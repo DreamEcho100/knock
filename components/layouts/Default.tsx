@@ -8,8 +8,7 @@ import { useId, useState } from 'react'
 import Link from 'next/link'
 import Button from '@components/shared/common/Button'
 
-const commonClasses =
-  'leading-relaxed text-[1.2rem] text-primary-2 mx-auto antialiased'
+const commonClasses = 'leading-relaxed text-[1.2rem] text-primary-2 mx-auto'
 
 const MainHeader = () => {
   const [isSmallScreenNaveOpen, setIsSmallScreenNaveOpen] = useState(false)
