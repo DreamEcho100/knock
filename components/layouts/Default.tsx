@@ -139,124 +139,131 @@ const Footer = () => {
   return (
     <footer
       id="main-footer"
-      className={`${commonClasses} bg-primary-2 flex flex-col max-w-[1400px] m-auto bg-primary-1 text-primary-2 p-4`}
+      className={`${commonClasses} max-w-[1400px] max-w bg-primary-1`}
     >
-      <div className="flex gap-2 flex-wrap">
-        <div className="flex lg:flex-grow flex-wrap justify-between p-2 gap-4">
-          <LinksListContainer
-            headerText="useful links"
-            links={[
-              { href: '/', text: 'Support' },
-              { href: '/', text: 'terms of service' },
-              { href: '/', text: 'privacy policy' },
-              { href: '/', text: 'refund policy' },
-              { href: '/', text: 'shipping policy' },
-              { href: '/', text: 'My account' },
-            ]}
-          />
-          <LinksListContainer
-            headerText="plug-ins"
-            links={[
-              { href: '/', text: 'knock plugin' },
-              { href: '/', text: 'knock compress' },
-            ]}
-          />
-          <LinksListContainer
-            linksListClassName=""
-            headerText="sample packs"
-            links={[
-              { href: '/', text: 'Drums that knock X' },
-              { href: '/', text: 'Drums that knock vol.9' },
-              { href: '/', text: 'Drums that knock vol.8' },
-              { href: '/', text: 'Drums that knock vol.7' },
-              { href: '/', text: 'All sample packs' },
-            ]}
-          />
-          <div className="flex flex-col p-2 max-w-[550px]">
-            <header className="flex flex-col gap-4">
-              <h2 className="text-h2 font-bold text-white uppercase">
-                subscribe
-              </h2>
-              <p>Promotion, new products and sales. Directly to your inbox</p>
-            </header>
-            <form className="flex flex-col gap-8 my-4">
-              <label htmlFor={`email-${formId}`} className="w-full max-w-[90%]">
-                <input
-                  type="email"
-                  placeholder="Email address"
-                  id={`email-${formId}`}
-                  className="w-full bg-transparent px-4 py-3 border-b border-b-slate-500 outline-none
+      <div className="section-content flex flex-col m-auto text-primary-2 p-4 py-8">
+        <div className="flex gap-2 flex-wrap">
+          <div className="flex lg:flex-grow flex-wrap justify-between p-2 gap-4">
+            <LinksListContainer
+              headerText="useful links"
+              links={[
+                { href: '/', text: 'Support' },
+                { href: '/', text: 'terms of service' },
+                { href: '/', text: 'privacy policy' },
+                { href: '/', text: 'refund policy' },
+                { href: '/', text: 'shipping policy' },
+                { href: '/', text: 'My account' },
+              ]}
+            />
+            <LinksListContainer
+              headerText="plug-ins"
+              links={[
+                { href: '/', text: 'knock plugin' },
+                { href: '/', text: 'knock compress' },
+              ]}
+            />
+            <LinksListContainer
+              linksListClassName=""
+              headerText="sample packs"
+              links={[
+                { href: '/', text: 'Drums that knock X' },
+                { href: '/', text: 'Drums that knock vol.9' },
+                { href: '/', text: 'Drums that knock vol.8' },
+                { href: '/', text: 'Drums that knock vol.7' },
+                { href: '/', text: 'All sample packs' },
+              ]}
+            />
+            <div className="flex flex-col p-2 max-w-[550px]">
+              <header className="flex flex-col gap-4">
+                <h2 className="text-h2 font-bold text-white uppercase">
+                  subscribe
+                </h2>
+                <p>Promotion, new products and sales. Directly to your inbox</p>
+              </header>
+              <form className="flex flex-col gap-8 my-4">
+                <label
+                  htmlFor={`email-${formId}`}
+                  className="w-full max-w-[90%]"
+                >
+                  <input
+                    type="email"
+                    placeholder="Email address"
+                    id={`email-${formId}`}
+                    className="w-full bg-transparent px-4 py-3 border-b border-b-slate-500 outline-none
 										transition-all duration-150
 										focus:border-b-slate-700"
-                />
-              </label>
+                  />
+                </label>
 
-              <Button type="submit" className="uppercase">
-                subscribe
-              </Button>
-            </form>
-            <footer className="flex gap-2 items-center flex-wrap justify-between">
-              <p className="text-white font-bold">Follow us on social media</p>
-              <ul className="flex gap-2">
-                <li>
-                  <a
-                    href="#"
-                    rel="noopener noreferrer"
-                    title="instagram"
-                    className="text-gray-400"
-                  >
-                    <FaInstagram />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    rel="noopener noreferrer"
-                    title="facebook"
-                    className="text-gray-400"
-                  >
-                    <FaFacebook />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    rel="noopener noreferrer"
-                    title="twitter"
-                    className="text-gray-400"
-                  >
-                    <FaTwitter />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    rel="noopener noreferrer"
-                    title="youtube"
-                    className="text-gray-400"
-                  >
-                    <FaYoutube />
-                  </a>
-                </li>
-              </ul>
-            </footer>
+                <Button type="submit" className="uppercase">
+                  subscribe
+                </Button>
+              </form>
+              <footer className="flex gap-2 items-center flex-wrap justify-between">
+                <p className="text-white font-bold">
+                  Follow us on social media
+                </p>
+                <ul className="flex gap-2">
+                  <li>
+                    <a
+                      href="#"
+                      rel="noopener noreferrer"
+                      title="instagram"
+                      className="text-gray-400"
+                    >
+                      <FaInstagram />
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      rel="noopener noreferrer"
+                      title="facebook"
+                      className="text-gray-400"
+                    >
+                      <FaFacebook />
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      rel="noopener noreferrer"
+                      title="twitter"
+                      className="text-gray-400"
+                    >
+                      <FaTwitter />
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      rel="noopener noreferrer"
+                      title="youtube"
+                      className="text-gray-400"
+                    >
+                      <FaYoutube />
+                    </a>
+                  </li>
+                </ul>
+              </footer>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="flex justify-between items-end mx-1 my-4">
-        <div className="px-1">
-          <Image src="/logo.png" width={100} height={50} alt="KNOCK logo" />
-          <small className="capitalize">
-            copyright &copy; plugins that knock
-          </small>
-        </div>
-        <div className="px-1">
-          <Image
-            src="/images/payment_cards.png"
-            alt="payment cards"
-            width={400}
-            height={50}
-          />
+        <div className="flex justify-between items-end mx-1 my-4">
+          <div className="px-1">
+            <Image src="/logo.png" width={100} height={50} alt="KNOCK logo" />
+            <small className="capitalize">
+              copyright &copy; plugins that knock
+            </small>
+          </div>
+          <div className="px-1">
+            <Image
+              src="/images/payment_cards.png"
+              alt="payment cards"
+              width={400}
+              height={50}
+            />
+          </div>
         </div>
       </div>
     </footer>

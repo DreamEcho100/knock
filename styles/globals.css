@@ -30,6 +30,11 @@ a {
 @tailwind utilities;
 
 @layer components {
+	.section-content {
+		max-width: 1200px;
+		margin: auto;
+	}
+
 	.text-align-initial {
 		text-align: initial;
 	}

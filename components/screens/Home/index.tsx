@@ -1,8 +1,8 @@
 import {
-  Section3,
+  AboutSection,
   HeroSection,
   OneProductShowCaseSection,
-  RecommendationsSection,
+  LatestSamplesSection,
 } from './sections'
 
 const HomeScreen = () => {
@@ -10,8 +10,8 @@ const HomeScreen = () => {
     <>
       <HeroSection />
       <OneProductShowCaseSection />
-      <Section3 />
-      <RecommendationsSection />
+      <AboutSection />
+      <LatestSamplesSection />
     </>
   )
 }
