@@ -8,7 +8,7 @@ const HeroSection = () => {
         className="section-content
 				px-8 py-12 flex items-center justify-center flex-col text-center"
       >
-        <div className="relative flex items-center justify-center">
+        <div className="relative flex items-center justify-center max-w-[900px]">
           <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full object-cover scale-150">
             <div className="flex w-full h-1/2">
               <Image

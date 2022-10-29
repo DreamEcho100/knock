@@ -8,7 +8,11 @@ import { useId, useState } from 'react'
 import Link from 'next/link'
 import Button from '@components/shared/common/Button'
 
-const commonClasses = 'leading-relaxed text-[1.2rem] text-primary-2 mx-auto'
+const commonClasses = 'leading-relaxed sm:text-[1.2rem] text-primary-2 mx-auto'
+
+const linkClasses = `text-primary-2 border-b border-transparent
+duration-150 transition-all
+focus:border-b-text-primary-1 hover:text-primary-1`
 
 const MainHeader = () => {
   const [isSmallScreenNaveOpen, setIsSmallScreenNaveOpen] = useState(false)
@@ -23,24 +27,32 @@ const MainHeader = () => {
   return (
     <header
       id="main-header"
-      className={`${commonClasses} z-10 fixed top-0 right-0 left-0 w-full flex flex-col`}
+      className={`${commonClasses} bg-primary-1 z-10 fixed top-0 right-0 left-0 w-full flex flex-col`}
     >
       <div className="relative w-full max-w-[1400px] mx-auto">
-        <div className="relative z-10 h-20 flex justify-between px-4 md:px-4 gap-2 sm:gap-4 bg-primary-1 text-primary-2">
-          <div className="flex items-center justify-center">
-            <Image
-              src="/logo.png"
-              width={100}
-              height={50}
-              priority
-              alt="KNOCK logo"
-            />
+        <div className="relative z-10 h-20 flex justify-between px-4 sm:px-8 gap-2 sm:gap-4 text-primary-2">
+          <div className="flex items-center justify-center text-primary-1">
+            <div className="relative">
+              <p className="font-black whitespace-nowrap">PLUGINS THAT KNOCK</p>
+              <div className="absolute top-0 ring-0 left-0 w-[105%] flex justify-end">
+                <Image
+                  src="/images/Trademark Artboard 1 copy 3.png"
+                  width={10}
+                  height={10}
+                  priority
+                  alt="KNOCK logo"
+                  className="aspect-square w-2 h-2"
+                />
+              </div>
+            </div>
           </div>
           <nav className="hidden lg:flex">
-            <ul className="flex items-center justify-center gap-2 sm:gap-4 uppercase">
+            <ul className="flex items-center justify-center gap-12 uppercase">
               {headerLinks.map((link) => (
                 <li key={link.text}>
-                  <Link href={link.href}>{link.text}</Link>
+                  <Link href={link.href} className={linkClasses}>
+                    {link.text}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -73,13 +85,13 @@ const MainHeader = () => {
           </ul>
         </div>
         <div
-          className={`bg-primary-1 block lg:hidden overflow-hidden absolute top-0 right-0 left-0 w-full
+          className={`mt-20 bg-primary-1 block lg:hidden overflow-hidden absolute top-0 right-0 left-0 w-full
 				${
           isSmallScreenNaveOpen
             ? // ? 'scale-y-100'
               // : 'scale-y-0 opacity-0 pointer-events-none'
               'translate-y-0'
-            : '-translate-y-full'
+            : '-translate-y-full opacity-0 pointer-events-none' // mt-0
         }
 				origin-top
 				transition-all duration-300`}
@@ -90,10 +102,7 @@ const MainHeader = () => {
                 <li key={link.text} className="w-full">
                   <Link
                     href={link.href}
-                    className="border-b border-transparent block w-fit
-										transition-all duration-300
-										hover:border-text-primary-1
-										focus:border-text-primary-1 focus:w-full"
+                    className={`${linkClasses} block w-fit focus:w-full`}
                   >
                     {link.text}
                   </Link>
