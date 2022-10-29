@@ -9,7 +9,7 @@ import Link from 'next/link'
 import Button from '@components/shared/common/Button'
 
 const commonClasses =
-  'leading-relaxed text-[1.2rem] bg-primary-2 text-primary-2 mx-auto antialiased'
+  'leading-relaxed text-[1.2rem] text-primary-2 mx-auto antialiased'
 
 const MainHeader = () => {
   const [isSmallScreenNaveOpen, setIsSmallScreenNaveOpen] = useState(false)
@@ -27,7 +27,7 @@ const MainHeader = () => {
       className={`${commonClasses} z-10 fixed top-0 right-0 left-0 w-full flex flex-col`}
     >
       <div className="relative w-full max-w-[1400px] mx-auto">
-        <div className="relative z-10 h-12 flex justify-between px-4 md:px-4 gap-2 sm:gap-4 bg-primary-1 text-primary-2">
+        <div className="relative z-10 h-20 flex justify-between px-4 md:px-4 gap-2 sm:gap-4 bg-primary-1 text-primary-2">
           <div className="flex items-center justify-center">
             <Image
               src="/logo.png"
@@ -139,7 +139,7 @@ const Footer = () => {
   return (
     <footer
       id="main-footer"
-      className={`${commonClasses} flex flex-col max-w-[1400px] m-auto bg-primary-1 text-primary-2 p-4`}
+      className={`${commonClasses} bg-primary-2 flex flex-col max-w-[1400px] m-auto bg-primary-1 text-primary-2 p-4`}
     >
       <div className="flex gap-2 flex-wrap">
         <div className="flex lg:flex-grow flex-wrap justify-between p-2 gap-4">
@@ -268,7 +268,7 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
     <>
       <MainHeader />
       <main
-        className={`${commonClasses} mt-12 max-w-[1400px] w-full h-fit flex flex-col`}
+        className={`${commonClasses} bg-primary-2 mt-20 max-w-[1400px] w-full h-fit flex flex-col`}
       >
         {children}
       </main>

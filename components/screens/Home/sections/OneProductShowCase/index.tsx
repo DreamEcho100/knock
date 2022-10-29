@@ -4,7 +4,7 @@ import Image from 'next/image'
 const OneProductShowCaseSection = () => {
   return (
     <section
-      className="flex p-4 flex-col
+      className="flex p-4 flex-col bg-primary-1
 			sm:px-8 sm:py-12 sm:flex-row"
     >
       <div
