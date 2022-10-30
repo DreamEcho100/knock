@@ -9,23 +9,21 @@ const Card = ({
   title: string
 }) => {
   return (
-    <div
-      className="bg-primary-2 max-w-[12rem] shadow-lg shadow-black rounded-lg overflow-hidden flex flex-col"
-      style={{
-        aspectRatio: 7 / 9,
-      }}
-    >
-      <div className="h-3/4">
+    <div className="bg-primary-2 max-w-[12rem] shadow-lg shadow-black rounded-lg overflow-hidden flex flex-col">
+      <div
+        // style={{ aspectRatio: 1, }}
+        className="aspect-square"
+      >
         <Image
           src={image.src}
           alt={image.alt || ''}
           width={800}
           height={800}
-          className=" w-full h-full"
+          className="w-full h-full"
         />
       </div>
       <div
-        className="h-1/4 text-center p-2 text-primary-2 flex items-center justify-center"
+        className="text-center px-2 py-4 text-primary-2 flex items-center justify-center"
         style={{ fontSize: 'small' }}
       >
         <p>{title}</p>
