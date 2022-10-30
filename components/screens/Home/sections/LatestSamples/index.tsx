@@ -37,12 +37,12 @@ const LatestSamplesSection = () => {
     <section className="bg-primary-2">
       <div
         className="section-content
-				flex p-4 flex-col
-				sm:px-8 sm:py-20 sm:flex-row"
+				flex p-4 flex-col px-8 py-12
+				md:px-8 md:py-20 md:flex-row"
       >
         <div
           className="flex gap-4 flex-col items-center text-center mb-12 p-4
-						sm:items-start sm:text-align-initial sm:flex-grow sm:w-1/2 sm:justify-center"
+						md:p-8 md:items-start md:text-align-initial md:flex-grow md:w-1/2 md:justify-center"
         >
           <h2 className="text-h2 font-bold text-primary-1">
             DRUMS THAT KNOCK SAMPLE PACKS
@@ -53,7 +53,7 @@ const LatestSamplesSection = () => {
           </p>
           <Button>Explore it now</Button>
         </div>
-        <div className="sm:flex-grow sm:w-1/2 flex justify-center items-center">
+        <div className="md:flex-grow md:w-1/2 flex justify-center items-center">
           <div className="flex gap-6">
             {[
               {

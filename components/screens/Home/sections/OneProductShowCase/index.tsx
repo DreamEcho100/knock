@@ -12,9 +12,9 @@ const OneProductShowCaseSection = () => {
       >
         <div
           className="flex gap-4 flex-col items-center text-center mb-12 
-				sm:p-4 sm:items-start sm:text-align-initial sm:flex-grow sm:w-1/2 sm:justify-center"
+				  	sm:p-8 sm:items-start sm:text-align-initial sm:flex-grow sm:w-1/2 sm:justify-center"
         >
-          <h2 className="text-h2 font-bold text-primary-1">
+          <h2 className="text-h2 font-bold text-primary-1 flex">
             <span className="flex">
               KNOCK
               <sup className="mt-[1rem]">
@@ -35,7 +35,10 @@ const OneProductShowCaseSection = () => {
           </p>
           <Button>Explore it now</Button>
         </div>
-        <div className="sm:flex-grow sm:w-1/2">
+        <div
+          className="flex items-center
+					sm:flex-grow sm:w-1/2"
+        >
           <Image
             src="/images/knock-clipper.png"
             alt="knock clipper"
