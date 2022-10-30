@@ -6,7 +6,7 @@ import { HiShoppingBag } from 'react-icons/hi'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { useId, useState } from 'react'
 import Link from 'next/link'
-import Button from '@components/shared/common/Button'
+import Button from '@components/shared/core/Button'
 
 const commonClasses = 'leading-relaxed sm:text-[1.2rem] text-primary-2 mx-auto'
 

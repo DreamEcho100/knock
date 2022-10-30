@@ -1,4 +1,4 @@
-import Button from '@components/shared/common/Button'
+import Button from '@components/shared/core/Button'
 import Image from 'next/image'
 
 const Card = ({
