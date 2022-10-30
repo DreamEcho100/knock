@@ -9,7 +9,7 @@ const Card = ({
   title: string
 }) => {
   return (
-    <div className="bg-primary-2 max-w-[12rem] shadow-lg shadow-black rounded-lg overflow-hidden flex flex-col">
+    <div className="bg-primary-2 max-w-[12rem] shadow-lg shadow-black rounded-xl overflow-hidden flex flex-col">
       <div
         // style={{ aspectRatio: 1, }}
         className="aspect-square"
@@ -26,7 +26,7 @@ const Card = ({
         className="text-center px-2 py-4 text-primary-2 flex items-center justify-center"
         style={{ fontSize: 'small' }}
       >
-        <p>{title}</p>
+        <p className="font-bold">{title}</p>
       </div>
     </div>
   )
