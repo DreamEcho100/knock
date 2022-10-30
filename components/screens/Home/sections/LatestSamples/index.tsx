@@ -10,12 +10,12 @@ const Card = ({
 }) => {
   return (
     <div
-      className="bg-primary-2 shadow-lg shadow-black rounded-lg overflow-hidden flex flex-col"
+      className="bg-primary-2 max-w-[12rem] shadow-lg shadow-black rounded-lg overflow-hidden flex flex-col"
       style={{
-        aspectRatio: 6 / 9,
+        aspectRatio: 7 / 9,
       }}
     >
-      <div className="h-4/5">
+      <div className="h-3/4">
         <Image
           src={image.src}
           alt={image.alt || ''}
@@ -24,7 +24,10 @@ const Card = ({
           className=" w-full h-full"
         />
       </div>
-      <div className="text-center p-2">
+      <div
+        className="h-1/4 text-center p-2 text-primary-2 flex items-center justify-center"
+        style={{ fontSize: 'small' }}
+      >
         <p>{title}</p>
       </div>
     </div>
@@ -37,7 +40,7 @@ const LatestSamplesSection = () => {
       <div
         className="section-content
 				flex p-4 flex-col
-				sm:px-8 sm:py-12 sm:flex-row"
+				sm:px-8 sm:py-20 sm:flex-row"
       >
         <div
           className="flex gap-4 flex-col items-center text-center mb-12 p-4

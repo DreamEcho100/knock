@@ -32,9 +32,9 @@ const MainHeader = () => {
       <div className="relative w-full max-w-[1400px] mx-auto">
         <div className="relative z-10 h-20 flex justify-between px-4 sm:px-8 gap-2 sm:gap-4 text-primary-2">
           <div className="flex items-center justify-center text-primary-1">
-            <div className="relative">
-              <p className="font-black whitespace-nowrap">PLUGINS THAT KNOCK</p>
-              <div className="absolute top-0 ring-0 left-0 w-[105%] flex justify-end">
+            <p className="font-black whitespace-nowrap flex">
+              PLUGINS THAT KNOCK
+              <sup>
                 <Image
                   src="/images/Trademark Artboard 1 copy 3.png"
                   width={10}
@@ -43,8 +43,8 @@ const MainHeader = () => {
                   alt="KNOCK logo"
                   className="aspect-square w-2 h-2"
                 />
-              </div>
-            </div>
+              </sup>
+            </p>
           </div>
           <nav className="hidden lg:flex">
             <ul className="flex items-center justify-center gap-12 uppercase">

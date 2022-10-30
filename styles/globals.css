@@ -5,6 +5,7 @@ body {
 }
 
 body {
+	/* font-family: 'Source Sans Pro', sans-serif; */
 	overflow-x: hidden;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -48,7 +49,7 @@ a {
 		line-height: 1.2;
 	}
 	.text-h2 {
-		font-size: 2.5rem;
+		font-size: 2.8rem;
 		line-height: 1.2;
 	}
 	.text-h3 {

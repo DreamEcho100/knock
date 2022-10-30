@@ -11,7 +11,7 @@ const RecommendationsSection = () => {
         className="section-content
 				flex p-4 flex-col items-center
 				md:items-stretch md:flex-row
-				md:px-8 md:py-12 md:gap-8
+				md:px-8 md:py-20 md:gap-8
 			"
       >
         <div

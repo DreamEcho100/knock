@@ -6,7 +6,7 @@ const HeroSection = () => {
     <section className="bg-primary-1">
       <div
         className="section-content
-				px-8 py-12 flex items-center justify-center flex-col text-center"
+				px-8 pt-24 pb-16 flex items-center justify-center flex-col text-center"
       >
         <div className="relative flex items-center justify-center max-w-[900px]">
           <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full object-cover scale-150">
@@ -58,7 +58,7 @@ const HeroSection = () => {
             className="object-cover mb-6 w-11/12 relative"
           />
         </div>
-        <h1 className="text-h1 font-bold text-primary-1">KNOCK PLUGIN</h1>
+        <h2 className="text-h2 font-bold text-primary-1 mt-12">KNOCK PLUGIN</h2>
         <p className="mb-6 max-w-[350px]">
           Make your drums KNOCK and punch through the mix.
         </p>
