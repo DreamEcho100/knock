@@ -122,12 +122,12 @@ const DigitalProductsSection = () => {
   return (
     <section className="bg-primary-1">
       <div
-        className="section-content relative p-8 sm:p-16 justify-items-center lg:justify-items-start"
+        className="section-content relative sm:p-8 md:p-16 justify-items-center"
         style={{
           zIndex: 2,
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(20rem, 1fr))',
-          gap: '2rem',
+          gap: '1rem',
         }}
       >
         {productsData.map((item) => (
