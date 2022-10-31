@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import DigitalProductsSection from './components/DigitalProducts'
 
 const HeroSection = () => {
   return (
@@ -29,7 +28,6 @@ const HeroSection = () => {
           <p>These drums KNOCK.</p>
         </div>
       </div>
-      <DigitalProductsSection />
     </section>
   )
 }

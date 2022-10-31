@@ -38,7 +38,7 @@ module.exports = {
 				text: {
 					primary: {
 						1: '#fff',
-						2: '##b4b4b4'
+						2: '#b4b4b4'
 					}
 				}
 			}

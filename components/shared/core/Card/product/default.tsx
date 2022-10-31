@@ -1,8 +1,10 @@
 import Image from 'next/image'
 import Button from '@components/shared/core/Button'
 import Link from 'next/link'
+import { cardClasses } from 'utils/core/cva'
+import type { VariantProps } from 'class-variance-authority'
 
-interface IProductCardProps {
+interface IProductCardProps extends VariantProps<typeof cardClasses> {
   image: { src: string; alt?: string }
   link: Parameters<typeof Link>['0']
   extraDetailsElement?: JSX.Element
@@ -19,13 +21,11 @@ const ProductBasicCard = ({
   image,
   link,
   extraDetailsElement,
+  intent,
 }: IProductCardProps) => {
+  console.log('intent', intent)
   return (
-    <div
-      className="bg-primary-2 max-w-[14rem] shadow-lg shadow-black rounded-2xl overflow-hidden flex flex-col
-				transition-all duration-500 group
-				focus-within:rounded-none"
-    >
+    <div className={cardClasses({ intent })}>
       <div
         // style={{ aspectRatio: 1, }}
         className="aspect-square overflow-hidden brightness-75
@@ -79,6 +79,7 @@ const ExtraProductCardDetails = ({
 export const ProductCardWithDetails = ({
   image,
   link,
+  intent,
   //
   price,
   productData,
@@ -90,6 +91,7 @@ export const ProductCardWithDetails = ({
     <ProductBasicCard
       image={image}
       link={link}
+      intent={intent}
       extraDetailsElement={
         <ExtraProductCardDetails
           price={price}

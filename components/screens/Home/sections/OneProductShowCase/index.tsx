@@ -36,7 +36,7 @@ const OneProductShowCaseSection = () => {
           <Button>Explore it now</Button>
         </div>
         <div
-          className="flex items-center
+          className="flex items-center p-8
 					sm:flex-grow sm:w-1/2"
         >
           <Image
@@ -44,7 +44,7 @@ const OneProductShowCaseSection = () => {
             alt="knock clipper"
             width={800}
             height={800}
-            className="object-cover"
+            className="object-contain max-h-[24rem]"
           />
         </div>
       </div>

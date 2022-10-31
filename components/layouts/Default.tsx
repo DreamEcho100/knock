@@ -29,10 +29,13 @@ const MainHeader = () => {
       id="main-header"
       className={`${commonClasses} bg-primary-1 z-10 fixed top-0 right-0 left-0 w-full flex flex-col`}
     >
-      <div className="relative w-full max-w-[1400px] mx-auto">
+      <div className="relative w-full max-w-[1920px] mx-auto">
         <div className="relative z-10 h-20 flex justify-between px-4 sm:px-8 gap-2 sm:gap-4 text-primary-2">
           <div className="flex items-center justify-center text-primary-1">
-            <p className="font-black whitespace-nowrap flex">
+            <p
+              className="font-black whitespace-nowrap flex"
+              style={{ fontFamily: 'decap_v1regular' }}
+            >
               PLUGINS THAT KNOCK
               <sup>
                 <Image
@@ -47,7 +50,7 @@ const MainHeader = () => {
             </p>
           </div>
           <nav className="hidden lg:flex">
-            <ul className="flex items-center justify-center gap-12 uppercase">
+            <ul className="flex items-center justify-center gap-10 font-bold uppercase">
               {headerLinks.map((link) => (
                 <li key={link.text}>
                   <Link href={link.href} className={linkClasses}>
@@ -97,12 +100,15 @@ const MainHeader = () => {
 				transition-all duration-300`}
         >
           <nav className="flex">
-            <ul className="flex flex-col gap-2 sm:gap-4 uppercase p-4 w-full">
+            <ul
+              className="flex flex-col gap-2 font-bold uppercase p-4 w-full
+									sm:gap-4"
+            >
               {headerLinks.map((link) => (
                 <li key={link.text} className="w-full">
                   <Link
                     href={link.href}
-                    className={`${linkClasses} block w-fit focus:w-full`}
+                    className={`${linkClasses} block w-fit`}
                   >
                     {link.text}
                   </Link>
@@ -147,11 +153,11 @@ const Footer = () => {
   return (
     <footer
       id="main-footer"
-      className={`${commonClasses} max-w-[1400px] max-w bg-primary-1`}
+      className={`${commonClasses} max-w-[1920px] max-w bg-primary-1`}
     >
       <div className="section-content flex flex-col m-auto text-primary-2 p-4 py-8">
-        <div className="flex gap-2 flex-wrap">
-          <div className="flex lg:flex-grow flex-wrap justify-between p-2 gap-4">
+        <div className="flex gap-2 flex-wrap w-full">
+          <div className="w-full flex lg:flex-grow flex-wrap justify-between p-2 gap-4">
             <LinksListContainer
               headerText="useful links"
               links={[
@@ -163,7 +169,7 @@ const Footer = () => {
                 { href: '/', text: 'My account' },
               ]}
             />
-            <LinksListContainer
+            {/* <LinksListContainer
               headerText="plug-ins"
               links={[
                 { href: '/', text: 'knock plugin' },
@@ -180,34 +186,9 @@ const Footer = () => {
                 { href: '/', text: 'Drums that knock vol.7' },
                 { href: '/', text: 'All sample packs' },
               ]}
-            />
+            /> */}
             <div className="flex flex-col p-2 max-w-[550px]">
-              <header className="flex flex-col gap-4">
-                <h2 className="text-h2 font-bold text-white uppercase">
-                  subscribe
-                </h2>
-                <p>Promotion, new products and sales. Directly to your inbox</p>
-              </header>
-              <form className="flex flex-col gap-8 my-4">
-                <label
-                  htmlFor={`email-${formId}`}
-                  className="w-full max-w-[90%]"
-                >
-                  <input
-                    type="email"
-                    placeholder="Email address"
-                    id={`email-${formId}`}
-                    className="w-full bg-transparent px-4 py-3 border-b border-b-slate-500 outline-none
-										transition-all duration-150
-										focus:border-b-slate-700"
-                  />
-                </label>
-
-                <Button type="submit" className="uppercase">
-                  subscribe
-                </Button>
-              </form>
-              <footer className="flex gap-2 items-center flex-wrap justify-between">
+              <header className="flex gap-2 items-center flex-wrap justify-between">
                 <p className="text-white font-bold">
                   Follow us on social media
                 </p>
@@ -253,7 +234,27 @@ const Footer = () => {
                     </a>
                   </li>
                 </ul>
-              </footer>
+              </header>
+              <div className="flex flex-col gap-4">
+                <h2 className="text-h2 font-bold text-white uppercase">
+                  subscribe
+                </h2>
+                <p>Promotion, new products and sales. Directly to your inbox</p>
+              </div>
+              <form className="flex gap-8 my-4">
+                <div className="flex bg-primary-3 text-primary-1 w-full max-w-[90%] rounded-3xl overflow-hidden">
+                  <input
+                    type="email"
+                    placeholder="Email address"
+                    id={`email-${formId}`}
+                    className="w-full bg-transparent px-4 py-2 outline-none
+											placeholder:text-text-primary-1"
+                  />
+                  <Button type="submit" className="uppercase">
+                    subscribe
+                  </Button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -283,7 +284,7 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
     <>
       <MainHeader />
       <main
-        className={`${commonClasses} bg-primary-2 mt-20 max-w-[1400px] w-full h-fit flex flex-col`}
+        className={`${commonClasses} bg-primary-2 mt-20 max-w-[1920px] w-full h-fit flex flex-col`}
       >
         {children}
       </main>

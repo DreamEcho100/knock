@@ -2,8 +2,6 @@
 
 import { ProductCardWithDetails } from '@components/shared/core/Card/product/default'
 
-const imgBasePath = '/images'
-
 const productsData = [
   {
     title: 'Complete Knock Bundle v2 (All Digital Products)',
@@ -122,25 +120,28 @@ const productsData = [
 
 const DigitalProductsSection = () => {
   return (
-    <div
-      className="relative p-8 sm:p-16 justify-items-center md:justify-items-start"
-      style={{
-        zIndex: 2,
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(15.625rem, 1fr))',
-        gap: '2rem',
-      }}
-    >
-      {productsData.map((item) => (
-        <ProductCardWithDetails
-          key={item.id}
-          link={{ children: item.title, href: `/products/${item.id}` }}
-          {...item}
-          toAddToCart
-          productData={item}
-        />
-      ))}
-    </div>
+    <section className="bg-primary-1">
+      <div
+        className="section-content relative p-8 sm:p-16 justify-items-center lg:justify-items-start"
+        style={{
+          zIndex: 2,
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(20rem, 1fr))',
+          gap: '2rem',
+        }}
+      >
+        {productsData.map((item) => (
+          <ProductCardWithDetails
+            key={item.id}
+            link={{ children: item.title, href: `/products/${item.id}` }}
+            {...item}
+            toAddToCart
+            productData={item}
+            intent="bottomCorners"
+          />
+        ))}
+      </div>
+    </section>
   )
 }
 
