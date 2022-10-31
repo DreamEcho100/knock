@@ -1,12 +1,13 @@
-import { NextPage } from 'next'
+import type { NextPage } from 'next'
 
-interface Props {}
+import DefaultLayout from '@components/layouts/Default'
+import DrumsThatKnock from '@components/screens/DrumsThatKnock'
 
-const DrumsThatKnockPage: NextPage<Props> = () => {
+const DrumsThatKnockPage: NextPage = () => {
   return (
-    <div>
-      <h2>drums-that-knock</h2>
-    </div>
+    <DefaultLayout>
+      <DrumsThatKnock />
+    </DefaultLayout>
   )
 }
 

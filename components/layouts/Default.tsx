@@ -19,7 +19,7 @@ const MainHeader = () => {
   const headerLinks = [
     { href: '/', text: 'knock' },
     { href: '/', text: 'knock clippr' },
-    { href: '/', text: 'drums that knock' },
+    { href: '/drums-that-knock', text: 'drums that knock' },
     { href: '/', text: 'faq' },
     { href: '/', text: 'contact' },
   ]

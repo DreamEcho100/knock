@@ -51,10 +51,10 @@ const HeroSection = () => {
           <Image
             src="/images/534aaf62a986c03ee09ee62a138d3845.gif"
             alt="knock plugin animation"
-            unoptimized
             width={800}
             height={800}
             priority
+            unoptimized
             className="object-cover mb-6 w-11/12 relative"
           />
         </div>

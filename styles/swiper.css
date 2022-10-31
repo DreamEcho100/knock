@@ -1,0 +1,31 @@
+.swiper {
+	padding: 1rem;
+}
+
+.swiper-button-next,
+[dir='rtl'] .swiper-button-prev {
+	content: '';
+	background-image: url('/svgs/right-arrow.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+	right: -5px;
+	transform: translateY(-50%);
+}
+.swiper-button-next:after,
+[dir='rtl'] .swiper-button-prev:after {
+	content: '';
+}
+
+.swiper-button-prev,
+[dir='rtl'] .swiper-button-next {
+	content: '';
+	background-image: url('/svgs/left-arrow.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+	left: -5px;
+	transform: translateY(-50%);
+}
+.swiper-button-prev:after,
+[dir='rtl'] .swiper-button-next:after {
+	content: '';
+}
