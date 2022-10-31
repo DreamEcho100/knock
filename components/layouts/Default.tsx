@@ -163,9 +163,9 @@ const Footer = () => {
               links={[
                 { href: '/', text: 'Support' },
                 { href: '/', text: 'terms of service' },
-                { href: '/', text: 'privacy policy' },
-                { href: '/', text: 'refund policy' },
-                { href: '/', text: 'shipping policy' },
+                { href: '/policies/privacy-policy', text: 'privacy policy' },
+                { href: '/policies/refund-policy', text: 'refund policy' },
+                { href: '/policies/shipping-policy', text: 'shipping policy' },
                 { href: '/', text: 'My account' },
               ]}
             />
