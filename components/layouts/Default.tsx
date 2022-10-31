@@ -1,5 +1,6 @@
-import Image from 'next/image'
 import type { ReactNode } from 'react'
+
+import Image from 'next/image'
 import { BsFillPersonFill } from 'react-icons/bs'
 import { FaInstagram, FaFacebook, FaTwitter, FaYoutube } from 'react-icons/fa'
 import { HiShoppingBag } from 'react-icons/hi'
@@ -7,6 +8,7 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 import { useId, useState } from 'react'
 import Link from 'next/link'
 import Button from '@components/shared/core/Button'
+import Logo from '@components/shared/core/Logo'
 
 const commonClasses = 'leading-relaxed sm:text-[1.2rem] text-primary-2 mx-auto'
 
@@ -32,22 +34,7 @@ const MainHeader = () => {
       <div className="relative w-full max-w-[1920px] mx-auto">
         <div className="relative z-10 h-20 flex justify-between px-4 sm:px-8 gap-2 sm:gap-4 text-primary-2">
           <div className="flex items-center justify-center text-primary-1">
-            <p
-              className="font-black whitespace-nowrap flex"
-              style={{ fontFamily: 'decap_v1regular' }}
-            >
-              PLUGINS THAT KNOCK
-              <sup>
-                <Image
-                  src="/images/Trademark Artboard 1 copy 3.png"
-                  width={10}
-                  height={10}
-                  priority
-                  alt="KNOCK logo"
-                  className="aspect-square w-2 h-2"
-                />
-              </sup>
-            </p>
+            <Logo />
           </div>
           <nav className="hidden lg:flex">
             <ul className="flex items-center justify-center gap-10 font-bold uppercase">
@@ -260,7 +247,8 @@ const Footer = () => {
         </div>
         <div className="flex justify-between items-end mx-1 my-4">
           <div className="px-1">
-            <Image src="/logo.png" width={100} height={50} alt="KNOCK logo" />
+            {/* <Image src="/logo.png" width={100} height={50} alt="KNOCK logo" /> */}
+            <Logo />
             <small className="capitalize">
               copyright &copy; plugins that knock
             </small>
