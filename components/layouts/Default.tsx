@@ -21,7 +21,7 @@ const MainHeader = () => {
     { href: '/', text: 'knock clippr' },
     { href: '/drums-that-knock', text: 'drums that knock' },
     { href: '/', text: 'faq' },
-    { href: '/', text: 'contact' },
+    { href: '/contact-us', text: 'contact' },
   ]
 
   return (

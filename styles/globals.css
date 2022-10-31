@@ -16,8 +16,18 @@ a {
 	text-decoration: none;
 }
 
-* {
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
 	box-sizing: border-box;
+}
+
+label,
+button,
+select {
+	cursor: pointer;
 }
 
 @media (prefers-color-scheme: dark) {

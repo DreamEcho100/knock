@@ -1,4 +1,5 @@
 import Button from '@components/shared/core/Button'
+import ProductBasicCard from '@components/shared/core/Card/product/default'
 import Image from 'next/image'
 
 const Card = ({
@@ -62,6 +63,7 @@ const LatestSamplesSection = () => {
                   alt: '',
                 },
                 title: 'Drums That Knock Vol. 9',
+                id: 'drums-that-knock-vol-9',
               },
               {
                 image: {
@@ -69,9 +71,14 @@ const LatestSamplesSection = () => {
                   alt: '',
                 },
                 title: 'Drums That Knock Vol. 9',
+                id: 'drums-that-knock-vol-9',
               },
             ].map((item, index) => (
-              <Card key={index} {...item} />
+              <ProductBasicCard
+                key={index}
+                link={{ children: item.title, href: `/products/${item.id}` }}
+                {...item}
+              />
             ))}
           </div>
         </div>
