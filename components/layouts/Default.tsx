@@ -22,7 +22,7 @@ const MainHeader = () => {
     { href: '/', text: 'knock' },
     { href: '/', text: 'knock clippr' },
     { href: '/drums-that-knock', text: 'drums that knock' },
-    { href: '/', text: 'faq' },
+    { href: '/faqs', text: 'faqs' },
     { href: '/contact-us', text: 'contact' },
   ]
 
