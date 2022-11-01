@@ -52,7 +52,7 @@ const artists = [
 const ArtistSection = () => {
   return (
     <section className="bg-primary-2">
-      <div className="section-content px-8 py-16 flex flex-col gap-12">
+      <div className="container-restrictions-1 px-8 py-16 flex flex-col gap-12">
         <header className="text-center">
           <h2 className="text-h2 font-bold capitalize">
             SOME ARTISTS WHO HAVE USED DRUMS THAT KNOCK

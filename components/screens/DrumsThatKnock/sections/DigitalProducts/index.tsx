@@ -122,7 +122,7 @@ const DigitalProductsSection = () => {
   return (
     <section className="bg-primary-1">
       <div
-        className="section-content relative sm:p-8 md:p-16 justify-items-center"
+        className="container-restrictions-1 relative sm:p-8 md:p-16 justify-items-center"
         style={{
           zIndex: 2,
           display: 'grid',

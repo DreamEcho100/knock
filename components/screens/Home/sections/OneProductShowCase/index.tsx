@@ -5,7 +5,7 @@ const OneProductShowCaseSection = () => {
   return (
     <section className="bg-primary-2">
       <div
-        className="section-content
+        className="container-restrictions-1
 				flex p-4 flex-col
 				sm:px-8 sm:py-py-20 sm:flex-row
 			"

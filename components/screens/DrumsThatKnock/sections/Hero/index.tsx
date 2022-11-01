@@ -4,7 +4,7 @@ const HeroSection = () => {
   return (
     <section className="bg-primary-1">
       <div
-        className="section-content
+        className="container-restrictions-1
 					relative flex items-center justify-center text-primary-1 p-8 py-16 h-screen max-h-[30rem]"
       >
         <Image

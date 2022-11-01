@@ -31,7 +31,7 @@ const MainHeader = () => {
       id="main-header"
       className={`${commonClasses} bg-primary-1 z-10 fixed top-0 right-0 left-0 w-full flex flex-col`}
     >
-      <div className="relative w-full max-w-[1920px] mx-auto">
+      <div className="relative w-full container-restrictions-1 mx-auto">
         <div className="relative z-10 h-20 flex justify-between px-4 sm:px-8 gap-2 sm:gap-4 text-primary-2">
           <div className="flex items-center justify-center text-primary-1">
             <Logo />
@@ -140,9 +140,9 @@ const Footer = () => {
   return (
     <footer
       id="main-footer"
-      className={`${commonClasses} max-w-[1920px] max-w bg-primary-1`}
+      className={`${commonClasses} container-restrictions-1 max-w bg-primary-1`}
     >
-      <div className="section-content flex flex-col m-auto text-primary-2 p-4 py-8">
+      <div className="container-restrictions-1 flex flex-col m-auto text-primary-2 p-4 py-8">
         <div className="flex gap-2 flex-wrap w-full">
           <div className="w-full flex lg:flex-grow flex-wrap justify-between p-2 gap-4">
             <LinksListContainer
@@ -272,7 +272,7 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
     <>
       <MainHeader />
       <main
-        className={`${commonClasses} bg-primary-2 mt-20 max-w-[1920px] w-full h-fit flex flex-col`}
+        className={`${commonClasses} bg-primary-2 mt-20 container-restrictions-1 w-full h-fit flex flex-col`}
       >
         {children}
       </main>

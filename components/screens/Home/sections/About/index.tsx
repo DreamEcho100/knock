@@ -2,7 +2,7 @@ const AboutSection = () => {
   return (
     <section className="bg-primary-1">
       <div
-        className="section-content
+        className="container-restrictions-1
 					flex gap-4 flex-col items-center justify-center text-center p-12 
 					sm:py-16
 					"

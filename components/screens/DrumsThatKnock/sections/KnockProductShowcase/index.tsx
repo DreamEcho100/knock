@@ -6,7 +6,7 @@ const KnockProductShowcaseSection = () => {
   return (
     <section className="bg-primary-1">
       <div
-        className="section-content
+        className="container-restrictions-1
 				flex p-4 flex-col items-center
 				md:items-stretch md:flex-row
 				md:px-8 md:py-20 md:gap-8
