@@ -7,8 +7,8 @@ const repeatedData = {
 		details: ['Lorem, ipsum']
 	},
 	video: {
-		title: 'Lorem, ipsum',
-		src: ''
+		title: 'Watch DECAP preview the sounds in Drums That Knock Vol. 9',
+		src: 'https://www.youtube.com/embed/4fiC6Zi0Wnw'
 	}
 };
 
@@ -77,10 +77,10 @@ const fakeProductsData = [
 		},
 		video: {
 			title: 'Watch DECAP preview the sounds in Drums That Knock Vol. 9',
-			src: ''
+			src: 'https://www.youtube.com/embed/4fiC6Zi0Wnw'
 		},
 		description:
-			'## DECAP - Drums That Knock Vol. 9 is available now,  with top notch original sounds for your production.\nAll BRAND NEW, never heard before sounds designed from scratch by DECAP. Premium quality, groundbreaking as always.\nMany of the sounds in this kit were run through Studer, and Telefunken tape machines, EMU SP-12 (crazy on the 808s) and other analog gear for extra depth, width and texture.',
+			'## DECAP - Drums That Knock Vol. 9 is available now,  with top notch original sounds for your production.\n\nAll BRAND NEW, never heard before sounds designed from scratch by DECAP. Premium quality, groundbreaking as always.\n\nMany of the sounds in this kit were run through Studer, and Telefunken tape machines, EMU SP-12 (crazy on the 808s) and other analog gear for extra depth, width and texture.\n',
 		price: 50,
 		id: 'drums-that-knock-vol-9'
 	},

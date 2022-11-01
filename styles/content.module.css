@@ -20,22 +20,22 @@
 	}
 }
 
-.contentContainer h2,
-.contentContainer h3 {
+.contentContainerElements h2,
+.contentContainerElements h3 {
 	color: white;
 	font-weight: bold;
 	text-transform: capitalize;
 	line-height: 1.2;
 	margin-bottom: 1rem;
 }
-.contentContainer h2 {
+.contentContainerElements h2 {
 	font-size: 2.8rem;
 	margin-top: 4rem;
 }
-.contentContainer h2:first-child {
+.contentContainerElements h2:first-child {
 	margin-top: 0;
 }
-.contentContainer h3 {
+.contentContainerElements h3 {
 	font-size: 1.8rem;
 	margin-top: 2rem;
 }
@@ -45,50 +45,50 @@
 	}
 }
 
-.contentContainer a {
+.contentContainerElements a {
 	text-decoration: none;
 	color: #7548fe;
 }
 
-.contentContainer ul li {
+.contentContainerElements ul li {
 	list-style: url('/svgs/purple-circle.svg');
 	list-style-position: inside;
 }
 
-.contentContainer table {
+.contentContainerElements table {
 	border-collapse: collapse;
 	margin-top: 2rem;
 	margin-bottom: 2rem;
 }
 
-.contentContainer td,
-.contentContainer th {
+.contentContainerElements td,
+.contentContainerElements th {
 	border: 0.0625rem solid #ddd;
 	padding: 0.5rem;
 }
 
-/* .contentContainer tr:nth-child(even) {
+/* .contentContainerElements tr:nth-child(even) {
 }
-.contentContainer tr:hover {
+.contentContainerElements tr:hover {
 } */
 
-.contentContainer th {
+.contentContainerElements th {
 	padding-top: 0.75rem;
 	padding-bottom: 0.75rem;
 	text-align: left;
 	color: white;
 }
 
-:global([dir='rtl']) .contentContainer th {
+:global([dir='rtl']) .contentContainerElements th {
 	text-align: right;
 }
 
-.contentContainer strong {
+.contentContainerElements strong {
 	font-weight: bold;
 	color: white;
 }
 
-.contentContainer em {
+.contentContainerElements em {
 	color: white;
 	font-style: italic;
 }

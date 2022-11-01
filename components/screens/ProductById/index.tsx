@@ -4,6 +4,7 @@ import {
   DescriptionSection,
   FeaturesAndFilesIncludedSection,
   HeroSection,
+  VideoSection,
 } from './sections'
 
 const ProductByIdScreen = ({ product }: IProductByIdPageProps) => (
@@ -14,6 +15,7 @@ const ProductByIdScreen = ({ product }: IProductByIdPageProps) => (
       features={product.features}
       filesIncluded={product.filesIncluded}
     />
+    <VideoSection video={product.video} />
   </>
 )
 

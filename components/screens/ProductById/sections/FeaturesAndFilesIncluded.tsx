@@ -1,4 +1,5 @@
 import { IProductByIdPageProps } from '@pages/products/[productId]'
+import Image from 'next/image'
 
 const FeaturesAndFilesIncludedSection = ({
   features,
@@ -8,26 +9,45 @@ const FeaturesAndFilesIncludedSection = ({
   filesIncluded: IProductByIdPageProps['product']['filesIncluded']
 }) => {
   return (
-    <section className="bg-primary-1">
+    <section className="bg-primary-1 overflow-hidden">
       <div
-        className="container-restrictions-2
-				flex gap-4 flex-wrap p-8
-				lg:flex-nowrap lg:p-0"
+        className="relative container-restrictions-2
+				flex gap-4 flex-wrap px-8 py-20
+				md:flex-nowrap lg:px-0"
       >
-        <div className="bg-primary-4 px-12 py-8 rounded-3xl mx-auto w-full lg:w-1/2">
+        <Image
+          src="/images/Rectangle 48.png"
+          alt=""
+          width={200}
+          height={200}
+          className="aspect-square absolute w-1/2 top-0 left-0 scale-150 -translate-y-1/3 -translate-x-1/4"
+        />
+        <div className="relative bg-primary-4 px-12 py-8 rounded-3xl mx-auto w-full lg:w-1/2">
           <ul
             className="flex flex-col flex-wrap gap-y-4"
-            style={{ listStyle: "url('/svgs/purple-circle.svg')" }}
+            style={{
+              listStyle: "url('/svgs/purple-circle.svg')",
+              listStylePosition: 'inside',
+            }}
           >
             {features.map((feature) => (
               <li key={feature}>{feature}</li>
             ))}
           </ul>
         </div>
-        <div className="bg-primary-4 px-16 py-8 rounded-3xl w-full lg:w-1/2">
+        <div className="relative bg-primary-4 px-12 py-8 rounded-3xl w-full lg:w-1/2">
           <ul
-            className="flex flex-col flex-wrap gap-y-4"
-            style={{ listStyle: "url('/svgs/purple-circle.svg')" }}
+            className="flex flex-col flex-wrap gap-4 text-[90%]"
+            // style={{ listStyle: "url('/svgs/purple-circle.svg')" }}
+            style={{
+              listStyle: "url('/svgs/purple-circle.svg')",
+              display: 'grid',
+              // gridTemplateColumns: 'repeat(auto-fill, minmax(20rem, 1fr))',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '1rem',
+              whiteSpace: 'break-spaces',
+              listStylePosition: 'inside',
+            }}
           >
             {filesIncluded.details.map((detail) => (
               <li key={detail}>{detail}</li>

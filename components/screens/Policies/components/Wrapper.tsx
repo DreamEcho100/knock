@@ -20,7 +20,11 @@ const Wrapper = ({ header, children }: IProps) => {
           </h1>
           {header.pChildren && <p>{header.pChildren}</p>}
         </header>
-        <div className={classes.contentContainer}>{children}</div>
+        <div
+          className={`${classes.contentContainer} ${classes.contentContainerElements}`}
+        >
+          {children}
+        </div>
       </div>
     </section>
   )

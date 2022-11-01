@@ -1,4 +1,8 @@
-import { IProductByIdPageProps } from '@pages/products/[productId]'
+import type { IProductByIdPageProps } from '@pages/products/[productId]'
+
+import MdToHTMLFormatter from '@components/shared/common/Format/MdToHTML'
+
+import classes from '@styles/content.module.css'
 
 const DescriptionSection = ({
   description,
@@ -6,12 +10,12 @@ const DescriptionSection = ({
   description: IProductByIdPageProps['product']['description']
 }) => {
   return (
-    <section className="bg-primary-1">
+    <section className="bg-primary-1 overflow-hidden">
       <div
-        className="container-restrictions-2
-				p-20"
+        className={`${classes.contentContainerElements} flex flex-col text-center container-restrictions-1 leading-10
+				p-20`}
       >
-        {description}
+        <MdToHTMLFormatter content={description} />
       </div>
     </section>
   )
