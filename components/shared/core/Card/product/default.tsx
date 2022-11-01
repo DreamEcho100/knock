@@ -12,7 +12,7 @@ interface IProductCardProps extends VariantProps<typeof cardClasses> {
 
 interface ExtraProductCardDetails {
   price: number
-  discountPrice?: number
+  priceAfterDiscount?: number
   toAddToCart: boolean
   productData: any
 }
@@ -42,7 +42,7 @@ const ProductBasicCard = ({
         />
       </div>
       <div
-        className="flex-grow text-center px-4 py-4 bg-primary-3 text-primary-2 flex flex-col items-center justify-center gap-1"
+        className="flex-grow text-center px-4 py-2 bg-primary-3 text-primary-2 flex flex-col items-center justify-center gap-1"
         style={{ fontSize: 'small' }}
       >
         <p className="font-bold">
@@ -60,13 +60,13 @@ const ExtraProductCardDetails = ({
   price,
   productData,
   toAddToCart,
-  discountPrice,
+  priceAfterDiscount,
 }: ExtraProductCardDetails) => {
   return (
     <>
-      {discountPrice ? (
+      {priceAfterDiscount ? (
         <p>
-          <del>${price}</del>&nbsp;&nbsp;${discountPrice}
+          <del>${price}</del>&nbsp;&nbsp;${priceAfterDiscount}
         </p>
       ) : (
         <p>${price}</p>
@@ -84,7 +84,7 @@ export const ProductCardWithDetails = ({
   price,
   productData,
   toAddToCart,
-  discountPrice,
+  priceAfterDiscount,
 }: Omit<IProductCardProps, 'extraDetailsElement'> &
   ExtraProductCardDetails) => {
   return (
@@ -97,7 +97,7 @@ export const ProductCardWithDetails = ({
           price={price}
           productData={productData}
           toAddToCart={toAddToCart}
-          discountPrice={discountPrice}
+          priceAfterDiscount={priceAfterDiscount}
         />
       }
     ></ProductBasicCard>

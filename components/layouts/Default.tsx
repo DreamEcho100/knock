@@ -272,7 +272,7 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
     <>
       <MainHeader />
       <main
-        className={`${commonClasses} bg-primary-2 mt-20 container-restrictions-1 w-full h-fit flex flex-col`}
+        className={`${commonClasses} bg-primary-2 mt-20 container-restrictions-1 w-full flex flex-col`}
       >
         {children}
       </main>

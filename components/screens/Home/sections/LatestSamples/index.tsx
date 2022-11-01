@@ -42,32 +42,6 @@ const LatestSamplesSection = () => {
           <Button>Explore it now</Button>
         </div>
         <div className="md:flex-grow md:w-1/2 flex justify-center items-center">
-          {/* <div className="flex gap-6">
-            {[
-              {
-                image: {
-                  src: '/images/d8052bdee8691b19d9186254f48089a8.png',
-                  alt: '',
-                },
-                title: 'Drums That Knock Vol. 9',
-                id: 'drums-that-knock-vol-9',
-              },
-              {
-                image: {
-                  src: '/images/5e56d0c1a9de63c6d45b0b33ab7fa460.png',
-                  alt: '',
-                },
-                title: 'Drums That Knock Vol. 9',
-                id: 'drums-that-knock-vol-9',
-              },
-            ].map((item, index) => (
-              <ProductBasicCard
-                key={index}
-                link={{ children: item.title, href: `/products/${item.id}` }}
-                {...item}
-              />
-            ))}
-          </div> */}
           <ProductCardSlider />
         </div>
       </div>
