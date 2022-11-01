@@ -6,8 +6,8 @@ const OneProductShowCaseSection = () => {
     <section className="bg-primary-2">
       <div
         className="container-restrictions-1
-				flex p-4 flex-col
-				sm:px-8 sm:py-py-20 sm:flex-row
+				flex py-20 flex-col
+				sm:px-8 sm:py-20 sm:flex-row
 			"
       >
         <div

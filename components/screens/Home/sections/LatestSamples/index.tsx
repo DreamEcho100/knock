@@ -15,9 +15,12 @@ const LatestSamplesSection = () => {
           className="flex gap-4 flex-col items-center text-center mb-12 p-4
 						md:p-8 md:items-start md:text-align-initial md:flex-grow md:w-1/2 md:justify-center"
         >
-          <h2 className="text-h2 font-bold text-primary-1">
+          <h2
+            className="text-h2 font-bold text-primary-1 text-center
+								md:text-align-initial"
+          >
             DRUMS THAT
-            <span className="flex">
+            <span className="flex w-fit mx-auto md:mx-0">
               KNOCK
               <sup>
                 <Image
