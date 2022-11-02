@@ -10,44 +10,7 @@ import 'swiper/css/navigation'
 // import 'swiper/css/pagination'
 // import 'swiper/css/scrollbar'
 import Image from 'next/image'
-
-const artists = [
-  {
-    image: {
-      src: '/images/people/attachment-eminem-header 1.png',
-      alt: '',
-    },
-    name: 'Artist Name',
-  },
-  {
-    image: {
-      src: '/images/people/beyonce-2000x1270-1-696x442 1.png',
-      alt: '',
-    },
-    name: 'Artist ',
-  },
-  {
-    image: {
-      src: '/images/people/Dua+Lipa 1.png',
-      alt: '',
-    },
-    name: 'Artist ',
-  },
-  {
-    image: {
-      src: '/images/people/G-Eazy 1.png',
-      alt: '',
-    },
-    name: 'Artist ',
-  },
-  {
-    image: {
-      src: '/images/people/kapak-132718-745x465-1652258213 1.png',
-      alt: '',
-    },
-    name: 'Artist ',
-  },
-]
+import { artists } from 'data/fakeData'
 
 const ArtistSection = () => {
   return (
@@ -73,7 +36,7 @@ const ArtistSection = () => {
             {'br'
               .repeat(2)
               .split('br')
-              .map((item) => artists)
+              .map(() => artists)
               .flat(1)
               .map((item, index) => (
                 <SwiperSlide

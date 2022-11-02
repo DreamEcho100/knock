@@ -4,6 +4,7 @@ import {
   HeroSection,
   ShapesYourDrumsSection,
   DrumsThatKnockSection,
+  ReviewsSection,
 } from './sections'
 
 const KnockScreen = () => {
@@ -14,6 +15,7 @@ const KnockScreen = () => {
       <ShapesYourDrumsSection />
       <EasyToUseSection />
       <DrumsThatKnockSection />
+      <ReviewsSection />
     </>
   )
 }
