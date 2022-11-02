@@ -12,8 +12,8 @@ const FeaturesAndFilesIncludedSection = ({
     <section className="bg-primary-1">
       <div
         className="relative
-				flex gap-4 flex-wrap px-8 py-20
-				md:flex-nowrap lg:px-0 md:justify-center md:gap-8"
+				flex justify-center flex-wrap gap-4 px-8 py-20
+				md:flex-nowrap lg:px-4 md:gap-8"
       >
         <Image
           src="/images/Rectangle 48.png"

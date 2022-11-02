@@ -8,14 +8,15 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
     <section className="bg-primary-1 overflow-hidden">
       <div
         className="container-restrictions-1
-					relative py-4 pt-10 sm:py-20 pb-10 flex items-center justify-center"
+					relative pt-32 0 pb-10 flex items-center justify-center"
       >
         <Image
           src="/images/Rectangle 47.png"
           alt=""
           width={200}
           height={200}
-          className="pointer-events-none aspect-square absolute w-1/2 top-0 right-0 scale-125 -translate-y-1/4"
+          className="pointer-events-none aspect-square absolute w-1/2 top-0 right-0 scale-125
+						lg:translate-x-[5%] lg:-translate-y-[5%]"
         />
         <div
           className="
