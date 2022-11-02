@@ -8,7 +8,7 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
     <section className="bg-primary-1 overflow-hidden">
       <div
         className="container-restrictions-1
-					relative p-4 pt-10 sm:p-20 pb-10 flex items-center justify-center"
+					relative py-4 pt-10 sm:py-20 pb-10 flex items-center justify-center"
       >
         <Image
           src="/images/Rectangle 47.png"
@@ -18,19 +18,19 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
           className="aspect-square absolute w-1/2 top-0 right-0 scale-100 -translate-y-1/4"
         />
         <div
-          className="container-restrictions-2
-			 			relative flex rounded-3xl overflow-hidden flex-col max-w-[400px]
-						lg:flex-row lg:max-w-full"
+          className="
+			 			relative flex rounded-3xl overflow-hidden flex-col w-11/12 max-w-[400px] flex justify-center
+						lg:flex-row lg:max-w-full lg:rounded-l-none lg:rounded-r-3xl"
         >
           <Image
             src={product.image.src}
             alt=""
             width={200}
             height={200}
-            className=" aspect-square w-full lg:min-w-[24rem]"
+            className=" aspect-square w-full lg:max-w-[20rem]"
           />
           <div
-            className="px-4 sm:px-16 py-8 flex flex-col gap-4 bg-primary-4 items-center justify-center text-center
+            className="px-4 sm:px-16 py-8 flex flex-col gap-2 bg-primary-4 items-center justify-center text-center
 							lg:items-stretch lg:justify-stretch lg:text-align-initial"
           >
             <h1 className="text-h2 capitalize font-bold">{product.title}</h1>
