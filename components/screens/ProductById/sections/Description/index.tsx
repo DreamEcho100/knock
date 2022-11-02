@@ -10,9 +10,9 @@ const DescriptionSection = ({
   description: IProductByIdPageProps['product']['description']
 }) => {
   return (
-    <section className="bg-primary-1 overflow-hidden">
+    <section className="bg-primary-1 overflow-x-hidden">
       <div
-        className={`${classes.contentContainerElements} flex flex-col text-center container-restrictions-1 leading-10
+        className={`${classes.contentContainerElements} ${classes.contentContainerV2} flex flex-col text-center container-restrictions-1 leading-10
 				p-20`}
       >
         <MdToHTMLFormatter content={description} />

@@ -19,7 +19,7 @@ focus:border-b-text-primary-1 hover:text-primary-1`
 const MainHeader = () => {
   const [isSmallScreenNaveOpen, setIsSmallScreenNaveOpen] = useState(false)
   const headerLinks = [
-    { href: '/', text: 'knock' },
+    { href: '/knock-plugin', text: 'knock' },
     { href: '/', text: 'knock clippr' },
     { href: '/drums-that-knock', text: 'drums that knock' },
     { href: '/faqs', text: 'faqs' },

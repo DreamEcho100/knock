@@ -7,13 +7,13 @@ const VideoSection = ({
   video: IProductByIdPageProps['product']['video']
 }) => {
   return (
-    <section className="relative bg-primary-1 overflow-hidden">
+    <section className="relative bg-primary-1">
       <Image
         src="/images/Rectangle 46.png"
         alt=""
         width={200}
         height={200}
-        className="aspect-square absolute w-1/2 top-0 right-0 scale-150 -translate-y-[5%] -translate-x-"
+        className="aspect-square absolute w-1/2 top-0 right-0 scale-150 -translate-y-[5%] -translate-x-1/4"
       />
       <div className="relative container-restrictions-1 mx-8 my-24 flex flex-col gap-8">
         <header className="text-center">
@@ -24,8 +24,8 @@ const VideoSection = ({
         <div className="flex items-center justify-center">
           {/* <video src={video.src} poster={video.posterSrc} controls></video> */}
           <iframe
-            width="800"
-            height="350"
+            width="400"
+            height="200"
             src={video.src}
             title={video.title || 'YouTube video player'}
             frameBorder="0"
