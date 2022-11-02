@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 const HeroSection = ({ product }: IProductByIdPageProps) => {
   return (
-    <section className="bg-primary-1 overflow-hidden">
+    <section className="bg-primary-1 overflow-x-hidden md:overflow-x-visible">
       <div
         className="container-restrictions-1
 					relative pt-32 0 pb-10 flex items-center justify-center"
@@ -16,7 +16,7 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
           width={200}
           height={200}
           className="pointer-events-none aspect-square absolute w-1/2 top-0 right-0 scale-125
-						lg:translate-x-[5%] lg:-translate-y-[5%]"
+						lg:translate-x-[4%] lg:-translate-y-[4%]"
         />
         <div
           className="
