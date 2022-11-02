@@ -1,9 +1,9 @@
 import type { ButtonHTMLAttributes } from 'react'
 import twClasses from 'utils/core/tailwind'
 
-interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
+export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
-const Button = ({ className, ...props }: IProps) => {
+const Button = ({ className, ...props }: IButtonProps) => {
   return (
     <button
       className={`${twClasses.button.default()} ${className || ''} `}

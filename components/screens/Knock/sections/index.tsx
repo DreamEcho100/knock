@@ -1,1 +1,5 @@
-export { default as HeroSection } from '@components/screens/Home/sections/Hero'
+export { default as HeroSection } from './Hero'
+export { default as DescriptionSection } from './Description'
+export { default as ShapesYourDrumsSection } from './ShapesYourDrums'
+export { default as EasyToUseSection } from './EasyToUse'
+export { default as DrumsThatKnockSection } from './DrumsThatKnock'
