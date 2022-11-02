@@ -66,7 +66,7 @@ const ReviewsSection = () => {
                         alt={item.image.alt}
                         width={250}
                         height={250}
-                        className="rounded-full aspect-square w-full h-full"
+                        className="aspect-square w-full h-full"
                       />
                     </div>
                   </div>
