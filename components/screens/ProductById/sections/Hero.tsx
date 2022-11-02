@@ -27,7 +27,7 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
             alt=""
             width={200}
             height={200}
-            className=" aspect-square w-full lg:max-w-[20rem]"
+            className=" aspect-square w-full lg:max-w-[25rem]"
           />
           <div
             className="px-4 rounded-r-none py-8 flex flex-col gap-2 bg-primary-4 items-center justify-center text-center
