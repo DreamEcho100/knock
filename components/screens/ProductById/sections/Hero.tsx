@@ -15,7 +15,7 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
           alt=""
           width={200}
           height={200}
-          className="aspect-square absolute w-1/2 top-0 right-0 scale-125 -translate-y-1/4"
+          className="pointer-events-none aspect-square absolute w-1/2 top-0 right-0 scale-125 -translate-y-1/4"
         />
         <div
           className="

@@ -24,7 +24,9 @@ module.exports = {
 				primary: {
 					1: '#fff',
 					2: '#C5C5C5', // '#b4b4b4'
-					3: '#A5A5A5'
+					3: '#A1A1A1',
+					4: '#A5A5A5',
+					5: '#BEBEBE'
 				}
 			},
 			colors: {
@@ -42,8 +44,10 @@ module.exports = {
 				text: {
 					primary: {
 						1: '#fff',
-						2: '#b4b4b4', // '#b4b4b4'
-						3: '#A5A5A5'
+						2: '#C5C5C5', // '#b4b4b4'
+						3: '#A1A1A1',
+						4: '#A5A5A5',
+						5: '#BEBEBE'
 					}
 				}
 			}

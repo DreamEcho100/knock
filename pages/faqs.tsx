@@ -86,7 +86,7 @@ const FAQSPages: NextPage = () => {
   return (
     <DefaultLayout>
       <section className="bg-primary-1 p-8 sm:p-16 flex flex-col">
-        <div className="max-w-[800px] mx-auto text-primary-3">
+        <div className="max-w-[800px] mx-auto text-primary-4">
           <header>
             <h1 className="text-h2 capitalize font-bold text-primary-1">
               FAQs
@@ -97,7 +97,7 @@ const FAQSPages: NextPage = () => {
               return (
                 <li
                   key={item.question}
-                  className="flex flex-col py-1 border-b-2 border-b-text-primary-3 "
+                  className="flex flex-col py-1 border-b-2 border-b-text-primary-4 "
                 >
                   <span className="flex flex-col text-[80%]">
                     <h2 className="text-3xl uppercase relative text-primary-1 mb-3">

@@ -13,11 +13,11 @@ const VideoSection = ({
         alt=""
         width={200}
         height={200}
-        className="aspect-square absolute w-1/2 top-0 right-0 scale-150 -translate-y-[5%] -translate-x-1/4"
+        className="pointer-events-none aspect-square absolute w-1/2 top-0 right-0 scale-150 -translate-y-[5%] -translate-x-1/4"
       />
       <div className="relative container-restrictions-1 mx-8 my-24 flex flex-col gap-8">
         <header className="text-center">
-          <h2 className="text-h2 font-bold text-primary-1 capitalize">
+          <h2 className="text-h3 font-bold text-primary-1 capitalize">
             watch {video.title}
           </h2>
         </header>

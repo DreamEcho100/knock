@@ -120,7 +120,7 @@ const LinksListContainer = ({
 }) => {
   return (
     <nav className="flex flex-col gap-2 p-2">
-      <h3 className="capitalize font-semibold text-h3 text-primary-1">
+      <h3 className="capitalize font-semibold text-h3 text-primary-5">
         {headerText}
       </h3>
       <ul className={linksListClassName}>
@@ -174,8 +174,8 @@ const Footer = () => {
                 { href: '/', text: 'All sample packs' },
               ]}
             /> */}
-            <div className="flex flex-col p-2 max-w-[550px]">
-              <header className="flex gap-2 items-center flex-wrap justify-between">
+            <div className="flex flex-col p-2 md:p-0 max-w-[700px] lg:w-1/2">
+              <header className="flex flex-col gap-2 mb-4">
                 <p className="text-white font-bold">
                   Follow us on social media
                 </p>
@@ -229,13 +229,13 @@ const Footer = () => {
                 <p>Promotion, new products and sales. Directly to your inbox</p>
               </div>
               <form className="flex gap-8 my-4">
-                <div className="flex bg-primary-3 text-primary-1 w-full max-w-[90%] rounded-3xl overflow-hidden">
+                <div className="flex bg-primary-3 text-primary-1 w-full rounded-3xl overflow-hidden">
                   <input
                     type="email"
                     placeholder="Email address"
                     id={`email-${formId}`}
-                    className="w-full bg-transparent px-4 py-2 outline-none
-											placeholder:text-text-primary-1"
+                    className="w-full bg-transparent px-6 py-2 outline-none
+											placeholder:text-text-primary-3 text-base"
                   />
                   <Button type="submit" className="uppercase">
                     subscribe
