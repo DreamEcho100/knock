@@ -3,12 +3,12 @@ import React from 'react'
 
 type Props = {}
 
-const VideoSection = (props: Props) => {
+const VideosSection = (props: Props) => {
   return (
     <section className="bg-primary-1 text-primary-2">
       <div
         className="container-restrictions-2
-					flex flex-col gap-8"
+					flex flex-col gap-16 py-20"
       >
         <header className="text-center">
           <h2 className="text-h2 text-primary-1 font-bold uppercase">
@@ -40,7 +40,7 @@ const VideoSection = (props: Props) => {
             className="overflow-hidden rounded-2xl"
           ></iframe>
         </div>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center mt-8">
           <Button className="capitalize">add to cart</Button>
         </div>
       </div>
@@ -48,4 +48,4 @@ const VideoSection = (props: Props) => {
   )
 }
 
-export default VideoSection
+export default VideosSection

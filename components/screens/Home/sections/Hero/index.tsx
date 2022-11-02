@@ -1,4 +1,5 @@
 import Button from '@components/shared/core/Button'
+import KnockTrademark from '@components/shared/core/KnockTrademark'
 import Image from 'next/image'
 
 const HeroSection = () => {
@@ -29,7 +30,10 @@ const HeroSection = () => {
             className="object-cover mb-6 w-11/12 relative"
           />
         </div>
-        <h2 className="text-h2 font-bold text-primary-1 mt-12">KNOCK PLUGIN</h2>
+        <h2 className="text-h2 font-bold text-primary-1 mt-12 flex flex-wrap">
+          <KnockTrademark />
+          &nbsp;PLUGIN
+        </h2>
         <p className="mb-6 max-w-[350px]">
           Make your drums KNOCK and punch through the mix.
         </p>

@@ -56,6 +56,12 @@ select {
 	}
 }
 
+body sup {
+	top: var(--sup-t, 0ch);
+	width: 1ch;
+	height: 1ch;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

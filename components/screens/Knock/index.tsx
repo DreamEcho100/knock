@@ -5,7 +5,7 @@ import {
   ShapesYourDrumsSection,
   DrumsThatKnockSection,
   ReviewsSection,
-  VideoSection,
+  VideosSection,
 } from './sections'
 
 const KnockScreen = () => {
@@ -17,7 +17,7 @@ const KnockScreen = () => {
       <EasyToUseSection />
       <DrumsThatKnockSection />
       <ReviewsSection />
-      <VideoSection />
+      <VideosSection />
     </>
   )
 }

@@ -1,3 +1,4 @@
+import KnockTrademark from '@components/shared/core/KnockTrademark'
 import Image from 'next/image'
 
 const HeroSection = () => {
@@ -19,13 +20,19 @@ const HeroSection = () => {
         <div className="relative flex flex-col items-center justify-center text-center">
           <h1 className="font-bold text-h2">
             DRUMS <br />
-            THAT KNOCK
+            <div className="flex flex-wrap">
+              THAT&nbsp;
+              <KnockTrademark />
+            </div>
           </h1>
           <p>
             Designed from scratch by DECAP. Premium quality, groundbreaking as
             always.
           </p>
-          <p>These drums KNOCK.</p>
+          <p className="flex flex-wrap">
+            These drums &nbsp;
+            <KnockTrademark />.
+          </p>
         </div>
       </div>
     </section>

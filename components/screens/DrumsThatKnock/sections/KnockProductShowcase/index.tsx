@@ -1,3 +1,4 @@
+import KnockTrademark from '@components/shared/core/KnockTrademark'
 import Image from 'next/image'
 import Link from 'next/link'
 import twClasses from 'utils/core/tailwind'
@@ -29,12 +30,14 @@ const KnockProductShowcaseSection = () => {
           className="flex flex-col gap-2items-center text-center mb-12 gap-4
 				md:p-4 md:items-start md:text-align-initial md:flex-grow md:w-1/2 md:justify-center"
         >
-          <h2 className="text-h2 text-primary-1 capitalize font-bold">KNOCK</h2>
-          <p>
-            This is the last plugin you will ever need to make your drums KNOCK
-            and punch through your mix. This plugin was meticulously crafted by
-            DECAP. It is inspired by the signature sound of Drums That Knock,
-            which has helped shaped the sonics of modern music.
+          <h2 className="text-h2 text-primary-1 capitalize font-bold flex flex-wrap">
+            <KnockTrademark />
+          </h2>
+          <p className="flex">
+            This is the last plugin you will ever need to make your drums knock
+            &nbsp and punch through your mix. This plugin was meticulously
+            crafted by DECAP. It is inspired by the signature sound of Drums
+            That Knock, which has helped shaped the sonics of modern music.
           </p>
           <Link
             href="/"

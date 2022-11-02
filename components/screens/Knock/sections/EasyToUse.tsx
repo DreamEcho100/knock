@@ -5,9 +5,9 @@ const EasyToUseSection = () => {
   return (
     <section className="bg-primary-1 text-primary-2">
       <div
-        className="container-restrictions-2
+        className="
 					px-4 py-20 flex flex-col
-					lg:flex-row"
+					lg:flex-row md:px-20"
       >
         <div
           className="w-full flex flex-col items-center p-4 text-center gap-8
@@ -15,7 +15,7 @@ const EasyToUseSection = () => {
 							lg:w-1/2 lg:text-align-initial lg:items-start"
         >
           <h2 className="text-h2 font-bold uppercase">EASY TO USE</h2>
-          <p>
+          <p className="max-w-[450px]">
             KNOCK is optimized for extreme ease of use for beginners and
             professionals alike. Use KNOCK to make your drums slap, and take you
             to the next level. Whether you are new to producing, or a seasoned
@@ -26,9 +26,18 @@ const EasyToUseSection = () => {
           <Button className="capitalize">Buy it now</Button>
         </div>
         <div
-          className="w-full
+          className="w-full relative overflow-hidden
 							 lg:w-1/2"
         >
+          <div className="absolute">
+            <CustomNextImage
+              src="/images/Rectangle 47.png"
+              alt=""
+              width={800}
+              height={500}
+              className="mx-auto w-full h-full object-cover -translate-y-[10%]"
+            />
+          </div>
           <CustomNextImage
             src="/images/laptop final 1.png"
             alt=""

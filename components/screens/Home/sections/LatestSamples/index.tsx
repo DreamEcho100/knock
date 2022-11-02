@@ -1,5 +1,6 @@
 import Button from '@components/shared/core/Button'
 import ProductBasicCard from '@components/shared/core/Card/product/default'
+import KnockTrademark from '@components/shared/core/KnockTrademark'
 import Image from 'next/image'
 import ProductCardSlider from './components/ProductCardSlider'
 
@@ -16,28 +17,16 @@ const LatestSamplesSection = () => {
 						md:p-8 md:items-start md:text-align-initial md:flex-grow md:w-1/2 md:justify-center"
         >
           <h2
-            className="text-h2 font-bold text-primary-1 text-center
+            className="text-h2 font-bold text-primary-1 text-center flex flex-wrap
 								md:text-align-initial"
           >
-            DRUMS THAT
-            <span className="flex w-fit mx-auto md:mx-0">
-              KNOCK
-              <sup>
-                <Image
-                  src="/images/Trademark Artboard 1 copy 3.png"
-                  width={10}
-                  height={10}
-                  priority
-                  alt="KNOCK logo"
-                  className="aspect-square w-2 h-2 mt-[1rem]"
-                />
-              </sup>
-            </span>
-            SAMPLE PACKS
+            DRUMS THAT&nbsp;
+            <KnockTrademark />
+            &nbsp;SAMPLE PACKS
           </h2>
-          <p className="text-primary-2 max-w-[300px]">
-            Designed from scratch by DECAP. Premium quality, groundbreaking as
-            always.
+          <p className="text-primary-2">
+            Designed from scratch by DECAP. <br /> Premium quality,
+            groundbreaking as always.
           </p>
           <Button>Explore it now</Button>
         </div>

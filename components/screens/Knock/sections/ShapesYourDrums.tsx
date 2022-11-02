@@ -52,20 +52,20 @@ const ShapesYourDrumsSection = () => {
   return (
     <section className=" text-primary-2 relative bg-primary-1">
       {/* radial-gradient(transparent, rgba(0, 0, 0, 0.4)) */}
-      <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full">
+      <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden">
         <CustomNextImage
-          src="/images/Pattern2 1.png"
+          src="/images/Pattern[1].png"
           alt=""
           width={800}
           height={800}
-          className="left-0 w-full h-full"
+          className="left-0 w-full h-full object-cover scale-[2]"
         />
       </div>
       <div
         className="absolute top-0 right-0 bottom-0 left-0 w-full h-full"
         style={{
           backgroundImage:
-            'radial-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9), rgba(0, 0, 0))',
+            'radial-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9), rgba(0, 0, 0))',
         }}
       >
         <CustomNextImage

@@ -1,4 +1,5 @@
 import Button from '@components/shared/core/Button'
+import KnockTrademark from '@components/shared/core/KnockTrademark'
 import Image from 'next/image'
 
 const OneProductShowCaseSection = () => {
@@ -14,21 +15,9 @@ const OneProductShowCaseSection = () => {
           className="flex gap-4 flex-col items-center text-center mb-12 
 				  	sm:p-8 sm:items-start sm:text-align-initial sm:flex-grow sm:w-1/2 sm:justify-center"
         >
-          <h2 className="text-h2 font-bold text-primary-1 flex">
-            <span className="flex">
-              KNOCK
-              <sup className="mt-[1rem]">
-                <Image
-                  src="/images/Trademark Artboard 1 copy 3.png"
-                  width={10}
-                  height={10}
-                  priority
-                  alt="KNOCK logo"
-                  className="aspect-square w-2 h-2"
-                />
-              </sup>
-            </span>
-            Clipper
+          <h2 className="text-h2 font-bold text-primary-1 flex flex-wrap">
+            <KnockTrademark />
+            &nbsp;Clipper
           </h2>
           <p className="text-primary-2">
             Adjustable hard + soft clipper module from KNOCK.

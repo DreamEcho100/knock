@@ -11,14 +11,16 @@ import 'swiper/css/navigation'
 // import 'swiper/css/scrollbar'
 import Image from 'next/image'
 import { artists } from 'data/fakeData'
+import KnockTrademark from '@components/shared/core/KnockTrademark'
 
 const ArtistSection = () => {
   return (
     <section className="bg-primary-2">
       <div className="container-restrictions-1 px-8 py-16 flex flex-col gap-12">
         <header className="text-center">
-          <h2 className="text-h2 font-bold capitalize">
-            SOME ARTISTS WHO HAVE USED DRUMS THAT KNOCK
+          <h2 className="text-h2 font-bold capitalize flex flex-wrap">
+            SOME ARTISTS WHO HAVE USED DRUMS THAT &nbsp;
+            <KnockTrademark />
           </h2>
         </header>
         <div className="px-8">

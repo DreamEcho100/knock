@@ -41,15 +41,20 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
               <span className="text-bg-secondary-1">Shipping</span>
               &nbsp;calculated at checkout.
             </p>
-            <p className="flex flex-col items-center lg:items-start">
+            <p
+              className="flex flex-wrap items-center justify-center
+								lg:justify-start"
+            >
               Pay in 4 interest-free installments of $12.50 with
-              <Image
-                src="/images/shoppay.png"
-                alt="shop pay"
-                width={200}
-                height={50}
-                className="object-contain w-28 aspect-video"
-              />
+              <span>
+                <Image
+                  src="/images/shoppay.png"
+                  alt="shop pay"
+                  width={200}
+                  height={50}
+                  className="w-[9ch]"
+                />
+              </span>
             </p>
             <div
               className="flex justify-center items-center flex-wrap gap-4

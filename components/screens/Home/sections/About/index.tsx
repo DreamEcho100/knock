@@ -1,3 +1,5 @@
+import KnockTrademark from '@components/shared/core/KnockTrademark'
+
 const AboutSection = () => {
   return (
     <section className="bg-primary-1">
@@ -7,8 +9,9 @@ const AboutSection = () => {
 					sm:py-16
 					"
       >
-        <h2 className="text-h2 text-primary-1 capitalize font-semibold">
-          MAKE YOUR DRUMS KNOCK
+        <h2 className="text-h2 text-primary-1 capitalize font-semibold flex flex-wrap">
+          MAKE YOUR DRUMS&nbsp;
+          <KnockTrademark />
         </h2>
         <p className="text-primary-2 max-w-[1000px]">
           DECAP is a Billboard Top 10, platinum-certified producer, sound
