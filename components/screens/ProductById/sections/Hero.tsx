@@ -15,11 +15,11 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
           alt=""
           width={200}
           height={200}
-          className="aspect-square absolute w-1/2 top-0 right-0 scale-100 -translate-y-1/4"
+          className="aspect-square absolute w-1/2 top-0 right-0 scale-125 -translate-y-1/4"
         />
         <div
           className="
-			 			relative flex rounded-3xl overflow-hidden flex-col w-11/12 max-w-[400px] flex justify-center
+			 			relative flex justify-center rounded-3xl overflow-hidden flex-col w-11/12 max-w-fit
 						lg:flex-row lg:max-w-full lg:rounded-l-none lg:rounded-r-3xl"
         >
           <Image
@@ -30,8 +30,9 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
             className=" aspect-square w-full lg:max-w-[20rem]"
           />
           <div
-            className="px-4 sm:px-16 py-8 flex flex-col gap-2 bg-primary-4 items-center justify-center text-center
-							lg:items-stretch lg:justify-stretch lg:text-align-initial"
+            className="px-4 rounded-r-none py-8 flex flex-col gap-2 bg-primary-4 items-center justify-center text-center
+							sm:px-16
+							lg:items-stretch lg:justify-stretch lg:text-align-initial lg:rounded-r-3xl"
           >
             <h1 className="text-h2 capitalize font-bold">{product.title}</h1>
             <p>${product.price}</p>
