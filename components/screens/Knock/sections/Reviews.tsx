@@ -34,15 +34,25 @@ const ReviewsSection = () => {
                 <SwiperSlide key={index} className="px-8 pt-24 pb-12">
                   <div className="flex relative">
                     <div
-                      className="rounded-2xl p-8 pr-[6rem] bg-primary-3"
-                      style={{ width: 'calc(100% - 5rem)' }}
+                      className="rounded-2xl p-8 bg-primary-3
+												sm:pr-[6rem] sm:mr-[6rem]"
+                      // style={{ width: 'calc(100% - 5rem)' }}
                     >
                       <q>{item.review}</q>
                       <br />
                       <br />
-                      <cite>{item.name}</cite>
+                      <div className="flex items-end gap-4">
+                        <cite className="flex items-end">{item.name}</cite>
+                        <CustomNextImage
+                          src={item.image.src}
+                          alt={item.image.alt}
+                          width={250}
+                          height={250}
+                          className="rounded-full aspect-square w-10 h-10"
+                        />
+                      </div>
                     </div>
-                    <div className="w-[10rem] h-[10rem] absolute top-1/2 -translate-y-1/2 right-0">
+                    <div className="hidden sm:block w-[10rem] h-[10rem] absolute top-1/2 -translate-y-1/2 right-0">
                       <CustomNextImage
                         src={item.image.src}
                         alt={item.image.alt}
