@@ -39,9 +39,14 @@ const ReviewsSection = () => {
                       // style={{ width: 'calc(100% - 5rem)' }}
                     >
                       <q>{item.review}</q>
-                      <span className="border-b-[0.0125rem] border-text-primary-3 w-8 my-2"></span>
+                      <span className="border-b-[0.0125rem] border-text-primary-4 w-12 mb-2 mt-3"></span>
                       <div className="flex items-end gap-4">
-                        <cite className="flex items-end">{item.name}</cite>
+                        <cite
+                          className="flex items-end"
+                          style={{ fontStyle: 'normal' }}
+                        >
+                          {item.name}
+                        </cite>
                         <CustomNextImage
                           src={item.image.src}
                           alt={item.image.alt}
