@@ -262,7 +262,7 @@ const Footer = () => {
             <Image
               src="/images/payment_cards.png"
               alt="payment cards"
-              width={400}
+              width={200}
               height={50}
             />
           </div>

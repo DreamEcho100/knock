@@ -16,8 +16,8 @@ const VideosContainer = () => {
 		lg:flex-row"
       >
         <iframe
-          width="400"
-          height="200"
+          width="800"
+          height="400"
           src="https://www.youtube.com/embed/4fiC6Zi0Wnw"
           title="YouTube video player"
           frameBorder="0"
@@ -26,8 +26,8 @@ const VideosContainer = () => {
           className="overflow-hidden rounded-2xl"
         ></iframe>
         <iframe
-          width="400"
-          height="200"
+          width="800"
+          height="400"
           src="https://www.youtube.com/embed/4fiC6Zi0Wnw"
           title="YouTube video player"
           frameBorder="0"
