@@ -44,7 +44,7 @@ const ProductShowcase = ({
         <Button className="capitalize" {...button} />
       </div>
       <div
-        className="w-full relative overflow-hidden p-4
+        className="w-full relative p-4
 							 lg:w-1/2 lg:p-0"
       >
         {backgroundImg && (
