@@ -5,8 +5,9 @@ const Description = ({
 }: {
   children: HTMLAttributes<HTMLParagraphElement>['children']
 }) => {
+  // !!!
   return (
-    <div className="text-center leading-12">
+    <div className="text-center leading-12 max-w-[900px]">
       <p className="text-[2.25rem] leading-[1.5]">{children}</p>
     </div>
   )

@@ -38,7 +38,7 @@ const ProductShowcase = ({
 							sm:pb-20
 							lg:w-1/2 lg:text-align-initial lg:items-start lg:py-8"
       >
-        <h2 className="text-h2 font-bold uppercase" {...h2} />
+        <h2 className="text-h2 font-bold uppercase flex flex-wrap" {...h2} />
         <p className="md:max-w-[450px]" {...p} />
 
         <Button className="capitalize" {...button} />
@@ -54,7 +54,7 @@ const ProductShowcase = ({
               alt=""
               width={800}
               height={500}
-              className={`${backgroundImgClassName} mx-auto w-full h-full object-cover scale-150`}
+              className={`${backgroundImgClassName} mx-auto w-full h-full object-cover scale-150 translate-y-[12.5%]`}
               {...backgroundImgProps}
             />
           </div>

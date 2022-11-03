@@ -62,11 +62,24 @@ body sup {
 	height: 1ch;
 }
 
+/* body > * {
+	max-width: 1280px;
+	margin: auto;
+} */
+
+main > section > *,
+#main-header > *,
+#main-footer > * {
+	max-width: 1280px;
+	margin: auto;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer components {
+	/* 
 	.container-restrictions-1 {
 		max-width: 1280px;
 		margin: auto;
@@ -75,7 +88,7 @@ body sup {
 		max-width: 900px;
 		margin: auto;
 	}
-
+ */
 	.text-align-initial {
 		text-align: initial;
 	}

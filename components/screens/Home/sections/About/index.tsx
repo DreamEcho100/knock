@@ -4,7 +4,7 @@ const AboutSection = () => {
   return (
     <section className="bg-primary-1">
       <div
-        className="container-restrictions-1
+        className="
 					flex gap-4 flex-col items-center justify-center text-center p-12 
 					sm:py-16
 					"

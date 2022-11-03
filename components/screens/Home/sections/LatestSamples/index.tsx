@@ -8,7 +8,7 @@ const LatestSamplesSection = () => {
   return (
     <section className="bg-primary-2">
       <div
-        className="container-restrictions-1
+        className="
 				flex p-8 flex-col
 				md:px-8 md:py-20 md:flex-row"
       >

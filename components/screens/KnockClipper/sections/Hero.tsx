@@ -6,7 +6,7 @@ const HeroSection = () => {
   return (
     <section className="bg-primary-1">
       <div
-        className="container-restrictions-1 overflow-hidden
+        className=" overflow-hidden
 				px-8 pt-24 pb-24 flex items-center justify-center flex-col text-center"
       >
         <div className="relative flex items-center justify-center max-w-[900px]">
@@ -23,11 +23,11 @@ const HeroSection = () => {
           <Image
             src="/images/abc59a63fe5ed68da58bff746fd14cce.png"
             alt=""
-            width={800}
-            height={800}
+            width={600}
+            height={600}
             priority
             unoptimized
-            className="object-cover mb-6 w-11/12 relative"
+            className="object-cover mb-6 relative"
             style={{ aspectRatio: '16 / 14' }}
           />
         </div>
@@ -43,7 +43,8 @@ const HeroSection = () => {
             Buy it now
             <del className="mx-2">$29</del>
           </Button>
-          <span className="p-2" /> <span>$15</span>
+          <span className="p-2" />{' '}
+          <span className="text-primary-1 font-bold">$15</span>
         </div>
       </div>
     </section>

@@ -7,7 +7,7 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
   return (
     <section className="bg-primary-1 overflow-x-hidden md:overflow-x-visible">
       <div
-        className="container-restrictions-1
+        className="
 					relative pt-32 0 pb-10 flex items-center justify-center"
       >
         <Image

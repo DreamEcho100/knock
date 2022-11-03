@@ -6,7 +6,7 @@ const HeroSection = () => {
   return (
     <section className="bg-primary-1">
       <div
-        className="container-restrictions-1 overflow-hidden
+        className=" overflow-hidden
 				px-8 pt-24 pb-16 flex items-center justify-center flex-col text-center"
       >
         <div className="relative flex items-center justify-center max-w-[900px]">

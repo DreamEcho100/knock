@@ -13,7 +13,7 @@ interface IProps {
 const Wrapper = ({ header, children }: IProps) => {
   return (
     <section className="bg-primary-1 p-8 sm:p-16">
-      <div className="container-restrictions-1">
+      <div className="">
         <header className="flex flex-col gap-4 text-text-primary-1">
           <h1 className="text-h2 font-semibold capitalize">
             {header.h1Children}

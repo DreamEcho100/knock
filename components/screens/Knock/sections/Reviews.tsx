@@ -11,7 +11,7 @@ import CustomNextImage from '@components/shared/common/CustomNextImage'
 const ReviewsSection = () => {
   return (
     <section className="bg-primary-1">
-      <div className="container-restrictions-1">
+      <div className="">
         <div className="px-8 pb-12 container-restrictions-2">
           <Swiper
             modules={[Navigation, Pagination, A11y]}

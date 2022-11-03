@@ -32,7 +32,7 @@ const MainHeader = () => {
       className={`${commonClasses} bg-primary-1 z-10 fixed top-0 right-0 left-0 w-full flex flex-col`}
     >
       <div
-        className="relative w-full container-restrictions-1 mx-auto
+        className="relative w-full mx-auto
 						lg:px-20"
       >
         <div className="relative z-10 h-20 flex justify-between px-4 sm:px-8 gap-2 sm:gap-4 text-primary-2">
@@ -274,7 +274,7 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
     <>
       <MainHeader />
       <main
-        className={`${commonClasses} bg-primary-2 mt-20 container-restrictions-1 w-full flex flex-col`}
+        className={`${commonClasses} bg-primary-2 mt-20 w-full flex flex-col`}
       >
         {children}
       </main>
