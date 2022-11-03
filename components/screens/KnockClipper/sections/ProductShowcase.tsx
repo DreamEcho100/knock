@@ -3,7 +3,10 @@ import ProductShowcase from '@components/shared/core/ProductShowcase'
 
 const ProductShowcaseSection = () => {
   return (
-    <section className="bg-primary-1 text-primary-2 px-4 py-20">
+    <section
+      className="bg-primary-1 text-primary-2 p-8 
+				sm:py-20"
+    >
       <ProductShowcase
         textContainer={{
           h2: {

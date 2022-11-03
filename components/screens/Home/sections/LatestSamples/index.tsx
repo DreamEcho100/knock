@@ -9,7 +9,7 @@ const LatestSamplesSection = () => {
     <section className="bg-primary-2">
       <div
         className="container-restrictions-1
-				flex p-4 flex-col px-8 py-12
+				flex p-8 flex-col
 				md:px-8 md:py-20 md:flex-row"
       >
         <div

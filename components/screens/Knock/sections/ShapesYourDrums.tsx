@@ -78,7 +78,8 @@ const ShapesYourDrumsSection = () => {
       </div>
       <div
         className="container-restrictions-2
-					relative px-4 py-20 flex flex-col gap-20"
+					relative flex flex-col gap-20 p-8
+					sm:py-20"
       >
         <header className="text-center">
           <h2 className="text-h2 uppercase text-primary-1">

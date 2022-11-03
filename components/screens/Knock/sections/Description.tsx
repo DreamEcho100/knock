@@ -2,7 +2,10 @@ import Description from '@components/shared/core/Description'
 
 const DescriptionSection = () => {
   return (
-    <section className="py-20 px-4 sm:px-20 bg-primary-2">
+    <section
+      className="bg-primary-2 p-8 
+							sm:py-20"
+    >
       <Description>
         KNOCK is the last plugin you will ever need to make your drums slap and
         punch through your mix. This plugin was meticulously crafted by platinum
