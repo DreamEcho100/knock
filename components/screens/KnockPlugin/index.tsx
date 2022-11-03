@@ -8,7 +8,7 @@ import {
   VideosSection,
 } from './sections'
 
-const KnockScreen = () => {
+const KnockPluginScreen = () => {
   return (
     <>
       <HeroSection />
@@ -22,4 +22,4 @@ const KnockScreen = () => {
   )
 }
 
-export default KnockScreen
+export default KnockPluginScreen
