@@ -141,9 +141,12 @@ const Footer = () => {
   const formId = useId()
 
   return (
-    <footer id="main-footer" className={`${commonClasses} max-w bg-primary-1`}>
+    <footer
+      id="main-footer"
+      className={`${commonClasses} max-w bg-primary-1 border-t-[0.125rem] border-t-text-primary-4`}
+    >
       <div
-        className="container-restrictions-1 flex flex-col m-auto text-primary-2 px-4 py-8 border-t-[0.125rem] border-t-text-primary-4
+        className="container-restrictions-1 flex flex-col m-auto text-primary-2 px-4 py-8
 						lg:px-24"
       >
         <div className="flex gap-2 flex-wrap w-full">
