@@ -31,7 +31,10 @@ const MainHeader = () => {
       id="main-header"
       className={`${commonClasses} bg-primary-1 z-10 fixed top-0 right-0 left-0 w-full flex flex-col`}
     >
-      <div className="relative w-full container-restrictions-1 mx-auto">
+      <div
+        className="relative w-full container-restrictions-1 mx-auto
+						lg:px-20"
+      >
         <div className="relative z-10 h-20 flex justify-between px-4 sm:px-8 gap-2 sm:gap-4 text-primary-2">
           <div className="flex items-center justify-center text-primary-1">
             <Logo />
@@ -138,11 +141,11 @@ const Footer = () => {
   const formId = useId()
 
   return (
-    <footer
-      id="main-footer"
-      className={`${commonClasses} container-restrictions-1 max-w bg-primary-1`}
-    >
-      <div className="container-restrictions-1 flex flex-col m-auto text-primary-2 p-4 py-8">
+    <footer id="main-footer" className={`${commonClasses} max-w bg-primary-1`}>
+      <div
+        className="container-restrictions-1 flex flex-col m-auto text-primary-2 px-4 py-8
+						lg:px-24"
+      >
         <div className="flex gap-2 flex-wrap w-full">
           <div className="w-full flex lg:flex-grow flex-wrap justify-between p-2 gap-4">
             <LinksListContainer
