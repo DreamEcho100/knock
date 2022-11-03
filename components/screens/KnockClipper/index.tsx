@@ -2,7 +2,7 @@ import {
   DescriptionSection,
   HeroSection,
   ProductShowcaseSection,
-  SystemRequirementsSection,
+  // SystemRequirementsSection,
 } from './sections'
 
 const KnockScreen = () => {

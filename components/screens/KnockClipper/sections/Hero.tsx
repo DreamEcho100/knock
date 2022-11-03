@@ -1,5 +1,4 @@
 import Button from '@components/shared/core/Button'
-import KnockSection from '@components/shared/core/KnockSection'
 import KnockTrademark from '@components/shared/core/KnockTrademark'
 import Image from 'next/image'
 
