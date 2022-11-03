@@ -3,6 +3,7 @@ import {
   HeroSection,
   ProductShowcaseSection,
   SystemRequirementsSection,
+  VideosSection,
 } from './sections'
 
 const KnockScreen = () => {
@@ -12,6 +13,7 @@ const KnockScreen = () => {
       <DescriptionSection />
       <ProductShowcaseSection />
       <SystemRequirementsSection />
+      <VideosSection />
     </>
   )
 }

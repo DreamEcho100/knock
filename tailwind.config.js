@@ -17,7 +17,8 @@ module.exports = {
 					4: '#1A1B1D'
 				},
 				secondary: {
-					1: '#7548FE '
+					1: '#7548FE ',
+					2: '#EF4370'
 				}
 			},
 			textColor: {
@@ -38,7 +39,8 @@ module.exports = {
 						4: '#1A1B1D'
 					},
 					secondary: {
-						1: '#7548FE '
+						1: '#7548FE ',
+						2: '#EF4370'
 					}
 				},
 				text: {

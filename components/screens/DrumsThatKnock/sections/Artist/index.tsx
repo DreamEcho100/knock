@@ -17,8 +17,8 @@ const ArtistSection = () => {
   return (
     <section className="bg-primary-2">
       <div className="container-restrictions-1 px-8 py-16 flex flex-col gap-12">
-        <header className="text-center">
-          <h2 className="text-h2 font-bold capitalize flex flex-wrap">
+        <header className="text-center flex items-center justify-center">
+          <h2 className="text-[2rem] font-bold capitalize flex flex-wrap">
             SOME ARTISTS WHO HAVE USED DRUMS THAT &nbsp;
             <KnockTrademark />
           </h2>

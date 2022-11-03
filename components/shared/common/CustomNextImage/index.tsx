@@ -1,8 +1,6 @@
 import Image from 'next/image'
 import { ImageProps } from 'next/dist/client/image.d'
 
-import classes from './index.module.css'
-
 export interface ICustomNextImageProps extends ImageProps {
   className?: string
   placeholder?: 'blur' | 'empty'
@@ -18,15 +16,16 @@ const CustomNextImage = ({
   blurDataURL,
   ...props
 }: ICustomNextImageProps) => {
+  // !!!
   const wrapperProps = {
-    className: `${className} ${classes['img-container']} ${classes['layout-fill']}`,
+    className,
   }
   const handleImageProps = () => {
     const imageProps: ICustomNextImageProps = {
       unoptimized,
       src,
       placeholder,
-      className: `${className} ${classes['img-container']} ${classes['layout-fill']}`,
+      className,
       alt: '',
       ...props,
     }

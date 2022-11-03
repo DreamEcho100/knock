@@ -16,7 +16,7 @@ const HeroSection = () => {
             width={800}
             height={800}
             priority
-            className="pointer-events-none absolute top-0 right-0 left-0 bottom-0 w-full h-full object-contain scale-150"
+            className="pointer-events-none absolute top-0 right-0 left-0 bottom-0 w-full h-full object-contain scale-75"
             style={{ transform: 'translate(8%, -2%) scale(2)' }}
           />
 
@@ -38,11 +38,13 @@ const HeroSection = () => {
         <p className="mb-6 text-[1.75rem] leading-10">
           Adjustable hard & soft clipper module from KNOCK.
         </p>
-        <Button className="capitalize  text-[1.375rem]">
-          Buy it now
-          <del className="mx-2">$29</del>
-          $15
-        </Button>
+        <div className="flex items-center justify-center">
+          <Button className="capitalize  text-[1.375rem]">
+            Buy it now
+            <del className="mx-2">$29</del>
+          </Button>
+          <span className="p-2" /> <span>$15</span>
+        </div>
       </div>
     </section>
   )

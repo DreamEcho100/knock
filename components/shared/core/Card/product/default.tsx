@@ -26,7 +26,8 @@ const ProductBasicCard = ({
   console.log('intent', intent)
   return (
     <div className={cardClasses({ intent })}>
-      <div
+      <Link
+        {...link}
         // style={{ aspectRatio: 1, }}
         className="aspect-square overflow-hidden brightness-75
 					group-hover:brightness-100"
@@ -40,7 +41,7 @@ const ProductBasicCard = ({
 						transition-all duration-300 group
 						group-hover:scale-125"
         />
-      </div>
+      </Link>
       <div
         className="flex-grow text-center px-4 py-2 bg-primary-3 text-primary-2 flex flex-col items-center justify-center gap-1"
         style={{ fontSize: 'small' }}
@@ -66,7 +67,8 @@ const ExtraProductCardDetails = ({
     <>
       {priceAfterDiscount ? (
         <p>
-          <del>${price}</del>&nbsp;&nbsp;${priceAfterDiscount}
+          <del>${price}</del>&nbsp;&nbsp;
+          <span className="text-bg-secondary-2">${priceAfterDiscount}</span>
         </p>
       ) : (
         <p>${price}</p>
