@@ -15,8 +15,13 @@ const commonClasses = 'leading-relaxed sm:text-[1.2rem] text-primary-2 mx-auto'
 
 const linkClasses = ({
   isActive,
-}: { isActive?: boolean } = {}) => `border-b border-transparent outline-none
+  keepCase,
+}: {
+  isActive?: boolean
+  keepCase?: boolean
+} = {}) => `border-b border-transparent outline-none
 duration-150 transition-all
+${keepCase ? '' : 'uppercase'}
 ${
   isActive
     ? 'text-bg-secondary-1 focus:border-b-bg-secondary-1'
@@ -29,7 +34,7 @@ const MainHeader = () => {
   const [isSmallScreenNaveOpen, setIsSmallScreenNaveOpen] = useState(false)
   const headerLinks = [
     { href: '/knock-plugin', text: 'knock' },
-    { href: '/knock_clipper', text: 'knock clipper' },
+    { href: '/knock_clipper', text: 'KNOCK Clipper', keepCase: true },
     { href: '/drums-that-knock', text: 'drums that knock' },
     { href: '/faqs', text: 'faqs' },
     { href: '/contact-us', text: 'contact' },
@@ -49,13 +54,14 @@ const MainHeader = () => {
             <Logo />
           </div>
           <nav className="hidden lg:flex">
-            <ul className="flex items-center justify-center gap-10 font-bold uppercase">
+            <ul className="flex items-center justify-center gap-10 font-bold">
               {headerLinks.map((link) => (
                 <li key={link.text}>
                   <Link
                     href={link.href}
                     className={linkClasses({
                       isActive: link.href === router.pathname,
+                      keepCase: link.keepCase,
                     })}
                   >
                     {link.text}
@@ -105,7 +111,7 @@ const MainHeader = () => {
         >
           <nav className="flex">
             <ul
-              className="flex flex-col gap-2 font-bold uppercase p-4 w-full
+              className="flex flex-col gap-2 font-bold p-4 w-full
 									sm:gap-4"
             >
               {headerLinks.map((link) => (
@@ -114,6 +120,7 @@ const MainHeader = () => {
                     href={link.href}
                     className={`${linkClasses({
                       isActive: link.href === router.pathname,
+                      keepCase: link.keepCase,
                     })} block w-fit`}
                   >
                     {link.text}

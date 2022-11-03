@@ -1,13 +1,29 @@
+import Link from 'next/link'
 import type { ButtonHTMLAttributes } from 'react'
 import twClasses from 'utils/core/tailwind'
 
-export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
+export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  isALink?: null
+}
 
-const Button = ({ className, ...props }: IButtonProps) => {
+export type _ILinkProps = Parameters<typeof Link>['0']
+export interface ILinkProps extends _ILinkProps {
+  href: _ILinkProps['href']
+}
+
+const Button = (props: IButtonProps | ILinkProps) => {
+  if ('href' in props)
+    return (
+      <Link
+        {...props}
+        className={`${twClasses.button.default()} ${props.className || ''} `}
+      />
+    )
+
   return (
     <button
-      className={`${twClasses.button.default()} ${className || ''} `}
       {...props}
+      className={`${twClasses.button.default()} ${props.className || ''} `}
     />
   )
 }

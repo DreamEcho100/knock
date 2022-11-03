@@ -11,7 +11,7 @@ const SystemRequirementsSection = () => {
           <h2 className="text-[2.25rem] text-primary-1 uppercase font-bold">
             System Requirements
           </h2>
-          <p className="text-[2rem]">
+          <p className="text-[1.5]">
             KNOCK Clipper is supported by all major DAWs in 64-bit VST3, AU and
             AAX format.
           </p>

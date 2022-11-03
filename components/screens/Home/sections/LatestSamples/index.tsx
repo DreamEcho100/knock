@@ -28,7 +28,7 @@ const LatestSamplesSection = () => {
             Designed from scratch by DECAP. <br /> Premium quality,
             groundbreaking as always.
           </p>
-          <Button>Explore it now</Button>
+          <Button href="/knock-plugin">Explore it now</Button>
         </div>
         <div className="md:flex-grow md:w-1/2 flex justify-center items-center">
           <ProductCardSlider />

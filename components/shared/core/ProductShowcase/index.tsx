@@ -1,4 +1,4 @@
-import type { IButtonProps } from '@components/shared/core/Button'
+import type { IButtonProps, _ILinkProps } from '@components/shared/core/Button'
 import type { ICustomNextImageProps } from '@components/shared/common/CustomNextImage'
 import type { HTMLAttributes } from 'react'
 
@@ -9,7 +9,7 @@ interface IProps {
   textContainer: {
     h2: HTMLAttributes<HTMLHeadingElement>
     p: HTMLAttributes<HTMLParagraphElement>
-    button: IButtonProps
+    button: IButtonProps | _ILinkProps
   }
   imageContainer: {
     mainImg: ICustomNextImageProps
@@ -54,7 +54,7 @@ const ProductShowcase = ({
               alt=""
               width={800}
               height={500}
-              className={`${backgroundImgClassName} object-contain mx-auto w-full h-full scale-[2] translate-y-[12.5%]`}
+              className={`${backgroundImgClassName} object-contain mx-auto w-full h-full scale-[2] translate-y-[12.5%] pointer-events-none`}
               {...backgroundImgProps}
             />
           </div>

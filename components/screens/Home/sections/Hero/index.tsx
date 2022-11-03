@@ -16,7 +16,7 @@ const HeroSection = () => {
             width={800}
             height={800}
             priority
-            className="absolute top-0 right-0 left-0 bottom-0 w-full h-full object-contain"
+            className="absolute top-0 right-0 left-0 bottom-0 w-full h-full object-contain pointer-events-none"
             style={{ transform: 'translate(8%, -2%) scale(2)' }}
           />
 
@@ -37,7 +37,9 @@ const HeroSection = () => {
         <p className="mb-6 max-w-[350px]">
           Make your drums KNOCK and punch through the mix.
         </p>
-        <Button className="capitalize">Explore it now</Button>
+        <Button className="capitalize" href="/knock-plugin">
+          Explore it now
+        </Button>
       </div>
     </section>
   )

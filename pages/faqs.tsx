@@ -34,7 +34,7 @@ const faqs: (
     question: 'WHAT ARE THE SYSTEM REQUIREMENTS / COMPATIBILITY?',
     answer: {
       opening:
-        'KNOCK is supported by all major DAWs in 64-bit VST3, AU and AAX format.',
+        'AU and AAX format.\nKNOCK is supported by all major DAWs in 64-bit VST3.',
       list: [
         {
           title: 'OS',
@@ -95,10 +95,7 @@ const FAQSPages: NextPage = () => {
           <ul className="flex flex-col gap-8 my-8 border-[0.125rem] border-bg-secondary-1 p-12 rounded-2xl leading-[2] text-[rgb(200, 200, 200)]">
             {faqs.map((item) => {
               return (
-                <li
-                  key={item.question}
-                  className="flex flex-col py-1 border-b-2 border-b-text-primary-4 "
-                >
+                <li key={item.question} className="flex flex-col py-1 ">
                   <span className="flex flex-col text-[80%]">
                     <h2 className="text-3xl uppercase relative text-primary-1 mb-3">
                       <Image
@@ -113,10 +110,15 @@ const FAQSPages: NextPage = () => {
                     </h2>
                     {item.__answer_type === 'opening_and_lists' ? (
                       <>
-                        <p>{item.answer.opening}</p>
-                        <div className="flex flex-wrap gap-4">
+                        {item.answer.opening.split('\n').map((item, index) => (
+                          <p key={index}>{item}</p>
+                        ))}
+                        <div className="flex flex-wrap gap-4 mt-4">
                           {item.answer.list.map((ListElem, ListElemIndex) => (
-                            <div key={ListElemIndex} className="max-w-[200px]">
+                            <div
+                              key={ListElemIndex}
+                              className="max-w-[200px] flex flex-col gap-2"
+                            >
                               <p>
                                 <strong>{ListElem.title}</strong>
                               </p>
