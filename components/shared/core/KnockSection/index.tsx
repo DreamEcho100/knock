@@ -55,7 +55,7 @@ const KnockSection = ({
           </h2>
         }
         <p
-          className={`mb-6 text-[1.75rem] leading-10 ${
+          className={`mb-6 text-[1.5rem] leading-10 ${
             pMaxW === 'large' ? 'max-w-[800px]' : 'max-w-[350px]'
           }`}
         >

@@ -7,7 +7,7 @@ const HeroSection = () => {
     <section className="bg-primary-1">
       <div
         className=" overflow-hidden
-				px-8 pt-24 pb-24 flex items-center justify-center flex-col text-center"
+				px-8 pt-12 pb-20 flex items-center justify-center flex-col text-center"
       >
         <div className="relative flex items-center justify-center max-w-[900px]">
           <Image
@@ -23,12 +23,12 @@ const HeroSection = () => {
           <Image
             src="/images/abc59a63fe5ed68da58bff746fd14cce.png"
             alt=""
-            width={600}
-            height={600}
+            width={400}
+            height={400}
             priority
             unoptimized
             className="object-cover mb-6 relative"
-            style={{ aspectRatio: '16 / 14' }}
+            style={{ aspectRatio: '16 / 16' }}
           />
         </div>
         <h2 className="text-h2 font-bold text-primary-1 mt-4 mb-4 flex flex-wrap">

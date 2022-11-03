@@ -34,22 +34,14 @@ const faqs: (
     question: 'WHAT ARE THE SYSTEM REQUIREMENTS / COMPATIBILITY?',
     answer: {
       opening:
-        'AU and AAX format.\nKNOCK is supported by all major DAWs in 64-bit VST3.',
+        'KNOCK is supported by all major DAWs in 64-bit VST3, AU and AAX format.',
       list: [
         {
-          title: 'OS',
+          title: 'OS/Processor:',
           items: [
-            'OSX 10.12+ - AU, VST3, AAX',
-            'WIN 8.1, 10 - 64 bit  VST3, AAX',
-            '8GB RAM required, 16GB recommended',
-          ],
-        },
-        {
-          title: 'Processor',
-          items: [
-            'Mac: Intel Core i5, i7, i9, Xeon, Apple M1',
-            'Windows: Intel Core i5, i7, i9, Xeon (all Gen 5 and above), AMD Quad Core',
-            'HDD Space requirements: Minimum of 500MB',
+            'Mac: Intel Core i5, i7, i9, Xeon, Apple M1 - OSX 10.12+ - AU, VST3, AAX',
+            'Windows: Intel Core i5, i7, i9, Xeon (all Gen 5 and above), AMD Quad Core - WIN 8.1, 10 - 64 bit  VST3, AAX',
+            'HDD Space requirements: Minimum of 500MB - 8GB RAM required, 16GB recommended',
           ],
         },
       ],
@@ -69,18 +61,6 @@ const faqs: (
     answer: 'Yes! KNOCK is compatible with Pro Tools / AAX.',
   },
 ]
-
-/*
-	margin-top: 2rem;
-	margin-bottom: 2rem;
-	border-width: 0.125rem;
-	--tw-border-opacity: 1;
-	border-color: rgb(117 72 254 / var(--tw-border-opacity));
-	padding: 2rem;
-	border-radius: 1rem;
-	line-height: 2;
-	color: rgb(200, 200, 200);
-*/
 
 const FAQSPages: NextPage = () => {
   return (
@@ -110,15 +90,10 @@ const FAQSPages: NextPage = () => {
                     </h2>
                     {item.__answer_type === 'opening_and_lists' ? (
                       <>
-                        {item.answer.opening.split('\n').map((item, index) => (
-                          <p key={index}>{item}</p>
-                        ))}
-                        <div className="flex flex-wrap gap-4 mt-4">
+                        <p>{item.answer.opening}</p>
+                        <div className="flex flex-wrap gap-4">
                           {item.answer.list.map((ListElem, ListElemIndex) => (
-                            <div
-                              key={ListElemIndex}
-                              className="max-w-[200px] flex flex-col gap-2"
-                            >
+                            <div key={ListElemIndex}>
                               <p>
                                 <strong>{ListElem.title}</strong>
                               </p>

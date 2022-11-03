@@ -28,7 +28,6 @@ const ArtistSection = () => {
             modules={[Navigation, A11y]}
             slidesPerView={6}
             navigation
-            spaceBetween={8}
             autoplay={{
               delay: 5000,
             }}
@@ -41,13 +40,13 @@ const ArtistSection = () => {
               .map((item, index) => (
                 <SwiperSlide
                   key={index}
-                  className="p-2 flex flex-col items-center justify-center text-center"
+                  className="p-2 gap-2 flex flex-col items-center justify-center text-center"
                 >
                   <Image
                     src={item.image.src}
                     alt={item.image.alt}
-                    width={100}
-                    height={100}
+                    width={120}
+                    height={120}
                     className="rounded-full"
                   />
                   <p>{item.name}</p>

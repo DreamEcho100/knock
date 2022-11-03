@@ -15,7 +15,6 @@ const ProductCardSlider = () => {
       autoplay={{
         delay: 7500,
       }}
-      className="p-4"
     >
       {fakeProductsData
         .filter((product) => product.title.startsWith('Drums That Knock Vol.'))

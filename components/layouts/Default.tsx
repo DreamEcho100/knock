@@ -54,7 +54,7 @@ const MainHeader = () => {
             <Logo />
           </div>
           <nav className="hidden lg:flex">
-            <ul className="flex items-center justify-center gap-10 font-bold">
+            <ul className="text-center flex items-center justify-center gap-10 font-bold">
               {headerLinks.map((link) => (
                 <li key={link.text}>
                   <Link
