@@ -54,7 +54,7 @@ const ProductShowcase = ({
               alt=""
               width={800}
               height={500}
-              className={`${backgroundImgClassName} mx-auto w-full h-full object-cover scale-150 translate-y-[12.5%]`}
+              className={`${backgroundImgClassName} object-contain mx-auto w-full h-full scale-[2] translate-y-[12.5%]`}
               {...backgroundImgProps}
             />
           </div>
