@@ -1,6 +1,10 @@
 const repeatedData = {
+	video: {
+		title: 'Watch DECAP preview the sounds in Drums That Knock Vol. 9',
+		src: 'https://www.youtube.com/embed/4fiC6Zi0Wnw'
+	},
 	description:
-		'## Lorem, ipsum dolor sit amet consectetur adipisicing elit\nSunt, adipisci vitae doloribus iusto non quisquam minima suscipit! Esse optio quos quae libero enim quibusdam ut aliquam ex incidunt, pariatur animi odit earum, Tempora nisi, fuga cumque, architecto temporibus omnis quis consequatur sint facere vitae explicabo.\nExercitationem totam eaque laborum, veritatis quia mollitia? Quia, illum numquam debitis animi quos natus, eos non provident, molestias repudiandae sunt eaque ipsa doloribus? Voluptatibus quod magni quidem rem nemo aut neque voluptatem.\nAut officiis neque vel velit consectetur impedit autem repudiandae eligendi earum ex, Quidem quod ut omnis aut earum optio eos incidunt dolores cum aliquid laudantium obcaecati beatae, iste repudiandae in pariatur magnam distinctio deserunt et, eaque fugiat fuga repellendus.',
+		'## DECAP - Drums That Knock Vol. 9 is available now,  with top notch original sounds for your production.\n\nAll BRAND NEW, never heard before sounds designed from scratch by DECAP. Premium quality, groundbreaking as always.\n\nMany of the sounds in this kit were run through Studer, and Telefunken tape machines, EMU SP-12 (crazy on the 808s) and other analog gear for extra depth, width and texture.\n',
 	features: [
 		'All sounds and loops are 100% royalty free - no clearance required',
 		'All sounds are crafted, sculpted, specially designed to KNOCK / punch through your mix',
@@ -29,10 +33,6 @@ const repeatedData = {
 			'52 Shouts + Adlibs',
 			'22 Hihat Loops'
 		]
-	},
-	video: {
-		title: 'Watch DECAP preview the sounds in Drums That Knock Vol. 9',
-		src: 'https://www.youtube.com/embed/4fiC6Zi0Wnw'
 	}
 };
 
@@ -66,16 +66,11 @@ const fakeProductsData = [
 		id: 'drums-that-knock-free-vol-1'
 	},
 	{
+		...repeatedData,
 		title: 'Drums That Knock Vol. 9',
 		image: {
 			src: '/images/d8052bdee8691b19d9186254f48089a8.png'
 		},
-		video: {
-			title: 'Watch DECAP preview the sounds in Drums That Knock Vol. 9',
-			src: 'https://www.youtube.com/embed/4fiC6Zi0Wnw'
-		},
-		description:
-			'## DECAP - Drums That Knock Vol. 9 is available now,  with top notch original sounds for your production.\n\nAll BRAND NEW, never heard before sounds designed from scratch by DECAP. Premium quality, groundbreaking as always.\n\nMany of the sounds in this kit were run through Studer, and Telefunken tape machines, EMU SP-12 (crazy on the 808s) and other analog gear for extra depth, width and texture.\n',
 		price: 50,
 		id: 'drums-that-knock-vol-9'
 	},
