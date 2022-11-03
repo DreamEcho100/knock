@@ -30,14 +30,13 @@ const ProductShowcase = ({
     <div
       className={`
 					flex flex-col
-					md:gap-0
-					lg:flex-row lg:gap-16 ${wrapperClassName}`}
+					lg:flex-row ${wrapperClassName}`}
       {...wrapper}
     >
       <div
         className="w-full flex flex-col items-center justify-center text-center gap-8 px-8 pb-4
 							sm:pb-20
-							lg:w-1/2 lg:text-align-initial lg:items-start lg:py-8 lg:justify-start"
+							lg:w-1/2 lg:text-align-initial lg:items-start lg:py-8"
       >
         <h2 className="text-h2 font-bold uppercase" {...h2} />
         <p className="md:max-w-[450px]" {...p} />
@@ -45,8 +44,8 @@ const ProductShowcase = ({
         <Button className="capitalize" {...button} />
       </div>
       <div
-        className="w-full relative overflow-hidden
-							 lg:w-1/2 p-4"
+        className="w-full relative overflow-hidden p-4
+							 lg:w-1/2 lg:p-0"
       >
         {backgroundImg && (
           <div className="absolute">
