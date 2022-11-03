@@ -51,7 +51,7 @@ const features = [
 const ShapesYourDrumsSection = () => {
   return (
     <section className=" text-primary-2 relative bg-primary-1">
-      <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden">
+      <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full max-w-none overflow-hidden">
         <CustomNextImage
           src="/images/Pattern[1].png"
           alt=""
@@ -61,7 +61,7 @@ const ShapesYourDrumsSection = () => {
         />
       </div>
       <div
-        className="absolute top-0 right-0 bottom-0 left-0 w-full h-full"
+        className="absolute top-0 right-0 bottom-0 left-0 w-full h-full max-w-none"
         style={{
           backgroundImage:
             'radial-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9), rgba(0, 0, 0))',
