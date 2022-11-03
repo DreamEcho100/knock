@@ -42,6 +42,7 @@ const MerchSection = () => {
             {...item}
             toAddToCart
             productData={item}
+            intent="bottomCorners"
           />
         ))}
       </div>

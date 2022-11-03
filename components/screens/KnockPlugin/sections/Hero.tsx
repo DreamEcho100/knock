@@ -5,6 +5,7 @@ const HeroSection = () => {
     <KnockSection
       buttonProps={{ children: 'Buy it now $99' }}
       description="Make your drums KNOCK and punch through the mix."
+      pTheme={{ text: 'medium', width: 'small' }}
     />
   )
 }

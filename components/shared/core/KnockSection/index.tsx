@@ -1,20 +1,39 @@
 import type { IButtonProps } from '@components/shared/core/Button'
+import type { VariantProps } from 'class-variance-authority'
 
 import Button from '@components/shared/core/Button'
 import Image from 'next/image'
-import KnockTrademark from '../KnockTrademark'
+import KnockTrademark from '@components/shared/core/KnockTrademark'
+import { cva } from 'class-variance-authority'
+
+export const pClasses = cva(`mb-6 leading-10`, {
+  variants: {
+    width: {
+      large: 'max-w-[800px]',
+      small: 'max-w-[350px]',
+    },
+    text: {
+      small: 'text-[1.25rem]',
+      medium: 'text-[1.75rem]',
+    },
+  },
+  defaultVariants: {
+    width: 'large',
+    text: 'small',
+  },
+})
 
 const KnockSection = ({
   buttonProps,
   description,
   title,
-  pMaxW = 'small',
+  pTheme = {},
   imageSrc = '/images/534aaf62a986c03ee09ee62a138d3845.gif',
 }: {
   title?: string
   description: string
   buttonProps: IButtonProps
-  pMaxW?: 'small' | 'medium' | 'large'
+  pTheme?: VariantProps<typeof pClasses>
   imageSrc?: string
 }) => {
   return (
@@ -54,13 +73,7 @@ const KnockSection = ({
             )}
           </h2>
         }
-        <p
-          className={`mb-6 text-[1.5rem] leading-10 ${
-            pMaxW === 'large' ? 'max-w-[800px]' : 'max-w-[350px]'
-          }`}
-        >
-          {description}
-        </p>
+        <p className={pClasses(pTheme)}>{description}</p>
         <Button className="capitalize text-[1.375rem]" {...buttonProps} />
       </div>
     </section>
