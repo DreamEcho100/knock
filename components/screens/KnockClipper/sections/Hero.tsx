@@ -17,7 +17,7 @@ const HeroSection = () => {
             height={800}
             priority
             className="pointer-events-none absolute top-0 right-0 left-0 bottom-0 w-full h-full object-contain scale-75"
-            style={{ transform: 'translate(8%, -2%) scale(2)' }}
+            style={{ transform: 'translate(8%, -2%) scale(1.5)' }}
           />
 
           <Image
