@@ -1,10 +1,34 @@
 const repeatedData = {
 	description:
 		'## Lorem, ipsum dolor sit amet consectetur adipisicing elit\nSunt, adipisci vitae doloribus iusto non quisquam minima suscipit! Esse optio quos quae libero enim quibusdam ut aliquam ex incidunt, pariatur animi odit earum, Tempora nisi, fuga cumque, architecto temporibus omnis quis consequatur sint facere vitae explicabo.\nExercitationem totam eaque laborum, veritatis quia mollitia? Quia, illum numquam debitis animi quos natus, eos non provident, molestias repudiandae sunt eaque ipsa doloribus? Voluptatibus quod magni quidem rem nemo aut neque voluptatem.\nAut officiis neque vel velit consectetur impedit autem repudiandae eligendi earum ex, Quidem quod ut omnis aut earum optio eos incidunt dolores cum aliquid laudantium obcaecati beatae, iste repudiandae in pariatur magnam distinctio deserunt et, eaque fugiat fuga repellendus.',
-	features: ['Lorem, ipsum'],
+	features: [
+		'All sounds and loops are 100% royalty free - no clearance required',
+		'All sounds are crafted, sculpted, specially designed to KNOCK / punch through your mix',
+		'All sounds are 100% original and crafted from scratch (no recycled sounds)',
+		'All loops are labeled with tempo, key, and ready to drop right into your DAW with no editing required',
+		'All sounds are in 24bit/44.1kHz format',
+		'All sounds and loops are compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, Bitwig, etc)'
+	],
 	filesIncluded: {
-		count: 1,
-		details: ['Lorem, ipsum']
+		count: 453,
+		details: [
+			'25 808s + Bass',
+			'9 Fills',
+			'28 Drum Loops',
+			'8 Rap Vocal Loops',
+			'31 Melodic Loops',
+			'38 Hihats',
+			'32 Snares + Claps + Rimshots',
+			'27 Kicks',
+			'54 Percussive One Shots',
+			'7 MIDI Files',
+			'36 FX One Shots',
+			'28 Melodic One Shots',
+			'40 Percussion Loops',
+			'16 Risers + Falls',
+			'52 Shouts + Adlibs',
+			'22 Hihat Loops'
+		]
 	},
 	video: {
 		title: 'Watch DECAP preview the sounds in Drums That Knock Vol. 9',
@@ -45,35 +69,6 @@ const fakeProductsData = [
 		title: 'Drums That Knock Vol. 9',
 		image: {
 			src: '/images/d8052bdee8691b19d9186254f48089a8.png'
-		},
-		features: [
-			'All sounds and loops are 100% royalty free - no clearance required',
-			'All sounds are crafted, sculpted, specially designed to KNOCK / punch through your mix',
-			'All sounds are 100% original and crafted from scratch (no recycled sounds)',
-			'All loops are labeled with tempo, key, and ready to drop right into your DAW with no editing required',
-			'All sounds are in 24bit/44.1kHz format',
-			'All sounds and loops are compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, Bitwig, etc)'
-		],
-		filesIncluded: {
-			count: 453,
-			details: [
-				'25 808s + Bass',
-				'9 Fills',
-				'28 Drum Loops',
-				'8 Rap Vocal Loops',
-				'31 Melodic Loops',
-				'38 Hihats',
-				'32 Snares + Claps + Rimshots',
-				'27 Kicks',
-				'54 Percussive One Shots',
-				'7 MIDI Files',
-				'36 FX One Shots',
-				'28 Melodic One Shots',
-				'40 Percussion Loops',
-				'16 Risers + Falls',
-				'52 Shouts + Adlibs',
-				'22 Hihat Loops'
-			]
 		},
 		video: {
 			title: 'Watch DECAP preview the sounds in Drums That Knock Vol. 9',
