@@ -20,10 +20,7 @@ const ContactUsPage = () => {
             <p className="text-h3">We&apos;d love to hear from you!</p>
           </header>
 
-          <form
-            className="flex flex-col items-center sm:items-start gap-16 my-8 border-[0.125rem] border-bg-secondary-1 rounded-2xl p-8 
-							sm:py-20"
-          >
+          <form className="flex flex-col items-center sm:items-start gap-16 my-8 border-[0.125rem] border-bg-secondary-1 rounded-2xl p-12">
             <FormInput
               spanTitleProps={{ children: 'Name', className: 'capitalize' }}
               labelContainerProps={{ className: 'w-full' }}

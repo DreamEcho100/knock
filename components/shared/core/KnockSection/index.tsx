@@ -48,8 +48,8 @@ const KnockSection = ({
           <h2 className="text-h2 font-bold text-primary-1 mt-4 mb-4 flex flex-wrap">
             {title || (
               <>
+                DRUM THAT&nbsp;
                 <KnockTrademark />
-                PLUGIN
               </>
             )}
           </h2>
