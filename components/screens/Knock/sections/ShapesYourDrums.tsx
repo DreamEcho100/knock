@@ -77,7 +77,7 @@ const ShapesYourDrumsSection = () => {
         />
       </div>
       <div
-        className="container-restrictions-2
+        className="max-w-screen-lg
 					relative flex flex-col gap-20 p-8
 					sm:py-20"
       >

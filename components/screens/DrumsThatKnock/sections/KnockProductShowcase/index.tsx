@@ -28,11 +28,12 @@ const KnockProductShowcaseSection = () => {
           mainImg: {
             src: '/images/534aaf62a986c03ee09ee62a138d3845.gif',
             alt: '',
+            className: 'max-w-md',
           },
 
           backgroundImg: false,
         }}
-        wrapper={{ className: 'lg:flex-row-reverse gap-16' }}
+        wrapper={{ className: 'lg:flex-row-reverse gap-8 lg:px-20' }}
       />
     </section>
   )

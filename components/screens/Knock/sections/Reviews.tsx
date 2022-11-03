@@ -12,7 +12,7 @@ const ReviewsSection = () => {
   return (
     <section className="bg-primary-1">
       <div className="">
-        <div className="px-8 pb-12 container-restrictions-2">
+        <div className="px-8 pb-12 container-restrictions-2 max-w-screen-lg mx-auto">
           <Swiper
             modules={[Navigation, Pagination, A11y]}
             slidesPerView={1}

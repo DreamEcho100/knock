@@ -60,10 +60,12 @@ const ProductShowcase = ({
           </div>
         )}
         <CustomNextImage
+          {...mainImg}
           width={800}
           height={500}
-          className="relative mx-auto w-full h-full object-contain"
-          {...mainImg}
+          className={`${
+            mainImg.className || ''
+          } relative mx-auto w-full h-full object-contain`}
         />
       </div>
     </div>

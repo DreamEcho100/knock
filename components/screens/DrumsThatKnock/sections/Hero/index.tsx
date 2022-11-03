@@ -29,7 +29,7 @@ const HeroSection = () => {
             Designed from scratch by DECAP. Premium quality, groundbreaking as
             always.
           </p>
-          <p className="flex flex-wrap">
+          <p className="text-[2rem] flex flex-wrap">
             These drums &nbsp;
             <KnockTrademark />.
           </p>

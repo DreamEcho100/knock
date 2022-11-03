@@ -12,7 +12,7 @@ const DigitalProductsSection = () => {
           zIndex: 2,
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))',
-          gap: '1rem',
+          gap: '4rem 1rem',
         }}
       >
         {fakeProductsData.map((item) => (

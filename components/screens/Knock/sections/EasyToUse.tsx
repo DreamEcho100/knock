@@ -18,9 +18,10 @@ const EasyToUseSection = () => {
           mainImg: {
             src: '/images/laptop final 1.png',
             alt: '',
+            className: 'max-w-md',
           },
         }}
-        wrapper={{ className: 'container-restrictions-2' }}
+        wrapper={{ className: 'container-restrictions-2 lg:px-20' }}
       />
     </section>
   )

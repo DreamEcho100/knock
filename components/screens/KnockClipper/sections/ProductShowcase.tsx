@@ -27,11 +27,12 @@ const ProductShowcaseSection = () => {
           mainImg: {
             src: '/images/f53123f1bc1e263458b5926c1b1422c3.png',
             alt: '',
+            className: 'max-w-md',
           },
 
           backgroundImg: { className: 'rotate-[270deg]' },
         }}
-        wrapper={{ className: 'lg:flex-row-reverse container-restrictions-2' }}
+        wrapper={{ className: 'lg:flex-row-reverse lg:px-20' }}
       />
     </section>
   )

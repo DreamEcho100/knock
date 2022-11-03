@@ -62,18 +62,12 @@ body sup {
 	height: 1ch;
 }
 
-/* body > * {
-	max-width: 1280px;
-	margin: auto;
-} */
-
 main > section > *,
 #main-header > *,
 #main-footer > * {
 	max-width: 1280px;
 	margin: auto;
 }
-
 @media (max-width: 768px) {
 	main > * {
 		overflow-x: hidden;
@@ -85,16 +79,6 @@ main > section > *,
 @tailwind utilities;
 
 @layer components {
-	/* 
-	.container-restrictions-1 {
-		max-width: 1280px;
-		margin: auto;
-	}
-	.container-restrictions-2 {
-		max-width: 900px;
-		margin: auto;
-	}
- */
 	.text-align-initial {
 		text-align: initial;
 	}
