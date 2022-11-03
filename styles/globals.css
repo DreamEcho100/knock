@@ -74,6 +74,12 @@ main > section > *,
 	margin: auto;
 }
 
+@media (max-width: 768px) {
+	main > * {
+		overflow-x: hidden;
+	}
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
