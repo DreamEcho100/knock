@@ -9,11 +9,13 @@ const KnockSection = ({
   description,
   title,
   pMaxW = 'small',
+  imageSrc = '/images/534aaf62a986c03ee09ee62a138d3845.gif',
 }: {
   title?: string
   description: string
   buttonProps: IButtonProps
   pMaxW?: 'small' | 'medium' | 'large'
+  imageSrc?: string
 }) => {
   return (
     <section className="bg-primary-1">
@@ -33,7 +35,7 @@ const KnockSection = ({
           />
 
           <Image
-            src="/images/534aaf62a986c03ee09ee62a138d3845.gif"
+            src={imageSrc}
             alt="knock plugin animation"
             width={800}
             height={800}
