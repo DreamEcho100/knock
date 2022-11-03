@@ -3,7 +3,7 @@ import { ImageProps } from 'next/dist/client/image.d'
 
 import classes from './index.module.css'
 
-interface ICustomNextImageProps extends ImageProps {
+export interface ICustomNextImageProps extends ImageProps {
   className?: string
   placeholder?: 'blur' | 'empty'
   role?: string

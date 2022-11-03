@@ -20,7 +20,7 @@ const MainHeader = () => {
   const [isSmallScreenNaveOpen, setIsSmallScreenNaveOpen] = useState(false)
   const headerLinks = [
     { href: '/knock-plugin', text: 'knock' },
-    { href: '/', text: 'knock clippr' },
+    { href: '/knock_clipper', text: 'knock clipper' },
     { href: '/drums-that-knock', text: 'drums that knock' },
     { href: '/faqs', text: 'faqs' },
     { href: '/contact-us', text: 'contact' },

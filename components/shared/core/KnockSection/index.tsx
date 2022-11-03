@@ -43,23 +43,23 @@ const KnockSection = ({
           />
         </div>
         {
-          <h2 className="text-h2 font-bold text-primary-1 mt-12 mb-4 flex flex-wrap">
+          <h2 className="text-h2 font-bold text-primary-1 mt-4 mb-4 flex flex-wrap">
             {title || (
               <>
                 <KnockTrademark />
-                &nbsp;PLUGIN
+                PLUGIN
               </>
             )}
           </h2>
         }
         <p
-          className={`mb-6 text-lg leading-10 ${
+          className={`mb-6 text-[1.75rem] leading-10 ${
             pMaxW === 'large' ? 'max-w-[800px]' : 'max-w-[350px]'
           }`}
         >
           {description}
         </p>
-        <Button className="capitalize" {...buttonProps} />
+        <Button className="capitalize text-[1.375rem]" {...buttonProps} />
       </div>
     </section>
   )
