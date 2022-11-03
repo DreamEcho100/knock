@@ -6,7 +6,10 @@ import twClasses from 'utils/core/tailwind'
 
 const KnockProductShowcaseSection = () => {
   return (
-    <section className="bg-primary-1 text-primary-2 px-4 py-20">
+    <section
+      className="bg-primary-1 text-primary-2 px-4 py-20
+							lg:px-20"
+    >
       <ProductShowcase
         textContainer={{
           h2: {
@@ -31,7 +34,7 @@ const KnockProductShowcaseSection = () => {
 
           backgroundImg: false,
         }}
-        wrapper={{ className: 'lg:flex-row-reverse' }}
+        wrapper={{ className: 'lg:flex-row-reverse gap-16' }}
       />
     </section>
   )

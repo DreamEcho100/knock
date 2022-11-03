@@ -28,10 +28,10 @@ const ProductShowcase = ({
 
   return (
     <div
+      {...wrapper}
       className={`
 					flex flex-col
 					lg:flex-row ${wrapperClassName}`}
-      {...wrapper}
     >
       <div
         className="w-full flex flex-col items-center justify-center text-center gap-8 px-8 pb-4
@@ -48,13 +48,13 @@ const ProductShowcase = ({
 							 lg:w-1/2 lg:p-0"
       >
         {backgroundImg && (
-          <div className="absolute">
+          <div className="absolute w-full h-full">
             <CustomNextImage
               src="/images/Rectangle 47.png"
               alt=""
               width={800}
               height={500}
-              className={`${backgroundImgClassName} mx-auto w-full h-full object-cover -translate-y-[10%]`}
+              className={`${backgroundImgClassName} mx-auto w-full h-full object-cover scale-150`}
               {...backgroundImgProps}
             />
           </div>
@@ -62,7 +62,7 @@ const ProductShowcase = ({
         <CustomNextImage
           width={800}
           height={500}
-          className="mx-auto w-full h-full object-contain"
+          className="relative mx-auto w-full h-full object-contain"
           {...mainImg}
         />
       </div>

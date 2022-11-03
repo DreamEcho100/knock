@@ -20,6 +20,7 @@ const EasyToUseSection = () => {
             alt: '',
           },
         }}
+        wrapper={{ className: 'container-restrictions-2' }}
       />
     </section>
   )

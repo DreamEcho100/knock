@@ -28,7 +28,7 @@ const ProductShowcaseSection = () => {
 
           backgroundImg: { className: 'rotate-[270deg]' },
         }}
-        wrapper={{ className: 'lg:flex-row-reverse' }}
+        wrapper={{ className: 'lg:flex-row-reverse container-restrictions-2' }}
       />
     </section>
   )
