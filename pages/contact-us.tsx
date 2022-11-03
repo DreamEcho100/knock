@@ -16,7 +16,7 @@ const ContactUsPage = () => {
       <section className="bg-primary-1 p-8 sm:p-16">
         <div className="">
           <header className="flex flex-col gap-4 text-text-primary-1">
-            <h1 className="text-h2 font-semibold">Contact us</h1>
+            <h1 className="text-h2 font-bold">Contact us</h1>
             <p className="text-h3">We&apos;d love to hear from you!</p>
           </header>
 

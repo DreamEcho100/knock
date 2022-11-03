@@ -29,11 +29,9 @@ const ArtistSection = () => {
             slidesPerView={6}
             navigation
             spaceBetween={8}
-            // pagination={{ clickable: true }}
-            // scrollbar={{ draggable: true }}
-            autoplay
-            onSwiper={(swiper) => console.log(swiper)}
-            onSlideChange={() => console.log('slide change')}
+            autoplay={{
+              delay: 5000,
+            }}
           >
             {'br'
               .repeat(2)

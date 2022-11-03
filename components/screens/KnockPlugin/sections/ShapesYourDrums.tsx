@@ -51,7 +51,6 @@ const features = [
 const ShapesYourDrumsSection = () => {
   return (
     <section className=" text-primary-2 relative bg-primary-1">
-      {/* radial-gradient(transparent, rgba(0, 0, 0, 0.4)) */}
       <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden">
         <CustomNextImage
           src="/images/Pattern[1].png"
@@ -77,7 +76,7 @@ const ShapesYourDrumsSection = () => {
         />
       </div>
       <div
-        className="max-w-screen-lg
+        className="max-w-screen-xl
 					relative flex flex-col gap-20 p-8
 					sm:py-20"
       >
@@ -90,7 +89,7 @@ const ShapesYourDrumsSection = () => {
           {features.map((item) => (
             <div
               key={item.title}
-              className="text-center w-64 flex flex-col items-center justify-start gap-8"
+              className="text-center w-[20rem] max-w-full flex flex-col items-center justify-start gap-8"
             >
               <CustomNextImage
                 {...item.image}

@@ -92,7 +92,7 @@ const FAQSPages: NextPage = () => {
               FAQs
             </h1>
           </header>
-          <ul className="flex flex-col gap-8 my-8 border-[0.125rem] border-bg-secondary-1 p-8 md:p-16 rounded-2xl leading-[2] text-[rgb(200, 200, 200)]">
+          <ul className="flex flex-col gap-8 my-8 border-[0.125rem] border-bg-secondary-1 p-12 rounded-2xl leading-[2] text-[rgb(200, 200, 200)]">
             {faqs.map((item) => {
               return (
                 <li

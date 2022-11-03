@@ -23,7 +23,6 @@ const ProductBasicCard = ({
   extraDetailsElement,
   intent,
 }: IProductCardProps) => {
-  console.log('intent', intent)
   return (
     <div className={cardClasses({ intent })}>
       <Link

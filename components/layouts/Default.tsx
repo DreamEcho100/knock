@@ -6,17 +6,26 @@ import { FaInstagram, FaFacebook, FaTwitter, FaYoutube } from 'react-icons/fa'
 import { HiShoppingBag } from 'react-icons/hi'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { useId, useState } from 'react'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Button from '@components/shared/core/Button'
 import Logo from '@components/shared/core/Logo'
 
 const commonClasses = 'leading-relaxed sm:text-[1.2rem] text-primary-2 mx-auto'
 
-const linkClasses = `text-primary-2 border-b border-transparent
+const linkClasses = ({
+  isActive,
+}: { isActive?: boolean } = {}) => `border-b border-transparent outline-none
 duration-150 transition-all
-focus:border-b-text-primary-1 hover:text-primary-1`
+${
+  isActive
+    ? 'text-bg-secondary-1 focus:border-b-bg-secondary-1'
+    : 'text-primary-2 focus:border-b-text-primary-1 hover:text-primary-1'
+}`
 
 const MainHeader = () => {
+  const router = useRouter()
+
   const [isSmallScreenNaveOpen, setIsSmallScreenNaveOpen] = useState(false)
   const headerLinks = [
     { href: '/knock-plugin', text: 'knock' },
@@ -43,7 +52,12 @@ const MainHeader = () => {
             <ul className="flex items-center justify-center gap-10 font-bold uppercase">
               {headerLinks.map((link) => (
                 <li key={link.text}>
-                  <Link href={link.href} className={linkClasses}>
+                  <Link
+                    href={link.href}
+                    className={linkClasses({
+                      isActive: link.href === router.pathname,
+                    })}
+                  >
                     {link.text}
                   </Link>
                 </li>
@@ -98,7 +112,9 @@ const MainHeader = () => {
                 <li key={link.text} className="w-full">
                   <Link
                     href={link.href}
-                    className={`${linkClasses} block w-fit`}
+                    className={`${linkClasses({
+                      isActive: link.href === router.pathname,
+                    })} block w-fit`}
                   >
                     {link.text}
                   </Link>

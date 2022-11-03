@@ -20,9 +20,9 @@ const ReviewsSection = () => {
             spaceBetween={8}
             pagination={{ clickable: true }}
             // scrollbar={{ draggable: true }}
-            autoplay
-            onSwiper={(swiper) => console.log(swiper)}
-            onSlideChange={() => console.log('slide change')}
+            autoplay={{
+              delay: 15000,
+            }}
           >
             {artists
               .map((item) => ({
@@ -34,8 +34,8 @@ const ReviewsSection = () => {
                 <SwiperSlide key={index} className="px-8 pt-24 pb-12">
                   <div className="flex relative">
                     <div
-                      className="rounded-2xl px-8 py-16 bg-primary-3 flex flex-col
-												sm:pr-[6rem] sm:mr-[6rem]"
+                      className="rounded-2xl px-8 py-16 bg-primary-5 flex flex-col
+												sm:pr-[5.5rem] sm:mr-[5.5rem]"
                       // style={{ width: 'calc(100% - 5rem)' }}
                     >
                       <q>{item.review}</q>

@@ -12,11 +12,9 @@ const ProductCardSlider = () => {
       modules={[Navigation, A11y]}
       slidesPerView={2}
       navigation
-      // pagination={{ clickable: true }}
-      // scrollbar={{ draggable: true }}
-      autoplay
-      onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={() => console.log('slide change')}
+      autoplay={{
+        delay: 7500,
+      }}
       className="p-4"
     >
       {fakeProductsData
