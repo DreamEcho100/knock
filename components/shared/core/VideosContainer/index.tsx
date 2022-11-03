@@ -12,7 +12,7 @@ const VideosContainer = () => {
         </h2>
       </header>
       <div
-        className="flex flex-col items-center justify-center gap-8
+        className="flex flex-col items-center justify-center gap-12
 		lg:flex-row"
       >
         <iframe
