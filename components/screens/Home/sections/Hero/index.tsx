@@ -32,7 +32,7 @@ const HeroSection = () => {
         </div>
         <h2 className="text-h2 font-bold text-primary-1 mt-12 flex flex-wrap">
           <KnockTrademark />
-          &nbsp;PLUGIN
+          PLUGIN
         </h2>
         <p className="mb-6 max-w-[350px]">
           Make your drums KNOCK and punch through the mix.
