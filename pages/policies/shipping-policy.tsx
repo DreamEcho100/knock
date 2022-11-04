@@ -1,8 +1,8 @@
-import DefaultLayout from '@components/layouts/Default'
-import ShippingPolicyScreen from '@components/screens/Policies/Shipping'
+import DefaultLayout from '@components/layouts/Default';
+import ShippingPolicyScreen from '@components/screens/Policies/Shipping';
 
 const ShippingPolicyPage = () => {
-  return <ShippingPolicyScreen />
-}
+	return <ShippingPolicyScreen />;
+};
 
-export default ShippingPolicyPage
+export default ShippingPolicyPage;

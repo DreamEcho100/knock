@@ -1,8 +1,8 @@
-import DefaultLayout from '@components/layouts/Default'
-import RefundPolicyScreen from '@components/screens/Policies/Refund'
+import DefaultLayout from '@components/layouts/Default';
+import RefundPolicyScreen from '@components/screens/Policies/Refund';
 
 const RefundPolicyPage = () => {
-  return <RefundPolicyScreen />
-}
+	return <RefundPolicyScreen />;
+};
 
-export default RefundPolicyPage
+export default RefundPolicyPage;

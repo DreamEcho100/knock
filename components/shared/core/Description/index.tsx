@@ -1,16 +1,16 @@
-import type { HTMLAttributes } from 'react'
+import type { HTMLAttributes } from 'react';
 
 const Description = ({
-  children,
+	children
 }: {
-  children: HTMLAttributes<HTMLParagraphElement>['children']
+	children: HTMLAttributes<HTMLParagraphElement>['children'];
 }) => {
-  // !!!
-  return (
-    <div className="text-center leading-12 max-w-[900px]">
-      <p className="text-[1.5rem] leading-[1.5]">{children}</p>
-    </div>
-  )
-}
+	// !!!
+	return (
+		<div className='text-center leading-12 max-w-[900px]'>
+			<p className='text-[1.5rem] leading-[1.5]'>{children}</p>
+		</div>
+	);
+};
 
-export default Description
+export default Description;

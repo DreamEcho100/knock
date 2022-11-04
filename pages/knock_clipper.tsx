@@ -1,11 +1,11 @@
-import DefaultLayout from '@components/layouts/Default'
-import KnockClipperScreen from '@components/screens/KnockClipper'
-import { NextPage } from 'next'
+import DefaultLayout from '@components/layouts/Default';
+import KnockClipperScreen from '@components/screens/KnockClipper';
+import { NextPage } from 'next';
 
 interface Props {}
 
 const KnockClipperPage: NextPage<Props> = () => {
-  return <KnockClipperScreen />
-}
+	return <KnockClipperScreen />;
+};
 
-export default KnockClipperPage
+export default KnockClipperPage;

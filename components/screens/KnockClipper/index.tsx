@@ -1,21 +1,21 @@
 import {
-  DescriptionSection,
-  HeroSection,
-  ProductShowcaseSection,
-  SystemRequirementsSection,
-  VideosSection,
-} from './sections'
+	DescriptionSection,
+	HeroSection,
+	ProductShowcaseSection,
+	SystemRequirementsSection,
+	VideosSection
+} from './sections';
 
 const KnockScreen = () => {
-  return (
-    <>
-      <HeroSection />
-      <DescriptionSection />
-      <ProductShowcaseSection />
-      <SystemRequirementsSection />
-      <VideosSection />
-    </>
-  )
-}
+	return (
+		<>
+			<HeroSection />
+			<DescriptionSection />
+			<ProductShowcaseSection />
+			<SystemRequirementsSection />
+			<VideosSection />
+		</>
+	);
+};
 
-export default KnockScreen
+export default KnockScreen;

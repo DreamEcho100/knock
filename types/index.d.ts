@@ -279,3 +279,48 @@ const product: IProduct = {
 		}
 	]
 };
+
+export interface IAccessToken {
+	accessToken: string;
+	expiresAt: string;
+}
+
+export interface ILoginSuccess {
+	success: true;
+	message: string;
+	user: IAccessToken;
+}
+
+export interface IRegisterSuccess {
+	success: true;
+	message: string; // "Account created successfully!",
+	response: {
+		id: string; // "gid://shopify/Customer/6439211991263"
+	};
+}
+export interface IUser {
+	id: string; // 'gid://shopify/Customer/6439111885023';
+	firstName: string;
+	lastName: string;
+	acceptsMarketing: boolean;
+	email: string;
+	phone: string | null;
+	createdAt: string | Date;
+	defaultAddress: string | null;
+	orders: {
+		edges: [];
+	};
+}
+
+export interface IUserSession {
+	data?: IUser;
+	isLoading: boolean;
+	isFetching: boolean;
+
+	error?: IGenericErrorResponse;
+}
+
+export interface IGenericErrorResponse {
+	success: false;
+	message: string;
+}

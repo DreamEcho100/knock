@@ -1,19 +1,19 @@
 import {
-  AboutSection,
-  HeroSection,
-  OneProductShowCaseSection,
-  LatestSamplesSection,
-} from './sections'
+	AboutSection,
+	HeroSection,
+	OneProductShowCaseSection,
+	LatestSamplesSection
+} from './sections';
 
 const HomeScreen = () => {
-  return (
-    <>
-      <HeroSection />
-      <OneProductShowCaseSection />
-      <AboutSection />
-      <LatestSamplesSection />
-    </>
-  )
-}
+	return (
+		<>
+			<HeroSection />
+			<OneProductShowCaseSection />
+			<AboutSection />
+			<LatestSamplesSection />
+		</>
+	);
+};
 
-export default HomeScreen
+export default HomeScreen;

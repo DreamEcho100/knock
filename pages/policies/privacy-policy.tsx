@@ -1,10 +1,10 @@
-import type { NextPage } from 'next'
+import type { NextPage } from 'next';
 
-import PrivacyPolicyScreen from '@components/screens/Policies/Privacy'
-import DefaultLayout from '@components/layouts/Default'
+import PrivacyPolicyScreen from '@components/screens/Policies/Privacy';
+import DefaultLayout from '@components/layouts/Default';
 
 const PrivacyPolicyPage: NextPage = () => {
-  return <PrivacyPolicyScreen />
-}
+	return <PrivacyPolicyScreen />;
+};
 
-export default PrivacyPolicyPage
+export default PrivacyPolicyPage;
