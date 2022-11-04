@@ -4,11 +4,7 @@ import PrivacyPolicyScreen from '@components/screens/Policies/Privacy'
 import DefaultLayout from '@components/layouts/Default'
 
 const PrivacyPolicyPage: NextPage = () => {
-  return (
-    <DefaultLayout>
-      <PrivacyPolicyScreen />
-    </DefaultLayout>
-  )
+  return <PrivacyPolicyScreen />
 }
 
 export default PrivacyPolicyPage

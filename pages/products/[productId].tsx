@@ -10,9 +10,7 @@ export interface IProductByIdPageProps {
 
 const ProductByIdPage: NextPage<IProductByIdPageProps> = ({ product }) => {
   return (
-    <DefaultLayout>
       <ProductByIdScreen product={product} />
-    </DefaultLayout>
   )
 }
 

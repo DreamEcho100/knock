@@ -5,11 +5,7 @@ import { NextPage } from 'next'
 interface Props {}
 
 const KnockClipperPage: NextPage<Props> = () => {
-  return (
-    <DefaultLayout>
-      <KnockClipperScreen />
-    </DefaultLayout>
-  )
+  return <KnockClipperScreen />
 }
 
 export default KnockClipperPage
