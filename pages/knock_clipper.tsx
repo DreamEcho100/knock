@@ -1,4 +1,3 @@
-import DefaultLayout from '@components/layouts/Default';
 import KnockClipperScreen from '@components/screens/KnockClipper';
 import { NextPage } from 'next';
 

@@ -4,6 +4,8 @@ import Button from '@components/shared/core/Button';
 import Image from 'next/image';
 
 const HeroSection = ({ product }: IProductByIdPageProps) => {
+	console.log('product.variants[0]', product.variants[0]);
+
 	return (
 		<section className='bg-primary-1 overflow-x-hidden md:overflow-x-visible'>
 			<div
@@ -20,23 +22,25 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 				/>
 				<div
 					className='
-			 			relative flex justify-center rounded-3xl overflow-hidden flex-col w-11/12 max-w-fit
+			 			relative bg-primary-1 flex justify-center rounded-3xl overflow-hidden flex-col w-11/12 max-w-fit
 						lg:flex-row lg:max-w-full lg:rounded-l-none lg:rounded-r-3xl'
 				>
-					<Image
-						src={product.image.src}
-						alt=''
-						width={200}
-						height={200}
-						className=' aspect-square w-full lg:max-w-[25rem]'
-					/>
+					{product.images && product.images[0] && (
+						<Image
+							src={product.images[0].src}
+							alt={product.images[0].altText || ''}
+							width={800}
+							height={800}
+							className=' aspect-square w-full lg:max-w-[25rem] object-contain'
+						/>
+					)}
 					<div
 						className='px-4 rounded-r-none py-8 flex flex-col gap-2 bg-primary-4 items-center justify-center text-center
 							sm:px-16
 							lg:items-stretch lg:justify-stretch lg:text-align-initial lg:rounded-r-3xl'
 					>
 						<h1 className='text-h2 capitalize font-bold'>{product.title}</h1>
-						<p>${product.price}</p>
+						<p>${product.variants[0].price.amount}</p>
 						<p>
 							<span className='text-bg-secondary-1'>Shipping</span>
 							&nbsp;calculated at checkout.

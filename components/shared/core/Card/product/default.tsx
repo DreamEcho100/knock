@@ -3,9 +3,12 @@ import Button from '@components/shared/core/Button';
 import Link from 'next/link';
 import { cardClasses } from 'utils/core/cva';
 import type { VariantProps } from 'class-variance-authority';
+import { IProduct } from 'types';
 
-interface IProductCardProps extends VariantProps<typeof cardClasses> {
-	image: { src: string; alt?: string };
+interface IProductCardProps
+	extends VariantProps<typeof cardClasses>,
+		Partial<IProduct> {
+	// images: NonNullable<IProduct['images']> // { src: string; alt?: string };
 	link: Parameters<typeof Link>['0'];
 	extraDetailsElement?: JSX.Element;
 }
@@ -18,7 +21,7 @@ interface ExtraProductCardDetails {
 }
 
 const ProductBasicCard = ({
-	image,
+	images,
 	link,
 	extraDetailsElement,
 	intent
@@ -31,15 +34,17 @@ const ProductBasicCard = ({
 				className='aspect-square overflow-hidden brightness-75
 					group-hover:brightness-100'
 			>
-				<Image
-					src={image.src}
-					alt={image.alt || ''}
-					width={800}
-					height={800}
-					className='w-full h-full
+				{images && images[0] && (
+					<Image
+						src={images[0].src}
+						alt={images[0].altText || ''}
+						width={800}
+						height={800}
+						className='w-full h-full object-contain
 						transition-all duration-300 group
 						group-hover:scale-125'
-				/>
+					/>
+				)}
 			</Link>
 			<div
 				className='flex-grow text-center px-4 py-2 bg-primary-3 text-primary-2 flex flex-col items-center justify-center gap-1'
@@ -78,7 +83,7 @@ const ExtraProductCardDetails = ({
 };
 
 export const ProductCardWithDetails = ({
-	image,
+	images,
 	link,
 	intent,
 	//
@@ -90,7 +95,7 @@ export const ProductCardWithDetails = ({
 	ExtraProductCardDetails) => {
 	return (
 		<ProductBasicCard
-			image={image}
+			images={images}
 			link={link}
 			intent={intent}
 			extraDetailsElement={

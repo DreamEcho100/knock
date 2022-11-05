@@ -180,6 +180,11 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
 		accessToken: accessToken
 	});
 
+	console.log(
+		'process.env.NEXT_PUBLIC_BACKEND_PATH',
+		process.env.NEXT_PUBLIC_BACKEND_PATH
+	);
+
 	return (
 		<>
 			<MainHeader />

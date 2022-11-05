@@ -9,7 +9,7 @@ const AboutSection = () => {
 					sm:py-16
 					'
 			>
-				<h2 className='text-h2 text-primary-1 capitalize font-semibold flex flex-wrap'>
+				<h2 className='text-h2 text-primary-1 capitalize font-semibold flex flex-wrap justify-center'>
 					MAKE YOUR DRUMS&nbsp;
 					<KnockTrademark />
 				</h2>

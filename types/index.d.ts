@@ -113,30 +113,30 @@ const variants = [
 		}
 	}
 ];
-const type = {
-	name: 'Product',
-	kind: 'OBJECT',
+interface TProductType {
+	name: string;
+	kind: 'OBJECT';
 	fieldBaseTypes: {
-		availableForSale: 'Boolean',
-		createdAt: 'DateTime',
-		description: 'String',
-		descriptionHtml: 'HTML',
-		handle: 'String',
-		id: 'ID',
-		images: 'ImageConnection',
-		onlineStoreUrl: 'URL',
-		options: 'ProductOption',
-		productType: 'String',
-		publishedAt: 'DateTime',
-		title: 'String',
-		updatedAt: 'DateTime',
-		variants: 'ProductVariantConnection',
-		vendor: 'String'
-	},
-	implementsNode: true
-};
+		availableForSale: 'Boolean';
+		createdAt: 'DateTime';
+		description: 'String';
+		descriptionHtml: 'HTML';
+		handle: 'String';
+		id: 'ID';
+		images: 'ImageConnection';
+		onlineStoreUrl: 'URL';
+		options: 'ProductOption';
+		productType: 'String';
+		publishedAt: 'DateTime';
+		title: 'String';
+		updatedAt: 'DateTime';
+		variants: 'ProductVariantConnection';
+		vendor: 'String';
+	};
+	implementsNode: boolean;
+}
 
-interface IProductOptions {
+interface IProductOption {
 	id: string;
 	name: string;
 	values: {
@@ -156,8 +156,7 @@ interface IProductOptions {
 		implementsNode: boolean;
 	};
 }
-[];
-interface IProductImages {
+interface IProductImage {
 	id: string;
 	src: string;
 	altText: null;
@@ -181,7 +180,6 @@ interface IProductImages {
 		first: number;
 	};
 }
-[];
 interface IProduct {
 	id: string;
 	availableForSale: boolean;
@@ -202,8 +200,10 @@ interface IProduct {
 	variableValues: {
 		first: number;
 	};
-	options: IProductOptions;
-	images: IProductImages;
+	options: IProductOption[];
+	images: IProductImage[];
+	type: TProductType;
+	variants: any; // Record<string, any>;
 }
 
 const product: IProduct = {
@@ -277,7 +277,30 @@ const product: IProduct = {
 				first: 20
 			}
 		}
-	]
+	],
+	type: {
+		name: 'Product',
+		kind: 'OBJECT',
+		fieldBaseTypes: {
+			availableForSale: 'Boolean',
+			createdAt: 'DateTime',
+			description: 'String',
+			descriptionHtml: 'HTML',
+			handle: 'String',
+			id: 'ID',
+			images: 'ImageConnection',
+			onlineStoreUrl: 'URL',
+			options: 'ProductOption',
+			productType: 'String',
+			publishedAt: 'DateTime',
+			title: 'String',
+			updatedAt: 'DateTime',
+			variants: 'ProductVariantConnection',
+			vendor: 'String'
+		},
+		implementsNode: true
+	},
+	variants
 };
 
 export interface IAccessToken {

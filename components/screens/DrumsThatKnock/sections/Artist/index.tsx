@@ -18,7 +18,7 @@ const ArtistSection = () => {
 		<section className='bg-primary-2'>
 			<div className='px-8 py-16 flex flex-col gap-12'>
 				<header className='text-center flex items-center justify-center'>
-					<h2 className='text-[2rem] font-bold capitalize flex flex-wrap'>
+					<h2 className='text-[2rem] font-bold capitalize flex flex-wrap justify-center'>
 						SOME ARTISTS WHO HAVE USED DRUMS THAT &nbsp;
 						<KnockTrademark />
 					</h2>
@@ -40,7 +40,7 @@ const ArtistSection = () => {
 							.map((item, index) => (
 								<SwiperSlide
 									key={index}
-									className='p-2 gap-2 flex flex-col items-center justify-center text-center'
+									className='p-2 gap-2 flex flex-col justify-center text-center'
 								>
 									<Image
 										src={item.image.src}

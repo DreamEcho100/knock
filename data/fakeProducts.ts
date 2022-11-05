@@ -36,6 +36,133 @@ const repeatedData = {
 	}
 };
 
+// const product = {
+// 	title: 'Drums That Knock Vol. 9',
+// 	image: {
+// 		src: '/images/d8052bdee8691b19d9186254f48089a8.png'
+// 	},
+// 	price: 50,
+// 	id: 'drums-that-knock-vol-9',
+// 	video: {
+// 		title: 'Watch DECAP preview the sounds in Drums That Knock Vol. 9',
+// 		src: 'https://www.youtube.com/embed/4fiC6Zi0Wnw'
+// 	},
+// 	description:
+// 		'## DECAP - Drums That Knock Vol. 9 is available now,  with top notch original sounds for your production.\n\nAll BRAND NEW, never heard before sounds designed from scratch by DECAP. Premium quality, groundbreaking as always.\n\nMany of the sounds in this kit were run through Studer, and Telefunken tape machines, EMU SP-12 (crazy on the 808s) and other analog gear for extra depth, width and texture.\n',
+// 	details: [
+// 		[
+// 			{
+// 				header: 'Files included',
+// 				list: [
+// 					'All sounds and loops are 100% royalty free - no clearance required',
+// 					'All sounds are crafted, sculpted, specially designed to KNOCK / punch through your mix',
+// 					'All sounds are 100% original and crafted from scratch (no recycled sounds)',
+// 					'All loops are labeled with tempo, key, and ready to drop right into your DAW with no editing required',
+// 					'All sounds are in 24bit/44.1kHz format',
+// 					'All sounds and loops are compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, Bitwig, etc)'
+// 				]
+// 			}
+// 		],
+// 		{
+// 			header: 'Files included',
+// 			list: [
+// 				'25 808s + Bass',
+// 				'9 Fills',
+// 				'28 Drum Loops',
+// 				'8 Rap Vocal Loops',
+// 				'31 Melodic Loops',
+// 				'38 Hihats',
+// 				'32 Snares + Claps + Rimshots',
+// 				'27 Kicks',
+// 				'54 Percussive One Shots',
+// 				'7 MIDI Files',
+// 				'36 FX One Shots',
+// 				'28 Melodic One Shots',
+// 				'40 Percussion Loops',
+// 				'16 Risers + Falls',
+// 				'52 Shouts + Adlibs',
+// 				'22 Hihat Loops'
+// 			]
+// 		}
+// 	],
+// 	embeddedVideos: [
+// 		{
+// 			title: 'Watch DECAP preview the sounds in Drums That Knock Vol. 9',
+// 			src: 'https://www.youtube.com/embed/4fiC6Zi0Wnw'
+// 		},
+// 		{
+// 			title: 'Watch DECAP preview the sounds in Drums That Knock Vol. 9',
+// 			src: 'https://www.youtube.com/embed/4fiC6Zi0Wnw'
+// 		}
+// 	]
+// };
+
+// const missingData = {
+// 	details: [
+// 		{
+// 			header: 'Files included',
+// 			list: [
+// 				'All sounds and loops are 100% royalty free - no clearance required',
+// 				'All sounds are crafted, sculpted, specially designed to KNOCK / punch through your mix',
+// 				'All sounds are 100% original and crafted from scratch (no recycled sounds)',
+// 				'All loops are labeled with tempo, key, and ready to drop right into your DAW with no editing required',
+// 				'All sounds are in 24bit/44.1kHz format',
+// 				'All sounds and loops are compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, Bitwig, etc)'
+// 			]
+// 		},
+// 		{
+// 			header: 'Files included',
+// 			list: [
+// 				'25 808s + Bass',
+// 				'9 Fills',
+// 				'28 Drum Loops',
+// 				'8 Rap Vocal Loops',
+// 				'31 Melodic Loops',
+// 				'38 Hihats',
+// 				'32 Snares + Claps + Rimshots',
+// 				'27 Kicks',
+// 				'54 Percussive One Shots',
+// 				'7 MIDI Files',
+// 				'36 FX One Shots',
+// 				'28 Melodic One Shots',
+// 				'40 Percussion Loops',
+// 				'16 Risers + Falls',
+// 				'52 Shouts + Adlibs',
+// 				'22 Hihat Loops'
+// 			]
+// 		}
+// 	],
+// 	embeddedVideos: [
+// 		{
+// 			title: 'Watch DECAP preview the sounds in Drums That Knock Vol. 9',
+// 			src: 'https://www.youtube.com/embed/4fiC6Zi0Wnw'
+// 		},
+// 		{
+// 			title: 'Watch DECAP preview the sounds in Drums That Knock Vol. 9',
+// 			src: 'https://www.youtube.com/embed/4fiC6Zi0Wnw'
+// 		}
+// 	]
+// };
+
+// interface missingData {
+// 	details: {
+// 		title?: string;
+// 		description?: string;
+// 		data: {
+// 			header?: string;
+// 			list: string[];
+// 		}[];
+// 	};
+// 	embeddedVideos: {
+// 		title?: string;
+// 		description?: string;
+// 		data: {
+// 			title?: string;
+// 			src: string;
+// 		}[]
+// 	};
+// }
+
 const fakeProductsData = [
 	{
 		...repeatedData,

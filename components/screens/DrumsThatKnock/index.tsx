@@ -1,3 +1,4 @@
+import { IProduct } from 'types';
 import {
 	ArtistSection,
 	DigitalProductsSection,
@@ -6,12 +7,12 @@ import {
 	MerchSection
 } from './sections';
 
-const DrumsThatKnock = () => {
+const DrumsThatKnock = ({ products }: { products: IProduct[] }) => {
 	return (
 		<>
 			<HeroSection />
-			<DigitalProductsSection />
-			<MerchSection />
+			<DigitalProductsSection products={products} />
+			{/* <MerchSection /> */}
 			<ArtistSection />
 			<KnockProductShowcaseSection />
 		</>

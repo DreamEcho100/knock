@@ -1,10 +1,28 @@
-import type { NextPage } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 
-import DefaultLayout from '@components/layouts/Default';
 import DrumsThatKnock from '@components/screens/DrumsThatKnock';
+import { IProduct } from 'types';
+import { getAllProducts } from '@utils/core/API';
 
-const DrumsThatKnockPage: NextPage = () => {
-	return <DrumsThatKnock />;
+interface IDrumsThatKnockPageProps {
+	products: IProduct[];
+}
+
+const DrumsThatKnockPage: NextPage<IDrumsThatKnockPageProps> = ({
+	products
+}) => {
+	return <DrumsThatKnock products={products} />;
 };
 
 export default DrumsThatKnockPage;
+
+export const getStaticProps: GetStaticProps = async () => {
+	const products = await getAllProducts();
+
+	return {
+		props: {
+			products,
+			revalidate: 5 * 60
+		}
+	};
+};

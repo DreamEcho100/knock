@@ -1,9 +1,10 @@
-import DefaultLayout from '@components/layouts/Default';
+import type { NextPage } from 'next';
+
 import Button from '@components/shared/core/Button';
 import FormInput from '@components/shared/core/FormInput';
 import { useState } from 'react';
 
-const ContactUsPage = () => {
+const ContactUsPage: NextPage = () => {
 	const [formValues, setFormValues] = useState({
 		name: '',
 		email: '',

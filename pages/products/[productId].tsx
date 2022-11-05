@@ -1,11 +1,13 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
-import DefaultLayout from '@components/layouts/Default';
 import fakeProductsData from 'data/fakeProducts';
 import ProductByIdScreen from '@components/screens/ProductById';
+import { getAllProducts, getProductById } from '@utils/core/API';
+import { grtIdFromGid } from '@utils/core/shopify';
+import { IProduct } from 'types';
 
 export interface IProductByIdPageProps {
-	product: typeof fakeProductsData[0];
+	product: IProduct;
 }
 
 const ProductByIdPage: NextPage<IProductByIdPageProps> = ({ product }) => {
@@ -13,9 +15,13 @@ const ProductByIdPage: NextPage<IProductByIdPageProps> = ({ product }) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const product = fakeProductsData.find(
-		(product) => product.id === params?.productId
-	);
+	const productId = params?.productId;
+	if (typeof productId !== 'string')
+		throw new Error('productId must be a string');
+
+	// !!!
+	// Handle errors
+	const product = await getProductById(productId);
 
 	if (!product)
 		return {
@@ -32,10 +38,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 export const getStaticPaths: GetStaticPaths<{ productId: string }> = async (
 	context
 ) => {
+	const paths = await getAllProducts().then((products) =>
+		products.map((product) => ({
+			params: { productId: grtIdFromGid(product.id) }
+		}))
+	);
+
 	return {
-		paths: fakeProductsData.map((product) => ({
-			params: { productId: product.id }
-		})),
+		paths,
 		fallback: 'blocking'
 	};
 };

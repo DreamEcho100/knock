@@ -32,7 +32,9 @@ const MerchSection = () => {
 			// }}
 		>
 			<header className='text-center flex items-center justify-center'>
-				<h2 className='text-h2 font-bold capitalize flex flex-wrap'>Merch</h2>
+				<h2 className='text-h2 font-bold capitalize flex flex-wrap justify-center'>
+					Merch
+				</h2>
 			</header>
 			<div className='flex flex-wrap items-center justify-center gap-8'>
 				{productsData.map((item) => (

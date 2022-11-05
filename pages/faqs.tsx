@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 
-import DefaultLayout from '@components/layouts/Default';
 import Image from 'next/image';
 
 const faqs: (

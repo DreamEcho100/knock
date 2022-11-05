@@ -11,11 +11,11 @@ const ProductByIdScreen = ({ product }: IProductByIdPageProps) => (
 	<>
 		<HeroSection product={product} />
 		<DescriptionSection description={product.description} />
-		<FeaturesAndFilesIncludedSection
+		{/* <FeaturesAndFilesIncludedSection
 			features={product.features}
 			filesIncluded={product.filesIncluded}
 		/>
-		<VideoSection video={product.video} />
+		<VideoSection video={product.video} /> */}
 	</>
 );
 

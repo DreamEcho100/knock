@@ -1,7 +1,9 @@
+import type { NextPage } from 'next';
+
 import DefaultLayout from '@components/layouts/Default';
 import ShippingPolicyScreen from '@components/screens/Policies/Shipping';
 
-const ShippingPolicyPage = () => {
+const ShippingPolicyPage: NextPage = () => {
 	return <ShippingPolicyScreen />;
 };
 

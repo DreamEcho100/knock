@@ -31,7 +31,7 @@ const HeroSection = () => {
 						style={{ aspectRatio: '16 / 16' }}
 					/>
 				</div>
-				<h2 className='text-h2 font-bold text-primary-1 mt-4 mb-4 flex flex-wrap'>
+				<h2 className='text-h2 font-bold text-primary-1 mt-4 mb-4 flex flex-wrap justify-center'>
 					<KnockTrademark />
 					Clipper
 				</h2>
