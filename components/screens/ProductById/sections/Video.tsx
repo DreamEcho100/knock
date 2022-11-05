@@ -1,10 +1,9 @@
 import type { IProductByIdPageProps } from '@pages/products/[productId]';
 import Image from 'next/image';
 
-const VideoSection = ({
-	video
-}: {
-	video: IProductByIdPageProps['product']['video'];
+const VideoSection = ({}: // video
+{
+	// video: IProductByIdPageProps['product']['video'];
 }) => {
 	return (
 		<section className='relative bg-primary-1'>
@@ -15,14 +14,13 @@ const VideoSection = ({
 				height={200}
 				className='pointer-events-none aspect-square absolute w-1/2 top-0 right-0 scale-150 -translate-y-[30%%] -translate-x-[40%]'
 			/>
-			<div className='relative mx-auto my-24 flex flex-col gap-8'>
+			{/* <div className='relative mx-auto my-24 flex flex-col gap-8'>
 				<header className='text-center'>
 					<h2 className='text-h3 font-bold text-primary-1 capitalize'>
 						watch {video.title}
 					</h2>
 				</header>
 				<div className='flex items-center justify-center'>
-					{/* <video src={video.src} poster={video.posterSrc} controls></video> */}
 					<iframe
 						width='800'
 						height='400'
@@ -34,7 +32,8 @@ const VideoSection = ({
 						className='overflow-hidden rounded-2xl'
 					></iframe>
 				</div>
-			</div>
+			</div> */}
+			{/* <video src={video.src} poster={video.posterSrc} controls></video> */}
 		</section>
 	);
 };

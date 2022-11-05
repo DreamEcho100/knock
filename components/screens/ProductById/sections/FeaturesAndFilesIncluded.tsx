@@ -1,19 +1,18 @@
 import { IProductByIdPageProps } from '@pages/products/[productId]';
 import TwoCardContainer from '@components/shared/core/TwoCardContainer';
 
-const FeaturesAndFilesIncludedSection = ({
-	features,
-	filesIncluded
-}: {
-	features: IProductByIdPageProps['product']['features'];
-	filesIncluded: IProductByIdPageProps['product']['filesIncluded'];
+const FeaturesAndFilesIncludedSection = ({}: // features,
+// filesIncluded
+{
+	// features: IProductByIdPageProps['product']['features'];
+	// filesIncluded: IProductByIdPageProps['product']['filesIncluded'];
 }) => {
 	return (
 		<section
 			className='bg-primary-1 px-8 p-8 
 				sm:py-20'
 		>
-			<TwoCardContainer
+			{/* <TwoCardContainer
 				items1={features}
 				items2={filesIncluded.details}
 				items2HeaderText={`files included ${filesIncluded.count}:`}
@@ -27,7 +26,7 @@ const FeaturesAndFilesIncludedSection = ({
 					},
 					className: 'text-[90%]'
 				}}
-			/>
+			/> */}
 		</section>
 	);
 };
