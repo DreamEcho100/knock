@@ -389,7 +389,7 @@ const CartContainer = () => {
 					</header>
 					<div className=''>
 						<Button
-							{...(productsData.length === 0 || !user
+							{...(productsData.length === 0 || !user?.data?.id
 								? ''
 								: { href: '/checkout' })}
 							disabled={productsData.length === 0}
@@ -397,7 +397,7 @@ const CartContainer = () => {
 						>
 							{productsData.length === 0
 								? 'cart is empty'
-								: !user
+								: !user?.data?.id
 								? 'please login to proceed to checkout'
 								: 'checkout'}
 						</Button>
