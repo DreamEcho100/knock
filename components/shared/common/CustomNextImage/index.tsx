@@ -9,7 +9,7 @@ export interface ICustomNextImageProps extends ImageProps {
 
 const CustomNextImage = ({
 	className = '',
-	unoptimized = true,
+	// unoptimized = true,
 	src,
 	alt = '',
 	placeholder = 'empty',
@@ -22,7 +22,7 @@ const CustomNextImage = ({
 	};
 	const handleImageProps = () => {
 		const imageProps: ICustomNextImageProps = {
-			unoptimized,
+			// unoptimized,
 			src,
 			placeholder,
 			className,

@@ -8,8 +8,11 @@ export type TInitialStateScreenSize = number;
 
 export interface ICartProduct extends IProduct {
 	// countInStock: number;
-	// preferredImage: { id: string; alt: string | null; src: string };
+	preferredImage: { alt: string | null; src: string } | null;
 	selectedAmount: number;
+	// !!!
+	// Add currencyCode
+	price: number;
 	addedOnCartAt: Date;
 	updatedOnCartAt?: Date;
 }

@@ -2,7 +2,7 @@ import { isDate } from '@utils/common/date';
 
 import { ECustomerContextConsts } from './constants';
 import { initIsVisible } from './initialState';
-import { IInitialState, IReducerActions } from './ts';
+import { IInitialState, IReducerActions, ICartProduct } from './ts';
 
 export const reducer = (
 	state: IInitialState,
@@ -35,17 +35,7 @@ export const reducer = (
 				) {
 					const productsIds = [];
 					cartObj.productsData = cartObj.productsData.filter(
-						(item: {
-							id: string | any[];
-							addedOnCartAt: Date;
-							categories: string | any[];
-							countInStock: number;
-							preferredImage: { id: string; alt: string; src: string };
-							price: number;
-							selectedAmount: number;
-							title: string | any[];
-							updatedOnCartAt: undefined;
-						}) => {
+						(item: ICartProduct) => {
 							if (
 								!item ||
 								typeof item !== 'object' ||
@@ -57,25 +47,8 @@ export const reducer = (
 
 							let _key: keyof typeof item;
 							for (_key in item) {
-								// if (Object.prototype.hasOwnProperty.call(item, key)) {
-								// 	const element = item[key];
-								// }
 								if (!('addedOnCartAt' in item) || !isDate(item.addedOnCartAt)) {
 									item.addedOnCartAt = new Date();
-								} else if (
-									!('categories' in item) ||
-									!Array.isArray(item.categories) ||
-									item.categories.length === 0
-								) {
-									isAValidProduct = false;
-									break;
-								} else if (
-									!('countInStock' in item) ||
-									isNaN(item.countInStock) ||
-									item.countInStock < 1
-								) {
-									isAValidProduct = false;
-									break;
 								} else if (
 									!('id' in item) ||
 									typeof item.id !== 'string' ||
@@ -87,15 +60,17 @@ export const reducer = (
 									!('preferredImage' in item) ||
 									typeof item.preferredImage !== 'object'
 								) {
-									item.preferredImage = { id: '??', alt: '', src: '' };
-								} else if (
-									!('price' in item) ||
-									typeof item.price !== 'number' ||
-									item.price < 1
-								) {
-									isAValidProduct = false;
-									break;
-								} else if (
+									item.preferredImage = null; //{ id: '??', alt: '', src: '' };
+								}
+								// else if (
+								// 	!('price' in item) ||
+								// 	typeof item.price !== 'number' ||
+								// 	item.price < 1
+								// ) {
+								// 	isAValidProduct = false;
+								// 	break;
+								// }
+								else if (
 									!('selectedAmount' in item) ||
 									typeof item.selectedAmount !== 'number' ||
 									item.selectedAmount < 1
@@ -117,79 +92,6 @@ export const reducer = (
 									item.updatedOnCartAt = undefined;
 								}
 							}
-							/*
-
-							for (key in item) {
-								// if (Object.prototype.hasOwnProperty.call(item, key)) {
-								// 	const element = item[key];
-								// }
-								if (
-									key === 'addedOnCartAt' &&
-									(!(key in item) || !isDate(item[key]))
-								) {
-									item.addedOnCartAt = new Date();
-								} else if (
-									key === 'addedOnCartAt' &&
-									(!(key in item) ||
-										!Array.isArray(item[key]) ||
-										item.categories.length === 0)
-								) {
-									isAValidProduct = false;
-									break;
-								} else if (
-									key === 'countInStock' &&
-									(!(key in item) ||
-										isNaN(item.countInStock) ||
-										item.countInStock < 1)
-								) {
-									isAValidProduct = false;
-									break;
-								} else if (
-									key === 'id' &&
-									(!(key in item) ||
-										typeof item[key] !== 'string' ||
-										item.id.length < 1)
-								) {
-									isAValidProduct = false;
-									break;
-								} else if (
-									key === 'preferredImage' &&
-									(!(key in item) || typeof item[key] !== 'object')
-								) {
-									item[key] = { id: '??', alt: '', src: '' };
-								} else if (
-									key === 'price' &&
-									(!(key in item) ||
-										typeof item[key] !== 'number' ||
-										item[key] < 1)
-								) {
-									isAValidProduct = false;
-									break;
-								} else if (
-									key === 'selectedAmount' &&
-									(!(key in item) ||
-										typeof item[key] !== 'number' ||
-										item[key] < 1)
-								) {
-									isAValidProduct = false;
-									break;
-								} else if (
-									key === 'title' &&
-									(!(key in item) ||
-										typeof item[key] !== 'string' ||
-										item[key].length < 1)
-								) {
-									isAValidProduct = false;
-									break;
-								}
-								if (
-									key === 'updatedOnCartAt' &&
-									(!(key in item) || !isDate(item[key]))
-								) {
-									item[key] = undefined;
-								}
-							}
-							*/
 
 							if (isAValidProduct) productsIds.push(item.id);
 							return isAValidProduct;

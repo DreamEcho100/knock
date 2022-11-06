@@ -1,4 +1,4 @@
-import { cva } from 'class-variance-authority';
+import { cva, cx } from 'class-variance-authority';
 
 export const cardClasses = cva(
 	`bg-primary-2 max-w-[16rem] shadow-lg shadow-black overflow-hidden flex flex-col
@@ -14,6 +14,42 @@ export const cardClasses = cva(
 		},
 		defaultVariants: {
 			intent: 'allCorners'
+		}
+	}
+);
+
+export const buttonClasses = cva(
+	`font-semibold outline-none
+	duration-300 transition-all`,
+	{
+		variants: {
+			w: {
+				fit: 'w-fit',
+				full: 'w-full'
+			},
+			p: {
+				wider: 'px-8 py-1'
+			},
+			rounded: {
+				'3xl': 'rounded-3xl'
+			},
+			theme: {
+				default: cx(
+					'text-white bg-secondary-1',
+					'hover:bg-purple-800',
+					'focus:ring focus:ring-bg-secondary-1'
+				)
+			},
+			display: {
+				'flex-xy-center': 'flex items-center justify-center'
+			}
+		},
+		// compoundVariants: [{ display: 'flex-center' }],
+		defaultVariants: {
+			w: 'fit',
+			p: 'wider',
+			rounded: '3xl',
+			theme: 'default'
 		}
 	}
 );

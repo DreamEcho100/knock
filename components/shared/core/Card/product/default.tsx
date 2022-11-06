@@ -4,6 +4,10 @@ import Link from 'next/link';
 import { cardClasses } from 'utils/core/cva';
 import type { VariantProps } from 'class-variance-authority';
 import { IProduct } from 'types';
+import { useSharedCustomerState } from '@context/Customer';
+import { customerGlobalActions } from '@context/Customer/actions';
+import { ICartProduct } from '@context/Customer/ts';
+import { convertProductToCartItem } from '@utils/core/products';
 
 interface IProductCardProps
 	extends VariantProps<typeof cardClasses>,
@@ -17,7 +21,7 @@ interface ExtraProductCardDetails {
 	price: number;
 	priceAfterDiscount?: number;
 	toAddToCart: boolean;
-	productData: any;
+	productData: IProduct;
 }
 
 const ProductBasicCard = ({
@@ -47,7 +51,7 @@ const ProductBasicCard = ({
 				)}
 			</Link>
 			<div
-				className='flex-grow text-center px-4 py-2 bg-primary-3 text-primary-2 flex flex-col items-center justify-center gap-1'
+				className='flex-grow text-center p-4 bg-primary-3 text-primary-2 flex flex-col items-center justify-center gap-1'
 				style={{ fontSize: 'small' }}
 			>
 				<p className='font-bold'>
@@ -67,6 +71,8 @@ const ExtraProductCardDetails = ({
 	toAddToCart,
 	priceAfterDiscount
 }: ExtraProductCardDetails) => {
+	const [, customerDispatch] = useSharedCustomerState();
+
 	return (
 		<>
 			{priceAfterDiscount ? (
@@ -77,7 +83,18 @@ const ExtraProductCardDetails = ({
 			) : (
 				<p>${price}</p>
 			)}
-			{toAddToCart && <Button className='capitalize'>add to cart</Button>}
+			{toAddToCart && (
+				<Button
+					className='capitalize'
+					onClick={() =>
+						customerGlobalActions.cart.addOneProduct(customerDispatch, {
+							newProduct: convertProductToCartItem({ product: productData })
+						})
+					}
+				>
+					add to cart
+				</Button>
+			)}
 		</>
 	);
 };

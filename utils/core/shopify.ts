@@ -1,1 +1,1 @@
-export const grtIdFromGid = (gid: string) => gid.replace(/[^\d+]/g, '');
+export const getIdFromGid = (gid: string) => gid.replace(/[^\d+]/g, '');

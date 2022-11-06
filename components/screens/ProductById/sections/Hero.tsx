@@ -2,13 +2,18 @@ import type { IProductByIdPageProps } from '@pages/products/[productId]';
 
 import Button from '@components/shared/core/Button';
 import Image from 'next/image';
+import { customerGlobalActions } from '@context/Customer/actions';
+import { convertProductToCartItem } from '@utils/core/products';
+import { useSharedCustomerState } from '@context/Customer';
 
 const HeroSection = ({ product }: IProductByIdPageProps) => {
+	const [, customerDispatch] = useSharedCustomerState();
+
 	return (
 		<section className='bg-primary-1 overflow-x-hidden md:overflow-x-visible'>
 			<div
 				className='
-					relative pt-32 0 pb-10 flex items-center justify-center'
+					relative px-8 pt-16 pb-8 md:px-16 flex items-center justify-center'
 			>
 				<Image
 					src='/images/Rectangle 47.png'
@@ -62,7 +67,16 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 							className='flex justify-center items-center flex-wrap gap-4
 									lg:justify-between'
 						>
-							<Button className='capitalize mt-2'>add to cart</Button>
+							<Button
+								className='capitalize mt-2'
+								onClick={() =>
+									customerGlobalActions.cart.addOneProduct(customerDispatch, {
+										newProduct: convertProductToCartItem({ product })
+									})
+								}
+							>
+								add to cart
+							</Button>
 							<Image
 								src='/images/payment_cards.png'
 								alt='payment cards'

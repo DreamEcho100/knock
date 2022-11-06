@@ -1,6 +1,7 @@
 // interface IProps {}
 
 import { ProductCardWithDetails } from '@components/shared/core/Card/product/default';
+import { IProduct } from 'types';
 
 const productsData = [
 	{
@@ -23,7 +24,7 @@ const productsData = [
 const MerchSection = () => {
 	return (
 		<section
-			className='relative p-8 sm:p-16 flex flex-col gap-8 bg-primary-1'
+			className='relative px-8 py-16 md:px-16 flex flex-col gap-8 bg-primary-1'
 			// style={{
 			//   zIndex: 2,
 			//   display: 'grid',
@@ -43,7 +44,7 @@ const MerchSection = () => {
 						link={{ children: item.title, href: `/products/${item.id}` }}
 						{...item}
 						toAddToCart
-						productData={item}
+						productData={(item as unknown) as IProduct}
 						intent='bottomCorners'
 					/>
 				))}

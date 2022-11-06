@@ -14,6 +14,10 @@
 	font-style: normal;
 }
 
+:root {
+	--main-nav-h: 6rem;
+}
+
 html,
 body {
 	width: 100%;

@@ -3,11 +3,7 @@ import ProductShowcase from '@components/shared/core/ProductShowcase';
 
 const KnockProductShowcaseSection = () => {
 	return (
-		<section
-			className='bg-primary-1 text-primary-2 p-8
-				sm:py-20
-				lg:px-20'
-		>
+		<section className='bg-primary-1 text-primary-2 px-8 py-16 md:px-16'>
 			<ProductShowcase
 				textContainer={{
 					h2: {

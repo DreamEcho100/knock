@@ -1,7 +1,8 @@
 // interface Props {}
 
 import { ProductCardWithDetails } from '@components/shared/core/Card/product/default';
-import { grtIdFromGid } from '@utils/core/shopify';
+
+import { getIdFromGid } from '@utils/core/shopify';
 
 import fakeProductsData from 'data/fakeProducts';
 
@@ -11,7 +12,7 @@ const DigitalProductsSection = ({ products }: { products: IProduct[] }) => {
 	return (
 		<section className='bg-primary-1'>
 			<div
-				className='relative sm:p-8 md:p-16 justify-items-center'
+				className='relative px-8 py-16 md:px-16 justify-items-center'
 				style={{
 					zIndex: 2,
 					display: 'grid',
@@ -25,7 +26,7 @@ const DigitalProductsSection = ({ products }: { products: IProduct[] }) => {
 						key={item.id}
 						link={{
 							children: item.title,
-							href: `/products/${grtIdFromGid(item.id)}`
+							href: `/products/${getIdFromGid(item.id)}`
 						}}
 						{...item}
 						toAddToCart

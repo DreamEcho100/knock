@@ -1,7 +1,7 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
 import ProductByIdScreen from '@components/screens/ProductById';
-import { grtIdFromGid } from '@utils/core/shopify';
+import { getIdFromGid } from '@utils/core/shopify';
 import { IProduct } from 'types';
 import { getAllProducts, getOneProductById } from 'server/controllers/products';
 
@@ -41,7 +41,7 @@ export const getStaticPaths: GetStaticPaths<{ productId: string }> = async (
 ) => {
 	const paths = await getAllProducts().then((products) =>
 		products.map((product) => ({
-			params: { productId: grtIdFromGid(product.id) }
+			params: { productId: getIdFromGid(product.id) }
 		}))
 	);
 

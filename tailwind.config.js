@@ -54,6 +54,9 @@ module.exports = {
 						5: '#BEBEBE'
 					}
 				}
+			},
+			spacing: {
+				'main-nav-h': 'var(--main-nav-h, 6rem)'
 			}
 		}
 	},
