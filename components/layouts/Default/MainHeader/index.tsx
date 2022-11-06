@@ -235,6 +235,7 @@ const MainHeader = () => {
 export default MainHeader;
 
 const CartContainer = () => {
+	const { user } = useGetUserDataFromStore();
 	const [
 		{
 			isVisible: { sideCart: isCartVisible },
@@ -388,11 +389,17 @@ const CartContainer = () => {
 					</header>
 					<div className=''>
 						<Button
-							{...(productsData.length === 0 ? '' : { href: '/checkout' })}
+							{...(productsData.length === 0 || !user
+								? ''
+								: { href: '/checkout' })}
 							disabled={productsData.length === 0}
 							classesIntent={{ w: 'full', display: 'flex-xy-center' }}
 						>
-							{productsData.length === 0 ? '???' : 'checkout'}
+							{productsData.length === 0
+								? 'cart is empty'
+								: !user
+								? 'please login to proceed to checkout'
+								: 'checkout'}
 						</Button>
 					</div>
 				</div>
