@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = (phase, { defaultConfig }) => {
-	console.log('defaultConfig', defaultConfig);
 	return {
 		reactStrictMode: true,
 		swcMinify: true,
