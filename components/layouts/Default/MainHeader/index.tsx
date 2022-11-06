@@ -53,6 +53,7 @@ const MainHeader = () => {
 
 	const [isRegisterDialogOpen, setIsRegisterDialogOpen] = useState(false);
 	const [isSmallScreenNaveOpen, setIsSmallScreenNaveOpen] = useState(false);
+
 	const headerLinks = [
 		{ href: '/knock-plugin', text: 'knock' },
 		{ href: '/knock_clipper', text: 'KNOCK Clipper', keepCase: true },
@@ -120,7 +121,7 @@ const MainHeader = () => {
 						<li className='block lg:hidden'>
 							<button
 								onClick={() => setIsSmallScreenNaveOpen((prev) => !prev)}
-								title={`press or click to 
+								title={`press or click to ${
 									isSmallScreenNaveOpen ? 'hide' : 'show'
 								} the nav menu`}
 								className='flex items-center justify-center'
@@ -194,14 +195,13 @@ const MainHeader = () => {
 					</ul>
 				</div>
 				<div
-					className={`mt-20 bg-primary-1 block lg:hidden overflow-hidden absolute top-0 right-0 left-0 w-full
-				
-					isSmallScreenNaveOpen
-						? // ? 'scale-y-100'
-						  // : 'scale-y-0 opacity-0 pointer-events-none'
-						  'translate-y-0'
-						: '-translate-y-full opacity-0 pointer-events-none' // mt-0
-				}
+					className={`mt-20 bg-primary-1 block lg:hidden overflow-hidden absolute top-0 right-0 left-0 w-full ${
+						isSmallScreenNaveOpen
+							? // ? 'scale-y-100'
+							  // : 'scale-y-0 opacity-0 pointer-events-none'
+							  'translate-y-0'
+							: '-translate-y-full opacity-0 pointer-events-none' // mt-0
+					}
 				origin-top
 				transition-all duration-300`}
 				>
