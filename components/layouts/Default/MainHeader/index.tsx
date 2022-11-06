@@ -90,7 +90,7 @@ const MainHeader = () => {
 	return (
 		<header
 			id='main-header'
-			className={`commonClasses} bg-primary-1 z-10 fixed top-0 right-0 left-0 w-full flex flex-col`}
+			className={`${commonClasses} bg-primary-1 z-10 fixed top-0 right-0 left-0 w-full flex flex-col`}
 		>
 			<div
 				className='relative w-full mx-auto
