@@ -20,12 +20,13 @@ const DigitalProductsSection = ({ products }: { products: IProduct[] }) => {
 				}}
 			>
 				{products.map((item) => (
+					
 					<ProductCardWithDetails
 						price={0}
 						key={item.id}
 						link={{
 							children: item.title,
-							href: `/products/${grtIdFromGid(item.id)}`
+							href: `/products/${item.handle}`
 						}}
 						{...item}
 						toAddToCart
