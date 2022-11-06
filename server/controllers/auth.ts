@@ -1,11 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-
 import validator from 'validator';
-
 import axios from 'axios';
-
 import gql from 'graphql-tag';
-
 import { print } from 'graphql';
 
 const login = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -50,10 +46,8 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 	);
 
 	if (!response.data.data.customerAccessTokenCreate.customerAccessToken) {
-		return res.status(500).json({
-			success: false,
-			message: 'Please check your email and password'
-		});
+		res.statusCode = 404
+		throw new Error('Please check your email and password')
 	}
 
 	return res.status(200).json({
@@ -102,10 +96,7 @@ const activate = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	);
 
-	if (
-		response.data.data.customerActivate.customerUserErrors[0].code ===
-		'ALREADY_ENABLED'
-	) {
+	if (response.data.data.customerActivate.customerUserErrors[0].code ==='ALREADY_ENABLED') {
 		throw new Error(
 			response.data.data.customerActivate.customerUserErrors[0].message
 		);

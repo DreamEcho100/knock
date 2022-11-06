@@ -4,8 +4,6 @@ import { ProductCardWithDetails } from '@components/shared/core/Card/product/def
 
 import { getIdFromGid } from '@utils/core/shopify';
 
-import fakeProductsData from 'data/fakeProducts';
-
 import { IProduct } from 'types';
 
 const DigitalProductsSection = ({ products }: { products: IProduct[] }) => {

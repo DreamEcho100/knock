@@ -331,6 +331,21 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 			}
 		}
 	);
+
+	if (!response.data.data.customerRecover){
+		throw new Error('')
+	  }
+	  if (response.data.data.customerRecover.customerUserErrors[0].code === "UNIDENTIFIED_CUSTOMER") {
+		throw new Error(response.data.data.customerRecover.customerUserErrors[0].message)
+	  }
+	
+	
+	
+	  return res.status(200).json({
+		success:true,
+		message:"Recovery email sent successfully"
+	  })
+
 };
 
 const clientsController = {

@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-
 const Client = require('shopify-buy');
-// fetch = require("node-fetch");
+
 
 export const createCheckout = async (
 	req: NextApiRequest,
@@ -79,15 +78,6 @@ export const addItemToCheckout = async (
 ) => {
 	const { checkoutId, lineItemsToAdd } = req.body;
 
-	/*
-    const lineItemsToAdd = [
-    {
-    variantId: 'gid://shopify/ProductVariant/29106064584',
-    quantity: 5,
-    customAttributes: [{key: "MyKey", value: "MyValue"}]
-    }
-    ];
-    */
 
 	const client = Client.buildClient({
 		domain: process.env.DOMAINE,
@@ -108,11 +98,6 @@ export const updateItemInCheckout = async (
 ) => {
 	const { checkoutId, lineItemsToUpdate } = req.body;
 
-	/*
-    const lineItemsToUpdate = [
-    {id: 'gid://shopify/CheckoutLineItem/194677729198640?checkout=e3bd71f7248c806f33725a53e33931ef', quantity: 2}
-    ];
-    */
 
 	const client = Client.buildClient({
 		domain: process.env.DOMAINE,
@@ -136,12 +121,6 @@ export const removeItemInCheckout = async (
 ) => {
 	const { checkoutId, lineItemIdsToRemove } = req.body;
 
-	/*
-    const lineItemIdsToRemove = [
-    'gid://shopify/CheckoutLineItem/194677729198640?checkout=e3bd71f7248c806f33725a53e33931ef'
-    ];
-
-    */
 
 	const client = Client.buildClient({
 		domain: process.env.DOMAINE,
