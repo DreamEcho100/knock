@@ -18,6 +18,8 @@ export const getAllProducts = async () => {
 		products: IProduct[];
 	} = await productsResponse.json();
 
+	console.log('productsResult', productsResult);
+
 	return productsResult.products;
 };
 export const getProductById = async (id: string) => {
