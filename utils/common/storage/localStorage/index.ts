@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const setItem = (name: string, value: any): void => {
 	if (typeof value !== 'string')
 		localStorage.setItem(name, JSON.stringify(value));

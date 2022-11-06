@@ -2,7 +2,7 @@ import type { GetStaticProps, NextPage } from 'next';
 
 import DrumsThatKnock from '@components/screens/DrumsThatKnock';
 import { IProduct } from 'types';
-import { getAllProducts } from '@utils/core/API';
+import { getAllProducts } from 'server/controllers/products';
 
 interface IDrumsThatKnockPageProps {
 	products: IProduct[];
@@ -17,7 +17,7 @@ const DrumsThatKnockPage: NextPage<IDrumsThatKnockPageProps> = ({
 export default DrumsThatKnockPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-	const products = await getAllProducts();
+	const products = JSON.parse(JSON.stringify(await getAllProducts()));
 
 	return {
 		props: {

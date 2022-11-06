@@ -1,10 +1,9 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
-import fakeProductsData from 'data/fakeProducts';
 import ProductByIdScreen from '@components/screens/ProductById';
-import { getAllProducts, getProductById } from '@utils/core/API';
 import { grtIdFromGid } from '@utils/core/shopify';
 import { IProduct } from 'types';
+import { getAllProducts, getOneProductById } from 'server/controllers/products';
 
 export interface IProductByIdPageProps {
 	product: IProduct;
@@ -21,7 +20,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 	// !!!
 	// Handle errors
-	const product = await getProductById(productId);
+	const product = JSON.parse(
+		JSON.stringify(await getOneProductById(productId))
+	);
 
 	if (!product)
 		return {

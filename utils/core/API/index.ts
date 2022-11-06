@@ -9,12 +9,7 @@ const getAppApiPath = () =>
 		: process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH;
 
 export const getAllProducts = async () => {
-	console.log('---------------------');
-	console.log('getAppApiPath()', getAppApiPath());
-	console.log('---------------------');
 	const productsResponse = await fetch(`${getAppApiPath()}/products`);
-
-	console.log('productsResponse', productsResponse);
 
 	const productsResult: {
 		products: IProduct[];
