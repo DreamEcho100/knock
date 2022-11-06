@@ -130,9 +130,6 @@ export const useLogoutUser = ({
 				})
 			);
 
-			console.log('----------------------------------');
-			console.log('accessToken', accessToken);
-
 			return fetch(`${process.env.NEXT_PUBLIC_BACKEND_PATH}/auth/logout`, {
 				headers: {
 					'Content-type': 'application/json',

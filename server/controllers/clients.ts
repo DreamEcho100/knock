@@ -331,8 +331,6 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 			}
 		}
 	);
-
-	console.log(response.data.data);
 };
 
 const clientsController = {

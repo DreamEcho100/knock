@@ -8,7 +8,6 @@ import fakeProductsData from 'data/fakeProducts';
 import { IProduct } from 'types';
 
 const DigitalProductsSection = ({ products }: { products: IProduct[] }) => {
-	console.log('products', products);
 	return (
 		<section className='bg-primary-1'>
 			<div

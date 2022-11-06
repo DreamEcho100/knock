@@ -4,8 +4,6 @@ import Button from '@components/shared/core/Button';
 import Image from 'next/image';
 
 const HeroSection = ({ product }: IProductByIdPageProps) => {
-	console.log('product.variants[0]', product.variants[0]);
-
 	return (
 		<section className='bg-primary-1 overflow-x-hidden md:overflow-x-visible'>
 			<div

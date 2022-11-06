@@ -11,11 +11,6 @@ import { print } from 'graphql';
 const login = async (req: NextApiRequest, res: NextApiResponse) => {
 	const data = req.body;
 
-	console.log('data', data);
-	console.log(
-		'process.env.SHOPIFY_STOREFRONT_API_TOKEN',
-		process.env.SHOPIFY_STOREFRONT_API_TOKEN
-	);
 	const customer = gql`
 		mutation customerAccessTokenCreate(
 			$input: CustomerAccessTokenCreateInput!
@@ -126,7 +121,6 @@ const checkToken = async (req: NextApiRequest, res: NextApiResponse) => {
 	const accessToken = req.headers.accesstoken;
 
 	if (accessToken) {
-		console.log(accessToken);
 		const user = await axios.post(
 			`https://pluginsthatknock.com/api/2022-10/graphql.json`,
 			{
