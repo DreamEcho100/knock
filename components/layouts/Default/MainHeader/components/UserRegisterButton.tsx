@@ -97,11 +97,14 @@ const RegisterType = ({
 		mutationFn: (event) => {
 			event.preventDefault();
 
-			return fetch(`${process.env.NEXT_PUBLIC_BACKEND_PATH}/auth/register`, {
-				method: 'POST',
-				headers: { 'Content-type': 'application/json' },
-				body: JSON.stringify(formValues)
-			})
+			return fetch(
+				`${process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH}/auth/register`,
+				{
+					method: 'POST',
+					headers: { 'Content-type': 'application/json' },
+					body: JSON.stringify(formValues)
+				}
+			)
 				.then((response) => response.json())
 				.then((result) => {
 					if ('success' in result && !result.success)
@@ -297,11 +300,14 @@ const LoginType = ({
 		mutationFn: (event) => {
 			event.preventDefault();
 
-			return fetch(`${process.env.NEXT_PUBLIC_BACKEND_PATH}/auth/login`, {
-				method: 'POST',
-				headers: { 'Content-type': 'application/json' },
-				body: JSON.stringify(formValues)
-			})
+			return fetch(
+				`${process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH}/auth/login`,
+				{
+					method: 'POST',
+					headers: { 'Content-type': 'application/json' },
+					body: JSON.stringify(formValues)
+				}
+			)
 				.then((response) => response.json())
 				.then((result) => {
 					if ('success' in result && !result.success)

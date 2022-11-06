@@ -68,12 +68,15 @@ export const useGetUserData = ({
 				})
 			);
 
-			return fetch(`${process.env.NEXT_PUBLIC_BACKEND_PATH}/auth/check-token`, {
-				headers: {
-					'Content-type': 'application/json',
-					accesstoken: accessToken
+			return fetch(
+				`${process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH}/auth/check-token`,
+				{
+					headers: {
+						'Content-type': 'application/json',
+						accesstoken: accessToken
+					}
 				}
-			})
+			)
 				.then((response) => response.json())
 				.then((result) => ({
 					data: result.user,
@@ -130,12 +133,15 @@ export const useLogoutUser = ({
 				})
 			);
 
-			return fetch(`${process.env.NEXT_PUBLIC_BACKEND_PATH}/auth/logout`, {
-				headers: {
-					'Content-type': 'application/json',
-					accesstoken: accessToken
+			return fetch(
+				`${process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH}/auth/logout`,
+				{
+					headers: {
+						'Content-type': 'application/json',
+						accesstoken: accessToken
+					}
 				}
-			}).then((response) => response.json());
+			).then((response) => response.json());
 		},
 		{
 			enabled,

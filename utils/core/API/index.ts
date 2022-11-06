@@ -1,9 +1,13 @@
 import { IProduct } from 'types';
 
+const getAppApiPath = () =>
+	typeof window === 'undefined'
+		? // !!!
+		  process.env.NEXT_PUBLIC_BACKEND_ABSOLUTE_PATH
+		: process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH;
+
 export const getAllProducts = async () => {
-	const productsResponse = await fetch(
-		`${process.env.NEXT_PUBLIC_BACKEND_PATH}/products`
-	);
+	const productsResponse = await fetch(`${getAppApiPath()}/products`);
 
 	const productsResult: {
 		products: IProduct[];
@@ -13,7 +17,7 @@ export const getAllProducts = async () => {
 };
 export const getProductById = async (id: string) => {
 	const productResponse = await fetch(
-		`${process.env.NEXT_PUBLIC_BACKEND_PATH}/products/product/?id=${id}`
+		`${getAppApiPath()}/products/product/?id=${id}`
 	);
 
 	const productResult: {
