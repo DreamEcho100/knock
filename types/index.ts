@@ -180,7 +180,7 @@ interface IProductImage {
 		first: number;
 	};
 }
-interface IProduct {
+export interface IProduct {
 	id: string;
 	availableForSale: boolean;
 	createdAt: string;

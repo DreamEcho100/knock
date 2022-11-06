@@ -10,6 +10,7 @@ import DefaultLayout from '@components/layouts/Default';
 
 import '@styles/globals.css';
 import '@styles/swiper.css';
+import { SharedCustomerStateProvider } from 'context/Customer';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const [queryClient] = useState(
@@ -34,9 +35,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<Hydrate state={pageProps.dehydratedState}>
-				<DefaultLayout>
-					<Component {...pageProps} />
-				</DefaultLayout>
+				<SharedCustomerStateProvider>
+					<DefaultLayout>
+						<Component {...pageProps} />
+					</DefaultLayout>
+				</SharedCustomerStateProvider>
 			</Hydrate>
 		</QueryClientProvider>
 	);
