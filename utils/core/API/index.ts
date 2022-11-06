@@ -14,11 +14,11 @@ export const getAllProducts = async () => {
 	console.log('---------------------');
 	const productsResponse = await fetch(`${getAppApiPath()}/products`);
 
+	console.log('productsResponse', productsResponse);
+
 	const productsResult: {
 		products: IProduct[];
 	} = await productsResponse.json();
-
-	console.log('productsResult', productsResult);
 
 	return productsResult.products;
 };
