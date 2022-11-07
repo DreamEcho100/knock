@@ -20,13 +20,13 @@ const DigitalProductsSection = ({ products }: { products: IProduct[] }) => {
 			>
 				{products.map((item) => (
 					<ProductCardWithDetails
-						price={0}
 						key={item.id}
 						link={{
 							children: item.title,
 							href: `/products/${getIdFromGid(item.id)}`
 						}}
 						{...item}
+						price={item.variants[0].price.amount}
 						toAddToCart
 						productData={item}
 						intent='bottomCorners'

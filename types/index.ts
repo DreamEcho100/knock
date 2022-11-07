@@ -347,3 +347,67 @@ export interface IGenericErrorResponse {
 	success: false;
 	message: string;
 }
+
+export interface ICheckoutIdAndKey {
+	checkoutId: string;
+	checkoutKey: string;
+}
+export interface ICheckout {
+	id: string;
+	ready: false;
+	requiresShipping: false;
+	note: null;
+	paymentDue: {
+		amount: string;
+		currencyCode: string;
+	};
+	paymentDueV2: {
+		amount: string;
+		currencyCode: string;
+	};
+	webUrl: string;
+	orderStatusUrl: null;
+	taxExempt: false;
+	taxesIncluded: false;
+	currencyCode: string;
+	totalTax: {
+		amount: string;
+		currencyCode: string;
+	};
+	totalTaxV2: {
+		amount: string;
+		currencyCode: string;
+	};
+	lineItemsSubtotalPrice: {
+		amount: string;
+		currencyCode: string;
+	};
+	subtotalPrice: {
+		amount: string;
+		currencyCode: string;
+	};
+	subtotalPriceV2: {
+		amount: string;
+		currencyCode: string;
+	};
+	totalPrice: {
+		amount: string;
+		currencyCode: string;
+	};
+	totalPriceV2: {
+		amount: string;
+		currencyCode: string;
+	};
+	completedAt: null;
+	createdAt: string;
+	updatedAt: string;
+	email: null;
+	discountApplications: [];
+	appliedGiftCards: [];
+	shippingAddress: null;
+	shippingLine: null;
+	customAttributes: [];
+	order: null;
+	lineItems: [];
+	userErrors: [];
+}

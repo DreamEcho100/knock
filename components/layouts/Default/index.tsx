@@ -2,14 +2,13 @@ import type { ReactNode } from 'react';
 
 import Image from 'next/image';
 import { FaInstagram, FaFacebook, FaTwitter, FaYoutube } from 'react-icons/fa';
-import { useEffect, useId } from 'react';
+import { useId } from 'react';
 import Link from 'next/link';
 import Button from '@components/shared/core/Button';
 import Logo from '@components/shared/core/Logo';
 import MainHeader from './MainHeader';
 import { useGetAccessToken, useGetUserData } from '@utils/core/hooks';
-import { customerGlobalActions } from '@context/Customer/actions';
-import { useSharedCustomerState } from '@context/Customer';
+import { useQuery } from '@tanstack/react-query';
 
 export const commonClasses =
 	'leading-relaxed sm:text-[1.2rem] text-primary-2 mx-auto';

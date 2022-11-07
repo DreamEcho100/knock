@@ -1,8 +1,21 @@
+import { useSharedCustomerState } from '@context/Customer';
 import { useQueryClient, useQuery } from '@tanstack/react-query';
 import { getCookie, removeCookie } from '@utils/common/storage/cookie/document';
-import { useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { useEffect } from 'react';
-import { IGenericErrorResponse, IUserSession } from 'types';
+import type {
+	ICheckout,
+	ICheckoutIdAndKey,
+	IGenericErrorResponse,
+	IUserSession
+} from 'types';
+import { checkoutApi } from './API';
+import type {
+	TCreateOneCheckoutReturnType,
+	TGetOneCheckoutReturnType
+} from './API';
+import { getUserCheckoutIdAndKeyFromCookie } from './cookie';
+import { getIdFromGid } from './shopify';
 
 // const userAccessToken = getCookie<IAccessToken>('user-access-token')
 
@@ -88,7 +101,7 @@ export const useGetUserData = ({
 		{
 			enabled,
 			onError: (error) => {
-				removeCookie('user-access-token');
+				// removeCookie('user-access-token');
 
 				queryClient.setQueriesData<IUserSession | undefined>(
 					['check-token'],
@@ -106,22 +119,50 @@ export const useGetUserData = ({
 	return query;
 };
 
+export const useGetUserCheckoutIdAndKeyCookie = () => {
+	const { user } = useGetUserDataFromStore();
+
+	return useMemo(() => getUserCheckoutIdAndKeyFromCookie(user?.data?.id), [
+		user?.data?.id
+	]);
+};
+
 export const useLogoutUser = ({
 	enabled,
 	onError,
-	onSuccess
+	onSuccess,
+	userCheckoutDetailsAndIdAndKey
 }: {
 	enabled: boolean;
 	onError?: () => void;
 	onSuccess?: () => void;
+	userCheckoutDetailsAndIdAndKey: ReturnType<
+		typeof useGetUserCheckoutDetailsAndIdAndKey
+	>;
 }) => {
+	const { user } = useGetUserDataFromStore();
+	const [
+		{
+			cart: { productsData }
+		}
+	] = useSharedCustomerState();
+
 	const queryClient = useQueryClient();
 	const accessToken = useGetAccessToken();
 
-	return useQuery<IUserSession, IGenericErrorResponse>(
+	return useQuery<
+		IUserSession & {
+			userCheckoutDetailsAndIdAndKey: NonNullable<
+				typeof userCheckoutDetailsAndIdAndKey
+			>;
+			userGId: string;
+		},
+		IGenericErrorResponse
+	>(
 		['logout'],
 		() => {
-			if (!accessToken) throw new Error('Access token is required');
+			if (!user?.data?.id)
+				if (!accessToken) throw new Error('Access token is required');
 
 			queryClient.setQueriesData<IUserSession | undefined>(
 				['check-token'],
@@ -141,11 +182,17 @@ export const useLogoutUser = ({
 						accesstoken: accessToken
 					}
 				}
-			).then((response) => response.json());
+			)
+				.then((response) => response.json())
+				.then((result) => ({
+					...result,
+					userCheckoutDetailsAndIdAndKey,
+					userGId: user?.data?.id
+				}));
 		},
 		{
 			enabled,
-			onSuccess: () => {
+			onSuccess: ({ userCheckoutDetailsAndIdAndKey, userGId }) => {
 				removeCookie('user-access-token');
 
 				queryClient.setQueriesData<IUserSession | undefined>(
@@ -157,6 +204,14 @@ export const useLogoutUser = ({
 						error: undefined
 					})
 				);
+
+				// uetUserCheckoutDetailsAndIdAndKey(user?.data?.id);
+
+				checkoutApi.deleteOne(
+					userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId,
+					productsData.map((product) => product.id)
+				);
+				removeCookie(`user-${getIdFromGid(userGId)}-checkoutIdAndKey`);
 
 				if (onSuccess) onSuccess();
 			},
@@ -181,4 +236,37 @@ export const useGetAccessToken = () => {
 	const accessTokenStr = getCookie<string>('user-access-token');
 
 	return accessTokenStr ? JSON.parse(accessTokenStr).accessToken : '';
+};
+
+export const useGetUserCheckoutDetailsAndIdAndKey = () => {
+	const { user } = useGetUserDataFromStore();
+	const queryClient = useQueryClient();
+
+	return useMemo(() => {
+		const createOneCheckout = queryClient.getQueryData<
+			TCreateOneCheckoutReturnType
+		>(['create-one-checkout', user?.data?.id]);
+		const getOneCheckout = queryClient.getQueryData<TGetOneCheckoutReturnType>([
+			'get-one-checkout',
+			user?.data?.id
+		]);
+
+		if (createOneCheckout?.checkout && createOneCheckout?.checkoutIdAndKey) {
+			return {
+				checkoutIdAndKey: createOneCheckout?.checkoutIdAndKey,
+				checkout: createOneCheckout?.checkout
+			};
+		} else if (getOneCheckout?.checkout) {
+			const checkoutIdAndKeyFromCookie = getUserCheckoutIdAndKeyFromCookie(
+				user?.data?.id
+			);
+
+			if (checkoutIdAndKeyFromCookie) {
+				return {
+					checkoutIdAndKey: checkoutIdAndKeyFromCookie,
+					checkout: getOneCheckout?.checkout
+				};
+			}
+		}
+	}, [queryClient, user?.data?.id]);
 };

@@ -1,4 +1,4 @@
-import { IProduct } from 'types';
+import { ICheckout, ICheckoutIdAndKey, IProduct } from 'types';
 
 const getAppApiPath = () =>
 	typeof window === 'undefined'
@@ -29,10 +29,74 @@ export const getProductById = async (id: string) => {
 	return productResult.product;
 };
 
+export const createOneCheckout = async () => {
+	const response = await fetch(`${getAppApiPath()}/checkouts/create`);
+
+	const result: {
+		checkoutIdAndKey: ICheckoutIdAndKey;
+		checkout: ICheckout;
+	} = await response.json();
+
+	return {
+		checkoutIdAndKey: result.checkoutIdAndKey,
+		checkout: result.checkout
+	};
+};
+
+export const deleteOneCheckout = async (
+	checkoutId: string,
+	lineItemIdsToRemove: string[]
+) => {
+	return await fetch(`${getAppApiPath()}/checkouts/delete-one`, {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(
+			{
+				checkoutId,
+				lineItemIdsToRemove
+			}
+			// productsData.map((product) => product.id)
+		)
+	});
+};
+
+export const getOneCheckout = async (
+	checkoutId: string,
+	checkoutKey: string
+) => {
+	const response = await fetch(
+		`${getAppApiPath()}/checkouts/get-one/?checkoutId=${checkoutId}&checkoutKey=${checkoutKey}`
+	);
+
+	const result: {
+		checkout: ICheckout;
+	} = await response.json();
+
+	return {
+		checkout: result.checkout
+	};
+};
+
+export const checkoutApi = {
+	createOne: createOneCheckout,
+	deleteOne: deleteOneCheckout,
+	getOne: getOneCheckout
+};
+
 const appApi = {
-	get: {
-		allProducts: getAllProducts
+	checkout: checkoutApi,
+	Products: {
+		getAll: getAllProducts
 	}
 };
 
 export default appApi;
+
+export type TCreateOneCheckoutReturnType = Awaited<
+	ReturnType<typeof createOneCheckout>
+>;
+export type TGetOneCheckoutReturnType = Awaited<
+	ReturnType<typeof getOneCheckout>
+>;

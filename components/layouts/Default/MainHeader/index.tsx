@@ -3,7 +3,15 @@ import Button from '@components/shared/core/Button';
 import Logo from '@components/shared/core/Logo';
 import { useSharedCustomerState } from '@context/Customer';
 import { customerGlobalActions } from '@context/Customer/actions';
-import { useGetUserDataFromStore, useLogoutUser } from '@utils/core/hooks';
+import { useQuery } from '@tanstack/react-query';
+import { setCookie } from '@utils/common/storage/cookie/document';
+import { checkoutApi } from '@utils/core/API';
+import {
+	useGetUserCheckoutDetailsAndIdAndKey,
+	useGetUserCheckoutIdAndKeyCookie,
+	useGetUserDataFromStore,
+	useLogoutUser
+} from '@utils/core/hooks';
 import { getIdFromGid } from '@utils/core/shopify';
 import { cx } from 'class-variance-authority';
 import Link from 'next/link';
@@ -23,24 +31,99 @@ const linkClasses = ({
 	keepCase?: boolean;
 } = {}) => `border-b border-transparent outline-none
 duration-150 transition-all
-keepCase ? '' : 'uppercase'}
-
+${keepCase ? '' : 'uppercase'}
 	isActive
 		? 'text-bg-secondary-1 focus:border-b-bg-secondary-1'
 		: 'text-primary-2 focus:border-b-text-primary-1 hover:text-primary-1'
 }`;
 
+const headerLinks = [
+	{ href: '/knock-plugin', text: 'knock' },
+	{ href: '/knock_clipper', text: 'KNOCK Clipper', keepCase: true },
+	{ href: '/drums-that-knock', text: 'drums that knock' },
+	{ href: '/faqs', text: 'FAQs', keepCase: true },
+	{ href: '/contact-us', text: 'contact' }
+];
+
 const MainHeader = () => {
 	const [{ cart }, customerDispatch] = useSharedCustomerState();
 	const { user } = useGetUserDataFromStore();
 	const router = useRouter();
+
 	const [isLoggingOut, setIsLoggingOut] = useState(false);
+	const [isRegisterDialogOpen, setIsRegisterDialogOpen] = useState(false);
+	const [isSmallScreenNaveOpen, setIsSmallScreenNaveOpen] = useState(false);
+	const [isCheckoutFound, setIsCheckoutFound] = useState(false);
+
+	const userCheckoutIdAndKeyFromCookie = useGetUserCheckoutIdAndKeyCookie();
+
+	const createCheckout = useQuery(
+		['create-one-checkout', user?.data?.id],
+		() => {
+			return checkoutApi.createOne();
+		},
+		{
+			enabled:
+				!!user?.data?.id && !userCheckoutIdAndKeyFromCookie && !isCheckoutFound,
+			onSuccess: (result) => {
+				if (!user?.data?.id) throw new Error('User id does not exist');
+
+				setCookie(
+					`user-${getIdFromGid(user.data.id)}-checkoutIdAndKey`,
+					JSON.stringify({
+						checkoutId: result.checkoutIdAndKey.checkoutId,
+						checkoutKey: result.checkoutIdAndKey.checkoutKey
+					}),
+					{
+						expires: new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000)
+					}
+				);
+				setIsCheckoutFound(true);
+			}
+		}
+	);
+
+	const getCheckout = useQuery(
+		['get-one-checkout', user?.data?.id],
+		() => {
+			if (!userCheckoutIdAndKeyFromCookie)
+				throw new Error('Missing check out id and key from cookie');
+
+			return checkoutApi.getOne(
+				userCheckoutIdAndKeyFromCookie.checkoutId,
+				userCheckoutIdAndKeyFromCookie.checkoutKey
+			);
+		},
+		{
+			enabled:
+				!!user?.data?.id &&
+				!!userCheckoutIdAndKeyFromCookie &&
+				!isCheckoutFound,
+			onSuccess: (result) => {
+				if (!user?.data?.id) throw new Error('User id does not exist');
+
+				// setCookie(
+				// 	`user-${getIdFromGid(user.data.id)}-checkoutIdAndKey`,
+				// 	JSON.stringify({
+				// 		checkoutId: result.checkoutIdAndKey.checkoutId,
+				// 		checkoutKey: result.checkoutIdAndKey.checkoutKey
+				// 	}),
+				// 	{
+				// 		expires: new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000)
+				// 	}
+				// );
+				setIsCheckoutFound(true);
+			}
+		}
+	);
+	const userCheckoutDetailsAndIdAndKey = useGetUserCheckoutDetailsAndIdAndKey();
+
 	const logoutUser = useLogoutUser({
 		enabled: !!isLoggingOut,
 		onSuccess: () => setIsLoggingOut(false),
-		onError: () => setIsLoggingOut(false)
+		onError: () => setIsLoggingOut(false),
+		userCheckoutDetailsAndIdAndKey
 	});
-
 	const cartProductsCount = useMemo(
 		() =>
 			cart.productsData.reduce(
@@ -50,17 +133,6 @@ const MainHeader = () => {
 			),
 		[cart.productsData]
 	);
-
-	const [isRegisterDialogOpen, setIsRegisterDialogOpen] = useState(false);
-	const [isSmallScreenNaveOpen, setIsSmallScreenNaveOpen] = useState(false);
-
-	const headerLinks = [
-		{ href: '/knock-plugin', text: 'knock' },
-		{ href: '/knock_clipper', text: 'KNOCK Clipper', keepCase: true },
-		{ href: '/drums-that-knock', text: 'drums that knock' },
-		{ href: '/faqs', text: 'FAQs', keepCase: true },
-		{ href: '/contact-us', text: 'contact' }
-	];
 
 	useEffect(() => {
 		// What I am doing here? I shoud move this logic to another place
@@ -83,9 +155,14 @@ const MainHeader = () => {
 			);
 		}
 	}, [customerDispatch]);
+
 	useEffect(() => {
 		setTimeout(() => localStorage.setItem('cart', JSON.stringify(cart)), 0);
 	}, [cart]);
+
+	useEffect(() => {
+		if (!user?.data?.id) setIsCheckoutFound(false);
+	}, [user?.data?.id]);
 
 	return (
 		<header
