@@ -332,20 +332,51 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	);
 
-	if (!response.data.data.customerRecover){
-		throw new Error('')
-	  }
-	  if (response.data.data.customerRecover.customerUserErrors[0].code === "UNIDENTIFIED_CUSTOMER") {
-		throw new Error(response.data.data.customerRecover.customerUserErrors[0].message)
-	  }
-	
-	
-	
-	  return res.status(200).json({
-		success:true,
-		message:"Recovery email sent successfully"
-	  })
+	if (!response.data.data.customerRecover) {
+		throw new Error('');
+	}
+	if (
+		response.data.data.customerRecover.customerUserErrors[0].code ===
+		'UNIDENTIFIED_CUSTOMER'
+	) {
+		throw new Error(
+			response.data.data.customerRecover.customerUserErrors[0].message
+		);
+	}
 
+	return res.status(200).json({
+		success: true,
+		message: 'Recovery email sent successfully'
+	});
+};
+
+const updateOneController = async (
+	req: NextApiRequest & { params: Record<string, any> },
+	res: NextApiResponse
+) => {
+	return res.status(200).json({
+		success: true,
+		message: `Successful Update for user with id: ${req.params.clientId}`
+	});
+};
+
+const getAllOrdersForOneClientByIdController = async (
+	req: NextApiRequest & { params: Record<string, any> },
+	res: NextApiResponse
+) => {
+	return res.status(200).json({
+		success: true,
+		message: `Successful Request for user with id: ${req.params.clientId}`
+	});
+};
+const getOneOrderForOneClientByIdController = async (
+	req: NextApiRequest & { params: Record<string, any> },
+	res: NextApiResponse
+) => {
+	return res.status(200).json({
+		success: true,
+		message: `Successful Request for user with id: ${req.params.clientId} and order with id: ${req.params.orderId}`
+	});
 };
 
 const clientsController = {
@@ -355,6 +386,13 @@ const clientsController = {
 		default: defaultAddress,
 		editOne: editAddress
 	},
+	one: {
+		orders: {
+			getOne: getOneOrderForOneClientByIdController,
+			getAll: getAllOrdersForOneClientByIdController
+		}
+	},
+	updateOne: updateOneController,
 	recoverPassword
 };
 

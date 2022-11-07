@@ -42,6 +42,7 @@ const nextConnect = (
 		onError,
 		onNoMatch
 	}
-) => nc<TReq, NextApiResponse>(options);
+) => nc(options);
+// <TReq, NextApiResponse>
 
 export default nextConnect;
