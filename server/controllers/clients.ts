@@ -355,8 +355,12 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const updateOneController = async (req: NextApiRequest & { params: Record<string, any> },res: NextApiResponse) => {
 
-	const customerAccessToken = req.params.clientAccessToken
+	const customerAccessToken = req.headers.clientaccesstoken
 	let {acceptsMarketing , email , phone , password , firstName , lastName } = req.body
+
+
+	console.log(customerAccessToken);
+	
 
 	const customer = gql`
 	mutation customerUpdate($customer: CustomerUpdateInput!, $customerAccessToken: String!) {
@@ -398,9 +402,6 @@ const updateOneController = async (req: NextApiRequest & { params: Record<string
 		throw new Error('Please enter a valid email')
 	  }
 	  
-	  if (password.length < 8) {
-		throw new Error('Please enter a password must be greater than 8 characters')
-	  }
 
 	  if (typeof acceptsMarketing === "string" ) {
 
@@ -426,7 +427,7 @@ const updateOneController = async (req: NextApiRequest & { params: Record<string
 					email,
 					firstName,
 					lastName,
-					password,
+					password: password.length < 8 ? '' : password ,
 					phone
 				  },
 				  customerAccessToken
@@ -469,7 +470,7 @@ const getAllOrdersForOneClientByIdController = async (
 	res: NextApiResponse
 ) => {
 
-	const accessToken = req.params.clientAccessToken;
+	const accessToken = req.headers.clientaccesstoken;
     const select = req.query.select
 
 
@@ -592,7 +593,8 @@ const getOneOrderForOneClientByIdController = async (
 	res: NextApiResponse
 ) => {
 
-	const {clientAccessToken , orderId} = req.params;
+	const {orderId} = req.params;
+	const clientAccessToken = req.headers.clientaccesstoken
     const {select , orderKey} = req.query
 
 
