@@ -1,12 +1,12 @@
 import { useSharedCustomerState } from '@context/Customer';
-import { useQueryClient, useQuery } from '@tanstack/react-query';
+import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 import { getCookie, removeCookie } from '@utils/common/storage/cookie/document';
 import { useMemo, useRef } from 'react';
 import { useEffect } from 'react';
 import type {
-	ICheckout,
-	ICheckoutIdAndKey,
 	IGenericErrorResponse,
+	ILineItem,
+	IProduct,
 	IUserSession
 } from 'types';
 import { checkoutApi } from './API';
@@ -16,6 +16,9 @@ import type {
 } from './API';
 import { getUserCheckoutIdAndKeyFromCookie } from './cookie';
 import { getIdFromGid } from './shopify';
+import { convertProductToCartItem } from './products';
+import { customerGlobalActions } from '@context/Customer/actions';
+import { ICartProduct } from '@context/Customer/ts';
 
 // const userAccessToken = getCookie<IAccessToken>('user-access-token')
 
@@ -241,16 +244,15 @@ export const useGetAccessToken = () => {
 export const useGetUserCheckoutDetailsAndIdAndKey = () => {
 	const { user } = useGetUserDataFromStore();
 	const queryClient = useQueryClient();
+	const createOneCheckout = queryClient.getQueryData<
+		TCreateOneCheckoutReturnType
+	>(['create-one-checkout', user?.data?.id]);
+	const getOneCheckout = queryClient.getQueryData<TGetOneCheckoutReturnType>([
+		'get-one-checkout',
+		user?.data?.id
+	]);
 
 	return useMemo(() => {
-		const createOneCheckout = queryClient.getQueryData<
-			TCreateOneCheckoutReturnType
-		>(['create-one-checkout', user?.data?.id]);
-		const getOneCheckout = queryClient.getQueryData<TGetOneCheckoutReturnType>([
-			'get-one-checkout',
-			user?.data?.id
-		]);
-
 		if (createOneCheckout?.checkout && createOneCheckout?.checkoutIdAndKey) {
 			return {
 				checkoutIdAndKey: createOneCheckout?.checkoutIdAndKey,
@@ -268,5 +270,152 @@ export const useGetUserCheckoutDetailsAndIdAndKey = () => {
 				};
 			}
 		}
-	}, [queryClient, user?.data?.id]);
+	}, [
+		createOneCheckout?.checkout,
+		createOneCheckout?.checkoutIdAndKey,
+		getOneCheckout?.checkout,
+		user?.data?.id
+	]);
+};
+
+export const useAddProductsToCheckoutAndCart = () => {
+	const [, customerDispatch] = useSharedCustomerState();
+	const getUserCheckoutDetailsAndIdAndKey = useGetUserCheckoutDetailsAndIdAndKey();
+
+	return useMutation<
+		{ products: (IProduct & { quantity: number })[]; result: ILineItem[] },
+		IGenericErrorResponse,
+		{ products: (IProduct & { quantity: number })[] }
+	>({
+		mutationFn: async ({ products }) => {
+			if (!getUserCheckoutDetailsAndIdAndKey?.checkoutIdAndKey?.checkoutId)
+				throw new Error('Missing checkout details');
+
+			if (
+				!Array.isArray(products) ||
+				products.length === 0 ||
+				products.some(
+					(product) =>
+						!product ||
+						typeof product !== 'object' ||
+						!product.quantity ||
+						!product.variants[0] ||
+						!product.variants[0]?.id
+				)
+			)
+				throw new Error(
+					'The passed product must be an object with quantity and variants information available in the products list'
+				);
+
+			return {
+				products,
+				result: await checkoutApi.products.addMany(
+					// getUserCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId,
+					`gid://shopify/Checkout/${getUserCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId}?key=${getUserCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutKey}`,
+					products.map((product) => ({
+						quantity: product.quantity,
+						variantId: product.variants[0].id
+					}))
+				)
+			};
+		},
+		onSuccess: ({ products, result }) => {
+			customerGlobalActions.cart.set(customerDispatch, {
+				cartObj: {
+					productsData: result.map((item) =>
+						convertProductToCartItem({ product: item })
+					),
+					updatedAt: new Date()
+				}
+			});
+		}
+	});
+};
+export const useUpdateProductsToCheckoutAndCart = () => {
+	const [, customerDispatch] = useSharedCustomerState();
+	const getUserCheckoutDetailsAndIdAndKey = useGetUserCheckoutDetailsAndIdAndKey();
+
+	return useMutation<
+		{ products: (ICartProduct & { quantity: number })[]; result: ILineItem[] },
+		IGenericErrorResponse,
+		{ products: (ICartProduct & { quantity: number })[] }
+	>({
+		mutationFn: async ({ products }) => {
+			if (!getUserCheckoutDetailsAndIdAndKey?.checkoutIdAndKey?.checkoutId)
+				throw new Error('Missing checkout details');
+
+			if (
+				!Array.isArray(products) ||
+				products.length === 0 ||
+				products.some(
+					(product) =>
+						!product ||
+						typeof product !== 'object' ||
+						!product.quantity ||
+						!product.variant?.id
+				)
+			)
+				throw new Error(
+					'The passed product must be an object with quantity and variants information available in the products list'
+				);
+
+			return {
+				products,
+				result: await checkoutApi.products.updateMany(
+					`gid://shopify/Checkout/${getUserCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId}?key=${getUserCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutKey}`,
+					products.map((product) => ({
+						quantity: product.quantity,
+						id: product.id
+					}))
+				)
+			};
+		},
+		onSuccess: ({ products, result }) => {
+			customerGlobalActions.cart.set(customerDispatch, {
+				cartObj: {
+					productsData: result.map((item) =>
+						convertProductToCartItem({ product: item })
+					),
+					updatedAt: new Date()
+				}
+			});
+		}
+	});
+};
+export const useRemoveProductsToCheckoutAndCart = () => {
+	const [, customerDispatch] = useSharedCustomerState();
+	const getUserCheckoutDetailsAndIdAndKey = useGetUserCheckoutDetailsAndIdAndKey();
+
+	return useMutation<
+		{ productsIds: string[]; result: ILineItem[] },
+		IGenericErrorResponse,
+		{ productsIds: string[] }
+	>({
+		mutationFn: async ({ productsIds }) => {
+			if (!getUserCheckoutDetailsAndIdAndKey?.checkoutIdAndKey?.checkoutId)
+				throw new Error('Missing checkout details');
+
+			if (
+				!Array.isArray(productsIds) ||
+				productsIds.length === 0 ||
+				productsIds.some((product) => typeof product !== 'string')
+			)
+				throw new Error('The passed productsIds must be an array of strings');
+
+			return {
+				productsIds,
+				result: await checkoutApi.products.removeMany(
+					`gid://shopify/Checkout/${getUserCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId}?key=${getUserCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutKey}`,
+					productsIds
+				)
+			};
+		},
+		onSuccess: ({ productsIds, result }) => {
+			productsIds.forEach((productId) =>
+				customerGlobalActions.cart.deleteOneProduct(customerDispatch, {
+					productId
+				})
+			);
+		}
+	});
 };

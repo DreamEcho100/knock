@@ -28,6 +28,15 @@ export const reducer = (
 
 		case ECustomerContextConsts.SET_CART: {
 			const { cartObj } = action.payload;
+
+			return {
+				...state,
+				cart: {
+					...state.cart,
+					...cartObj
+				}
+			};
+
 			if (cartObj && typeof cartObj === 'object') {
 				if (
 					Array.isArray(cartObj.productsData) &&

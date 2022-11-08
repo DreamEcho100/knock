@@ -46,8 +46,8 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 	);
 
 	if (!response.data.data.customerAccessTokenCreate.customerAccessToken) {
-		res.statusCode = 404
-		throw new Error('Please check your email and password')
+		res.statusCode = 404;
+		throw new Error('Please check your email and password');
 	}
 
 	return res.status(200).json({
@@ -96,7 +96,10 @@ const activate = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	);
 
-	if (response.data.data.customerActivate.customerUserErrors[0].code ==='ALREADY_ENABLED') {
+	if (
+		response.data.data.customerActivate.customerUserErrors[0].code ===
+		'ALREADY_ENABLED'
+	) {
 		throw new Error(
 			response.data.data.customerActivate.customerUserErrors[0].message
 		);
@@ -230,6 +233,8 @@ const checkToken = async (req: NextApiRequest, res: NextApiResponse) => {
 			}
 		);
 
+		console.log('user.data', user.data);
+		console.log('user.data.data', user.data.data);
 		if (!user.data.data.customer) {
 			throw new Error('Customer not found');
 		}

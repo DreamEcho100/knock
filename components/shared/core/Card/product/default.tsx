@@ -4,10 +4,7 @@ import Link from 'next/link';
 import { cardClasses } from 'utils/core/cva';
 import type { VariantProps } from 'class-variance-authority';
 import { IProduct } from 'types';
-import { useSharedCustomerState } from '@context/Customer';
-import { customerGlobalActions } from '@context/Customer/actions';
-import { ICartProduct } from '@context/Customer/ts';
-import { convertProductToCartItem } from '@utils/core/products';
+import { useAddProductsToCheckoutAndCart } from '@utils/core/hooks';
 
 interface IProductCardProps
 	extends VariantProps<typeof cardClasses>,
@@ -19,7 +16,6 @@ interface IProductCardProps
 
 interface ExtraProductCardDetails {
 	price: number;
-	priceAfterDiscount?: number;
 	toAddToCart: boolean;
 	productData: IProduct;
 }
@@ -68,17 +64,18 @@ export default ProductBasicCard;
 const ExtraProductCardDetails = ({
 	price,
 	productData,
-	toAddToCart,
-	priceAfterDiscount
+	toAddToCart
 }: ExtraProductCardDetails) => {
-	const [, customerDispatch] = useSharedCustomerState();
+	const addProductsToCheckoutAndCart = useAddProductsToCheckoutAndCart();
 
 	return (
 		<>
-			{priceAfterDiscount ? (
+			{productData.variants[0] &&
+			productData.variants[0].compareAtPrice?.amount ? (
 				<p>
-					<del>${price}</del>&nbsp;&nbsp;
-					<span className='text-bg-secondary-2'>${priceAfterDiscount}</span>
+					<del>${productData.variants[0].compareAtPrice.amount}</del>
+					&nbsp;&nbsp;
+					<span className='text-bg-secondary-2'>${price}</span>
 				</p>
 			) : (
 				<p>${price}</p>
@@ -87,8 +84,8 @@ const ExtraProductCardDetails = ({
 				<Button
 					className='capitalize'
 					onClick={() =>
-						customerGlobalActions.cart.addOneProduct(customerDispatch, {
-							newProduct: convertProductToCartItem({ product: productData })
+						addProductsToCheckoutAndCart.mutate({
+							products: [{ ...productData, quantity: 1 }]
 						})
 					}
 				>
@@ -106,8 +103,7 @@ export const ProductCardWithDetails = ({
 	//
 	price,
 	productData,
-	toAddToCart,
-	priceAfterDiscount
+	toAddToCart
 }: Omit<IProductCardProps, 'extraDetailsElement'> &
 	ExtraProductCardDetails) => {
 	return (
@@ -120,7 +116,6 @@ export const ProductCardWithDetails = ({
 					price={price}
 					productData={productData}
 					toAddToCart={toAddToCart}
-					priceAfterDiscount={priceAfterDiscount}
 				/>
 			}
 		></ProductBasicCard>

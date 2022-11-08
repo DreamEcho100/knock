@@ -1,13 +1,13 @@
 import type { ICartProduct } from '@context/Customer/ts';
 
-import type { IProduct } from 'types';
+import type { ILineItem } from 'types';
 
 export const convertProductToCartItem = ({
 	product,
 	preferredImage,
 	selectedAmount
 }: {
-	product: IProduct;
+	product: ILineItem;
 	preferredImage?: ICartProduct['preferredImage'];
 	selectedAmount?: ICartProduct['selectedAmount'];
 }) => {
@@ -15,13 +15,20 @@ export const convertProductToCartItem = ({
 		...product,
 		preferredImage: preferredImage
 			? preferredImage
-			: product.images && product.images[0]
+			: product.variant.image
 			? {
-					src: product.images[0].src,
-					alt: product.images[0].altText || ''
+					src: product.variant.image.src,
+					alt: product.variant.image.altText || ''
 			  }
 			: null,
-		price: product.variants[0].price.amount,
-		selectedAmount: selectedAmount ? selectedAmount : 1
+		price:
+			typeof product.variant.price.amount === 'string'
+				? parseFloat(product.variant.price.amount)
+				: product.variant.price.amount,
+		selectedAmount: product.quantity
+			? product.quantity
+			: selectedAmount
+			? selectedAmount
+			: 1
 	};
 };

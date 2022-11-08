@@ -5,9 +5,11 @@ import Image from 'next/image';
 import { customerGlobalActions } from '@context/Customer/actions';
 import { convertProductToCartItem } from '@utils/core/products';
 import { useSharedCustomerState } from '@context/Customer';
+import { useAddProductsToCheckoutAndCart } from '@utils/core/hooks';
 
 const HeroSection = ({ product }: IProductByIdPageProps) => {
 	const [, customerDispatch] = useSharedCustomerState();
+	const addProductsToCheckoutAndCart = useAddProductsToCheckoutAndCart();
 
 	return (
 		<section className='bg-primary-1 overflow-x-hidden md:overflow-x-visible'>
@@ -70,8 +72,8 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 							<Button
 								className='capitalize mt-2'
 								onClick={() =>
-									customerGlobalActions.cart.addOneProduct(customerDispatch, {
-										newProduct: convertProductToCartItem({ product })
+									addProductsToCheckoutAndCart.mutate({
+										products: [{ ...product, quantity: 1 }]
 									})
 								}
 							>

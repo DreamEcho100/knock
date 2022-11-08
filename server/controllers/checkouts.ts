@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 const Client = require('shopify-buy');
 
-
 export const createCheckout = async (
 	req: NextApiRequest,
 	res: NextApiResponse
@@ -78,7 +77,6 @@ export const addItemToCheckout = async (
 ) => {
 	const { checkoutId, lineItemsToAdd } = req.body;
 
-
 	const client = Client.buildClient({
 		domain: process.env.DOMAINE,
 		storefrontAccessToken: process.env.SHOPIFY_STOREFRONT_API_TOKEN
@@ -97,7 +95,6 @@ export const updateItemInCheckout = async (
 	res: NextApiResponse
 ) => {
 	const { checkoutId, lineItemsToUpdate } = req.body;
-
 
 	const client = Client.buildClient({
 		domain: process.env.DOMAINE,
@@ -120,7 +117,6 @@ export const removeItemInCheckout = async (
 	res: NextApiResponse
 ) => {
 	const { checkoutId, lineItemIdsToRemove } = req.body;
-
 
 	const client = Client.buildClient({
 		domain: process.env.DOMAINE,

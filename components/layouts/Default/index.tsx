@@ -8,7 +8,6 @@ import Button from '@components/shared/core/Button';
 import Logo from '@components/shared/core/Logo';
 import MainHeader from './MainHeader';
 import { useGetAccessToken, useGetUserData } from '@utils/core/hooks';
-import { useQuery } from '@tanstack/react-query';
 
 export const commonClasses =
 	'leading-relaxed sm:text-[1.2rem] text-primary-2 mx-auto';

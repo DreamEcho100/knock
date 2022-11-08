@@ -26,7 +26,11 @@ const DigitalProductsSection = ({ products }: { products: IProduct[] }) => {
 							href: `/products/${getIdFromGid(item.id)}`
 						}}
 						{...item}
-						price={item.variants[0].price.amount}
+						price={
+							typeof item.variants[0].price.amount === 'string'
+								? parseFloat(item.variants[0].price.amount)
+								: item.variants[0].price.amount
+						}
 						toAddToCart
 						productData={item}
 						intent='bottomCorners'

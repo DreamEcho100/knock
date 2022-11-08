@@ -10,8 +10,11 @@ import {
 	useGetUserCheckoutDetailsAndIdAndKey,
 	useGetUserCheckoutIdAndKeyCookie,
 	useGetUserDataFromStore,
-	useLogoutUser
+	useLogoutUser,
+	useRemoveProductsToCheckoutAndCart,
+	useUpdateProductsToCheckoutAndCart
 } from '@utils/core/hooks';
+import { convertProductToCartItem } from '@utils/core/products';
 import { getIdFromGid } from '@utils/core/shopify';
 import { cx } from 'class-variance-authority';
 import Link from 'next/link';
@@ -135,30 +138,32 @@ const MainHeader = () => {
 	);
 
 	useEffect(() => {
-		// What I am doing here? I shoud move this logic to another place
-		const lsCartString = localStorage.getItem('cart');
-		if (!lsCartString) return;
-		try {
-			const lsCartObj = JSON.parse(lsCartString);
+		if (!userCheckoutDetailsAndIdAndKey) return;
 
-			customerGlobalActions.cart.set(customerDispatch, {
-				cartObj: lsCartObj
-			});
-		} catch (error) {
-			if (error instanceof Error) console.error(error.message);
-			localStorage.setItem(
-				'cart',
-				JSON.stringify({
-					productsData: [],
-					updatedAt: null
-				})
-			);
-		}
-	}, [customerDispatch]);
+		if (cart.productsData.length !== 0 || cart.updatedAt) return;
 
-	useEffect(() => {
-		setTimeout(() => localStorage.setItem('cart', JSON.stringify(cart)), 0);
-	}, [cart]);
+		const { checkout } = userCheckoutDetailsAndIdAndKey;
+
+		if (checkout.lineItems.length === 0) return;
+
+		customerGlobalActions.cart.set(customerDispatch, {
+			cartObj: {
+				productsData: checkout.lineItems.map((item) =>
+					convertProductToCartItem({ product: item })
+				),
+				updatedAt: new Date()
+			}
+		});
+	}, [
+		cart.productsData.length,
+		cart.updatedAt,
+		customerDispatch,
+		userCheckoutDetailsAndIdAndKey
+	]);
+
+	// useEffect(() => {
+	// 	setTimeout(() => localStorage.setItem('cart', JSON.stringify(cart)), 0);
+	// }, [cart]);
 
 	useEffect(() => {
 		if (!user?.data?.id) setIsCheckoutFound(false);
@@ -320,6 +325,14 @@ const CartContainer = () => {
 		},
 		customerDispatch
 	] = useSharedCustomerState();
+	const userCheckoutDetailsAndIdAndKey = useGetUserCheckoutDetailsAndIdAndKey();
+
+	const removeProductsToCheckoutAndCart = useRemoveProductsToCheckoutAndCart();
+	const updateProductsToCheckoutAndCart = useUpdateProductsToCheckoutAndCart();
+
+	const disableAllButtons =
+		removeProductsToCheckoutAndCart.isLoading ||
+		updateProductsToCheckoutAndCart.isLoading;
 
 	const productsTotalPrice = useMemo(
 		() =>
@@ -392,45 +405,40 @@ const CartContainer = () => {
 											<button
 												className='px-3'
 												title='decrease the amount by 1'
+												disabled={disableAllButtons}
 												onClick={() => {
-													if (product.selectedAmount - 1 === 0)
-														return customerGlobalActions.cart.deleteOneProduct(
-															customerDispatch,
-															{
-																productId: product.id
-															}
-														);
+													if (product.quantity - 1 === 0)
+														return removeProductsToCheckoutAndCart.mutate({
+															productsIds: [product.id]
+														});
 
-													customerGlobalActions.cart.updateOneProduct(
-														customerDispatch,
-														{
-															productNewData: {
-																...product,
-																selectedAmount: product.selectedAmount - 1
-															},
-															productId: product.id
-														}
-													);
+													updateProductsToCheckoutAndCart.mutate({
+														products: [
+															{
+																...(product as any),
+																quantity: product.quantity - 1
+															}
+														]
+													});
 												}}
 											>
 												-
 											</button>
-											<p>{product.selectedAmount}</p>
+											<p>{product.quantity}</p>
 											<button
 												className='px-3'
 												title='increase the amount by 1'
-												onClick={() => {
-													customerGlobalActions.cart.updateOneProduct(
-														customerDispatch,
-														{
-															productNewData: {
-																...product,
-																selectedAmount: product.selectedAmount + 1
-															},
-															productId: product.id
-														}
-													);
-												}}
+												disabled={disableAllButtons}
+												onClick={() =>
+													updateProductsToCheckoutAndCart.mutate({
+														products: [
+															{
+																...(product as any),
+																quantity: product.quantity + 1
+															}
+														]
+													})
+												}
 											>
 												+
 											</button>
@@ -441,14 +449,12 @@ const CartContainer = () => {
 												'w-fit py-1 text-primary-3 hover:text-primary-2 focus:text-primary-1',
 												'transition-all duration-150'
 											)}
-											onClick={() => {
-												customerGlobalActions.cart.deleteOneProduct(
-													customerDispatch,
-													{
-														productId: product.id
-													}
-												);
-											}}
+											disabled={disableAllButtons}
+											onClick={() =>
+												removeProductsToCheckoutAndCart.mutate({
+													productsIds: [product.id]
+												})
+											}
 										>
 											remove
 										</button>
@@ -466,10 +472,12 @@ const CartContainer = () => {
 					</header>
 					<div className=''>
 						<Button
-							{...(productsData.length === 0 || !user?.data?.id
+							{...(productsData.length === 0 ||
+							!user?.data?.id ||
+							!userCheckoutDetailsAndIdAndKey?.checkout?.webUrl
 								? ''
-								: { href: '/checkout' })}
-							disabled={productsData.length === 0}
+								: { href: userCheckoutDetailsAndIdAndKey.checkout.webUrl })}
+							disabled={productsData.length === 0 || disableAllButtons}
 							classesIntent={{ w: 'full', display: 'flex-xy-center' }}
 						>
 							{productsData.length === 0

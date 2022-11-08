@@ -1,4 +1,21 @@
-import { ICheckout, ICheckoutIdAndKey, IProduct } from 'types';
+import type { ICheckout, ICheckoutIdAndKey, ILineItem, IProduct } from 'types';
+
+const throwIfResponseError = async (response: Response) => {
+	if (!response.ok) {
+		let errorMessage: string;
+		const text = await response.text();
+
+		errorMessage = text;
+
+		throw new Error(`Error, ${response.statusText}, ${errorMessage}`);
+	}
+};
+
+// const tryCatch = async <T>(func: T) => {
+// 	try {
+// 		if (typeof func === 'function') func();
+// 	} catch (error) {}
+// };
 
 const getAppApiPath = () =>
 	typeof window === 'undefined'
@@ -9,45 +26,47 @@ const getAppApiPath = () =>
 		: process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH;
 
 export const getAllProducts = async () => {
-	const productsResponse = await fetch(`${getAppApiPath()}/products`);
+	const response = await fetch(`${getAppApiPath()}/products`);
 
 	const productsResult: {
 		products: IProduct[];
-	} = await productsResponse.json();
+	} = await response.json();
+
+	await throwIfResponseError(response);
 
 	return productsResult.products;
 };
 export const getProductById = async (id: string) => {
-	const productResponse = await fetch(
-		`${getAppApiPath()}/products/product/?id=${id}`
-	);
+	const response = await fetch(`${getAppApiPath()}/products/product/?id=${id}`);
+
+	await throwIfResponseError(response);
 
 	const productResult: {
 		product: IProduct;
-	} = await productResponse.json();
+	} = await response.json();
 
 	return productResult.product;
 };
-
 export const createOneCheckout = async () => {
-	const response = await fetch(`${getAppApiPath()}/checkouts/create`);
+	const response = await fetch(`${getAppApiPath()}/checkouts/create-one`);
 
 	const result: {
 		checkoutIdAndKey: ICheckoutIdAndKey;
 		checkout: ICheckout;
 	} = await response.json();
 
+	await throwIfResponseError(response);
+
 	return {
 		checkoutIdAndKey: result.checkoutIdAndKey,
 		checkout: result.checkout
 	};
 };
-
 export const deleteOneCheckout = async (
 	checkoutId: string,
 	lineItemIdsToRemove: string[]
 ) => {
-	return await fetch(`${getAppApiPath()}/checkouts/delete-one`, {
+	const response = await fetch(`${getAppApiPath()}/checkouts/delete-one`, {
 		method: 'DELETE',
 		headers: {
 			'Content-Type': 'application/json'
@@ -60,8 +79,13 @@ export const deleteOneCheckout = async (
 			// productsData.map((product) => product.id)
 		)
 	});
-};
 
+	await throwIfResponseError(response);
+
+	const result = await response.json();
+
+	return result();
+};
 export const getOneCheckout = async (
 	checkoutId: string,
 	checkoutKey: string
@@ -69,6 +93,8 @@ export const getOneCheckout = async (
 	const response = await fetch(
 		`${getAppApiPath()}/checkouts/get-one/?checkoutId=${checkoutId}&checkoutKey=${checkoutKey}`
 	);
+
+	await throwIfResponseError(response);
 
 	const result: {
 		checkout: ICheckout;
@@ -78,11 +104,88 @@ export const getOneCheckout = async (
 		checkout: result.checkout
 	};
 };
+export const addManyProductsToCheckout = async (
+	checkoutId: string,
+	lineItemsToAdd: {
+		variantId: string; //'gid://shopify/ProductVariant/41485788053727';
+		quantity: number;
+	}[]
+) => {
+	const response = await fetch(`${getAppApiPath()}/checkouts/products`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ checkoutId, lineItemsToAdd })
+	});
+
+	await throwIfResponseError(response);
+
+	const result: {
+		item: {
+			lineItems: ILineItem[];
+		};
+	} = await response.json();
+
+	return result.item.lineItems;
+};
+export const updateManyProductsToCheckout = async (
+	checkoutId: string,
+	lineItemsToUpdate: {
+		id: string; //'gid://shopify/ProductVariant/41485788053727';
+		quantity: number;
+	}[]
+) => {
+	const response = await fetch(`${getAppApiPath()}/checkouts/products`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ checkoutId, lineItemsToUpdate })
+	});
+
+	await throwIfResponseError(response);
+
+	const result: {
+		item: {
+			lineItems: ILineItem[];
+		};
+	} = await response.json();
+
+	return result.item.lineItems;
+};
+export const removeManyProductsToCheckout = async (
+	checkoutId: string,
+	lineItemIdsToRemove: string[]
+) => {
+	const response = await fetch(`${getAppApiPath()}/checkouts/products`, {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ checkoutId, lineItemIdsToRemove })
+	});
+
+	await throwIfResponseError(response);
+
+	const result: {
+		item: {
+			lineItems: ILineItem[];
+		};
+	} = await response.json();
+
+	return result.item.lineItems;
+};
 
 export const checkoutApi = {
 	createOne: createOneCheckout,
 	deleteOne: deleteOneCheckout,
-	getOne: getOneCheckout
+	getOne: getOneCheckout,
+	products: {
+		addMany: addManyProductsToCheckout,
+		removeMany: removeManyProductsToCheckout,
+		updateMany: updateManyProductsToCheckout
+	}
 };
 
 const appApi = {

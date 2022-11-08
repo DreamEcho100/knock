@@ -1,4 +1,4 @@
-import type { IProduct } from 'types';
+import type { ILineItem, IProduct } from 'types';
 
 import type { Dispatch } from 'react';
 
@@ -6,7 +6,7 @@ import { ECustomerContextConsts } from './constants';
 
 export type TInitialStateScreenSize = number;
 
-export interface ICartProduct extends IProduct {
+export interface ICartProduct extends ILineItem {
 	// countInStock: number;
 	preferredImage: { alt: string | null; src: string } | null;
 	selectedAmount: number;
@@ -16,6 +16,9 @@ export interface ICartProduct extends IProduct {
 	addedOnCartAt: Date;
 	updatedOnCartAt?: Date;
 }
+
+// {
+// }
 
 interface ICart {
 	productsData: ICartProduct[];
