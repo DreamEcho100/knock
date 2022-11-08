@@ -5,6 +5,9 @@ import axios from 'axios';
 import gql from 'graphql-tag';
 
 import { print } from 'graphql';
+import API_URL from './apiUrl';
+import validator from 'validator';
+
 
 const deleteAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 	const data = req.body;
@@ -25,7 +28,7 @@ const deleteAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 	const response = await axios.post(
-		'https://pluginsthatknock.com/api/2022-10/graphql.json',
+		API_URL,
 		{
 			query: print(customer),
 			variables: {
@@ -111,7 +114,7 @@ const addAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 	const response = await axios.post(
-		'https://pluginsthatknock.com/api/2022-10/graphql.json',
+		API_URL,
 		{
 			query: print(customer),
 			variables: {
@@ -182,7 +185,7 @@ const defaultAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 	`;
 
 	const response = await axios.post(
-		'https://pluginsthatknock.com/api/2022-10/graphql.json',
+		API_URL,
 		{
 			query: print(customer),
 			variables: {
@@ -252,7 +255,7 @@ const editAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 	`;
 
 	const response = await axios.post(
-		'https://pluginsthatknock.com/api/2022-10/graphql.json',
+		API_URL,
 		{
 			query: print(customer),
 			variables: {
@@ -316,7 +319,7 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 	const response = await axios.post(
-		'https://pluginsthatknock.com/api/2022-10/graphql.json',
+		API_URL,
 		{
 			query: print(customer),
 			variables: {
@@ -350,33 +353,365 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 	});
 };
 
-const updateOneController = async (
-	req: NextApiRequest & { params: Record<string, any> },
-	res: NextApiResponse
-) => {
+const updateOneController = async (req: NextApiRequest & { params: Record<string, any> },res: NextApiResponse) => {
+
+	const customerAccessToken = req.params.clientAccessToken
+	let {acceptsMarketing , email , phone , password , firstName , lastName } = req.body
+
+	const customer = gql`
+	mutation customerUpdate($customer: CustomerUpdateInput!, $customerAccessToken: String!) {
+		customerUpdate(customer: $customer, customerAccessToken: $customerAccessToken) {
+		  customer {
+			id
+			acceptsMarketing
+			defaultAddress {
+				address1
+				address2
+				city
+				company
+				country
+				firstName
+				lastName
+				province
+				zip
+			}
+			email
+			firstName
+			lastName
+			phone
+			updatedAt
+			createdAt
+		  }
+		  customerAccessToken {
+			accessToken
+			expiresAt
+		  }
+		  customerUserErrors {
+			code
+			field
+			message
+		  }
+		}
+	  }`;
+
+	  if (!validator.isEmail(email)) {
+		throw new Error('Please enter a valid email')
+	  }
+	  
+	  if (password.length < 8) {
+		throw new Error('Please enter a password must be greater than 8 characters')
+	  }
+
+	  if (typeof acceptsMarketing === "string" ) {
+
+		if (validator.isBoolean(acceptsMarketing)) {
+			if (acceptsMarketing === "true") {
+				acceptsMarketing = !!Boolean(acceptsMarketing)
+			}else{
+				acceptsMarketing = false
+			}
+		  } else{
+			throw new Error('acceptsMarketing this field must be a true or false')
+		  }
+	  }
+	  
+	  
+	  const response = await axios.post(
+		API_URL,
+		{
+			query: print(customer),
+			variables: {
+				customer: {
+					acceptsMarketing,
+					email,
+					firstName,
+					lastName,
+					password,
+					phone
+				  },
+				  customerAccessToken
+			}
+		},
+		{
+			headers: {
+				'Content-Type': 'application/json',
+				'X-Shopify-Storefront-Access-Token':
+					process.env.SHOPIFY_STOREFRONT_API_TOKEN
+			}
+		}
+	);
+
+	
+	if (response.data.errors) {
+		res.statusCode = 401
+		throw new Error(response.data.errors[0].message)
+	}
+
+	if (response.data.data.customerUpdate.customerUserErrors) {
+		response.data.data.customerUpdate.customerUserErrors.map((el:any) => {
+			res.statusCode = 401
+			throw new Error(el.message)
+		})
+	}
+
+
 	return res.status(200).json({
-		success: true,
-		message: `Successful Update for user with id: ${req.params.clientId}`
+			success: true,
+			message: `Successful Update for user with id: ${response.data.data.customerUpdate.customer.id}`,
+			client:response.data.data.customerUpdate.customer,
+			accessTokenDetails:response.data.data.customerUpdate.customerAccessToken
 	});
+	
 };
 
 const getAllOrdersForOneClientByIdController = async (
 	req: NextApiRequest & { params: Record<string, any> },
 	res: NextApiResponse
 ) => {
-	return res.status(200).json({
-		success: true,
-		message: `Successful Request for user with id: ${req.params.clientId}`
-	});
+
+	const accessToken = req.params.clientAccessToken;
+    const select = req.query.select
+
+
+	if (accessToken) {
+		const {data} = await axios.post(
+			API_URL,
+			{
+				query: `
+          query {
+          customer(customerAccessToken: ${JSON.stringify(accessToken)}) {
+            id
+            orders (first:${select || '250'})  {
+                edges{
+                    node{
+                        id
+                        name
+                        orderNumber
+                        originalTotalPrice {
+                            amount
+                            currencyCode
+                        }
+                        totalPrice{
+                            amount
+                            currencyCode
+                        }
+                        totalShippingPrice{
+                            amount
+                            currencyCode
+                        }
+                        totalTax{
+                            amount
+                            currencyCode
+                        }
+                        lineItems(first:${select || '250'}){
+                            edges{
+                                node{
+                                    title
+                                    currentQuantity
+                                    originalTotalPrice{
+                                        amount
+                                        currencyCode
+                                    }
+                                    discountedTotalPrice{
+                                        amount
+                                        currencyCode
+                                    }
+                                    variant{
+                                        id
+                                        availableForSale
+                                        barcode
+                                        price{
+                                            amount
+                                            currencyCode
+                                        }
+                                        compareAtPrice{
+                                            amount
+                                            currencyCode
+                                        }
+                                        image{
+                                            id
+                                            url
+                                            altText
+                                            height
+                                            width
+                                        }
+                                    }
+                                    quantity
+                                }
+                            }
+                        }
+                        phone
+                        processedAt
+                        cancelReason
+                        canceledAt
+                        currencyCode
+                        customerLocale
+                        customerUrl
+                        edited
+                        email
+                        financialStatus
+                    }
+					cursor
+                }
+				pageInfo {
+					endCursor
+					hasNextPage
+				  }
+            }
+          }
+        }
+         `
+			},
+			{
+				headers: {
+					'Content-Type': 'application/json',
+					'X-Shopify-Storefront-Access-Token':process.env.SHOPIFY_STOREFRONT_API_TOKEN
+				}
+			}
+		);
+
+		
+		const customer = data.data.customer
+		
+
+		if (!customer) {
+			res.statusCode = 404
+			throw new Error('Customer not found');
+		}
+
+		return res.status(200).json({
+			success: true,
+			message: `Successful Request for user with id: ${customer.id}`,
+			...customer
+		});
+    }
+
 };
 const getOneOrderForOneClientByIdController = async (
 	req: NextApiRequest & { params: Record<string, any> },
 	res: NextApiResponse
 ) => {
-	return res.status(200).json({
-		success: true,
-		message: `Successful Request for user with id: ${req.params.clientId} and order with id: ${req.params.orderId}`
-	});
+
+	const {clientAccessToken , orderId} = req.params;
+    const {select , orderKey} = req.query
+
+
+    const {data} = await axios.post(
+        API_URL,
+        {
+            query: `
+            query {
+                customer(customerAccessToken: ${JSON.stringify(clientAccessToken)}) {
+                  id
+                  orders (first:${select || '250'})  {
+                      edges{
+                          node{
+                              id
+                              name
+                              orderNumber
+                              originalTotalPrice {
+                                  amount
+                                  currencyCode
+                              }
+                              totalPrice{
+                                  amount
+                                  currencyCode
+                              }
+                              totalShippingPrice{
+                                  amount
+                                  currencyCode
+                              }
+                              totalTax{
+                                  amount
+                                  currencyCode
+                              }
+                              lineItems(first:${select || '250'}){
+                                  edges{
+                                      node{
+                                          title
+                                          currentQuantity
+                                          originalTotalPrice{
+                                              amount
+                                              currencyCode
+                                          }
+                                          discountedTotalPrice{
+                                              amount
+                                              currencyCode
+                                          }
+                                          variant{
+                                              id
+                                              availableForSale
+                                              barcode
+                                              price{
+                                                  amount
+                                                  currencyCode
+                                              }
+                                              compareAtPrice{
+                                                  amount
+                                                  currencyCode
+                                              }
+                                              image{
+                                                  id
+                                                  url
+                                                  altText
+                                                  height
+                                                  width
+                                              }
+                                          }
+                                          quantity
+                                      }
+                                  }
+                              }
+                              phone
+                              processedAt
+                              cancelReason
+                              canceledAt
+                              currencyCode
+                              customerLocale
+                              customerUrl
+                              edited
+                              email
+                              financialStatus
+                          }
+                      }
+                  }
+                }
+              }
+     `
+        },
+        {
+            headers: {
+                'Content-Type': 'application/json',
+				'X-Shopify-Storefront-Access-Token':process.env.SHOPIFY_STOREFRONT_API_TOKEN
+            }
+        }
+    );
+
+	const customer = data.data.customer
+	
+
+	
+
+    if (!customer) {
+        res.statusCode = 404
+        throw new Error('Customer not found')
+    }
+
+    const orders = customer.orders.edges
+    
+    const filterOrder = orders.filter((el:any)=> el.node.id === `gid://shopify/Order/${orderId}?key=${orderKey}`)
+
+    if (!filterOrder.length) {
+        res.statusCode = 404
+        throw new Error('Please check your orderId and orderKey')
+    }
+
+    return res.status(200).json({
+        success:true,
+		message: `Successful Request for user with id: ${clientAccessToken} and order with id: ${req.params.orderId}`,
+        order:filterOrder
+    })
+
 };
 
 const clientsController = {
