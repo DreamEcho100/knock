@@ -3,6 +3,7 @@ import validator from 'validator';
 import axios from 'axios';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
+import API_URL from './apiUrl';
 
 const login = async (req: NextApiRequest, res: NextApiResponse) => {
 	const data = req.body;
@@ -26,7 +27,7 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 	`;
 
 	const response = await axios.post(
-		'https://pluginsthatknock.com/api/2022-10/graphql.json',
+		API_URL,
 		{
 			query: print(customer),
 			variables: {
@@ -76,7 +77,7 @@ const activate = async (req: NextApiRequest, res: NextApiResponse) => {
 	`;
 
 	const response = await axios.post(
-		'https://pluginsthatknock.com/api/2022-10/graphql.json',
+		API_URL,
 		{
 			query: print(customer),
 			variables: {
@@ -113,7 +114,7 @@ const checkToken = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	if (accessToken) {
 		const user = await axios.post(
-			`https://pluginsthatknock.com/api/2022-10/graphql.json`,
+			API_URL,
 			{
 				query: `
           query {
@@ -261,7 +262,7 @@ const logout = async (req: NextApiRequest, res: NextApiResponse) => {
 	`;
 
 	const response = await axios.post(
-		'https://pluginsthatknock.com/api/2022-10/graphql.json',
+		API_URL,
 		{
 			query: print(deletedAccessToken),
 			variables: {
@@ -326,7 +327,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	if (data.password.length < 8) {
 		throw new Error(
-			'Please enter an password must be greater than 8 characters'
+			'Please enter a password must be greater than 8 characters'
 		);
 	}
 
@@ -335,7 +336,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
 	}
 
 	const response = await axios.post(
-		'https://pluginsthatknock.com/api/2022-10/graphql.json',
+		API_URL,
 		{
 			query: print(createCustomer),
 			variables: {
@@ -362,8 +363,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
 		);
 	}
 
-	if (
-		response.data.data.customerCreate?.customerUserErrors[0] &&
+	if (response.data.data.customerCreate?.customerUserErrors[0] &&
 		response.data.data.customerCreate?.customerUserErrors[0].code === 'TAKEN'
 	) {
 		throw new Error('Account already exists check your email for confirmation');
