@@ -4,7 +4,7 @@ import { getIdFromGid } from './shopify';
 
 export const getUserCheckoutIdAndKeyFromCookie = (gid?: string) => {
 	if (!gid) return null;
-	const str = getCookie(`user-${getIdFromGid(gid)}-checkoutIdAndKey`);
+	const str = getCookie('checkoutIdAndKey');
 
 	if (!str) return null;
 

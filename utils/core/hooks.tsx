@@ -214,7 +214,7 @@ export const useLogoutUser = ({
 					userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId,
 					productsData.map((product) => product.id)
 				);
-				removeCookie(`user-${getIdFromGid(userGId)}-checkoutIdAndKey`);
+				// removeCookie('checkoutIdAndKey');
 
 				if (onSuccess) onSuccess();
 			},

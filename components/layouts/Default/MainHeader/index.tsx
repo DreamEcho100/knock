@@ -66,13 +66,10 @@ const MainHeader = () => {
 			return checkoutApi.createOne();
 		},
 		{
-			enabled:
-				!!user?.data?.id && !userCheckoutIdAndKeyFromCookie && !isCheckoutFound,
+			enabled: !userCheckoutIdAndKeyFromCookie && !isCheckoutFound,
 			onSuccess: (result) => {
-				if (!user?.data?.id) throw new Error('User id does not exist');
-
 				setCookie(
-					`user-${getIdFromGid(user.data.id)}-checkoutIdAndKey`,
+					'checkoutIdAndKey',
 					JSON.stringify({
 						checkoutId: result.checkoutIdAndKey.checkoutId,
 						checkoutKey: result.checkoutIdAndKey.checkoutKey
@@ -98,23 +95,8 @@ const MainHeader = () => {
 			);
 		},
 		{
-			enabled:
-				!!user?.data?.id &&
-				!!userCheckoutIdAndKeyFromCookie &&
-				!isCheckoutFound,
+			enabled: !!userCheckoutIdAndKeyFromCookie && !isCheckoutFound,
 			onSuccess: (result) => {
-				if (!user?.data?.id) throw new Error('User id does not exist');
-
-				// setCookie(
-				// 	`user-${getIdFromGid(user.data.id)}-checkoutIdAndKey`,
-				// 	JSON.stringify({
-				// 		checkoutId: result.checkoutIdAndKey.checkoutId,
-				// 		checkoutKey: result.checkoutIdAndKey.checkoutKey
-				// 	}),
-				// 	{
-				// 		expires: new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000)
-				// 	}
-				// );
 				setIsCheckoutFound(true);
 			}
 		}
@@ -160,14 +142,6 @@ const MainHeader = () => {
 		customerDispatch,
 		userCheckoutDetailsAndIdAndKey
 	]);
-
-	// useEffect(() => {
-	// 	setTimeout(() => localStorage.setItem('cart', JSON.stringify(cart)), 0);
-	// }, [cart]);
-
-	useEffect(() => {
-		if (!user?.data?.id) setIsCheckoutFound(false);
-	}, [user?.data?.id]);
 
 	return (
 		<header
@@ -473,18 +447,13 @@ const CartContainer = () => {
 					<div className=''>
 						<Button
 							{...(productsData.length === 0 ||
-							!user?.data?.id ||
 							!userCheckoutDetailsAndIdAndKey?.checkout?.webUrl
 								? ''
 								: { href: userCheckoutDetailsAndIdAndKey.checkout.webUrl })}
 							disabled={productsData.length === 0 || disableAllButtons}
 							classesIntent={{ w: 'full', display: 'flex-xy-center' }}
 						>
-							{productsData.length === 0
-								? 'cart is empty'
-								: !user?.data?.id
-								? 'please login to proceed to checkout'
-								: 'checkout'}
+							{productsData.length === 0 ? 'cart is empty' : 'checkout'}
 						</Button>
 					</div>
 				</div>
