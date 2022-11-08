@@ -13,8 +13,6 @@ export const getOneProductById = async (id: string) => {
 		domain: process.env.DOMAINE,
 		storefrontAccessToken: process.env.SHOPIFY_STOREFRONT_API_TOKEN
 	});
-
-	console.log(isNaN(Number(id)));
 	
 
 	if (isNaN(Number(id))) {
