@@ -51,7 +51,9 @@ const CustomerProfileScreen = () => {
 	if (user?.isLoading)
 		return (
 			<section className='bg-primary-1 p-8 sm:p-16'>
-				<button onClick={() => setCounter((prev) => prev++)}>Loading...</button>
+				<button onClick={() => setCounter((prev) => prev++)}>
+					Loading...{counter}
+				</button>
 			</section>
 		);
 
