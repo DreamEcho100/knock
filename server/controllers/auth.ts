@@ -177,29 +177,33 @@ const checkToken = async (req: NextApiRequest, res: NextApiResponse) => {
                           currentQuantity
                           quantity
                           title
-                          variant{
+						  originalTotalPrice { 
+							amount
+							currencyCode
+						  }
+                          variant {
                             id
-                            image{
+                            image {
                               id
                               height
                               width
                               url
                               altText
                             }
-                            price{
+                            price {
                               amount
                               currencyCode
                             }
-                            product{
+                            product {
                               id
                               handle
                               title
                               totalInventory
                               availableForSale
                               description
-                              images{
-                                edges{
-                                  node{
+                              images(first:250){
+                                edges { 
+                                  node {
                                       id
                                       width
                                       height
