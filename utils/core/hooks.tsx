@@ -26,12 +26,6 @@ export const useGetUserDataFromStore = () => {
 	const queryClient = useQueryClient();
 
 	const user = queryClient.getQueryData<IUserSession>(['check-token']);
-	const [counter, setCounter] = useState(0);
-
-	useEffect(() => {
-		if (!user) return;
-		setCounter((prev) => prev++);
-	}, [user]);
 
 	return {
 		user,
@@ -204,7 +198,7 @@ export const useLogoutUser = ({
 		},
 		{
 			enabled,
-			onSuccess: ({ userCheckoutDetailsAndIdAndKey, userGId }) => {
+			onSuccess: async ({ userCheckoutDetailsAndIdAndKey, userGId }) => {
 				removeCookie('user-access-token');
 
 				queryClient.setQueriesData<IUserSession | undefined>(
@@ -226,7 +220,9 @@ export const useLogoutUser = ({
 					);
 				// removeCookie('checkoutIdAndKey');
 
-				if (onSuccess) onSuccess();
+				if (onSuccess) await onSuccess();
+
+				window.location.reload();
 			},
 			onError: (error) => {
 				queryClient.setQueriesData<IUserSession | undefined>(

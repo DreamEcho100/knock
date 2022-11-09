@@ -1,9 +1,6 @@
-'use client';
-import { useQueryClient } from '@tanstack/react-query';
-import { IUserSession } from 'types';
 import { useGetUserDataFromStore } from '@utils/core/hooks';
-import { getIdFromGid } from '@utils/core/shopify';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 // import {
 // } from './sections';
@@ -33,34 +30,21 @@ const TitleValue = ({
 );
 
 const CustomerProfileScreen = () => {
-	// const { getUser } = useGetUserDataFromStore();
-	// const user = getUser();
-
-	const queryClient = useQueryClient();
-	const user = queryClient.getQueryData<IUserSession>(['check-token']);
-
-	const [counter, setCounter] = useState(0);
+	const router = useRouter();
+	const { user } = useGetUserDataFromStore();
 
 	useEffect(() => {
-		if (!user) return;
-		setTimeout(() => setCounter((prev) => prev++), 3000);
-	}, [user]);
-
-	console.log('++++++user', user);
-	console.log('counter', counter);
-	if (user?.isLoading)
-		return (
-			<section className='bg-primary-1 p-8 sm:p-16'>
-				<button onClick={() => setCounter((prev) => prev++)}>
-					Loading...{counter}
-				</button>
-			</section>
-		);
+		if (!user?.data?.id) router.push('/'); //  && !user?.isLoading
+	}, [router, user]);
 
 	if (!user?.data)
 		return (
 			<section className='bg-primary-1 p-8 sm:p-16'>
-				<p>Please login first to view your data</p>
+				<p>
+					{user?.isLoading
+						? 'Loading...'
+						: 'Please login first to view your data'}
+				</p>
 			</section>
 		);
 
