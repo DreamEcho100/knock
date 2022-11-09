@@ -191,7 +191,8 @@ const MainHeader = () => {
 								/>
 							) : (
 								<Link
-									href={`/customers/${getIdFromGid(user.data.id)}`}
+									// href={`/customers/${getIdFromGid(user.data.id)}`}
+									href='/customer-profile'
 									title='profile'
 									className='flex items-center justify-center text-bg-secondary-1'
 								>
