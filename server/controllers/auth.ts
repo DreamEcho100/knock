@@ -1,8 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+
 import validator from 'validator';
+
 import axios from 'axios';
+
 import gql from 'graphql-tag';
+
 import { print } from 'graphql';
+
 import API_URL from './apiUrl';
 
 const login = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -116,7 +121,7 @@ const checkToken = async (req: NextApiRequest, res: NextApiResponse) => {
 	const accessToken = req.headers.accesstoken;
 
 	if (accessToken) {
-		const {data} = await axios.post(
+		const { data } = await axios.post(
 			API_URL,
 			{
 				query: `
@@ -237,7 +242,6 @@ const checkToken = async (req: NextApiRequest, res: NextApiResponse) => {
 				}
 			}
 		);
-
 
 		if (!data.data.customer) {
 			throw new Error('Customer not found');

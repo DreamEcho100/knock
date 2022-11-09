@@ -51,7 +51,7 @@ export interface IProduct {
 			currencyCode: string;
 		};
 		weight: 0;
-		available: true;
+		available: boolean;
 		sku: string;
 		compareAtPrice: {
 			amount: string;
@@ -82,8 +82,8 @@ export interface IProduct {
 			referenceUnit: null;
 			referenceValue: 0;
 		};
-		hasNextPage: false;
-		hasPreviousPage: false;
+		hasNextPage: boolean;
+		hasPreviousPage: boolean;
 		variableValues: {
 			first: 20;
 		};
@@ -165,17 +165,118 @@ export interface IRegisterSuccess {
 		id: string; // "gid://shopify/Customer/6439211991263"
 	};
 }
-export interface IUser {
-	id: string; // 'gid://shopify/Customer/6439111885023';
+interface IUser {
+	id: string;
 	firstName: string;
 	lastName: string;
 	acceptsMarketing: boolean;
 	email: string;
-	phone: string | null;
-	createdAt: string | Date;
-	defaultAddress: string | null;
+	phone: null;
+	createdAt: string;
+	defaultAddress: {
+		id: string;
+		address1: string;
+		address2: string;
+		city: string;
+		company: null;
+		country: string;
+		zip: string;
+		province: string;
+		phone: null;
+	};
+	addresses: {
+		edges: {
+			node: {
+				id: string;
+				address1: string;
+				address2: string;
+				city: string;
+				company: null;
+				country: string;
+				firstName: string;
+				lastName: string;
+				province: string;
+				zip: string;
+				phone: null;
+			};
+		}[];
+	};
 	orders: {
-		edges: [];
+		edges: {
+			node: {
+				id: string;
+				orderNumber: number;
+				email: string;
+				name: string;
+				phone: null;
+				totalPrice: {
+					amount: string;
+					currencyCode: string;
+				};
+				totalShippingPrice: {
+					amount: string;
+					currencyCode: string;
+				};
+				totalTax: {
+					amount: string;
+					currencyCode: string;
+				};
+				totalRefunded: {
+					amount: string;
+					currencyCode: string;
+				};
+				lineItems: {
+					edges: {
+						node: {
+							currentQuantity: number;
+							quantity: number;
+							title: string;
+							originalTotalPrice: {
+								amount: string;
+								currencyCode: string;
+							};
+							variant: {
+								id: string;
+								image: {
+									id: string;
+									height: number;
+									width: number;
+									url: string;
+									altText: null;
+								};
+								price: {
+									amount: string;
+									currencyCode: string;
+								};
+								product: {
+									id: string;
+									handle: string;
+									title: string;
+									totalInventory: number;
+									availableForSale: boolean;
+									description: string;
+									images: {
+										edges: {
+											node: {
+												id: string;
+												width: number;
+												height: number;
+												url: string;
+											};
+										}[];
+									};
+									updatedAt: string;
+									createdAt: string;
+								};
+								quantityAvailable: number;
+								title: string;
+							};
+						};
+					}[];
+				};
+				processedAt: string;
+			};
+		}[];
 	};
 }
 
@@ -198,8 +299,8 @@ export interface ICheckoutIdAndKey {
 }
 export interface ICheckout {
 	id: string;
-	ready: false;
-	requiresShipping: false;
+	ready: boolean;
+	requiresShipping: boolean;
 	note: null;
 	paymentDue: {
 		amount: string;
@@ -211,8 +312,8 @@ export interface ICheckout {
 	};
 	webUrl: string;
 	orderStatusUrl: null;
-	taxExempt: false;
-	taxesIncluded: false;
+	taxExempt: boolean;
+	taxesIncluded: boolean;
 	currencyCode: string;
 	totalTax: {
 		amount: string;

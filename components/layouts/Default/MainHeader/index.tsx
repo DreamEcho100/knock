@@ -62,9 +62,7 @@ const MainHeader = () => {
 
 	const createCheckout = useQuery(
 		['create-one-checkout', user?.data?.id],
-		() => {
-			return checkoutApi.createOne();
-		},
+		() => checkoutApi.createOne(),
 		{
 			enabled: !userCheckoutIdAndKeyFromCookie && !isCheckoutFound,
 			onSuccess: (result) => {
@@ -192,12 +190,13 @@ const MainHeader = () => {
 									setIsOpen={setIsRegisterDialogOpen}
 								/>
 							) : (
-								<button
-									title='cart'
-									className='flex items-center justify-center'
+								<Link
+									href={`/customers/${getIdFromGid(user.data.id)}`}
+									title='profile'
+									className='flex items-center justify-center text-bg-secondary-1'
 								>
 									<BsFillPersonFill />
-								</button>
+								</Link>
 							)}
 						</li>
 						<li>

@@ -8,6 +8,7 @@ import Button from '@components/shared/core/Button';
 import { IGenericErrorResponse, ILoginSuccess, IRegisterSuccess } from 'types';
 import { setCookie } from '@utils/common/storage/cookie/document';
 import { useGetUserData, useGetUserDataFromStore } from '@utils/core/hooks';
+import { BsFillPersonFill } from 'react-icons/bs';
 
 interface IProps {
 	isOpen: boolean;
@@ -46,11 +47,11 @@ const UserRegisterButton = ({ isOpen, setIsOpen }: IProps) => {
 	return (
 		<>
 			<button
-				title='profile'
+				title='login/register'
 				className='flex items-center justify-center'
 				onClick={() => setIsOpen(true)}
 			>
-				login
+				<BsFillPersonFill />
 			</button>
 			{type === 'register' ? (
 				<RegisterType

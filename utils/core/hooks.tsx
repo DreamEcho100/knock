@@ -1,7 +1,7 @@
 import { useSharedCustomerState } from '@context/Customer';
 import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 import { getCookie, removeCookie } from '@utils/common/storage/cookie/document';
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useEffect } from 'react';
 import type {
 	IGenericErrorResponse,
@@ -26,8 +26,17 @@ export const useGetUserDataFromStore = () => {
 	const queryClient = useQueryClient();
 
 	const user = queryClient.getQueryData<IUserSession>(['check-token']);
+	const [counter, setCounter] = useState(0);
 
-	return { user: user };
+	useEffect(() => {
+		if (!user) return;
+		setCounter((prev) => prev++);
+	}, [user]);
+
+	return {
+		user,
+		getUser: () => queryClient.getQueryData<IUserSession>(['check-token'])
+	};
 };
 
 export const useGetUserData = ({
@@ -210,10 +219,11 @@ export const useLogoutUser = ({
 
 				// uetUserCheckoutDetailsAndIdAndKey(user?.data?.id);
 
-				checkoutApi.deleteOne(
-					userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId,
-					productsData.map((product) => product.id)
-				);
+				if (userCheckoutDetailsAndIdAndKey)
+					checkoutApi.deleteOne(
+						userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId,
+						productsData.map((product) => product.id)
+					);
 				// removeCookie('checkoutIdAndKey');
 
 				if (onSuccess) onSuccess();
@@ -288,6 +298,10 @@ export const useAddProductsToCheckoutAndCart = () => {
 		{ products: (IProduct & { quantity: number })[] }
 	>({
 		mutationFn: async ({ products }) => {
+			console.log(
+				'getUserCheckoutDetailsAndIdAndKey',
+				getUserCheckoutDetailsAndIdAndKey
+			);
 			if (!getUserCheckoutDetailsAndIdAndKey?.checkoutIdAndKey?.checkoutId)
 				throw new Error('Missing checkout details');
 
