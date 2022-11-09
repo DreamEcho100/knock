@@ -3,6 +3,7 @@ import validator from 'validator';
 import axios from 'axios';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
+import API_URL from './apiUrl';
 
 const login = async (req: NextApiRequest, res: NextApiResponse) => {
 	const data = req.body;
@@ -26,7 +27,7 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 	`;
 
 	const response = await axios.post(
-		'https://pluginsthatknock.com/api/2022-10/graphql.json',
+		API_URL,
 		{
 			query: print(customer),
 			variables: {
@@ -76,7 +77,7 @@ const activate = async (req: NextApiRequest, res: NextApiResponse) => {
 	`;
 
 	const response = await axios.post(
-		'https://pluginsthatknock.com/api/2022-10/graphql.json',
+		API_URL,
 		{
 			query: print(customer),
 			variables: {
@@ -115,8 +116,8 @@ const checkToken = async (req: NextApiRequest, res: NextApiResponse) => {
 	const accessToken = req.headers.accesstoken;
 
 	if (accessToken) {
-		const user = await axios.post(
-			`https://pluginsthatknock.com/api/2022-10/graphql.json`,
+		const {data} = await axios.post(
+			API_URL,
 			{
 				query: `
           query {
@@ -129,7 +130,7 @@ const checkToken = async (req: NextApiRequest, res: NextApiResponse) => {
             phone
             createdAt
             defaultAddress {id address1 address2  city company country zip province phone}
-            addresses(first:50) {
+            addresses(first:250) {
                edges{
                  node{
                    id
@@ -170,35 +171,39 @@ const checkToken = async (req: NextApiRequest, res: NextApiResponse) => {
                     amount
                     currencyCode
                   }
-                  lineItems{
+                  lineItems(first:250){
                       edges{
                         node{
                           currentQuantity
                           quantity
                           title
-                          variant{
+						  originalTotalPrice { 
+							amount
+							currencyCode
+						  }
+                          variant {
                             id
-                            image{
+                            image {
                               id
                               height
                               width
                               url
                               altText
                             }
-                            price{
+                            price {
                               amount
                               currencyCode
                             }
-                            product{
+                            product {
                               id
                               handle
                               title
                               totalInventory
                               availableForSale
                               description
-                              images{
-                                edges{
-                                  node{
+                              images(first:250){
+                                edges { 
+                                  node {
                                       id
                                       width
                                       height
@@ -233,16 +238,15 @@ const checkToken = async (req: NextApiRequest, res: NextApiResponse) => {
 			}
 		);
 
-		console.log('user.data', user.data);
-		console.log('user.data.data', user.data.data);
-		if (!user.data.data.customer) {
+
+		if (!data.data.customer) {
 			throw new Error('Customer not found');
 		}
 
 		return res.status(200).json({
 			success: true,
 			message: '',
-			user: user.data.data.customer
+			user: data.data.customer
 		});
 	} else {
 		throw new Error();
@@ -266,7 +270,7 @@ const logout = async (req: NextApiRequest, res: NextApiResponse) => {
 	`;
 
 	const response = await axios.post(
-		'https://pluginsthatknock.com/api/2022-10/graphql.json',
+		API_URL,
 		{
 			query: print(deletedAccessToken),
 			variables: {
@@ -340,7 +344,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
 	}
 
 	const response = await axios.post(
-		'https://pluginsthatknock.com/api/2022-10/graphql.json',
+		API_URL,
 		{
 			query: print(createCustomer),
 			variables: {
