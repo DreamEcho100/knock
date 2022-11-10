@@ -3,6 +3,7 @@ import type { IProductByIdPageProps } from '@pages/products/[productId]';
 import MdToHTMLFormatter from '@components/shared/common/Format/MdToHTML';
 
 import classes from '@styles/content.module.css';
+import Description from '@components/shared/core/Description';
 
 const DescriptionSection = ({
 	description
@@ -10,12 +11,11 @@ const DescriptionSection = ({
 	description: IProductByIdPageProps['product']['description'];
 }) => {
 	return (
-		<section className='bg-primary-1 overflow-x-hidden'>
-			<div
-				className={`${classes.contentContainerElements} ${classes.contentContainerV2} flex flex-col gap-8 text-center leading-10 px-8 py-16 md:px-16`}
-			>
-				<MdToHTMLFormatter content={description} />
-			</div>
+		<section
+			className='bg-primary-1 p-8 
+				sm:py-20'
+		>
+			<Description>{description}</Description>
 		</section>
 	);
 };
