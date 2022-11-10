@@ -20,13 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 					queries: {
 						refetchIntervalInBackground: false,
 						refetchOnWindowFocus: false,
-						refetchInterval: 5 * 60 * 1000,
-						initialData: {
-							isLoading: true,
-							isFetching: true,
-							data: undefined,
-							error: undefined
-						}
+						refetchInterval: 5 * 60 * 1000
 					}
 				}
 			})

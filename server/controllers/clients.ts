@@ -359,7 +359,6 @@ const updateOneController = async (req: NextApiRequest & { params: Record<string
 	let {acceptsMarketing , email , phone , password , firstName , lastName } = req.body
 
 
-	console.log(customerAccessToken);
 	
 
 	const customer = gql`

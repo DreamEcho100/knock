@@ -212,7 +212,10 @@ const MainHeader = () => {
 								}
 							>
 								<span
-									className={cx('relative', cartProductsCount === 0 ? '' : '')}
+									className={cx(
+										'relative pointer-events-none',
+										cartProductsCount === 0 ? '' : ''
+									)}
 								>
 									<HiShoppingBag
 										className={cx(
@@ -242,7 +245,7 @@ const MainHeader = () => {
 									title='cart'
 									className='flex items-center justify-center disabled:bg-slate-400'
 									onClick={() => setIsLoggingOut(true)}
-									disabled={logoutUser.isLoading}
+									disabled={logoutUser.isLoading && isLoggingOut}
 								>
 									logout
 								</button>
@@ -291,7 +294,6 @@ const MainHeader = () => {
 export default MainHeader;
 
 const CartContainer = () => {
-	const { user } = useGetUserDataFromStore();
 	const [
 		{
 			isVisible: { sideCart: isCartVisible },

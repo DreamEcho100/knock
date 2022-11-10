@@ -165,7 +165,7 @@ export interface IRegisterSuccess {
 		id: string; // "gid://shopify/Customer/6439211991263"
 	};
 }
-interface IUser {
+export interface IUser {
 	id: string;
 	firstName: string;
 	lastName: string;
@@ -278,14 +278,6 @@ interface IUser {
 			};
 		}[];
 	};
-}
-
-export interface IUserSession {
-	data?: IUser;
-	isLoading: boolean;
-	isFetching: boolean;
-
-	error?: IGenericErrorResponse;
 }
 
 export interface IGenericErrorResponse {

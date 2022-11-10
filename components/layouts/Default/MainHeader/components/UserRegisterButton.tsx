@@ -1,3 +1,8 @@
+import type {
+	IGenericErrorResponse,
+	ILoginSuccess,
+	IRegisterSuccess
+} from 'types';
 import type { Dispatch, FormEvent, SetStateAction } from 'react';
 
 import { useState } from 'react';
@@ -5,9 +10,8 @@ import Dialog from '@components/shared/common/Dialog';
 import { cx } from 'class-variance-authority';
 import { useMutation } from '@tanstack/react-query';
 import Button from '@components/shared/core/Button';
-import { IGenericErrorResponse, ILoginSuccess, IRegisterSuccess } from 'types';
 import { setCookie } from '@utils/common/storage/cookie/document';
-import { useGetUserData, useGetUserDataFromStore } from '@utils/core/hooks';
+import { useGetUserData } from '@utils/core/hooks';
 import { BsFillPersonFill } from 'react-icons/bs';
 
 interface IProps {
@@ -336,7 +340,7 @@ const LoginType = ({
 	});
 
 	useGetUserData({
-		enabled: loginMutation.isSuccess,
+		enabled: loginMutation.isSuccess && !!loginMutation.data?.user?.accessToken,
 		accessToken: loginMutation.data?.user?.accessToken
 	});
 

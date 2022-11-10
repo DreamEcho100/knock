@@ -7,7 +7,7 @@ import Link from 'next/link';
 import Button from '@components/shared/core/Button';
 import Logo from '@components/shared/core/Logo';
 import MainHeader from './MainHeader';
-import { useGetAccessToken, useGetUserData } from '@utils/core/hooks';
+import { getGetAccessTokenFromCookie, useGetUserData } from '@utils/core/hooks';
 
 export const commonClasses =
 	'leading-relaxed sm:text-[1.2rem] text-primary-2 mx-auto';
@@ -173,7 +173,7 @@ const Footer = () => {
 };
 
 const DefaultLayout = ({ children }: { children: ReactNode }) => {
-	const accessToken = useGetAccessToken();
+	const accessToken = getGetAccessTokenFromCookie();
 
 	useGetUserData({
 		enabled: !!accessToken,

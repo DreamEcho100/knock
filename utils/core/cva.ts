@@ -28,10 +28,12 @@ export const buttonClasses = cva(
 				full: 'w-full'
 			},
 			p: {
+				wide: 'px-4 py-1',
 				wider: 'px-8 py-1'
 			},
 			rounded: {
-				'3xl': 'rounded-3xl'
+				'3xl': 'rounded-3xl',
+				none: 'rounded-none'
 			},
 			theme: {
 				default: cx(
