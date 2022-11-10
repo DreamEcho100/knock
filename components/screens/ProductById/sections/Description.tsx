@@ -1,8 +1,5 @@
 import type { IProductByIdPageProps } from '@pages/products/[productId]';
 
-import MdToHTMLFormatter from '@components/shared/common/Format/MdToHTML';
-
-import classes from '@styles/content.module.css';
 import Description from '@components/shared/core/Description';
 
 const DescriptionSection = ({
