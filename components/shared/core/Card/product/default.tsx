@@ -31,7 +31,7 @@ const ProductBasicCard = ({
 			<Link
 				{...link}
 				// style={{ aspectRatio: 1, }}
-				className='aspect-square overflow-hidden brightness-75
+				className='aspect-square overflow-hidden brightness-75 max-w-full
 					group-hover:brightness-100'
 			>
 				{images && images[0] && (

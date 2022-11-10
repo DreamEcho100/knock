@@ -8,7 +8,7 @@ const nextConfig = (phase, { defaultConfig }) => {
 		},
 		experimental: {
 			// appDir: true
-			runtime: 'experimental-edge`'
+			// runtime: 'experimental-edge'
 		}
 	};
 };

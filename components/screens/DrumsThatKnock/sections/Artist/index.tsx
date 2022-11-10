@@ -26,10 +26,15 @@ const ArtistSection = () => {
 				<div className='px-8'>
 					<Swiper
 						modules={[Navigation, A11y]}
-						slidesPerView={6}
+						slidesPerView={1}
 						navigation
 						autoplay={{
 							delay: 5000
+						}}
+						breakpoints={{
+							300: { slidesPerView: 3 },
+							520: { slidesPerView: 4 },
+							720: { slidesPerView: 6 }
 						}}
 					>
 						{'br'

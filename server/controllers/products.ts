@@ -1,55 +1,52 @@
-import { IProduct } from 'types';
+import setFields from '@utils/common/productFields/productFields';
+import { getShopifyClient } from '@utils/core/shopify';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
-import setFields from '@utils/common/productFields/productFields';
-
-const Client = require('shopify-buy');
 
 //------------ get one product by id
 
 export const getOneProductById = async (id: string) => {
-
-	const client = Client.buildClient({
-		domain: process.env.DOMAINE,
-		storefrontAccessToken: process.env.SHOPIFY_STOREFRONT_API_TOKEN
-	});
-	
+	const client = getShopifyClient();
 
 	if (isNaN(Number(id))) {
-	 	const response = await client.product.fetchByHandle(id)
+		const response = await client.product.fetchByHandle(id);
 
-		 const otherData = setFields(response.handle);
+		const otherData =
+			'handle' in response && typeof (response as any).handle === 'string'
+				? setFields((response as any).handle)
+				: response;
 
-		 const product = {
+		const product = {
 			...response,
-			...otherData,
-		  };
-		 return product as IProduct
+			...otherData
+		};
+
+		return product;
 	}
-		const response = await client.product.fetch(`gid://shopify/Product/${id}`)
+	const response = await client.product.fetch(`gid://shopify/Product/${id}`);
 
-		const otherData = setFields(response.handle);
+	const otherData =
+		'handle' in response && typeof (response as any).handle === 'string'
+			? setFields((response as any).handle)
+			: response;
 
-	    const product = {
-			...response,
-			...otherData,
-		  };
+	const product = {
+		...response,
+		...otherData
+	};
 
-		return product as IProduct
-
+	return product; // as IProduct;
 };
-
 
 const getOneProductController = async (
 	req: NextApiRequest,
 	res: NextApiResponse
 ) => {
-
 	const product = await getOneProductById(req.query.id as string);
 
 	if (!product) {
-		res.statusCode = 404
-		throw new Error('Product not found')
+		res.statusCode = 404;
+		throw new Error('Product not found');
 	}
 
 	return res.status(200).json({
@@ -59,19 +56,13 @@ const getOneProductController = async (
 	});
 };
 
-
 //--------  getAllProducts
 
 export const getAllProducts = async () => {
-	const client = Client.buildClient({
-		domain: process.env.DOMAINE,
-		storefrontAccessToken: process.env.SHOPIFY_STOREFRONT_API_TOKEN
-	});
+	const client = getShopifyClient();
 
-	return (await client.product.fetchAll()) as IProduct[];
+	return await client.product.fetchAll(); // as IProduct[];
 };
-
-
 
 const getAllProductsController = async (
 	req: NextApiRequest,
@@ -85,7 +76,6 @@ const getAllProductsController = async (
 		products
 	});
 };
-
 
 const productsController = {
 	getOneProduct: getOneProductController,
