@@ -1,4 +1,4 @@
-import type { GetStaticProps, NextPage } from 'next';
+import type { GetServerSideProps, GetStaticProps, NextPage } from 'next';
 
 import DrumsThatKnock from '@components/screens/DrumsThatKnock';
 import { IProduct } from 'types';
@@ -16,13 +16,17 @@ const DrumsThatKnockPage: NextPage<IDrumsThatKnockPageProps> = ({
 
 export default DrumsThatKnockPage;
 
-export const getStaticProps: GetStaticProps = async () => {
-	const products = JSON.parse(JSON.stringify(await getAllProducts()));
 
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const category:string = context.query["category"] as string ;
+		
+	const products = JSON.parse(JSON.stringify(await getAllProducts(category)));
+  
 	return {
-		props: {
-			products,
-			revalidate: 5 * 60
-		}
+	  props: {
+		products,
+		revalidate: 5 * 60,
+	  },
 	};
-};
+  };

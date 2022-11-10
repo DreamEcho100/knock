@@ -39,8 +39,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 export const getStaticPaths: GetStaticPaths<{ productId: string }> = async (
 	context
 ) => {
-	const paths = await getAllProducts().then((products) =>
-		products.map((product) => ({
+	const paths = await getAllProducts('').then((products:any) =>
+		products.map((product:any) => ({
 			params: { productId: getIdFromGid(product.id) }
 		}))
 	);
