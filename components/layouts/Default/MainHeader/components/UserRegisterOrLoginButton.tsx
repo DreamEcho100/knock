@@ -1,0 +1,322 @@
+import type {
+	IGenericErrorResponse,
+	ILoginSuccess,
+	IRegisterSuccess
+} from 'types';
+import type { Dispatch, FormEvent, SetStateAction } from 'react';
+
+import { useState } from 'react';
+import Dialog from '@components/shared/common/Dialog';
+import { cx } from 'class-variance-authority';
+import { useMutation } from '@tanstack/react-query';
+import Button from '@components/shared/core/Button';
+import { setCookie } from '@utils/common/storage/cookie/document';
+import { useGetUserData } from '@utils/core/hooks';
+import { BsFillPersonFill } from 'react-icons/bs';
+import FormField from '@components/shared/core/FieldForm';
+
+interface IProps {
+	isOpen: boolean;
+	setIsOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+const UserRegisterButton = ({ isOpen, setIsOpen }: IProps) => {
+	const [type, setType] = useState<'register' | 'login'>('login');
+
+	return (
+		<>
+			<button
+				title='login/register'
+				className='flex items-center justify-center'
+				onClick={() => setIsOpen(true)}
+			>
+				<BsFillPersonFill />
+			</button>
+			{type === 'register' ? (
+				<RegisterType
+					isOpen={isOpen}
+					setIsOpen={setIsOpen}
+					setType={setType}
+					type={type}
+				/>
+			) : (
+				<LoginType
+					isOpen={isOpen}
+					setIsOpen={setIsOpen}
+					setType={setType}
+					type={type}
+				/>
+			)}
+		</>
+	);
+};
+
+export default UserRegisterButton;
+
+const RegisterType = ({
+	isOpen,
+	setIsOpen,
+	setType,
+	type
+}: IProps & {
+	setType: Dispatch<SetStateAction<'register' | 'login'>>;
+	type: 'register' | 'login';
+}) => {
+	const [formValues, setFormValues] = useState({
+		email: '',
+		password: '',
+		firstName: '',
+		lastName: ''
+	});
+
+	const registerMutation = useMutation<
+		IRegisterSuccess,
+		IGenericErrorResponse,
+		FormEvent
+	>({
+		mutationFn: (event) => {
+			event.preventDefault();
+
+			return fetch(
+				`${process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH}/auth/register`,
+				{
+					method: 'POST',
+					headers: { 'Content-type': 'application/json' },
+					body: JSON.stringify(formValues)
+				}
+			)
+				.then((response) => response.json())
+				.then((result) => {
+					if ('success' in result && !result.success)
+						throw new Error(result.message);
+
+					return result;
+				});
+		},
+		onSuccess: (result) => {
+			// console.log('result', result)
+			// setIsOpen(false)
+		}
+	});
+
+	return (
+		<Dialog
+			isOpen={isOpen}
+			setIsOpen={setIsOpen}
+			header={{
+				title: registerMutation.isSuccess
+					? 'Registered successfully'
+					: 'Register',
+				description: registerMutation.isSuccess ? (
+					<>
+						Please check your email, then{' '}
+						<button
+							className='font-bold text-primary-1'
+							onClick={() => setType('login')}
+						>
+							login
+						</button>
+					</>
+				) : (
+					<>
+						Have an account?{' '}
+						<button
+							className='text-bg-secondary-1'
+							onClick={() => setType('login')}
+						>
+							login
+						</button>
+					</>
+				)
+			}}
+		>
+			{!registerMutation.isSuccess && (
+				<form
+					className='sm:w-11/12 mx-auto my-4'
+					onSubmit={registerMutation.mutate}
+				>
+					<fieldset className='mt-2 space-y-4'>
+						<FormField
+							values={formValues}
+							setValues={setFormValues}
+							name='firstName'
+							placeholder='*first name'
+							autoComplete='first-name'
+							minLength={3}
+						/>
+						<FormField
+							values={formValues}
+							setValues={setFormValues}
+							name='lastName'
+							placeholder='*last name'
+							autoComplete='last-name'
+							minLength={3}
+						/>
+						<FormField
+							values={formValues}
+							setValues={setFormValues}
+							name='email'
+							type='email'
+							placeholder='*email'
+							autoComplete='email'
+							minLength={3}
+						/>
+						<FormField
+							values={formValues}
+							setValues={setFormValues}
+							name='password'
+							type='password'
+							placeholder='*password'
+							autoComplete='password'
+							minLength={3}
+						/>
+						<div className='mt-4 flex justify-end'>
+							<Button
+								type='submit'
+								classesIntent={{ w: 'full' }}
+								className='mt-4'
+								disabled={registerMutation.isLoading}
+							>
+								Submit
+							</Button>
+						</div>
+					</fieldset>
+					{registerMutation.isError && (
+						<div className='text-bg-secondary-2'>
+							<p>{registerMutation.error.message}</p>
+						</div>
+					)}
+				</form>
+			)}
+		</Dialog>
+	);
+};
+
+const LoginType = ({
+	isOpen,
+	setIsOpen,
+	setType,
+	type
+}: IProps & {
+	setType: Dispatch<SetStateAction<'register' | 'login'>>;
+	type: 'register' | 'login';
+}) => {
+	const [formValues, setFormValues] = useState({
+		email: '',
+		password: ''
+	});
+
+	const loginMutation = useMutation<
+		ILoginSuccess,
+		IGenericErrorResponse,
+		FormEvent
+	>({
+		mutationFn: (event) => {
+			event.preventDefault();
+
+			return fetch(
+				`${process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH}/auth/login`,
+				{
+					method: 'POST',
+					headers: { 'Content-type': 'application/json' },
+					body: JSON.stringify(formValues)
+				}
+			)
+				.then((response) => response.json())
+				.then((result) => {
+					if ('success' in result && !result.success)
+						throw new Error(result.message);
+
+					return result;
+				});
+		},
+		onSuccess: (result) => {
+			const { user } = result;
+
+			setCookie(
+				'user-access-token',
+				JSON.stringify({
+					accessToken: user.accessToken,
+					expiresAt: user.expiresAt
+				}),
+				{
+					expires: new Date(user.expiresAt)
+				}
+			);
+
+			setIsOpen(false);
+		}
+	});
+
+	useGetUserData({
+		enabled: loginMutation.isSuccess && !!loginMutation.data?.user?.accessToken,
+		accessToken: loginMutation.data?.user?.accessToken
+	});
+
+	return (
+		<Dialog
+			isOpen={isOpen}
+			setIsOpen={setIsOpen}
+			header={{
+				title: loginMutation.isSuccess ? 'Logged successfully' : 'Log in',
+				description: loginMutation.isSuccess ? (
+					<>Getting your user data...</>
+				) : (
+					<>
+						Don&apos;t have an account?{' '}
+						<button
+							className='text-bg-secondary-1'
+							onClick={() => setType('register')}
+						>
+							Create a new one
+						</button>
+					</>
+				)
+			}}
+		>
+			{!loginMutation.isSuccess && (
+				<form
+					className='sm:w-11/12 mx-auto my-4'
+					onSubmit={loginMutation.mutate}
+				>
+					<fieldset className='mt-2 space-y-4'>
+						<FormField
+							values={formValues}
+							setValues={setFormValues}
+							name='email'
+							type='email'
+							placeholder='*email'
+							autoComplete='email'
+							minLength={3}
+						/>
+						<FormField
+							values={formValues}
+							setValues={setFormValues}
+							name='password'
+							type='password'
+							placeholder='*password'
+							autoComplete='password'
+							minLength={3}
+						/>
+						<div className='mt-4 flex justify-end'>
+							{/* <CloseDialog disabled={loginMutation.isLoading}>Submit</CloseDialog> */}
+							<Button
+								type='submit'
+								classesIntent={{ w: 'full' }}
+								className='mt-4'
+								disabled={loginMutation.isLoading}
+							>
+								Submit
+							</Button>
+						</div>
+					</fieldset>
+					{loginMutation.isError && (
+						<div className='text-bg-secondary-2'>
+							<p>{loginMutation.error.message}</p>
+						</div>
+					)}
+				</form>
+			)}
+		</Dialog>
+	);
+};

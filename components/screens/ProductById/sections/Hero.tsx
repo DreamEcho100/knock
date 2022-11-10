@@ -15,7 +15,7 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 		<section className='bg-primary-1 overflow-x-hidden md:overflow-x-visible'>
 			<div
 				className='
-					relative px-8 pt-16 pb-8 md:px-16 flex items-center justify-center'
+					relative pt-8 pb-8 sm:px-8 sm:pt-16 md:px-16 flex items-center justify-center'
 			>
 				<Image
 					src='/images/Rectangle 47.png'
@@ -26,8 +26,8 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 						lg:translate-x-[4%] lg:-translate-y-[4%]'
 				/>
 				<div
-					className='
-			 			relative bg-primary-1 flex justify-center rounded-3xl overflow-hidden flex-col w-11/12 max-w-fit
+					className='relative bg-primary-1 flex justify-center rounded-lg overflow-hidden flex-col w-11/12 max-w-fit
+						sm:rounded-3xl
 						lg:flex-row lg:max-w-full lg:rounded-l-none lg:rounded-r-3xl'
 				>
 					{product.images && product.images[0] && (
@@ -84,7 +84,7 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 								alt='payment cards'
 								width={300}
 								height={50}
-								className='w-1/2 object-contain'
+								className='sm:w-1/2 object-contain'
 							/>
 						</div>
 					</div>

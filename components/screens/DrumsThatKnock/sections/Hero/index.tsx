@@ -6,7 +6,7 @@ const HeroSection = () => {
 		<section className='bg-primary-1'>
 			<div
 				className='overflow-hidden
-					relative flex items-center justify-center text-primary-1 p-8 py-16 h-screen max-h-[30rem]'
+					relative flex items-center justify-center text-primary-1 p-8 py-16 h-screen min-h-fit max-h-[30rem]'
 			>
 				<Image
 					src='/images/Group 179.png'

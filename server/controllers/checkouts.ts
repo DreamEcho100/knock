@@ -1,19 +1,20 @@
+import { getShopifyClient } from '@utils/core/shopify';
+
 import type { NextApiRequest, NextApiResponse } from 'next';
-const Client = require('shopify-buy');
 
 export const createCheckout = async (
 	req: NextApiRequest,
 	res: NextApiResponse
 ) => {
-	const client = Client.buildClient({
-		domain: process.env.DOMAINE,
-		storefrontAccessToken: process.env.SHOPIFY_STOREFRONT_API_TOKEN
-	});
+	const client = getShopifyClient();
 	const checkout = await client.checkout.create();
 
+	const checkoutId =
+		typeof checkout.id === 'string' ? checkout.id : checkout.id.toString();
+
 	const data = {
-		checkoutId: checkout.id.split('/')[4].split('?key=')[0],
-		checkoutKey: checkout.id.split('/')[4].split('?key=')[1]
+		checkoutId: checkoutId.split('/')[4].split('?key=')[0],
+		checkoutKey: checkoutId.split('/')[4].split('?key=')[1]
 	};
 
 	return res.status(200).json({
@@ -30,11 +31,9 @@ export const updateCheckout = async (
 ) => {
 	const { checkoutId, input } = req.body;
 
-	const client = Client.buildClient({
-		domain: process.env.DOMAINE,
-		storefrontAccessToken: process.env.SHOPIFY_STOREFRONT_API_TOKEN
-	});
-	const checkout = await client.checkout.updateAttributes(checkoutId, input);
+	const client = getShopifyClient();
+	// updateAttributes
+	const checkout = await client.checkout.updateLineItems(checkoutId, input);
 
 	return res.status(200).json({
 		success: true,
@@ -49,10 +48,7 @@ export const getCheckout = async (
 ) => {
 	const { checkoutId, checkoutKey } = req.query;
 
-	const client = Client.buildClient({
-		domain: process.env.DOMAINE,
-		storefrontAccessToken: process.env.SHOPIFY_STOREFRONT_API_TOKEN
-	});
+	const client = getShopifyClient();
 	const checkout = await client.checkout.fetch(
 		`gid://shopify/Checkout/${checkoutId}?key=${checkoutKey}`
 	);
@@ -77,10 +73,7 @@ export const addItemToCheckout = async (
 ) => {
 	const { checkoutId, lineItemsToAdd } = req.body;
 
-	const client = Client.buildClient({
-		domain: process.env.DOMAINE,
-		storefrontAccessToken: process.env.SHOPIFY_STOREFRONT_API_TOKEN
-	});
+	const client = getShopifyClient();
 	const item = await client.checkout.addLineItems(checkoutId, lineItemsToAdd);
 
 	return res.status(200).json({
@@ -96,10 +89,7 @@ export const updateItemInCheckout = async (
 ) => {
 	const { checkoutId, lineItemsToUpdate } = req.body;
 
-	const client = Client.buildClient({
-		domain: process.env.DOMAINE,
-		storefrontAccessToken: process.env.SHOPIFY_STOREFRONT_API_TOKEN
-	});
+	const client = getShopifyClient();
 	const item = await client.checkout.updateLineItems(
 		checkoutId,
 		lineItemsToUpdate
@@ -118,10 +108,7 @@ export const removeItemInCheckout = async (
 ) => {
 	const { checkoutId, lineItemIdsToRemove } = req.body;
 
-	const client = Client.buildClient({
-		domain: process.env.DOMAINE,
-		storefrontAccessToken: process.env.SHOPIFY_STOREFRONT_API_TOKEN
-	});
+	const client = getShopifyClient();
 	const item = await client.checkout.removeLineItems(
 		checkoutId,
 		lineItemIdsToRemove
