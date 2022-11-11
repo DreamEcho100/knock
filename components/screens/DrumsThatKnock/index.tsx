@@ -1,7 +1,6 @@
 import { IDrumsThatKnockPageProps } from '@pages/drums-that-knock';
-import type { IProduct } from 'types';
 import {
-	ArtistSection,
+	ArtistsSection,
 	DigitalProductsSection,
 	HeroSection,
 	KnockProductShowcaseSection
@@ -16,7 +15,7 @@ const DrumsThatKnock = ({
 			<HeroSection />
 			<DigitalProductsSection products={products} />
 			{/* <MerchSection /> */}
-			<ArtistSection />
+			<ArtistsSection />
 			<KnockProductShowcaseSection knockPlugin={knockPlugin} />
 		</>
 	);
