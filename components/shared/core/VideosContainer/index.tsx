@@ -31,7 +31,7 @@ const VideosContainer = ({
 						// src='https://www.youtube.com/embed/4fiC6Zi0Wnw'
 						// title='YouTube video player'
 						{...iframe}
-						className='overflow-hidden rounded-2xl'
+						className='overflow-hidden rounded-2xl max-w-[90%] aspect-video'
 					/>
 				))}
 			</div>

@@ -12,11 +12,11 @@ const LatestSamplesSection = ({
 		<section className='bg-primary-2'>
 			<div
 				className='
-				flex p-8 flex-col
+				flex p-8 flex-col gap-4
 				md:px-8 md:py-20 md:flex-row'
 			>
 				<div
-					className='flex gap-4 flex-col items-center text-center mb-12 p-4
+					className='flex gap-4 flex-col items-center text-center p-4
 						md:p-8 md:items-start md:text-align-initial md:flex-grow md:w-1/2 md:justify-center'
 				>
 					<h2
@@ -27,7 +27,7 @@ const LatestSamplesSection = ({
 						<KnockTrademark />
 						&nbsp;SAMPLE PACKS
 					</h2>
-					<p className='text-primary-2'>
+					<p className='text-primary-2 mb-2'>
 						Designed from scratch by DECAP. <br /> Premium quality,
 						groundbreaking as always.
 					</p>

@@ -41,7 +41,7 @@ const KnockSection = ({
 		<section className='bg-primary-1'>
 			<div
 				className='overflow-hidden
-					w-full px-4 sm:px-8 py-16 flex items-center justify-center flex-col text-center'
+					w-full px-4 sm:px-8 py-12 sm:py-16 flex items-center justify-center flex-col sm:gap-4 text-center'
 			>
 				<div className='relative flex items-center justify-center max-w-[900px]'>
 					<CustomNextImage
@@ -64,7 +64,10 @@ const KnockSection = ({
 					/>
 				</div>
 				{
-					<h2 className='text-h2 font-bold text-primary-1 mt-4 mb-4 flex flex-wrap'>
+					<h2
+						className='text-h2 font-bold mb-2 text-primary-1 flex flex-wrap
+								sm:mb-0'
+					>
 						{title || (
 							<>
 								DRUM THAT&nbsp;

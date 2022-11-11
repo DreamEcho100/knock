@@ -4,7 +4,7 @@ import ProductShowcase from '@components/shared/core/ProductShowcase';
 const OneProductShowCaseSection = () => {
 	return (
 		<section
-			className='bg-primary-2 text-primary-2 px-4 p-8
+			className='bg-primary-2 text-primary-2 px-4 py-16
 				sm:p-20
 				md:px-32'
 		>

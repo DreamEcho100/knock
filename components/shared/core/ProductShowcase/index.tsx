@@ -36,15 +36,19 @@ const ProductShowcase = ({
 		<div
 			{...wrapper}
 			className={`
-					flex flex-col
+					flex flex-col gap-8 lg:gap-0
 					lg:flex-row ${wrapperClassName}`}
 		>
 			<div
-				className='w-full flex flex-col items-center justify-center text-center gap-8 px-8 pb-4
+				className='w-full flex flex-col items-center justify-center text-center gap-4 px-8 pb-4
 							sm:pb-20
-							lg:w-1/2 lg:text-align-initial lg:items-start lg:py-8'
+							lg:gap-8 lg:w-1/2 lg:text-align-initial lg:items-start lg:py-8'
 			>
-				<h2 className='text-h2 font-bold uppercase flex flex-wrap' {...h2} />
+				<h2
+					className='text-h2 font-bold uppercase flex flex-wrap text-center justify-center
+						lg:text-align-initial lg:justify-start'
+					{...h2}
+				/>
 				<p className='md:max-w-[450px]' {...p} />
 
 				<Button

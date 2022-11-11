@@ -35,10 +35,11 @@ const linkClasses = ({
 } = {}) => `border-b border-transparent outline-none
 duration-150 transition-all
 ${keepCase ? '' : 'uppercase'}
-	isActive
-		? 'text-bg-secondary-1 focus:border-b-bg-secondary-1'
-		: 'text-primary-2 focus:border-b-text-primary-1 hover:text-primary-1'
-}`;
+	${
+		isActive
+			? 'text-bg-secondary-1 focus:border-b-bg-secondary-1'
+			: 'text-primary-2 focus:border-b-text-primary-1 hover:text-primary-1'
+	}`;
 
 const headerLinks = [
 	{ href: '/knock-plugin', text: 'knock' },
@@ -152,7 +153,7 @@ const MainHeader = () => {
 			>
 				<div className='relative z-10 h-main-nav-h flex justify-between px-4 sm:px-8 gap-2 sm:gap-4 text-primary-2'>
 					<div className='flex items-center justify-center text-primary-1'>
-						<Logo />
+						<Logo onClick={() => setIsSmallScreenNaveOpen(false)} />
 					</div>
 					<nav className='hidden lg:flex'>
 						<ul className='text-center flex items-center justify-center gap-10 font-bold'>
@@ -277,6 +278,7 @@ const MainHeader = () => {
 											isActive: link.href === router.pathname,
 											keepCase: link.keepCase
 										})} block w-fit`}
+										onClick={() => setIsSmallScreenNaveOpen(false)}
 									>
 										{link.text}
 									</Link>

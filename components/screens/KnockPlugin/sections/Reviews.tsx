@@ -17,7 +17,7 @@ const ReviewsSection = () => {
 						modules={[Navigation, A11y, Autoplay, Pagination]}
 						slidesPerView={1}
 						navigation
-						spaceBetween={8}
+						spaceBetween={20}
 						pagination={{ clickable: true }}
 						// scrollbar={{ draggable: true }}
 						autoplay={{
