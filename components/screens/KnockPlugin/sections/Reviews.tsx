@@ -31,10 +31,10 @@ const ReviewsSection = () => {
 									'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis'
 							}))
 							.map((item, index) => (
-								<SwiperSlide key={index} className='px-8 pt-24 pb-12'>
+								<SwiperSlide key={index} className='px-0 sm:p-4 pt-6 pb-24'>
 									<div className='flex relative'>
 										<div
-											className='rounded-2xl px-8 py-16 bg-primary-5 flex flex-col
+											className='rounded-2xl px-6 sm:px-8 py-16 bg-primary-5 flex flex-col
 												sm:pr-[5.5rem] sm:mr-[5.5rem]'
 											// style={{ width: 'calc(100% - 5rem)' }}
 										>
