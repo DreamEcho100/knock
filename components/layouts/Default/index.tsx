@@ -15,6 +15,13 @@ import CustomNextImage from '@components/shared/common/CustomNextImage';
 
 export const commonClasses = 'leading-relaxed text-primary-2 mx-auto';
 
+const socialLinks = {
+	facebook: 'https://www.facebook.com/decapmusic',
+	twitter: 'https://twitter.com/decapmusic',
+	instagram: 'https://www.instagram.com/decapmusic/',
+	youtube: 'https://www.youtube.com/decapmusic'
+};
+
 const LinksListContainer = ({
 	headerText,
 	links,
@@ -101,7 +108,7 @@ const Footer = () => {
 								<ul className='flex gap-2'>
 									<li>
 										<a
-											href='#'
+											href={socialLinks.instagram}
 											rel='noopener noreferrer'
 											title='instagram'
 											className='text-gray-400'
@@ -111,7 +118,7 @@ const Footer = () => {
 									</li>
 									<li>
 										<a
-											href='#'
+											href={socialLinks.facebook}
 											rel='noopener noreferrer'
 											title='facebook'
 											className='text-gray-400'
@@ -121,7 +128,7 @@ const Footer = () => {
 									</li>
 									<li>
 										<a
-											href='#'
+											href={socialLinks.twitter}
 											rel='noopener noreferrer'
 											title='twitter'
 											className='text-gray-400'
@@ -131,7 +138,7 @@ const Footer = () => {
 									</li>
 									<li>
 										<a
-											href='#'
+											href={socialLinks.youtube}
 											rel='noopener noreferrer'
 											title='youtube'
 											className='text-gray-400'
