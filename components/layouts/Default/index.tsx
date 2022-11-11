@@ -6,7 +6,11 @@ import Link from 'next/link';
 import Button from '@components/shared/core/Button';
 import Logo from '@components/shared/core/Logo';
 import MainHeader from './MainHeader';
-import { getGetAccessTokenFromCookie, useGetUserData } from '@utils/core/hooks';
+import {
+	getGetAccessTokenFromCookie,
+	useGetUserData,
+	useGetUserDataFromStore
+} from '@utils/core/hooks';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 
 export const commonClasses = 'leading-relaxed text-primary-2 mx-auto';
@@ -17,7 +21,7 @@ const LinksListContainer = ({
 	linksListClassName = 'capitalize flex flex-col gap-1'
 }: {
 	headerText: string;
-	links: { href: string; text: string }[];
+	links: { href: string; text: string; isHidden?: boolean }[];
 	linksListClassName?: string;
 }) => {
 	return (
@@ -26,11 +30,15 @@ const LinksListContainer = ({
 				{headerText}
 			</h3>
 			<ul className={linksListClassName}>
-				{links.map((item) => (
-					<li key={item.text}>
-						<Link href={item.href}>{item.text}</Link>
-					</li>
-				))}
+				{links.map((item) =>
+					item.isHidden ? (
+						<></>
+					) : (
+						<li key={item.text}>
+							<Link href={item.href}>{item.text}</Link>
+						</li>
+					)
+				)}
 			</ul>
 		</nav>
 	);
@@ -38,6 +46,8 @@ const LinksListContainer = ({
 
 const Footer = () => {
 	const formId = useId();
+
+	const { user } = useGetUserDataFromStore();
 
 	return (
 		<footer
@@ -58,7 +68,11 @@ const Footer = () => {
 								{ href: '/policies/privacy-policy', text: 'privacy policy' },
 								{ href: '/policies/refund-policy', text: 'refund policy' },
 								{ href: '/policies/shipping-policy', text: 'shipping policy' },
-								{ href: '/', text: 'My account' }
+								{
+									href: '/customer-profile',
+									text: 'My account',
+									isHidden: !user?.data?.id
+								}
 							]}
 						/>
 						{/* <LinksListContainer
