@@ -205,14 +205,14 @@ const CustomerProfileScreen = () => {
 
 	if (user.status === 'loading' && user.fetchStatus === 'fetching')
 		return (
-			<section className='bg-primary-1 p-8 sm:p-16'>
+			<section className='bg-primary-1 section-p-v1'>
 				<p>Loading...</p>
 			</section>
 		);
 
 	if (!user.isSuccess)
 		return (
-			<section className='bg-primary-1 p-8 sm:p-16'>
+			<section className='bg-primary-1 section-p-v1'>
 				<p>
 					{!user.isSuccess
 						? 'Please login first to view your data'
@@ -254,7 +254,7 @@ const CustomerProfileScreen = () => {
 	];
 
 	return (
-		<section className='bg-primary-1 p-8 sm:p-16'>
+		<section className='bg-primary-1 section-p-v1'>
 			<AccordionRoot
 				type='multiple'
 				className='my-8 flex flex-col gap-8'

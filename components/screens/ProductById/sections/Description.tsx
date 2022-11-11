@@ -8,10 +8,7 @@ const DescriptionSection = ({
 	description: IProductByIdPageProps['product']['description'];
 }) => {
 	return (
-		<section
-			className='bg-primary-1 p-8 
-				sm:py-16'
-		>
+		<section className='bg-primary-1 section-p-v1'>
 			<Description>{description}</Description>
 		</section>
 	);

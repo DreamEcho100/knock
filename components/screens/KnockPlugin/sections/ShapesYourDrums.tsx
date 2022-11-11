@@ -50,7 +50,7 @@ const features = [
 
 const ShapesYourDrumsSection = () => {
 	return (
-		<section className=' text-primary-2 relative bg-primary-1'>
+		<section className=' text-primary-2 relative bg-primary-1 section-p-v1'>
 			<div className='absolute top-0 right-0 bottom-0 left-0 w-full h-full max-w-none overflow-hidden'>
 				<CustomNextImage
 					src='/images/Pattern[1].png'
@@ -75,7 +75,7 @@ const ShapesYourDrumsSection = () => {
 			</div>
 			<div
 				className='max-w-screen-xl
-					relative flex flex-col gap-20 px-4 sm:px-8 py-16'
+					relative flex flex-col gap-20'
 			>
 				<header className='text-center'>
 					<h2 className='text-h2 uppercase text-primary-1'>

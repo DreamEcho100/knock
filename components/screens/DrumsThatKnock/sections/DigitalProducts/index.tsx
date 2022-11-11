@@ -13,9 +13,9 @@ const DigitalProductsSection = ({
 	products: IDrumsThatKnockPageProps['products'];
 }) => {
 	return (
-		<section className='bg-primary-1'>
+		<section className='bg-primary-1 section-p-v1'>
 			<div
-				className='relative px-2 sm:px-8 py-16 md:px-16 justify-items-center'
+				className='relative justify-items-center'
 				style={{
 					zIndex: 2,
 					display: 'grid',

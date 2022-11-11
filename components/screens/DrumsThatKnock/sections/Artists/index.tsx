@@ -16,18 +16,19 @@ import CustomNextImage from '@components/shared/common/CustomNextImage';
 
 const ArtistsSection = () => {
 	return (
-		<section className='bg-primary-2'>
-			<div className='px-8 py-16 flex flex-col gap-12'>
+		<section className='bg-primary-2 section-p-v1'>
+			<div className='flex flex-col gap-12'>
 				<header className='text-center flex items-center justify-center'>
 					<h2 className='text-[2rem] font-bold capitalize flex flex-wrap justify-center'>
 						SOME ARTISTS WHO HAVE USED DRUMS THAT &nbsp;
 						<KnockTrademark />
 					</h2>
 				</header>
-				<div className='px-8'>
+				<div>
 					<Swiper
 						modules={[Navigation, A11y, Autoplay]}
 						slidesPerView={1}
+						spaceBetween={10}
 						navigation
 						autoplay={{
 							delay: 5000
@@ -46,7 +47,7 @@ const ArtistsSection = () => {
 							.map((item, index) => (
 								<SwiperSlide
 									key={index}
-									className='p-2 gap-2 flex flex-col justify-center items-center text-center'
+									className='translate-y-2 p-2 gap-2 flex flex-col justify-center items-center text-center'
 								>
 									<CustomNextImage
 										src={item.image.src}

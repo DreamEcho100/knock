@@ -38,10 +38,10 @@ const KnockSection = ({
 	imageSrc?: string;
 }) => {
 	return (
-		<section className='bg-primary-1'>
+		<section className='bg-primary-1 section-p-v1'>
 			<div
 				className='overflow-hidden
-					w-full px-4 sm:px-8 py-12 sm:py-16 flex items-center justify-center flex-col sm:gap-4 text-center'
+					w-full flex items-center justify-center flex-col sm:gap-4 text-center'
 			>
 				<div className='relative flex items-center justify-center max-w-[900px]'>
 					<CustomNextImage
@@ -65,7 +65,7 @@ const KnockSection = ({
 				</div>
 				{
 					<h2
-						className='text-h2 font-bold mb-2 text-primary-1 flex flex-wrap
+						className='text-h2 font-bold mb-2 text-primary-1 flex flex-wrap justify-center text-center
 								sm:mb-0'
 					>
 						{title || (
@@ -77,7 +77,7 @@ const KnockSection = ({
 					</h2>
 				}
 				<p className={pClasses(pTheme)}>{description}</p>
-				<Button className='capitalize text-[1.375rem]' {...buttonProps} />
+				<Button className='capitalize text-h5' {...buttonProps} />
 			</div>
 		</section>
 	);

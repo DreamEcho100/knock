@@ -13,7 +13,7 @@ const ContactUsPage: NextPage = () => {
 	});
 
 	return (
-		<section className='bg-primary-1 p-8 sm:p-16'>
+		<section className='bg-primary-1 section-p-v1'>
 			<div className='max-w-[800px] mx-auto'>
 				<header className='flex flex-col gap-4 text-text-primary-1'>
 					<h1 className='text-h2 font-bold'>Contact us</h1>

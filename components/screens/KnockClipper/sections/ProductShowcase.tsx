@@ -9,10 +9,7 @@ const ProductShowcaseSection = ({
 	knockClipperPlugin: IKnockClipperPageProps['knockClipperPlugin'];
 }) => {
 	return (
-		<section
-			className='bg-primary-1 text-primary-2 p-8 
-				sm:py-16'
-		>
+		<section className='bg-primary-1 text-primary-2 section-p-v1'>
 			<ProductShowcase
 				product={knockClipperPlugin}
 				textContainer={{

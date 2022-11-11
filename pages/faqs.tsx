@@ -62,7 +62,7 @@ const faqs: (
 
 const FAQSPages: NextPage = () => {
 	return (
-		<section className='bg-primary-1 p-8 sm:p-16 flex flex-col break-all'>
+		<section className='bg-primary-1 section-p-v1 flex flex-col break-all'>
 			<div className='max-w-full md:max-w-[800px] mx-auto text-primary-4'>
 				<header>
 					<h1 className='text-h2 capitalize font-bold text-primary-1'>FAQs</h1>

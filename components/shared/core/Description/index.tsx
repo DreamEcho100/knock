@@ -7,7 +7,7 @@ const Description = ({
 }) => {
 	// !!!
 	return (
-		<div className='text-center leading-12 max-w-[900px]'>
+		<div className='text-center leading-12 max-w-[1000px]'>
 			<p className='text-h5 leading-[1.5]'>{children}</p>
 		</div>
 	);

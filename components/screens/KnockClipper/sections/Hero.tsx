@@ -27,10 +27,10 @@ const HeroSection = ({
 	});
 
 	return (
-		<section className='bg-primary-1'>
+		<section className='bg-primary-1 section-p-v1'>
 			<div
 				className=' overflow-hidden
-				px-8 pt-12 pb-20 flex items-center justify-center flex-col text-center'
+					flex items-center justify-center flex-col text-center'
 			>
 				<div className='relative flex items-center justify-center max-w-[900px]'>
 					<CustomNextImage

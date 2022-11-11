@@ -2,10 +2,7 @@ import Description from '@components/shared/core/Description';
 
 const DescriptionSection = () => {
 	return (
-		<section
-			className='bg-primary-2 p-8 
-				sm:py-16'
-		>
+		<section className='bg-primary-2 section-p-v1'>
 			<Description>
 				KNOCK Clipper is a premium quality, user adjustable hard / soft clipper
 				designed by DECAP. It is the CLIP module from his acclaimed plugin,

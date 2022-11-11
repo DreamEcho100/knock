@@ -8,10 +8,7 @@ const FeaturesAndFilesIncludedSection = ({}: // features,
 	// filesIncluded: IProductByIdPageProps['product']['filesIncluded'];
 }) => {
 	return (
-		<section
-			className='bg-primary-1 px-8 p-8 
-				sm:py-16'
-		>
+		<section className='bg-primary-1  section-p-v1'>
 			{/* <TwoCardContainer
 				items1={features}
 				items2={filesIncluded.details}

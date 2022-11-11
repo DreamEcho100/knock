@@ -30,7 +30,7 @@
 .contentContainerElements h2,
 .contentContainerElements h3 {
 	color: white;
-	font-weight: bold;
+	font-weight: 600;
 	text-transform: capitalize;
 	line-height: 1.2;
 	margin-bottom: 1rem;

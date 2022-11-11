@@ -12,10 +12,10 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 	const addProductsToCheckoutAndCart = useAddProductsToCheckoutAndCart();
 
 	return (
-		<section className='bg-primary-1 overflow-x-hidden md:overflow-x-visible'>
+		<section className='bg-primary-1 section-p-v1 overflow-x-hidden md:overflow-x-visible'>
 			<div
 				className='
-					relative pt-8 pb-8 sm:px-8 sm:pt-16 md:px-16 flex items-center justify-center'
+					relative flex items-center justify-center'
 			>
 				<CustomNextImage
 					src='/images/Rectangle 47.png'

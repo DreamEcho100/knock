@@ -122,6 +122,25 @@ main > section > *,
 @tailwind utilities;
 
 @layer components {
+	.section-p-v1 {
+		padding: 2rem;
+	}
+	@media (min-width: 768px) {
+		.section-p-v1 {
+			padding-left: 2rem;
+			padding-right: 2rem;
+		}
+		.section-p-v1 {
+			padding-top: 4rem;
+			padding-bottom: 4rem;
+		}
+	}
+
+	.section-p-x-v1 {
+		padding-left: 2rem;
+		padding-right: 2rem;
+	}
+
 	.text-align-initial {
 		text-align: initial;
 	}

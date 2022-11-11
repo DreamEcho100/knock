@@ -9,7 +9,7 @@ const KnockProductShowcaseSection = ({
 	knockPlugin: IDrumsThatKnockPageProps['knockPlugin'];
 }) => {
 	return (
-		<section className='bg-primary-1 text-primary-2 px-8 py-16 md:px-16'>
+		<section className='bg-primary-1 text-primary-2 section-p-v1'>
 			<ProductShowcase
 				product={knockPlugin}
 				textContainer={{

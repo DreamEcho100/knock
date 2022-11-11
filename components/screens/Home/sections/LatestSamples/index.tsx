@@ -9,11 +9,11 @@ const LatestSamplesSection = ({
 	products: IHomePageProps['products'];
 }) => {
 	return (
-		<section className='bg-primary-2'>
+		<section className='bg-primary-2 section-p-v1'>
 			<div
 				className='
-				flex p-8 flex-col gap-4
-				md:px-8 md:py-16 md:flex-row'
+				flex flex-col gap-4
+				md:flex-row'
 			>
 				<div
 					className='flex gap-4 flex-col items-center text-center p-4

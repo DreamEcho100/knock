@@ -35,35 +35,33 @@ const reviewsImages = [
 
 const ReviewsSection = () => {
 	return (
-		<section className='bg-primary-1'>
-			<div className=''>
-				<div className='px-8 pb-12 container-restrictions-2 max-w-screen-lg mx-auto'>
-					<Swiper
-						modules={[Navigation, Pagination, Autoplay, A11y]}
-						slidesPerView={1}
-						navigation
-						spaceBetween={8}
-						pagination={{ clickable: true }}
-						autoplay={{
-							delay: 7500
-						}}
-					>
-						{reviewsImages.map((item, index) => (
-							<SwiperSlide key={index} className='px-8 pt-24 pb-12'>
-								<div className='w-full h-full aspect-square'>
-									<CustomNextImage
-										unoptimized
-										src={item}
-										alt={`Knock plugin review ${index + 1}`}
-										width={250}
-										height={250}
-										className='w-full h-full object-contain'
-									/>
-								</div>
-							</SwiperSlide>
-						))}
-					</Swiper>
-				</div>
+		<section className='bg-primary-1 section-p-v1'>
+			<div className='container-restrictions-2 max-w-screen-lg mx-auto'>
+				<Swiper
+					modules={[Navigation, Pagination, Autoplay, A11y]}
+					slidesPerView={1}
+					navigation
+					spaceBetween={8}
+					pagination={{ clickable: true }}
+					autoplay={{
+						delay: 7500
+					}}
+				>
+					{reviewsImages.map((item, index) => (
+						<SwiperSlide key={index} className='px-8 pt-24 pb-12'>
+							<div className='w-full h-full aspect-square'>
+								<CustomNextImage
+									unoptimized
+									src={item}
+									alt={`Knock plugin review ${index + 1}`}
+									width={250}
+									height={250}
+									className='w-full h-full object-contain'
+								/>
+							</div>
+						</SwiperSlide>
+					))}
+				</Swiper>
 			</div>
 		</section>
 	);

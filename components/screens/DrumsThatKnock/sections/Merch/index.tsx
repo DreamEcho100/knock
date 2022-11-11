@@ -24,7 +24,7 @@ const productsData = [
 const MerchSection = () => {
 	return (
 		<section
-			className='relative px-8 py-16 md:px-16 flex flex-col gap-8 bg-primary-1'
+			className='relative section-p-v1 flex flex-col gap-8 bg-primary-1'
 			// style={{
 			//   zIndex: 2,
 			//   display: 'grid',

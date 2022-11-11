@@ -6,7 +6,7 @@ const VideoSection = ({}: // video
 	// video: IProductByIdPageProps['product']['video'];
 }) => {
 	return (
-		<section className='relative bg-primary-1'>
+		<section className='relative bg-primary-1 section-p-v1'>
 			<CustomNextImage
 				src='/images/Rectangle 46.png'
 				width={200}

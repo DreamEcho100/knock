@@ -205,8 +205,8 @@ import { cx } from 'class-variance-authority';
 
 const ReviewsSection = () => {
 	return (
-		<section className='bg-primary-1'>
-			<div className='px-8 pb-12 container-restrictions-2 max-w-screen-lg mx-auto'>
+		<section className='bg-primary-1 section-p-x-v1'>
+			<div className='container-restrictions-2 max-w-screen-lg mx-auto'>
 				<Swiper
 					modules={[Navigation, A11y, Autoplay]}
 					slidesPerView={1}
@@ -221,7 +221,7 @@ const ReviewsSection = () => {
 					{reviews.map((item, index) => (
 						<SwiperSlide
 							key={index}
-							className='h-full px-2 sm:p-4 pt-12 pb-12 flex items-center justify-center'
+							className='h-full px-2 flex items-center justify-center'
 						>
 							<div className='flex relative'>
 								<div
