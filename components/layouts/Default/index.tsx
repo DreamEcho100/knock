@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
 
-import Image from 'next/image';
 import { FaInstagram, FaFacebook, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { useId } from 'react';
 import Link from 'next/link';
@@ -8,6 +7,7 @@ import Button from '@components/shared/core/Button';
 import Logo from '@components/shared/core/Logo';
 import MainHeader from './MainHeader';
 import { getGetAccessTokenFromCookie, useGetUserData } from '@utils/core/hooks';
+import CustomNextImage from '@components/shared/common/CustomNextImage';
 
 export const commonClasses =
 	'leading-relaxed sm:text-[1.2rem] text-primary-2 mx-auto';
@@ -159,7 +159,7 @@ const Footer = () => {
 						</small>
 					</div>
 					<div className='px-1'>
-						<Image
+						<CustomNextImage
 							src='/images/payment_cards.png'
 							alt='payment cards'
 							width={200}

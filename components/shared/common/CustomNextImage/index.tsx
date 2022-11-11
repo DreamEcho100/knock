@@ -1,15 +1,16 @@
 import Image from 'next/image';
 import { ImageProps } from 'next/dist/client/image.d';
 
-export interface ICustomNextImageProps extends ImageProps {
+export interface ICustomNextImageProps extends Omit<ImageProps, 'alt'> {
 	className?: string;
 	placeholder?: 'blur' | 'empty';
 	role?: string;
+	alt?: string;
 }
 
 const CustomNextImage = ({
 	className = '',
-	// unoptimized = true,
+	unoptimized = true,
 	src,
 	alt = '',
 	placeholder = 'empty',
@@ -22,7 +23,7 @@ const CustomNextImage = ({
 	};
 	const handleImageProps = () => {
 		const imageProps: ICustomNextImageProps = {
-			// unoptimized,
+			unoptimized,
 			src,
 			placeholder,
 			className,

@@ -29,7 +29,6 @@ const TwoCardContainer = ({
 			{backgroundImg && (
 				<CustomNextImage
 					src='/images/Rectangle 48.png'
-					alt=''
 					width={200}
 					height={200}
 					className='pointer-events-none aspect-square absolute w-1/2 top-0 left-0 scale-150 -translate-y-1/3 -translate-x-1/4'

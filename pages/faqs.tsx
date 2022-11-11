@@ -1,6 +1,5 @@
+import CustomNextImage from '@components/shared/common/CustomNextImage';
 import type { NextPage } from 'next';
-
-import Image from 'next/image';
 
 const faqs: (
 	| {
@@ -74,9 +73,8 @@ const FAQSPages: NextPage = () => {
 							<li key={item.question} className='flex flex-col py-1 '>
 								<span className='flex flex-col text-[80%]'>
 									<h2 className='text-3xl uppercase relative text-primary-1 mb-3'>
-										<Image
+										<CustomNextImage
 											src='/svgs/purple-circle.svg'
-											alt=''
 											width={20}
 											height={20}
 											className='w-[0.6rem] h-[0.6rem] absolute top-[1.2rem] left-0 -translate-x-[150%]

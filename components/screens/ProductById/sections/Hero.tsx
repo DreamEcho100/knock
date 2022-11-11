@@ -1,11 +1,12 @@
 import type { IProductByIdPageProps } from '@pages/products/[productId]';
 
 import Button from '@components/shared/core/Button';
-import Image from 'next/image';
+
 import { customerGlobalActions } from '@context/Customer/actions';
 import { convertProductToCartItem } from '@utils/core/products';
 import { useSharedCustomerState } from '@context/Customer';
 import { useAddProductsToCheckoutAndCart } from '@utils/core/hooks';
+import CustomNextImage from '@components/shared/common/CustomNextImage';
 
 const HeroSection = ({ product }: IProductByIdPageProps) => {
 	const addProductsToCheckoutAndCart = useAddProductsToCheckoutAndCart();
@@ -16,9 +17,8 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 				className='
 					relative pt-8 pb-8 sm:px-8 sm:pt-16 md:px-16 flex items-center justify-center'
 			>
-				<Image
+				<CustomNextImage
 					src='/images/Rectangle 47.png'
-					alt=''
 					width={200}
 					height={200}
 					className='pointer-events-none aspect-square absolute w-1/2 top-0 right-0 scale-125
@@ -30,7 +30,7 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 						lg:flex-row lg:max-w-full lg:rounded-l-none lg:rounded-r-3xl'
 				>
 					{product.images && product.images[0] && (
-						<Image
+						<CustomNextImage
 							src={product.images[0].src}
 							alt={product.images[0].altText || ''}
 							width={800}
@@ -55,7 +55,7 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 						>
 							Pay in 4 interest-free installments of $12.50 with
 							<span>
-								<Image
+								<CustomNextImage
 									src='/images/shoppay.png'
 									alt='shop pay'
 									width={200}
@@ -78,7 +78,7 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 							>
 								add to cart
 							</Button>
-							<Image
+							<CustomNextImage
 								src='/images/payment_cards.png'
 								alt='payment cards'
 								width={300}

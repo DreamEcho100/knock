@@ -1,5 +1,5 @@
+import CustomNextImage from '@components/shared/common/CustomNextImage';
 import KnockTrademark from '@components/shared/core/KnockTrademark';
-import Image from 'next/image';
 
 const HeroSection = () => {
 	return (
@@ -8,9 +8,8 @@ const HeroSection = () => {
 				className='overflow-hidden
 					relative flex items-center justify-center text-center text-primary-1 p-8 py-16 h-screen min-h-fit max-h-[30rem]'
 			>
-				<Image
+				<CustomNextImage
 					src='/images/Group 179.png'
-					alt=''
 					width={800}
 					height={800}
 					priority

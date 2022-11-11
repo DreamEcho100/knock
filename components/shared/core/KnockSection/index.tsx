@@ -2,9 +2,10 @@ import type { IButtonProps } from '@components/shared/core/Button';
 import type { VariantProps } from 'class-variance-authority';
 
 import Button from '@components/shared/core/Button';
-import Image from 'next/image';
+
 import KnockTrademark from '@components/shared/core/KnockTrademark';
 import { cva } from 'class-variance-authority';
+import CustomNextImage from '@components/shared/common/CustomNextImage';
 
 export const pClasses = cva(`mb-6 leading-10`, {
 	variants: {
@@ -43,9 +44,8 @@ const KnockSection = ({
 					w-full px-8 pt-24 pb-16 flex items-center justify-center flex-col text-center'
 			>
 				<div className='relative flex items-center justify-center max-w-[900px]'>
-					<Image
+					<CustomNextImage
 						src='/images/Group 179.png'
-						alt=''
 						width={800}
 						height={800}
 						priority
@@ -53,7 +53,7 @@ const KnockSection = ({
 						style={{ transform: 'translate(8%, -2%) scale(2)' }}
 					/>
 
-					<Image
+					<CustomNextImage
 						src={imageSrc}
 						alt='knock plugin animation'
 						width={800}

@@ -1,10 +1,11 @@
 import Button from '@components/shared/core/Button';
 import KnockTrademark from '@components/shared/core/KnockTrademark';
-import Image from 'next/image';
+
 import { useAddKnockPluginToCartButtonProps } from './utils/hookes';
 
 import type { IKnockClipperPageProps } from '@pages/knock_clipper';
 import { priceCurrencyFormatter } from '@utils/core/shopify';
+import CustomNextImage from '@components/shared/common/CustomNextImage';
 const HeroSection = ({
 	knockClipperPlugin
 }: {
@@ -32,9 +33,8 @@ const HeroSection = ({
 				px-8 pt-12 pb-20 flex items-center justify-center flex-col text-center'
 			>
 				<div className='relative flex items-center justify-center max-w-[900px]'>
-					<Image
+					<CustomNextImage
 						src='/images/Rectangle 48.png'
-						alt=''
 						width={800}
 						height={800}
 						priority
@@ -42,9 +42,8 @@ const HeroSection = ({
 						style={{ transform: 'translate(8%, -2%) scale(1.5)' }}
 					/>
 
-					<Image
+					<CustomNextImage
 						src='/images/abc59a63fe5ed68da58bff746fd14cce.png'
-						alt=''
 						width={400}
 						height={400}
 						priority

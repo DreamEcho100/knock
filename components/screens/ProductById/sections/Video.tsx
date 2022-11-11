@@ -1,5 +1,5 @@
+import CustomNextImage from '@components/shared/common/CustomNextImage';
 import type { IProductByIdPageProps } from '@pages/products/[productId]';
-import Image from 'next/image';
 
 const VideoSection = ({}: // video
 {
@@ -7,9 +7,8 @@ const VideoSection = ({}: // video
 }) => {
 	return (
 		<section className='relative bg-primary-1'>
-			<Image
+			<CustomNextImage
 				src='/images/Rectangle 46.png'
-				alt=''
 				width={200}
 				height={200}
 				className='pointer-events-none aspect-square absolute w-1/2 top-0 right-0 scale-150 -translate-y-[30%%] -translate-x-[40%]'

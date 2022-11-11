@@ -66,7 +66,6 @@ const ProductShowcase = ({
 					<div className='absolute w-full h-full'>
 						<CustomNextImage
 							src='/images/Rectangle 47.png'
-							alt=''
 							width={800}
 							height={500}
 							className={`${backgroundImgClassName} object-contain mx-auto w-full h-full scale-[2] translate-y-[12.5%] pointer-events-none`}

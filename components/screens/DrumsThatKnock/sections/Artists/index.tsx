@@ -9,9 +9,10 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 // import 'swiper/css/pagination'
 // import 'swiper/css/scrollbar'
-import Image from 'next/image';
+
 import { artists } from 'data/fakeData';
 import KnockTrademark from '@components/shared/core/KnockTrademark';
+import CustomNextImage from '@components/shared/common/CustomNextImage';
 
 const ArtistsSection = () => {
 	return (
@@ -47,7 +48,7 @@ const ArtistsSection = () => {
 									key={index}
 									className='p-2 gap-2 flex flex-col justify-center items-center text-center'
 								>
-									<Image
+									<CustomNextImage
 										src={item.image.src}
 										alt={item.image.alt}
 										width={120}

@@ -1,10 +1,10 @@
-import Image from 'next/image';
 import Button from '@components/shared/core/Button';
 import Link from 'next/link';
 import { cardClasses } from 'utils/core/cva';
 import type { VariantProps } from 'class-variance-authority';
 import { IProduct } from 'types';
 import { useAddProductsToCheckoutAndCart } from '@utils/core/hooks';
+import CustomNextImage from '@components/shared/common/CustomNextImage';
 
 interface IProductCardProps
 	extends VariantProps<typeof cardClasses>,
@@ -35,7 +35,7 @@ const ProductBasicCard = ({
 					group-hover:brightness-100'
 			>
 				{images && images[0] && (
-					<Image
+					<CustomNextImage
 						src={images[0].src}
 						alt={images[0].altText || ''}
 						width={800}
