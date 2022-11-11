@@ -9,8 +9,7 @@ import MainHeader from './MainHeader';
 import { getGetAccessTokenFromCookie, useGetUserData } from '@utils/core/hooks';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 
-export const commonClasses =
-	'leading-relaxed sm:text-[1.2rem] text-primary-2 mx-auto';
+export const commonClasses = 'leading-relaxed text-primary-2 mx-auto';
 
 const LinksListContainer = ({
 	headerText,

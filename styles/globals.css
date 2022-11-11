@@ -60,6 +60,27 @@ select {
 	cursor: pointer;
 }
 
+body {
+	font-size: 1.2rem;
+}
+
+@media (max-width: 640px) {
+	:root {
+		--main-nav-h: 4rem;
+	}
+	body {
+		font-size: 1rem;
+	}
+}
+@media (max-width: 520px) {
+	:root {
+		--main-nav-h: 3rem;
+	}
+	body {
+		font-size: 0.75rem;
+	}
+}
+
 @media (prefers-color-scheme: dark) {
 	html {
 		color-scheme: dark;
@@ -119,6 +140,10 @@ main > section > *,
 		font-size: 1.6rem;
 		line-height: 1.2;
 	}
+	.text-h3 {
+		font-size: 1.35rem;
+		line-height: 1.2;
+	}
 
 	@media screen and (max-width: 640px) {
 		.text-h1 {
@@ -126,6 +151,29 @@ main > section > *,
 		}
 		.text-h2 {
 			font-size: 2.25rem;
+		}
+	}
+
+	@media screen and (max-width: 520px) {
+		.text-h1 {
+			font-size: 1.5rem;
+			line-height: 1.2;
+		}
+		.text-h2 {
+			font-size: 1.125rem;
+			line-height: 1.2;
+		}
+		.text-h3 {
+			font-size: 1rem;
+			line-height: 1.2;
+		}
+		.text-h4 {
+			font-size: 0.9rem;
+			line-height: 1.2;
+		}
+		.text-h5 {
+			font-size: 0.8rem;
+			line-height: 1.2;
 		}
 	}
 }

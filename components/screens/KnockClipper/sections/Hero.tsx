@@ -56,12 +56,12 @@ const HeroSection = ({
 					<KnockTrademark />
 					Clipper
 				</h2>
-				<p className='mb-6 text-[1.75rem] leading-10'>
+				<p className='mb-6 text-h4 leading-10'>
 					Adjustable hard & soft clipper module from KNOCK.
 				</p>
 				<div className='flex items-center justify-center'>
 					<Button
-						className='capitalize  text-[1.375rem]'
+						className='capitalize  text-h6'
 						{...addKnockPluginToCartButtonProps}
 					/>
 					<span className='p-2' />{' '}
