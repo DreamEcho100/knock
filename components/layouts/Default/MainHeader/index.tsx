@@ -254,7 +254,7 @@ const MainHeader = () => {
 					</ul>
 				</div>
 				<div
-					className={`mt-20 bg-primary-1 block lg:hidden overflow-hidden absolute top-0 right-0 left-0 w-full ${
+					className={`mt-main-nav-h bg-primary-1 block lg:hidden overflow-hidden absolute top-0 right-0 left-0 w-full ${
 						isSmallScreenNaveOpen
 							? // ? 'scale-y-100'
 							  // : 'scale-y-0 opacity-0 pointer-events-none'
