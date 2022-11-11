@@ -28,7 +28,7 @@ interface ICart {
 export interface IInitialState {
 	isVisible: {
 		sideNav: boolean;
-		sideCart: boolean;
+		headerCart: boolean;
 	};
 	cart: ICart; // | ICartUpdatedIdle | ICartUpdatedLoading;
 }

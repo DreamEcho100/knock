@@ -2,7 +2,7 @@ import type { IInitialState } from './ts';
 
 export const initIsVisible = (): IInitialState['isVisible'] => ({
 	sideNav: false,
-	sideCart: false
+	headerCart: false
 });
 
 export const initState = (cart?: IInitialState['cart']): IInitialState => ({

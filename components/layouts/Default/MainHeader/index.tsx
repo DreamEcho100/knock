@@ -207,7 +207,7 @@ const MainHeader = () => {
 								onClick={() =>
 									customerGlobalActions.setIsVisibleOnly(
 										customerDispatch,
-										'sideCart'
+										'headerCart'
 									)
 								}
 							>
@@ -296,7 +296,7 @@ export default MainHeader;
 const CartContainer = () => {
 	const [
 		{
-			isVisible: { sideCart: isCartVisible },
+			isVisible: { headerCart: isCartVisible },
 			cart: { productsData }
 		},
 		customerDispatch
@@ -330,7 +330,7 @@ const CartContainer = () => {
 						: 'pointer-events-none opacity-0 duration-150'
 				)}
 				onClick={() =>
-					customerGlobalActions.setIsVisibleOnly(customerDispatch, 'sideCart')
+					customerGlobalActions.setIsVisibleOnly(customerDispatch, 'headerCart')
 				}
 			></div>
 			<div

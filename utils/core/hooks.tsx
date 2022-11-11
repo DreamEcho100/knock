@@ -237,6 +237,8 @@ export const useAddProductsToCheckoutAndCart = () => {
 					updatedAt: new Date()
 				}
 			});
+
+			customerGlobalActions.setIsVisibleOnly(customerDispatch, 'headerCart')
 		}
 	});
 };
