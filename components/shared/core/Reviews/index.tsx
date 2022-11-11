@@ -35,7 +35,7 @@ const Reviews = ({
 				{reviews.map((item, index) => (
 					<SwiperSlide
 						key={index}
-						className='h-full px-2 flex items-center justify-center'
+						className='my-8 h-full px-2 flex items-center justify-center'
 					>
 						<div className='flex relative'>
 							<div
@@ -59,7 +59,7 @@ const Reviews = ({
 											alt={item.image.alt}
 											width={250}
 											height={250}
-											className='block sm:hidden rounded-full aspect-square w-8 h-8 object-cover'
+											className='bg-black block sm:hidden rounded-full aspect-square w-8 h-8 object-cover'
 										/>
 									)}
 								</div>
@@ -76,7 +76,7 @@ const Reviews = ({
 										alt={item.image.alt}
 										width={250}
 										height={250}
-										className='rounded-full aspect-square w-full h-full object-cover'
+										className='bg-black rounded-full aspect-square w-full h-full object-cover'
 									/>
 								)}
 							</div>

@@ -5,9 +5,8 @@
 	--swiper-pagination-color: #7548fe;
 }
 
-.swiper-wrapper-items-center .swiper-wrapper {
-	display: flex;
-	align-items: center;
+.swiper-wrapper {
+	padding: 1rem 0;
 }
 
 .swiper-button-next,
@@ -50,4 +49,13 @@
 	.swiper-button-prev {
 		width: 1rem !important;
 	}
+}
+
+/*  */
+/*  */
+/*  */
+
+.swiper-wrapper-items-center .swiper-wrapper {
+	display: flex;
+	align-items: center;
 }

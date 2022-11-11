@@ -11,233 +11,128 @@ import {
 
 const reviews = [
 	{
-		image: { src: '/images/people/Dara JT..webp', alt: 'Dara JT.' },
+		image: { src: '/images/icon1.png', alt: '' },
 		review:
-			"You're a Trendsetter,\nTrailblazer, Innovator, Mogul, and Inspiration to everyone\naround you. Your Drums Will Always stand the test of Time\nfor many generations of creatives. More Blessings on Blessings.",
-		reviewedBy: 'Dara JT.'
-	},
-	{
-		image: { src: '/images/people/AN TY.jpg', alt: 'AN TY' },
-		review:
-			"LEGEND. Not one of my songs I've released\nin the past 5 years has been made without at least one\nelement of any of the DTK.",
-		reviewedBy: 'AN TY'
-	},
-	{
-		image: { src: '/images/people/icon1.png', alt: '' },
-		review:
-			"Dude, your sound packs to many were like a real inside look into what the words biggest\nproducers are working with and why their music sounded as it did. When you made it\naccessible for everyone to have you've literally bridge a HUGE gap between pros with\nexpensive equipment and kids with laptops to a point where everyone is able to focus\nmore on creativity and not stress out about the quality of your beats. We are forever\nthankful for that",
-		reviewedBy: 'From The Crib'
-	},
-	{
-		image: { src: '/images/people/LLusion.jpg', alt: 'LLusion' },
-		review:
-			'DTK truly got me through some tough times. Still does to this day. About to download X\ntonight and make some crazy shit. Praise DECAP',
-		reviewedBy: 'LLusion'
-	},
-	{
-		image: { src: '/images/people/Toasty_MM.jpeg', alt: 'Toasty_MM' },
-		review:
-			"Helped me elevate my own sound and gave me the confidence to actually send out my\nmusic. Without Decap I would have never to make the music I've made with artists\ntoday. Thank you brother.",
-		reviewedBy: 'Toasty_MM'
+			"This Knock plug in is essential for all drum buses. I use Knock for the drum bus, and RC 20 for\nthe melody bus and I don't need anything more.",
+		reviewedBy: 'Demetrious White'
 	},
 	{
 		image: {
-			src: '/images/people/Pri$EGotBeats.jpg',
-			alt: 'Pri$EGotBeats'
+			src: '/images/people/Carlito Olivero.jpg',
+			alt: 'Carlito Olivero'
 		},
 		review:
-			"He (Decap) really does have some of the best sounds in the game, if not the best.\nmean you really don't have to do anything to them, when mixing your beat. Kicks are\npowerful, Snare crack, and the rest is top tier quality. Thanks for all your hard work an\neffort.",
-		reviewedBy: 'Pri$EGotBeats'
+			"Easily one of the most genius plugins ever made. I know about a year late but bro. THANK\nYOU! You've just improved my workflow by so much. Can't wait to see what you come up with\nnext, perhaps a Fx plug-in for Melodie's?",
+		reviewedBy: 'Carlito Olivero'
 	},
 	{
-		image: { src: '/images/people/icon1.png', alt: '' },
+		image: { src: '/images/people/A.J. Hall.jpeg', alt: 'A.J. Hall' },
+		review: 'Thanks bro! Knock has permanent residence on my master channel.',
+		reviewedBy: 'A.J. Hall'
+	},
+	{
+		image: { src: '/images/people/Cameron Butler.jpg', alt: 'Cameron Butler' },
 		review:
-			'DECAP kits are the best. You know it, I know it; Everybody knows it!',
-		reviewedBy: 'Pro Ave'
+			'I highly recommend the KNOCK plugin. drums gon feel like they physically coming out\nof the speakers',
+		reviewedBy: 'Cameron Butler'
 	},
 	{
-		image: { src: '/images/people/Flume.jpg', alt: 'Flume' },
-		review: 'Thnx for keeping me inspired.',
-		reviewedBy: 'Flume'
-	},
-	{
-		image: { src: '/images/people/Ipkuss.jpg', alt: 'Ipkuss' },
+		image: { src: '/images/people/Rocky Blaq.jpg', alt: 'Rocky Blaq' },
 		review:
-			"Decap is literally helping shape the sound of popular modern production, it's trippy.",
-		reviewedBy: 'Ipkuss'
+			'One of the best plugins I ever got.... this is definitely my Top 3 go-to for drums! Stay\ntuned for a video recap!',
+		reviewedBy: 'Rocky Blaq'
 	},
 	{
-		image: {
-			src: '/images/people/KAELIN ELLIS.jpg',
-			alt: 'KAELIN ELLIS'
-		},
-		review: 'Thank you Decap for the drums that knock.',
-		reviewedBy: 'KAELIN ELLIS'
-	},
-	{
-		image: { src: '/images/people/THE KOUNT.jpg', alt: 'THE KOUNT' },
-		review: 'Decap shit slaps unreasonably hard',
-		reviewedBy: 'THE KOUNT'
-	},
-	{
-		image: {
-			src: '/images/people/Monte booker.jpg',
-			alt: 'Monte booker'
-		},
+		image: { src: '/images/icon1.png', alt: '' },
 		review:
-			'They gotta add in the amount of hours we all use your kits in this.',
-		reviewedBy: 'Monte booker'
+			'Shout out to DECAP for making one of the best plug-ins of all time. I literally use it on\nevery beat.',
+		reviewedBy: 'ZayTooLit Back Up'
 	},
 	{
-		image: { src: '/images/people/FrankPole.jpg', alt: 'FrankPole' },
-		review: 'DECAP shaped the music industry according to his style Legend.',
-		reviewedBy: 'FrankPole'
-	},
-	{
-		image: {
-			src: '/images/people/shamtrax music.jpg',
-			alt: 'shamtrax music'
-		},
-		review: 'Refreshing sound design EVERY time!',
-		reviewedBy: 'shamtrax music'
-	},
-	{
-		image: { src: '/images/people/Gustavs.jpg', alt: 'Gustavs' },
-		review: 'The best drum kits out there. I got all of them!',
-		reviewedBy: 'Gustavs'
-	},
-	{
-		image: { src: '/images/people/Spizzyspose.jpg', alt: 'Spizzyspose' },
-		review: 'Instant buy',
-		reviewedBy: 'Spizzyspose'
-	},
-	{
-		image: { src: '/images/people/Blvkbeats.jpg', alt: 'Blvkbeats' },
-		review: 'Best drums in the game',
-		reviewedBy: 'Blvkbeats'
-	},
-	{
-		image: {
-			src: '/images/people/Ecklectic official.jpg',
-			alt: 'Ecklectic'
-		},
-		review: 'The best drums in the industry period!',
-		reviewedBy: 'Luis Garay'
-	},
-	{
-		image: {
-			src: '/images/people/Ecklectic official.jpg',
-			alt: 'Ecklectic official'
-		},
-		review: 'Decap with my FAVE kits.',
-		reviewedBy: 'Ecklectic official'
-	},
-	{
-		image: { src: '/images/people/icon1.png', alt: '' },
-		review: 'These drums will probably win in a fight against Mike Tyson.',
-		reviewedBy: 'Adiktive'
-	},
-	{
-		image: { src: '/images/people/icon1.png', alt: '' },
-		review: 'Nothing beats the joy of getting a Decap drumkit.',
-		reviewedBy: 'Naveedsperspective'
-	},
-	{
-		image: {
-			src: '/images/people/Amnesiaxbeats.jpg',
-			alt: 'Amnesiaxbeats'
-		},
-		review: 'U have the dopest drums in the game rn. I use them a lot.',
-		reviewedBy: 'Amnesiaxbeats'
-	},
-	{
-		image: { src: '/images/people/nata beats.jpg', alt: 'nata beats' },
-		review: 'One of the best sound designers in the game!',
-		reviewedBy: 'nata beats'
-	},
-	{
-		image: { src: '/images/people/icon1.png', alt: '' },
-		review: 'The best kits around!',
-		reviewedBy: 'Strong Maurice'
-	},
-	{
-		image: { src: '/images/people/Wearejayem.webp', alt: 'Wearejayem' },
-		review: 'These drums really knock bro!!!!',
-		reviewedBy: 'Wearejayem'
-	},
-	{
-		image: { src: '/images/people/Maadrhino.jpg', alt: 'Maadrhino' },
-		review: "I'm gonna get all of them!",
-		reviewedBy: 'Maadrhino'
-	},
-	{
-		image: { src: '/images/people/vaportwitch.jpg', alt: 'vaportwitch' },
-		review: 'Legendary. Changed the game for a generation of producers.',
-		reviewedBy: 'vaportwitch'
-	},
-	{
-		image: {
-			src: '/images/people/Tradevoorhees.jpg',
-			alt: 'Tradevoorhees'
-		},
+		image: { src: '/images/people/Tim Kelley.jpg', alt: 'Tim Kelley' },
 		review:
-			'Best drums in the game. real shit. I use your kicks on everything. even my own live\ndrums.',
-		reviewedBy: 'Tradevoorhees'
+			'This plug is unreal everybody should have it that mix or produce! Good job famo',
+		reviewedBy: 'Tim Kelley'
 	},
 	{
-		image: { src: '/images/people/goodxj.jpg', alt: 'goodxj' },
-		review: 'Best drums in the game!!! #dtk',
-		reviewedBy: 'goodxj'
-	},
-	{
-		image: { src: '/images/people/Moorekismet.jpg', alt: 'Moorekismet' },
-		review: 'Take my fucking money',
-		reviewedBy: 'Moorekismet'
+		image: { src: '/images/people/Skratch Bastid.jpg', alt: 'Skratch Bastid' },
+		review: 'Fire plugin',
+		reviewedBy: 'Skratch Bastid'
 	},
 	{
 		image: {
-			src: '/images/people/Donelljonesforever.jpg',
-			alt: 'Donelljonesforever'
+			src: '/images/people/Vincent Van den Ende.jpg',
+			alt: 'Vincent Van den Ende'
 		},
-		review: 'I love your drums fam. Consider it bought…',
-		reviewedBy: 'Donelljonesforever'
+		review: 'One of my favourites!!!!',
+		reviewedBy: 'Vincent Van den Ende'
 	},
 	{
-		image: { src: '/images/people/icon1.png', alt: '' },
+		image: { src: '/images/icon1.png', alt: '' },
+		review: 'One of my go to plugs for beats and sound design! Excellence!',
+		reviewedBy: 'Tone Jonez'
+	},
+	{
+		image: { src: '/images/people/ILIASSOPDEBEAT.jpg', alt: 'ILIASSOPDEBEAT' },
+		review: "Best plugin for mixing kicks/808's",
+		reviewedBy: 'ILIASSOPDEBEAT'
+	},
+	{
+		image: { src: '/images/icon1.png', alt: '' },
 		review:
-			'Welp, this about to be the drum sounds on every track for the foreseeable future haha',
-		reviewedBy: 'Ambedo_bass'
+			"when I tell you that it's worth every penny.... Bro. It takes stock sounds to a new level.\nJust imagine what it could do for your sounds in your library.",
+		reviewedBy: 'Xtradaking'
+	},
+	{
+		image: { src: '/images/icon1.png', alt: '' },
+		review:
+			'DECAP did 1 plugin and that sht already in GOAT status.thats power.',
+		reviewedBy: 'VOICE NOTE PAPI'
 	},
 	{
 		image: {
-			src: '/images/people/of the trees.jpg',
-			alt: 'of the trees'
+			src: '/images/people/Karat Gold Music.jpg',
+			alt: 'Karat Gold Music'
 		},
-		review: 'best kick samples i always come back to are DECAP',
-		reviewedBy: 'of the trees'
+		review: "Maaan, it's exactly how it's supposed to be. Great plugin!",
+		reviewedBy: 'Karat Gold Music'
 	},
 	{
-		image: { src: '/images/people/icon1.png', alt: '' },
+		image: { src: '/images/people/M-phazes.jpg', alt: 'M-phazes' },
+		review: 'YOU KILLED THIS SHIT BRO!! PLUG-IN IS WILD!',
+		reviewedBy: 'M-phazes'
+	},
+	{
+		image: { src: '/images/people/Dibia$e.jpg', alt: 'Dibia$e' },
 		review:
-			'Goes without saying but DECAP got the best drum kits out no question about it.',
-		reviewedBy: 'WIZE'
+			"That plug in the KNOCK from DECAP is 🔥🔥🔥. I'm gonna have some demos soon.\nThis is definitely a must have in the arsenal.",
+		reviewedBy: 'Dibia$e'
 	},
 	{
-		image: { src: '/images/people/FrankPole2.jpg', alt: 'FrankPole' },
+		image: { src: '/images/icon1.png', alt: '' },
 		review:
-			'DECAP is a pioneer in the music industry. All the recent hip-hop/trap songs released in\nrecent years sound like that because of his sample packs',
-		reviewedBy: 'FrankPole'
+			'Finally getting a chance to play with DECAP\'s new plugin "KNOCK" and it does exactly\nwhat the title says. Super useful for shaping individual sounds and gonna be using this a\nlot on the drum buss. Definitely get that if you haven\'t yet.',
+		reviewedBy: 'GOD.DAMN.CHAN'
 	},
 	{
-		image: {
-			src: '/images/people/DJ Jazzy Jeff.jpg',
-			alt: 'DJ Jazzy Jeff'
-		},
-		review: 'This is a MUST HAVE!!!! WOW!!!',
-		reviewedBy: 'DJ Jazzy Jeff'
+		image: { src: '/images/icon1.png', alt: '' },
+		review:
+			'I love how useful it is and how it doesn\'t use much CPU. It allows producers to use it on\nmany tracks. making them "knock" and sound cohesive together at the same time. Big\nstep up from the stock Drum Buss plugin.',
+		reviewedBy: 'walterdeans'
+	},
+	{
+		image: { src: '/images/people/Mars Today.jpg', alt: 'Mars Today' },
+		review:
+			'Just copped the homie DECAP\'s new "Knock" plugin. Here is my 4 word review: It\'s\nreally really good.',
+		reviewedBy: 'Mars Today'
+	},
+	{
+		image: { src: '/images/icon1.png', alt: '' },
+		review:
+			"Y'all betta grab that! It's like hot sauce I been putting it on everything lol!",
+		reviewedBy: 'Tone Jonez'
 	}
 ];
-
 // const shortReviews = reviews.filter((review) => review.review.length < 100);
 
 const KnockPluginScreen = ({ knockPlugin }: IKnockPluginPageProps) => {
