@@ -140,7 +140,7 @@ const OrderCard = ({
 								'w-[95vw] max-w-md rounded-lg p-4 md:w-full',
 								'flex flex-col gap-4',
 								'top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]',
-								'bg-white dark:bg-gray-800',
+								'bg-white dark:bg-neutral-900',
 								'focus:outline-none focus-visible:ring-[0.125rem] focus-visible:ring-purple-500 focus-visible:ring-opacity-75'
 							)}
 						>
@@ -156,7 +156,7 @@ const OrderCard = ({
 								{lineItems.map(({ node: item }) => (
 									<div key={item.variant.id}>
 										<div className='flex'>
-											<div className='w-36 h-36 aspect-square'>
+											<div className='w-36 flex items-center bg-black'>
 												{item?.variant?.image?.url && (
 													<CustomNextImage
 														unoptimized
@@ -164,7 +164,7 @@ const OrderCard = ({
 														alt={item.variant.image.altText || ''}
 														width={150}
 														height={150}
-														className='w-full h-full object-contain'
+														className='w-full h-full aspect-square object-contain'
 													/>
 												)}
 											</div>
