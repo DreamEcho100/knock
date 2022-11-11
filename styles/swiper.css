@@ -34,6 +34,11 @@
 	content: '' !important;
 }
 
+.swiper-button-next,
+.swiper-button-prev {
+	width: 1.5rem !important;
+}
+
 @media (max-width: 768px) {
 	.swiper-button-next,
 	.swiper-button-prev {

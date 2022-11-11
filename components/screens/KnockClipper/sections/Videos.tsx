@@ -15,7 +15,7 @@ const VideosSection = ({
 	return (
 		<section
 			className='bg-primary-1 text-primary-2 p-8 
-				sm:py-20'
+				sm:py-16'
 		>
 			<VideosContainer
 				iframes={[

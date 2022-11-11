@@ -7,7 +7,7 @@ import KnockTrademark from '@components/shared/core/KnockTrademark';
 import { cva } from 'class-variance-authority';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 
-export const pClasses = cva(`mb-6 leading-10`, {
+export const pClasses = cva(`mb-6 leading-6 sm:leading-10`, {
 	variants: {
 		width: {
 			large: 'max-w-[800px]',

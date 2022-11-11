@@ -10,7 +10,7 @@ const FeaturesAndFilesIncludedSection = ({}: // features,
 	return (
 		<section
 			className='bg-primary-1 px-8 p-8 
-				sm:py-20'
+				sm:py-16'
 		>
 			{/* <TwoCardContainer
 				items1={features}

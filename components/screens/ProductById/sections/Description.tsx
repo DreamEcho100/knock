@@ -10,7 +10,7 @@ const DescriptionSection = ({
 	return (
 		<section
 			className='bg-primary-1 p-8 
-				sm:py-20'
+				sm:py-16'
 		>
 			<Description>{description}</Description>
 		</section>

@@ -181,7 +181,7 @@ const MainHeader = () => {
 								} the nav menu`}
 								className='flex items-center justify-center'
 							>
-								<GiHamburgerMenu />
+								<GiHamburgerMenu className='text-base' />
 							</button>
 						</li>
 						<li>
@@ -197,7 +197,7 @@ const MainHeader = () => {
 									title='profile'
 									className='flex items-center justify-center text-bg-secondary-1'
 								>
-									<BsFillPersonFill />
+									<BsFillPersonFill className='text-base' />
 								</Link>
 							)}
 						</li>
@@ -220,6 +220,7 @@ const MainHeader = () => {
 								>
 									<HiShoppingBag
 										className={cx(
+											'text-base',
 											'duration-300 transition-all',
 											cartProductsCount === 0
 												? ''

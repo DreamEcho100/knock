@@ -62,17 +62,17 @@ const faqs: (
 
 const FAQSPages: NextPage = () => {
 	return (
-		<section className='bg-primary-1 p-8 sm:p-16 flex flex-col'>
-			<div className='max-w-[800px] mx-auto text-primary-4'>
+		<section className='bg-primary-1 p-8 sm:p-16 flex flex-col break-all'>
+			<div className='max-w-full md:max-w-[800px] mx-auto text-primary-4'>
 				<header>
 					<h1 className='text-h2 capitalize font-bold text-primary-1'>FAQs</h1>
 				</header>
-				<ul className='flex flex-col gap-8 my-8 border-[0.125rem] border-bg-secondary-1 px-20 py-12 rounded-2xl leading-[2] text-[rgb(200, 200, 200)]'>
+				<ul className='flex flex-col gap-8 my-8 border-[0.125rem] border-bg-secondary-1 px-8 sm:px-20 py-12 rounded-2xl leading-[2] text-[rgb(200, 200, 200)]'>
 					{faqs.map((item) => {
 						return (
-							<li key={item.question} className='flex flex-col py-1 '>
+							<li key={item.question} className='flex flex-col py-1rounded'>
 								<span className='flex flex-col text-[80%]'>
-									<h2 className='text-3xl uppercase relative text-primary-1 mb-3'>
+									<h3 className='text-h3 uppercase relative text-primary-1 mb-3'>
 										<CustomNextImage
 											src='/svgs/purple-circle.svg'
 											width={20}
@@ -81,7 +81,7 @@ const FAQSPages: NextPage = () => {
 													rtl:right-0 rtl:left-auto rtl:translate-x-[150%]'
 										/>
 										{item.question}
-									</h2>
+									</h3>
 									{item.__answer_type === 'opening_and_lists' ? (
 										<>
 											<p>{item.answer.opening}</p>

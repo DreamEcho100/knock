@@ -40,7 +40,9 @@ const KnockProductShowcaseSection = ({
 
 					backgroundImg: false
 				}}
-				wrapper={{ className: 'lg:flex-row-reverse gap-8 lg:px-20' }}
+				wrapper={{
+					className: 'lg:flex-row-reverse gap-8 lg:px-20 flex-col-reverse'
+				}}
 			/>
 		</section>
 	);

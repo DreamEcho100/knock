@@ -36,12 +36,11 @@ const ProductShowcase = ({
 		<div
 			{...wrapper}
 			className={`
-					flex flex-col gap-8 lg:gap-0
+					flex flex-col gap-16 lg:gap-0
 					lg:flex-row ${wrapperClassName}`}
 		>
 			<div
-				className='w-full flex flex-col items-center justify-center text-center gap-4 px-8 pb-4
-							sm:pb-20
+				className='w-full flex flex-col items-center justify-center text-center gap-4 md:px-8 pb-4
 							lg:gap-8 lg:w-1/2 lg:text-align-initial lg:items-start lg:py-8'
 			>
 				<h2
@@ -63,7 +62,7 @@ const ProductShowcase = ({
 				/>
 			</div>
 			<div
-				className='w-full relative p-4
+				className='w-full relative md:p-4
 							 lg:w-1/2 lg:p-0'
 			>
 				{backgroundImg && (

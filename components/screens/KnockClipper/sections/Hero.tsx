@@ -56,7 +56,7 @@ const HeroSection = ({
 					<KnockTrademark />
 					Clipper
 				</h2>
-				<p className='mb-6 text-h4 leading-10'>
+				<p className='mb-6 text-h4 leading-6 sm:leading-10'>
 					Adjustable hard & soft clipper module from KNOCK.
 				</p>
 				<div className='flex items-center justify-center'>

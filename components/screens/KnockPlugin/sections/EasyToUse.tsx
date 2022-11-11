@@ -7,7 +7,7 @@ const EasyToUseSection = ({
 	knockPlugin: IKnockPluginPageProps['knockPlugin'];
 }) => {
 	return (
-		<section className='bg-primary-1 text-primary-2 px-4 sm:px-8 py-16'>
+		<section className='bg-primary-1 text-primary-2 px-4 sm:px-8 py-12'>
 			<ProductShowcase
 				product={knockPlugin}
 				textContainer={{
@@ -27,7 +27,9 @@ const EasyToUseSection = ({
 						className: 'max-w-md'
 					}
 				}}
-				wrapper={{ className: 'container-restrictions-2 lg:px-20' }}
+				wrapper={{
+					className: 'container-restrictions-2 flex-col-reverse lg:px-20'
+				}}
 			/>
 		</section>
 	);

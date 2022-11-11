@@ -20,7 +20,9 @@ export const getShopifyClient = () => {
 };
 
 export const priceCurrencyFormatter = (price: string, currency: string) => {
-	if (currency.toLocaleUpperCase() === 'USD') return `$${price}`;
+	const formattedPrice =
+		parseInt(price) === parseFloat(price) ? parseInt(price).toString() : price;
+	if (currency.toLocaleUpperCase() === 'USD') return `$${formattedPrice}`;
 
 	return `${price} ${currency}`;
 };

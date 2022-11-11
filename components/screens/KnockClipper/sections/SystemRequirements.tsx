@@ -4,7 +4,7 @@ const SystemRequirementsSection = () => {
 	return (
 		<section
 			className='bg-primary-1 p-8 
-				sm:py-20'
+				sm:py-16'
 		>
 			<div className='flex flex-col gap-12'>
 				<header className='p-4 text-primary-2 text-center flex flex-col justify-center items-center gap-6'>
