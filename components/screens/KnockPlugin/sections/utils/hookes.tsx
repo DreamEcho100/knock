@@ -1,5 +1,6 @@
 import type { IKnockPluginPageProps } from '@pages/knock-plugin';
 import { useAddProductsToCheckoutAndCart } from '@utils/core/hooks';
+import { priceCurrencyFormatter } from '@utils/core/shopify';
 
 export const useAddKnockPluginToCartButtonProps = ({
 	knockPlugin,
@@ -22,16 +23,23 @@ export const useAddKnockPluginToCartButtonProps = ({
 			<>
 				Buy it now{' '}
 				<span className='bg-secondary-2'>
-					{knockPlugin.variants[0].price.amount}&nbsp;
-					{knockPlugin.variants[0].price.currencyCode}
+					{priceCurrencyFormatter(
+						knockPlugin.variants[0].price.amount,
+						knockPlugin.variants[0].price.currencyCode
+					)}
 				</span>
 				<del>
-					{knockPlugin.variants[0].compareAtPrice.amount}&nbsp;
-					{knockPlugin.variants[0].compareAtPrice.currencyCode}
+					{priceCurrencyFormatter(
+						knockPlugin.variants[0].compareAtPrice.amount,
+						knockPlugin.variants[0].compareAtPrice.currencyCode
+					)}
 				</del>
 			</>
 		) : (
-			`Buy it now ${knockPlugin.variants[0].price.amount}${knockPlugin.variants[0].price.currencyCode}`
+			`Buy it now ${priceCurrencyFormatter(
+				knockPlugin.variants[0].price.amount,
+				knockPlugin.variants[0].price.currencyCode
+			)}`
 		)
 	};
 };

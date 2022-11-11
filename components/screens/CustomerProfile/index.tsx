@@ -15,7 +15,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import accordionClasses from '@styles/accordion.module.css';
 
 import { useGetUserDataFromStore } from '@utils/core/hooks';
-import { getIdFromGid } from '@utils/core/shopify';
+import { getIdFromGid, priceCurrencyFormatter } from '@utils/core/shopify';
 
 import type { IUser } from 'types';
 
@@ -73,20 +73,32 @@ const OrderCard = ({
 				<TitleValue title='id:' value={order.id} />
 				<TitleValue
 					title='total price:'
-					value={`${order.totalPrice.amount} ${order.totalPrice.currencyCode}`}
+					value={priceCurrencyFormatter(
+						order.totalPrice.amount,
+						order.totalPrice.currencyCode
+					)}
 				/>
 				<TitleValue
 					title='total tax:'
-					value={`${order.totalTax.amount} ${order.totalTax.currencyCode}`}
+					value={priceCurrencyFormatter(
+						order.totalTax.amount,
+						order.totalTax.currencyCode
+					)}
 				/>
 				<TitleValue
 					title='total shipping price:'
-					value={`${order.totalShippingPrice.amount} ${order.totalShippingPrice.currencyCode}`}
+					value={priceCurrencyFormatter(
+						order.totalShippingPrice.amount,
+						order.totalShippingPrice.currencyCode
+					)}
 				/>
 				{!!parseFloat(order.totalRefunded.amount) && (
 					<TitleValue
 						title='total refunded:'
-						value={`${order.totalRefunded.amount} ${order.totalRefunded.currencyCode}`}
+						value={priceCurrencyFormatter(
+							order.totalRefunded.amount,
+							order.totalRefunded.currencyCode
+						)}
 					/>
 				)}
 				<Button

@@ -1,12 +1,14 @@
 import type { IKnockClipperPageProps } from '@pages/knock_clipper';
 import { useAddProductsToCheckoutAndCart } from '@utils/core/hooks';
+import { priceCurrencyFormatter } from '@utils/core/shopify';
+import { ReactNode } from 'react-markdown/lib/react-markdown';
 
 export const useAddKnockPluginToCartButtonProps = ({
 	knockClipperPlugin,
 	text
 }: {
 	knockClipperPlugin: IKnockClipperPageProps['knockClipperPlugin'];
-	text?: string;
+	text?: ReactNode;
 }) => {
 	const addProductsToCheckoutAndCart = useAddProductsToCheckoutAndCart();
 
@@ -22,17 +24,24 @@ export const useAddKnockPluginToCartButtonProps = ({
 			<>
 				Buy it now{' '}
 				<span>
-					{knockClipperPlugin.variants[0].price.amount}&nbsp;
-					{knockClipperPlugin.variants[0].price.currencyCode}
+					{priceCurrencyFormatter(
+						knockClipperPlugin.variants[0].price.amount,
+						knockClipperPlugin.variants[0].price.currencyCode
+					)}
 				</span>
 				&nbsp;
-				<del className='text-bg-secondary-2'>
-					{knockClipperPlugin.variants[0].compareAtPrice.amount}&nbsp;
-					{knockClipperPlugin.variants[0].compareAtPrice.currencyCode}
+				<del className='text-bg-secondary-2 line-through'>
+					{priceCurrencyFormatter(
+						knockClipperPlugin.variants[0].compareAtPrice.amount,
+						knockClipperPlugin.variants[0].compareAtPrice.currencyCode
+					)}
 				</del>
 			</>
 		) : (
-			`Buy it now ${knockClipperPlugin.variants[0].price.amount}${knockClipperPlugin.variants[0].price.currencyCode}`
+			`Buy it now ${priceCurrencyFormatter(
+				knockClipperPlugin.variants[0].price.amount,
+				knockClipperPlugin.variants[0].price.currencyCode
+			)}`
 		)
 	};
 };

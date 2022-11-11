@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useAddKnockPluginToCartButtonProps } from './utils/hookes';
 
 import type { IKnockClipperPageProps } from '@pages/knock_clipper';
+import { priceCurrencyFormatter } from '@utils/core/shopify';
 const HeroSection = ({
 	knockClipperPlugin
 }: {
@@ -11,7 +12,17 @@ const HeroSection = ({
 }) => {
 	const addKnockPluginToCartButtonProps = useAddKnockPluginToCartButtonProps({
 		knockClipperPlugin,
-		text: `Buy it now ${knockClipperPlugin.variants[0].compareAtPrice.amount} ${knockClipperPlugin.variants[0].compareAtPrice.currencyCode}`
+		text: (
+			<>
+				Buy it now&nbsp;
+				<del className='text-bg-secondary-2 line-through'>
+					{priceCurrencyFormatter(
+						knockClipperPlugin.variants[0].compareAtPrice.amount,
+						knockClipperPlugin.variants[0].compareAtPrice.currencyCode
+					)}
+				</del>
+			</>
+		)
 	});
 
 	return (
@@ -56,8 +67,10 @@ const HeroSection = ({
 					/>
 					<span className='p-2' />{' '}
 					<span className='text-primary-1 font-bold'>
-						{knockClipperPlugin.variants[0].price.amount}{' '}
-						{knockClipperPlugin.variants[0].price.currencyCode}
+						{priceCurrencyFormatter(
+							knockClipperPlugin.variants[0].price.amount,
+							knockClipperPlugin.variants[0].price.currencyCode
+						)}
 					</span>
 				</div>
 			</div>

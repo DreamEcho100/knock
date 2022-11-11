@@ -18,3 +18,9 @@ export const getShopifyClient = () => {
 		storefrontAccessToken: SHOPIFY_STOREFRONT_API_TOKEN
 	});
 };
+
+export const priceCurrencyFormatter = (price: string, currency: string) => {
+	if (currency.toLocaleUpperCase() === 'USD') return `$${price}`;
+
+	return `${price} ${currency}`;
+};
