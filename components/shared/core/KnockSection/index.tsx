@@ -14,8 +14,8 @@ export const pClasses = cva(`mb-6 leading-10`, {
 			small: 'max-w-[350px]'
 		},
 		text: {
-			small: 'text-[1.25rem]',
-			medium: 'text-[1.75rem]'
+			small: 'text-h6',
+			medium: 'text-h5'
 		}
 	},
 	defaultVariants: {

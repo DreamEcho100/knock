@@ -8,7 +8,7 @@ const Description = ({
 	// !!!
 	return (
 		<div className='text-center leading-12 max-w-[900px]'>
-			<p className='text-[1.5rem] leading-[1.5]'>{children}</p>
+			<p className='text-h5 leading-[1.5]'>{children}</p>
 		</div>
 	);
 };

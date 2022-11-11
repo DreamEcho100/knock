@@ -7,7 +7,7 @@ const EasyToUseSection = ({
 	knockPlugin: IKnockPluginPageProps['knockPlugin'];
 }) => {
 	return (
-		<section className='bg-primary-1 text-primary-2 px-4 py-20'>
+		<section className='bg-primary-1 text-primary-2 px-4 sm:px-8 py-16'>
 			<ProductShowcase
 				product={knockPlugin}
 				textContainer={{

@@ -75,8 +75,7 @@ const ShapesYourDrumsSection = () => {
 			</div>
 			<div
 				className='max-w-screen-xl
-					relative flex flex-col gap-20 p-8
-					sm:py-20'
+					relative flex flex-col gap-20 px-4 sm:px-8 py-16'
 			>
 				<header className='text-center'>
 					<h2 className='text-h2 uppercase text-primary-1'>

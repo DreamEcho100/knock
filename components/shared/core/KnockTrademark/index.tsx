@@ -2,7 +2,7 @@ import CustomNextImage from '@components/shared/common/CustomNextImage';
 
 const KnockTrademark = () => {
 	return (
-		<span className='flex w-fit mx-auto md:mx-0 relative'>
+		<span className='flex w-fit relative'>
 			KNOCK
 			<sup>
 				<CustomNextImage
