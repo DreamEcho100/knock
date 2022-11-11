@@ -4,6 +4,11 @@
 	--swiper-pagination-color: #7548fe;
 }
 
+.swiper-wrapper-items-center .swiper-wrapper {
+	display: flex;
+	align-items: center;
+}
+
 .swiper-button-next,
 [dir='rtl'] .swiper-button-prev {
 	content: '' !important;
