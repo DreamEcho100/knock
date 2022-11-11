@@ -47,6 +47,19 @@ export const getProductById = async (id: string) => {
 
 	return productResult.product;
 };
+export const getProductByHandle = async (handle: string) => {
+	const response = await fetch(
+		`${getAppApiPath()}/products/product/?handle=${handle}`
+	);
+
+	await throwIfResponseError(response);
+
+	const productResult: {
+		product: IProduct;
+	} = await response.json();
+
+	return productResult.product;
+};
 export const createOneCheckout = async () => {
 	const response = await fetch(`${getAppApiPath()}/checkouts/create-one`);
 

@@ -1,3 +1,4 @@
+import { IKnockClipperPageProps } from '@pages/knock_clipper';
 import {
 	DescriptionSection,
 	HeroSection,
@@ -6,14 +7,14 @@ import {
 	VideosSection
 } from './sections';
 
-const KnockScreen = () => {
+const KnockScreen = ({ knockClipperPlugin }: IKnockClipperPageProps) => {
 	return (
 		<>
-			<HeroSection />
+			<HeroSection knockClipperPlugin={knockClipperPlugin} />
 			<DescriptionSection />
-			<ProductShowcaseSection />
+			<ProductShowcaseSection knockClipperPlugin={knockClipperPlugin} />
 			<SystemRequirementsSection />
-			<VideosSection />
+			<VideosSection knockClipperPlugin={knockClipperPlugin} />
 		</>
 	);
 };

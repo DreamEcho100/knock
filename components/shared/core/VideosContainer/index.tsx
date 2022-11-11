@@ -1,6 +1,14 @@
-import Button from '../Button';
+import type { IframeHTMLAttributes } from 'react';
+import type { IButtonProps } from '@components/shared/core/Button';
+import Button from '@components/shared/core/Button';
 
-const VideosContainer = () => {
+const VideosContainer = ({
+	iframes,
+	buttonProps = {}
+}: {
+	iframes: IframeHTMLAttributes<HTMLIFrameElement>[];
+	buttonProps?: IButtonProps;
+}) => {
 	return (
 		<div
 			className='container-restrictions-2
@@ -15,29 +23,22 @@ const VideosContainer = () => {
 				className='flex flex-col items-center justify-center gap-12
 		lg:flex-row'
 			>
-				<iframe
-					width='800'
-					height='400'
-					src='https://www.youtube.com/embed/4fiC6Zi0Wnw'
-					title='YouTube video player'
-					frameBorder='0'
-					allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-					allowFullScreen
-					className='overflow-hidden rounded-2xl'
-				></iframe>
-				<iframe
-					width='800'
-					height='400'
-					src='https://www.youtube.com/embed/4fiC6Zi0Wnw'
-					title='YouTube video player'
-					frameBorder='0'
-					allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-					allowFullScreen
-					className='overflow-hidden rounded-2xl'
-				></iframe>
+				{iframes.map((iframe, index) => (
+					<iframe
+						key={index}
+						width='800'
+						height='400'
+						// src='https://www.youtube.com/embed/4fiC6Zi0Wnw'
+						// title='YouTube video player'
+						{...iframe}
+						className='overflow-hidden rounded-2xl'
+					/>
+				))}
 			</div>
 			<div className='flex items-center justify-center mt-8'>
-				<Button className='capitalize'>add to cart</Button>
+				<Button className='capitalize' {...buttonProps}>
+					add to cart
+				</Button>
 			</div>
 		</div>
 	);

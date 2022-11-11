@@ -62,13 +62,8 @@ export const useGetUserData = ({
 	return query;
 };
 
-export const useGetUserCheckoutIdAndKeyCookie = () => {
-	const { user } = useGetUserDataFromStore();
-
-	return useMemo(() => getUserCheckoutIdAndKeyFromCookie(user?.data?.id), [
-		user?.data?.id
-	]);
-};
+export const useGetUserCheckoutIdAndKeyCookie = () =>
+	getUserCheckoutIdAndKeyFromCookie(); // useMemo(() => getUserCheckoutIdAndKeyFromCookie(), []);
 
 export const useLogoutUser = ({
 	enabled,
@@ -161,10 +156,9 @@ export const useGetUserCheckoutDetailsAndIdAndKey = () => {
 	const queryClient = useQueryClient();
 	const createOneCheckout = queryClient.getQueryData<
 		TCreateOneCheckoutReturnType
-	>(['create-one-checkout', user?.data?.id]);
+	>(['create-one-checkout']);
 	const getOneCheckout = queryClient.getQueryData<TGetOneCheckoutReturnType>([
-		'get-one-checkout',
-		user?.data?.id
+		'get-one-checkout'
 	]);
 
 	return useMemo(() => {
@@ -174,9 +168,7 @@ export const useGetUserCheckoutDetailsAndIdAndKey = () => {
 				checkout: createOneCheckout?.checkout
 			};
 		} else if (getOneCheckout?.checkout) {
-			const checkoutIdAndKeyFromCookie = getUserCheckoutIdAndKeyFromCookie(
-				user?.data?.id
-			);
+			const checkoutIdAndKeyFromCookie = getUserCheckoutIdAndKeyFromCookie();
 
 			if (checkoutIdAndKeyFromCookie) {
 				return {
@@ -188,8 +180,7 @@ export const useGetUserCheckoutDetailsAndIdAndKey = () => {
 	}, [
 		createOneCheckout?.checkout,
 		createOneCheckout?.checkoutIdAndKey,
-		getOneCheckout?.checkout,
-		user?.data?.id
+		getOneCheckout?.checkout
 	]);
 };
 

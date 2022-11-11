@@ -1,22 +1,33 @@
 import ProductBasicCard from '@components/shared/core/Card/product/default';
-import { Navigation, A11y } from 'swiper';
+import { Navigation, A11y, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import fakeProductsData from 'data/fakeProducts';
+import type { IHomePageProps } from '@pages/index';
+import { getIdFromGid } from '@utils/core/shopify';
 
-const ProductCardSlider = () => {
+const ProductCardSlider = ({
+	products
+}: {
+	products: IHomePageProps['products'];
+}) => {
 	return (
 		<Swiper
-			modules={[Navigation, A11y]}
-			slidesPerView={2}
+			modules={[Navigation, A11y, Autoplay]}
+			slidesPerView={1}
 			navigation
 			autoplay={{
 				delay: 7500
 			}}
+			breakpoints={{
+				500: {
+					slidesPerView: 2
+				}
+			}}
 		>
-			{fakeProductsData
+			{products
 				.filter((product) => product.title.startsWith('Drums That Knock Vol.'))
 				.map((item, index) => (
 					<SwiperSlide
@@ -27,7 +38,7 @@ const ProductCardSlider = () => {
 							key={index}
 							link={{
 								children: item.title,
-								href: `/products/${item.id}`
+								href: `/products/${getIdFromGid(item.id)}`
 							}}
 							{...item}
 						/>

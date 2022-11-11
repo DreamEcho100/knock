@@ -1,4 +1,4 @@
-import { Navigation, Pagination, A11y } from 'swiper';
+import { Navigation, A11y, Autoplay, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { artists } from 'data/fakeData';
@@ -14,7 +14,7 @@ const ReviewsSection = () => {
 			<div className=''>
 				<div className='px-8 pb-12 container-restrictions-2 max-w-screen-lg mx-auto'>
 					<Swiper
-						modules={[Navigation, Pagination, A11y]}
+						modules={[Navigation, A11y, Autoplay, Pagination]}
 						slidesPerView={1}
 						navigation
 						spaceBetween={8}

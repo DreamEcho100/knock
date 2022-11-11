@@ -1,20 +1,23 @@
-import { IProduct } from 'types';
+import { IDrumsThatKnockPageProps } from '@pages/drums-that-knock';
+import type { IProduct } from 'types';
 import {
 	ArtistSection,
 	DigitalProductsSection,
 	HeroSection,
-	KnockProductShowcaseSection,
-	MerchSection
+	KnockProductShowcaseSection
 } from './sections';
 
-const DrumsThatKnock = ({ products }: { products: IProduct[] }) => {
+const DrumsThatKnock = ({
+	products,
+	knockPlugin
+}: IDrumsThatKnockPageProps) => {
 	return (
 		<>
 			<HeroSection />
 			<DigitalProductsSection products={products} />
 			{/* <MerchSection /> */}
 			<ArtistSection />
-			<KnockProductShowcaseSection />
+			<KnockProductShowcaseSection knockPlugin={knockPlugin} />
 		</>
 	);
 };

@@ -1,9 +1,15 @@
 import ProductShowcase from '@components/shared/core/ProductShowcase';
+import { IKnockPluginPageProps } from '@pages/knock-plugin';
 
-const EasyToUseSection = () => {
+const EasyToUseSection = ({
+	knockPlugin
+}: {
+	knockPlugin: IKnockPluginPageProps['knockPlugin'];
+}) => {
 	return (
 		<section className='bg-primary-1 text-primary-2 px-4 py-20'>
 			<ProductShowcase
+				product={knockPlugin}
 				textContainer={{
 					h2: {
 						children: 'EASY TO USE'

@@ -1,32 +1,42 @@
-import type { GetServerSideProps, GetStaticProps, NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 
 import DrumsThatKnock from '@components/screens/DrumsThatKnock';
 import { IProduct } from 'types';
-import { getAllProducts } from 'server/controllers/products';
+import {
+	getAllProducts,
+	getOneProductByHandle
+} from 'server/controllers/products';
 
-interface IDrumsThatKnockPageProps {
-	products: IProduct[];
+export interface IDrumsThatKnockPageProps {
+	products: IProduct[]; // ShopifyBuy.Product[];
+	knockPlugin: IProduct; // ShopifyBuy.Product;
 }
 
 const DrumsThatKnockPage: NextPage<IDrumsThatKnockPageProps> = ({
-	products
+	products,
+	knockPlugin
 }) => {
-	return <DrumsThatKnock products={products} />;
+	return <DrumsThatKnock products={products} knockPlugin={knockPlugin} />;
 };
 
 export default DrumsThatKnockPage;
 
+export const getServerSideProps: GetServerSideProps = async () => {
+	const products = JSON.parse(
+		JSON.stringify(
+			await getAllProducts({ typesToExclude: ['Sound Editing Software'] })
+		)
+	);
 
+	const knockPlugin = JSON.parse(
+		JSON.stringify(await getOneProductByHandle('knock-plugin'))
+	);
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-	const category:string = context.query["category"] as string ;
-		
-	const products = JSON.parse(JSON.stringify(await getAllProducts(category)));
-  
 	return {
-	  props: {
-		products,
-		revalidate: 5 * 60,
-	  },
+		props: {
+			products,
+			knockPlugin,
+			revalidate: 5 * 60
+		}
 	};
-  };
+};

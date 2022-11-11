@@ -1,29 +1,40 @@
 import KnockTrademark from '@components/shared/core/KnockTrademark';
 import ProductShowcase from '@components/shared/core/ProductShowcase';
+import { IDrumsThatKnockPageProps } from '@pages/drums-that-knock';
+import Link from 'next/link';
 
-const KnockProductShowcaseSection = () => {
+const KnockProductShowcaseSection = ({
+	knockPlugin
+}: {
+	knockPlugin: IDrumsThatKnockPageProps['knockPlugin'];
+}) => {
 	return (
 		<section className='bg-primary-1 text-primary-2 px-8 py-16 md:px-16'>
 			<ProductShowcase
+				product={knockPlugin}
 				textContainer={{
 					h2: {
 						children: (
-							<>
-								<KnockTrademark />
-								Clipper
-							</>
+							<Link href='/knock-plugin' className='flex flex-wrap'>
+								{knockPlugin.title.split(' ').map((item, index) => (
+									<span key={index}>
+										{item.toLowerCase() === 'knock' ? <KnockTrademark /> : item}
+									</span>
+								))}
+							</Link>
 						)
 					},
 					p: {
-						children:
-							'This is the last plugin you will ever need to make your drums knock and punch through your mix. This plugin was meticulously crafted by DECAP. It is inspired by the signature sound of Drums That Knock, which has helped shaped the sonics of modern music.'
+						children: knockPlugin.description
 					},
 					button: { children: 'Buy it now' }
 				}}
 				imageContainer={{
 					mainImg: {
-						src: '/images/534aaf62a986c03ee09ee62a138d3845.gif',
-						alt: '',
+						// src: '/images/534aaf62a986c03ee09ee62a138d3845.gif',
+						src: knockPlugin.images[0] && knockPlugin.images[0]?.src,
+						alt:
+							(knockPlugin.images[0] && knockPlugin.images[0]?.altText) || '',
 						className: 'max-w-md'
 					},
 

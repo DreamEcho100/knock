@@ -1,3 +1,4 @@
+import type { IKnockPluginPageProps } from '@pages/knock-plugin';
 import {
 	DescriptionSection,
 	EasyToUseSection,
@@ -8,16 +9,16 @@ import {
 	VideosSection
 } from './sections';
 
-const KnockPluginScreen = () => {
+const KnockPluginScreen = ({ knockPlugin }: IKnockPluginPageProps) => {
 	return (
 		<>
-			<HeroSection />
+			<HeroSection knockPlugin={knockPlugin} />
 			<DescriptionSection />
 			<ShapesYourDrumsSection />
-			<EasyToUseSection />
-			<DrumsThatKnockSection />
+			<EasyToUseSection knockPlugin={knockPlugin} />
+			<DrumsThatKnockSection knockPlugin={knockPlugin} />
 			<ReviewsSection />
-			<VideosSection />
+			<VideosSection knockPlugin={knockPlugin} />
 		</>
 	);
 };

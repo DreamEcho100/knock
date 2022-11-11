@@ -39,8 +39,8 @@ const KnockSection = ({
 	return (
 		<section className='bg-primary-1'>
 			<div
-				className=' overflow-hidden
-				px-8 pt-24 pb-16 flex items-center justify-center flex-col text-center'
+				className='overflow-hidden
+					w-full px-8 pt-24 pb-16 flex items-center justify-center flex-col text-center'
 			>
 				<div className='relative flex items-center justify-center max-w-[900px]'>
 					<Image

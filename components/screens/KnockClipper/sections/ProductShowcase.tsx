@@ -1,13 +1,20 @@
+import type { IKnockClipperPageProps } from '@pages/knock_clipper';
+
 import KnockTrademark from '@components/shared/core/KnockTrademark';
 import ProductShowcase from '@components/shared/core/ProductShowcase';
 
-const ProductShowcaseSection = () => {
+const ProductShowcaseSection = ({
+	knockClipperPlugin
+}: {
+	knockClipperPlugin: IKnockClipperPageProps['knockClipperPlugin'];
+}) => {
 	return (
 		<section
 			className='bg-primary-1 text-primary-2 p-8 
 				sm:py-20'
 		>
 			<ProductShowcase
+				product={knockClipperPlugin}
 				textContainer={{
 					h2: {
 						children: (

@@ -1,10 +1,27 @@
 import KnockClipperScreen from '@components/screens/KnockClipper';
-import { NextPage } from 'next';
+import { IProduct } from 'types';
+import type { GetServerSideProps, NextPage } from 'next';
+import { getOneProductByHandle } from 'server/controllers/products';
 
-interface Props {}
+export interface IKnockClipperPageProps {
+	knockClipperPlugin: IProduct;
+}
 
-const KnockClipperPage: NextPage<Props> = () => {
-	return <KnockClipperScreen />;
+const KnockClipperPage: NextPage<IKnockClipperPageProps> = (props) => {
+	return <KnockClipperScreen {...props} />;
 };
 
 export default KnockClipperPage;
+
+export const getServerSideProps: GetServerSideProps = async () => {
+	const knockClipperPlugin = JSON.parse(
+		JSON.stringify(await getOneProductByHandle('knock-pluginboutique'))
+	);
+
+	return {
+		props: {
+			knockClipperPlugin,
+			revalidate: 5 * 60
+		}
+	};
+};

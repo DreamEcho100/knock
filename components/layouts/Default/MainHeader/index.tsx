@@ -61,7 +61,7 @@ const MainHeader = () => {
 	const userCheckoutIdAndKeyFromCookie = useGetUserCheckoutIdAndKeyCookie();
 
 	const createCheckout = useQuery(
-		['create-one-checkout', user?.data?.id],
+		['create-one-checkout'],
 		() => checkoutApi.createOne(),
 		{
 			enabled: !userCheckoutIdAndKeyFromCookie && !isCheckoutFound,
@@ -82,7 +82,7 @@ const MainHeader = () => {
 	);
 
 	const getCheckout = useQuery(
-		['get-one-checkout', user?.data?.id],
+		['get-one-checkout'],
 		() => {
 			if (!userCheckoutIdAndKeyFromCookie)
 				throw new Error('Missing check out id and key from cookie');
@@ -345,101 +345,99 @@ const CartContainer = () => {
 					<h3 className='text-h3 uppercase font-semibold'>cart</h3>
 				</header>
 				<div className='flex flex-col gap-4'>
-					{productsData.length === 0 ? (
-						<div>Empty, Let&apos;s do something about it {'\u{1F917}'}</div>
-					) : (
-						productsData.map((product) => (
-							<article
-								key={product.id}
-								className='flex border-b-[0.125rem] border-b-primary-1 pb-4'
-							>
-								<div className='w-28 min-w-[4rem] aspect-square bg-primary-1 max-w-[30%]'>
-									{product.preferredImage?.src && (
-										<CustomNextImage
-											src={product.preferredImage?.src}
-											alt={product.preferredImage?.alt || ''}
-											width={112}
-											height={112}
-											className='aspect-square object-contain w-full h-full'
-										/>
-									)}
-								</div>
-								<div className='flex flex-col px-4 py-2 gap-2 flex-grow'>
-									<header className='flex flex-col gap-1 sm:flex-row sm:gap-2 sm:justify-between'>
-										<h4>
-											<Link
-												href={`/products/${getIdFromGid(product.id)}`}
-												className='inline-block whitespace-nowrap max-w-[10rem] text-ellipsis overflow-hidden'
-											>
-												{product.title}
-											</Link>
-										</h4>
-										<p title='price per product'>${product.price}</p>
-									</header>
-									<div className='flex flex-col gap-1 sm:flex-row sm:gap-2 sm:justify-between'>
-										<div className='w-fit border-[0.125rem] border-bg-secondary-1 rounded-2xl p-1 flex gap-3'>
-											<button
-												className='px-3'
-												title='decrease the amount by 1'
-												disabled={disableAllButtons}
-												onClick={() => {
-													if (product.quantity - 1 === 0)
-														return removeProductsToCheckoutAndCart.mutate({
-															productsIds: [product.id]
-														});
+					{productsData.length === 0
+						? "You don't have any items in your cart yet."
+						: productsData.map((product) => (
+								<article
+									key={product.id}
+									className='flex border-b-[0.25rem] border-b-primary-1 pb-4'
+								>
+									<div className='w-28 min-w-[4rem] aspect-square bg-primary-1 max-w-[30%]'>
+										{product.preferredImage?.src && (
+											<CustomNextImage
+												src={product.preferredImage?.src}
+												alt={product.preferredImage?.alt || ''}
+												width={112}
+												height={112}
+												className='aspect-square object-contain w-full h-full'
+											/>
+										)}
+									</div>
+									<div className='flex flex-col px-4 py-2 gap-2 flex-grow'>
+										<header className='flex flex-col gap-1 sm:flex-row sm:gap-2 sm:justify-between'>
+											<h4>
+												<Link
+													href={`/products/${getIdFromGid(product.id)}`}
+													className='inline-block whitespace-nowrap max-w-[10rem] text-ellipsis overflow-hidden'
+												>
+													{product.title}
+												</Link>
+											</h4>
+											<p title='price per product'>${product.price}</p>
+										</header>
+										<div className='flex flex-col gap-1 sm:flex-row sm:gap-2 sm:justify-between'>
+											<div className='w-fit border-[0.125rem] border-bg-secondary-1 rounded-2xl p-1 flex gap-3'>
+												<button
+													className='px-3'
+													title='decrease the amount by 1'
+													disabled={disableAllButtons}
+													onClick={() => {
+														if (product.quantity - 1 === 0)
+															return removeProductsToCheckoutAndCart.mutate({
+																productsIds: [product.id]
+															});
 
-													updateProductsToCheckoutAndCart.mutate({
-														products: [
-															{
-																...(product as any),
-																quantity: product.quantity - 1
-															}
-														]
-													});
-												}}
-											>
-												-
-											</button>
-											<p>{product.quantity}</p>
+														updateProductsToCheckoutAndCart.mutate({
+															products: [
+																{
+																	...(product as any),
+																	quantity: product.quantity - 1
+																}
+															]
+														});
+													}}
+												>
+													-
+												</button>
+												<p>{product.quantity}</p>
+												<button
+													className='px-3'
+													title='increase the amount by 1'
+													disabled={disableAllButtons}
+													onClick={() =>
+														updateProductsToCheckoutAndCart.mutate({
+															products: [
+																{
+																	...(product as any),
+																	quantity: product.quantity + 1
+																}
+															]
+														})
+													}
+												>
+													+
+												</button>
+											</div>
+
 											<button
-												className='px-3'
-												title='increase the amount by 1'
+												className={cx(
+													'w-fit py-1 text-primary-3 hover:text-primary-2 focus:text-primary-1',
+													'transition-all duration-150'
+												)}
 												disabled={disableAllButtons}
 												onClick={() =>
-													updateProductsToCheckoutAndCart.mutate({
-														products: [
-															{
-																...(product as any),
-																quantity: product.quantity + 1
-															}
-														]
+													removeProductsToCheckoutAndCart.mutate({
+														productsIds: [product.id]
 													})
 												}
 											>
-												+
+												remove
 											</button>
 										</div>
-
-										<button
-											className={cx(
-												'w-fit py-1 text-primary-3 hover:text-primary-2 focus:text-primary-1',
-												'transition-all duration-150'
-											)}
-											disabled={disableAllButtons}
-											onClick={() =>
-												removeProductsToCheckoutAndCart.mutate({
-													productsIds: [product.id]
-												})
-											}
-										>
-											remove
-										</button>
 									</div>
-								</div>
-								<div className=''></div>
-							</article>
-						))
-					)}
+									<div className=''></div>
+								</article>
+						  ))}
 				</div>
 				<div className='pt-8 flex flex-col gap-8'>
 					<header className='flex gap-2 justify-between'>
@@ -455,7 +453,7 @@ const CartContainer = () => {
 							disabled={productsData.length === 0 || disableAllButtons}
 							classesIntent={{ w: 'full', display: 'flex-xy-center' }}
 						>
-							{productsData.length === 0 ? 'cart is empty' : 'checkout'}
+							{productsData.length === 0 ? 'Cart Is Empty' : 'checkout'}
 						</Button>
 					</div>
 				</div>

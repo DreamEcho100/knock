@@ -1,55 +1,38 @@
+import { getShopifyClient } from '@utils/core/shopify';
+
 import { IProduct } from 'types';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
-import setFields from '@utils/common/productFields/productFields';
-
-const Client = require('shopify-buy');
 
 //------------ get one product by id
 
 export const getOneProductById = async (id: string) => {
+	const client = getShopifyClient();
 
-	const client = Client.buildClient({
-		domain: process.env.DOMAINE,
-		storefrontAccessToken: process.env.SHOPIFY_STOREFRONT_API_TOKEN
-	});
-	
-
-	if (isNaN(Number(id))) {
-	 	const response = await client.product.fetchByHandle(id)
-
-		 const otherData = setFields(response.handle);
-
-		 const product = {
-			...response,
-			...otherData,
-		  };
-		 return product as IProduct
-	}
-		const response = await client.product.fetch(`gid://shopify/Product/${id}`)
-
-		const otherData = setFields(response.handle);
-
-	    const product = {
-			...response,
-			...otherData,
-		  };
-
-		return product as IProduct
-
+	return (await client.product.fetch(
+		`gid://shopify/Product/${id}`
+	)) as unknown as IProduct;
 };
+export const getOneProductByHandle = async (handle: string) => {
+	const client = getShopifyClient();
 
+	return (await client.product.fetchByHandle(handle)) as unknown as IProduct;
+};
 
 const getOneProductController = async (
 	req: NextApiRequest,
 	res: NextApiResponse
 ) => {
-
-	const product = await getOneProductById(req.query.id as string);
+	const product =
+		typeof req.query.id === 'string'
+			? await getOneProductById(req.query.id)
+			: typeof req.query.handle === 'string'
+			? await getOneProductByHandle(req.query.handle)
+			: undefined;
 
 	if (!product) {
-		res.statusCode = 404
-		throw new Error('Product not found')
+		res.statusCode = 404;
+		throw new Error('Product not found');
 	}
 
 	return res.status(200).json({
@@ -59,59 +42,37 @@ const getOneProductController = async (
 	});
 };
 
-
 //--------  getAllProducts
+type productType = 'Tutorial' | 'Sound Editing Software';
 
-export const getAllProducts = async (category:string) => {
-	
-	const client = Client.buildClient({
-		domain: process.env.DOMAINE,
-		storefrontAccessToken: process.env.SHOPIFY_STOREFRONT_API_TOKEN
-	});
+export const getAllProducts = async ({
+	typesToExclude,
+	typesToInclude
+}: { typesToExclude?: productType[]; typesToInclude?: productType[] } = {}) => {
+	const client = getShopifyClient();
 
-	const products = await client.product.fetchAll()
+	let products = (await client.product.fetchAll()) as unknown as IProduct[];
+	products.forEach((item) => console.log(item.title, '---', item.handle));
 
-	
-	const digital_product =  products.filter((el:any) => el.productType !== 'Merch')
-	const merch =  products.filter((el:any) => el.productType === 'Merch')
-	const sample_packs =  products.filter((el:any) => el.productType === '')
-	const tutorial = products.filter((el:any) => el.productType === 'Tutorial')
-	const audio_plugin = products.filter((el:any) => el.productType === "Sound Editing Software")
+	if (Array.isArray(typesToExclude))
+		products = products.filter(
+			(product) => !typesToExclude.includes((product as any).productType)
+		);
+	if (Array.isArray(typesToInclude))
+		products = products.filter((product) =>
+			typesToInclude.includes((product as any).productType)
+		);
 
-	
-
-	if (!category) {
-		return (products) as IProduct[];
-	}
-
-	switch (category) {
-		case 'digital-product':
-		return (digital_product) as IProduct[];
-		case 'sample-packs':
-		return (sample_packs) as IProduct[];
-		case 'tutorial':
-		return (tutorial) as IProduct[];
-		case 'audio-plugin':
-		return (audio_plugin) as IProduct[];
-		case 'merch':
-		return (merch) as IProduct[];
-		default:
-		return ([]) as IProduct[];
-	}
-	
+	return products;
 };
-
-
 
 const getAllProductsController = async (
 	req: NextApiRequest,
 	res: NextApiResponse
 ) => {
+	const category = req.query.category;
 
-	const category = req.query.category
-
-	const products = await getAllProducts(category as string);
-
+	const products = await getAllProducts();
 
 	return res.status(200).json({
 		success: true,
@@ -119,7 +80,6 @@ const getAllProductsController = async (
 		products
 	});
 };
-
 
 const productsController = {
 	getOneProduct: getOneProductController,

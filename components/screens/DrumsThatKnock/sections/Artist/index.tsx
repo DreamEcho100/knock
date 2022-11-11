@@ -1,5 +1,5 @@
 // import Swiper core and required modules
-import { Navigation, A11y } from 'swiper';
+import { Navigation, A11y, Autoplay } from 'swiper';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -25,7 +25,7 @@ const ArtistSection = () => {
 				</header>
 				<div className='px-8'>
 					<Swiper
-						modules={[Navigation, A11y]}
+						modules={[Navigation, A11y, Autoplay]}
 						slidesPerView={1}
 						navigation
 						autoplay={{
@@ -45,7 +45,7 @@ const ArtistSection = () => {
 							.map((item, index) => (
 								<SwiperSlide
 									key={index}
-									className='p-2 gap-2 flex flex-col justify-center text-center'
+									className='p-2 gap-2 flex flex-col justify-center items-center text-center'
 								>
 									<Image
 										src={item.image.src}

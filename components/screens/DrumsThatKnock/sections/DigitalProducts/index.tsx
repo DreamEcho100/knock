@@ -1,12 +1,17 @@
 // interface Props {}
 
 import { ProductCardWithDetails } from '@components/shared/core/Card/product/default';
+import { IDrumsThatKnockPageProps } from '@pages/drums-that-knock';
 
 import { getIdFromGid } from '@utils/core/shopify';
 
 import { IProduct } from 'types';
 
-const DigitalProductsSection = ({ products }: { products: IProduct[] }) => {
+const DigitalProductsSection = ({
+	products
+}: {
+	products: IDrumsThatKnockPageProps['products'];
+}) => {
 	return (
 		<section className='bg-primary-1'>
 			<div

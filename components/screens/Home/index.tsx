@@ -1,3 +1,4 @@
+import { IHomePageProps } from '@pages/index';
 import {
 	AboutSection,
 	HeroSection,
@@ -5,13 +6,13 @@ import {
 	LatestSamplesSection
 } from './sections';
 
-const HomeScreen = () => {
+const HomeScreen = ({ products }: IHomePageProps) => {
 	return (
 		<>
 			<HeroSection />
 			<OneProductShowCaseSection />
 			<AboutSection />
-			<LatestSamplesSection />
+			<LatestSamplesSection products={products} />
 		</>
 	);
 };

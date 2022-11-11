@@ -4,6 +4,8 @@ import type { HTMLAttributes } from 'react';
 
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 import Button from '@components/shared/core/Button';
+import type { IProduct } from 'types';
+import { useAddProductsToCheckoutAndCart } from '@utils/core/hooks';
 
 interface IProps {
 	textContainer: {
@@ -16,13 +18,17 @@ interface IProps {
 		backgroundImg?: Partial<ICustomNextImageProps> | false;
 	};
 	wrapper?: HTMLAttributes<HTMLDivElement>;
+	product?: IProduct;
 }
 
 const ProductShowcase = ({
+	product,
 	textContainer: { h2 = {}, p = {}, button = {} },
 	imageContainer: { mainImg, backgroundImg = {} },
 	wrapper: { className: wrapperClassName = '', ...wrapper } = {}
 }: IProps) => {
+	const addProductsToCheckoutAndCart = useAddProductsToCheckoutAndCart();
+
 	const { className: backgroundImgClassName = '', ...backgroundImgProps } =
 		backgroundImg || {};
 
@@ -41,7 +47,16 @@ const ProductShowcase = ({
 				<h2 className='text-h2 font-bold uppercase flex flex-wrap' {...h2} />
 				<p className='md:max-w-[450px]' {...p} />
 
-				<Button className='capitalize' {...button} />
+				<Button
+					className='capitalize'
+					onClick={() =>
+						product &&
+						addProductsToCheckoutAndCart.mutate({
+							products: [{ ...product, quantity: 1 }]
+						})
+					}
+					{...button}
+				/>
 			</div>
 			<div
 				className='w-full relative p-4

@@ -8,7 +8,6 @@ import { useSharedCustomerState } from '@context/Customer';
 import { useAddProductsToCheckoutAndCart } from '@utils/core/hooks';
 
 const HeroSection = ({ product }: IProductByIdPageProps) => {
-	const [, customerDispatch] = useSharedCustomerState();
 	const addProductsToCheckoutAndCart = useAddProductsToCheckoutAndCart();
 
 	return (

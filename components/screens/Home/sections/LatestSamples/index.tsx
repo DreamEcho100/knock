@@ -1,10 +1,13 @@
 import Button from '@components/shared/core/Button';
-import ProductBasicCard from '@components/shared/core/Card/product/default';
 import KnockTrademark from '@components/shared/core/KnockTrademark';
-import Image from 'next/image';
+import type { IHomePageProps } from '@pages/index';
 import ProductCardSlider from './components/ProductCardSlider';
 
-const LatestSamplesSection = () => {
+const LatestSamplesSection = ({
+	products
+}: {
+	products: IHomePageProps['products'];
+}) => {
 	return (
 		<section className='bg-primary-2'>
 			<div
@@ -18,7 +21,7 @@ const LatestSamplesSection = () => {
 				>
 					<h2
 						className='text-h2 font-bold text-primary-1 text-center flex flex-wrap justify-center
-								md:text-align-initial'
+								md:text-align-initial md:justify-start'
 					>
 						DRUMS THAT&nbsp;
 						<KnockTrademark />
@@ -28,10 +31,10 @@ const LatestSamplesSection = () => {
 						Designed from scratch by DECAP. <br /> Premium quality,
 						groundbreaking as always.
 					</p>
-					<Button href='/knock-plugin'>Explore it now</Button>
+					<Button href='/drums-that-knock'>Explore it now</Button>
 				</div>
 				<div className='md:flex-grow md:w-1/2 flex justify-center items-center'>
-					<ProductCardSlider />
+					<ProductCardSlider products={products} />
 				</div>
 			</div>
 		</section>

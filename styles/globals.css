@@ -22,6 +22,15 @@ html,
 body {
 	width: 100%;
 	height: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#__next {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	overflow: hidden;
 }
 
 body {
@@ -66,17 +75,19 @@ body sup {
 	height: 1ch;
 }
 
+/* main > section, */
 main > section > *,
 #main-header > *,
 #main-footer > * {
 	max-width: 1280px;
-	margin: auto;
+	margin-left: auto;
+	margin-right: auto;
 }
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
 	main > * {
 		overflow-x: hidden;
 	}
-}
+} */
 
 @tailwind base;
 @tailwind components;

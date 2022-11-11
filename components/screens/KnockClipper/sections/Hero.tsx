@@ -1,8 +1,19 @@
 import Button from '@components/shared/core/Button';
 import KnockTrademark from '@components/shared/core/KnockTrademark';
 import Image from 'next/image';
+import { useAddKnockPluginToCartButtonProps } from './utils/hookes';
 
-const HeroSection = () => {
+import type { IKnockClipperPageProps } from '@pages/knock_clipper';
+const HeroSection = ({
+	knockClipperPlugin
+}: {
+	knockClipperPlugin: IKnockClipperPageProps['knockClipperPlugin'];
+}) => {
+	const addKnockPluginToCartButtonProps = useAddKnockPluginToCartButtonProps({
+		knockClipperPlugin,
+		text: `Buy it now ${knockClipperPlugin.variants[0].compareAtPrice.amount} ${knockClipperPlugin.variants[0].compareAtPrice.currencyCode}`
+	});
+
 	return (
 		<section className='bg-primary-1'>
 			<div
@@ -39,12 +50,15 @@ const HeroSection = () => {
 					Adjustable hard & soft clipper module from KNOCK.
 				</p>
 				<div className='flex items-center justify-center'>
-					<Button className='capitalize  text-[1.375rem]'>
-						Buy it now
-						<del className='mx-2'>$29</del>
-					</Button>
+					<Button
+						className='capitalize  text-[1.375rem]'
+						{...addKnockPluginToCartButtonProps}
+					/>
 					<span className='p-2' />{' '}
-					<span className='text-primary-1 font-bold'>$15</span>
+					<span className='text-primary-1 font-bold'>
+						{knockClipperPlugin.variants[0].price.amount}{' '}
+						{knockClipperPlugin.variants[0].price.currencyCode}
+					</span>
 				</div>
 			</div>
 		</section>
