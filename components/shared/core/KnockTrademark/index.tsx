@@ -11,7 +11,7 @@ const KnockTrademark = () => {
 					height={10}
 					priority
 					alt='KNOCK logo'
-					className='aspect-square w-2 h-2'
+					className='aspect-square w-2 h-2 object-contain'
 				/>
 			</sup>
 		</span>
