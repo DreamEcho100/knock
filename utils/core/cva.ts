@@ -19,7 +19,7 @@ export const cardClasses = cva(
 );
 
 export const buttonClasses = cva(
-	`font-semibold outline-none
+	`font-semibold outline-none disabled:cursor-not-allowed
 	duration-300 transition-all`,
 	{
 		variants: {

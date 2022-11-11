@@ -1,13 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+import { z } from 'zod';
+
 import axios from 'axios';
 
 import gql from 'graphql-tag';
 
 import { print } from 'graphql';
-import API_URL from './apiUrl';
+
 import validator from 'validator';
 
+import API_URL from './apiUrl';
 
 const deleteAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 	const data = req.body;
@@ -353,83 +356,82 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 	});
 };
 
-const updateOneController = async (req: NextApiRequest & { params: Record<string, any> },res: NextApiResponse) => {
+const updateOneController = async (
+	req: NextApiRequest & { params: Record<string, any> },
+	res: NextApiResponse
+) => {
+	const customerAccessToken = req.headers.clientaccesstoken;
+	// let { acceptsMarketing, email, phone, password, firstName, lastName } =
+	// 	req.body;
 
-	const customerAccessToken = req.headers.clientaccesstoken
-	let {acceptsMarketing , email , phone , password , firstName , lastName } = req.body
-
-
-	
+	const input = z
+		.object({
+			acceptsMarketing: z.boolean().optional(),
+			email: z.string().email().optional(),
+			phone: z.string().optional(),
+			password: z.string().min(8).optional(),
+			firstName: z.string().min(2).optional(),
+			lastName: z.string().min(2).optional()
+		})
+		.parse(req.body);
 
 	const customer = gql`
-	mutation customerUpdate($customer: CustomerUpdateInput!, $customerAccessToken: String!) {
-		customerUpdate(customer: $customer, customerAccessToken: $customerAccessToken) {
-		  customer {
-			id
-			acceptsMarketing
-			defaultAddress {
-				address1
-				address2
-				city
-				company
-				country
-				firstName
-				lastName
-				province
-				zip
+		mutation customerUpdate(
+			$customer: CustomerUpdateInput!
+			$customerAccessToken: String!
+		) {
+			customerUpdate(
+				customer: $customer
+				customerAccessToken: $customerAccessToken
+			) {
+				customer {
+					id
+					acceptsMarketing
+					defaultAddress {
+						address1
+						address2
+						city
+						company
+						country
+						firstName
+						lastName
+						province
+						zip
+					}
+					email
+					firstName
+					lastName
+					phone
+					updatedAt
+					createdAt
+				}
+				customerAccessToken {
+					accessToken
+					expiresAt
+				}
+				customerUserErrors {
+					code
+					field
+					message
+				}
 			}
-			email
-			firstName
-			lastName
-			phone
-			updatedAt
-			createdAt
-		  }
-		  customerAccessToken {
-			accessToken
-			expiresAt
-		  }
-		  customerUserErrors {
-			code
-			field
-			message
-		  }
 		}
-	  }`;
+	`;
 
-	  if (!validator.isEmail(email)) {
-		throw new Error('Please enter a valid email')
-	  }
-	  
-
-	  if (typeof acceptsMarketing === "string" ) {
-
-		if (validator.isBoolean(acceptsMarketing)) {
-			if (acceptsMarketing === "true") {
-				acceptsMarketing = !!Boolean(acceptsMarketing)
-			}else{
-				acceptsMarketing = false
-			}
-		  } else{
-			throw new Error('acceptsMarketing this field must be a true or false')
-		  }
-	  }
-	  
-	  
-	  const response = await axios.post(
+	const response = await axios.post(
 		API_URL,
 		{
 			query: print(customer),
 			variables: {
 				customer: {
-					acceptsMarketing,
-					email,
-					firstName,
-					lastName,
-					password: password.length < 8 ? '' : password ,
-					phone
-				  },
-				  customerAccessToken
+					acceptsMarketing: input.acceptsMarketing,
+					email: input.email,
+					firstName: input.firstName,
+					lastName: input.lastName,
+					password: input.password,
+					phone: input.phone
+				},
+				customerAccessToken
 			}
 		},
 		{
@@ -441,40 +443,39 @@ const updateOneController = async (req: NextApiRequest & { params: Record<string
 		}
 	);
 
-	
 	if (response.data.errors) {
-		res.statusCode = 401
-		throw new Error(response.data.errors[0].message)
+		res.statusCode = 401;
+		throw new Error(response.data.errors[0].message);
 	}
 
-	if (response.data.data.customerUpdate.customerUserErrors) {
-		response.data.data.customerUpdate.customerUserErrors.map((el:any) => {
-			res.statusCode = 401
-			throw new Error(el.message)
-		})
+	if (response.data.data.customerUpdate.customerUserErrors.length !== 0) {
+		res.statusCode = 401;
+		throw new Error(
+			response.data.data.customerUpdate.customerUserErrors
+				.map((el: any) => {
+					return el.message;
+				})
+				.join(', ')
+		);
 	}
-
 
 	return res.status(200).json({
-			success: true,
-			message: `Successful Update for user with id: ${response.data.data.customerUpdate.customer.id}`,
-			client:response.data.data.customerUpdate.customer,
-			accessTokenDetails:response.data.data.customerUpdate.customerAccessToken
+		success: true,
+		message: `Successful Update for user with id: ${response.data.data.customerUpdate.customer.id}`,
+		client: response.data.data.customerUpdate.customer,
+		accessTokenDetails: response.data.data.customerUpdate.customerAccessToken
 	});
-	
 };
 
 const getAllOrdersForOneClientByIdController = async (
 	req: NextApiRequest & { params: Record<string, any> },
 	res: NextApiResponse
 ) => {
-
 	const accessToken = req.headers.clientaccesstoken;
-    const select = req.query.select
-
+	const select = req.query.select;
 
 	if (accessToken) {
-		const {data} = await axios.post(
+		const { data } = await axios.post(
 			API_URL,
 			{
 				query: `
@@ -565,17 +566,16 @@ const getAllOrdersForOneClientByIdController = async (
 			{
 				headers: {
 					'Content-Type': 'application/json',
-					'X-Shopify-Storefront-Access-Token':process.env.SHOPIFY_STOREFRONT_API_TOKEN
+					'X-Shopify-Storefront-Access-Token':
+						process.env.SHOPIFY_STOREFRONT_API_TOKEN
 				}
 			}
 		);
 
-		
-		const customer = data.data.customer
-		
+		const customer = data.data.customer;
 
 		if (!customer) {
-			res.statusCode = 404
+			res.statusCode = 404;
 			throw new Error('Customer not found');
 		}
 
@@ -584,25 +584,24 @@ const getAllOrdersForOneClientByIdController = async (
 			message: `Successful Request for user with id: ${customer.id}`,
 			...customer
 		});
-    }
-
+	}
 };
 const getOneOrderForOneClientByIdController = async (
 	req: NextApiRequest & { params: Record<string, any> },
 	res: NextApiResponse
 ) => {
+	const { orderId } = req.params;
+	const clientAccessToken = req.headers.clientaccesstoken;
+	const { select, orderKey } = req.query;
 
-	const {orderId} = req.params;
-	const clientAccessToken = req.headers.clientaccesstoken
-    const {select , orderKey} = req.query
-
-
-    const {data} = await axios.post(
-        API_URL,
-        {
-            query: `
+	const { data } = await axios.post(
+		API_URL,
+		{
+			query: `
             query {
-                customer(customerAccessToken: ${JSON.stringify(clientAccessToken)}) {
+                customer(customerAccessToken: ${JSON.stringify(
+									clientAccessToken
+								)}) {
                   id
                   orders (first:${select || '250'})  {
                       edges{
@@ -679,40 +678,39 @@ const getOneOrderForOneClientByIdController = async (
                 }
               }
      `
-        },
-        {
-            headers: {
-                'Content-Type': 'application/json',
-				'X-Shopify-Storefront-Access-Token':process.env.SHOPIFY_STOREFRONT_API_TOKEN
-            }
-        }
-    );
+		},
+		{
+			headers: {
+				'Content-Type': 'application/json',
+				'X-Shopify-Storefront-Access-Token':
+					process.env.SHOPIFY_STOREFRONT_API_TOKEN
+			}
+		}
+	);
 
-	const customer = data.data.customer
-	
+	const customer = data.data.customer;
 
-	
+	if (!customer) {
+		res.statusCode = 404;
+		throw new Error('Customer not found');
+	}
 
-    if (!customer) {
-        res.statusCode = 404
-        throw new Error('Customer not found')
-    }
+	const orders = customer.orders.edges;
 
-    const orders = customer.orders.edges
-    
-    const filterOrder = orders.filter((el:any)=> el.node.id === `gid://shopify/Order/${orderId}?key=${orderKey}`)
+	const filterOrder = orders.filter(
+		(el: any) => el.node.id === `gid://shopify/Order/${orderId}?key=${orderKey}`
+	);
 
-    if (!filterOrder.length) {
-        res.statusCode = 404
-        throw new Error('Please check your orderId and orderKey')
-    }
+	if (!filterOrder.length) {
+		res.statusCode = 404;
+		throw new Error('Please check your orderId and orderKey');
+	}
 
-    return res.status(200).json({
-        success:true,
+	return res.status(200).json({
+		success: true,
 		message: `Successful Request for user with id: ${clientAccessToken} and order with id: ${req.params.orderId}`,
-        order:filterOrder
-    })
-
+		order: filterOrder
+	});
 };
 
 const clientsController = {

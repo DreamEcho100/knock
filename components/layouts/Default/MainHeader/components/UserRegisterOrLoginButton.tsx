@@ -279,7 +279,10 @@ const LoginType = ({
 					className='sm:w-11/12 mx-auto my-4'
 					onSubmit={loginMutation.mutate}
 				>
-					<fieldset className='mt-2 space-y-4'>
+					<fieldset
+						className='mt-2 space-y-4'
+						disabled={loginMutation.isLoading}
+					>
 						<FormField
 							values={formValues}
 							setValues={setFormValues}

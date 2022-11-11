@@ -7,6 +7,7 @@ type TRes = NextApiResponse; // & ServerResponse;
 type TNext = NextApiHandler; // & ServerResponse;
 
 const onError = (err: Error, req: TReq, res: TRes, next: TNext) => {
+	console.log('err', err);
 	const statusCode = res.statusCode < 400 ? 500 : res.statusCode;
 	const statusMessage = res.statusMessage
 		? res.statusMessage
@@ -42,7 +43,12 @@ const nextConnect = (
 		onError,
 		onNoMatch
 	}
-) => nc(options);
+) =>
+	nc({
+		onError,
+		onNoMatch,
+		...options
+	});
 // <TReq, NextApiResponse>
 
 export default nextConnect;

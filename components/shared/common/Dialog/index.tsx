@@ -48,14 +48,14 @@ const Dialog = ({ isOpen, setIsOpen, header, children }: Props) => {
 						forceMount
 						className={cx(
 							'fixed z-50',
-							'w-[95vw] max-w-xl rounded-lg p-4 md:w-full',
+							'w-[95vw] max-w-xl rounded-lg px-10 py-4 md:w-full',
 							'top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]',
 							'bg-white dark:bg-neutral-800',
 							'focus:outline-none focus-visible:ring-[0.125rem] focus-visible:ring-purple-500 focus-visible:ring-opacity-75'
 						)}
 					>
 						{header && (
-							<header className='sm:w-11/12 mx-auto my-4'>
+							<header className=' mx-auto my-4'>
 								<DialogPrimitive.Title className='text-h3 font-bold text-neutral-900 dark:text-neutral-100'>
 									{header.title}
 								</DialogPrimitive.Title>

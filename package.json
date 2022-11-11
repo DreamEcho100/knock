@@ -31,7 +31,8 @@
 		"react-tracked": "^1.7.10",
 		"shopify-buy": "^2.17.1",
 		"swiper": "^8.4.4",
-		"validator": "^13.7.0"
+		"validator": "^13.7.0",
+		"zod": "^3.19.1"
 	},
 	"devDependencies": {
 		"@types/node": "^18.11.9",

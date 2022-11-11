@@ -1,8 +1,6 @@
 import Button from '@components/shared/core/Button';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 
-import { Transition } from '@headlessui/react';
-
 import {
 	Root as AccordionRoot,
 	Item as AccordionItem,
@@ -10,21 +8,25 @@ import {
 	Trigger as AccordionTrigger,
 	Content as AccordionContent
 } from '@radix-ui/react-accordion';
-import * as DialogPrimitive from '@radix-ui/react-dialog';
 
 import accordionClasses from '@styles/accordion.module.css';
 
-import { useGetUserDataFromStore } from '@utils/core/hooks';
+import {
+	getGetAccessTokenFromCookie,
+	useGetUserDataFromStore
+} from '@utils/core/hooks';
 import { getIdFromGid, priceCurrencyFormatter } from '@utils/core/shopify';
 
-import type { IUser } from 'types';
+import type { IGenericErrorResponse, IUser } from 'types';
 
 import { cx } from 'class-variance-authority';
 
-import { Fragment, useState } from 'react';
+import { Dispatch, FormEvent, SetStateAction, useMemo, useState } from 'react';
 
 import { BiChevronUpCircle } from 'react-icons/bi';
-import { IoMdClose } from 'react-icons/io';
+import Dialog from '@components/shared/common/Dialog';
+import FormField from '@components/shared/core/FieldForm';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const TitleValue = ({
 	title,
@@ -108,100 +110,231 @@ const OrderCard = ({
 					See Cart Items
 				</Button>
 			</div>
-			<DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
-				<Transition.Root show={isOpen}>
-					<Transition.Child
-						as={Fragment}
-						enter='ease-out duration-150'
-						enterFrom='opacity-0'
-						enterTo='opacity-100'
-						leave='ease-in duration-50'
-						leaveFrom='opacity-100'
-						leaveTo='opacity-0'
-					>
-						<DialogPrimitive.Overlay
-							forceMount
-							className='fixed inset-0 z-20 bg-black/50'
-						/>
-					</Transition.Child>
-					<Transition.Child
-						as={Fragment}
-						enter='ease-out duration-300'
-						enterFrom='opacity-0 scale-95'
-						enterTo='opacity-100 scale-100'
-						leave='ease-in duration-200'
-						leaveFrom='opacity-100 scale-100'
-						leaveTo='opacity-0 scale-95'
-					>
-						<DialogPrimitive.Content
-							forceMount
-							className={cx(
-								'fixed z-50',
-								'w-[95vw] max-w-md rounded-lg p-4 md:w-full',
-								'flex flex-col gap-4',
-								'top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]',
-								'bg-white dark:bg-neutral-900',
-								'focus:outline-none focus-visible:ring-[0.125rem] focus-visible:ring-purple-500 focus-visible:ring-opacity-75'
-							)}
-						>
-							<header>
-								<DialogPrimitive.Title className='text-h3 font-bold text-gray-900 dark:text-gray-100'>
-									Products
-								</DialogPrimitive.Title>
-								{/* <DialogPrimitive.Description className='mt-2 text-base font-normal text-gray-700 dark:text-gray-400'>
-									description
-								</DialogPrimitive.Description> */}
-							</header>
-							<div className=''>
-								{lineItems.map(({ node: item }) => (
-									<div key={item.variant.id}>
-										<div className='flex'>
-											<div className='w-36 flex items-center bg-black'>
-												{item?.variant?.image?.url && (
-													<CustomNextImage
-														unoptimized
-														src={item.variant.image.url}
-														alt={item.variant.image.altText || ''}
-														width={150}
-														height={150}
-														className='w-full h-full aspect-square object-contain'
-													/>
-												)}
-											</div>
-											<div className='p-2'>
-												<TitleValue
-													title='id'
-													value={getIdFromGid(item.variant.id)}
-												/>
-												<TitleValue title='title' value={item.title} />
-												<TitleValue
-													title='original total price'
-													value={`${item.originalTotalPrice.amount} ${item.originalTotalPrice.currencyCode}`}
-												/>
-												<TitleValue title='quantity' value={item.quantity} />
-											</div>
-										</div>
-									</div>
-								))}
+			<Dialog
+				header={{ title: 'Products' }}
+				isOpen={isOpen}
+				setIsOpen={setIsOpen}
+			>
+				<div className=''>
+					{lineItems.map(({ node: item }) => (
+						<div key={item.variant.id}>
+							<div className='flex'>
+								<div className='w-36 flex items-center bg-black'>
+									{item?.variant?.image?.url && (
+										<CustomNextImage
+											unoptimized
+											src={item.variant.image.url}
+											alt={item.variant.image.altText || ''}
+											width={150}
+											height={150}
+											className='w-full h-full aspect-square object-contain'
+										/>
+									)}
+								</div>
+								<div className='p-2'>
+									<TitleValue
+										title='id'
+										value={getIdFromGid(item.variant.id)}
+									/>
+									<TitleValue title='title' value={item.title} />
+									<TitleValue
+										title='original total price'
+										value={`${item.originalTotalPrice.amount} ${item.originalTotalPrice.currencyCode}`}
+									/>
+									<TitleValue title='quantity' value={item.quantity} />
+								</div>
 							</div>
-							<DialogPrimitive.Close
-								className={cx(
-									'absolute top-3.5 right-3.5 inline-flex items-center justify-center rounded-full p-1',
-									'focus:outline-none focus-visible:ring-[0.125rem] focus-visible:ring-purple-500 focus-visible:ring-opacity-75'
-								)}
-							>
-								<IoMdClose className='h-4 w-4 text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-400' />
-							</DialogPrimitive.Close>
-						</DialogPrimitive.Content>
-					</Transition.Child>
-				</Transition.Root>
-			</DialogPrimitive.Root>
+						</div>
+					))}
+				</div>
+			</Dialog>
 		</>
+	);
+};
+
+const UpdateUserBasicDetails = ({
+	isOpen,
+	setIsOpen
+}: {
+	isOpen: boolean;
+	setIsOpen: Dispatch<SetStateAction<boolean>>;
+}) => {
+	const queryClient = useQueryClient();
+	const { user } = useGetUserDataFromStore();
+	const accessTokenFrom = getGetAccessTokenFromCookie();
+
+	const initFromValues = () => ({
+		email: user.data ? user.data.email : '',
+		firstName: user.data ? user.data.firstName : '',
+		lastName: user.data ? user.data.lastName : '',
+		acceptsMarketing: user.data ? user.data.acceptsMarketing : false
+	});
+
+	const [formValues, setFormValues] = useState(initFromValues());
+
+	const isChanged = useMemo(() => {
+		if (
+			!user.data ||
+			(user.data &&
+				user.data.email.trim() === formValues.email.trim() &&
+				user.data.firstName.trim() === formValues.firstName.trim() &&
+				user.data.lastName.trim() === formValues.lastName.trim() &&
+				user.data.acceptsMarketing === formValues.acceptsMarketing)
+		)
+			return false;
+
+		return true;
+	}, [
+		formValues.acceptsMarketing,
+		formValues.email,
+		formValues.firstName,
+		formValues.lastName,
+		user.data
+	]);
+
+	const updateMutation = useMutation<{}, IGenericErrorResponse, FormEvent>({
+		mutationFn: (event) => {
+			event.preventDefault();
+
+			if (!accessTokenFrom) throw new Error('No access token available');
+			if (!isChanged) throw new Error('No changes detected');
+			if (!user.data) throw new Error('No user data available');
+
+			return fetch(
+				`${process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH}//clients`,
+				{
+					method: 'PUT',
+					headers: {
+						'Content-type': 'application/json',
+						clientaccesstoken: accessTokenFrom
+					},
+					body: JSON.stringify({
+						email:
+							user.data.email.trim() !== formValues.email.trim()
+								? formValues.email
+								: undefined,
+						firstName:
+							user.data.firstName.trim() !== formValues.firstName.trim()
+								? formValues.firstName
+								: undefined,
+						lastName:
+							user.data.lastName.trim() !== formValues.lastName.trim()
+								? formValues.lastName
+								: undefined,
+						acceptsMarketing:
+							user.data.acceptsMarketing !== formValues.acceptsMarketing
+								? formValues.acceptsMarketing
+								: undefined
+					})
+				}
+			)
+				.then((response) => response.json())
+				.then((result) => {
+					if ('success' in result && !result.success)
+						throw new Error(result.message);
+
+					return result;
+				});
+		},
+		onSuccess: async (result) => {
+			// console.log('result', result)
+			// await user.refetch();
+			queryClient.setQueryData<IUser>(['check-token'], (prev) => {
+				if (!prev) return prev;
+
+				return {
+					...prev,
+					...formValues
+				};
+			});
+			setIsOpen(false);
+		}
+	});
+
+	return (
+		<Dialog
+			header={{ title: 'Update Your Basic Details' }}
+			isOpen={isOpen}
+			setIsOpen={setIsOpen}
+		>
+			<form
+				className='sm:w-11/12 mx-auto my-4 flex flex-col'
+				onSubmit={updateMutation.mutate}
+			>
+				<fieldset
+					className='mt-2 space-y-4'
+					disabled={updateMutation.isLoading}
+				>
+					<FormField
+						values={formValues}
+						setValues={setFormValues}
+						name='firstName'
+						placeholder='*first name'
+						autoComplete='first-name'
+						minLength={3}
+					/>
+					<FormField
+						values={formValues}
+						setValues={setFormValues}
+						name='lastName'
+						placeholder='*last name'
+						autoComplete='last-name'
+						minLength={3}
+					/>
+					<FormField
+						values={formValues}
+						setValues={setFormValues}
+						name='email'
+						type='email'
+						placeholder='*email'
+						autoComplete='email'
+						minLength={3}
+					/>
+
+					<div className=''>
+						<label>
+							<input
+								checked={formValues.acceptsMarketing}
+								type='checkbox'
+								name='acceptsMarketing'
+								onChange={() =>
+									setFormValues((prev) => ({
+										...prev,
+										acceptsMarketing: !prev.acceptsMarketing
+									}))
+								}
+							/>
+							&nbsp;
+							<span>Accepting marketing</span>
+						</label>
+					</div>
+
+					<div className='flex justify-end'>
+						<Button
+							type='submit'
+							classesIntent={{ w: 'full' }}
+							disabled={updateMutation.isLoading || !isChanged}
+						>
+							Submit
+						</Button>
+					</div>
+				</fieldset>
+				{updateMutation.isError && (
+					<div className='text-bg-secondary-2'>
+						<p>{updateMutation.error.message}</p>
+					</div>
+				)}
+			</form>
+		</Dialog>
 	);
 };
 
 const CustomerProfileScreen = () => {
 	const { user } = useGetUserDataFromStore();
+	const [
+		isUpdateUserBasicDetailsOpen,
+		setIsUpdateUserBasicDetailsOpen
+	] = useState(false);
 
 	if (user.status === 'loading' && user.fetchStatus === 'fetching')
 		return (
@@ -229,6 +362,19 @@ const CustomerProfileScreen = () => {
 			title: 'Personal Details',
 			accordionContent: (
 				<AccordionContent className='py-4'>
+					<header>
+						<Button
+							onClick={() => setIsUpdateUserBasicDetailsOpen(true)}
+							classesIntent={{ rounded: 'none', p: 'wide' }}
+						>
+							Edit
+						</Button>
+						<UpdateUserBasicDetails
+							isOpen={isUpdateUserBasicDetailsOpen}
+							setIsOpen={setIsUpdateUserBasicDetailsOpen}
+						/>
+						<hr className='w-[75%] border-bg-secondary-1 my-2' />
+					</header>
 					<TitleValue title='first Name:' value={user.data.firstName} />
 					<TitleValue title='last Name:' value={user.data.lastName} />
 					<TitleValue title='email:' value={user.data.email} />

@@ -152,7 +152,6 @@ export const getGetAccessTokenFromCookie = () => {
 };
 
 export const useGetUserCheckoutDetailsAndIdAndKey = () => {
-	const { user } = useGetUserDataFromStore();
 	const queryClient = useQueryClient();
 	const createOneCheckout = queryClient.getQueryData<
 		TCreateOneCheckoutReturnType
@@ -238,7 +237,7 @@ export const useAddProductsToCheckoutAndCart = () => {
 				}
 			});
 
-			customerGlobalActions.setIsVisibleOnly(customerDispatch, 'headerCart')
+			customerGlobalActions.setIsVisibleOnly(customerDispatch, 'headerCart');
 		}
 	});
 };
