@@ -42,7 +42,7 @@
 
 .swiper-button-next,
 .swiper-button-prev {
-	width: 1.5rem !important;
+	width: 1.25rem !important;
 }
 
 @media (max-width: 768px) {
