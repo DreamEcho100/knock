@@ -52,7 +52,6 @@ export const getAllProducts = async ({
 	const client = getShopifyClient();
 
 	let products = (await client.product.fetchAll()) as unknown as IProduct[];
-	products.forEach((item) => console.log(item.title, '---', item.handle));
 
 	if (Array.isArray(typesToExclude))
 		products = products.filter(
