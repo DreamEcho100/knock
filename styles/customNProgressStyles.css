@@ -1,0 +1,16 @@
+#nprogress .bar {
+	background: var(--main-nprogress) !important;
+}
+
+#nprogress .peg {
+	box-shadow: 0 0 1.25rem var(--main-nprogress), 0 0 1rem var(--main-nprogress) !important;
+}
+
+#nprogress .spinner-icon {
+	border-top-color: var(--main-nprogress) !important;
+	border-left-color: var(--main-nprogress) !important;
+	/* box-sizing: 1rem; */
+	background-color: rgba(255, 255, 255, 0.15);
+	box-shadow: 0 0 1.25rem rgba(255, 255, 255, 0.15), 0 0 1rem rgba(0, 0, 0, 0.5);
+	padding: 0.75em;
+}

@@ -16,6 +16,7 @@
 
 :root {
 	--main-nav-h: 6rem;
+	--main-nprogress: rgb(117 72 254);
 }
 
 html,
