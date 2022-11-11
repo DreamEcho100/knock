@@ -14,7 +14,7 @@ export const commonClasses = 'leading-relaxed text-primary-2 mx-auto';
 const LinksListContainer = ({
 	headerText,
 	links,
-	linksListClassName = 'capitalize'
+	linksListClassName = 'capitalize flex flex-col gap-1'
 }: {
 	headerText: string;
 	links: { href: string; text: string }[];
