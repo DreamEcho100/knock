@@ -22,7 +22,7 @@ const CustomNextImage = ({
 		className
 	};
 	const handleImageProps = () => {
-		const imageProps: ICustomNextImageProps = {
+		const imageProps: Omit<ICustomNextImageProps, 'alt'> & { alt: string } = {
 			unoptimized,
 			src,
 			placeholder,
@@ -39,6 +39,7 @@ const CustomNextImage = ({
 		return imageProps;
 	};
 
+	// eslint-disable-next-line jsx-a11y/alt-text
 	return <Image {...handleImageProps()} />;
 };
 
