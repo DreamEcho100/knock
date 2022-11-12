@@ -19,6 +19,7 @@ import '@styles/globals.css';
 import '@styles/swiper.css';
 import '@styles/customNProgressStyles.css';
 import { SharedCustomerStateProvider } from 'context/Customer';
+import Head from 'next/head';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const [queryClient] = useState(
@@ -40,6 +41,15 @@ function MyApp({ Component, pageProps }: AppProps) {
 				<SharedCustomerStateProvider>
 					<DefaultLayout>
 						<DynamicTopProgressBar />
+						<Head>
+							<title>
+								PLUGINS THAT KNOCK | KNOCK Plugin - Make Your Drums Knock
+							</title>
+							<meta
+								name='description'
+								content='The KNOCK Plugin created by DECAP will help you make Drums That Knock hard and punch through your mix. Easy to use for music producers at all levels.'
+							/>
+						</Head>
 						<Component {...pageProps} />
 					</DefaultLayout>
 				</SharedCustomerStateProvider>

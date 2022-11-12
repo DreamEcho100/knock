@@ -27,6 +27,7 @@ import { BiChevronUpCircle } from 'react-icons/bi';
 import Dialog from '@components/shared/common/Dialog';
 import FormField from '@components/shared/core/FieldForm';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import Head from 'next/head';
 
 const TitleValue = ({
 	title,
@@ -331,25 +332,42 @@ const UpdateUserBasicDetails = ({
 
 const CustomerProfileScreen = () => {
 	const { user } = useGetUserDataFromStore();
-	const [isUpdateUserBasicDetailsOpen, setIsUpdateUserBasicDetailsOpen] =
-		useState(false);
+	const [
+		isUpdateUserBasicDetailsOpen,
+		setIsUpdateUserBasicDetailsOpen
+	] = useState(false);
 
 	if (user.status === 'loading' && user.fetchStatus === 'fetching')
 		return (
-			<section className='bg-primary-1 section-p-v1'>
-				<p>Loading...</p>
-			</section>
+			<>
+				<Head>
+					<title>Loading... | KNOCK Plugin - Make Your Drums Knock</title>
+				</Head>
+				<section className='bg-primary-1 section-p-v1'>
+					<p>Loading...</p>
+				</section>
+			</>
 		);
 
 	if (!user.isSuccess)
 		return (
-			<section className='bg-primary-1 section-p-v1'>
-				<p>
-					{!user.isSuccess
-						? 'Please login first to view your data'
-						: "Your data doesn't exist \u{1F928}"}
-				</p>
-			</section>
+			<>
+				<Head>
+					<title>
+						{!user.isSuccess
+							? 'Please login first to view your data'
+							: "Your data doesn't exist \u{1F928}"}{' '}
+						| KNOCK Plugin - Make Your Drums Knock
+					</title>
+				</Head>
+				<section className='bg-primary-1 section-p-v1'>
+					<p>
+						{!user.isSuccess
+							? 'Please login first to view your data'
+							: "Your data doesn't exist \u{1F928}"}
+					</p>
+				</section>
+			</>
 		);
 
 	const orders = user.data.orders.edges;
@@ -398,42 +416,50 @@ const CustomerProfileScreen = () => {
 	];
 
 	return (
-		<section className='bg-primary-1 section-p-v1'>
-			<AccordionRoot
-				type='multiple'
-				className='my-8 flex flex-col gap-8'
-				defaultValue={['personalDetails']}
-			>
-				{accordionDetails.map((item) => (
-					<AccordionItem key={item.key} value={item.key}>
-						<AccordionHeader className='p-0 m-0'>
-							<AccordionTrigger
-								className={cx(
-									'p-0 m-0 w-full text-h2',
-									'border-0 cursor-pointer bg-transparent font-bold p-0 w-full',
-									'flex items-center justify-between',
-									'border-b border-b-bg-secondary-1'
-								)}
-							>
-								<span className='flex flex-wrap text-align-initial'>
-									{item.title}
-								</span>
-								<BiChevronUpCircle
-									aria-hidden
+		<>
+			<Head>
+				<title>
+					{user.data.firstName} {user.data.lastName} | Customer Profile | KNOCK
+					Plugin - Make Your Drums Knock
+				</title>
+			</Head>
+			<section className='bg-primary-1 section-p-v1'>
+				<AccordionRoot
+					type='multiple'
+					className='my-8 flex flex-col gap-8'
+					defaultValue={['personalDetails']}
+				>
+					{accordionDetails.map((item) => (
+						<AccordionItem key={item.key} value={item.key}>
+							<AccordionHeader className='p-0 m-0'>
+								<AccordionTrigger
 									className={cx(
-										'min-w-fit',
-										'border-0 cursor-pointer bg-transparent font-bold text-bg-secondary-1',
-										accordionClasses.rotate180OnOpen,
-										'duration-150 text-3xl'
+										'p-0 m-0 w-full text-h2',
+										'border-0 cursor-pointer bg-transparent font-bold p-0 w-full',
+										'flex items-center justify-between',
+										'border-b border-b-bg-secondary-1'
 									)}
-								/>
-							</AccordionTrigger>
-						</AccordionHeader>
-						{item.accordionContent}
-					</AccordionItem>
-				))}
-			</AccordionRoot>
-		</section>
+								>
+									<span className='flex flex-wrap text-align-initial'>
+										{item.title}
+									</span>
+									<BiChevronUpCircle
+										aria-hidden
+										className={cx(
+											'min-w-fit',
+											'border-0 cursor-pointer bg-transparent font-bold text-bg-secondary-1',
+											accordionClasses.rotate180OnOpen,
+											'duration-150 text-3xl'
+										)}
+									/>
+								</AccordionTrigger>
+							</AccordionHeader>
+							{item.accordionContent}
+						</AccordionItem>
+					))}
+				</AccordionRoot>
+			</section>
+		</>
 	);
 };
 

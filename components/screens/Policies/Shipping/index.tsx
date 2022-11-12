@@ -6,6 +6,11 @@ const ShippingPolicyScreen = () => {
 			header={{
 				h1Children: 'shipping policy'
 			}}
+			head={{
+				title: 'Shipping Policy | KNOCK Plugin - Make Your Drums Knock',
+				description:
+					'This Shipping Policy describes is for the Digital Products and the Physical Products'
+			}}
 		>
 			<h2>Digital Products</h2>
 			<p>

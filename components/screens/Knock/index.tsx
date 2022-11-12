@@ -1,4 +1,5 @@
 import type { IKnockPluginPageProps } from '@pages/knock';
+import Head from 'next/head';
 import {
 	DescriptionSection,
 	EasyToUseSection,
@@ -138,6 +139,13 @@ const reviews = [
 const KnockScreen = ({ knockPlugin }: IKnockPluginPageProps) => {
 	return (
 		<>
+			<Head>
+				<title>KNOCK Plugin | PLUGINS THAT KNOCK</title>
+				<meta
+					name='description'
+					content='This is the last plugin you will ever need to make your drums KNOCK and punch through your mix. This plugin was meticulously crafted by platinum producer &amp; award winning sound designer, DECAP. It is inspired by the signature sound of his popular drum kit series DRUMS THAT KNOCK, which has helped shaped the sonics o'
+				/>
+			</Head>
 			<HeroSection knockPlugin={knockPlugin} />
 			<DescriptionSection />
 			<ShapesYourDrumsSection />

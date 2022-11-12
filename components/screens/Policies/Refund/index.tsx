@@ -6,6 +6,10 @@ const RefundPolicyScreen = () => {
 			header={{
 				h1Children: 'refund policy'
 			}}
+			head={{
+				title: 'Refund Policy | KNOCK Plugin - Make Your Drums Knock',
+				description: 'Refund Policy'
+			}}
 		>
 			<h2>What&apos;s your return policy?</h2>
 			<p>

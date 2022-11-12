@@ -15,6 +15,11 @@ const PrivatePoliciesScreen = () => {
 				),
 				h1Children: 'Privacy policy'
 			}}
+			head={{
+				title: 'Privacy Policy',
+				description:
+					"This Privacy Policy describes how (the 'Site' or 'we') \n collects, uses, and discloses your Personal Information when you visit or make a purchase from the Site."
+			}}
 		>
 			<h2>Collecting Personal Information</h2>
 			<p>

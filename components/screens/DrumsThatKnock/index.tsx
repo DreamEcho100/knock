@@ -1,4 +1,5 @@
 import { IDrumsThatKnockPageProps } from '@pages/drums-that-knock';
+import Head from 'next/head';
 import {
 	ArtistsSection,
 	DigitalProductsSection,
@@ -243,6 +244,14 @@ const DrumsThatKnock = ({
 }: IDrumsThatKnockPageProps) => {
 	return (
 		<>
+			<Head>
+				<title>DRUMS THAT KNOCK | KNOCK Plugin - Make Your Drums Knock</title>
+				<meta
+					name='description'
+					content='Designed from scratch by DECAP. Premium quality, groundbreaking as
+				always.'
+				/>
+			</Head>
 			<HeroSection />
 			<DigitalProductsSection products={products} />
 			{/* <MerchSection /> */}
