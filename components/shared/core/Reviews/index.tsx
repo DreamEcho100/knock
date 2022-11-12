@@ -10,7 +10,7 @@ import CustomNextImage from '@components/shared/common/CustomNextImage';
 import { cva, cx } from 'class-variance-authority';
 
 const handleReviewCardVariants = cva(
-	'relative rounded-2xl w-full px-6 sm:px-10 py-12 bg-primary-5 flex	flex-col',
+	'relative rounded-2xl w-full px-6 sm:px-10 py-12 bg-primary-5 flex flex-col',
 	{
 		variants: {
 			'min-h': {
@@ -31,9 +31,28 @@ const handleReviewCardVariants = cva(
 	}
 );
 
+const handleContainerVariants = cva(
+	'container-restrictions-2 max-w-screen-sm mx-auto',
+	{
+		variants: {
+			'max-w': {
+				'screen-lg': 'max-w-screen-lg',
+				'screen-sm': 'max-w-screen-sm',
+				'screen-md': 'max-w-screen-md'
+			}
+		},
+		defaultVariants: {
+			'max-w': 'screen-lg'
+		}
+	}
+);
+
+'container-restrictions-2 max-w-screen-sm mx-auto';
+
 const Reviews = ({
 	reviews,
-	reviewCardVariants = {}
+	reviewCardVariants = {},
+	containerVariants
 }: {
 	reviews: {
 		image?: {
@@ -44,9 +63,10 @@ const Reviews = ({
 		reviewedBy: string;
 	}[];
 	reviewCardVariants?: VariantProps<typeof handleReviewCardVariants>;
+	containerVariants?: VariantProps<typeof handleContainerVariants>;
 }) => {
 	return (
-		<div className='container-restrictions-2 max-w-screen-lg mx-auto'>
+		<div className={handleContainerVariants(containerVariants)}>
 			<Swiper
 				modules={[Navigation, A11y, Autoplay]}
 				slidesPerView={1}
@@ -63,7 +83,7 @@ const Reviews = ({
 						key={index}
 						className='my-8 w-full px-3 flex items-center justify-center'
 					>
-						<div className='flex items-center justify-center relative w-full relative'>
+						<div className='flex items-center justify-center relative w-full'>
 							<div
 								className={handleReviewCardVariants({
 									...reviewCardVariants,

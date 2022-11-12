@@ -23,22 +23,35 @@ export const pClasses = cva(`mb-6 leading-6 sm:leading-10`, {
 		text: 'small'
 	}
 });
+export const sectionClasses = cva('bg-primary-1', {
+	variants: {
+		p: {
+			'section-p-v1': 'section-p-v1',
+			'section-p-x-v1': 'section-p-x-v1'
+		}
+	},
+	defaultVariants: {
+		p: 'section-p-v1'
+	}
+});
 
 const KnockSection = ({
 	buttonProps,
 	description,
 	title,
 	pTheme = {},
+	sectionTheme,
 	imageSrc = '/images/534aaf62a986c03ee09ee62a138d3845.gif'
 }: {
 	title?: string;
 	description: string;
 	buttonProps: IButtonProps;
 	pTheme?: VariantProps<typeof pClasses>;
+	sectionTheme?: VariantProps<typeof sectionClasses>;
 	imageSrc?: string;
 }) => {
 	return (
-		<section className='bg-primary-1 section-p-v1'>
+		<section className={sectionClasses(sectionTheme)}>
 			<div
 				className='overflow-hidden
 					w-full flex items-center justify-center flex-col sm:gap-4 text-center'

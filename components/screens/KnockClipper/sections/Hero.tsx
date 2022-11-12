@@ -16,12 +16,15 @@ const HeroSection = ({
 		text: (
 			<>
 				Buy it now&nbsp;
-				<del className='text-bg-secondary-2 line-through'>
-					{priceCurrencyFormatter(
-						knockClipperPlugin.variants[0].compareAtPrice.amount,
-						knockClipperPlugin.variants[0].compareAtPrice.currencyCode
+				{knockClipperPlugin?.variants[0] &&
+					knockClipperPlugin.variants[0]?.compareAtPrice?.amount && (
+						<del className='text-bg-secondary-2 line-through'>
+							{priceCurrencyFormatter(
+								knockClipperPlugin.variants[0].compareAtPrice.amount,
+								knockClipperPlugin.variants[0].compareAtPrice.currencyCode
+							)}
+						</del>
 					)}
-				</del>
 			</>
 		)
 	});
@@ -65,12 +68,15 @@ const HeroSection = ({
 						{...addKnockPluginToCartButtonProps}
 					/>
 					<span className='p-2' />{' '}
-					<span className='text-primary-1 font-bold'>
-						{priceCurrencyFormatter(
-							knockClipperPlugin.variants[0].price.amount,
-							knockClipperPlugin.variants[0].price.currencyCode
+					{knockClipperPlugin?.variants[0] &&
+						knockClipperPlugin.variants[0]?.price?.amount && (
+							<span className='text-primary-1 font-bold'>
+								{priceCurrencyFormatter(
+									knockClipperPlugin.variants[0].price.amount,
+									knockClipperPlugin.variants[0].price.currencyCode
+								)}
+							</span>
 						)}
-					</span>
 				</div>
 			</div>
 		</section>

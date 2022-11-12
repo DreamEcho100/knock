@@ -12,8 +12,9 @@ const LatestSamplesSection = ({
 		<section className='bg-primary-2 section-p-v1'>
 			<div
 				className='
-				flex flex-col gap-4
-				md:flex-row'
+				flex flex-col
+				md:flex-row
+				lg:gap-6'
 			>
 				<div
 					className='flex gap-4 flex-col items-center text-center p-4

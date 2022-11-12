@@ -1,5 +1,5 @@
 import KnockSection from '@components/shared/core/KnockSection';
-import { IKnockPluginPageProps } from '@pages/knock-plugin';
+import { IKnockPluginPageProps } from '@pages/knock';
 import { useAddKnockPluginToCartButtonProps } from './utils/hookes';
 
 const HeroSection = ({

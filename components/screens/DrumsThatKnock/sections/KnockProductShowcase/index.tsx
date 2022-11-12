@@ -15,7 +15,7 @@ const KnockProductShowcaseSection = ({
 				textContainer={{
 					h2: {
 						children: (
-							<Link href='/knock-plugin' className='flex flex-wrap'>
+							<Link href='/knock' className='flex flex-wrap'>
 								{knockPlugin.title.split(' ').map((item, index) => (
 									<span key={index}>
 										{item.toLowerCase() === 'knock' ? <KnockTrademark /> : item}

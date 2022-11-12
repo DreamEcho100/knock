@@ -1,4 +1,4 @@
-import type { IKnockPluginPageProps } from '@pages/knock-plugin';
+import type { IKnockPluginPageProps } from '@pages/knock';
 import { useAddProductsToCheckoutAndCart } from '@utils/core/hooks';
 import { priceCurrencyFormatter } from '@utils/core/shopify';
 

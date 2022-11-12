@@ -3,7 +3,7 @@ import KnockTrademark from '@components/shared/core/KnockTrademark';
 
 const HeroSection = () => {
 	return (
-		<section className='bg-primary-1 section-p-v1 leading-[1] sm:leading-[1.7]'>
+		<section className='bg-primary-1 section-p-x-v1 leading-[1] sm:leading-[1.7]'>
 			<div
 				className='overflow-hidden
 					relative flex items-center justify-center text-center text-primary-1 h-screen min-h-fit max-h-[30rem]'

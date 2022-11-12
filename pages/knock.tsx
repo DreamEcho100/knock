@@ -1,6 +1,6 @@
 import type { GetServerSideProps, NextPage } from 'next';
 
-import KnockPluginScreen from 'components/screens/KnockPlugin';
+import KnockScreen from '@components/screens/Knock';
 import type { IProduct } from 'types';
 import { getOneProductByHandle } from 'server/controllers/products';
 
@@ -9,7 +9,7 @@ export interface IKnockPluginPageProps {
 }
 
 const KnockPluginPage: NextPage<IKnockPluginPageProps> = (props) => {
-	return <KnockPluginScreen {...props} />;
+	return <KnockScreen {...props} />;
 };
 
 export default KnockPluginPage;

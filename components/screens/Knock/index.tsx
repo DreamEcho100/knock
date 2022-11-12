@@ -1,4 +1,4 @@
-import type { IKnockPluginPageProps } from '@pages/knock-plugin';
+import type { IKnockPluginPageProps } from '@pages/knock';
 import {
 	DescriptionSection,
 	EasyToUseSection,
@@ -135,7 +135,7 @@ const reviews = [
 ];
 // const shortReviews = reviews.filter((review) => review.review.length < 100);
 
-const KnockPluginScreen = ({ knockPlugin }: IKnockPluginPageProps) => {
+const KnockScreen = ({ knockPlugin }: IKnockPluginPageProps) => {
 	return (
 		<>
 			<HeroSection knockPlugin={knockPlugin} />
@@ -149,4 +149,4 @@ const KnockPluginScreen = ({ knockPlugin }: IKnockPluginPageProps) => {
 	);
 };
 
-export default KnockPluginScreen;
+export default KnockScreen;

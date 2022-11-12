@@ -66,6 +66,7 @@ const ArtistsSection = ({ reviews }: Parameters<typeof Reviews>['0']) => {
 					<Reviews
 						reviews={reviews}
 						reviewCardVariants={{ 'min-h': 'sm', 'max-w': 'sm' }}
+						containerVariants={{ 'max-w': 'screen-sm' }}
 					/>
 				</div>
 			</div>

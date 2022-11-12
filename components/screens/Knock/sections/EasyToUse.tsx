@@ -1,5 +1,5 @@
 import ProductShowcase from '@components/shared/core/ProductShowcase';
-import { IKnockPluginPageProps } from '@pages/knock-plugin';
+import { IKnockPluginPageProps } from '@pages/knock';
 
 const EasyToUseSection = ({
 	knockPlugin

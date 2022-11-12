@@ -36,7 +36,7 @@ const HeroSection = () => {
 				<p className='mb-6 max-w-[350px]'>
 					Make your drums KNOCK and punch through the mix.
 				</p>
-				<Button className='capitalize' href='/knock-plugin'>
+				<Button className='capitalize' href='/knock'>
 					Explore it now
 				</Button>
 			</div>
