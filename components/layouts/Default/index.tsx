@@ -171,7 +171,7 @@ const Footer = () => {
 						</div>
 					</div>
 				</div>
-				<div className='flex gap-2 justify-between items-end mx-1 my-4 text-sm'>
+				<div className='flex gap-2 justify-between items-end mx-1 my-4 text-[0.650rem]'>
 					<div className=''>
 						<Logo />
 						<small className='capitalize'>
