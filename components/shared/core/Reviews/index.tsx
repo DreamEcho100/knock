@@ -10,12 +10,15 @@ import CustomNextImage from '@components/shared/common/CustomNextImage';
 import { cva, cx } from 'class-variance-authority';
 
 const handleReviewCardVariants = cva(
-	'rounded-2xl w-full px-6 sm:px-10 py-12 bg-primary-5 flex 	flex-col',
+	'relative rounded-2xl w-full px-6 sm:px-10 py-12 bg-primary-5 flex	flex-col',
 	{
 		variants: {
 			'min-h': {
 				sm: 'min-h-[8rem]',
 				md: 'min-h-[14rem]'
+			},
+			'max-w': {
+				sm: 'max-w-[30rem]'
 			},
 			withReviewerImage: {
 				true: 'sm:pr-[5.5rem] sm:mr-[4.5rem] sm:py-16'
@@ -60,20 +63,46 @@ const Reviews = ({
 						key={index}
 						className='my-8 w-full px-3 flex items-center justify-center'
 					>
-						<div className='flex relative w-full'>
+						<div className='flex items-center justify-center relative w-full relative'>
 							<div
-								className={
-									handleReviewCardVariants({
-										...reviewCardVariants,
-										withReviewerImage:
-											reviewCardVariants.withReviewerImage || !!item.image
-									})
-									// 		cx(
-									// 		,
-									// 		item.image ? 'withReviewerImage' : ''
-									// )
-								}
+								className={handleReviewCardVariants({
+									...reviewCardVariants,
+									withReviewerImage:
+										reviewCardVariants.withReviewerImage || !!item.image
+								})}
 							>
+								<div
+									className={cx(
+										'hidden absolute top-1/2 -translate-y-1/2 right-0',
+										'sm:block sm:w-36 sm:h-36'
+									)}
+								>
+									{item.image && (
+										<CustomNextImage
+											src={item.image.src}
+											alt={item.image.alt}
+											width={250}
+											height={250}
+											className='bg-black rounded-full aspect-square w-full h-full object-cover translate-x-1/2'
+										/>
+									)}
+								</div>
+								<div
+									className={cx(
+										'w-16 h-16 absolute top-8 -translate-y-full left-8',
+										'sm:w-20 sm:h-20 sm:top-10'
+									)}
+								>
+									{item.image && (
+										<CustomNextImage
+											src='/svgs/double-quates.svg'
+											alt={item.image.alt}
+											width={250}
+											height={250}
+											className='aspect-square w-full h-full'
+										/>
+									)}
+								</div>
 								<q>{item.review}</q>
 								<span className='border-b-[0.0125rem] border-text-primary-4 w-12 mb-2 mt-3'></span>
 								<div className='flex items-end gap-4'>
@@ -93,38 +122,6 @@ const Reviews = ({
 										/>
 									)}
 								</div>
-							</div>
-							<div
-								className={cx(
-									'hidden absolute top-1/2 -translate-y-1/2 right-0',
-									'sm:block sm:w-36 sm:h-36'
-								)}
-							>
-								{item.image && (
-									<CustomNextImage
-										src={item.image.src}
-										alt={item.image.alt}
-										width={250}
-										height={250}
-										className='bg-black rounded-full aspect-square w-full h-full object-cover'
-									/>
-								)}
-							</div>
-							<div
-								className={cx(
-									'w-16 h-16 absolute top-8 -translate-y-full left-8',
-									'sm:w-20 sm:h-20 sm:top-10'
-								)}
-							>
-								{item.image && (
-									<CustomNextImage
-										src='/svgs/double-quates.svg'
-										alt={item.image.alt}
-										width={250}
-										height={250}
-										className='aspect-square w-full h-full'
-									/>
-								)}
 							</div>
 						</div>
 					</SwiperSlide>

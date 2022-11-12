@@ -21,7 +21,7 @@ const ArtistsSection = ({ reviews }: Parameters<typeof Reviews>['0']) => {
 			<div className='flex flex-col gap-4'>
 				<header className='text-center flex items-center justify-center'>
 					<h2 className='text-h2 font-bold capitalize flex flex-wrap justify-center'>
-						SOME ARTISTS WHO HAVE USED DRUMS THAT &nbsp;
+						SOME ARTISTS WHO HAVE USED DRUMS THAT&nbsp;
 						<KnockTrademark />
 					</h2>
 				</header>
@@ -63,7 +63,10 @@ const ArtistsSection = ({ reviews }: Parameters<typeof Reviews>['0']) => {
 					</Swiper>
 				</div>
 				<div className='-translate-y-6'>
-					<Reviews reviews={reviews} reviewCardVariants={{ 'min-h': 'sm' }} />
+					<Reviews
+						reviews={reviews}
+						reviewCardVariants={{ 'min-h': 'sm', 'max-w': 'sm' }}
+					/>
 				</div>
 			</div>
 		</section>
