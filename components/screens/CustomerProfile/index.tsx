@@ -331,10 +331,8 @@ const UpdateUserBasicDetails = ({
 
 const CustomerProfileScreen = () => {
 	const { user } = useGetUserDataFromStore();
-	const [
-		isUpdateUserBasicDetailsOpen,
-		setIsUpdateUserBasicDetailsOpen
-	] = useState(false);
+	const [isUpdateUserBasicDetailsOpen, setIsUpdateUserBasicDetailsOpen] =
+		useState(false);
 
 	if (user.status === 'loading' && user.fetchStatus === 'fetching')
 		return (

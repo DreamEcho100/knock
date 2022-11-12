@@ -153,9 +153,10 @@ export const getGetAccessTokenFromCookie = () => {
 
 export const useGetUserCheckoutDetailsAndIdAndKey = () => {
 	const queryClient = useQueryClient();
-	const createOneCheckout = queryClient.getQueryData<
-		TCreateOneCheckoutReturnType
-	>(['create-one-checkout']);
+	const createOneCheckout =
+		queryClient.getQueryData<TCreateOneCheckoutReturnType>([
+			'create-one-checkout'
+		]);
 	const getOneCheckout = queryClient.getQueryData<TGetOneCheckoutReturnType>([
 		'get-one-checkout'
 	]);

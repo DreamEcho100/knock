@@ -19,7 +19,7 @@ import {
 	TMinOfDates,
 	TSetDateValues,
 	TSubtractDateValues,
-	TTwoDateDifference,
+	TTwoDateDifference
 } from './ts';
 
 export const getDateValues: TGetDateValues = (
@@ -34,7 +34,7 @@ export const getDateValues: TGetDateValues = (
 		year,
 		dayOfWeek,
 		time,
-		date,
+		date
 	} = {}
 ) => {
 	const dateObject = new Date(dateValue);
@@ -62,7 +62,7 @@ export const setDateValues: TSetDateValues = (
 		daysInMonth,
 		month,
 		year,
-		weekOfYear,
+		weekOfYear
 	} = {}
 ) => {
 	const dateObject = new Date(dateValue);
@@ -211,7 +211,7 @@ export const formatDate: TFormatDate = (providedDate, options) => {
 
 	if (tempArray.length === 1)
 		return {
-			date: tempArray[0],
+			date: tempArray[0]
 		};
 
 	const fullTimeString: string = tempArray[tempArray.length - 1];
@@ -231,13 +231,13 @@ export const formatDate: TFormatDate = (providedDate, options) => {
 		return {
 			date: fullDateString,
 			time,
-			timeZoneName,
+			timeZoneName
 		};
 	} else {
 		time = fullTimeString;
 		return {
 			date: fullDateString,
-			time,
+			time
 		};
 	}
 };

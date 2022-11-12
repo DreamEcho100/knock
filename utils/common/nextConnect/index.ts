@@ -38,9 +38,7 @@ interface INextConnectOptions {
 	onNoMatch?: typeof onNoMatch;
 }
 
-const nextConnect = (
-	options: INextConnectOptions
-) =>
+const nextConnect = (options: INextConnectOptions) =>
 	nc({
 		onError,
 		onNoMatch,

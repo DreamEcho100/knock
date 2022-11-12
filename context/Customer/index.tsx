@@ -7,5 +7,5 @@ const useMyState = () => useReducer(reducer, initState());
 
 export const {
 	Provider: SharedCustomerStateProvider,
-	useTracked: useSharedCustomerState,
+	useTracked: useSharedCustomerState
 } = createContainer(useMyState);

@@ -1,3 +1,3 @@
-:global([data-state="open"]) .rotate180OnOpen {
-  transform: rotate(180deg);
+:global([data-state='open']) .rotate180OnOpen {
+	transform: rotate(180deg);
 }
