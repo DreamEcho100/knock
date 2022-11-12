@@ -38,7 +38,7 @@ const LatestSamplesSection = ({
 				<div className='md:flex-grow md:w-1/2 flex justify-center items-center'>
 					<ProductCardSlider products={products} />
 				</div>
-				<div className='md:hidden flex justify-center items-center p-4'>
+				<div className='md:hidden flex justify-center items-center p-5'>
 					<Button href='/drums-that-knock'>Explore it now</Button>
 				</div>
 			</div>
