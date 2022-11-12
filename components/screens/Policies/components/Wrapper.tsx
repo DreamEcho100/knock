@@ -12,7 +12,7 @@ interface IProps {
 
 const Wrapper = ({ header, children }: IProps) => {
 	return (
-		<section className='bg-primary-1 section-p-v1  break-all'>
+		<section className='bg-primary-1 section-p-v1'>
 			<div className='md:max-w-[800px] mx-auto'>
 				<header className='flex flex-col gap-4 text-text-primary-1'>
 					<h1 className='text-h2 font-semibold capitalize'>

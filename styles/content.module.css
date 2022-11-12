@@ -4,17 +4,16 @@
 	border-width: 0.125rem;
 	--tw-border-opacity: 1;
 	border-color: rgb(117 72 254 / var(--tw-border-opacity));
-	padding: 2rem;
+	padding: 1.8rem;
 	border-radius: 1rem;
 	line-height: 2;
 	color: rgb(200, 200, 200);
+	word-break: break-all;
 }
 @media (min-width: 640px) {
 	.contentContainer {
 		padding-left: 4rem /* 64px */;
 		padding-right: 4rem /* 64px */;
-	}
-	.contentContainer {
 		padding-top: 5rem /* 80px */;
 		padding-bottom: 5rem /* 80px */;
 	}
@@ -30,7 +29,7 @@
 .contentContainerElements h2,
 .contentContainerElements h3 {
 	color: white;
-	font-weight: 600;
+	font-weight: 500;
 	text-transform: capitalize;
 	line-height: 1.2;
 	margin-bottom: 1rem;

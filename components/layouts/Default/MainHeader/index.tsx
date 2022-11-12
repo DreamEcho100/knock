@@ -268,8 +268,10 @@ const MainHeader = () => {
 				>
 					<nav className='flex'>
 						<ul
-							className='flex flex-col gap-2 font-bold p-4 w-full
-									sm:gap-4'
+							className={cx(
+								'flex flex-col gap-2 font-bold px-4 pt-0 pb-4  w-full text-base',
+								'sm:text-size-inherit sm:gap-4'
+							)}
 						>
 							{headerLinks.map((link) => (
 								<li key={link.text} className='w-full'>

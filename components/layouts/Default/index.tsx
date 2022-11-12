@@ -25,7 +25,7 @@ const socialLinks = {
 const LinksListContainer = ({
 	headerText,
 	links,
-	linksListClassName = 'capitalize flex flex-col gap-1 text-lg sm:text-size-inherit'
+	linksListClassName = 'capitalize flex flex-col gap-1 text-base sm:text-size-inherit'
 }: {
 	headerText: string;
 	links: { href: string; text: string; isHidden?: boolean }[];
