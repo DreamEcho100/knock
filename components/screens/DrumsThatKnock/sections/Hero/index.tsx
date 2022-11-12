@@ -24,11 +24,11 @@ const HeroSection = () => {
 							<KnockTrademark />
 						</div>
 					</h1>
-					<p className='text-[2rem] max-w-[800px]'>
+					<p className='text-[1rem] sm:text-3xl max-w-[800px]'>
 						Designed from scratch by DECAP. Premium quality, groundbreaking as
 						always.
 					</p>
-					<p className='text-[2rem] flex flex-wrap items-center justify-center text-center'>
+					<p className='text-[1rem] sm:text-3xl flex flex-wrap items-center justify-center text-center'>
 						These drums &nbsp;
 						<KnockTrademark />.
 					</p>

@@ -19,7 +19,7 @@ const ArtistsSection = () => {
 		<section className='bg-primary-2 section-p-v1'>
 			<div className='flex flex-col gap-12'>
 				<header className='text-center flex items-center justify-center'>
-					<h2 className='text-[2rem] font-bold capitalize flex flex-wrap justify-center'>
+					<h2 className='text-h2 font-bold capitalize flex flex-wrap justify-center'>
 						SOME ARTISTS WHO HAVE USED DRUMS THAT &nbsp;
 						<KnockTrademark />
 					</h2>

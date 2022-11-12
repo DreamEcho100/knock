@@ -353,7 +353,7 @@ const CartContainer = () => {
 						: productsData.map((product) => (
 								<article
 									key={product.id}
-									className='flex border-b-[0.25rem] border-b-primary-1 pb-4'
+									className='flex border-b-[0.0625rem] border-b-primary-1 pb-4'
 								>
 									<div className='w-28 min-w-[4rem] aspect-square bg-primary-1 max-w-[30%]'>
 										{product.preferredImage?.src && (

@@ -1,3 +1,5 @@
+import type { VariantProps } from 'class-variance-authority';
+
 import { Navigation, A11y, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -5,10 +7,30 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
-import { cx } from 'class-variance-authority';
+import { cva, cx } from 'class-variance-authority';
+
+const handleReviewCardVariants = cva(
+	'rounded-2xl w-full px-6 sm:px-10 py-12 bg-primary-5 flex 	flex-col',
+	{
+		variants: {
+			'min-h': {
+				sm: 'min-h-[8rem]',
+				md: 'min-h-[14rem]'
+			},
+			withReviewerImage: {
+				true: 'sm:pr-[5.5rem] sm:mr-[4.5rem] sm:py-16'
+			}
+		},
+		defaultVariants: {
+			'min-h': 'md',
+			withReviewerImage: true
+		}
+	}
+);
 
 const Reviews = ({
-	reviews
+	reviews,
+	reviewCardVariants = {}
 }: {
 	reviews: {
 		image?: {
@@ -18,6 +40,7 @@ const Reviews = ({
 		review: string;
 		reviewedBy: string;
 	}[];
+	reviewCardVariants?: VariantProps<typeof handleReviewCardVariants>;
 }) => {
 	return (
 		<div className='container-restrictions-2 max-w-screen-lg mx-auto'>
@@ -35,14 +58,21 @@ const Reviews = ({
 				{reviews.map((item, index) => (
 					<SwiperSlide
 						key={index}
-						className='my-8 h-full px-2 flex items-center justify-center'
+						className='my-8 w-full px-3 flex items-center justify-center'
 					>
-						<div className='flex relative'>
+						<div className='flex relative w-full'>
 							<div
-								className={cx(
-									'rounded-2xl px-6 sm:px-10 py-12 bg-primary-5 flex 	flex-col',
-									item.image ? 'sm:pr-[5.5rem] sm:mr-[4.5rem] sm:py-16' : ''
-								)}
+								className={
+									handleReviewCardVariants({
+										...reviewCardVariants,
+										withReviewerImage:
+											reviewCardVariants.withReviewerImage || !!item.image
+									})
+									// 		cx(
+									// 		,
+									// 		item.image ? 'withReviewerImage' : ''
+									// )
+								}
 							>
 								<q>{item.review}</q>
 								<span className='border-b-[0.0125rem] border-text-primary-4 w-12 mb-2 mt-3'></span>

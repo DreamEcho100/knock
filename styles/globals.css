@@ -145,6 +145,10 @@ main > section > *,
 		text-align: initial;
 	}
 
+	.text-size-inherit {
+		text-align: inherit;
+	}
+
 	.text-h1 {
 		font-size: 4rem;
 	}
