@@ -3,8 +3,7 @@ import {
 	ArtistsSection,
 	DigitalProductsSection,
 	HeroSection,
-	KnockProductShowcaseSection,
-	ReviewsSection
+	KnockProductShowcaseSection
 } from './sections';
 
 const reviews = [
@@ -247,8 +246,7 @@ const DrumsThatKnock = ({
 			<HeroSection />
 			<DigitalProductsSection products={products} />
 			{/* <MerchSection /> */}
-			<ArtistsSection />
-			<ReviewsSection reviews={shortReviews} />
+			<ArtistsSection reviews={shortReviews} />
 			<KnockProductShowcaseSection knockPlugin={knockPlugin} />
 		</>
 	);

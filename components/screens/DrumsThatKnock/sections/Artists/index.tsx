@@ -10,11 +10,12 @@ import 'swiper/css/navigation';
 // import 'swiper/css/pagination'
 // import 'swiper/css/scrollbar'
 
-import { artists } from 'data/fakeData';
+import { artists } from 'data';
 import KnockTrademark from '@components/shared/core/KnockTrademark';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
+import Reviews from '@components/shared/core/Reviews';
 
-const ArtistsSection = () => {
+const ArtistsSection = ({ reviews }: Parameters<typeof Reviews>['0']) => {
 	return (
 		<section className='bg-primary-2 section-p-v1 pb-0'>
 			<div className='flex flex-col gap-4'>
@@ -60,6 +61,9 @@ const ArtistsSection = () => {
 								</SwiperSlide>
 							))}
 					</Swiper>
+				</div>
+				<div className='-translate-y-6'>
+					<Reviews reviews={reviews} reviewCardVariants={{ 'min-h': 'sm' }} />
 				</div>
 			</div>
 		</section>
