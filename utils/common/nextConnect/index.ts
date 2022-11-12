@@ -39,10 +39,7 @@ interface INextConnectOptions {
 }
 
 const nextConnect = (
-	options: INextConnectOptions = {
-		onError,
-		onNoMatch
-	}
+	options: INextConnectOptions
 ) =>
 	nc({
 		onError,

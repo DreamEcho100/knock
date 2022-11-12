@@ -31,10 +31,15 @@ const LatestSamplesSection = ({
 						Designed from scratch by DECAP. <br /> Premium quality,
 						groundbreaking as always.
 					</p>
-					<Button href='/drums-that-knock'>Explore it now</Button>
+					<Button className='hidden md:block' href='/drums-that-knock'>
+						Explore it now
+					</Button>
 				</div>
 				<div className='md:flex-grow md:w-1/2 flex justify-center items-center'>
 					<ProductCardSlider products={products} />
+				</div>
+				<div className='md:hidden flex justify-center items-center p-4'>
+					<Button href='/drums-that-knock'>Explore it now</Button>
 				</div>
 			</div>
 		</section>
