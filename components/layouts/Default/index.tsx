@@ -66,7 +66,7 @@ const Footer = () => {
 						lg:px-24'
 			>
 				<div className='flex gap-2 flex-wrap w-full'>
-					<div className='w-full flex lg:flex-grow flex-wrap justify-between p-2 gap-4'>
+					<div className='w-full flex lg:flex-grow flex-wrap justify-between gap-4'>
 						<LinksListContainer
 							headerText='useful links'
 							links={[
@@ -171,7 +171,7 @@ const Footer = () => {
 						</div>
 					</div>
 				</div>
-				<div className='flex gap-2 justify-between items-end mx-1 my-4 text-[0.650rem]'>
+				<div className='flex gap-2 px-1 justify-between items-end mx-1 my-4 text-[0.650rem]'>
 					<div className=''>
 						<Logo />
 						<small className='capitalize'>
