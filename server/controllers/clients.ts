@@ -361,8 +361,6 @@ const updateOneController = async (
 	res: NextApiResponse
 ) => {
 	const customerAccessToken = req.headers.clientaccesstoken;
-	// let { acceptsMarketing, email, phone, password, firstName, lastName } =
-	// 	req.body;
 
 	const input = z
 		.object({
@@ -448,7 +446,8 @@ const updateOneController = async (
 		throw new Error(response.data.errors[0].message);
 	}
 
-	if (response.data.data.customerUpdate.customerUserErrors.length !== 0) {
+	// It could return an empty array, and if that happen it will result to be true
+	if (response.data.data.customerUpdate?.customerUserErrors?.length !== 0) {
 		res.statusCode = 401;
 		throw new Error(
 			response.data.data.customerUpdate.customerUserErrors
