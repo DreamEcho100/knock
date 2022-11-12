@@ -24,7 +24,7 @@ import { BsFillPersonFill } from 'react-icons/bs';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { HiShoppingBag } from 'react-icons/hi';
 import { commonClasses } from '..';
-import UserRegisterOrLoginButton from './components/UserRegisterOrLoginButton';
+import UserAuthButton from './components/UserAuthButton';
 
 const linkClasses = ({
 	isActive,
@@ -186,7 +186,7 @@ const MainHeader = () => {
 						</li>
 						<li>
 							{!user?.data ? (
-								<UserRegisterOrLoginButton
+								<UserAuthButton
 									isOpen={isRegisterDialogOpen}
 									setIsOpen={setIsRegisterDialogOpen}
 								/>

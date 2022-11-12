@@ -123,19 +123,19 @@ export const useLogoutUser = ({
 			onSuccess: async ({ userCheckoutDetailsAndIdAndKey, userGId }) => {
 				removeCookie('user-access-token');
 
-				queryClient.invalidateQueries<IUser | undefined>(['check-token']);
-
 				// uetUserCheckoutDetailsAndIdAndKey(user?.data?.id);
 
+				console.log('productsData', productsData);
 				if (userCheckoutDetailsAndIdAndKey)
-					checkoutApi.deleteOne(
-						userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId,
+					checkoutApi.products.removeMany(
+						`gid://shopify/Checkout/${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId}?key=${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutKey}`,
 						productsData.map((product) => product.id)
 					);
 				// removeCookie('checkoutIdAndKey');
 
 				if (onSuccess) await onSuccess();
 
+				queryClient.invalidateQueries<IUser | undefined>(['check-token']);
 				window.location.reload();
 			},
 			onError: (error) => {
@@ -153,10 +153,9 @@ export const getGetAccessTokenFromCookie = () => {
 
 export const useGetUserCheckoutDetailsAndIdAndKey = () => {
 	const queryClient = useQueryClient();
-	const createOneCheckout =
-		queryClient.getQueryData<TCreateOneCheckoutReturnType>([
-			'create-one-checkout'
-		]);
+	const createOneCheckout = queryClient.getQueryData<
+		TCreateOneCheckoutReturnType
+	>(['create-one-checkout']);
 	const getOneCheckout = queryClient.getQueryData<TGetOneCheckoutReturnType>([
 		'get-one-checkout'
 	]);

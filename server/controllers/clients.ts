@@ -308,8 +308,7 @@ const editAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
-
-	const input = z.object({email: z.string().email().optional()}).parse(req.body);
+	const input = z.object({ email: z.string().email() }).parse(req.body);
 
 	const customer = gql`
 		mutation customerRecover($email: String!) {
@@ -327,7 +326,7 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 		{
 			query: print(customer),
 			variables: {
-				email:input.email
+				email: input.email
 			}
 		},
 		{
@@ -340,13 +339,18 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 	);
 
 	if (!response.data.data.customerRecover) {
-		res.statusCode = 404
-		throw new Error("Customer not found! or email already sent !");
+		res.statusCode = 404;
+		throw new Error('Customer not found! or email already sent !');
 	}
 
-	if (response.data.data.customerRecover.customerUserErrors.length && response.data.data.customerRecover.customerUserErrors[0].code) {
-		res.statusCode = 404
-		throw new Error(response.data.data.customerRecover.customerUserErrors[0].message)
+	if (
+		response.data.data.customerRecover.customerUserErrors.length &&
+		response.data.data.customerRecover.customerUserErrors[0].code
+	) {
+		res.statusCode = 404;
+		throw new Error(
+			response.data.data.customerRecover.customerUserErrors[0].message
+		);
 	}
 
 	return res.status(200).json({
@@ -356,45 +360,46 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 const resetPassword = async (req: NextApiRequest, res: NextApiResponse) => {
-
-	const input = z.object({
-		id: z.string().optional(),
-		password: z.string().min(8).optional(),
-		resetToken: z.string().optional(),
-	})
-	.parse(req.body);
+	const input = z
+		.object({
+			id: z.string().optional(),
+			password: z.string().min(8).optional(),
+			resetToken: z.string().optional()
+		})
+		.parse(req.body);
 
 	const customer = gql`
 		mutation customerReset($id: ID!, $input: CustomerResetInput!) {
-		customerReset(id: $id, input: $input) {
-		  customer {
-			id
-			email
-			firstName
-			lastName
-			phone
-			updatedAt
-		  }
-		  customerAccessToken {
-			accessToken
-			expiresAt
-		  }
-		  customerUserErrors {
-			code
-			field
-			message
-		  }
+			customerReset(id: $id, input: $input) {
+				customer {
+					id
+					email
+					firstName
+					lastName
+					phone
+					updatedAt
+				}
+				customerAccessToken {
+					accessToken
+					expiresAt
+				}
+				customerUserErrors {
+					code
+					field
+					message
+				}
+			}
 		}
-	  }`;
+	`;
 	const response = await axios.post(
 		API_URL,
 		{
 			query: print(customer),
 			variables: {
-				id:`gid://shopify/Customer/${input.id}`,
-				input:{
-					password:input.password,
-					resetToken:input.resetToken					
+				id: `gid://shopify/Customer/${input.id}`,
+				input: {
+					password: input.password,
+					resetToken: input.resetToken
 				}
 			}
 		},
@@ -407,22 +412,25 @@ const resetPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	);
 
-
-
 	if (response.data.errors) {
-		res.statusCode = 404
-		throw new Error(response.data.errors[0].message)
+		res.statusCode = 404;
+		throw new Error(response.data.errors[0].message);
 	}
 
-	if (response.data.data.customerReset && response.data.data.customerReset.customerUserErrors.length) {
-		res.statusCode = 404
-		throw new Error(response.data.data.customerReset.customerUserErrors[0].message)
+	if (
+		response.data.data.customerReset &&
+		response.data.data.customerReset.customerUserErrors.length
+	) {
+		res.statusCode = 404;
+		throw new Error(
+			response.data.data.customerReset.customerUserErrors[0].message
+		);
 	}
 
 	return res.status(200).json({
 		success: true,
 		message: 'Reset password done successfully',
-		user:response.data.data.customerReset
+		user: response.data.data.customerReset
 	});
 };
 

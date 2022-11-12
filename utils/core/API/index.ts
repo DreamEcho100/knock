@@ -32,14 +32,14 @@ export const getAllProducts = async () => {
 		products: IProduct[];
 	} = await response.json();
 
-	await throwIfResponseError(response);
+	// await throwIfResponseError(response);
 
 	return productsResult.products;
 };
 export const getProductById = async (id: string) => {
 	const response = await fetch(`${getAppApiPath()}/products/product/?id=${id}`);
 
-	await throwIfResponseError(response);
+	// await throwIfResponseError(response);
 
 	const productResult: {
 		product: IProduct;
@@ -52,7 +52,7 @@ export const getProductByHandle = async (handle: string) => {
 		`${getAppApiPath()}/products/product/?handle=${handle}`
 	);
 
-	await throwIfResponseError(response);
+	// await throwIfResponseError(response);
 
 	const productResult: {
 		product: IProduct;
@@ -68,7 +68,7 @@ export const createOneCheckout = async () => {
 		checkout: ICheckout;
 	} = await response.json();
 
-	await throwIfResponseError(response);
+	// await throwIfResponseError(response);
 
 	return {
 		checkoutIdAndKey: result.checkoutIdAndKey,
@@ -79,7 +79,7 @@ export const deleteOneCheckout = async (
 	checkoutId: string,
 	lineItemIdsToRemove: string[]
 ) => {
-	const response = await fetch(`${getAppApiPath()}/checkouts/delete-one`, {
+	const response = await fetch(`${getAppApiPath()}/checkouts/products`, {
 		method: 'DELETE',
 		headers: {
 			'Content-Type': 'application/json'
@@ -93,7 +93,7 @@ export const deleteOneCheckout = async (
 		)
 	});
 
-	await throwIfResponseError(response);
+	// await throwIfResponseError(response);
 
 	const result = await response.json();
 
@@ -107,7 +107,7 @@ export const getOneCheckout = async (
 		`${getAppApiPath()}/checkouts/get-one/?checkoutId=${checkoutId}&checkoutKey=${checkoutKey}`
 	);
 
-	await throwIfResponseError(response);
+	// await throwIfResponseError(response);
 
 	const result: {
 		checkout: ICheckout;
@@ -132,7 +132,7 @@ export const addManyProductsToCheckout = async (
 		body: JSON.stringify({ checkoutId, lineItemsToAdd })
 	});
 
-	await throwIfResponseError(response);
+	// await throwIfResponseError(response);
 
 	const result: {
 		item: {
@@ -157,7 +157,7 @@ export const updateManyProductsToCheckout = async (
 		body: JSON.stringify({ checkoutId, lineItemsToUpdate })
 	});
 
-	await throwIfResponseError(response);
+	// await throwIfResponseError(response);
 
 	const result: {
 		item: {
@@ -179,7 +179,7 @@ export const removeManyProductsToCheckout = async (
 		body: JSON.stringify({ checkoutId, lineItemIdsToRemove })
 	});
 
-	await throwIfResponseError(response);
+	// await throwIfResponseError(response);
 
 	const result: {
 		item: {

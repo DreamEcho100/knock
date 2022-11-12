@@ -37,15 +37,13 @@ const LinksListContainer = ({
 				{headerText}
 			</h3>
 			<ul className={linksListClassName}>
-				{links.map((item) =>
-					item.isHidden ? (
-						<></>
-					) : (
+				{links
+					.filter((item) => !item.isHidden)
+					.map((item) => (
 						<li key={item.text}>
 							<Link href={item.href}>{item.text}</Link>
 						</li>
-					)
-				)}
+					))}
 			</ul>
 		</nav>
 	);
