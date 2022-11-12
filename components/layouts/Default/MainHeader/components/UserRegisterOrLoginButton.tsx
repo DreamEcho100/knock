@@ -30,7 +30,7 @@ const UserRegisterButton = ({ isOpen, setIsOpen }: IProps) => {
 				className='flex items-center justify-center'
 				onClick={() => setIsOpen(true)}
 			>
-				<BsFillPersonFill className='text-base' />
+				<BsFillPersonFill className='text-xl' />
 			</button>
 			{type === 'register' ? (
 				<RegisterType

@@ -181,7 +181,7 @@ const MainHeader = () => {
 								} the nav menu`}
 								className='flex items-center justify-center'
 							>
-								<GiHamburgerMenu className='text-base' />
+								<GiHamburgerMenu className='text-xl' />
 							</button>
 						</li>
 						<li>
@@ -197,7 +197,7 @@ const MainHeader = () => {
 									title='profile'
 									className='flex items-center justify-center text-bg-secondary-1'
 								>
-									<BsFillPersonFill className='text-base' />
+									<BsFillPersonFill className='text-xl' />
 								</Link>
 							)}
 						</li>
@@ -220,7 +220,7 @@ const MainHeader = () => {
 								>
 									<HiShoppingBag
 										className={cx(
-											'text-base',
+											'text-xl',
 											'duration-300 transition-all',
 											cartProductsCount === 0
 												? ''
@@ -269,7 +269,7 @@ const MainHeader = () => {
 					<nav className='flex'>
 						<ul
 							className={cx(
-								'flex flex-col gap-2 font-bold px-4 pt-0 pb-4  w-full text-base',
+								'flex flex-col gap-2 font-bold px-4 pt-0 pb-4  w-full text-xl',
 								'sm:text-size-inherit sm:gap-4'
 							)}
 						>
