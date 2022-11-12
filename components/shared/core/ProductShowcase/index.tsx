@@ -36,7 +36,7 @@ const ProductShowcase = ({
 		<div
 			{...wrapper}
 			className={`
-					flex flex-col gap-16 lg:gap-0
+					flex flex-col gap-12 lg:gap-0
 					lg:flex-row ${wrapperClassName}`}
 		>
 			<div
@@ -82,7 +82,7 @@ const ProductShowcase = ({
 					height={500}
 					className={`${
 						mainImg.className || ''
-					} relative mx-auto w-full h-full object-contain`}
+					} relative mx-auto w-full max-w-[80%] h-full object-contain`}
 				/>
 			</div>
 		</div>
