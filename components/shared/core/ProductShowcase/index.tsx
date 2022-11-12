@@ -82,7 +82,7 @@ const ProductShowcase = ({
 					height={500}
 					className={`${
 						mainImg.className || ''
-					} relative mx-auto w-full max-w-[80%] h-full object-contain`}
+					} relative mx-auto w-full h-full object-contain max-w-[80%] sm:max-w-[60%] lg:max-w-full`}
 				/>
 			</div>
 		</div>
