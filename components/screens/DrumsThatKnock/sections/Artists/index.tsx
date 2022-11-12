@@ -16,8 +16,8 @@ import CustomNextImage from '@components/shared/common/CustomNextImage';
 
 const ArtistsSection = () => {
 	return (
-		<section className='bg-primary-2 section-p-v1'>
-			<div className='flex flex-col gap-12'>
+		<section className='bg-primary-2 section-p-v1 pb-0'>
+			<div className='flex flex-col gap-4'>
 				<header className='text-center flex items-center justify-center'>
 					<h2 className='text-h2 font-bold capitalize flex flex-wrap justify-center'>
 						SOME ARTISTS WHO HAVE USED DRUMS THAT &nbsp;

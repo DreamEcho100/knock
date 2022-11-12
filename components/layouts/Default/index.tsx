@@ -171,14 +171,14 @@ const Footer = () => {
 						</div>
 					</div>
 				</div>
-				<div className='flex justify-between items-end mx-1 my-4'>
-					<div className='px-1'>
+				<div className='flex gap-2 justify-between items-end mx-1 my-4 text-sm'>
+					<div className=''>
 						<Logo />
 						<small className='capitalize'>
 							copyright &copy; plugins that knock
 						</small>
 					</div>
-					<div className='px-1'>
+					<div className='w-36 sm:w-64'>
 						<CustomNextImage
 							src='/images/payment_cards.png'
 							alt='payment cards'
