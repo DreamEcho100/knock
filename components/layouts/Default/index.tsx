@@ -103,7 +103,7 @@ const Footer = () => {
 								<p className='text-white font-bold'>
 									Follow us on social media
 								</p>
-								<ul className='flex gap-2'>
+								<ul className='flex gap-4 text-2xl'>
 									<li>
 										<a
 											href={socialLinks.instagram}
