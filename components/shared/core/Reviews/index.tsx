@@ -47,7 +47,7 @@ const handleContainerVariants = cva(
 	}
 );
 
-'container-restrictions-2 max-w-screen-sm mx-auto';
+('container-restrictions-2 max-w-screen-sm mx-auto');
 
 const Reviews = ({
 	reviews,
