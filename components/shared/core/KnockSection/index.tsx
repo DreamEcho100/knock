@@ -52,10 +52,7 @@ const KnockSection = ({
 }) => {
 	return (
 		<section className={sectionClasses(sectionTheme)}>
-			<div
-				className='overflow-hidden
-					w-full flex items-center justify-center flex-col sm:gap-4 text-center'
-			>
+			<div className='w-full flex items-center justify-center flex-col sm:gap-4 text-center'>
 				<div className='relative flex items-center justify-center max-w-[900px]'>
 					<CustomNextImage
 						src='/images/Group 179.png'

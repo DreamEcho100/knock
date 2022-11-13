@@ -31,10 +31,7 @@ const HeroSection = ({
 
 	return (
 		<section className='bg-primary-1 section-p-v1'>
-			<div
-				className=' overflow-hidden
-					flex items-center justify-center flex-col text-center'
-			>
+			<div className='flex items-center justify-center flex-col text-center'>
 				<div className='relative flex items-center justify-center max-w-[900px]'>
 					<CustomNextImage
 						src='/images/Rectangle 48.png'

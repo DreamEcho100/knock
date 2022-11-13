@@ -31,6 +31,7 @@ const UserAuthButton = ({ isOpen, setIsOpen }: IProps) => {
 	return (
 		<>
 			<button
+				type='button'
 				title='login/register'
 				className='flex items-center justify-center'
 				onClick={() => setIsOpen(true)}
@@ -123,6 +124,7 @@ const RegisterType = ({
 					<>
 						Please check your email, then{' '}
 						<button
+							type='button'
 							className='font-bold text-primary-1'
 							onClick={() => setType(EWindowType.LOGIN)}
 						>
@@ -133,6 +135,7 @@ const RegisterType = ({
 					<>
 						Have an account?{' '}
 						<button
+							type='button'
 							className='text-bg-secondary-1'
 							onClick={() => setType(EWindowType.LOGIN)}
 						>
@@ -277,6 +280,7 @@ const LoginType = ({
 					<>
 						Don&apos;t have an account?{' '}
 						<button
+							type='button'
 							className='text-bg-secondary-1'
 							onClick={() => setType(EWindowType.REGISTER)}
 						>
@@ -313,15 +317,15 @@ const LoginType = ({
 							autoComplete='password'
 							minLength={3}
 						/>
-						{/* // !!! */}
-						{/* <div className=''>
+						<div className=''>
 							<button
+								type='button'
 								className='text-bg-secondary-1'
 								onClick={() => setType(EWindowType.FORGET_PASSWORD)}
 							>
 								forget password?
 							</button>
-						</div> */}
+						</div>
 						<div className='mt-4 flex justify-end'>
 							<Button
 								type='submit'
@@ -406,6 +410,7 @@ const ForgetPasswordType = ({
 							: 'Have an account?'}
 						&nbsp;Have an account?&nbsp;
 						<button
+							type='button'
 							className='text-bg-secondary-1'
 							onClick={() => setType(EWindowType.LOGIN)}
 						>
