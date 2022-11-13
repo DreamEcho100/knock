@@ -100,9 +100,6 @@ main > section > *,
 	}
 }
 @media (max-width: 520px) {
-	:root {
-		--main-nav-h: 3rem;
-	}
 	body {
 		font-size: 1rem;
 	}
