@@ -40,6 +40,7 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-size: 1.2rem;
+	line-height: 1.5;
 }
 
 h1,
@@ -95,7 +96,7 @@ main > section > *,
 		--main-nav-h: 4rem;
 	}
 	body {
-		font-size: 1rem;
+		font-size: 1.1rem;
 	}
 }
 @media (max-width: 520px) {
@@ -103,7 +104,7 @@ main > section > *,
 		--main-nav-h: 3rem;
 	}
 	body {
-		font-size: 0.75rem;
+		font-size: 1rem;
 	}
 }
 
@@ -194,10 +195,10 @@ main > section > *,
 			font-size: 1.3rem;
 		}
 		.text-h5 {
-			font-size: 1rem;
+			font-size: 1.2rem;
 		}
 		.text-h6 {
-			font-size: 0.85rem;
+			font-size: 1.1rem;
 		}
 	}
 }
