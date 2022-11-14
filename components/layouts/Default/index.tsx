@@ -100,7 +100,7 @@ const Footer = () => {
             /> */}
 						<div className='flex flex-col p-2 md:p-0 max-w-[700px] lg:w-1/2'>
 							<header className='flex flex-col gap-2 mb-4'>
-								<p className='text-white font-bold'>
+								<p className='text-white font-semibold'>
 									Follow us on social media
 								</p>
 								<ul className='flex gap-4 text-2xl'>
@@ -147,7 +147,7 @@ const Footer = () => {
 								</ul>
 							</header>
 							<div className='flex flex-col gap-4'>
-								<h2 className='text-h2 font-bold text-white uppercase'>
+								<h2 className='text-h2 font-semibold text-white uppercase'>
 									subscribe
 								</h2>
 								<p>Promotion, new products and sales. Directly to your inbox</p>

@@ -21,7 +21,7 @@ const LatestSamplesSection = ({
 						md:p-8 md:items-start md:text-align-initial md:flex-grow md:w-1/2 md:justify-center'
 				>
 					<h2
-						className='text-h2 font-bold text-primary-1 text-center flex flex-wrap justify-center
+						className='text-h2 font-semibold text-primary-1 text-center flex flex-wrap justify-center
 								md:text-align-initial md:justify-start'
 					>
 						DRUMS THAT&nbsp;

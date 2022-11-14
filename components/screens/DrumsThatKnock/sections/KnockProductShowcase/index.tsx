@@ -16,18 +16,27 @@ const KnockProductShowcaseSection = ({
 					h2: {
 						children: (
 							<Link href='/knock' className='flex flex-wrap'>
-								{knockPlugin.title.split(' ').map((item, index) => (
+								{/* {knockPlugin.title.split(' ').map((item, index) => (
 									<span key={index}>
 										{item.toLowerCase() === 'knock' ? <KnockTrademark /> : item}
 									</span>
-								))}
+								))} */}
+								<KnockTrademark />
 							</Link>
 						)
 					},
 					p: {
-						children: knockPlugin.description
+						children:
+							'This is the last plugin you will ever need to make your drums KNOCK and punch through your mix. This plugin was meticulously crafted by DECAP. It is inspired by the signature sound of Drums That Knock, which has helped shaped the sonics of modern music.'
+						// knockPlugin.description
 					},
-					button: { children: 'Buy it now' }
+					button: {
+						children: 'Learn more',
+						onClick: () => {
+							return;
+						},
+						href: '/knock'
+					}
 				}}
 				imageContainer={{
 					mainImg: {

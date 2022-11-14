@@ -125,7 +125,7 @@ const RegisterType = ({
 						Please check your email, then{' '}
 						<button
 							type='button'
-							className='font-bold text-primary-1'
+							className='font-semibold text-primary-1'
 							onClick={() => setType(EWindowType.LOGIN)}
 						>
 							login

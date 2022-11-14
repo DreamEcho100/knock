@@ -14,10 +14,12 @@ const handleReviewCardVariants = cva(
 	{
 		variants: {
 			'min-h': {
+				'extra-sm': 'min-h-[7rem]',
 				sm: 'min-h-[8rem]',
 				md: 'min-h-[14rem]'
 			},
 			'max-w': {
+				'extra-sm': 'max-w-[28rem]',
 				sm: 'max-w-[30rem]'
 			},
 			withReviewerImage: {

@@ -14,6 +14,7 @@ const DynamicTopProgressBar = dynamic(
 		ssr: false
 	}
 );
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 
 import '@styles/globals.css';
 import '@styles/swiper.css';
@@ -39,6 +40,16 @@ function MyApp({ Component, pageProps }: AppProps) {
 		<QueryClientProvider client={queryClient}>
 			<Hydrate state={pageProps.dehydratedState}>
 				<SharedCustomerStateProvider>
+					{/* <GoogleReCaptchaProvider */}
+					{/* reCaptchaKey='6LdjpwUjAAAAAJTSe4mdrNT3x0CFHfr0uaxEDC_H'
+						container={{
+							// optional to render inside custom element
+							element: <div></div>,
+							parameters: {
+								theme: 'dark' // optional, default undefined
+							}
+						}}
+					> */}
 					<DefaultLayout>
 						<DynamicTopProgressBar />
 						<Head>
@@ -52,6 +63,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 						</Head>
 						<Component {...pageProps} />
 					</DefaultLayout>
+					{/* </GoogleReCaptchaProvider> */}
 				</SharedCustomerStateProvider>
 			</Hydrate>
 		</QueryClientProvider>

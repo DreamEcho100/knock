@@ -56,7 +56,7 @@ const Dialog = ({ isOpen, setIsOpen, header, children }: Props) => {
 					>
 						{header && (
 							<header className=' mx-auto my-4'>
-								<DialogPrimitive.Title className='text-h3 font-bold text-neutral-900 dark:text-neutral-100'>
+								<DialogPrimitive.Title className='text-h3 font-semibold text-neutral-900 dark:text-neutral-100'>
 									{header.title}
 								</DialogPrimitive.Title>
 								{header.description && (

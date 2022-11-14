@@ -41,16 +41,12 @@ const ProductBasicCard = ({
 						width={800}
 						height={800}
 						className='w-full h-full object-contain
-						transition-all duration-300 group
-						group-hover:scale-125'
+						transition-all duration-300'
 					/>
 				)}
 			</Link>
-			<div
-				className='flex-grow text-center p-4 bg-primary-3 text-primary-2 flex flex-col items-center justify-center gap-1'
-				style={{ fontSize: 'small' }}
-			>
-				<p className='font-bold'>
+			<div className='flex-grow text-center p-4 bg-primary-3 text-primary-2 flex flex-col items-center gap-2 justify-center'>
+				<p className='font-semibold'>
 					<Link {...link} />
 				</p>
 				{extraDetailsElement}
@@ -83,6 +79,7 @@ const ExtraProductCardDetails = ({
 			{toAddToCart && (
 				<Button
 					className='capitalize'
+					classesIntent={{ p: 'extra-wide' }}
 					onClick={() =>
 						addProductsToCheckoutAndCart.mutate({
 							products: [{ ...productData, quantity: 1 }]

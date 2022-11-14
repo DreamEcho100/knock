@@ -85,19 +85,22 @@ const ComboBoxField = <T,>({
 	);
 };
 
-const handleLabelVariants = cva('max-w-full font-bold flex cursor-pointer', {
-	variants: {
-		display: {
-			dynamicOnSmScreens: 'flex-col sm:flex-row',
-			col: 'flex-col',
-			row: 'flex-row'
+const handleLabelVariants = cva(
+	'max-w-full font-semibold flex cursor-pointer',
+	{
+		variants: {
+			display: {
+				dynamicOnSmScreens: 'flex-col sm:flex-row',
+				col: 'flex-col',
+				row: 'flex-row'
+			}
+		},
+		defaultVariants: {
+			display: 'dynamicOnSmScreens'
 		}
-	},
-	defaultVariants: {
-		display: 'dynamicOnSmScreens'
 	}
-});
-const handleLabelTextVariants = cva('font-bold flex cursor-pointer', {
+);
+const handleLabelTextVariants = cva('font-semibold flex cursor-pointer', {
 	variants: {
 		items: {
 			center: 'flex items-center justify-center',

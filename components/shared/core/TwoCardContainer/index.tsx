@@ -24,7 +24,7 @@ const TwoCardContainer = ({
 		<div
 			className='relative
 			flex justify-center flex-wrap gap-4
-			md:flex-nowrap md:gap-8'
+			md:flex-nowrap md:gap-8 lg:gap-16'
 		>
 			{backgroundImg && (
 				<CustomNextImage
@@ -37,7 +37,9 @@ const TwoCardContainer = ({
 			<div className='relative max-w-[550px] flex flex-col gap-8 bg-primary-4 px-10 py-8 rounded-3xl w-full lg:w-1/2'>
 				{items1HeaderText && (
 					<header>
-						<h3 className='text-h3 font-bold capitalize'>{items1HeaderText}</h3>
+						<h3 className='text-h3 font-semibold capitalize'>
+							{items1HeaderText}
+						</h3>
 					</header>
 				)}
 				<ul
@@ -59,7 +61,9 @@ const TwoCardContainer = ({
 			<div className='relative max-w-[550px] flex flex-col gap-8 bg-primary-4 px-12 py-8 rounded-3xl w-full lg:w-1/2'>
 				{items2HeaderText && (
 					<header>
-						<h3 className='text-h3 font-bold capitalize'>{items2HeaderText}</h3>
+						<h3 className='text-h3 font-semibold capitalize'>
+							{items2HeaderText}
+						</h3>
 					</header>
 				)}
 				<ul

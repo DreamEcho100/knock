@@ -6,6 +6,7 @@ import CustomNextImage from '@components/shared/common/CustomNextImage';
 import Button from '@components/shared/core/Button';
 import type { IProduct } from 'types';
 import { useAddProductsToCheckoutAndCart } from '@utils/core/hooks';
+import { cx } from 'class-variance-authority';
 
 interface IProps {
 	textContainer: {
@@ -41,10 +42,10 @@ const ProductShowcase = ({
 		>
 			<div
 				className='w-full flex flex-col items-center justify-center text-center gap-4 md:px-8 pb-4
-							lg:gap-8 lg:w-1/2 lg:text-align-initial lg:items-start lg:py-8'
+							lg:gap-4 lg:w-1/2 lg:text-align-initial lg:items-start lg:py-8'
 			>
 				<h2
-					className='text-h2 font-bold uppercase flex flex-wrap text-center justify-center
+					className='text-h2 font-semibold uppercase flex flex-wrap text-center justify-center
 						lg:text-align-initial lg:justify-start'
 					{...h2}
 				/>
@@ -62,8 +63,11 @@ const ProductShowcase = ({
 				/>
 			</div>
 			<div
-				className='w-full relative md:p-4
-							 lg:w-1/2 lg:p-0'
+				className={cx(
+					'w-full relative flex items-center',
+					'md:p-4',
+					'lg:w-1/2 lg:p-0'
+				)}
 			>
 				{backgroundImg && (
 					<div className='absolute w-full h-full'>
@@ -82,7 +86,7 @@ const ProductShowcase = ({
 					height={500}
 					className={`${
 						mainImg.className || ''
-					} relative mx-auto w-full h-full object-contain max-w-[80%] sm:max-w-[60%] lg:max-w-full`}
+					} relative mx-auto w-full object-contain max-w-[80%] sm:max-w-[60%] lg:max-w-full`}
 				/>
 			</div>
 		</div>

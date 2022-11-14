@@ -7,7 +7,7 @@ import KnockTrademark from '@components/shared/core/KnockTrademark';
 import { cva } from 'class-variance-authority';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 
-export const pClasses = cva(`mb-6 leading-6 sm:leading-10`, {
+export const pClasses = cva(`mb-6 leading-6 sm:leading-8`, {
 	variants: {
 		width: {
 			large: 'max-w-[800px]',
@@ -52,8 +52,8 @@ const KnockSection = ({
 }) => {
 	return (
 		<section className={sectionClasses(sectionTheme)}>
-			<div className='w-full flex items-center justify-center flex-col sm:gap-4 text-center'>
-				<div className='relative flex items-center justify-center max-w-[900px]'>
+			<div className='w-full flex items-center justify-center flex-col sm:gap-2 text-center'>
+				<div className='relative flex items-center justify-center max-w-[900px] mb-1'>
 					<CustomNextImage
 						src='/images/Group 179.png'
 						width={800}
@@ -70,17 +70,17 @@ const KnockSection = ({
 						height={800}
 						priority
 						unoptimized
-						className='object-cover mb-6 w-11/12 relative'
+						className='object-cover mb-6 w-4/5 relative'
 					/>
 				</div>
 				{
 					<h2
-						className='text-h2 font-bold mb-2 text-primary-1 flex flex-wrap justify-center text-center
+						className='text-h2 font-semibold mb-2 text-primary-1 flex flex-wrap justify-center text-center
 								sm:mb-0'
 					>
 						{title || (
 							<>
-								DRUM THAT&nbsp;
+								DRUMS THAT&nbsp;
 								<KnockTrademark />
 							</>
 						)}

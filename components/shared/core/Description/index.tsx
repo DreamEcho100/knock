@@ -1,14 +1,29 @@
+import { cva, VariantProps } from 'class-variance-authority';
 import type { HTMLAttributes } from 'react';
 
+const handDescriptionVariants = cva('text-center max-w-[1024px]', {
+	variants: {
+		'text-size': {
+			h5: 'text-h5',
+			h6: 'text-h6'
+		}
+	},
+	defaultVariants: {
+		'text-size': 'h5'
+	}
+});
+
 const Description = ({
-	children
+	children,
+	variants
 }: {
 	children: HTMLAttributes<HTMLParagraphElement>['children'];
+	variants?: VariantProps<typeof handDescriptionVariants>;
 }) => {
 	// !!!
 	return (
-		<div className='text-center leading-12 max-w-[1000px]'>
-			<p className='text-h5 leading-[1.5]'>{children}</p>
+		<div className={handDescriptionVariants(variants)}>
+			<p>{children}</p>
 		</div>
 	);
 };

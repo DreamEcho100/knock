@@ -39,8 +39,8 @@ body {
 	overflow-x: hidden;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	font-size: 1.2rem;
-	line-height: 1.5;
+	font-size: 1.1rem;
+	line-height: 1.3;
 }
 
 h1,
@@ -72,7 +72,7 @@ select {
 }
 
 body sup {
-	top: var(--sup-t, 0ch);
+	top: var(--sup-t, 0.25ch);
 	width: 1ch;
 	height: 1ch;
 }
@@ -90,6 +90,10 @@ main > section > *,
 		overflow-x: hidden;
 	}
 } */
+
+#main-header {
+	font-size: 1.1rem;
+}
 
 @media (max-width: 640px) {
 	:root {

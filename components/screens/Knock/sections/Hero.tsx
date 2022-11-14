@@ -15,7 +15,7 @@ const HeroSection = ({
 		<KnockSection
 			buttonProps={addKnockPluginToCartButtonProps}
 			description='Make your drums KNOCK and punch through the mix.'
-			pTheme={{ text: 'medium', width: 'small' }}
+			pTheme={{ text: 'medium', width: 'large' }}
 		/>
 	);
 };

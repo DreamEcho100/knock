@@ -43,7 +43,9 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 							sm:px-16
 							lg:items-stretch lg:justify-stretch lg:text-align-initial lg:rounded-r-3xl'
 					>
-						<h1 className='text-h2 capitalize font-bold'>{product.title}</h1>
+						<h1 className='text-h2 capitalize font-semibold'>
+							{product.title}
+						</h1>
 						<p>${product.variants[0].price.amount}</p>
 						<p>
 							<span className='text-bg-secondary-1'>Shipping</span>

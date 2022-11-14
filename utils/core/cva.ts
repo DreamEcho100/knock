@@ -1,7 +1,7 @@
 import { cva, cx } from 'class-variance-authority';
 
 export const cardClasses = cva(
-	`bg-primary-2 max-w-[16rem] shadow-lg shadow-black overflow-hidden flex flex-col
+	`bg-primary-2 max-w-[18rem] shadow-lg shadow-black overflow-hidden flex flex-col
 		transition-all duration-500 group
 		focus-within:rounded-none`,
 	{
@@ -28,8 +28,9 @@ export const buttonClasses = cva(
 				full: 'w-full'
 			},
 			p: {
-				wide: 'px-4 py-1',
-				wider: 'px-8 py-1'
+				wide: 'px-4 py-[0.125rem]',
+				wider: 'px-8 py-[0.125rem]',
+				'extra-wide': 'px-10 py-[0.125rem]'
 			},
 			rounded: {
 				'3xl': 'rounded-3xl',

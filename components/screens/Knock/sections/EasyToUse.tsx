@@ -24,7 +24,7 @@ const EasyToUseSection = ({
 					mainImg: {
 						src: '/images/laptop final 1.png',
 						alt: '',
-						className: 'max-w-md'
+						className: 'md:px-[15%]'
 					}
 				}}
 				wrapper={{

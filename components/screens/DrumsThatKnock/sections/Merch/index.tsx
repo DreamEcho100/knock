@@ -33,7 +33,7 @@ const MerchSection = () => {
 			// }}
 		>
 			<header className='text-center flex items-center justify-center'>
-				<h2 className='text-h2 font-bold capitalize flex flex-wrap justify-center'>
+				<h2 className='text-h2 font-semibold capitalize flex flex-wrap justify-center'>
 					Merch
 				</h2>
 			</header>
@@ -44,7 +44,7 @@ const MerchSection = () => {
 						link={{ children: item.title, href: `/products/${item.id}` }}
 						{...item}
 						toAddToCart
-						productData={item as unknown as IProduct}
+						productData={(item as unknown) as IProduct}
 						intent='bottomCorners'
 					/>
 				))}

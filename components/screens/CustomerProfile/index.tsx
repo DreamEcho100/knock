@@ -435,7 +435,7 @@ const CustomerProfileScreen = () => {
 								<AccordionTrigger
 									className={cx(
 										'p-0 m-0 w-full text-h2',
-										'border-0 cursor-pointer bg-transparent font-bold p-0 w-full',
+										'border-0 cursor-pointer bg-transparent font-semibold p-0 w-full',
 										'flex items-center justify-between',
 										'border-b border-b-bg-secondary-1'
 									)}
@@ -447,7 +447,7 @@ const CustomerProfileScreen = () => {
 										aria-hidden
 										className={cx(
 											'min-w-fit',
-											'border-0 cursor-pointer bg-transparent font-bold text-bg-secondary-1',
+											'border-0 cursor-pointer bg-transparent font-semibold text-bg-secondary-1',
 											accordionClasses.rotate180OnOpen,
 											'duration-150 text-3xl'
 										)}

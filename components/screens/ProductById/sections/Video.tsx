@@ -15,7 +15,7 @@ const VideoSection = ({}: // video
 			/>
 			{/* <div className='relative mx-auto my-24 flex flex-col gap-8'>
 				<header className='text-center'>
-					<h2 className='text-h3 font-bold text-primary-1 capitalize'>
+					<h2 className='text-h3 font-semibold text-primary-1 capitalize'>
 						watch {video.title}
 					</h2>
 				</header>

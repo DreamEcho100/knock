@@ -35,11 +35,11 @@ const HeroSection = ({
 				<div className='relative flex items-center justify-center max-w-[900px]'>
 					<CustomNextImage
 						src='/images/Rectangle 48.png'
-						width={800}
-						height={800}
+						width={1000}
+						height={1000}
 						priority
 						className='pointer-events-none absolute top-0 right-0 left-0 bottom-0 w-full h-full object-contain scale-75'
-						style={{ transform: 'translate(8%, -2%) scale(1.5)' }}
+						style={{ transform: 'translate(8%, -2%) scale(2)' }}
 					/>
 
 					<CustomNextImage
@@ -48,18 +48,18 @@ const HeroSection = ({
 						height={400}
 						priority
 						unoptimized
-						className='object-cover mb-6 relative'
+						className='object-cover relative'
 						style={{ aspectRatio: '16 / 16' }}
 					/>
 				</div>
-				<h2 className='text-h2 font-bold text-primary-1 mt-4 mb-4 flex flex-wrap justify-center'>
+				<h2 className='text-h2 font-semibold text-primary-1 mt-4 mb-4 flex flex-wrap justify-center'>
 					<KnockTrademark />
 					Clipper
 				</h2>
 				<p className='mb-6 text-h4 sm:leading-10'>
 					Adjustable hard & soft clipper module from KNOCK.
 				</p>
-				<div className='flex items-center justify-center'>
+				<div className='flex items-center justify-center relative'>
 					<Button
 						className='capitalize  text-h6'
 						{...addKnockPluginToCartButtonProps}
@@ -67,7 +67,7 @@ const HeroSection = ({
 					<span className='p-2' />{' '}
 					{knockClipperPlugin?.variants[0] &&
 						knockClipperPlugin.variants[0]?.price?.amount && (
-							<span className='text-primary-1 font-bold'>
+							<span className='text-primary-1 font-semibold'>
 								{priceCurrencyFormatter(
 									knockClipperPlugin.variants[0].price.amount,
 									knockClipperPlugin.variants[0].price.currencyCode
