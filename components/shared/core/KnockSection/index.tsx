@@ -24,7 +24,7 @@ export const pClasses = cva(`mb-6 leading-6 sm:leading-8`, {
 		text: 'small'
 	}
 });
-export const sectionClasses = cva('bg-primary-1', {
+export const sectionClasses = cva('bg-primary-1 section-h-v1', {
 	variants: {
 		p: {
 			'section-p-v1': 'section-p-v1',
@@ -53,7 +53,7 @@ const KnockSection = ({
 }) => {
 	return (
 		<section className={sectionClasses(sectionTheme)}>
-			<div className='w-full flex items-center justify-center flex-col sm:gap-2 text-center'>
+			<div className='w-full h-full flex items-center justify-center flex-col sm:gap-2 text-center'>
 				<div className='relative flex items-center justify-center max-w-[900px] mb-1'>
 					<CustomNextImage
 						src='/images/Group 179.png'
@@ -61,7 +61,7 @@ const KnockSection = ({
 						height={800}
 						priority
 						className='pointer-events-none absolute top-0 right-0 left-0 bottom-0 w-full h-full object-contain scale-150'
-						style={{ transform: 'translate(8%, -2%) scale(2.25)' }}
+						style={{ transform: 'translate(8%, -2%) scale(2.5)' }}
 					/>
 
 					<CustomNextImage

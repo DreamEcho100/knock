@@ -74,12 +74,12 @@ const Reviews = ({
 					delay: 15000
 				}}
 				loop
-				className='swiper-wrapper-items-center'
+				className='swiper-wrapper-items-center scale-105'
 			>
 				{reviews.map((item, index) => (
 					<SwiperSlide
 						key={index}
-						className='my-8 w-full px-3 flex items-center justify-center'
+						className='my-8 w-full px-3 flex items-center justify-center scale-95'
 					>
 						<div className='flex items-center justify-center relative w-full'>
 							<div

@@ -15,7 +15,7 @@ const VideosContainer = ({
 		flex flex-col gap-16'
 		>
 			<header className='text-center'>
-				<h2 className='text-h2 text-primary-1 font-semibold uppercase'>
+				<h2 className='text-h3 text-primary-1 font-semibold uppercase'>
 					take your drums to the next level
 				</h2>
 			</header>

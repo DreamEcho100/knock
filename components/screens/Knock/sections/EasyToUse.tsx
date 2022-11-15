@@ -23,7 +23,8 @@ const EasyToUseSection = ({
 				imageContainer={{
 					mainImg: {
 						src: '/images/laptop final 1.png',
-						alt: ''
+						alt: '',
+						className: 'lg:px-[10%]'
 					}
 				}}
 				wrapper={{

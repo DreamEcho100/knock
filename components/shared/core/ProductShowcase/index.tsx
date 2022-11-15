@@ -38,11 +38,11 @@ const ProductShowcase = ({
 		<div
 			{...wrapper}
 			className={`
-					flex flex-col max-w-[1024px]
+					h-full flex flex-col max-w-[1280px] items-center
 					lg:flex-row ${wrapperClassName}`}
 		>
 			<div
-				className='w-full flex flex-col items-center justify-center text-center gap-2 md:px-4 pb-4
+				className='w-full h-full flex flex-col items-center justify-center text-center gap-2 md:px-4 pb-4
 							lg:gap-4 lg:w-fit lg:max-w-[60%]  lg:text-align-initial lg:items-start lg:py-4'
 			>
 				<h2
@@ -50,7 +50,7 @@ const ProductShowcase = ({
 						lg:text-align-initial lg:justify-start'
 					{...h2}
 				/>
-				<p className='md:max-w-[450px] text-h6' {...p} />
+				<p className='md:max-w-[450px]' {...p} />
 
 				<Button
 					className='capitalize'

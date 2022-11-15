@@ -4,8 +4,8 @@ import KnockTrademark from '@components/shared/core/KnockTrademark';
 
 const HeroSection = () => {
 	return (
-		<section className='bg-primary-1 section-p-v1'>
-			<div className='flex items-center justify-center flex-col gap-1 text-center'>
+		<section className='bg-primary-1 section-p-v1 section-h-v1'>
+			<div className='h-full flex items-center justify-center flex-col gap-1 text-center'>
 				<div className='relative flex items-center justify-center max-w-[900px]'>
 					<CustomNextImage
 						src='/images/Group 179.png'
@@ -13,7 +13,7 @@ const HeroSection = () => {
 						height={800}
 						priority
 						className='absolute top-0 right-0 left-0 bottom-0 w-full h-full object-contain pointer-events-none'
-						style={{ transform: 'translate(8%, -2%) scale(2.25)' }}
+						style={{ transform: 'translate(8%, -2%) scale(2.5)' }}
 					/>
 
 					<CustomNextImage

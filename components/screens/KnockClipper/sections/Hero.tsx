@@ -30,8 +30,8 @@ const HeroSection = ({
 	});
 
 	return (
-		<section className='bg-primary-1 section-p-v1'>
-			<div className='flex items-center justify-center flex-col text-center'>
+		<section className='bg-primary-1 section-p-v1 section-h-v1'>
+			<div className='h-full flex items-center justify-center flex-col text-center'>
 				<div className='relative flex items-center justify-center max-w-[900px]'>
 					<CustomNextImage
 						src='/images/Rectangle 48.png'
@@ -56,7 +56,7 @@ const HeroSection = ({
 					<KnockTrademark />
 					Clipper
 				</h2>
-				<p className='mb-6 text-h4 sm:leading-10'>
+				<p className='mb-6 text-h5 sm:leading-10'>
 					Adjustable hard & soft clipper module from KNOCK.
 				</p>
 				<div className='flex items-center justify-center relative'>

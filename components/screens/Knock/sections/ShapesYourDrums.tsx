@@ -86,13 +86,13 @@ const ShapesYourDrumsSection = () => {
 					{features.map((item) => (
 						<div
 							key={item.title}
-							className='text-center w-[20rem] max-w-full flex flex-col items-center justify-start gap-8'
+							className='text-center w-[18rem] max-w-full flex flex-col items-center justify-start gap-8'
 						>
 							<CustomNextImage
 								{...item.image}
 								width={175}
 								height={175}
-								className='aspect-square'
+								className='aspect-square max-w-[10rem]'
 							/>
 							<p className='font-semibold'>{item.title}</p>
 							<p>{item.description}</p>
