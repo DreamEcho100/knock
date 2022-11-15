@@ -1,7 +1,7 @@
 import Button from '@components/shared/core/Button';
 import Link from 'next/link';
 import { cardClasses } from 'utils/core/cva';
-import type { VariantProps } from 'class-variance-authority';
+import { cx, VariantProps } from 'class-variance-authority';
 import { IProduct } from 'types';
 import { useAddProductsToCheckoutAndCart } from '@utils/core/hooks';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
@@ -31,8 +31,11 @@ const ProductBasicCard = ({
 			<Link
 				{...link}
 				// style={{ aspectRatio: 1, }}
-				className='aspect-square overflow-hidden brightness-75 max-w-full
-					group-hover:brightness-100'
+				className={cx(
+					'aspect-square overflow-hidden brightness-75 max-w-full',
+					'transition-all',
+					'group-hover:brightness-100 group-hover:duration-150'
+				)}
 			>
 				{images && images[0] && (
 					<CustomNextImage

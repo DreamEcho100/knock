@@ -30,15 +30,14 @@ const ProductShowcaseSection = ({
 				imageContainer={{
 					mainImg: {
 						src: '/images/f53123f1bc1e263458b5926c1b1422c3.png',
-						alt: '',
-						className: 'md:px-[15%]'
+						alt: ''
 					},
 
 					backgroundImg: {
-						className: '-translate-x-[30%]  scale-[2]'
+						className: '-translate-x-[30%] scale-[2]'
 					}
 				}}
-				wrapper={{ className: 'lg:flex-row-reverse lg:px-20 flex-col-reverse' }}
+				wrapper={{ className: 'lg:flex-row-reverse flex-col-reverse gap-10' }}
 			/>
 		</section>
 	);

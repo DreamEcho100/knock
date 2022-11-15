@@ -26,10 +26,10 @@ const HeroSection = () => {
 						className='object-cover mb-6 w-11/12 relative'
 					/>
 				</div>
-				<h2 className='text-h2 font-semibold text-primary-1 flex flex-wrap justify-center'>
+				<h1 className='text-h2 font-semibold text-primary-1 flex flex-wrap justify-center'>
 					<KnockTrademark />
 					PLUGIN
-				</h2>
+				</h1>
 				<p className='mb-6 max-w-[350px]'>
 					Make your drums KNOCK and punch through the mix.
 				</p>

@@ -37,19 +37,19 @@ const ProductShowcase = ({
 		<div
 			{...wrapper}
 			className={`
-					flex flex-col gap-6
-					lg:flex-row lg:gap-10 ${wrapperClassName}`}
+					flex flex-col max-w-[1024px]
+					lg:flex-row lg:justify-between ${wrapperClassName}`}
 		>
 			<div
-				className='w-full flex flex-col items-center justify-center text-center gap-4 md:px-8 pb-4
-							lg:gap-4 lg:w-1/2 lg:text-align-initial lg:items-start lg:py-8'
+				className='w-full flex flex-col items-center justify-center text-center gap-2 md:px-4 pb-4
+							lg:gap-4 lg:w-fit lg:max-w-[60%]  lg:text-align-initial lg:items-start lg:py-4'
 			>
 				<h2
-					className='text-h2 font-semibold uppercase flex flex-wrap text-center justify-center
+					className='text-h3 font-semibold text-primary-1 uppercase flex flex-wrap text-center justify-center
 						lg:text-align-initial lg:justify-start'
 					{...h2}
 				/>
-				<p className='md:max-w-[450px] text-base sm:text-size-initial' {...p} />
+				<p className='md:max-w-[450px] text-h6' {...p} />
 
 				<Button
 					className='capitalize'
@@ -62,13 +62,7 @@ const ProductShowcase = ({
 					{...button}
 				/>
 			</div>
-			<div
-				className={cx(
-					'w-full relative flex items-center',
-					'md:p-4',
-					'lg:w-1/2 lg:p-0'
-				)}
-			>
+			<div className={cx('w-full relative flex items-center', 'lg:w-[40%]')}>
 				{backgroundImg && (
 					<div className='absolute w-full h-full'>
 						<CustomNextImage

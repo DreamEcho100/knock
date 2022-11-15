@@ -11,6 +11,7 @@ export const pClasses = cva(`mb-6 leading-6 sm:leading-8`, {
 	variants: {
 		width: {
 			large: 'max-w-[800px]',
+			larger: 'max-w-[950px]',
 			small: 'max-w-[350px]'
 		},
 		text: {

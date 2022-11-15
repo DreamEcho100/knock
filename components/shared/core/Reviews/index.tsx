@@ -101,7 +101,7 @@ const Reviews = ({
 											className={cx(
 												'bg-black rounded-full aspect-square object-cover',
 
-												'sm:block sm:w-32 sm:h-32'
+												'sm:block sm:w-28 sm:h-28'
 											)}
 										/>
 									)}

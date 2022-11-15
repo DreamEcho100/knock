@@ -8,7 +8,7 @@ const AboutSection = () => {
 				className='
 					flex gap-4 flex-col items-center justify-center text-center'
 			>
-				<h2 className='text-h2 text-primary-1 capitalize font-semibold flex flex-wrap justify-center'>
+				<h2 className='text-h3 text-primary-1 capitalize font-semibold flex flex-wrap justify-center'>
 					MAKE YOUR DRUMS&nbsp;
 					<KnockTrademark />
 				</h2>

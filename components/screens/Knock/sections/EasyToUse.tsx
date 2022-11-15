@@ -23,12 +23,11 @@ const EasyToUseSection = ({
 				imageContainer={{
 					mainImg: {
 						src: '/images/laptop final 1.png',
-						alt: '',
-						className: 'md:px-[15%]'
+						alt: ''
 					}
 				}}
 				wrapper={{
-					className: 'container-restrictions-2 flex-col-reverse lg:px-20'
+					className: 'flex-col-reverse gap-4'
 				}}
 			/>
 		</section>

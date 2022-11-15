@@ -20,16 +20,21 @@ const ArtistsSection = ({ reviews }: Parameters<typeof Reviews>['0']) => {
 		<section className='bg-primary-2 section-p-v1 pb-0'>
 			<div className='flex flex-col gap-2 lg:px-8 sm:gap-4'>
 				<header className='text-center flex items-center justify-center'>
-					<h2 className='text-2xl sm:text-h2 font-bold capitalize flex flex-wrap justify-center'>
+					<h2 className='sm:text-h3 font-bold capitalize flex flex-wrap justify-center'>
 						SOME ARTISTS WHO HAVE USED DRUMS THAT&nbsp;
 						<KnockTrademark />
 					</h2>
 				</header>
-				<div className='max-w-[900px] mx-auto'>
+				<div className='w-[1200px] max-w-full mx-auto'>
 					<Swiper
 						modules={[Navigation, A11y, Autoplay]}
-						slidesPerView={6}
+						slidesPerView={2}
 						navigation
+						breakpoints={{
+							400: { slidesPerView: 4 },
+							700: { slidesPerView: 6 },
+							800: { slidesPerView: 8, spaceBetween: 5 }
+						}}
 						autoplay={{
 							delay: 5000
 						}}

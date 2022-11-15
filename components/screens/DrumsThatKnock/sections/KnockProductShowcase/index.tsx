@@ -42,16 +42,12 @@ const KnockProductShowcaseSection = ({
 					mainImg: {
 						// src: '/images/534aaf62a986c03ee09ee62a138d3845.gif',
 						src: knockPlugin.images[0] && knockPlugin.images[0]?.src,
-						alt:
-							(knockPlugin.images[0] && knockPlugin.images[0]?.altText) || '',
-						className: 'max-w-md'
+						alt: (knockPlugin.images[0] && knockPlugin.images[0]?.altText) || ''
 					},
 
 					backgroundImg: false
 				}}
-				wrapper={{
-					className: 'lg:flex-row-reverse gap-8 lg:px-20 flex-col-reverse'
-				}}
+				wrapper={{ className: 'lg:flex-row-reverse flex-col-reverse' }}
 			/>
 		</section>
 	);
