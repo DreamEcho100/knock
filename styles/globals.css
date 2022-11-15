@@ -124,26 +124,20 @@ main > section > *,
 @tailwind utilities;
 
 @layer components {
-	.section-p-v1 {
+	.section-p-v1,
+	.section-p-x-v1 {
 		padding-left: 2rem;
 		padding-right: 2rem;
+	}
+	.section-p-v1 {
 		padding-top: 2.5rem;
 		padding-bottom: 2.5rem;
 	}
 	@media (min-width: 768px) {
 		.section-p-v1 {
-			padding-left: 2rem;
-			padding-right: 2rem;
+			padding-top: 4.5rem;
+			padding-bottom: 4.5rem;
 		}
-		.section-p-v1 {
-			padding-top: 4rem;
-			padding-bottom: 4rem;
-		}
-	}
-
-	.section-p-x-v1 {
-		padding-left: 2rem;
-		padding-right: 2rem;
 	}
 
 	.text-align-initial {
@@ -158,19 +152,19 @@ main > section > *,
 		font-size: 4rem;
 	}
 	.text-h2 {
-		font-size: 3rem;
+		font-size: 2.8rem;
 	}
 	.text-h3 {
-		font-size: 2.4rem;
+		font-size: 2.3rem;
 	}
 	.text-h4 {
-		font-size: 1.7rem;
-	}
-	.text-h5 {
 		font-size: 1.6rem;
 	}
+	.text-h5 {
+		font-size: 1.5rem;
+	}
 	.text-h6 {
-		font-size: 1.35rem;
+		font-size: 1.3rem;
 	}
 
 	@media screen and (max-width: 640px) {

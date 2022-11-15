@@ -13,7 +13,7 @@ const HeroSection = () => {
 						height={800}
 						priority
 						className='absolute top-0 right-0 left-0 bottom-0 w-full h-full object-contain pointer-events-none'
-						style={{ transform: 'translate(8%, -2%) scale(2)' }}
+						style={{ transform: 'translate(8%, -2%) scale(2.25)' }}
 					/>
 
 					<CustomNextImage
@@ -23,7 +23,7 @@ const HeroSection = () => {
 						height={800}
 						priority
 						unoptimized
-						className='object-cover mb-6 w-11/12 relative'
+						className='object-cover mb-6 w-3/4 relative'
 					/>
 				</div>
 				<h1 className='text-h2 font-semibold text-primary-1 flex flex-wrap justify-center'>

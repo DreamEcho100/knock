@@ -41,7 +41,7 @@ const LatestSamplesSection = ({
 						<KnockTrademark />
 						SAMPLE PACKS
 					</h2>
-					<p className='text-primary-2 text-h5 mb-2'>
+					<p className='text-primary-2 text-h6 mb-2'>
 						Designed from scratch by DECAP. <br /> Premium quality,
 						groundbreaking as always.
 					</p>
