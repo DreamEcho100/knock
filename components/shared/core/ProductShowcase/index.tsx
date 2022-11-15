@@ -38,7 +38,7 @@ const ProductShowcase = ({
 			{...wrapper}
 			className={`
 					flex flex-col max-w-[1024px]
-					lg:flex-row lg:justify-between ${wrapperClassName}`}
+					lg:flex-row ${wrapperClassName}`}
 		>
 			<div
 				className='w-full flex flex-col items-center justify-center text-center gap-2 md:px-4 pb-4

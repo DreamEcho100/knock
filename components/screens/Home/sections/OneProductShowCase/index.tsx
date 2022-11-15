@@ -27,7 +27,7 @@ const OneProductShowCaseSection = () => {
 					backgroundImg: false
 				}}
 				wrapper={{
-					className: 'flex-col-reverse'
+					className: 'flex-col-reverse lg:justify-center'
 				}}
 			/>
 		</section>

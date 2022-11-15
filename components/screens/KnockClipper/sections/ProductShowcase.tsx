@@ -37,7 +37,10 @@ const ProductShowcaseSection = ({
 						className: '-translate-x-[30%] scale-[2]'
 					}
 				}}
-				wrapper={{ className: 'lg:flex-row-reverse flex-col-reverse gap-10' }}
+				wrapper={{
+					className:
+						'lg:flex-row-reverse flex-col-reverse gap-10 lg:justify-between'
+				}}
 			/>
 		</section>
 	);
