@@ -83,7 +83,7 @@ const FAQSPages: NextPage = () => {
 							return (
 								<li key={item.question} className='flex flex-col py-1rounded'>
 									<span className='flex flex-col text-[80%]'>
-										<h3 className='text-h3 uppercase relative text-primary-1 mb-3'>
+										<h3 className='text-h4 uppercase relative text-primary-1 mb-3'>
 											<CustomNextImage
 												src='/svgs/purple-circle.svg'
 												width={20}

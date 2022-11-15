@@ -29,7 +29,7 @@ export const buttonClasses = cva(
 			},
 			p: {
 				wide: 'px-4 py-[0.125rem]',
-				wider: 'px-8 py-[0.125rem]',
+				wider: 'px-8 py-[0.25rem]',
 				'extra-wide': 'px-10 py-[0.125rem]'
 			},
 			rounded: {

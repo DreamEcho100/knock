@@ -10,7 +10,7 @@ const OneProductShowCaseSection = () => {
 						children: (
 							<>
 								<KnockTrademark />
-								&nbsp;Clipper
+								Clipper
 							</>
 						)
 					},

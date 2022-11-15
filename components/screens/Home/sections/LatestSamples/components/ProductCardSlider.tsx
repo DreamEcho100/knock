@@ -26,16 +26,17 @@ const ProductCardSlider = ({
 					slidesPerView: 2
 				}
 			}}
+			loop
 		>
 			{products
 				.filter((product) => product.title.startsWith('Drums That Knock Vol.'))
-				.map((item, index) => (
+				.map((item) => (
 					<SwiperSlide
-						key={index}
+						key={item.id}
 						className='px-4 flex flex-col items-center justify-center text-center'
 					>
 						<ProductBasicCard
-							key={index}
+							key={item.id}
 							link={{
 								children: item.title,
 								href: `/products/${getIdFromGid(item.id)}`

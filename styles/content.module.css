@@ -34,14 +34,14 @@
 	margin-bottom: 1rem;
 }
 .contentContainerElements h2 {
-	font-size: 2rem;
+	font-size: 1.6rem;
 	margin-top: 4rem;
 }
 .contentContainerElements h2:first-child {
 	margin-top: 0;
 }
 .contentContainerElements h3 {
-	font-size: 1.8rem;
+	font-size: 1.4rem;
 	margin-top: 2rem;
 }
 @media (max-width: 640px) {

@@ -1,39 +1,17 @@
 import type { NextPage } from 'next';
 
-// import ReCAPTCHA from 'react-google-recaptcha';
-import { GoogleReCaptcha, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import Button from '@components/shared/core/Button';
 import FormInput from '@components/shared/core/FormInput';
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import Head from 'next/head';
 
 const ContactUsPage: NextPage = () => {
-	const { executeRecaptcha } = useGoogleReCaptcha();
 	const [formValues, setFormValues] = useState({
 		name: '',
 		email: '',
 		_subject: '',
 		message: ''
 	});
-
-	const handleReCAPTCHAonChange = (value: string | null) => {
-		console.log('Captcha value:', value);
-	};
-	// Create an event handler so you can call the verification on button click event or form submit
-	const handleReCaptchaVerify = useCallback(async () => {
-		if (!executeRecaptcha) {
-			console.log('Execute recaptcha not yet available');
-			return;
-		}
-
-		const token = await executeRecaptcha('yourAction');
-		// Do whatever you want with the token
-	}, [executeRecaptcha]);
-
-	// You can use useEffect to trigger the verification as soon as the component being loaded
-	useEffect(() => {
-		handleReCaptchaVerify();
-	}, [handleReCaptchaVerify]);
 
 	return (
 		<>
@@ -94,17 +72,6 @@ const ContactUsPage: NextPage = () => {
 							required
 							minLength={3}
 						/>
-						{/* <ReCAPTCHA
-							sitekey='6LdjpwUjAAAAAJTSe4mdrNT3x0CFHfr0uaxEDC_H'
-							onChange={handleReCAPTCHAonChange}
-						/> */}
-						{/* <GoogleReCaptcha
-							onVerify={handleReCAPTCHAonChange}
-							refreshReCaptcha={3}
-						/> */}
-						<button type='button' onClick={handleReCaptchaVerify}>
-							Verify recaptcha
-						</button>
 						<Button>Submit</Button>
 					</form>
 				</div>

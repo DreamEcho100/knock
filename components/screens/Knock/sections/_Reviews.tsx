@@ -46,9 +46,10 @@ const ReviewsSection = () => {
 					autoplay={{
 						delay: 7500
 					}}
+					loop
 				>
 					{reviewsImages.map((item, index) => (
-						<SwiperSlide key={index} className='px-8 pt-24 pb-12'>
+						<SwiperSlide key={item} className='px-8 pt-24 pb-12'>
 							<div className='w-full h-full aspect-square'>
 								<CustomNextImage
 									unoptimized

@@ -125,7 +125,6 @@ export const useLogoutUser = ({
 
 				// uetUserCheckoutDetailsAndIdAndKey(user?.data?.id);
 
-				console.log('productsData', productsData);
 				if (userCheckoutDetailsAndIdAndKey)
 					checkoutApi.products.removeMany(
 						`gid://shopify/Checkout/${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId}?key=${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutKey}`,

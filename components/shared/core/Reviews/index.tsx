@@ -10,7 +10,7 @@ import CustomNextImage from '@components/shared/common/CustomNextImage';
 import { cva, cx } from 'class-variance-authority';
 
 const handleReviewCardVariants = cva(
-	'relative rounded-2xl w-full px-6 sm:px-10 py-12 bg-primary-5 flex flex-col',
+	'relative rounded-2xl w-full px-6 py-12 bg-primary-5 flex',
 	{
 		variants: {
 			'min-h': {
@@ -21,14 +21,10 @@ const handleReviewCardVariants = cva(
 			'max-w': {
 				'extra-sm': 'max-w-[28rem]',
 				sm: 'max-w-[30rem]'
-			},
-			withReviewerImage: {
-				true: 'sm:pr-[5.5rem] sm:mr-[4.5rem] sm:py-16'
 			}
 		},
 		defaultVariants: {
-			'min-h': 'md',
-			withReviewerImage: true
+			'min-h': 'md'
 		}
 	}
 );
@@ -74,10 +70,10 @@ const Reviews = ({
 				slidesPerView={1}
 				navigation
 				spaceBetween={20}
-				// scrollbar={{ draggable: true }}
 				autoplay={{
 					delay: 15000
 				}}
+				loop
 				className='swiper-wrapper-items-center'
 			>
 				{reviews.map((item, index) => (
@@ -88,15 +84,12 @@ const Reviews = ({
 						<div className='flex items-center justify-center relative w-full'>
 							<div
 								className={handleReviewCardVariants({
-									...reviewCardVariants,
-									withReviewerImage:
-										reviewCardVariants.withReviewerImage || !!item.image
+									...reviewCardVariants
 								})}
 							>
 								<div
 									className={cx(
-										'hidden absolute top-1/2 -translate-y-1/2 right-0',
-										'sm:block sm:w-36 sm:h-36'
+										'sm:flex sm:min-w-fit items-center justify-center'
 									)}
 								>
 									{item.image && (
@@ -105,7 +98,11 @@ const Reviews = ({
 											alt={item.image.alt}
 											width={250}
 											height={250}
-											className='bg-black rounded-full aspect-square w-full h-full object-cover translate-x-1/2'
+											className={cx(
+												'bg-black rounded-full aspect-square object-cover',
+
+												'sm:block sm:w-32 sm:h-32'
+											)}
 										/>
 									)}
 								</div>
@@ -125,15 +122,17 @@ const Reviews = ({
 										/>
 									)}
 								</div>
-								<q>{item.review}</q>
-								<span className='border-b-[0.0125rem] border-text-primary-4 w-12 mb-2 mt-3'></span>
-								<div className='flex items-end gap-4'>
-									<cite
-										className='flex items-end'
-										style={{ fontStyle: 'normal' }}
-									>
-										{item.reviewedBy}
-									</cite>
+								<div className='flex flex-col p-4'>
+									<q>{item.review}</q>
+									<span className='border-b-[0.0125rem] border-text-primary-4 w-12 mb-2 mt-3'></span>
+									<div className='flex items-end gap-4'>
+										<cite
+											className='flex items-end'
+											style={{ fontStyle: 'normal' }}
+										>
+											{item.reviewedBy}
+										</cite>
+									</div>
 									{item.image && (
 										<CustomNextImage
 											src={item.image.src}

@@ -28,37 +28,28 @@ const ArtistsSection = ({ reviews }: Parameters<typeof Reviews>['0']) => {
 				<div className='max-w-[900px] mx-auto'>
 					<Swiper
 						modules={[Navigation, A11y, Autoplay]}
-						slidesPerView={1}
+						slidesPerView={6}
 						navigation
 						autoplay={{
 							delay: 5000
 						}}
-						breakpoints={{
-							300: { slidesPerView: 3 },
-							520: { slidesPerView: 4 },
-							720: { slidesPerView: 6 }
-						}}
+						loop
 					>
-						{'br'
-							.repeat(2)
-							.split('br')
-							.map(() => artists)
-							.flat(1)
-							.map((item, index) => (
-								<SwiperSlide
-									key={index}
-									className='p-2 flex flex-col justify-center items-center text-center'
-								>
-									<CustomNextImage
-										src={item.image.src}
-										alt={item.image.alt}
-										width={100}
-										height={100}
-										className='rounded-full'
-									/>
-									<p>{item.name}</p>
-								</SwiperSlide>
-							))}
+						{artists.map((item) => (
+							<SwiperSlide
+								key={item.image.src + item.image.alt}
+								className='p-2 flex flex-col justify-center items-center text-center'
+							>
+								<CustomNextImage
+									src={item.image.src}
+									alt={item.image.alt}
+									width={100}
+									height={100}
+									className='rounded-full'
+								/>
+								<p>{item.name}</p>
+							</SwiperSlide>
+						))}
 					</Swiper>
 				</div>
 				<div className='-translate-y-6'>
