@@ -5,11 +5,12 @@ const handDescriptionVariants = cva('text-center max-w-[1024px]', {
 	variants: {
 		'text-size': {
 			h5: 'text-h5',
-			h6: 'text-h6'
+			h6: 'text-h6',
+			dynamic: 'text-h6 sm:text-h5'
 		}
 	},
 	defaultVariants: {
-		'text-size': 'h5'
+		'text-size': 'dynamic'
 	}
 });
 

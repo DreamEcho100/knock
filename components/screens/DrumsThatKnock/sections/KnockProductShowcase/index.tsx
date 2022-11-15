@@ -31,7 +31,7 @@ const KnockProductShowcaseSection = ({
 						// knockPlugin.description
 					},
 					button: {
-						children: 'Learn more',
+						children: 'Explore them',
 						onClick: () => {
 							return;
 						},
