@@ -28,7 +28,11 @@ const ContactUsPage: NextPage = () => {
 
 					<form
 						className='flex flex-col items-center sm:items-start gap-16 my-8 border-[0.125rem] border-bg-secondary-1 rounded-2xl p-12'
-						action='https://formsubmit.co/maze6572198@gmail.com'
+						action={
+							process.env.NEXT_PUPLIC_FORMSUBMIT_EMAIL
+								? `https://formsubmit.co/${process.env.NEXT_PUPLIC_FORMSUBMIT_EMAIL}`
+								: ''
+						}
 						method='POST'
 					>
 						<FormInput
