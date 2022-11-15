@@ -44,8 +44,10 @@ const KnockProductShowcaseSection = ({
 						src: knockPlugin.images[0] && knockPlugin.images[0]?.src,
 						alt: (knockPlugin.images[0] && knockPlugin.images[0]?.altText) || ''
 					},
-
-					backgroundImg: false
+					index: {
+						className: 'lg:w-[50%]'
+					}
+					// backgroundImg: false
 				}}
 				wrapper={{
 					className: 'lg:flex-row-reverse flex-col-reverse lg:justify-between'

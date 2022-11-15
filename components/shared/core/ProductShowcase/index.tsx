@@ -17,6 +17,7 @@ interface IProps {
 	imageContainer: {
 		mainImg: ICustomNextImageProps;
 		backgroundImg?: Partial<ICustomNextImageProps> | false;
+		index?: HTMLAttributes<HTMLDivElement>;
 	};
 	wrapper?: HTMLAttributes<HTMLDivElement>;
 	product?: IProduct;
@@ -25,7 +26,7 @@ interface IProps {
 const ProductShowcase = ({
 	product,
 	textContainer: { h2 = {}, p = {}, button = {} },
-	imageContainer: { mainImg, backgroundImg = {} },
+	imageContainer: { mainImg, backgroundImg = {}, index: imageContainerIndex },
 	wrapper: { className: wrapperClassName = '', ...wrapper } = {}
 }: IProps) => {
 	const addProductsToCheckoutAndCart = useAddProductsToCheckoutAndCart();
@@ -62,7 +63,14 @@ const ProductShowcase = ({
 					{...button}
 				/>
 			</div>
-			<div className={cx('w-full relative flex items-center', 'lg:w-[40%]')}>
+			<div
+				{...imageContainerIndex}
+				className={cx(
+					'w-full relative flex items-center',
+					'lg:w-[40%]',
+					imageContainerIndex?.className
+				)}
+			>
 				{backgroundImg && (
 					<div className='absolute w-full h-full'>
 						<CustomNextImage
