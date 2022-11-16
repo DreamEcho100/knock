@@ -1,9 +1,13 @@
 import { getShopifyClient } from '@utils/core/shopify';
+
 import axios from 'axios';
+
 import { print } from 'graphql';
+
 import gql from 'graphql-tag';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
+
 import { z } from 'zod';
 
 export const createCheckout = async (
@@ -129,40 +133,45 @@ export const associateClientToCheckout = async (
 	req: NextApiRequest,
 	res: NextApiResponse
 ) => {
-
 	const input = z
 		.object({
-			checkoutId: z.string().optional(),
-			checkoutKey:z.string().optional(),
-			customerAccessToken: z.string().optional(),
+			checkoutId: z.string(),
+			checkoutKey: z.string(),
+			customerAccessToken: z.string()
 		})
 		.parse(req.body);
 
 	const customer = gql`
-	mutation associateCustomerWithCheckout($checkoutId: ID!, $customerAccessToken: String!) {
-		checkoutCustomerAssociateV2(checkoutId: $checkoutId, customerAccessToken: $customerAccessToken) {
-		  checkout {
-			id
-		  }
-		  checkoutUserErrors {
-			code
-			field
-			message
-		  }
-		  customer {
-			id
-		  }
+		mutation associateCustomerWithCheckout(
+			$checkoutId: ID!
+			$customerAccessToken: String!
+		) {
+			checkoutCustomerAssociateV2(
+				checkoutId: $checkoutId
+				customerAccessToken: $customerAccessToken
+			) {
+				checkout {
+					id
+				}
+				checkoutUserErrors {
+					code
+					field
+					message
+				}
+				customer {
+					id
+				}
+			}
 		}
-	  }
 	`;
 
 	const response = await axios.post(
-				`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
-				checkoutId:`gid://shopify/Checkout/${input.checkoutId}?key=${input.checkoutKey}`,
-				customerAccessToken:input.customerAccessToken
+				checkoutId: `gid://shopify/Checkout/${input.checkoutId}?key=${input.checkoutKey}`,
+				customerAccessToken: input.customerAccessToken
 			}
 		},
 		{
@@ -174,58 +183,61 @@ export const associateClientToCheckout = async (
 		}
 	);
 
-
 	if (response.data.errors) {
-		res.statusCode = 401
-		throw new Error(response.data.errors[0].message)
+		res.statusCode = 401;
+		throw new Error(response.data.errors[0].message);
 	}
 
-	if (response.data.data.checkoutCustomerAssociateV2 && response.data.data.checkoutCustomerAssociateV2.checkoutUserErrors.length) {
-		res.statusCode = 401
-		throw new Error(response.data.data.checkoutCustomerAssociateV2.checkoutUserErrors[0].message)
+	if (
+		response.data.data.checkoutCustomerAssociateV2 &&
+		response.data.data.checkoutCustomerAssociateV2.checkoutUserErrors.length
+	) {
+		res.statusCode = 401;
+		throw new Error(
+			response.data.data.checkoutCustomerAssociateV2.checkoutUserErrors[0].message
+		);
 	}
 
 	return res.status(200).json({
-		success:true,
-		message:'Costumer associated successfully!',
-		customer:response.data.data.checkoutCustomerAssociateV2.customer
-	})
-}
+		success: true,
+		message: 'Costumer associated successfully!',
+		customer: response.data.data.checkoutCustomerAssociateV2.customer
+	});
+};
 
 export const disassociateClientToCheckout = async (
 	req: NextApiRequest,
 	res: NextApiResponse
 ) => {
-
 	const input = z
 		.object({
-			checkoutId: z.string().optional(),
-			checkoutKey:z.string().optional(),
+			checkoutId: z.string(),
+			checkoutKey: z.string()
 		})
 		.parse(req.body);
 
 	const customer = gql`
-	mutation checkoutCustomerDisassociateV2($checkoutId: ID!) {
-		checkoutCustomerDisassociateV2(checkoutId: $checkoutId) {
-		  checkout {
-			id
-			email
-		  }
-		  checkoutUserErrors {
-			code
-			field
-			message
-		  }
+		mutation checkoutCustomerDisassociateV2($checkoutId: ID!) {
+			checkoutCustomerDisassociateV2(checkoutId: $checkoutId) {
+				checkout {
+					id
+					email
+				}
+				checkoutUserErrors {
+					code
+					field
+					message
+				}
+			}
 		}
-	 }
 	`;
 
 	const response = await axios.post(
-				`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
-				checkoutId:`gid://shopify/Checkout/${input.checkoutId}?key=${input.checkoutKey}`,
+				checkoutId: `gid://shopify/Checkout/${input.checkoutId}?key=${input.checkoutKey}`
 			}
 		},
 		{
@@ -237,23 +249,27 @@ export const disassociateClientToCheckout = async (
 		}
 	);
 
-
 	if (response.data.errors) {
-		res.statusCode = 401
-		throw new Error(response.data.errors[0].message)
+		res.statusCode = 401;
+		throw new Error(response.data.errors[0].message);
 	}
 
-	if (response.data.data.checkoutCustomerDisassociateV2 && response.data.data.checkoutCustomerDisassociateV2.checkoutUserErrors.length) {
-		res.statusCode = 401
-		throw new Error(response.data.data.checkoutCustomerDisassociateV2.checkoutUserErrors[0].message)
+	if (
+		response.data.data.checkoutCustomerDisassociateV2 &&
+		response.data.data.checkoutCustomerDisassociateV2.checkoutUserErrors.length
+	) {
+		res.statusCode = 401;
+		throw new Error(
+			response.data.data.checkoutCustomerDisassociateV2.checkoutUserErrors[0].message
+		);
 	}
 
 	return res.status(200).json({
-		success:true,
-		message:'Costumer disassociated successfully!',
-		customer:response.data.data.checkoutCustomerDisassociateV2.checkout
-	})
-}
+		success: true,
+		message: 'Costumer disassociated successfully!',
+		customer: response.data.data.checkoutCustomerDisassociateV2.checkout
+	});
+};
 const checkoutsController = {
 	createOne: createCheckout,
 	addOne: addItemToCheckout,
@@ -261,8 +277,8 @@ const checkoutsController = {
 	removeOne: removeItemInCheckout,
 	update: updateCheckout,
 	getAll: getCheckout,
-	associateClient:associateClientToCheckout,
-	disassociateClient:disassociateClientToCheckout
+	associateClient: associateClientToCheckout,
+	disassociateClient: disassociateClientToCheckout
 };
 
 export default checkoutsController;

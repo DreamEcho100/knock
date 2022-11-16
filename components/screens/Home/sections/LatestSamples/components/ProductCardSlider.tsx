@@ -16,11 +16,11 @@ const ProductCardSlider = ({
 	return (
 		<Swiper
 			modules={[Navigation, A11y, Autoplay]}
-			slidesPerView={1}
 			navigation
 			autoplay={{
 				delay: 7500
 			}}
+			slidesPerView='auto'
 			breakpoints={{
 				500: {
 					slidesPerView: 2

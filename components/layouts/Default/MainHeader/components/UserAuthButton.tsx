@@ -79,7 +79,8 @@ const RegisterType = ({
 		email: '',
 		password: '',
 		firstName: '',
-		lastName: ''
+		lastName: '',
+		acceptsMarketing: true
 	});
 
 	const registerMutation = useMutation<
@@ -185,6 +186,24 @@ const RegisterType = ({
 							autoComplete='password'
 							minLength={3}
 						/>
+
+						<div className=''>
+							<label>
+								<input
+									checked={formValues.acceptsMarketing}
+									type='checkbox'
+									name='acceptsMarketing'
+									onChange={() =>
+										setFormValues((prev) => ({
+											...prev,
+											acceptsMarketing: !prev.acceptsMarketing
+										}))
+									}
+								/>
+								&nbsp;
+								<span>Accepting marketing</span>
+							</label>
+						</div>
 						<div className='mt-4 flex justify-end'>
 							<Button
 								type='submit'

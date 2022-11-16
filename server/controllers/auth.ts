@@ -12,8 +12,8 @@ import { z } from 'zod';
 const login = async (req: NextApiRequest, res: NextApiResponse) => {
 	const input = z
 		.object({
-			email: z.string().email().optional(),
-			password: z.string().min(8).optional()
+			email: z.string().email(),
+			password: z.string().min(8)
 		})
 		.parse(req.body);
 
@@ -121,7 +121,10 @@ const activate = async (req: NextApiRequest, res: NextApiResponse) => {
 	});
 };
 
-const checkToken = async (req: NextApiRequest & { params: Record<string, any> } , res: NextApiResponse  ) => {
+const checkToken = async (
+	req: NextApiRequest & { params: Record<string, any> },
+	res: NextApiResponse
+) => {
 	const accessToken = req.headers.accesstoken;
 
 	//const {checkoutId , checkoutKey} = req.params
@@ -263,7 +266,7 @@ const checkToken = async (req: NextApiRequest & { params: Record<string, any> } 
 		return res.status(200).json({
 			success: true,
 			message: '',
-			user: data.data.customer,
+			user: data.data.customer
 			//checkoutUrl
 		});
 	} else {
@@ -316,12 +319,12 @@ const logout = async (req: NextApiRequest, res: NextApiResponse) => {
 const register = async (req: NextApiRequest, res: NextApiResponse) => {
 	const input = z
 		.object({
-			acceptsMarketing: z.boolean().optional(),
-			email: z.string().email().optional(),
-			phone: z.string().optional(),
-			password: z.string().min(8).optional(),
-			firstName: z.string().min(2).optional(),
-			lastName: z.string().min(2).optional()
+			acceptsMarketing: z.boolean(),
+			email: z.string().email(),
+			phone: z.string(),
+			password: z.string().min(8),
+			firstName: z.string().min(2),
+			lastName: z.string().min(2)
 		})
 		.parse(req.body);
 

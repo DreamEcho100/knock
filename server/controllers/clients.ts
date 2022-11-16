@@ -364,9 +364,9 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 const resetPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 	const input = z
 		.object({
-			id: z.string().optional(),
-			password: z.string().min(8).optional(),
-			resetToken: z.string().optional()
+			id: z.string(),
+			password: z.string().min(8),
+			resetToken: z.string()
 		})
 		.parse(req.body);
 
@@ -796,9 +796,7 @@ const subscribeToNewsLetters = async (
 	req: NextApiRequest & { params: Record<string, any> },
 	res: NextApiResponse
 ) => {
-	const input = z
-		.object({ email: z.string().email().optional() })
-		.parse(req.body);
+	const input = z.object({ email: z.string().email() }).parse(req.body);
 
 	const { data } = await axios.get(
 		`https://${process.env.DOMAINE}/admin/api/2022-10/customers/search.json?fields=id&query=email:${input.email}`,
@@ -865,21 +863,23 @@ const supportForm = async (
 ) => {
 	const input = z
 		.object({
-			email: z.string().email().optional(),
-			subject: z.string().optional(),
-			message: z.string().optional(),
-			fullName: z.string().min(2).optional(),
-			countryCode:z.string().max(2).optional()
+			email: z.string().email(),
+			subject: z.string(),
+			message: z.string(),
+			fullName: z.string().min(2),
+			countryCode: z.string().max(2)
 		})
 		.parse(req.body);
 
-	const email = await new SibApiV3Sdk.TransactionalEmailsApi().sendTransacEmail({
+	const email = await new SibApiV3Sdk.TransactionalEmailsApi().sendTransacEmail(
+		{
 			sender: { email: input.email, name: input.fullName },
 			subject: input.subject,
 			htmlContent:
 				'<!DOCTYPE html><html><body><h1>Contact form</h1></body></html>',
-			messageVersions: [{
-					to: [{email: process.env.CLIENT_EMAIL , name: 'PLUGINSTHATKNOCK'}],
+			messageVersions: [
+				{
+					to: [{ email: process.env.CLIENT_EMAIL, name: 'PLUGINSTHATKNOCK' }],
 					htmlContent: `<!DOCTYPE html>
 						<html lang="en">
 						<head>

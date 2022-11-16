@@ -29,8 +29,8 @@ const ArtistsSection = ({ reviews }: Parameters<typeof Reviews>['0']) => {
 					<div className='w-[1200px] max-w-full mx-auto'>
 						<Swiper
 							modules={[Navigation, A11y, Autoplay]}
-							slidesPerView={2}
 							navigation
+							slidesPerView='auto'
 							breakpoints={{
 								400: { slidesPerView: 4 },
 								700: { slidesPerView: 6 },
