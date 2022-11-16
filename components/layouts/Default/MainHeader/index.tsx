@@ -351,7 +351,7 @@ const CartContainer = () => {
 				)}
 			>
 				<header className='pb-4'>
-					<h3 className='text-h3 uppercase font-semibold'>cart</h3>
+					<h3 className='text-h4 uppercase font-semibold'>cart</h3>
 				</header>
 				<div className='flex flex-col gap-4'>
 					{productsData.length === 0
@@ -450,7 +450,7 @@ const CartContainer = () => {
 				</div>
 				<div className='pt-8 flex flex-col gap-8'>
 					<header className='flex gap-2 justify-between'>
-						<h3 className='text-h3 uppercase font-semibold'>subtotal</h3>
+						<h3 className='text-h4 uppercase font-semibold'>subtotal</h3>
 						<p title='price per product'>${productsTotalPrice}</p>
 					</header>
 					<div className=''>

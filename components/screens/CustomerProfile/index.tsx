@@ -28,6 +28,7 @@ import Dialog from '@components/shared/common/Dialog';
 import FormField from '@components/shared/core/FieldForm';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Head from 'next/head';
+import Link from 'next/link';
 
 const TitleValue = ({
 	title,
@@ -407,9 +408,18 @@ const CustomerProfileScreen = () => {
 			title: 'Orders',
 			accordionContent: (
 				<AccordionContent className='flex flex-wrap py-8 gap-4'>
-					{orders.map(({ node: order }) => (
-						<OrderCard key={order.id} order={order} />
-					))}
+					{!Array.isArray(orders) || orders.length === 0 ? (
+						<p>
+							<span>Ther&apos;s no orders {'\u{1F625}'}</span>&nbsp;
+							<Link href='/drums-that-knock' className='text-bg-secondary-1'>
+								let&apos; do something about that
+							</Link>
+						</p>
+					) : (
+						orders.map(({ node: order }) => (
+							<OrderCard key={order.id} order={order} />
+						))
+					)}
 				</AccordionContent>
 			)
 		}

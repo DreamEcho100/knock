@@ -94,7 +94,7 @@ const ShapesYourDrumsSection = () => {
 								height={175}
 								className='aspect-square max-w-[10rem]'
 							/>
-							<p className='font-semibold'>{item.title}</p>
+							<p className='font-bold'>{item.title}</p>
 							<p>{item.description}</p>
 						</div>
 					))}

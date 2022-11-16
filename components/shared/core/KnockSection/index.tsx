@@ -1,5 +1,6 @@
 import type { IButtonProps } from '@components/shared/core/Button';
 import type { VariantProps } from 'class-variance-authority';
+import type { ReactNode } from 'react';
 
 import Button from '@components/shared/core/Button';
 
@@ -7,7 +8,7 @@ import KnockTrademark from '@components/shared/core/KnockTrademark';
 import { cva } from 'class-variance-authority';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 
-export const pClasses = cva(`mb-6 leading-6 sm:leading-8`, {
+export const pClasses = cva('mt-2 mb-6 leading-6 sm:leading-8', {
 	variants: {
 		width: {
 			large: 'max-w-[800px]',
@@ -24,6 +25,21 @@ export const pClasses = cva(`mb-6 leading-6 sm:leading-8`, {
 		text: 'small'
 	}
 });
+export const h2Classes = cva(
+	'font-semibold mb-2 text-primary-1 flex flex-wrap justify-center text-center sm:mb-0',
+	{
+		variants: {
+			'text-size': {
+				md: 'text-h3',
+				lg: 'text-h2'
+			}
+		},
+		defaultVariants: {
+			'text-size': 'lg'
+		}
+	}
+);
+
 export const sectionClasses = cva('bg-primary-1 section-h-v1', {
 	variants: {
 		p: {
@@ -42,19 +58,21 @@ const KnockSection = ({
 	title,
 	pTheme = {},
 	sectionTheme,
-	imageSrc = '/images/534aaf62a986c03ee09ee62a138d3845.gif'
+	imageSrc = '/images/534aaf62a986c03ee09ee62a138d3845.gif',
+	h2theme
 }: {
-	title?: string;
+	title?: ReactNode;
 	description: string;
 	buttonProps: IButtonProps;
 	pTheme?: VariantProps<typeof pClasses>;
+	h2theme?: VariantProps<typeof h2Classes>;
 	sectionTheme?: VariantProps<typeof sectionClasses>;
 	imageSrc?: string;
 }) => {
 	return (
 		<section className={sectionClasses(sectionTheme)}>
 			<div className='w-full h-full flex items-center justify-center flex-col sm:gap-2 text-center'>
-				<div className='relative flex items-center justify-center max-w-[900px] mb-1'>
+				<div className='relative flex items-center justify-center max-w-3xl mb-1'>
 					<CustomNextImage
 						src='/images/Group 179.png'
 						width={800}
@@ -75,10 +93,7 @@ const KnockSection = ({
 					/>
 				</div>
 				{
-					<h2
-						className='text-h2 font-semibold mb-2 text-primary-1 flex flex-wrap justify-center text-center
-								sm:mb-0'
-					>
+					<h2 className={h2Classes(h2theme)}>
 						{title || (
 							<>
 								DRUMS THAT&nbsp;
@@ -88,7 +103,7 @@ const KnockSection = ({
 					</h2>
 				}
 				<p className={pClasses(pTheme)}>{description}</p>
-				<Button className='capitalize text-h5' {...buttonProps} />
+				<Button className='capitalize' {...buttonProps} />
 			</div>
 		</section>
 	);

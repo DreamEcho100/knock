@@ -18,7 +18,7 @@ const HeroSection = ({
 				Buy it now&nbsp;
 				{knockClipperPlugin?.variants[0] &&
 					knockClipperPlugin.variants[0]?.compareAtPrice?.amount && (
-						<del className='text-bg-secondary-2 line-through'>
+						<del className='line-through font-normal'>
 							{priceCurrencyFormatter(
 								knockClipperPlugin.variants[0].compareAtPrice.amount,
 								knockClipperPlugin.variants[0].compareAtPrice.currencyCode
@@ -39,7 +39,7 @@ const HeroSection = ({
 						height={1000}
 						priority
 						className='pointer-events-none absolute top-0 right-0 left-0 bottom-0 w-full h-full object-contain scale-75'
-						style={{ transform: 'translate(8%, -2%) scale(2)' }}
+						style={{ transform: 'translate(8%, -2%) scale(2, 1.4)' }}
 					/>
 
 					<CustomNextImage
@@ -67,7 +67,7 @@ const HeroSection = ({
 					<span className='p-2' />{' '}
 					{knockClipperPlugin?.variants[0] &&
 						knockClipperPlugin.variants[0]?.price?.amount && (
-							<span className='text-primary-1 font-semibold'>
+							<span className='text-bg-secondary-2 font-semibold'>
 								{priceCurrencyFormatter(
 									knockClipperPlugin.variants[0].price.amount,
 									knockClipperPlugin.variants[0].price.currencyCode

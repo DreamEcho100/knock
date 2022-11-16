@@ -25,7 +25,7 @@ const socialLinks = {
 const LinksListContainer = ({
 	headerText,
 	links,
-	linksListClassName = 'capitalize flex flex-col gap-2 text-lg sm:text-size-inherit'
+	linksListClassName = 'capitalize flex flex-col gap-1 text-md sm:text-size-inherit'
 }: {
 	headerText: string;
 	links: { href: string; text: string; isHidden?: boolean }[];
@@ -102,11 +102,11 @@ const Footer = () => {
               ]}
             /> */}
 						<div className='flex flex-col p-2 md:p-0 max-w-[700px] lg:w-1/2'>
-							<header className='flex flex-col gap-2 mb-4'>
+							<header className='flex flex-col gap-1 mb-2'>
 								<p className='text-white font-semibold'>
 									Follow us on social media
 								</p>
-								<ul className='flex gap-4 text-2xl'>
+								<ul className='flex gap-4 text-xl'>
 									<li>
 										<a
 											href={socialLinks.instagram}
@@ -149,8 +149,8 @@ const Footer = () => {
 									</li>
 								</ul>
 							</header>
-							<div className='flex flex-col gap-4'>
-								<h2 className='text-h2 font-semibold text-white uppercase'>
+							<div className='flex flex-col gap-2'>
+								<h2 className='text-h3 font-semibold text-white uppercase'>
 									subscribe
 								</h2>
 								<p>Promotion, new products and sales. Directly to your inbox</p>

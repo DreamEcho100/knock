@@ -12,7 +12,7 @@ const VideosSection = ({
 		knockPlugin
 	});
 	return (
-		<section className='bg-primary-1 text-primary-2 section-p-x-v1'>
+		<section className='bg-primary-1 text-primary-2 section-p-x-v1 section-pb-v1'>
 			<VideosContainer
 				iframes={[
 					{

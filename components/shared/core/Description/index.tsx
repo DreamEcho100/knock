@@ -1,4 +1,4 @@
-import { cva, VariantProps } from 'class-variance-authority';
+import { cva, cx, VariantProps } from 'class-variance-authority';
 import type { HTMLAttributes } from 'react';
 
 const handDescriptionVariants = cva('text-center max-w-[1024px]', {
@@ -16,14 +16,16 @@ const handDescriptionVariants = cva('text-center max-w-[1024px]', {
 
 const Description = ({
 	children,
-	variants
+	variants,
+	className
 }: {
 	children: HTMLAttributes<HTMLParagraphElement>['children'];
 	variants?: VariantProps<typeof handDescriptionVariants>;
+	className?: string;
 }) => {
 	// !!!
 	return (
-		<div className={handDescriptionVariants(variants)}>
+		<div className={cx(handDescriptionVariants(variants), className)}>
 			<p>{children}</p>
 		</div>
 	);

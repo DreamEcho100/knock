@@ -126,23 +126,48 @@ main > section > *,
 
 @layer components {
 	.section-h-v1 {
-		height: 100vh;
-		max-height: 50rem;
-		min-height: fit-content;
+		height: auto;
 	}
 	.section-p-v1,
 	.section-p-x-v1 {
 		padding-left: 2rem;
 		padding-right: 2rem;
 	}
+	.section-p-v1,
+	.section-pb-v1 {
+		padding-bottom: 2.5rem;
+	}
 	.section-p-v1 {
 		padding-top: 2.5rem;
+	}
+	/* .section-h-v1.section-p-v1,
+	.section-h-v1.section-pb-v1 {
+		padding-bottom: 0;
+	}
+	.section-h-v1.section-p-v1 {
+		padding-top: 0;
+	} */
+	.section-h-v1.section-p-v1 {
+		padding-top: 2.5rem;
+	}
+	.section-h-v1.section-p-v1,
+	.section-h-v1.section-pb-v1 {
 		padding-bottom: 2.5rem;
 	}
 	@media (min-width: 768px) {
 		.section-p-v1 {
 			padding-top: 4.5rem;
+		}
+		.section-p-v1,
+		.section-pb-v1 {
 			padding-bottom: 4.5rem;
+		}
+	}
+	@media (min-height: 600px) {
+		.section-h-v1 {
+			height: 100vh;
+			max-height: 45rem;
+			min-height: fit-content;
 		}
 	}
 

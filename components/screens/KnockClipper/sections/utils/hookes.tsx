@@ -23,14 +23,14 @@ export const useAddKnockPluginToCartButtonProps = ({
 		) : knockClipperPlugin.variants[0].compareAtPrice ? (
 			<>
 				Buy it now{' '}
-				<span>
+				<span className='text-bg-secondary-2'>
 					{priceCurrencyFormatter(
 						knockClipperPlugin.variants[0].price.amount,
 						knockClipperPlugin.variants[0].price.currencyCode
 					)}
 				</span>
 				&nbsp;
-				<del className='text-bg-secondary-2 line-through'>
+				<del className='line-through'>
 					{priceCurrencyFormatter(
 						knockClipperPlugin.variants[0].compareAtPrice.amount,
 						knockClipperPlugin.variants[0].compareAtPrice.currencyCode

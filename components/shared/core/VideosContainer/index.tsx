@@ -12,7 +12,7 @@ const VideosContainer = ({
 	return (
 		<div
 			className='container-restrictions-2
-		flex flex-col gap-16'
+		flex flex-col gap-12'
 		>
 			<header className='text-center'>
 				<h2 className='text-h3 text-primary-1 font-semibold uppercase'>

@@ -6,7 +6,7 @@ const HeroSection = () => {
 	return (
 		<section className='bg-primary-1 section-p-v1 section-h-v1'>
 			<div className='h-full flex items-center justify-center flex-col gap-1 text-center'>
-				<div className='relative flex items-center justify-center max-w-[900px]'>
+				<div className='relative flex items-center justify-center max-w-3xl'>
 					<CustomNextImage
 						src='/images/Group 179.png'
 						width={800}
