@@ -84,14 +84,10 @@ const MainFooter = () => {
 					return result;
 				});
 		},
-		onSuccess: (result) => {
-			console.log('result', result);
-			setTimeout(() => toast('Success! please check your email'), 0);
-		},
-		onError: (result) => {
-			console.log('result', result);
-			setTimeout(() => toast(result.message, { type: 'error' }), 0);
-		}
+		onSuccess: () =>
+			setTimeout(() => toast('Success! please check your email'), 0),
+		onError: (result) =>
+			setTimeout(() => toast(result.message, { type: 'error' }), 0)
 	});
 
 	const { user } = useGetUserDataFromStore();
