@@ -27,6 +27,7 @@ const LatestSamplesSection = ({
 				className='
 				flex flex-col
 				md:flex-row
+				gap-4
 				lg:gap-6'
 			>
 				<div
@@ -52,7 +53,13 @@ const LatestSamplesSection = ({
 				{/* <div className='md:flex-grow md:w-1/2 flex justify-center items-center'>
 					<ProductCardSlider products={products} />
 				</div> */}
-				<div className='md:flex-grow md:w-1/2 flex justify-center items-center gap-8'>
+				<div
+					className='md:flex-grow md:w-1/2 justify-center items-center gap-8'
+					style={{
+						display: 'grid',
+						gridTemplateColumns: '1fr 1fr'
+					}}
+				>
 					{filteredProducts
 						.filter(
 							(item) =>
