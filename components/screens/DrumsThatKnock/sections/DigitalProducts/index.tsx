@@ -78,7 +78,7 @@ const DigitalProductsSection = ({
 					height={800}
 				/>
 				<CustomNextImage
-					className='w-full h-full object-contain -translate-y-[10%] scale-x-[1.5] scale-y-[1.5] translate-x-[10%] rtl:-translate-x-[10%]'
+					className='w-full h-full object-contain -translate-y-[10%] scale-x-[1.1] scale-y-[1.1] translate-x-[5%] rtl:-translate-x-[5%]'
 					src='/images/Rectangle 45.png'
 					alt=''
 					width={800}
