@@ -8,11 +8,13 @@ import KnockTrademark from '@components/shared/core/KnockTrademark';
 import { cva } from 'class-variance-authority';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 
-export const pClasses = cva('mt-2 mb-6 leading-6 sm:leading-8', {
+export const pClasses = cva('mt-2 mb-6 leading-6', {
 	variants: {
 		width: {
-			large: 'max-w-[800px]',
 			larger: 'max-w-[950px]',
+			large: 'max-w-[800px]',
+			'medium-2': 'max-w-[750px]',
+			medium: 'max-w-[700px]',
 			small: 'max-w-[350px]'
 		},
 		text: {
@@ -26,7 +28,7 @@ export const pClasses = cva('mt-2 mb-6 leading-6 sm:leading-8', {
 	}
 });
 export const h2Classes = cva(
-	'font-semibold mb-2 text-primary-1 flex flex-wrap justify-center text-center sm:mb-0',
+	'font-semibold mb-1 text-primary-1 flex flex-wrap justify-center text-center sm:mb-0',
 	{
 		variants: {
 			'text-size': {
@@ -89,7 +91,7 @@ const KnockSection = ({
 						height={800}
 						priority
 						unoptimized
-						className='object-cover mb-6 w-4/5 relative'
+						className='object-cover mb-4 w-4/5 relative'
 					/>
 				</div>
 				{

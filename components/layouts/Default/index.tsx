@@ -25,7 +25,7 @@ const socialLinks = {
 const LinksListContainer = ({
 	headerText,
 	links,
-	linksListClassName = 'capitalize flex flex-col gap-1 text-md sm:text-size-inherit'
+	linksListClassName = 'capitalize flex flex-col text-md sm:text-size-inherit'
 }: {
 	headerText: string;
 	links: { href: string; text: string; isHidden?: boolean }[];
@@ -33,7 +33,7 @@ const LinksListContainer = ({
 }) => {
 	return (
 		<nav className='flex flex-col gap-2 p-2'>
-			<h3 className='capitalize font-semibold text-h3 text-primary-5'>
+			<h3 className='capitalize font-semibold text-3xl text-primary-5'>
 				{headerText}
 			</h3>
 			<ul className={linksListClassName}>
@@ -101,8 +101,8 @@ const Footer = () => {
                 { href: '/', text: 'All sample packs' },
               ]}
             /> */}
-						<div className='flex flex-col p-2 md:p-0 max-w-[700px] lg:w-1/2'>
-							<header className='flex flex-col gap-1 mb-2'>
+						<div className='flex flex-col p-2 gap-3 md:p-0 max-w-[700px] lg:w-1/2'>
+							<header className='flex flex-col gap-3'>
 								<p className='text-white font-semibold'>
 									Follow us on social media
 								</p>
@@ -173,7 +173,7 @@ const Footer = () => {
 					</div>
 				</div>
 				<div className='flex gap-2 px-1 justify-between items-end mx-1 my-4 text-[0.650rem]'>
-					<div className=''>
+					<div className='flex flex-col gap-1'>
 						<Logo />
 						<small className='capitalize'>
 							copyright &copy; plugins that knock

@@ -35,7 +35,7 @@ const VideosContainer = ({
 					/>
 				))}
 			</div>
-			<div className='flex items-center justify-center mb-8'>
+			<div className='flex items-center justify-center mb-4'>
 				<Button className='capitalize' {...buttonProps}>
 					add to cart
 				</Button>

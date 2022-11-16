@@ -52,11 +52,11 @@ const HeroSection = ({
 						style={{ aspectRatio: '16 / 16' }}
 					/>
 				</div>
-				<h2 className='text-h2 font-semibold text-primary-1 mt-4 mb-4 flex flex-wrap justify-center'>
+				<h2 className='text-h3 font-semibold text-primary-1 mt-4 mb-3 flex flex-wrap justify-center'>
 					<KnockTrademark />
 					Clipper
 				</h2>
-				<p className='mb-6 text-h5 sm:leading-10'>
+				<p className='mb-5 text-h5 '>
 					Adjustable hard & soft clipper module from KNOCK.
 				</p>
 				<div className='flex items-center justify-center relative'>

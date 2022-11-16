@@ -15,7 +15,8 @@ const OneProductShowCaseSection = () => {
 						)
 					},
 					p: {
-						children: 'Adjustable hard + soft clipper module from KNOCK.'
+						children: 'Adjustable hard + soft clipper module from KNOCK.',
+						className: 'text-h6 max-w-[300px]'
 					},
 					button: { children: 'Explore it now', href: '/knock_clipper' }
 				}}

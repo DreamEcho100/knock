@@ -30,7 +30,7 @@ const HeroSection = () => {
 					<KnockTrademark />
 					PLUGIN
 				</h1>
-				<p className='mb-6 max-w-[350px]'>
+				<p className='mb-6 max-w-[300px]'>
 					Make your drums KNOCK and punch through the mix.
 				</p>
 				<Button className='capitalize' href='/knock'>

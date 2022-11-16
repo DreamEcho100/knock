@@ -28,7 +28,7 @@ const KnockProductShowcaseSection = ({
 					p: {
 						children:
 							'This is the last plugin you will ever need to make your drums KNOCK and punch through your mix. This plugin was meticulously crafted by DECAP. It is inspired by the signature sound of Drums That Knock, which has helped shaped the sonics of modern music.',
-						className: 'max-w-[1024px]'
+						className: 'lg:max-w-[410px]'
 					},
 					button: {
 						children: 'Explore them',
@@ -42,12 +42,14 @@ const KnockProductShowcaseSection = ({
 					mainImg: {
 						// src: '/images/534aaf62a986c03ee09ee62a138d3845.gif',
 						src: knockPlugin.images[0] && knockPlugin.images[0]?.src,
-						alt: (knockPlugin.images[0] && knockPlugin.images[0]?.altText) || ''
+						alt:
+							(knockPlugin.images[0] && knockPlugin.images[0]?.altText) || '',
+						className: 'lg:px-[5%]'
 					},
 					index: {
-						className: 'lg:w-auto lg:flex-grow' // scale-[1.5]'
-					}
-					// backgroundImg: false
+						className: 'lg:w-[50%]' // scale-[1.5]'
+					},
+					backgroundImg: { className: 'scale-[3]' }
 				}}
 				wrapper={{
 					className: 'lg:flex-row-reverse flex-col-reverse lg:justify-center'

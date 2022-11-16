@@ -78,7 +78,7 @@ const ShapesYourDrumsSection = () => {
 					relative flex flex-col gap-10 sm:gap-20'
 			>
 				<header className='text-center'>
-					<h2 className='text-h2 uppercase text-primary-1'>
+					<h2 className='text-h3 font-semibold uppercase text-primary-1'>
 						how knock shapes your drums
 					</h2>
 				</header>
@@ -86,7 +86,7 @@ const ShapesYourDrumsSection = () => {
 					{features.map((item) => (
 						<div
 							key={item.title}
-							className='text-center w-[18rem] max-w-full flex flex-col items-center justify-start gap-8'
+							className='text-center w-[18rem] max-w-full flex flex-col items-center justify-start gap-6'
 						>
 							<CustomNextImage
 								{...item.image}
@@ -95,7 +95,7 @@ const ShapesYourDrumsSection = () => {
 								className='aspect-square max-w-[10rem]'
 							/>
 							<p className='font-bold'>{item.title}</p>
-							<p>{item.description}</p>
+							<p className='mt-[-0.75rem]'>{item.description}</p>
 						</div>
 					))}
 				</div>

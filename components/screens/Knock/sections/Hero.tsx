@@ -17,7 +17,8 @@ const HeroSection = ({
 			buttonProps={addKnockPluginToCartButtonProps}
 			title={
 				<>
-					<KnockTrademark /> Plugin
+					<KnockTrademark />
+					PLUGIN
 				</>
 			}
 			description='Make your drums KNOCK and punch through the mix.'

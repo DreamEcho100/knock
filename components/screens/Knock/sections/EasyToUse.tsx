@@ -15,8 +15,17 @@ const EasyToUseSection = ({
 						children: 'EASY TO USE'
 					},
 					p: {
-						children:
-							"KNOCK is optimized for extreme ease of use for beginners and professionals alike. Use KNOCK to make your drums slap, and take you to the next level. Whether you are new to producing, or a seasoned pro, KNOCK will seamlessly fit into your workflow. It's lightweight on your CPU too - use it on a bunch of tracks!"
+						children: (
+							<>
+								KNOCK is optimized for extreme ease of use for beginners and
+								professionals alike. Use KNOCK to make your drums slap, and take
+								you to the next level. Whether you are new to producing, or a
+								seasoned pro, KNOCK will seamlessly fit into your workflow.
+								It&apos;s lightweight on your CPU too - use it
+								<br />
+								on a bunch of tracks!
+							</>
+						)
 					},
 					button: { children: 'Buy it now' }
 				}}
