@@ -57,7 +57,8 @@ const LatestSamplesSection = ({
 					className='md:flex-grow md:w-1/2 justify-center items-center gap-8'
 					style={{
 						display: 'grid',
-						gridTemplateColumns: '1fr 1fr'
+						gridTemplateColumns: 'repeat(auto-fit, minmax(10rem, 1fr))',
+						justifyItems: 'center'
 					}}
 				>
 					{filteredProducts
