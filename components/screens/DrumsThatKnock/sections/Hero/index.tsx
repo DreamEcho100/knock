@@ -4,7 +4,7 @@ import KnockTrademark from '@components/shared/core/KnockTrademark';
 const HeroSection = () => {
 	return (
 		<section className='bg-primary-1 section-p-v1 leading-[1] sm:leading-[1.7]'>
-			<div className='relative py-4 flex items-center justify-center text-center text-primary-1 min-h-fit max-h-[30rem]'>
+			<div className='relative py-4 my-6 flex items-center justify-center text-center text-primary-1 min-h-fit max-h-[30rem]'>
 				<CustomNextImage
 					src='/images/Group 179.png'
 					width={800}
