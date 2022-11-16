@@ -10,7 +10,7 @@ const VideosContainer = ({
 	buttonProps?: IButtonProps;
 }) => {
 	return (
-		<div className='flex flex-col gap-12'>
+		<div className='flex flex-col gap-4 md:gap-8 lg:gap-12'>
 			<header className='text-center'>
 				<h2 className='text-h3 text-primary-1 font-semibold uppercase'>
 					take your drums to the next level

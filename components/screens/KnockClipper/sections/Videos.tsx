@@ -13,7 +13,7 @@ const VideosSection = ({
 	});
 
 	return (
-		<section className='bg-primary-1 text-primary-2 section-p-v1 flex flex-col'>
+		<section className='pt-[2.75rem] lg:pt-[4.75rem] bg-primary-1 text-primary-2 section-p-v1 flex flex-col'>
 			<div className='p-1' />
 			<VideosContainer
 				iframes={[
