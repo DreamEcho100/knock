@@ -8,9 +8,9 @@ import gql from 'graphql-tag';
 
 import { print } from 'graphql';
 
-import validator from 'validator';
-
-import API_URL from './apiUrl';
+const SibApiV3Sdk = require('sib-api-v3-sdk');
+SibApiV3Sdk.ApiClient.instance.authentications['api-key'].apiKey =
+	process.env.SENDINBLUE_API_SMTP;
 
 const deleteAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 	const data = req.body;
@@ -31,7 +31,7 @@ const deleteAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 	const response = await axios.post(
-		API_URL,
+		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -117,7 +117,7 @@ const addAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 	const response = await axios.post(
-		API_URL,
+		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -188,7 +188,7 @@ const defaultAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 	`;
 
 	const response = await axios.post(
-		API_URL,
+		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -258,7 +258,7 @@ const editAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 	`;
 
 	const response = await axios.post(
-		API_URL,
+		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -322,7 +322,7 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 	const response = await axios.post(
-		API_URL,
+		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -339,8 +339,10 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 	);
 
 	if (!response.data.data.customerRecover) {
-		res.statusCode = 404;
-		throw new Error('Customer not found! or email already sent !');
+		res.statusCode = 429;
+		throw new Error(
+			'The user sent too many requests in a given amount of time.'
+		);
 	}
 
 	if (
@@ -392,7 +394,7 @@ const resetPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 	const response = await axios.post(
-		API_URL,
+		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -495,7 +497,7 @@ const updateOneController = async (
 	`;
 
 	const response = await axios.post(
-		API_URL,
+		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -553,7 +555,7 @@ const getAllOrdersForOneClientByIdController = async (
 
 	if (accessToken) {
 		const { data } = await axios.post(
-			API_URL,
+			`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
 			{
 				query: `
           query {
@@ -672,7 +674,7 @@ const getOneOrderForOneClientByIdController = async (
 	const { select, orderKey } = req.query;
 
 	const { data } = await axios.post(
-		API_URL,
+		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
 		{
 			query: `
             query {
@@ -790,6 +792,224 @@ const getOneOrderForOneClientByIdController = async (
 	});
 };
 
+const subscribeToNewsLetters = async (
+	req: NextApiRequest & { params: Record<string, any> },
+	res: NextApiResponse
+) => {
+	const input = z
+		.object({ email: z.string().email().optional() })
+		.parse(req.body);
+
+	const { data } = await axios.get(
+		`https://${process.env.DOMAINE}/admin/api/2022-10/customers/search.json?fields=id&query=email:${input.email}`,
+		{
+			headers: {
+				'X-Shopify-Access-Token': process.env.API_ACCESS_TOKEN
+			}
+		}
+	);
+
+	if (!data.customers.length) {
+		throw new Error(
+			'Customer not found you must be a member to get newsletter'
+		);
+	}
+
+	const customerGql = gql`
+		mutation customerUpdate($input: CustomerInput!) {
+			customerUpdate(input: $input) {
+				customer {
+					id
+				}
+				userErrors {
+					field
+					message
+				}
+			}
+		}
+	`;
+
+	const response = await axios.post(
+		`https://${process.env.ADMIN_DOMAINE}/admin/api/2022-10/graphql.json`,
+		{
+			query: print(customerGql),
+			variables: {
+				input: {
+					acceptsMarketing: true,
+					id: `gid://shopify/Customer/${data.customers[0].id}`
+				}
+			}
+		},
+		{
+			headers: {
+				'Content-Type': 'application/json',
+				'X-Shopify-Access-Token': process.env.API_ACCESS_TOKEN
+			}
+		}
+	);
+
+	if (response.data.data.customerUpdate.userErrors.length) {
+		res.statusCode = 404;
+		throw new Error(response.data.data.customerUpdate.userErrors[0].message);
+	}
+
+	return res.status(200).json({
+		success: true,
+		message: 'You have been subscribed successfully!'
+	});
+};
+
+const supportForm = async (
+	req: NextApiRequest & { params: Record<string, any> },
+	res: NextApiResponse
+) => {
+	const input = z
+		.object({
+			email: z.string().email().optional(),
+			subject: z.string().optional(),
+			message: z.string().optional(),
+			fullName: z.string().min(2).optional(),
+			countryCode:z.string().max(2).optional()
+		})
+		.parse(req.body);
+
+	const email = await new SibApiV3Sdk.TransactionalEmailsApi().sendTransacEmail({
+			sender: { email: input.email, name: input.fullName },
+			subject: input.subject,
+			htmlContent:
+				'<!DOCTYPE html><html><body><h1>Contact form</h1></body></html>',
+			messageVersions: [{
+					to: [{email: process.env.CLIENT_EMAIL , name: 'PLUGINSTHATKNOCK'}],
+					htmlContent: `<!DOCTYPE html>
+						<html lang="en">
+						<head>
+							<meta charset="UTF-8" />
+							<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+							<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+							<link rel="preconnect" href="https://fonts.googleapis.com" />
+							<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+							<link
+							href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap"
+							rel="stylesheet"
+							/>
+							<title>Contact Email</title>
+						</head>
+						<style>
+							body {
+							font-family: "Lato", sans-serif;
+							}
+							p {
+							color: black;
+							text-align: left;
+							font-family: "Lato", sans-serif;
+							line-height: 1.6;
+							font-size: 14px;
+							padding: 0px 0 0;
+							margin: 0;
+							}
+							a{
+							color: #4E7FA1;
+							}
+						</style>
+
+						<body>
+							<table style="width: 100%; height: 100%; padding: 20px 0">
+							<tbody >
+								<tr>
+								<td style="height: 1%">
+									<table
+									style="
+										background-color: #ffffff;
+										width: 100%;
+										height: 100%;
+										max-width: 500px;
+										margin: 0 auto;
+										position: relative;
+										border: 2px solid #e3e3e3;
+										border-radius: 10px;
+									"
+									>
+									<tbody>
+										<tr>
+										<td style="height: 1%; padding: 10px 30px 0">
+											<p style="font-size: 14px">
+											You received a new message from your online store's
+											contact <br />
+											form
+											</p>
+											<hr
+											style="height: 2px; border: none; background: #e3e3e3"
+											/>
+										</td>
+										</tr>
+
+										<tr>
+										<td style="height: 1%; padding: 10px 30px">
+											<p style="font-weight: 900 ;" >
+											Country Code:
+											</p>
+											<p style="font-weight: 500 ;"  >${input.countryCode}</p>
+										</td>
+										</tr>
+										<tr>
+										<td style="height: 1%;  padding: 10px 30px">
+											<p style="font-weight: 900 ;" >
+											Name:
+											</p>
+											<p style="font-weight: 500 ;" >
+											${input.fullName}
+											</p>
+										</td>
+										</tr>
+										<tr>
+										<td style="height: 1%; padding: 10px 30px">
+											<p style="font-weight: 900 ;">
+											Email:
+											</p>
+											<p style="font-weight: 500 ;"  >
+											<a href="mailto:${input.email}"> ${input.email} </a>
+											</p>
+										</td>
+										</tr>
+										<tr>
+										<td style="height: 1%; padding: 0 30px">
+											<p style="font-weight: 900 ;" >
+											Body:
+											</p>
+											<p  style="padding-bottom: 20px ; font-weight: 500 ;" > ${input.message} </p>
+										</td>
+										</tr>
+										<tr>
+										<td  style="height: 1%; padding: 0 30px">
+											<p style="font-weight: 900 ;" >
+											Thank you
+											</p>
+											<p style="font-weight: 500 ; padding-bottom: 20px ;" >${input.fullName}</p>
+										</td>
+										</tr>
+									</tbody>
+									</table>
+								</td>
+								</tr>
+							</tbody>
+							</table>
+						</body>
+						</html>
+				`,
+					subject: input.subject
+				}
+			]
+		}
+	);
+
+	if (email) {
+		return res.status(200).json({
+			success: true,
+			message: 'The form was sent successfully!',
+			email
+		});
+	}
+};
 const clientsController = {
 	address: {
 		deleteOne: deleteAddress,
@@ -805,7 +1025,9 @@ const clientsController = {
 	},
 	updateOne: updateOneController,
 	recoverPassword,
-	resetPassword
+	resetPassword,
+	subscribeToNewsLetters,
+	supportForm
 };
 
 export default clientsController;

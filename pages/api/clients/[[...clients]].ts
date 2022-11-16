@@ -11,6 +11,8 @@ const clientsAPIRouteHandler = nextConnect({ attachParams: true })
 	.post(`${basePath}/recover-password`, clientsController.recoverPassword)
 	.post(`${basePath}/reset-password`, clientsController.resetPassword)
 	.post(`${basePath}/addresses/add-one`, clientsController.address.addOne)
+	.post(`${basePath}/subscribe-newsletters`, clientsController.subscribeToNewsLetters)
+	.post(`${basePath}/contact-us`, clientsController.supportForm)
 	.put(`${basePath}/addresses/default`, clientsController.address.default)
 	.put(`${basePath}/addresses/edit-one`, clientsController.address.editOne)
 	.delete(`${basePath}/addresses/delete-one`,clientsController.address.deleteOne);

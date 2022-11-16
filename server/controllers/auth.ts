@@ -1,17 +1,21 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import validator from 'validator';
-
 import axios from 'axios';
 
 import gql from 'graphql-tag';
 
 import { print } from 'graphql';
 
-import API_URL from './apiUrl';
+import { z } from 'zod';
+//const Multipassify = require('multipassify');
 
 const login = async (req: NextApiRequest, res: NextApiResponse) => {
-	const data = req.body;
+	const input = z
+		.object({
+			email: z.string().email().optional(),
+			password: z.string().min(8).optional()
+		})
+		.parse(req.body);
 
 	const customer = gql`
 		mutation customerAccessTokenCreate(
@@ -32,13 +36,13 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 	`;
 
 	const response = await axios.post(
-		API_URL,
+		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
 				input: {
-					email: data.email,
-					password: data.password
+					email: input.email,
+					password: input.password
 				}
 			}
 		},
@@ -82,7 +86,7 @@ const activate = async (req: NextApiRequest, res: NextApiResponse) => {
 	`;
 
 	const response = await axios.post(
-		API_URL,
+		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -117,12 +121,13 @@ const activate = async (req: NextApiRequest, res: NextApiResponse) => {
 	});
 };
 
-const checkToken = async (req: NextApiRequest, res: NextApiResponse) => {
+const checkToken = async (req: NextApiRequest & { params: Record<string, any> } , res: NextApiResponse  ) => {
 	const accessToken = req.headers.accesstoken;
 
+	//const {checkoutId , checkoutKey} = req.params
 	if (accessToken) {
 		const { data } = await axios.post(
-			API_URL,
+			`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
 			{
 				query: `
           query {
@@ -160,6 +165,7 @@ const checkToken = async (req: NextApiRequest, res: NextApiResponse) => {
                   email
                   name
                   phone
+				  statusUrl
                   totalPrice {
                     amount
                     currencyCode
@@ -247,10 +253,18 @@ const checkToken = async (req: NextApiRequest, res: NextApiResponse) => {
 			throw new Error('Customer not found');
 		}
 
+		// Construct the Multipassify encoder
+		//	const multipassify = new Multipassify(process.env.SHOPIFY_MULTIPASS_TOKEN);
+
+		//let customerData = {email: data.data.customer.email , return_to:`https://${process.env.DOMAINE}/60096020703/checkouts/$${checkoutId}?key=${checkoutKey}`};
+		//multipassify.encode(customerData);
+		//const checkoutUrl = multipassify.generateUrl(customerData,process.env.DOMAINE);
+
 		return res.status(200).json({
 			success: true,
 			message: '',
-			user: data.data.customer
+			user: data.data.customer,
+			//checkoutUrl
 		});
 	} else {
 		throw new Error();
@@ -274,7 +288,7 @@ const logout = async (req: NextApiRequest, res: NextApiResponse) => {
 	`;
 
 	const response = await axios.post(
-		API_URL,
+		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
 		{
 			query: print(deletedAccessToken),
 			variables: {
@@ -300,7 +314,16 @@ const logout = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 const register = async (req: NextApiRequest, res: NextApiResponse) => {
-	let data = req.body;
+	const input = z
+		.object({
+			acceptsMarketing: z.boolean().optional(),
+			email: z.string().email().optional(),
+			phone: z.string().optional(),
+			password: z.string().min(8).optional(),
+			firstName: z.string().min(2).optional(),
+			lastName: z.string().min(2).optional()
+		})
+		.parse(req.body);
 
 	const createCustomer = gql`
 		mutation customerCreate($input: CustomerCreateInput!) {
@@ -330,33 +353,18 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 
-	if (!data.email) {
-		throw new Error('Please enter an email');
-	}
-	if (!data.password) {
-		throw new Error('Please enter an password');
-	}
-
-	if (data.password.length < 8) {
-		throw new Error(
-			'Please enter an password must be greater than 8 characters'
-		);
-	}
-
-	if (!validator.isEmail(data.email)) {
-		throw new Error('Please enter a valid email');
-	}
-
 	const response = await axios.post(
-		API_URL,
+		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
 		{
 			query: print(createCustomer),
 			variables: {
 				input: {
-					email: data.email,
-					password: data.password,
-					firstName: data.firstName,
-					lastName: data.lastName
+					acceptsMarketing: input.acceptsMarketing,
+					email: input.email,
+					password: input.password,
+					firstName: input.firstName,
+					lastName: input.lastName,
+					phone: input.phone
 				}
 			}
 		},
