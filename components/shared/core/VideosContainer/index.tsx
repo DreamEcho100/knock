@@ -10,10 +10,7 @@ const VideosContainer = ({
 	buttonProps?: IButtonProps;
 }) => {
 	return (
-		<div
-			className='container-restrictions-2
-		flex flex-col gap-12'
-		>
+		<div className='flex flex-col gap-12'>
 			<header className='text-center'>
 				<h2 className='text-h3 text-primary-1 font-semibold uppercase'>
 					take your drums to the next level
@@ -35,7 +32,7 @@ const VideosContainer = ({
 					/>
 				))}
 			</div>
-			<div className='flex items-center justify-center mb-4'>
+			<div className='flex items-center justify-center mt-2'>
 				<Button className='capitalize' {...buttonProps}>
 					add to cart
 				</Button>

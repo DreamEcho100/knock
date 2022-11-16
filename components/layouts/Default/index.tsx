@@ -60,7 +60,7 @@ const Footer = () => {
 			className={`${commonClasses} max-w bg-primary-1 border-t-[0.125rem] border-t-text-primary-4`}
 		>
 			<div
-				className='container-restrictions-1 flex flex-col m-auto text-primary-2 px-4 py-8
+				className='flex flex-col m-auto text-primary-2 px-4 py-8
 						lg:px-24'
 			>
 				<div className='flex gap-2 flex-wrap w-full'>
@@ -172,8 +172,8 @@ const Footer = () => {
 						</div>
 					</div>
 				</div>
-				<div className='flex gap-2 px-1 justify-between items-end mx-1 my-4 text-[0.650rem]'>
-					<div className='flex flex-col gap-1'>
+				<div className='flex gap-2 px-1 justify-between items-end mx-1 my-4 text-[0.7rem]'>
+					<div className='flex flex-col'>
 						<Logo />
 						<small className='capitalize'>
 							copyright &copy; plugins that knock

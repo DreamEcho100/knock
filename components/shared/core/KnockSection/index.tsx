@@ -28,7 +28,7 @@ export const pClasses = cva('mt-2 mb-6 leading-6', {
 	}
 });
 export const h2Classes = cva(
-	'font-semibold mb-1 text-primary-1 flex flex-wrap justify-center text-center sm:mb-0',
+	'font-semibold text-primary-1 flex flex-wrap justify-center text-center',
 	{
 		variants: {
 			'text-size': {

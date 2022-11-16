@@ -29,23 +29,20 @@ const handleReviewCardVariants = cva(
 	}
 );
 
-const handleContainerVariants = cva(
-	'container-restrictions-2 max-w-screen-sm mx-auto',
-	{
-		variants: {
-			'max-w': {
-				'screen-lg': 'max-w-screen-lg',
-				'screen-sm': 'max-w-screen-sm',
-				'screen-md': 'max-w-screen-md'
-			}
-		},
-		defaultVariants: {
-			'max-w': 'screen-lg'
+const handleContainerVariants = cva('max-w-screen-sm mx-auto', {
+	variants: {
+		'max-w': {
+			'screen-lg': 'max-w-screen-lg',
+			'screen-sm': 'max-w-screen-sm',
+			'screen-md': 'max-w-screen-md'
 		}
+	},
+	defaultVariants: {
+		'max-w': 'screen-lg'
 	}
-);
+});
 
-('container-restrictions-2 max-w-screen-sm mx-auto');
+('max-w-screen-sm mx-auto');
 
 const Reviews = ({
 	reviews,

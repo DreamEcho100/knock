@@ -21,7 +21,7 @@ const ArtistsSection = ({ reviews }: Parameters<typeof Reviews>['0']) => {
 			<section className='bg-primary-2 section-p-v1 pb-0'>
 				<div className='flex flex-col gap-2 lg:px-8 sm:gap-4'>
 					<header className='text-center flex items-center justify-center'>
-						<h2 className='text-h4 font-bold capitalize flex flex-wrap justify-center'>
+						<h2 className='text-h4 font-semibold capitalize flex flex-wrap justify-center'>
 							SOME ARTISTS WHO HAVE USED DRUMS THAT&nbsp;
 							<KnockTrademark />
 						</h2>

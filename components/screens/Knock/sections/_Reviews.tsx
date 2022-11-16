@@ -36,7 +36,7 @@ const reviewsImages = [
 const ReviewsSection = () => {
 	return (
 		<section className='bg-primary-1 section-p-x-v1'>
-			<div className='container-restrictions-2 max-w-screen-lg mx-auto'>
+			<div className='max-w-screen-lg mx-auto'>
 				<Swiper
 					modules={[Navigation, Pagination, Autoplay, A11y]}
 					slidesPerView={1}
