@@ -10,7 +10,7 @@ import CustomNextImage from '@components/shared/common/CustomNextImage';
 import { cva, cx } from 'class-variance-authority';
 
 const handleReviewCardVariants = cva(
-	'relative rounded-2xl w-full px-6 py-12 bg-primary-5 flex',
+	'relative rounded-2xl w-full px-6 py-12 flex',
 	{
 		variants: {
 			'min-h': {
@@ -50,7 +50,7 @@ const Reviews = ({
 	containerVariants
 }: {
 	reviews: {
-		image?: {
+		image: {
 			src: string;
 			alt: string;
 		};
@@ -71,12 +71,12 @@ const Reviews = ({
 					delay: 15000
 				}}
 				loop
-				className='swiper-wrapper-items-center scale-105'
+				className='swiper-wrapper-items-center'
 			>
 				{reviews.map((item, index) => (
 					<SwiperSlide
 						key={index}
-						className='my-8 w-full px-3 flex items-center justify-center scale-95'
+						className='my-8 w-full px-3 flex items-center justify-center'
 					>
 						<div className='flex items-center justify-center relative w-full'>
 							<div
@@ -84,61 +84,45 @@ const Reviews = ({
 									...reviewCardVariants
 								})}
 							>
-								<div
-									className={cx(
-										'sm:flex sm:min-w-fit items-center justify-center'
-									)}
-								>
-									{item.image && (
-										<CustomNextImage
-											src={item.image.src}
-											alt={item.image.alt}
-											width={250}
-											height={250}
-											className={cx(
-												'bg-black rounded-full aspect-square object-cover',
-
-												'sm:block sm:w-28 sm:h-28'
-											)}
-										/>
-									)}
-								</div>
-								<div
-									className={cx(
-										'w-16 h-16 absolute top-8 -translate-y-full left-8',
-										'sm:w-20 sm:h-20 sm:top-10'
-									)}
-								>
-									{item.image && (
-										<CustomNextImage
-											src='/svgs/double-quates.svg'
-											alt={item.image.alt}
-											width={250}
-											height={250}
-											className='aspect-square w-full h-full'
-										/>
-									)}
-								</div>
-								<div className='flex flex-col p-4'>
-									<q>{item.review}</q>
-									<span className='border-b-[0.0125rem] border-text-primary-4 w-12 mb-2 mt-3'></span>
-									<div className='flex items-end gap-4'>
-										<cite
-											className='flex items-end'
-											style={{ fontStyle: 'normal' }}
-										>
-											{item.reviewedBy}
-										</cite>
+								<div className='flex flex-col gap-6 p-4 text-center w-fit mx-auto relative'>
+									<div
+										className={cx(
+											'w-16 h-16 absolute top-0 -translate-y-full left-0'
+											// 'sm:w-20 sm:h-20 sm:top-10'
+										)}
+									>
+										{item.image && (
+											<CustomNextImage
+												src='/svgs/double-quates.svg'
+												alt={item.image.alt}
+												width={250}
+												height={250}
+												className='aspect-square w-full h-full scale-90'
+											/>
+										)}
 									</div>
-									{item.image && (
+									<q>{item.review}</q>
+									<div className='flex justify-center gap-2'>
 										<CustomNextImage
 											src={item.image.src}
 											alt={item.image.alt}
 											width={250}
 											height={250}
-											className='bg-black block sm:hidden rounded-full aspect-square w-8 h-8 object-cover'
+											className='bg-black block rounded-full aspect-square w-20 h-20 object-cover'
 										/>
-									)}
+										<div className='flex flex-col items-center justify-between'>
+											<span />
+											<span className='border-b-[0.0125rem] border-text-primary-4 w-12 mb-2 mt-3 translate-y-[1ch]' />
+											<div className='flex items-end gap-4'>
+												<cite
+													className='flex items-end'
+													style={{ fontStyle: 'normal' }}
+												>
+													{item.reviewedBy}
+												</cite>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
