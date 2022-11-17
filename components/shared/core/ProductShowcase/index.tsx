@@ -53,7 +53,7 @@ const ProductShowcase = ({
 				<p className='md:max-w-[450px]' {...p} />
 
 				<Button
-					className='capitalize'
+					className='capitalize mt-1'
 					onClick={() =>
 						product &&
 						addProductsToCheckoutAndCart.mutate({

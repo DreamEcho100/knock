@@ -376,8 +376,23 @@ const CartContainer = () => {
 										<header className='flex flex-col gap-1 sm:flex-row sm:gap-2 sm:justify-between'>
 											<h4>
 												<Link
-													href={`/products/${getIdFromGid(product.id)}`}
+													href={
+														product?.variant?.product?.handle === 'knock-plugin'
+															? '/knock'
+															: product?.variant?.product?.handle ===
+															  'knockclipper-pluginboutique'
+															? '/knock_clipper'
+															: `/products/${getIdFromGid(
+																	product.variant.product.id
+															  )}`
+													}
 													className='inline-block whitespace-nowrap max-w-[10rem] text-ellipsis overflow-hidden'
+													onClick={() =>
+														customerGlobalActions.setIsVisibleOnly(
+															customerDispatch,
+															'headerCart'
+														)
+													}
 												>
 													{product.title}
 												</Link>

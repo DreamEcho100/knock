@@ -813,7 +813,7 @@ const subscribeToNewsLetters = async (
 		});
 	} catch (error) {
 		res.statusCode = error.status;
-		throw new Error('You are already subscribed on the newsletters');
+		throw new Error('You are already subscribed to the newsletter');
 	}
 };
 

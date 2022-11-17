@@ -55,7 +55,8 @@ export const sectionClasses = cva('bg-primary-1 section-h-v1', {
 });
 
 const KnockSection = ({
-	buttonProps,
+	buttonProps = {},
+	buttonElem,
 	description,
 	title,
 	pTheme = {},
@@ -65,7 +66,8 @@ const KnockSection = ({
 }: {
 	title?: ReactNode;
 	description: string;
-	buttonProps: IButtonProps;
+	buttonProps?: IButtonProps;
+	buttonElem?: JSX.Element;
 	pTheme?: VariantProps<typeof pClasses>;
 	h2theme?: VariantProps<typeof h2Classes>;
 	sectionTheme?: VariantProps<typeof sectionClasses>;
@@ -105,7 +107,7 @@ const KnockSection = ({
 					</h2>
 				}
 				<p className={pClasses(pTheme)}>{description}</p>
-				<Button className='capitalize' {...buttonProps} />
+				{buttonElem || <Button className='capitalize' {...buttonProps} />}
 			</div>
 		</section>
 	);

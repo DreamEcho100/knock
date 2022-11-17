@@ -1,16 +1,13 @@
 import type { IKnockPluginPageProps } from '@pages/knock';
 import VideosContainer from '@components/shared/core/VideosContainer';
 
-import { useAddKnockPluginToCartButtonProps } from './utils/hookes';
+import AddItemOnHeroSectionButton from '@components/shared/core/AddItemOnHeroSectionButton';
 
 const VideosSection = ({
 	knockPlugin
 }: {
 	knockPlugin: IKnockPluginPageProps['knockPlugin'];
 }) => {
-	const addKnockPluginToCartButtonProps = useAddKnockPluginToCartButtonProps({
-		knockPlugin
-	});
 	return (
 		<section className='bg-primary-1 text-primary-2 section-p-x-v1 section-pb-v1'>
 			<VideosContainer
@@ -34,7 +31,7 @@ const VideosSection = ({
 						allowFullScreen: true
 					}
 				]}
-				buttonProps={addKnockPluginToCartButtonProps}
+				buttonElem={<AddItemOnHeroSectionButton product={knockPlugin} />}
 			/>
 		</section>
 	);

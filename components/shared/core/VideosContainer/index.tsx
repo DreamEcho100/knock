@@ -4,10 +4,12 @@ import Button from '@components/shared/core/Button';
 
 const VideosContainer = ({
 	iframes,
-	buttonProps = {}
+	buttonProps = {},
+	buttonElem
 }: {
 	iframes: IframeHTMLAttributes<HTMLIFrameElement>[];
 	buttonProps?: IButtonProps;
+	buttonElem?: JSX.Element;
 }) => {
 	return (
 		<div className='flex flex-col gap-4 md:gap-8 lg:gap-12'>
@@ -33,9 +35,11 @@ const VideosContainer = ({
 				))}
 			</div>
 			<div className='flex items-center justify-center mt-2'>
-				<Button className='capitalize' {...buttonProps}>
-					add to cart
-				</Button>
+				{buttonElem || (
+					<Button className='capitalize' {...buttonProps}>
+						add to cart
+					</Button>
+				)}
 			</div>
 		</div>
 	);

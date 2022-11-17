@@ -86,10 +86,8 @@ const MainFooter = () => {
 		},
 		onSuccess: () =>
 			setTimeout(() => toast('Success! you have been subscribed \u{1F973}'), 0),
-		onError: (result) => {
-			console.log('result', result);
-			setTimeout(() => toast(result.message, { type: 'error' }), 0);
-		}
+		onError: (result) =>
+			setTimeout(() => toast(result.message, { type: 'error' }), 0)
 	});
 
 	const { user } = useGetUserDataFromStore();

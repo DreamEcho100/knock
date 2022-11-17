@@ -1,34 +1,13 @@
-import Button from '@components/shared/core/Button';
 import KnockTrademark from '@components/shared/core/KnockTrademark';
 
-import { useAddKnockPluginToCartButtonProps } from './utils/hookes';
-
 import type { IKnockClipperPageProps } from '@pages/knock_clipper';
-import { priceCurrencyFormatter } from '@utils/core/shopify';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
+import AddItemOnHeroSectionButton from '@components/shared/core/AddItemOnHeroSectionButton';
 const HeroSection = ({
 	knockClipperPlugin
 }: {
 	knockClipperPlugin: IKnockClipperPageProps['knockClipperPlugin'];
 }) => {
-	const addKnockPluginToCartButtonProps = useAddKnockPluginToCartButtonProps({
-		knockClipperPlugin,
-		text: (
-			<>
-				Buy it now&nbsp;
-				{knockClipperPlugin?.variants[0] &&
-					knockClipperPlugin.variants[0]?.compareAtPrice?.amount && (
-						<del className='line-through font-normal'>
-							{priceCurrencyFormatter(
-								knockClipperPlugin.variants[0].compareAtPrice.amount,
-								knockClipperPlugin.variants[0].compareAtPrice.currencyCode
-							)}
-						</del>
-					)}
-			</>
-		)
-	});
-
 	return (
 		<section className='bg-primary-1 section-p-v1 section-h-v1'>
 			<div className='h-full flex items-center justify-center flex-col text-center'>
@@ -59,22 +38,7 @@ const HeroSection = ({
 				<p className='mb-5 text-h5 '>
 					Adjustable hard & soft clipper module from KNOCK.
 				</p>
-				<div className='flex items-center justify-center relative'>
-					<Button
-						className='capitalize  text-h6'
-						{...addKnockPluginToCartButtonProps}
-					/>
-					<span className='p-2' />{' '}
-					{knockClipperPlugin?.variants[0] &&
-						knockClipperPlugin.variants[0]?.price?.amount && (
-							<span className='text-bg-secondary-2 font-semibold'>
-								{priceCurrencyFormatter(
-									knockClipperPlugin.variants[0].price.amount,
-									knockClipperPlugin.variants[0].price.currencyCode
-								)}
-							</span>
-						)}
-				</div>
+				<AddItemOnHeroSectionButton product={knockClipperPlugin} />
 			</div>
 		</section>
 	);

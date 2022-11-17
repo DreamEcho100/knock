@@ -1,7 +1,9 @@
 import Client from 'shopify-buy';
 
 export const getIdFromGid = (gid: string | number) =>
-	typeof gid === 'number' ? gid : gid.replace(/[^\d+]|\?.+/g, '');
+	typeof gid === 'number'
+		? gid
+		: gid.replace(/\?.+/g, '').replace(/[^\d+]/g, '');
 
 export const getShopifyClient = () => {
 	if (!process.env.DOMAINE)

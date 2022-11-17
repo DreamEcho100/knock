@@ -1,17 +1,12 @@
+import AddItemOnHeroSectionButton from '@components/shared/core/AddItemOnHeroSectionButton';
 import VideosContainer from '@components/shared/core/VideosContainer';
 import { IKnockClipperPageProps } from '@pages/knock_clipper';
-import { useAddKnockPluginToCartButtonProps } from './utils/hookes';
 
 const VideosSection = ({
 	knockClipperPlugin
 }: {
 	knockClipperPlugin: IKnockClipperPageProps['knockClipperPlugin'];
 }) => {
-	const addKnockPluginToCartButtonProps = useAddKnockPluginToCartButtonProps({
-		knockClipperPlugin,
-		text: 'Add To Cart'
-	});
-
 	return (
 		<section className='pt-[2.75rem] lg:pt-[4.75rem] bg-primary-1 text-primary-2 section-p-v1 flex flex-col'>
 			<div className='p-1' />
@@ -36,7 +31,7 @@ const VideosSection = ({
 						allowFullScreen: true
 					}
 				]}
-				buttonProps={addKnockPluginToCartButtonProps}
+				buttonElem={<AddItemOnHeroSectionButton product={knockClipperPlugin} />}
 			/>
 		</section>
 	);

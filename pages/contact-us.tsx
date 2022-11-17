@@ -67,6 +67,7 @@ const ContactUsPage: NextPage = () => {
 							minLength={3}
 						/>
 						<FormInput
+							isATextarea
 							spanTitleProps={{ children: 'Message', className: 'capitalize' }}
 							labelContainerProps={{ className: 'w-full' }}
 							placeholder='Message'
