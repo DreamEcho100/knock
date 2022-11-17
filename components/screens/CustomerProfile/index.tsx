@@ -371,7 +371,7 @@ const CustomerProfileScreen = () => {
 			</>
 		);
 
-	const orders = user.data.orders.edges;
+	const orders = user?.data?.orders?.edges;
 
 	const accordionDetails = [
 		{
