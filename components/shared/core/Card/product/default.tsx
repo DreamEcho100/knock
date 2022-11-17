@@ -1,8 +1,9 @@
+import { cva, cx, VariantProps } from 'class-variance-authority';
+import type { IProduct } from 'types';
+
 import Button from '@components/shared/core/Button';
 import Link from 'next/link';
 import { cardClasses } from 'utils/core/cva';
-import { cx, VariantProps } from 'class-variance-authority';
-import { IProduct } from 'types';
 import { useAddProductsToCheckoutAndCart } from '@utils/core/hooks';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 
@@ -12,6 +13,7 @@ interface IProductCardProps
 	// images: NonNullable<IProduct['images']> // { src: string; alt?: string };
 	link: Parameters<typeof Link>['0'];
 	extraDetailsElement?: JSX.Element;
+	imageVariants?: VariantProps<typeof handleImageVariants>;
 }
 
 interface ExtraProductCardDetails {
@@ -20,22 +22,37 @@ interface ExtraProductCardDetails {
 	productData: IProduct;
 }
 
+const handleImageVariants = cva(
+	['aspect-square overflow-hidden max-w-full', 'transition-all'],
+	{
+		variants: {
+			onHover: {
+				'darker-to-lighter': [
+					'brightness-75',
+					'group-hover:brightness-100 group-hover:duration-150'
+				],
+				'to-darker': 'group-hover:brightness-75 group-hover:duration-150',
+				'to-lighter': 'group-hover:brightness-150 group-hover:duration-150',
+				'to-dimmer':
+					'group-hover:contrast-[0.8] group-hover:opacity-[0.8] group-hover:blur-[0.5px] group-hover:duration-150'
+			}
+		}
+	}
+);
+
 const ProductBasicCard = ({
 	images,
 	link,
 	extraDetailsElement,
-	intent
+	intent,
+	imageVariants
 }: IProductCardProps) => {
 	return (
 		<div className={cardClasses({ intent })}>
 			<Link
 				{...link}
 				// style={{ aspectRatio: 1, }}
-				className={cx(
-					'aspect-square overflow-hidden max-w-full',
-					'transition-all'
-					// 'group-hover:brightness-100 group-hover:duration-150' brightness-75
-				)}
+				className={handleImageVariants(imageVariants)}
 			>
 				{images && images[0] && (
 					<CustomNextImage
@@ -100,6 +117,7 @@ export const ProductCardWithDetails = ({
 	images,
 	link,
 	intent,
+	imageVariants,
 	//
 	price,
 	productData,
@@ -111,6 +129,7 @@ export const ProductCardWithDetails = ({
 			images={images}
 			link={link}
 			intent={intent}
+			imageVariants={imageVariants}
 			extraDetailsElement={
 				<ExtraProductCardDetails
 					price={price}

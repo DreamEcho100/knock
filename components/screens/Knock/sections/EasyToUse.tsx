@@ -33,7 +33,7 @@ const EasyToUseSection = ({
 					mainImg: {
 						src: '/images/laptop final 1.png',
 						alt: '',
-						className: 'lg:px-[20%]'
+						className: 'lg:px-[10%]'
 					}
 				}}
 				wrapper={{

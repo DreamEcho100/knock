@@ -22,8 +22,10 @@ const HeroSection = () => {
 						</div>
 					</h1>
 					<p className='text-[1rem] sm:text-2xl max-w-[600px]'>
-						Designed from scratch by DECAP. Premium quality, groundbreaking as
-						always.
+						Designed from scratch by DECAP.
+					</p>
+					<p className='text-[1rem] sm:text-2xl max-w-[600px]'>
+						Premium quality, groundbreaking as always.
 					</p>
 					<p className='text-[1rem] sm:text-2xl flex flex-wrap items-center justify-center text-center'>
 						These drums &nbsp;

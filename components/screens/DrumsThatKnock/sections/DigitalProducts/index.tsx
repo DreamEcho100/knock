@@ -110,6 +110,7 @@ const DigitalProductsSection = ({
 						toAddToCart
 						productData={item}
 						intent='none'
+						imageVariants={{ onHover: 'to-dimmer' }}
 					/>
 				))}
 			</div>

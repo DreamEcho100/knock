@@ -137,7 +137,8 @@ main > section > *,
 	.section-pb-v1 {
 		padding-bottom: calc(2.5rem * var(--p-multi, var(--pb-multi, 1)));
 	}
-	.section-p-v1 {
+	.section-p-v1,
+	.section-pt-v1 {
 		padding-top: calc(2.5rem * var(--p-multi, var(--pt-multi, 1)));
 	}
 	/* .section-h-v1.section-p-v1,
@@ -147,7 +148,8 @@ main > section > *,
 	.section-h-v1.section-p-v1 {
 		padding-top: calc(0 * var(--p-multi, var(--pt-multi, 1)));
 	} */
-	.section-h-v1.section-p-v1 {
+	.section-h-v1.section-p-,
+	.section-h-v1.section-pt-v1 {
 		padding-top: calc(2.5rem * var(--p-multi, var(--pt-multi, 1)));
 	}
 	.section-h-v1.section-p-v1,
@@ -155,7 +157,8 @@ main > section > *,
 		padding-bottom: calc(2.5rem * var(--p-multi, var(--pb-multi, 1)));
 	}
 	@media (min-width: 768px) {
-		.section-p-v1 {
+		.section-p-v1,
+		.section-pt-v1 {
 			padding-top: calc(4.5rem * var(--p-multi, var(--pt-multi, 1)));
 		}
 		.section-p-v1,
@@ -163,7 +166,7 @@ main > section > *,
 			padding-bottom: calc(4.5rem * var(--p-multi, var(--pb-multi, 1)));
 		}
 	}
-	@media (min-height: 600px) {
+	@media (min-height: 700px) {
 		.section-h-v1 {
 			height: calc(100vh * var(--h-multi, 1));
 			max-height: 48rem;

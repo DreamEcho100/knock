@@ -31,7 +31,7 @@ const KnockProductShowcaseSection = ({
 						className: 'lg:max-w-[410px]'
 					},
 					button: {
-						children: 'Explore them',
+						children: 'Learn More',
 						onClick: () => {
 							return;
 						},

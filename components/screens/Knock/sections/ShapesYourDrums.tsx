@@ -40,7 +40,7 @@ const features = [
 	{
 		title: 'CLIP',
 		description:
-			'A user adjustable hard / soft clipper. Push your drums hard without clipping to give your drums a warm, aggressive tone reminiscent of pushing vintage analogue gear into "the red". Select a harder clip curve for a more aggressive tone, or a softer clip curve for a more rounded tone.',
+			'A user adjustable hard & soft clipper. Push your drums hard without clipping to give your drums a warm, aggressive tone reminiscent of pushing vintage analogue gear into "the red". Select a harder clip curve for a more aggressive tone, or a softer clip curve for a more rounded tone.',
 		image: {
 			src: '/images/knock/CLERP_266x266 1.png',
 			alt: ''

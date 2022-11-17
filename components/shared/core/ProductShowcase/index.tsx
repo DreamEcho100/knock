@@ -53,7 +53,7 @@ const ProductShowcase = ({
 				<p className='md:max-w-[450px]' {...p} />
 
 				<Button
-					className='capitalize mt-1'
+					className='capitalize mt-3'
 					onClick={() =>
 						product &&
 						addProductsToCheckoutAndCart.mutate({
@@ -77,7 +77,7 @@ const ProductShowcase = ({
 							src='/images/Rectangle 47.png'
 							width={800}
 							height={500}
-							className={`${backgroundImgClassName} object-contain mx-auto w-full h-full scale-[2] translate-y-[12.5%] pointer-events-none`}
+							className={`${backgroundImgClassName} object-contain mx-auto w-full h-full scale-[2.25] translate-y-[12.5%] pointer-events-none`}
 							{...backgroundImgProps}
 						/>
 					</div>

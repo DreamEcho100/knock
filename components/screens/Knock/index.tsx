@@ -1,5 +1,6 @@
 import type { IKnockPluginPageProps } from '@pages/knock';
 import Head from 'next/head';
+import { SystemRequirementsSection } from '../KnockClipper/sections';
 import {
 	DescriptionSection,
 	EasyToUseSection,
@@ -152,6 +153,10 @@ const KnockScreen = ({ knockPlugin }: IKnockPluginPageProps) => {
 			<EasyToUseSection knockPlugin={knockPlugin} />
 			<DrumsThatKnockSection knockPlugin={knockPlugin} />
 			<ReviewsSection reviews={reviews} />
+
+			<SystemRequirementsSection />
+			<section aria-hidden className='section-pb-v1 bg-primary-1'></section>
+
 			<VideosSection knockPlugin={knockPlugin} />
 		</>
 	);

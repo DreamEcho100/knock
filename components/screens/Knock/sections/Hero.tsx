@@ -10,9 +10,13 @@ const HeroSection = ({
 }) => {
 	return (
 		<KnockSection
-			// buttonProps={addKnockPluginToCartButtonProps}
 			buttonElem={<AddItemOnHeroSectionButton product={knockPlugin} />}
-			title={<KnockTrademark />}
+			title={
+				<>
+					MAKE YOUR DRUMS&nbsp;
+					<KnockTrademark />
+				</>
+			}
 			description='Make your drums KNOCK and punch through the mix.'
 			pTheme={{ width: 'small' }}
 		/>

@@ -18,14 +18,14 @@ export const pClasses = cva('text-white mt-2 mb-5 leading-6', {
 			small: 'max-w-[350px]'
 		},
 		text: {
-			none: 'text-[1.3rem]',
+			dynamic: 'sm:text-[1.3rem]',
 			small: 'text-h6',
 			medium: 'text-h5'
 		}
 	},
 	defaultVariants: {
 		width: 'large',
-		text: 'none'
+		text: 'dynamic'
 	}
 });
 export const h2Classes = cva(
@@ -55,6 +55,18 @@ export const sectionClasses = cva('bg-primary-1 pt-16 pb-12 sm:section-h-v1', {
 	}
 });
 
+export const sectionInnerWrapperClasses = cva(
+	'w-full h-full flex items-center justify-center flex-col sm:gap-2 text-center',
+	{
+		variants: {
+			'sm:gap': {
+				2: 'sm:gap-2',
+				4: 'sm:gap-4'
+			}
+		}
+	}
+);
+
 const imagesContainerClasses = cva(
 	'relative flex items-center justify-center max-w-4xl',
 	{
@@ -70,6 +82,17 @@ const imagesContainerClasses = cva(
 	}
 );
 
+const textContainerClasses = cva('flex flex-col items-center justify-center', {
+	variants: {
+		'sm:gap': {
+			2: 'sm:gap-2',
+			4: 'sm:gap-4',
+			6: 'sm:gap-6'
+		}
+	},
+	defaultVariants: {}
+});
+
 const KnockSection = ({
 	buttonProps = {},
 	buttonElem,
@@ -79,7 +102,9 @@ const KnockSection = ({
 	sectionTheme,
 	imageSrc = '/images/534aaf62a986c03ee09ee62a138d3845.gif',
 	h2theme,
-	imagesContainerTheme
+	imagesContainerTheme,
+	textContainerTheme,
+	sectionInnerWrapperTheme
 }: {
 	title?: ReactNode;
 	description: string;
@@ -88,21 +113,17 @@ const KnockSection = ({
 	pTheme?: VariantProps<typeof pClasses>;
 	h2theme?: VariantProps<typeof h2Classes>;
 	imagesContainerTheme?: VariantProps<typeof imagesContainerClasses>;
+	textContainerTheme?: VariantProps<typeof textContainerClasses>;
 	sectionTheme?: VariantProps<typeof sectionClasses>;
+	sectionInnerWrapperTheme?: VariantProps<typeof sectionInnerWrapperClasses>;
 	imageSrc?: string;
 }) => {
 	return (
 		<section
 			className={sectionClasses(sectionTheme)}
-			style={
-				{
-					'--pt-multi': 3.5,
-					'--pb-multi': 2.5
-					// '--h-multi': 1.8
-				} as CSSProperties
-			}
+			style={{ '--pt-multi': 3, '--pb-multi': 2 } as CSSProperties}
 		>
-			<div className='w-full h-full flex items-center justify-center flex-col sm:gap-2 text-center'>
+			<div className={sectionInnerWrapperClasses(sectionInnerWrapperTheme)}>
 				<div className={imagesContainerClasses(imagesContainerTheme)}>
 					<CustomNextImage
 						src='/images/Group 179.png'
@@ -126,18 +147,20 @@ const KnockSection = ({
 						className='object-cover w-3/4 relative'
 					/>
 				</div>
-				{
-					<h2 className={h2Classes(h2theme)}>
-						{title || (
-							<>
-								DRUMS THAT&nbsp;
-								<KnockTrademark />
-							</>
-						)}
-					</h2>
-				}
-				<p className={pClasses(pTheme)}>{description}</p>
-				{buttonElem || <Button className='capitalize' {...buttonProps} />}
+				<div className={textContainerClasses(textContainerTheme)}>
+					{
+						<h2 className={h2Classes(h2theme)}>
+							{title || (
+								<>
+									DRUMS THAT&nbsp;
+									<KnockTrademark />
+								</>
+							)}
+						</h2>
+					}
+					<p className={pClasses(pTheme)}>{description}</p>
+					{buttonElem || <Button className='capitalize' {...buttonProps} />}
+				</div>
 			</div>
 		</section>
 	);

@@ -11,12 +11,7 @@ const HeroSection = () => {
 			// buttonProps={addKnockPluginToCartButtonProps}
 			// imageSrc='/images/29f8b3dde3b1d7e7a476bf19c95536f1.png'
 			description='Make your drums KNOCK and punch through the mix.'
-			title={
-				<>
-					<KnockTrademark />
-					PLUGIN
-				</>
-			}
+			title={<KnockTrademark />}
 			pTheme={{ width: 'small' }}
 			// h2theme={{ 'text-size': 'md' }}
 			buttonProps={{

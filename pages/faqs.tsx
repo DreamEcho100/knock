@@ -25,9 +25,9 @@ const faqs: (
 		answer: 'Yes! KNOCK comes bundled with factory presets crafted by DECAP.'
 	},
 	{
-		question: 'IS KNOCK COMPATIBLE WITH MY DAW?',
+		question: 'ARE YOUR PLUGINS COMPATIBLE WITH MY DAW?',
 		answer:
-			'KNOCK is compatible with every DAW that supports VST3, AU or AAX plugin formats. Please note that VST2 is not supported. This includes the latest versions of: Ableton Live, FL Studio, Pro Tools, Logic, Bitwig Studio, Reaper, Studio One, and others.'
+			'Our plugins are compatible with every DAW that supports VST3, AU or AAX plugin formats. Please note that VST2 is not supported. This includes the latest versions of: Ableton Live, FL Studio, Pro Tools, Logic, Bitwig Studio, Reaper, Studio One, and others.'
 	},
 	{
 		question: 'WHAT ARE THE SYSTEM REQUIREMENTS / COMPATIBILITY?',
@@ -49,15 +49,16 @@ const faqs: (
 	},
 	{
 		question: 'DO YOU OFFER A DEMO VERSION?',
-		answer: 'At the moment, there is no demo version for KNOCK.'
+		answer: 'At the moment, there are no demo versions.'
 	},
 	{
 		question: 'DOES KNOCK SUPPORT MAC OS BIG SUR & APPLE M1 CHIPS?',
-		answer: 'KNOCK is fully compatible with both Mac OS Big Sur and Apple M1.'
+		answer:
+			'Our plugins are fully compatible with both Mac OS Ventura and Apple M1 & M2 processors.'
 	},
 	{
 		question: 'DOES KNOCK SUPPORT PRO TOOLS / AAX?',
-		answer: 'Yes! KNOCK is compatible with Pro Tools / AAX.'
+		answer: 'Yes! Our plugins are compatible with Pro Tools / AAX.'
 	}
 ];
 
@@ -96,7 +97,7 @@ const FAQSPages: NextPage = () => {
 										{item.__answer_type === 'opening_and_lists' ? (
 											<>
 												<p>{item.answer.opening}</p>
-												<div className='flex flex-wrap gap-4'>
+												<div className='flex flex-wrap gap-4 mt-2'>
 													{item.answer.list.map((ListElem, ListElemIndex) => (
 														<div key={ListElemIndex}>
 															<p>
