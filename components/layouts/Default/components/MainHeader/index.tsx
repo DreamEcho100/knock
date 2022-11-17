@@ -24,7 +24,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { HiShoppingBag } from 'react-icons/hi';
-import { commonClasses } from '..';
+import { commonClasses } from '../..';
 import UserAuthButton from './components/UserAuthButton';
 
 const linkClasses = ({

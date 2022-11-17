@@ -42,13 +42,19 @@ function MyApp({ Component, pageProps }: AppProps) {
 					<DefaultLayout>
 						<DynamicTopProgressBar />
 						<Head>
-							<title>
-								PLUGINS THAT KNOCK | KNOCK Plugin - Make Your Drums Knock
-							</title>
+							<meta charSet='UTF-8' />
+							<meta httpEquiv='X-UA-Compatible' content='IE=edge' />
+							<meta
+								name='viewport'
+								content='width=device-width, initial-scale=1.0'
+							/>
 							<meta
 								name='description'
 								content='The KNOCK Plugin created by DECAP will help you make Drums That Knock hard and punch through your mix. Easy to use for music producers at all levels.'
 							/>
+							<title>
+								PLUGINS THAT KNOCK | KNOCK Plugin - Make Your Drums Knock
+							</title>
 						</Head>
 						<Component {...pageProps} />
 					</DefaultLayout>
