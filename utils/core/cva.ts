@@ -1,7 +1,7 @@
 import { cva, cx } from 'class-variance-authority';
 
 export const cardClasses = cva(
-	`bg-primary-2 max-w-[20rem] shadow-lg shadow-black overflow-hidden flex flex-col
+	`bg-primary-2 max-w-[15rem] sm:max-w-[18rem] md:max-w-[20rem] shadow-lg shadow-black overflow-hidden flex flex-col
 		transition-all duration-500 group
 		focus-within:rounded-none`,
 	{
