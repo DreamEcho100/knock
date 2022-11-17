@@ -86,8 +86,10 @@ const MainFooter = () => {
 		},
 		onSuccess: () =>
 			setTimeout(() => toast('Success! you have been subscribed \u{1F973}'), 0),
-		onError: (result) =>
-			setTimeout(() => toast(result.message, { type: 'error' }), 0)
+		onError: (result) => {
+			console.log('result', result);
+			setTimeout(() => toast(result.message, { type: 'error' }), 0);
+		}
 	});
 
 	const { user } = useGetUserDataFromStore();
@@ -201,6 +203,7 @@ const MainFooter = () => {
 									<input
 										type='email'
 										name='email'
+										required
 										placeholder='Email address'
 										id={`email-${formId}`}
 										className='w-full bg-transparent px-6 py-2 outline-none
@@ -211,6 +214,7 @@ const MainFooter = () => {
 												email: event.target.value
 											}));
 										}}
+										disabled={subscribeToNewsLetters.isLoading}
 									/>
 									<Button type='submit' className='uppercase'>
 										subscribe

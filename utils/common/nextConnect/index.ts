@@ -9,17 +9,31 @@ type TNext = NextApiHandler; // & ServerResponse;
 const onError = (err: Error, req: TReq, res: TRes, next: TNext) => {
 	console.log('err', err);
 	const statusCode = res.statusCode < 400 ? 500 : res.statusCode;
-	const statusMessage = res.statusMessage
+	let statusMessage: string | any[] = res.statusMessage
 		? res.statusMessage
 		: err instanceof Error
 		? err.message
 		: err;
 
+	if (Array.isArray(statusMessage))
+		statusMessage = statusMessage.map((item) => item.message).join(', ');
+	if (
+		statusMessage.trim().startsWith('[') &&
+		statusMessage.trim().endsWith(']')
+	)
+		statusMessage = JSON.parse(statusMessage)
+			.map((item: Record<string, any>) => item.message)
+			.join(', ');
+
 	if (process.env.NODE_ENV === 'development') {
+		console.log('\n');
+		console.log('----------------------------------------');
 		console.error(`Status code: ${statusCode}`);
 		console.error(`Name: ${err.name}`);
 		console.error(`Message: ${statusMessage}`);
 		console.error(`Stack: ${err.stack}`);
+		console.log('----------------------------------------');
+		console.log('\n');
 	}
 
 	return res.status(statusCode).json({

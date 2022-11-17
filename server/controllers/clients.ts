@@ -812,12 +812,8 @@ const subscribeToNewsLetters = async (
 			response
 		});
 	} catch (error) {
-
-		return res.status(error.status).json({
-			success: false,
-			error: 'You are already subscribed on the newsletters'
-		});
-		
+		res.statusCode = error.status;
+		throw new Error('You are already subscribed on the newsletters');
 	}
 };
 
