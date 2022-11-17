@@ -22,7 +22,13 @@ const onError = (err: Error, req: TReq, res: TRes, next: TNext) => {
 		statusMessage.trim().endsWith(']')
 	)
 		statusMessage = JSON.parse(statusMessage)
-			.map((item: Record<string, any>) => item.message)
+			.map((item: Record<string, any>) =>
+				typeof item === 'string'
+					? item
+					: typeof item === 'object' && 'message' in item
+					? item.message
+					: JSON.stringify(item)
+			)
 			.join(', ');
 
 	if (process.env.NODE_ENV === 'development') {

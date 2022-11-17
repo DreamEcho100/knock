@@ -22,9 +22,9 @@ const VideosSection = ({
 						allowFullScreen: true
 					},
 					{
-						src:
-							'https://player.vimeo.com/video/641066429?h=9d21e759ca&amp;title=0&amp;byline=0&amp;portrait=0&amp;transparent=0&amp;player_id=0&amp;app_id=58479&amp;loop=true&amp;muted=true&amp;controls=0',
-						title: 'KNOCK Plugin | Before and After - Vimeo video player',
+						src: 'https://www.youtube.com/embed/amdBTeGw7ks',
+						title:
+							'KNOCK Plugin by DECAP | Before & After - YouTube video player',
 						frameBorder: '0',
 						allow:
 							'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
