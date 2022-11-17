@@ -17,6 +17,7 @@ const DrumsThatKnockSection = ({
 			sectionTheme={{ p: 'section-p-x-v1' }}
 			pTheme={{ width: 'medium-2' }}
 			h2theme={{ 'text-size': 'md' }}
+			imagesContainerTheme={{ pb: 'none' }}
 		/>
 	);
 };

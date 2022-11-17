@@ -1,6 +1,6 @@
 import type { IButtonProps } from '@components/shared/core/Button';
 import type { VariantProps } from 'class-variance-authority';
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 
 import Button from '@components/shared/core/Button';
 
@@ -8,7 +8,7 @@ import KnockTrademark from '@components/shared/core/KnockTrademark';
 import { cva } from 'class-variance-authority';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 
-export const pClasses = cva('mt-2 mb-6 leading-6', {
+export const pClasses = cva('text-white mt-2 mb-5 leading-6', {
 	variants: {
 		width: {
 			larger: 'max-w-[950px]',
@@ -18,13 +18,14 @@ export const pClasses = cva('mt-2 mb-6 leading-6', {
 			small: 'max-w-[350px]'
 		},
 		text: {
+			none: 'text-[1.3rem]',
 			small: 'text-h6',
 			medium: 'text-h5'
 		}
 	},
 	defaultVariants: {
 		width: 'large',
-		text: 'small'
+		text: 'none'
 	}
 });
 export const h2Classes = cva(
@@ -42,7 +43,7 @@ export const h2Classes = cva(
 	}
 );
 
-export const sectionClasses = cva('bg-primary-1 section-h-v1', {
+export const sectionClasses = cva('bg-primary-1 pt-16 pb-12 sm:section-h-v1', {
 	variants: {
 		p: {
 			'section-p-v1': 'section-p-v1',
@@ -54,6 +55,21 @@ export const sectionClasses = cva('bg-primary-1 section-h-v1', {
 	}
 });
 
+const imagesContainerClasses = cva(
+	'relative flex items-center justify-center max-w-4xl',
+	{
+		variants: {
+			pb: {
+				'mb-12': 'mb-12',
+				none: ''
+			}
+		},
+		defaultVariants: {
+			pb: 'mb-12'
+		}
+	}
+);
+
 const KnockSection = ({
 	buttonProps = {},
 	buttonElem,
@@ -62,38 +78,52 @@ const KnockSection = ({
 	pTheme = {},
 	sectionTheme,
 	imageSrc = '/images/534aaf62a986c03ee09ee62a138d3845.gif',
-	h2theme
+	h2theme,
+	imagesContainerTheme
 }: {
 	title?: ReactNode;
 	description: string;
-	buttonProps?: IButtonProps;
+	buttonProps?: Parameters<typeof Button>[0];
 	buttonElem?: JSX.Element;
 	pTheme?: VariantProps<typeof pClasses>;
 	h2theme?: VariantProps<typeof h2Classes>;
+	imagesContainerTheme?: VariantProps<typeof imagesContainerClasses>;
 	sectionTheme?: VariantProps<typeof sectionClasses>;
 	imageSrc?: string;
 }) => {
 	return (
-		<section className={sectionClasses(sectionTheme)}>
+		<section
+			className={sectionClasses(sectionTheme)}
+			style={
+				{
+					'--pt-multi': 3.5,
+					'--pb-multi': 2.5
+					// '--h-multi': 1.8
+				} as CSSProperties
+			}
+		>
 			<div className='w-full h-full flex items-center justify-center flex-col sm:gap-2 text-center'>
-				<div className='relative flex items-center justify-center max-w-3xl mb-1'>
+				<div className={imagesContainerClasses(imagesContainerTheme)}>
 					<CustomNextImage
 						src='/images/Group 179.png'
 						width={800}
 						height={800}
 						priority
 						className='pointer-events-none absolute top-0 right-0 left-0 bottom-0 w-full h-full object-contain scale-150'
-						style={{ transform: 'translate(8%, -2%) scale(2.5)' }}
+						style={{
+							transform:
+								'translate(-6%, 2%) scale(2.4) rotateZ(-10deg) rotateY(180deg)'
+						}}
 					/>
 
 					<CustomNextImage
 						src={imageSrc}
-						alt='knock plugin animation'
+						alt='knock plugin'
 						width={800}
 						height={800}
 						priority
 						unoptimized
-						className='object-cover mb-4 w-4/5 relative'
+						className='object-cover w-3/4 relative'
 					/>
 				</div>
 				{

@@ -33,7 +33,7 @@ const LinksListContainer = ({
 }) => {
 	return (
 		<nav className='flex flex-col gap-2 p-2'>
-			<h3 className='capitalize font-semibold text-3xl text-primary-5'>
+			<h3 className='capitalize font-semibold text-2xl text-primary-5'>
 				{headerText}
 			</h3>
 			<ul className={linksListClassName}>
@@ -140,53 +140,6 @@ const MainFooter = () => {
               ]}
             /> */}
 						<div className='flex flex-col p-2 gap-3 md:p-0 max-w-[700px] lg:w-1/2'>
-							<header className='flex flex-col gap-3'>
-								<p className='text-white font-semibold'>
-									Follow us on social media
-								</p>
-								<ul className='flex gap-4 text-xl'>
-									<li>
-										<a
-											href={socialLinks.instagram}
-											rel='noopener noreferrer'
-											title='instagram'
-											className='text-gray-400'
-										>
-											<FaInstagram />
-										</a>
-									</li>
-									<li>
-										<a
-											href={socialLinks.facebook}
-											rel='noopener noreferrer'
-											title='facebook'
-											className='text-gray-400'
-										>
-											<FaFacebook />
-										</a>
-									</li>
-									<li>
-										<a
-											href={socialLinks.twitter}
-											rel='noopener noreferrer'
-											title='twitter'
-											className='text-gray-400'
-										>
-											<FaTwitter />
-										</a>
-									</li>
-									<li>
-										<a
-											href={socialLinks.youtube}
-											rel='noopener noreferrer'
-											title='youtube'
-											className='text-gray-400'
-										>
-											<FaYoutube />
-										</a>
-									</li>
-								</ul>
-							</header>
 							<div className='flex flex-col gap-2'>
 								<h2 className='text-h3 font-semibold text-white uppercase'>
 									subscribe
@@ -241,14 +194,56 @@ const MainFooter = () => {
 							copyright &copy; plugins that knock
 						</small>
 					</div>
-					<div className='w-36 sm:w-64'>
+					{/* <div className='w-36 sm:w-64'>
 						<CustomNextImage
 							src='/images/payment_cards.png'
 							alt='payment cards'
 							width={200}
 							height={50}
 						/>
-					</div>
+					</div> */}
+					<ul className='flex gap-4 text-xl'>
+						<li>
+							<a
+								href={socialLinks.instagram}
+								rel='noopener noreferrer'
+								title='instagram'
+								className='text-gray-400'
+							>
+								<FaInstagram />
+							</a>
+						</li>
+						<li>
+							<a
+								href={socialLinks.facebook}
+								rel='noopener noreferrer'
+								title='facebook'
+								className='text-gray-400'
+							>
+								<FaFacebook />
+							</a>
+						</li>
+						<li>
+							<a
+								href={socialLinks.twitter}
+								rel='noopener noreferrer'
+								title='twitter'
+								className='text-gray-400'
+							>
+								<FaTwitter />
+							</a>
+						</li>
+						<li>
+							<a
+								href={socialLinks.youtube}
+								rel='noopener noreferrer'
+								title='youtube'
+								className='text-gray-400'
+							>
+								<FaYoutube />
+							</a>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</footer>

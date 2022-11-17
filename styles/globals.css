@@ -130,43 +130,43 @@ main > section > *,
 	}
 	.section-p-v1,
 	.section-p-x-v1 {
-		padding-left: 2rem;
-		padding-right: 2rem;
+		padding-left: calc(2rem * var(--p-multi, var(--pl-multi, 1)));
+		padding-right: calc(2rem * var(--p-multi, var(--pr-multi, 1)));
 	}
 	.section-p-v1,
 	.section-pb-v1 {
-		padding-bottom: 2.5rem;
+		padding-bottom: calc(2.5rem * var(--p-multi, var(--pb-multi, 1)));
 	}
 	.section-p-v1 {
-		padding-top: 2.5rem;
+		padding-top: calc(2.5rem * var(--p-multi, var(--pt-multi, 1)));
 	}
 	/* .section-h-v1.section-p-v1,
 	.section-h-v1.section-pb-v1 {
-		padding-bottom: 0;
+		padding-bottom: calc(0 * var(--p-multi, var(--pb-multi, 1)));
 	}
 	.section-h-v1.section-p-v1 {
-		padding-top: 0;
+		padding-top: calc(0 * var(--p-multi, var(--pt-multi, 1)));
 	} */
 	.section-h-v1.section-p-v1 {
-		padding-top: 2.5rem;
+		padding-top: calc(2.5rem * var(--p-multi, var(--pt-multi, 1)));
 	}
 	.section-h-v1.section-p-v1,
 	.section-h-v1.section-pb-v1 {
-		padding-bottom: 2.5rem;
+		padding-bottom: calc(2.5rem * var(--p-multi, var(--pb-multi, 1)));
 	}
 	@media (min-width: 768px) {
 		.section-p-v1 {
-			padding-top: 4.5rem;
+			padding-top: calc(4.5rem * var(--p-multi, var(--pt-multi, 1)));
 		}
 		.section-p-v1,
 		.section-pb-v1 {
-			padding-bottom: 4.5rem;
+			padding-bottom: calc(4.5rem * var(--p-multi, var(--pb-multi, 1)));
 		}
 	}
 	@media (min-height: 600px) {
 		.section-h-v1 {
-			height: 100vh;
-			max-height: 45rem;
+			height: calc(100vh * var(--h-multi, 1));
+			max-height: 48rem;
 			min-height: fit-content;
 		}
 	}

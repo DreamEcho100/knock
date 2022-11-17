@@ -91,7 +91,7 @@ const DigitalProductsSection = ({
 					zIndex: 2,
 					display: 'grid',
 					gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))',
-					gap: '3rem 1rem'
+					gap: '4rem 3rem'
 				}}
 			>
 				{rearrangedProducts.map((item) => (
@@ -109,7 +109,7 @@ const DigitalProductsSection = ({
 						}
 						toAddToCart
 						productData={item}
-						intent='bottomCorners'
+						intent='none'
 					/>
 				))}
 			</div>

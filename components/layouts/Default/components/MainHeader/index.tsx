@@ -46,8 +46,8 @@ const headerLinks = [
 	{ href: '/knock', text: 'knock' },
 	{ href: '/knock_clipper', text: 'KNOCK Clipper', keepCase: true },
 	{ href: '/drums-that-knock', text: 'drums that knock' },
-	{ href: '/faqs', text: 'FAQs', keepCase: true },
-	{ href: '/contact-us', text: 'contact' }
+	{ href: '/faqs', text: 'FAQs', keepCase: true }
+	// { href: '/contact-us', text: 'contact' }
 ];
 
 const MainHeader = () => {
@@ -400,7 +400,7 @@ const CartContainer = () => {
 											<p title='price per product'>${product.price}</p>
 										</header>
 										<div className='flex flex-col gap-1 sm:flex-row sm:gap-2 sm:justify-between'>
-											<div className='w-fit border-[0.125rem] border-bg-secondary-1 rounded-2xl p-1 flex gap-3'>
+											{/* <div className='w-fit border-[0.125rem] border-bg-secondary-1 rounded-2xl p-1 flex gap-3'>
 												<button
 													className='px-3'
 													title='decrease the amount by 1'
@@ -441,7 +441,7 @@ const CartContainer = () => {
 												>
 													+
 												</button>
-											</div>
+											</div> */}
 
 											<button
 												className={cx(

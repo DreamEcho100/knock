@@ -32,9 +32,9 @@ const ProductBasicCard = ({
 				{...link}
 				// style={{ aspectRatio: 1, }}
 				className={cx(
-					'aspect-square overflow-hidden brightness-75 max-w-full',
-					'transition-all',
-					'group-hover:brightness-100 group-hover:duration-150'
+					'aspect-square overflow-hidden max-w-full',
+					'transition-all'
+					// 'group-hover:brightness-100 group-hover:duration-150' brightness-75
 				)}
 			>
 				{images && images[0] && (
@@ -49,7 +49,7 @@ const ProductBasicCard = ({
 				)}
 			</Link>
 			<div className='flex-grow text-center p-4 bg-primary-3 text-primary-2 flex flex-col items-center gap-2 justify-center'>
-				<p className='font-semibold'>
+				<p className='text-[110%]'>
 					<Link {...link} />
 				</p>
 				{extraDetailsElement}
@@ -71,17 +71,17 @@ const ExtraProductCardDetails = ({
 		<>
 			{productData.variants[0] &&
 			productData.variants[0].compareAtPrice?.amount ? (
-				<p>
+				<p className='font-semibold'>
 					<del>${productData.variants[0].compareAtPrice.amount}</del>
 					&nbsp;&nbsp;
 					<span className='text-bg-secondary-2'>${price}</span>
 				</p>
 			) : (
-				<p>${price}</p>
+				<p className='font-semibold'>${price}</p>
 			)}
 			{toAddToCart && (
 				<Button
-					className='capitalize'
+					className='capitalize mb-2'
 					classesIntent={{ p: 'extra-wide' }}
 					onClick={() =>
 						addProductsToCheckoutAndCart.mutate({
