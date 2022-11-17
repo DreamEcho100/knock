@@ -321,7 +321,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
 		.object({
 			acceptsMarketing: z.boolean(),
 			email: z.string().email(),
-			phone: z.string(),
+			phone: z.string().optional(),
 			password: z.string().min(8),
 			firstName: z.string().min(2),
 			lastName: z.string().min(2)

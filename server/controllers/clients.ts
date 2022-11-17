@@ -796,65 +796,29 @@ const subscribeToNewsLetters = async (
 	req: NextApiRequest & { params: Record<string, any> },
 	res: NextApiResponse
 ) => {
-	const input = z.object({ email: z.string().email() }).parse(req.body);
+	const email = z.string().email().parse(req.body.email);
 
-	const { data } = await axios.get(
-		`https://${process.env.DOMAINE}/admin/api/2022-10/customers/search.json?fields=id&query=email:${input.email}`,
-		{
-			headers: {
-				'X-Shopify-Access-Token': process.env.API_ACCESS_TOKEN
-			}
-		}
-	);
+	let apiInstance = new SibApiV3Sdk.ContactsApi();
 
-	if (!data.customers.length) {
-		throw new Error(
-			'Customer not found you must be a member to get newsletter'
-		);
+	try {
+		let createContact = new SibApiV3Sdk.CreateContact();
+
+		createContact.email = email;
+		const response = await apiInstance.createContact(createContact);
+
+		return res.status(200).json({
+			success: true,
+			message: 'You have been subscribed successfully!',
+			response
+		});
+	} catch (error) {
+
+		return res.status(error.status).json({
+			success: false,
+			error: 'You are already subscribed on the newsletters'
+		});
+		
 	}
-
-	const customerGql = gql`
-		mutation customerUpdate($input: CustomerInput!) {
-			customerUpdate(input: $input) {
-				customer {
-					id
-				}
-				userErrors {
-					field
-					message
-				}
-			}
-		}
-	`;
-
-	const response = await axios.post(
-		`https://${process.env.ADMIN_DOMAINE}/admin/api/2022-10/graphql.json`,
-		{
-			query: print(customerGql),
-			variables: {
-				input: {
-					acceptsMarketing: true,
-					id: `gid://shopify/Customer/${data.customers[0].id}`
-				}
-			}
-		},
-		{
-			headers: {
-				'Content-Type': 'application/json',
-				'X-Shopify-Access-Token': process.env.API_ACCESS_TOKEN
-			}
-		}
-	);
-
-	if (response.data.data.customerUpdate.userErrors.length) {
-		res.statusCode = 404;
-		throw new Error(response.data.data.customerUpdate.userErrors[0].message);
-	}
-
-	return res.status(200).json({
-		success: true,
-		message: 'You have been subscribed successfully!'
-	});
 };
 
 const supportForm = async (
