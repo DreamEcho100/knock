@@ -815,7 +815,7 @@ const subscribeToNewsLetters = async (
 
 		return res.status(error.status).json({
 			success: false,
-			error: 'You are already subscribed on the newsletters'
+			message: 'You are already subscribed on the newsletters'
 		});
 		
 	}
