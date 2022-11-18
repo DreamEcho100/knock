@@ -71,7 +71,7 @@ const Reviews = ({
 					delay: 15000
 				}}
 				loop
-				className='swiper-wrapper-items-center'
+				className='swiper-wrapper-items-center select-none'
 			>
 				{reviews.map((item, index) => (
 					<SwiperSlide
@@ -97,11 +97,12 @@ const Reviews = ({
 												alt={item.image.alt}
 												width={250}
 												height={250}
+												priority
 												className='aspect-square w-full h-full scale-90'
 											/>
 										)}
 									</div>
-									<q>{item.review}</q>
+									<q className='select-auto'>{item.review}</q>
 									<div className='flex justify-center gap-2'>
 										<CustomNextImage
 											src={item.image.src}
@@ -115,7 +116,7 @@ const Reviews = ({
 											<span className='border-b-[0.0125rem] border-text-primary-4 w-12 mb-2 mt-3 translate-y-[1ch]' />
 											<div className='flex items-end gap-4'>
 												<cite
-													className='flex items-end'
+													className='flex items-end select-auto'
 													style={{ fontStyle: 'normal' }}
 												>
 													{item.reviewedBy}

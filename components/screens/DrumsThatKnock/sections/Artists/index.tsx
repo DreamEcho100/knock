@@ -40,6 +40,7 @@ const ArtistsSection = ({ reviews }: Parameters<typeof Reviews>['0']) => {
 								delay: 5000
 							}}
 							loop
+							className='select-none'
 						>
 							{artists.map((item) => (
 								<SwiperSlide
@@ -53,7 +54,7 @@ const ArtistsSection = ({ reviews }: Parameters<typeof Reviews>['0']) => {
 										height={100}
 										className='rounded-full'
 									/>
-									<p>{item.name}</p>
+									<p className='select-auto'>{item.name}</p>
 								</SwiperSlide>
 							))}
 						</Swiper>

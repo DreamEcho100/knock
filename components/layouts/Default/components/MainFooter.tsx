@@ -102,7 +102,7 @@ const MainFooter = () => {
 						lg:px-24'
 			>
 				<div className='flex gap-2 flex-wrap w-full'>
-					<div className='w-full flex lg:flex-grow flex-wrap justify-between gap-4'>
+					<div className='w-full flex lg:flex-grow flex-wrap justify-between gap-2 sm:gap-4'>
 						<LinksListContainer
 							headerText='useful links'
 							links={[
@@ -139,15 +139,15 @@ const MainFooter = () => {
                 { href: '/', text: 'All sample packs' },
               ]}
             /> */}
-						<div className='flex flex-col p-2 gap-3 md:p-0 max-w-[700px] lg:w-1/2'>
-							<div className='flex flex-col gap-2'>
+						<div className='flex flex-col p-2 gap-4 md:p-0 max-w-[700px] lg:w-1/2'>
+							<div className='flex flex-col gap-4'>
 								<h2 className='text-h3 font-semibold text-white uppercase'>
 									subscribe
 								</h2>
 								<p>Promotion, new products and sales. Directly to your inbox</p>
 							</div>
 							<form
-								className='flex gap-8 my-4'
+								className='flex gap-4'
 								onSubmit={subscribeToNewsLetters.mutate}
 							>
 								<div className='flex bg-primary-3 text-primary-1 w-full rounded-3xl overflow-hidden'>
@@ -184,6 +184,48 @@ const MainFooter = () => {
 									/>
 								</div>
 							</form>
+							<ul className='mt-2 flex gap-4 text-xl'>
+								<li>
+									<a
+										href={socialLinks.instagram}
+										rel='noopener noreferrer'
+										title='instagram'
+										className='text-gray-400'
+									>
+										<FaInstagram />
+									</a>
+								</li>
+								<li>
+									<a
+										href={socialLinks.facebook}
+										rel='noopener noreferrer'
+										title='facebook'
+										className='text-gray-400'
+									>
+										<FaFacebook />
+									</a>
+								</li>
+								<li>
+									<a
+										href={socialLinks.twitter}
+										rel='noopener noreferrer'
+										title='twitter'
+										className='text-gray-400'
+									>
+										<FaTwitter />
+									</a>
+								</li>
+								<li>
+									<a
+										href={socialLinks.youtube}
+										rel='noopener noreferrer'
+										title='youtube'
+										className='text-gray-400'
+									>
+										<FaYoutube />
+									</a>
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -202,48 +244,6 @@ const MainFooter = () => {
 							height={50}
 						/>
 					</div> */}
-					<ul className='flex gap-4 text-xl'>
-						<li>
-							<a
-								href={socialLinks.instagram}
-								rel='noopener noreferrer'
-								title='instagram'
-								className='text-gray-400'
-							>
-								<FaInstagram />
-							</a>
-						</li>
-						<li>
-							<a
-								href={socialLinks.facebook}
-								rel='noopener noreferrer'
-								title='facebook'
-								className='text-gray-400'
-							>
-								<FaFacebook />
-							</a>
-						</li>
-						<li>
-							<a
-								href={socialLinks.twitter}
-								rel='noopener noreferrer'
-								title='twitter'
-								className='text-gray-400'
-							>
-								<FaTwitter />
-							</a>
-						</li>
-						<li>
-							<a
-								href={socialLinks.youtube}
-								rel='noopener noreferrer'
-								title='youtube'
-								className='text-gray-400'
-							>
-								<FaYoutube />
-							</a>
-						</li>
-					</ul>
 				</div>
 			</div>
 		</footer>
