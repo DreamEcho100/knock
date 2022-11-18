@@ -147,7 +147,7 @@ const MainFooter = () => {
 								<p>Promotion, new products and sales. Directly to your inbox</p>
 							</div>
 							<form
-								className='flex gap-4'
+								className='flex gap-4 p-2'
 								onSubmit={subscribeToNewsLetters.mutate}
 							>
 								<div className='flex bg-primary-3 text-primary-1 w-full rounded-3xl overflow-hidden'>
