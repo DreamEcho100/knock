@@ -169,7 +169,7 @@ main > section > *,
 	@media (min-height: 700px) {
 		.section-h-v1 {
 			height: calc(100vh * var(--h-multi, 1));
-			max-height: 48rem;
+			max-height: var(--max-h-multi, 48rem);
 			min-height: fit-content;
 		}
 	}

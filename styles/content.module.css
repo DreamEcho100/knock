@@ -18,6 +18,10 @@
 	}
 }
 
+.contentContainerElements * {
+	max-width: 100%;
+}
+
 .contentContainerElements.contentContainerV2 {
 	font-size: 1.75rem;
 }

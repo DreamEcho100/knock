@@ -8,20 +8,26 @@ import {
 	VideoSection
 } from './sections';
 
-const ProductByIdScreen = ({ product }: IProductByIdPageProps) => (
-	<>
-		<Head>
-			<title>{product.title} | KNOCK Plugin - Make Your Drums Knock</title>
-			<meta name='description' content={product.description} />
-		</Head>
-		<HeroSection product={product} />
-		<DescriptionSection description={product.description} />
-		{/* <FeaturesAndFilesIncludedSection
+import classes from '@styles/content.module.css';
+
+const ProductByIdScreen = ({ product }: IProductByIdPageProps) => {
+	console.log('product', product);
+
+	return (
+		<>
+			<Head>
+				<title>{product.title} | KNOCK Plugin - Make Your Drums Knock</title>
+				<meta name='description' content={product.description} />
+			</Head>
+			<HeroSection product={product} />
+			{/* <DescriptionSection description={product.description} /> */}
+			{/* <FeaturesAndFilesIncludedSection
 			features={product.features}
 			filesIncluded={product.filesIncluded}
 		/>
 		<VideoSection video={product.video} /> */}
-	</>
-);
+		</>
+	);
+};
 
 export default ProductByIdScreen;

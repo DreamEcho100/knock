@@ -121,7 +121,13 @@ const KnockSection = ({
 	return (
 		<section
 			className={sectionClasses(sectionTheme)}
-			style={{ '--pt-multi': 3, '--pb-multi': 2 } as CSSProperties}
+			style={
+				{
+					'--pt-multi': 3,
+					'--pb-multi': 2,
+					'--max-h-multi': 'auto'
+				} as CSSProperties
+			}
 		>
 			<div className={sectionInnerWrapperClasses(sectionInnerWrapperTheme)}>
 				<div className={imagesContainerClasses(imagesContainerTheme)}>
