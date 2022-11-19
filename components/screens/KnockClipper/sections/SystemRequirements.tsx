@@ -9,14 +9,13 @@ const SystemRequirementsSection = () => {
 						System Requirements
 					</h2>
 					<p className='text-h5'>
-						KNOCK Clipper is supported by all major DAWs in 64-bit VST3, AU and
-						AAX format.
+						Supported by all major DAWs in 64-bit VST3, AU and AAX format.
 					</p>
 				</header>
 
 				<TwoCardContainer
 					items1={[
-						'9 OSX 10.12+ - AU, VST3, AAX (KNOCK Clipper is fully compatible with both Mac OS Monterey and Apple M1 & M2.)',
+						'9 OSX 10.12+ - AU, VST3, AAX (KNOCK Clipper is Fully compatible with both Mac OS Ventura and Apple M1 & M2.)',
 						'Intel Core i5, i7, i9, Xeon, Apple M1',
 						'8GB RAM required, 16GB recommended',
 						'HDD Space requirements: Minimum of 500MB'

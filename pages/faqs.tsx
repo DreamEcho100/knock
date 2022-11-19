@@ -32,8 +32,7 @@ const faqs: (
 	{
 		question: 'WHAT ARE THE SYSTEM REQUIREMENTS / COMPATIBILITY?',
 		answer: {
-			opening:
-				'KNOCK is supported by all major DAWs in 64-bit VST3, AU and AAX format.',
+			opening: 'Supported by all major DAWs in 64-bit VST3, AU and AAX format.',
 			list: [
 				{
 					title: 'OS/Processor:',

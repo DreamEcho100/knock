@@ -6,7 +6,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import CustomNextImage from '@components/shared/common/CustomNextImage';
+import CustomNextImage, {
+	ICustomNextImageProps
+} from '@components/shared/common/CustomNextImage';
 import { cva, cx } from 'class-variance-authority';
 
 const handleReviewCardVariants = cva(
@@ -50,7 +52,7 @@ const Reviews = ({
 	containerVariants
 }: {
 	reviews: {
-		image: {
+		image: Partial<Omit<ICustomNextImageProps, 'src' | 'alt'>> & {
 			src: string;
 			alt: string;
 		};
@@ -91,22 +93,19 @@ const Reviews = ({
 											// 'sm:w-20 sm:h-20 sm:top-10'
 										)}
 									>
-										{item.image && (
-											<CustomNextImage
-												src='/svgs/double-quates.svg'
-												alt={item.image.alt}
-												width={250}
-												height={250}
-												priority
-												className='aspect-square w-full h-full scale-90'
-											/>
-										)}
+										<CustomNextImage
+											src='/svgs/double-quates.svg'
+											alt='double-quates'
+											width={250}
+											height={250}
+											priority
+											className='aspect-square w-full h-full scale-90'
+										/>
 									</div>
 									<q className='select-auto'>{item.review}</q>
 									<div className='flex justify-center gap-2'>
 										<CustomNextImage
-											src={item.image.src}
-											alt={item.image.alt}
+											{...item.image}
 											width={250}
 											height={250}
 											className='bg-black block rounded-full aspect-square w-20 h-20 object-cover'

@@ -21,7 +21,7 @@ const reviews = [
 		reviewedBy: 'AN TY'
 	},
 	{
-		image: { src: '/images/icon1.png', alt: '' },
+		image: { src: '/images/icon1.png', priority: true, alt: '' },
 		review:
 			"Dude, your sound packs to many were like a real inside look into what the words biggest\nproducers are working with and why their music sounded as it did. When you made it\naccessible for everyone to have you've literally bridge a HUGE gap between pros with\nexpensive equipment and kids with laptops to a point where everyone is able to focus\nmore on creativity and not stress out about the quality of your beats. We are forever\nthankful for that",
 		reviewedBy: 'From The Crib'
@@ -48,7 +48,7 @@ const reviews = [
 		reviewedBy: 'Pri$EGotBeats'
 	},
 	{
-		image: { src: '/images/icon1.png', alt: '' },
+		image: { src: '/images/icon1.png', priority: true, alt: '' },
 		review:
 			'DECAP kits are the best. You know it, I know it; Everybody knows it!',
 		reviewedBy: 'Pro Ave'
@@ -131,12 +131,12 @@ const reviews = [
 		reviewedBy: 'Ecklectic official'
 	},
 	{
-		image: { src: '/images/icon1.png', alt: '' },
+		image: { src: '/images/icon1.png', priority: true, alt: '' },
 		review: 'These drums will probably win in a fight against Mike Tyson.',
 		reviewedBy: 'Adiktive'
 	},
 	{
-		image: { src: '/images/icon1.png', alt: '' },
+		image: { src: '/images/icon1.png', priority: true, alt: '' },
 		review: 'Nothing beats the joy of getting a Decap drumkit.',
 		reviewedBy: 'Naveedsperspective'
 	},
@@ -154,7 +154,7 @@ const reviews = [
 		reviewedBy: 'nata beats'
 	},
 	{
-		image: { src: '/images/icon1.png', alt: '' },
+		image: { src: '/images/icon1.png', priority: true, alt: '' },
 		review: 'The best kits around!',
 		reviewedBy: 'Strong Maurice'
 	},
@@ -201,7 +201,7 @@ const reviews = [
 		reviewedBy: 'Donelljonesforever'
 	},
 	{
-		image: { src: '/images/icon1.png', alt: '' },
+		image: { src: '/images/icon1.png', priority: true, alt: '' },
 		review:
 			'Welp, this about to be the drum sounds on every track for the foreseeable future haha',
 		reviewedBy: 'Ambedo_bass'
@@ -215,7 +215,7 @@ const reviews = [
 		reviewedBy: 'of the trees'
 	},
 	{
-		image: { src: '/images/icon1.png', alt: '' },
+		image: { src: '/images/icon1.png', priority: true, alt: '' },
 		review:
 			'Goes without saying but DECAP got the best drum kits out no question about it.',
 		reviewedBy: 'WIZE'

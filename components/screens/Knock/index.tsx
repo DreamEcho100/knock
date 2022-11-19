@@ -13,7 +13,7 @@ import {
 
 const reviews = [
 	{
-		image: { src: '/images/icon1.png', alt: '' },
+		image: { src: '/images/icon1.png', priority: true, alt: '' },
 		review:
 			"This Knock plug in is essential for all drum buses. I use Knock for the drum bus, and RC 20 for\nthe melody bus and I don't need anything more.",
 		reviewedBy: 'Demetrious White'
@@ -45,7 +45,7 @@ const reviews = [
 		reviewedBy: 'Rocky Blaq'
 	},
 	{
-		image: { src: '/images/icon1.png', alt: '' },
+		image: { src: '/images/icon1.png', priority: true, alt: '' },
 		review:
 			'Shout out to DECAP for making one of the best plug-ins of all time. I literally use it on\nevery beat.',
 		reviewedBy: 'ZayTooLit Back Up'
@@ -70,7 +70,7 @@ const reviews = [
 		reviewedBy: 'Vincent Van den Ende'
 	},
 	{
-		image: { src: '/images/icon1.png', alt: '' },
+		image: { src: '/images/icon1.png', priority: true, alt: '' },
 		review: 'One of my go to plugs for beats and sound design! Excellence!',
 		reviewedBy: 'Tone Jonez'
 	},
@@ -80,13 +80,13 @@ const reviews = [
 		reviewedBy: 'ILIASSOPDEBEAT'
 	},
 	{
-		image: { src: '/images/icon1.png', alt: '' },
+		image: { src: '/images/icon1.png', priority: true, alt: '' },
 		review:
 			"when I tell you that it's worth every penny.... Bro. It takes stock sounds to a new level.\nJust imagine what it could do for your sounds in your library.",
 		reviewedBy: 'Xtradaking'
 	},
 	{
-		image: { src: '/images/icon1.png', alt: '' },
+		image: { src: '/images/icon1.png', priority: true, alt: '' },
 		review:
 			'DECAP did 1 plugin and that sht already in GOAT status.thats power.',
 		reviewedBy: 'VOICE NOTE PAPI'
@@ -111,13 +111,13 @@ const reviews = [
 		reviewedBy: 'Dibia$e'
 	},
 	{
-		image: { src: '/images/icon1.png', alt: '' },
+		image: { src: '/images/icon1.png', priority: true, alt: '' },
 		review:
 			'Finally getting a chance to play with DECAP\'s new plugin "KNOCK" and it does exactly\nwhat the title says. Super useful for shaping individual sounds and gonna be using this a\nlot on the drum buss. Definitely get that if you haven\'t yet.',
 		reviewedBy: 'GOD.DAMN.CHAN'
 	},
 	{
-		image: { src: '/images/icon1.png', alt: '' },
+		image: { src: '/images/icon1.png', priority: true, alt: '' },
 		review:
 			'I love how useful it is and how it doesn\'t use much CPU. It allows producers to use it on\nmany tracks. making them "knock" and sound cohesive together at the same time. Big\nstep up from the stock Drum Buss plugin.',
 		reviewedBy: 'walterdeans'
@@ -129,7 +129,7 @@ const reviews = [
 		reviewedBy: 'Mars Today'
 	},
 	{
-		image: { src: '/images/icon1.png', alt: '' },
+		image: { src: '/images/icon1.png', priority: true, alt: '' },
 		review:
 			"Y'all betta grab that! It's like hot sauce I been putting it on everything lol!",
 		reviewedBy: 'Tone Jonez'

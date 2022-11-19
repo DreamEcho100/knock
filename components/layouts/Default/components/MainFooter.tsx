@@ -154,11 +154,11 @@ const MainFooter = () => {
 									<input
 										type='email'
 										name='email'
+										autoComplete='off'
 										required
 										placeholder='Email address'
 										id={`email-${formId}`}
-										className='w-full bg-transparent px-6 py-2 outline-none
-											placeholder:text-text-primary-3 text-base'
+										className='w-full bg-transparent px-6 py-2 outline-none text-base autofill:bg-red-900'
 										onChange={(event) => {
 											setFormValues((prev) => ({
 												...prev,

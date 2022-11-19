@@ -33,20 +33,25 @@ const AddItemOnHeroSectionButton = ({ product }: { product: IProduct }) => {
 	}, [product.variants]);
 
 	return (
-		<div className='flex flex-col-reverse mb-[-2ch] mt-[-2.5ch] items-center justify-center relative'>
-			<Button className='capitalize text-h6' {...buttonProps}>
-				Buy it now
+		<div className='flex flex-col mb-[-2ch] mt-[-2.5ch] items-center justify-center relative'>
+			<span className='p-2' />{' '}
+			<div className=''>
 				{prices.compareToPrice && (
 					<>
 						&nbsp;
 						<del className='line-through font-normal'>
 							{prices.compareToPrice}
 						</del>
+						&nbsp;
 					</>
 				)}
+				<span className='text-bg-secondary-2 font-semibold'>
+					{prices.price}
+				</span>
+			</div>
+			<Button className='capitalize text-h6' {...buttonProps}>
+				Buy it now
 			</Button>
-			<span className='p-1' />{' '}
-			<span className='text-bg-secondary-2 font-semibold'>{prices.price}</span>
 		</div>
 	);
 };

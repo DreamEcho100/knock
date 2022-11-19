@@ -1,4 +1,3 @@
-import type { IButtonProps } from '@components/shared/core/Button';
 import type { VariantProps } from 'class-variance-authority';
 import type { CSSProperties, ReactNode } from 'react';
 
@@ -38,12 +37,12 @@ export const h2Classes = cva(
 			}
 		},
 		defaultVariants: {
-			'text-size': 'lg'
+			'text-size': 'md'
 		}
 	}
 );
 
-export const sectionClasses = cva('bg-primary-1 pt-16 pb-12 sm:section-h-v1', {
+export const sectionClasses = cva('bg-primary-1 sm:section-h-v1', {
 	variants: {
 		p: {
 			'section-p-v1': 'section-p-v1',
@@ -56,7 +55,7 @@ export const sectionClasses = cva('bg-primary-1 pt-16 pb-12 sm:section-h-v1', {
 });
 
 export const sectionInnerWrapperClasses = cva(
-	'w-full h-full flex items-center justify-center flex-col sm:gap-2 text-center',
+	'w-full flex items-center justify-center flex-col sm:gap-2 text-center',
 	{
 		variants: {
 			'sm:gap': {
@@ -123,9 +122,10 @@ const KnockSection = ({
 			className={sectionClasses(sectionTheme)}
 			style={
 				{
-					'--pt-multi': 3,
+					'--pt-multi': 1.8,
 					'--pb-multi': 2,
-					'--max-h-multi': 'auto'
+					'--h': 'fit-content',
+					'--max-h': 'fit-content'
 				} as CSSProperties
 			}
 		>
@@ -139,7 +139,7 @@ const KnockSection = ({
 						className='pointer-events-none absolute top-0 right-0 left-0 bottom-0 w-full h-full object-contain scale-150'
 						style={{
 							transform:
-								'translate(-6%, 2%) scale(2.4) rotateZ(-10deg) rotateY(180deg)'
+								'translate(8%, -2%) scale(2.4, 2.4) rotateZ(-198deg) rotateY(180deg)'
 						}}
 					/>
 

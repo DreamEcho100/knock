@@ -22,9 +22,8 @@ const VideosSection = ({
 						allowFullScreen: true
 					},
 					{
-						src: 'https://www.youtube.com/embed/hM3IMIPc6DA?controls=0',
-						title:
-							'KNOCK Clipper vs Fruity Soft Clipper vs Glue Compressor - Shootout - YouTube video player',
+						src: 'https://www.youtube.com/embed/LMOG2rvxqGk?controls=0',
+						title: 'KNOCK: Before and After - YouTube video player',
 						frameBorder: '0',
 						allow:
 							'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',

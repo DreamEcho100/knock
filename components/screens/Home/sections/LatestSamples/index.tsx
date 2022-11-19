@@ -4,7 +4,6 @@ import KnockTrademark from '@components/shared/core/KnockTrademark';
 import type { IHomePageProps } from '@pages/index';
 import { getIdFromGid } from '@utils/core/shopify';
 import { useMemo } from 'react';
-import ProductCardSlider from './components/ProductCardSlider';
 
 const LatestSamplesSection = ({
 	products
@@ -47,7 +46,7 @@ const LatestSamplesSection = ({
 						groundbreaking as always.
 					</p>
 					<Button className='hidden md:block' href='/drums-that-knock'>
-						Explore it now
+						Explore Them
 					</Button>
 				</div>
 				{/* <div className='md:flex-grow md:w-1/2 flex justify-center items-center'>

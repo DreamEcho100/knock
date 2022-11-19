@@ -17,7 +17,7 @@ const HeroSection = ({
 						width={1000}
 						height={1000}
 						priority
-						className='pointer-events-none absolute top-0 right-0 left-0 bottom-0 w-full h-full object-contain scale-75'
+						className='pointer-events-none absolute top-0 right-0 left-0 bottom-0 w-full h-full object-contain scale-75 select-none'
 						style={{ transform: 'translate(18%, 2%) scale(2.4, 2)' }}
 					/>
 
@@ -35,7 +35,7 @@ const HeroSection = ({
 					<KnockTrademark />
 					Clipper
 				</h2>
-				<p className='mb-10 text-h5 '>
+				<p className='mb-8 text-h5 '>
 					Adjustable hard & soft clipper module from KNOCK.
 				</p>
 				<AddItemOnHeroSectionButton product={knockClipperPlugin} />
