@@ -804,6 +804,7 @@ const subscribeToNewsLetters = async (
 		let createContact = new SibApiV3Sdk.CreateContact();
 
 		createContact.email = email;
+		createContact.listIds = [51]
 		const response = await apiInstance.createContact(createContact);
 
 		return res.status(200).json({
