@@ -5,6 +5,7 @@ import FormInput from '@components/shared/core/FormInput';
 import { useState } from 'react';
 import Head from 'next/head';
 import { useRef } from 'react';
+import Link from 'next/link';
 
 const ContactUsPage: NextPage = () => {
 	const [formValues, setFormValues] = useState({
@@ -31,9 +32,12 @@ const ContactUsPage: NextPage = () => {
 				<div className='max-w-[800px] mx-auto'>
 					<header className='flex flex-col gap-4 text-text-primary-1'>
 						<h1 className='text-h2 font-semibold'>Contact Us</h1>
-						<p className='text-h3'>
-							If you have a question, please review FAQs ((hyperlink to FAQs
-							page)) before submitting a ticket.
+						<p className='text-text-primary-2'>
+							If you have a question, please review{' '}
+							<Link href='/faqs' className='text-bg-secondary-1'>
+								FAQs
+							</Link>{' '}
+							before submitting a ticket.
 						</p>
 					</header>
 
