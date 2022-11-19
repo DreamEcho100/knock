@@ -6,6 +6,7 @@ import { IoMdClose } from 'react-icons/io';
 // import cx from 'classnames'
 import { Fragment } from 'react';
 import { cx } from 'class-variance-authority';
+import { createPortal } from 'react-dom';
 
 interface Props {
 	setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -18,7 +19,9 @@ interface Props {
 }
 
 const Dialog = ({ isOpen, setIsOpen, header, children }: Props) => {
-	return (
+	if (typeof document === 'undefined') return <></>;
+
+	return createPortal(
 		<DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
 			<Transition.Root show={isOpen}>
 				<Transition.Child
@@ -50,17 +53,17 @@ const Dialog = ({ isOpen, setIsOpen, header, children }: Props) => {
 							'fixed z-50',
 							'w-[95vw] max-w-xl rounded-lg px-10 py-4 md:w-full',
 							'top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]',
-							'bg-white dark:bg-neutral-800',
+							'bg-neutral-800',
 							'focus:outline-none focus-visible:ring-[0.125rem] focus-visible:ring-purple-500 focus-visible:ring-opacity-75'
 						)}
 					>
 						{header && (
 							<header className=' mx-auto my-4'>
-								<DialogPrimitive.Title className='text-h3 font-semibold text-neutral-900 dark:text-neutral-100'>
+								<DialogPrimitive.Title className='text-h3 font-semibold text-neutral-100'>
 									{header.title}
 								</DialogPrimitive.Title>
 								{header.description && (
-									<DialogPrimitive.Description className='mt-6 text-base font-normal text-neutral-700 dark:text-neutral-400'>
+									<DialogPrimitive.Description className='mt-6 text-base font-normal text-neutral-400'>
 										{header.description}
 									</DialogPrimitive.Description>
 								)}
@@ -74,12 +77,13 @@ const Dialog = ({ isOpen, setIsOpen, header, children }: Props) => {
 								'focus:outline-none focus-visible:ring-[0.125rem] focus-visible:ring-purple-500 focus-visible:ring-opacity-75'
 							)}
 						>
-							<IoMdClose className='h-4 w-4 text-neutral-500 hover:text-neutral-700 dark:text-neutral-500 dark:hover:text-neutral-400' />
+							<IoMdClose className='h-4 w-4 text-neutral-500 hover:text-neutral-400' />
 						</DialogPrimitive.Close>
 					</DialogPrimitive.Content>
 				</Transition.Child>
 			</Transition.Root>
-		</DialogPrimitive.Root>
+		</DialogPrimitive.Root>,
+		document.body
 	);
 };
 
@@ -92,7 +96,7 @@ export const CloseDialog = (
 		<DialogPrimitive.Close
 			className={cx(
 				'inline-flex select-none justify-center rounded-md px-4 py-2 text-sm font-medium',
-				'bg-purple-600 text-white hover:bg-purple-700 dark:bg-purple-700 dark:text-neutral-100 dark:hover:bg-purple-600',
+				'bg-purple-600 text-neutral-100 hover:bg-purple-600',
 				'border border-transparent',
 				'focus:outline-none focus-visible:ring-[0.125rem] focus-visible:ring-purple-500 focus-visible:ring-opacity-75'
 			)}

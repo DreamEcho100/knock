@@ -70,7 +70,7 @@ const OrderCard = ({
 					'max-w-[400px] break-all ring-[0.125rem] ring-white ring-opacity-50 p-4',
 					'flex flex-col',
 					'duration-300 transition-all',
-					'hover:scale-110'
+					'hover:scale-110 hover:relative hover:bg-black'
 				)}
 				key={order.id}
 			>
@@ -120,6 +120,60 @@ const OrderCard = ({
 				<div className=''>
 					{lineItems.map(({ node: item }) => (
 						<div key={item.variant.id}>
+							<div className='flex'>
+								<div className='w-36 flex items-center bg-black'>
+									{item?.variant?.image?.url && (
+										<CustomNextImage
+											unoptimized
+											src={item.variant.image.url}
+											alt={item.variant.image.altText || ''}
+											width={150}
+											height={150}
+											className='w-full h-full aspect-square object-contain'
+										/>
+									)}
+								</div>
+								<div className='p-2'>
+									<TitleValue
+										title='id'
+										value={getIdFromGid(item.variant.id)}
+									/>
+									<TitleValue title='title' value={item.title} />
+									<TitleValue
+										title='original total price'
+										value={`${item.originalTotalPrice.amount} ${item.originalTotalPrice.currencyCode}`}
+									/>
+									<TitleValue title='quantity' value={item.quantity} />
+								</div>
+							</div>
+						</div>
+					))}
+				</div>
+			</Dialog>
+		</>
+	);
+};
+
+const ProductsOnOrder = ({
+	lineItems,
+	buttonText
+}: {
+	lineItems: IUser['orders']['edges'][0]['node']['lineItems']['edges'];
+	buttonText: string;
+}) => {
+	const [isOpen, setIsOpen] = useState(false);
+
+	return (
+		<>
+			<button onClick={() => setIsOpen(true)}>{buttonText}</button>
+			<Dialog
+				header={{ title: 'Products' }}
+				isOpen={isOpen}
+				setIsOpen={setIsOpen}
+			>
+				<div className='flex flex-col gap-4'>
+					{[...lineItems, ...lineItems].map(({ node: item }, index) => (
+						<div key={item.variant.id + index}>
 							<div className='flex'>
 								<div className='w-36 flex items-center bg-black'>
 									{item?.variant?.image?.url && (
@@ -373,6 +427,8 @@ const CustomerProfileScreen = () => {
 
 	const orders = user?.data?.orders?.edges;
 
+	console.log('orders', orders);
+
 	const accordionDetails = [
 		{
 			key: 'personalDetails',
@@ -416,10 +472,159 @@ const CustomerProfileScreen = () => {
 							</Link>
 						</p>
 					) : (
-						orders.map(({ node: order }) => (
-							<OrderCard key={order.id} order={order} />
-						))
+						<>
+							<table className='orders-table max-w-screen-lg w-full border-collapse mx-auto overflow-x-auto table-fixed'>
+								<thead className='border border-gray-500 font-bold'>
+									<td className='px-8 py-6 md:px-12 md:py-8'>Order</td>
+									<td className='px-8 py-6 md:px-12 md:py-8'>Payment</td>
+									<td className='px-8 py-6 md:px-12 md:py-8'>Fulfillment</td>
+									<td className='px-8 py-6 md:px-12 md:py-8'>Total</td>
+								</thead>
+								<tbody>
+									{orders.map(({ node: itemNode }) => (
+										<tr key={itemNode.id}>
+											<td className='px-8 py-6 md:px-12 md:py-8 border border-gray-500'>
+												<span className='title font-bold hidden'>
+													Order:&nbsp;
+												</span>
+												<span className='text-bg-secondary-1'>
+													{/* {itemNode.name} */}
+													<ProductsOnOrder
+														lineItems={itemNode.lineItems.edges}
+														buttonText={itemNode.name}
+													/>
+												</span>
+												&nbsp;-&nbsp;
+												<span>
+													{new Date(itemNode.processedAt).toLocaleDateString(
+														undefined,
+														{
+															dateStyle: 'medium'
+														}
+													)}
+												</span>
+											</td>
+											<td className='px-8 py-6 md:px-12 md:py-8 border border-gray-500'>
+												<span className='title font-bold hidden'>
+													Payment:&nbsp;
+												</span>
+												Paid
+											</td>
+											<td className='px-8 py-6 md:px-12 md:py-8 border border-gray-500'>
+												<span className='title font-bold hidden'>
+													Fulfillment:&nbsp;
+												</span>
+												Fulfilled
+											</td>
+											<td className='px-8 py-6 md:px-12 md:py-8 border border-gray-500'>
+												<span className='title font-bold hidden'>
+													Total:&nbsp;
+												</span>
+												{priceCurrencyFormatter(
+													(
+														parseFloat(itemNode.totalPrice.amount) +
+														parseFloat(itemNode.totalShippingPrice.amount) +
+														parseFloat(itemNode.totalTax.amount) -
+														parseFloat(itemNode.totalRefunded.amount)
+													).toString(),
+													itemNode.totalPrice.currencyCode,
+													{
+														toFixed: 2
+													}
+												)}
+											</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+							<style jsx>{`
+								.orders-table {
+									border-collapse: collapse;
+									width: 100%;
+								}
+
+								/* .orders-table tr {
+									padding: 0.35em;
+								} */
+
+								.orders-table th,
+								.orders-table td {
+									text-align: center;
+								}
+
+								/* .orders-table th {
+									text-transform: uppercase;
+								} */
+
+								@media screen and (max-width: 600px) {
+									.orders-table {
+										border: 0;
+									}
+
+									.orders-table caption {
+										font-size: 1.3em;
+									}
+
+									.orders-table thead {
+										border: none;
+										clip: rect(0 0 0 0);
+										height: 1px;
+										margin: -1px;
+										overflow: hidden;
+										padding: 0;
+										position: absolute;
+										width: 1px;
+									}
+
+									.orders-table tr {
+										border-bottom: 3px solid #ddd;
+										display: block;
+										margin-bottom: 0.625em;
+									}
+
+									.orders-table td {
+										border-bottom: 1px solid #ddd;
+										display: block;
+										font-size: 0.8em;
+										text-align: initial;
+									}
+
+									.orders-table td .title {
+										display: inline-block;
+										width: 25%;
+										max-width: fit-content;
+									}
+
+									.orders-table td::before {
+										/*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+										content: attr(data-label);
+										float: left;
+										font-weight: bold;
+										text-transform: uppercase;
+									}
+
+									.orders-table td:last-child {
+										border-bottom: 0;
+									}
+								}
+								@media screen and (max-width: 400px) {
+									.orders-table td {
+										padding: 0.5rem;
+										white-space: break-spaces;
+									}
+									.orders-table td .title {
+										width: auto;
+									}
+								}
+							`}</style>
+						</>
 					)}
+					{/* orders.map(({ node: order }) => (
+							<OrderCard key={order.id} order={order} />
+						)) */}
 				</AccordionContent>
 			)
 		}

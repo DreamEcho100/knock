@@ -183,7 +183,12 @@ export const useGetUserCheckoutDetailsAndIdAndKey = () => {
 };
 
 export const useAddProductsToCheckoutAndCart = () => {
-	const [, customerDispatch] = useSharedCustomerState();
+	const [
+		{
+			cart: { productsData }
+		},
+		customerDispatch
+	] = useSharedCustomerState();
 	const userCheckoutDetailsAndIdAndKey = useGetUserCheckoutDetailsAndIdAndKey();
 
 	return useMutation<
@@ -191,7 +196,19 @@ export const useAddProductsToCheckoutAndCart = () => {
 		IGenericErrorResponse,
 		{ products: (IProduct & { quantity: number })[] }
 	>({
-		mutationFn: async ({ products }) => {
+		mutationFn: async ({ products: _products }) => {
+			// !!!
+			// Abstract it?
+			const products = _products.filter(
+				(product) =>
+					!productsData.find(
+						(productOnCart) => productOnCart.variant.product.id === product.id
+					)
+			);
+			if (products.length === 0)
+				throw new Error(
+					"No product Added either it's already exists or something wrong happened"
+				);
 			if (
 				!userCheckoutDetailsAndIdAndKey?.checkoutIdAndKey?.checkoutId ||
 				!userCheckoutDetailsAndIdAndKey?.checkoutIdAndKey?.checkoutKey
