@@ -115,10 +115,7 @@ const reviews = [
 		reviewedBy: 'Blvkbeats'
 	},
 	{
-		image: {
-			src: '/images/people/Ecklectic official.jpg',
-			alt: 'Ecklectic'
-		},
+		image: { src: '/images/icon1.png', priority: true, alt: '' },
 		review: 'The best drums in the industry period!',
 		reviewedBy: 'Luis Garay'
 	},

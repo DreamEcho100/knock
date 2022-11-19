@@ -7,7 +7,7 @@ import KnockTrademark from '@components/shared/core/KnockTrademark';
 import { cva } from 'class-variance-authority';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 
-export const pClasses = cva('text-white mt-2 mb-5 leading-6', {
+export const pClasses = cva('text-primary-2 mt-2 mb-5 leading-6', {
 	variants: {
 		width: {
 			larger: 'max-w-[950px]',

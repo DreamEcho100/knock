@@ -33,17 +33,12 @@ const AddItemOnHeroSectionButton = ({ product }: { product: IProduct }) => {
 	}, [product.variants]);
 
 	return (
-		<div className='flex flex-col mb-[-2ch] mt-[-2.5ch] items-center justify-center relative'>
-			<span className='p-2' />{' '}
-			<div className=''>
+		<div className='flex flex-col gap-[0.35rem] items-center justify-center relative'>
+			<div className='flex flex-wrap gap-[0.35rem] text-[95%]'>
 				{prices.compareToPrice && (
-					<>
-						&nbsp;
-						<del className='line-through font-normal'>
-							{prices.compareToPrice}
-						</del>
-						&nbsp;
-					</>
+					<del className='line-through font-normal'>
+						{prices.compareToPrice}
+					</del>
 				)}
 				<span className='text-bg-secondary-2 font-semibold'>
 					{prices.price}

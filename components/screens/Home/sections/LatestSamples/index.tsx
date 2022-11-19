@@ -52,14 +52,7 @@ const LatestSamplesSection = ({
 				{/* <div className='md:flex-grow md:w-1/2 flex justify-center items-center'>
 					<ProductCardSlider products={products} />
 				</div> */}
-				<div
-					className='md:flex-grow md:w-1/2 justify-center items-center gap-8'
-					style={{
-						display: 'grid',
-						gridTemplateColumns: 'repeat(auto-fit, minmax(10rem, 1fr))',
-						justifyItems: 'center'
-					}}
-				>
+				<div className='md:flex-grow md:w-1/2 flex flex-col sm:flex-row justify-center items-center gap-8'>
 					{filteredProducts
 						.filter(
 							(item) =>
@@ -67,14 +60,15 @@ const LatestSamplesSection = ({
 								item.handle === 'drums-that-knock-x'
 						)
 						.map((item) => (
-							<ProductBasicCard
-								key={item.id}
-								link={{
-									children: item.title,
-									href: `/products/${getIdFromGid(item.id)}`
-								}}
-								{...item}
-							/>
+							<div className='sm:flex-1' key={item.id}>
+								<ProductBasicCard
+									link={{
+										children: item.title,
+										href: `/products/${getIdFromGid(item.id)}`
+									}}
+									{...item}
+								/>
+							</div>
 						))}
 					{/*
 					 */}

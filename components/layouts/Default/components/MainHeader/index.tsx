@@ -150,9 +150,9 @@ const MainHeader = () => {
 		>
 			<div
 				className='relative w-full mx-auto
-						lg:px-12'
+				px-4 sm:px-8'
 			>
-				<div className='relative z-10 h-main-nav-h flex justify-between px-4 sm:px-8 gap-2 sm:gap-4 text-primary-2'>
+				<div className='relative z-10 h-main-nav-h flex justify-between gap-2 sm:gap-4 text-primary-2'>
 					<div
 						className='flex items-center justify-center text-primary-1'
 						style={{ '--sup-t': '0ch' } as CSSProperties}
@@ -160,7 +160,7 @@ const MainHeader = () => {
 						<Logo onClick={() => setIsSmallScreenNaveOpen(false)} />
 					</div>
 					<nav className='hidden lg:flex'>
-						<ul className='text-center flex items-center justify-center gap-8 font-semibold'>
+						<ul className='text-center flex items-center justify-center gap-10 font-semibold'>
 							{headerLinks.map((link) => (
 								<li key={link.text}>
 									<Link
@@ -273,7 +273,7 @@ const MainHeader = () => {
 					<nav className='flex'>
 						<ul
 							className={cx(
-								'flex flex-col gap-2 font-semibold px-4 pt-0 pb-4  w-full text-xl',
+								'flex flex-col gap-2 font-semibold px-4 sm:px-8 pt-0 pb-4  w-full text-xl',
 								'sm:text-size-inherit sm:gap-4'
 							)}
 						>
