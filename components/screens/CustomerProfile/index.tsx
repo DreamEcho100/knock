@@ -172,8 +172,8 @@ const ProductsOnOrder = ({
 				setIsOpen={setIsOpen}
 			>
 				<div className='flex flex-col gap-4'>
-					{[...lineItems, ...lineItems].map(({ node: item }, index) => (
-						<div key={item.variant.id + index}>
+					{lineItems.map(({ node: item }) => (
+						<div key={item.variant.id}>
 							<div className='flex'>
 								<div className='w-36 flex items-center bg-black'>
 									{item?.variant?.image?.url && (
