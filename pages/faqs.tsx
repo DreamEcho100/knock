@@ -51,12 +51,12 @@ const faqs: (
 		answer: 'At the moment, there are no demo versions.'
 	},
 	{
-		question: 'DOES KNOCK SUPPORT MAC OS BIG SUR & APPLE M1 CHIPS?',
+		question: 'DO YOU SUPPORT MAC OS VENTURA & APPLE SILICON M1 & M2?',
 		answer:
 			'Our plugins are fully compatible with both Mac OS Ventura and Apple M1 & M2 processors.'
 	},
 	{
-		question: 'DOES KNOCK SUPPORT PRO TOOLS / AAX?',
+		question: 'IS PRO TOOLS / AAX SUPPORTED?',
 		answer: 'Yes! Our plugins are compatible with Pro Tools / AAX.'
 	}
 ];
