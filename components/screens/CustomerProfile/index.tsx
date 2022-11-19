@@ -67,7 +67,7 @@ const OrderCard = ({
 		<>
 			<div
 				className={cx(
-					'max-w-[400px] break-all ring-[0.125rem] ring-white ring-opacity-50 p-4',
+					'max-w-[400px] ring-[0.125rem] ring-white ring-opacity-50 p-4',
 					'flex flex-col',
 					'duration-300 transition-all',
 					'hover:scale-110 hover:relative hover:bg-black'
@@ -156,10 +156,12 @@ const OrderCard = ({
 
 const ProductsOnOrder = ({
 	lineItems,
-	buttonText
+	buttonText,
+	statusUrl
 }: {
 	lineItems: IUser['orders']['edges'][0]['node']['lineItems']['edges'];
 	buttonText: string;
+	statusUrl: string;
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -167,7 +169,19 @@ const ProductsOnOrder = ({
 		<>
 			<button onClick={() => setIsOpen(true)}>{buttonText}</button>
 			<Dialog
-				header={{ title: 'Products' }}
+				contentVariants={{ bg: 'primary-2' }}
+				header={{
+					title: (
+						<>
+							Products{' '}
+							<small className='text-sm text-purple-700'>
+								<a href={statusUrl} target='_blank' rel='noreferrer'>
+									Go to the download page
+								</a>
+							</small>
+						</>
+					)
+				}}
 				isOpen={isOpen}
 				setIsOpen={setIsOpen}
 			>
@@ -427,8 +441,6 @@ const CustomerProfileScreen = () => {
 
 	const orders = user?.data?.orders?.edges;
 
-	console.log('orders', orders);
-
 	const accordionDetails = [
 		{
 			key: 'personalDetails',
@@ -492,6 +504,7 @@ const CustomerProfileScreen = () => {
 													<ProductsOnOrder
 														lineItems={itemNode.lineItems.edges}
 														buttonText={itemNode.name}
+														statusUrl={itemNode.statusUrl}
 													/>
 												</span>
 												&nbsp;-&nbsp;
@@ -521,12 +534,11 @@ const CustomerProfileScreen = () => {
 													Total:&nbsp;
 												</span>
 												{priceCurrencyFormatter(
-													(
-														parseFloat(itemNode.totalPrice.amount) +
-														parseFloat(itemNode.totalShippingPrice.amount) +
-														parseFloat(itemNode.totalTax.amount) -
-														parseFloat(itemNode.totalRefunded.amount)
-													).toString(),
+													parseFloat(itemNode.totalPrice.amount)
+														// + parseFloat(itemNode.totalShippingPrice.amount) +
+														// parseFloat(itemNode.totalTax.amount) -
+														// parseFloat(itemNode.totalRefunded.amount)
+														.toString(),
 													itemNode.totalPrice.currencyCode,
 													{
 														toFixed: 2

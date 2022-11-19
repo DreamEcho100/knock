@@ -5,20 +5,48 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { IoMdClose } from 'react-icons/io';
 // import cx from 'classnames'
 import { Fragment } from 'react';
-import { cx } from 'class-variance-authority';
+import { cva, cx, VariantProps } from 'class-variance-authority';
 import { createPortal } from 'react-dom';
 
 interface Props {
 	setIsOpen: Dispatch<SetStateAction<boolean>>;
 	isOpen: boolean;
 	header?: {
-		title: string;
+		title: Parameters<typeof DialogPrimitive.Title>[0]['children'];
 		description?: Parameters<typeof DialogPrimitive.Description>[0]['children'];
 	};
 	children: ReactNode;
+	contentVariants?: VariantProps<typeof handlerContentVariants>;
 }
 
-const Dialog = ({ isOpen, setIsOpen, header, children }: Props) => {
+const handlerContentVariants = cva(
+	[
+		'fixed z-50',
+		'w-[95vw] max-w-xl rounded-lg px-10 py-4 md:w-full',
+		'top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]',
+		'focus:outline-none focus-visible:ring-[0.125rem] focus-visible:ring-purple-500 focus-visible:ring-opacity-75'
+	],
+	{
+		variants: {
+			bg: {
+				'neutral-800': 'bg-neutral-800',
+				'primary-1': 'bg-primary-1',
+				'primary-2': 'bg-primary-2'
+			}
+		},
+		defaultVariants: {
+			bg: 'neutral-800'
+		}
+	}
+);
+
+const Dialog = ({
+	isOpen,
+	setIsOpen,
+	header,
+	children,
+	contentVariants
+}: Props) => {
 	if (typeof document === 'undefined') return <></>;
 
 	return createPortal(
@@ -49,13 +77,7 @@ const Dialog = ({ isOpen, setIsOpen, header, children }: Props) => {
 				>
 					<DialogPrimitive.Content
 						forceMount
-						className={cx(
-							'fixed z-50',
-							'w-[95vw] max-w-xl rounded-lg px-10 py-4 md:w-full',
-							'top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]',
-							'bg-neutral-800',
-							'focus:outline-none focus-visible:ring-[0.125rem] focus-visible:ring-purple-500 focus-visible:ring-opacity-75'
-						)}
+						className={handlerContentVariants(contentVariants)}
 					>
 						{header && (
 							<header className=' mx-auto my-4'>

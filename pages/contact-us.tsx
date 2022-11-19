@@ -25,7 +25,7 @@ const ContactUsPage: NextPage = () => {
 				<title>Contact Us | KNOCK Plugin - Make Your Drums Knock</title>
 				<meta
 					name='description'
-					content='If you have a question, please review FAQs ((hyperlink to FAQs page)) before submitting a ticket.'
+					content='If you have a question, please review FAQs before submitting a ticket.'
 				/>
 			</Head>
 			<section className='bg-primary-1 section-p-v1'>

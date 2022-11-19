@@ -205,6 +205,7 @@ export interface IUser {
 		edges: {
 			node: {
 				id: string;
+				statusUrl: string;
 				orderNumber: number;
 				email: string;
 				name: string;

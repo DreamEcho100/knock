@@ -71,7 +71,7 @@ const FAQSPages: NextPage = () => {
 					content='Frequently asked questions about us'
 				/>
 			</Head>
-			<section className='bg-primary-1 section-p-v1 flex flex-col break-all'>
+			<section className='bg-primary-1 section-p-v1 flex flex-col'>
 				<div className='max-w-full md:max-w-[800px] mx-auto text-primary-4'>
 					<header>
 						<h1 className='text-h2 capitalize font-semibold text-primary-1'>

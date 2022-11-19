@@ -11,8 +11,6 @@ import {
 import classes from '@styles/content.module.css';
 
 const ProductByIdScreen = ({ product }: IProductByIdPageProps) => {
-	console.log('product', product);
-
 	return (
 		<>
 			<Head>
