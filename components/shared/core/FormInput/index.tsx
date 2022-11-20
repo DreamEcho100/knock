@@ -93,6 +93,7 @@ const FormInput = <T,>({
 								}))
 						);
 					}}
+					name={name.toString()}
 					value={(values[name] as string | undefined) || ''}
 					id={`email-${formInputId}`}
 					className={handleInputVariants(variants)}

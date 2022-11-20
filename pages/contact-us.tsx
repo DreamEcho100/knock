@@ -53,6 +53,9 @@ const ContactUsPage: NextPage = () => {
 							if (configRef.current.toNotSubmit) event.preventDefault();
 						}}
 					>
+						<input type='hidden' name='_template' value='box' />
+						<input type='text' name='_honey' style={{ display: 'none' }} />
+						{/* <input type="hidden" name="_next" value="https://yourdomain.co/thanks.html" /> */}
 						<FormInput
 							spanTitleProps={{ children: 'Name', className: 'capitalize' }}
 							labelContainerProps={{ className: 'w-full gap-2' }}
