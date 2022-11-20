@@ -424,7 +424,7 @@ const CustomerProfileScreen = () => {
 				<Head>
 					<title>
 						{!user.isSuccess
-							? 'Please login first to view your data'
+							? 'Please login first to view your data, or reload the page and make sure you have a good internet connection'
 							: "Your data doesn't exist \u{1F928}"}{' '}
 						| KNOCK Plugin - Make Your Drums Knock
 					</title>
@@ -432,7 +432,7 @@ const CustomerProfileScreen = () => {
 				<section className='bg-primary-1 section-p-v1'>
 					<p>
 						{!user.isSuccess
-							? 'Please login first to view your data'
+							? 'Please login first to view your data, or reload the page and make sure you have a good internet connection'
 							: "Your data doesn't exist \u{1F928}"}
 					</p>
 				</section>
