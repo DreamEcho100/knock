@@ -158,10 +158,11 @@ const KnockSection = ({
 						<video
 							src={videoSrc}
 							autoPlay
+							muted
 							title='knock plugin'
 							loop
 							controls={false}
-							className='object-cover w-3/4 relative rounded-2xl'
+							className='object-cover w-3/4 relative rounded-3xl'
 						/>
 					)}
 				</div>
