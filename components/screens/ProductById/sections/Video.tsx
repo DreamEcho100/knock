@@ -11,7 +11,7 @@ const VideoSection = ({}: // video
 				src='/images/Rectangle 46.png'
 				width={200}
 				height={200}
-				className='pointer-events-none aspect-square absolute w-1/2 top-0 right-0 scale-150 -translate-y-[30%%] -translate-x-[40%]'
+				className='select-none aspect-square absolute w-1/2 top-0 right-0 scale-150 -translate-y-[30%%] -translate-x-[40%]'
 			/>
 			{/* <div className='relative mx-auto my-24 flex flex-col gap-8'>
 				<header className='text-center'>

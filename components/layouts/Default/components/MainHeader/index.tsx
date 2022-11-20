@@ -216,12 +216,7 @@ const MainHeader = () => {
 									)
 								}
 							>
-								<span
-									className={cx(
-										'relative pointer-events-none',
-										cartProductsCount === 0 ? '' : ''
-									)}
-								>
+								<span className='relative'>
 									<HiShoppingBag
 										className={cx(
 											'text-xl',
@@ -260,12 +255,13 @@ const MainHeader = () => {
 					</ul>
 				</div>
 				<div
+					aria-hidden={!isSmallScreenNaveOpen}
 					className={`mt-main-nav-h bg-primary-1 block lg:hidden overflow-hidden absolute top-0 right-0 left-0 w-full ${
 						isSmallScreenNaveOpen
 							? // ? 'scale-y-100'
 							  // : 'scale-y-0 opacity-0 pointer-events-none'
 							  'translate-y-0'
-							: '-translate-y-full opacity-0 pointer-events-none' // mt-0
+							: '-translate-y-full opacity-0 pointer-events-none select-none' // mt-0
 					}
 				origin-top
 				transition-all duration-300`}
@@ -332,11 +328,12 @@ const CartContainer = () => {
 	return (
 		<>
 			<div
+				aria-hidden={!isCartVisible}
 				className={cx(
 					'fixed translate-y-main-nav-h top-0 right-0 w-full h-full bg-primary-3 bg-opacity-60 transition-all',
 					isCartVisible
 						? 'duration-300'
-						: 'pointer-events-none opacity-0 duration-150'
+						: 'pointer-events-none select-none opacity-0 duration-150'
 				)}
 				onClick={() =>
 					customerGlobalActions.setIsVisibleOnly(customerDispatch, 'headerCart')

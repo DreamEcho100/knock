@@ -17,7 +17,7 @@ const HeroSection = ({
 						width={1000}
 						height={1000}
 						priority
-						className='pointer-events-none absolute top-0 right-0 left-0 bottom-0 w-full h-full object-contain scale-75 select-none'
+						className='select-none absolute top-0 right-0 left-0 bottom-0 w-full h-full object-contain scale-75'
 						style={{ transform: 'translate(18%, 2%) scale(2.4, 2)' }}
 					/>
 

@@ -93,7 +93,7 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 						src='/images/Rectangle 47.png'
 						width={200}
 						height={200}
-						className='pointer-events-none aspect-square absolute w-3/4 top-0 right-0 scale-125
+						className='select-none aspect-square absolute w-3/4 top-0 right-0 scale-125
 						md:w-1/2
 						lg:translate-x-[4%] lg:-translate-y-[4%]'
 					/>
