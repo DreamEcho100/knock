@@ -3,15 +3,27 @@ import { useAddProductsToCheckoutAndCart } from '@utils/core/hooks';
 import { priceCurrencyFormatter } from '@utils/core/shopify';
 import Button from './Button';
 import { useMemo } from 'react';
+import { cx } from 'class-variance-authority';
 
-const AddItemOnHeroSectionButton = ({ product }: { product: IProduct }) => {
+const AddItemOnHeroSectionButton = ({
+	product,
+	buttonProps: _buttonProps = {},
+	hideButton
+}: {
+	product: IProduct;
+	buttonProps?: Parameters<typeof Button>[0];
+	hideButton?: boolean;
+}) => {
 	const addProductsToCheckoutAndCart = useAddProductsToCheckoutAndCart();
 
 	const buttonProps = {
 		onClick: () =>
 			addProductsToCheckoutAndCart.mutate({
 				products: [{ ...product, quantity: 1 }]
-			})
+			}),
+		children: 'Buy it now',
+		className: 'capitalize text-h6',
+		..._buttonProps
 	};
 
 	const prices = useMemo(() => {
@@ -40,13 +52,16 @@ const AddItemOnHeroSectionButton = ({ product }: { product: IProduct }) => {
 						{prices.compareToPrice}
 					</del>
 				)}
-				<span className='text-bg-secondary-2 font-semibold'>
+				<span
+					className={cx(
+						prices.compareToPrice ? 'text-bg-secondary-2' : '',
+						'font-semibold'
+					)}
+				>
 					{prices.price}
 				</span>
 			</div>
-			<Button className='capitalize text-h6' {...buttonProps}>
-				Buy it now
-			</Button>
+			{!hideButton && <Button {...buttonProps} />}
 		</div>
 	);
 };

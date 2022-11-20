@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { cardClasses } from 'utils/core/cva';
 import { useAddProductsToCheckoutAndCart } from '@utils/core/hooks';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
+import AddItemOnHeroSectionButton from '../../AddItemOnHeroSectionButton';
 
 interface IProductCardProps
 	extends VariantProps<typeof cardClasses>,
@@ -83,6 +84,17 @@ const ExtraProductCardDetails = ({
 	toAddToCart
 }: ExtraProductCardDetails) => {
 	const addProductsToCheckoutAndCart = useAddProductsToCheckoutAndCart();
+
+	return (
+		<AddItemOnHeroSectionButton
+			product={productData}
+			buttonProps={{
+				children: 'add to cart',
+				classesIntent: { p: 'extra-wide' }
+			}}
+			hideButton={!toAddToCart}
+		/>
+	);
 
 	return (
 		<>

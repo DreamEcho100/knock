@@ -10,7 +10,7 @@ const HeroSection = () => {
 					width={800}
 					height={800}
 					priority
-					className='absolute top-0 right-0 left-0 bottom-0 w-full h-full object-contain'
+					className='pointer-events-none select-none absolute top-0 right-0 left-0 bottom-0 w-full h-full object-contain'
 					style={{ transform: 'translate(5%, -3%) scale(2.8, 2.6)' }}
 				/>
 				<div className='relative flex flex-col items-center justify-center text-center gap-4 text-primary-2 py-10 sm:p-0'>
