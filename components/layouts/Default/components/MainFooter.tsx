@@ -154,7 +154,7 @@ const MainFooter = () => {
 									<input
 										type='email'
 										name='email'
-										autoComplete='off'
+										// autoComplete='off'
 										required
 										placeholder='Email address'
 										id={`email-${formId}`}
@@ -167,8 +167,14 @@ const MainFooter = () => {
 										}}
 										disabled={subscribeToNewsLetters.isLoading}
 									/>
-									<Button type='submit' className='uppercase'>
+									<Button
+										type='submit'
+										className='uppercase'
+										classesIntent={{ rounded: 'none', p: 'wide' }}
+									>
+										<span className='p-1' />
 										subscribe
+										<span className='p-1' />
 									</Button>
 									<ToastContainer
 										position='top-right'
