@@ -99,7 +99,8 @@ const KnockSection = ({
 	title,
 	pTheme = {},
 	sectionTheme,
-	imageSrc = '/images/534aaf62a986c03ee09ee62a138d3845.gif',
+	imageSrc,
+	videoSrc = '/videos/534aaf62a986c03ee09ee62a138d3845.mp4',
 	h2theme,
 	imagesContainerTheme,
 	textContainerTheme,
@@ -116,6 +117,7 @@ const KnockSection = ({
 	sectionTheme?: VariantProps<typeof sectionClasses>;
 	sectionInnerWrapperTheme?: VariantProps<typeof sectionInnerWrapperClasses>;
 	imageSrc?: string;
+	videoSrc?: string;
 }) => {
 	return (
 		<section
@@ -142,16 +144,26 @@ const KnockSection = ({
 								'translate(8%, -2%) scale(2.4, 2.4) rotateZ(-198deg) rotateY(180deg)'
 						}}
 					/>
-
-					<CustomNextImage
-						src={imageSrc}
-						alt='knock plugin'
-						width={800}
-						height={800}
-						priority
-						unoptimized
-						className='object-cover w-3/4 relative'
-					/>
+					{imageSrc ? (
+						<CustomNextImage
+							src={imageSrc}
+							alt='knock plugin'
+							width={800}
+							height={800}
+							priority
+							unoptimized
+							className='object-cover w-3/4 relative'
+						/>
+					) : (
+						<video
+							src={videoSrc}
+							autoPlay
+							title='knock plugin'
+							loop
+							controls={false}
+							className='object-cover w-3/4 relative rounded-2xl'
+						/>
+					)}
 				</div>
 				<div className={textContainerClasses(textContainerTheme)}>
 					{
