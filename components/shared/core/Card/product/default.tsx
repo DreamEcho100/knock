@@ -8,9 +8,7 @@ import { useAddProductsToCheckoutAndCart } from '@utils/core/hooks';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 import AddItemOnHeroSectionButton from '../../AddItemOnHeroSectionButton';
 
-interface IProductCardProps
-	extends VariantProps<typeof cardClasses>,
-		Partial<IProduct> {
+interface IProductCardProps extends VariantProps<typeof cardClasses>, IProduct {
 	// images: NonNullable<IProduct['images']> // { src: string; alt?: string };
 	link: Parameters<typeof Link>['0'];
 	extraDetailsElement?: JSX.Element;
@@ -46,7 +44,8 @@ const ProductBasicCard = ({
 	link,
 	extraDetailsElement,
 	intent,
-	imageVariants
+	imageVariants,
+	title
 }: IProductCardProps) => {
 	return (
 		<div className={cardClasses({ intent })}>
@@ -58,7 +57,7 @@ const ProductBasicCard = ({
 				{images && images[0] && (
 					<CustomNextImage
 						src={images[0].src}
-						alt={images[0].altText || ''}
+						alt={images[0].altText || title || ''}
 						width={800}
 						height={800}
 						className='w-full h-full object-contain
@@ -133,15 +132,17 @@ export const ProductCardWithDetails = ({
 	//
 	price,
 	productData,
-	toAddToCart
+	toAddToCart,
+	title
 }: Omit<IProductCardProps, 'extraDetailsElement'> &
 	ExtraProductCardDetails) => {
 	return (
 		<ProductBasicCard
-			images={images}
+			// images={images}
 			link={link}
 			intent={intent}
 			imageVariants={imageVariants}
+			{...productData}
 			extraDetailsElement={
 				<ExtraProductCardDetails
 					price={price}
