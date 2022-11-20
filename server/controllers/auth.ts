@@ -13,7 +13,7 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 	const input = z
 		.object({
 			email: z.string().email(),
-			password: z.string().min(8)
+			password: z.string().min(5)
 		})
 		.parse(req.body);
 
