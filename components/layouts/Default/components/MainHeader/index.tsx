@@ -152,14 +152,19 @@ const MainHeader = () => {
 				className='relative w-full mx-auto
 				px-4 sm:px-8'
 			>
-				<div className='relative z-10 h-main-nav-h flex justify-between gap-2 sm:gap-4 text-primary-2'>
+				<div
+					className='relative z-10 h-main-nav-h flex justify-between gap-2 sm:gap-4 text-primary-2 lg:grid'
+					style={{
+						gridTemplateColumns: '12rem 1fr 12rem'
+					}}
+				>
 					<div
 						className='flex items-center justify-center text-primary-1'
 						style={{ '--sup-t': '0ch' } as CSSProperties}
 					>
 						<Logo onClick={() => setIsSmallScreenNaveOpen(false)} />
 					</div>
-					<nav className='hidden lg:flex'>
+					<nav className='hidden lg:flex lg:justify-center'>
 						<ul className='text-center flex items-center justify-center gap-10 font-semibold'>
 							{headerLinks.map((link) => (
 								<li key={link.text}>
@@ -176,7 +181,7 @@ const MainHeader = () => {
 							))}
 						</ul>
 					</nav>
-					<ul className='flex items-center justify-center gap-2 sm:gap-4'>
+					<ul className='flex items-center justify-end gap-2 sm:gap-4'>
 						<li className='block lg:hidden'>
 							<button
 								onClick={() => setIsSmallScreenNaveOpen((prev) => !prev)}

@@ -2,9 +2,6 @@ import type { IProductByIdPageProps } from '@pages/products/[productId]';
 
 import Button from '@components/shared/core/Button';
 
-import { customerGlobalActions } from '@context/Customer/actions';
-import { convertProductToCartItem } from '@utils/core/products';
-import { useSharedCustomerState } from '@context/Customer';
 import { useAddProductsToCheckoutAndCart } from '@utils/core/hooks';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 
@@ -98,10 +95,25 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 						lg:translate-x-[4%] lg:-translate-y-[4%]'
 					/>
 					<div
+						className='description-container'
 						dangerouslySetInnerHTML={{
 							__html: product.descriptionHtml
 						}}
-					></div>
+					/>
+					<style jsx global>{`
+						.description-container {
+							display: flex;
+							flex-direction: column;
+							gap: 1rem;
+						}
+						.description-container ul {
+							padding-left: 1rem;
+						}
+						[dir='rtl'] .description-container ul {
+							padding-left: 0;
+							padding-right: 1rem;
+						}
+					`}</style>
 				</div>
 			</div>
 		</section>
