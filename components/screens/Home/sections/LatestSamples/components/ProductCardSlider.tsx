@@ -40,7 +40,7 @@ const ProductCardSlider = ({
 								children: item.title,
 								href: `/products/${getIdFromGid(item.id)}`
 							}}
-							{...item}
+							productData={item}
 						/>
 					</SwiperSlide>
 				))}

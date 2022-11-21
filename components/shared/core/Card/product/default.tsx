@@ -1,22 +1,21 @@
-import { cva, cx, VariantProps } from 'class-variance-authority';
+import { cva, VariantProps } from 'class-variance-authority';
 import type { IProduct } from 'types';
 
-import Button from '@components/shared/core/Button';
 import Link from 'next/link';
 import { cardClasses } from 'utils/core/cva';
 import { useAddProductsToCheckoutAndCart } from '@utils/core/hooks';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 import AddItemOnHeroSectionButton from '../../AddItemOnHeroSectionButton';
 
-interface IProductCardProps extends VariantProps<typeof cardClasses>, IProduct {
+interface IProductCardProps extends VariantProps<typeof cardClasses> {
 	// images: NonNullable<IProduct['images']> // { src: string; alt?: string };
 	link: Parameters<typeof Link>['0'];
 	extraDetailsElement?: JSX.Element;
 	imageVariants?: VariantProps<typeof handleImageVariants>;
+	productData: IProduct;
 }
 
 interface ExtraProductCardDetails {
-	price: number;
 	toAddToCart: boolean;
 	productData: IProduct;
 }
@@ -40,12 +39,11 @@ const handleImageVariants = cva(
 );
 
 const ProductBasicCard = ({
-	images,
+	productData: { images, title },
 	link,
 	extraDetailsElement,
 	intent,
-	imageVariants,
-	title
+	imageVariants
 }: IProductCardProps) => {
 	return (
 		<div className={cardClasses({ intent })}>
@@ -78,9 +76,8 @@ const ProductBasicCard = ({
 export default ProductBasicCard;
 
 const ExtraProductCardDetails = ({
-	price,
-	productData,
-	toAddToCart
+	toAddToCart,
+	productData
 }: ExtraProductCardDetails) => {
 	const addProductsToCheckoutAndCart = useAddProductsToCheckoutAndCart();
 
@@ -94,58 +91,25 @@ const ExtraProductCardDetails = ({
 			hideButton={!toAddToCart}
 		/>
 	);
-
-	return (
-		<>
-			{productData.variants[0] &&
-			productData.variants[0].compareAtPrice?.amount ? (
-				<p className='font-semibold'>
-					<del>${productData.variants[0].compareAtPrice.amount}</del>
-					&nbsp;&nbsp;
-					<span className='text-bg-secondary-2'>${price}</span>
-				</p>
-			) : (
-				<p className='font-semibold'>${price}</p>
-			)}
-			{toAddToCart && (
-				<Button
-					className='capitalize mb-2'
-					classesIntent={{ p: 'extra-wide' }}
-					onClick={() =>
-						addProductsToCheckoutAndCart.mutate({
-							products: [{ ...productData, quantity: 1 }]
-						})
-					}
-				>
-					add to cart
-				</Button>
-			)}
-		</>
-	);
 };
 
 export const ProductCardWithDetails = ({
-	images,
 	link,
 	intent,
 	imageVariants,
 	//
-	price,
 	productData,
-	toAddToCart,
-	title
-}: Omit<IProductCardProps, 'extraDetailsElement'> &
+	toAddToCart
+}: Omit<IProductCardProps, 'extraDetailsElement' | 'productData'> &
 	ExtraProductCardDetails) => {
 	return (
 		<ProductBasicCard
-			// images={images}
 			link={link}
 			intent={intent}
 			imageVariants={imageVariants}
-			{...productData}
+			productData={productData}
 			extraDetailsElement={
 				<ExtraProductCardDetails
-					price={price}
 					productData={productData}
 					toAddToCart={toAddToCart}
 				/>

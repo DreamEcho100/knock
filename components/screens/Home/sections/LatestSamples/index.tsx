@@ -66,7 +66,7 @@ const LatestSamplesSection = ({
 										children: item.title,
 										href: `/products/${getIdFromGid(item.id)}`
 									}}
-									{...item}
+									productData={item}
 								/>
 							</div>
 						))}

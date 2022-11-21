@@ -42,7 +42,6 @@ const MerchSection = () => {
 					<ProductCardWithDetails
 						key={item.id}
 						link={{ children: item.title, href: `/products/${item.id}` }}
-						{...item}
 						toAddToCart
 						productData={(item as unknown) as IProduct}
 						intent='bottomCorners'
