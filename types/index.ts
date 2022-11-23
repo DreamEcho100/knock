@@ -30,6 +30,16 @@ export interface IProduct {
 	vendor: string;
 	publishedAt: string;
 	onlineStoreUrl: string;
+	features:[];
+	video:{
+		title:string
+		src:string
+		srcTwo:string
+	}
+	filesIncluded:{
+		count:number
+		details:[]
+	}
 	hasNextPage: {
 		value: boolean;
 	};

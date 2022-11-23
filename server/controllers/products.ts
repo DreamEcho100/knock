@@ -3,15 +3,24 @@ import { getShopifyClient } from '@utils/core/shopify';
 import { IProduct } from 'types';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
+import setFields from '@utils/common/productFields/productFields';
 
 //------------ get one product by id
 
 export const getOneProductById = async (id: string) => {
 	const client = getShopifyClient();
 
-	return (await client.product.fetch(
-		`gid://shopify/Product/${id}`
-	)) as unknown as IProduct;
+	const product:any = await client.product.fetch(`gid://shopify/Product/${id}`)
+
+
+	const newFields = setFields(product.handle)
+
+	const newProductObject = {
+		...product,
+		...newFields
+	}
+
+	return (newProductObject) as unknown as IProduct;
 };
 export const getOneProductByHandle = async (handle: string) => {
 	const client = getShopifyClient();

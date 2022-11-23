@@ -2,6 +2,9 @@ const setFields = (handle: any) => {
 	switch (handle) {
 		case 'melodies-that-knock-vol-1':
 			return {
+				description: [
+					'DECAP - Melodies That Knock Vol. 1 melodic sample pack. This kit is perfectly paired with Drums That Knock.'
+				],
 				video: {
 					title: 'Watch DECAP - Melodies That Knock Vol. 1 (DEMO)',
 					src: 'https://www.youtube.com/embed/du81OLTutOc'
@@ -18,12 +21,15 @@ const setFields = (handle: any) => {
 				],
 				filesIncluded: {
 					count: 0,
-					details: null
+					details: []
 				}
 			};
 
 		case 'melodies-that-knock-vol-2-free-download':
 			return {
+				description: [
+					'DECAP - Melodies That Knock Vol. 2 melodic sample pack. This kit is perfectly paired with Drums That Knock.'
+				],
 				video: {
 					title: 'Watch DECAP - Melodies That Knock Vol. 1 (DEMO)',
 					src: 'https://www.youtube.com/embed/T64PcrQaC-A'
@@ -38,12 +44,13 @@ const setFields = (handle: any) => {
 				],
 				filesIncluded: {
 					count: 0,
-					details: null
+					details: []
 				}
 			};
 
 		case 'drums-that-knock-vol-1':
 			return {
+				description: ['DECAP - Drums That Knock Vol. 1'],
 				video: {
 					title: 'Watch DECAP - Drums That Knock Vol. 1',
 					src: 'https://www.youtube.com/embed/EduPz5KmANk'
@@ -71,6 +78,7 @@ const setFields = (handle: any) => {
 
 		case 'drums-that-knock-vol-2':
 			return {
+				description: ['DECAP - Drums That Knock Vol. 2'],
 				video: null,
 				features: [
 					'All sounds and loops are 100% royalty free',
@@ -96,6 +104,7 @@ const setFields = (handle: any) => {
 
 		case 'drums-that-knock-vol-3':
 			return {
+				description: ['DECAP - Drums That Knock Vol. 3'],
 				video: {
 					title: 'Watch DECAP - Drums That Knock Vol. 3',
 					src: 'https://www.youtube.com/embed/23e9wz11lqA'
@@ -124,6 +133,7 @@ const setFields = (handle: any) => {
 
 		case 'drums-that-knock-vol-4':
 			return {
+				description: ['DECAP - Drums That Knock Vol. 4'],
 				video: {
 					title: 'Watch DECAP - Drums That Knock Vol. 4',
 					src: 'https://www.youtube.com/embed/zXklcm6yYdk'
@@ -153,6 +163,7 @@ const setFields = (handle: any) => {
 
 		case 'drums-that-knock-vol-5':
 			return {
+				description: ['DECAP - Drums That Knock Vol. 5'],
 				video: {
 					title: 'Watch DECAP - Drums That Knock Vol. 5',
 					src: 'https://www.youtube.com/embed/Vrn2jOXbtXU'
@@ -184,6 +195,7 @@ const setFields = (handle: any) => {
 
 		case 'drums-that-knock-vol-6':
 			return {
+				description: ['DECAP - Drums That Knock Vol. 6'],
 				video: {
 					title: 'Watch DECAP - Drums That Knock Vol. 6',
 					src: 'https://www.youtube.com/embed/aDbjb5wlos0'
@@ -216,6 +228,9 @@ const setFields = (handle: any) => {
 
 		case 'drums-that-knock-vol-7':
 			return {
+				description: [
+					'DECAP - Drums That Knock Vol.7 is now available, with top notch original sounds for use in your production.'
+				],
 				video: {
 					title: 'Watch DECAP - Drums That Knock Vol. 7',
 					src: 'https://www.youtube.com/embed/OrXT2MpwHEg'
@@ -251,6 +266,9 @@ const setFields = (handle: any) => {
 
 		case 'drums-that-knock-vol-8':
 			return {
+				description: [
+					'DECAP - Drums That Knock Vol. 8 is now available, with top notch original sounds for your production.'
+				],
 				video: {
 					title: 'Watch DECAP - Drums That Knock Vol. 8',
 					src: 'https://www.youtube.com/embed/YNKkxd2aPzI'
@@ -288,6 +306,11 @@ const setFields = (handle: any) => {
 
 		case 'drums-that-knock-vol-9':
 			return {
+				description: [
+					'DECAP - Drums That Knock Vol. 9 is available now, with top notch original sounds for your production.',
+					'All BRAND NEW, never heard before sounds designed from scratch by DECAP. Premium quality, groundbreaking as always.',
+					'Many of the sounds in this kit were run through Studer, and Telefunken tape machines, EMU SP-12 (crazy on the 808s) and other analog gear for extra depth, width and texture. '
+				],
 				video: {
 					title: 'Watch DECAP - Drums That Knock Vol. 9',
 					src: 'https://www.youtube.com/embed/j1Fj0gm2GXE'
@@ -325,6 +348,11 @@ const setFields = (handle: any) => {
 
 		case 'drums-that-knock-free-download':
 			return {
+				description: [
+					'DECAP - Drums That Knock Free Vol. 1 (Free Download)',
+					'All BRAND NEW, never heard before sounds designed from scratch by DECAP. Premium quality, groundbreaking as always.',
+					'Download this free drum kit right now, and make some 🔥'
+				],
 				video: null,
 				features: [
 					'All sounds and loops are 100% royalty free - no clearance required',
@@ -353,6 +381,11 @@ const setFields = (handle: any) => {
 
 		case 'drums-that-knock-x':
 			return {
+				description: [
+					"The long awaited 10th volume of DECAP's Drums That Knock series, DRUMS THAT KNOCK X is available now, with top notch original sounds for your production.",
+					'All BRAND NEW, never heard before sounds designed from scratch by DECAP. Premium quality, groundbreaking as always.',
+					"Many of the sounds in this kit were run through analog saturation, analog compression and analog tape for extra depth, width and texture. DECAP's plugin, KNOCK was also used for additional punch and character when designing these sounds."
+				],
 				video: {
 					title: 'Watch DRUMS THAT KNOCK X',
 					src: 'https://www.youtube.com/embed/p-wek5z59IA',
@@ -394,6 +427,12 @@ const setFields = (handle: any) => {
 
 		case 'complete-knock-bundle-v2-all-digital-products':
 			return {
+				description: [
+					'DECAP - Complete Knock Bundle (Version 2)',
+					"This is truly the last drum kit bundle you'll ever need!",
+					'This bundle features every digital product available on the Drums That Knock store, including Drums That Knock Limited Edition, which was previously only available for a short time during Black Friday 2021. You get 15 total products!'
+				],
+				features:[],
 				video: null,
 				filesIncluded: {
 					count: null,
@@ -417,6 +456,41 @@ const setFields = (handle: any) => {
 				}
 			};
 
+		case 'decap-ableton-live-masterclass':
+			return {
+				description: [
+					'DECAP - Ableton Masterclass',
+					"Level: Intermediate / Advanced ",
+					"In this live 47 minute deep dive Masterclass, DECAP (Billboard Top 10, Platinum Certified Producer) dives into some intermediate / advanced production and sound design techniques during the track breakdown of his release 'Who's There?!'."
+				],
+				video: {
+					title:"Free Preview:",
+					src:"https://www.youtube.com/embed/LwIgcY5CpjI"
+				},
+				features:[],
+				filesIncluded: {
+					count: null,
+					details: [
+						'0:00-4:00 Introduction',
+						"4:17-10:50 Kick sound design from scratch, Hi hat sound design from scratch in operator, drum arrangement",
+						"10:50-15:54 808 bass sound design in wavetable, 808 processing",
+						"15:54-17:13 Going with the creative flow, feel the energy",
+						"17:20-18:05 Add width to 808",
+						"18:20-21:28 Making sound fx in wavetable",
+						"21:28-24:41 Finding the sweet spot, creative sound design, no limits",
+						"24:54-25:43 Vocal chops",
+						"25:43-28:34 Pluck sound design from scratch in Wavetable",
+						"28:45-30:58 Bridge section, pitching vocals, rhodes fx, sidechain compression",
+						"30:58-32:44 Vocal chain: How to make a bad vocal sound good",
+						"32:44-35:48 Building up the intro with FX, frequency shifter",
+						"35:55-38:24 Master chain + explanation",
+						"38:35-41:24 Proper stereo imaging explained",
+						"41:39-43:36 Balancing productivity and creative sound design",
+						"43:46-44:44 Why I don't layer drums, how to layer properly if you do",
+						"44:44-End Learn the rules to break them"
+					]
+				}
+			};
 		default:
 			break;
 	}
