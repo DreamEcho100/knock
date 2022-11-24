@@ -43,7 +43,8 @@ const deleteAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
-					process.env.SHOPIFY_STOREFRONT_API_TOKEN
+					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
+				'accept-encoding': 'null'
 			}
 		}
 	);
@@ -140,7 +141,8 @@ const addAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
-					process.env.SHOPIFY_STOREFRONT_API_TOKEN
+					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
+				'accept-encoding': 'null'
 			}
 		}
 	);
@@ -200,7 +202,8 @@ const defaultAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
-					process.env.SHOPIFY_STOREFRONT_API_TOKEN
+					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
+				'accept-encoding': 'null'
 			}
 		}
 	);
@@ -282,7 +285,8 @@ const editAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
-					process.env.SHOPIFY_STOREFRONT_API_TOKEN
+					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
+				'accept-encoding': 'null'
 			}
 		}
 	);
@@ -333,7 +337,8 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
-					process.env.SHOPIFY_STOREFRONT_API_TOKEN
+					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
+				'accept-encoding': 'null'
 			}
 		}
 	);
@@ -370,23 +375,23 @@ const resetPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 		.parse(req.body);
 
 	const customer = gql`
-	mutation customerResetByUrl($password: String!, $resetUrl: URL!) {
-		customerResetByUrl(password: $password, resetUrl: $resetUrl) {
-		  customer {
-			id
-			email
-		  }
-		  customerAccessToken {
-			accessToken
-			expiresAt
-		  }
-		  customerUserErrors {
-			code
-			field
-			message
-		  }
+		mutation customerResetByUrl($password: String!, $resetUrl: URL!) {
+			customerResetByUrl(password: $password, resetUrl: $resetUrl) {
+				customer {
+					id
+					email
+				}
+				customerAccessToken {
+					accessToken
+					expiresAt
+				}
+				customerUserErrors {
+					code
+					field
+					message
+				}
+			}
 		}
-	  }
 	`;
 	const response = await axios.post(
 		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
@@ -401,14 +406,13 @@ const resetPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
-					process.env.SHOPIFY_STOREFRONT_API_TOKEN
+					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
+				'accept-encoding': 'null'
 			}
 		}
 	);
 
-	console.log('====================================');
-	console.log(response.data);
-	console.log('====================================');
+
 
 	if (response.data.errors) {
 		res.statusCode = 404;
@@ -512,7 +516,8 @@ const updateOneController = async (
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
-					process.env.SHOPIFY_STOREFRONT_API_TOKEN
+					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
+				'accept-encoding': 'null'
 			}
 		}
 	);
@@ -758,7 +763,8 @@ const getOneOrderForOneClientByIdController = async (
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
-					process.env.SHOPIFY_STOREFRONT_API_TOKEN
+					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
+				'accept-encoding': 'null'
 			}
 		}
 	);
@@ -800,7 +806,7 @@ const subscribeToNewsLetters = async (
 		let createContact = new SibApiV3Sdk.CreateContact();
 
 		createContact.email = email;
-		createContact.listIds = [51]
+		createContact.listIds = [51];
 		const response = await apiInstance.createContact(createContact);
 
 		return res.status(200).json({
