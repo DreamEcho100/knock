@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import classes from '../../../styles/accountPages.module.scss';
+import classes from '@styles/accountPages.module.scss';
 import FormField from '@components/shared/core/FieldForm';
 import Button from '@components/shared/core/Button';
 import { toast } from 'react-toastify';
@@ -68,7 +68,7 @@ const ActivatePage = () => {
 					<h4>ACTIVATE ACCOUNT</h4>
 					<p>To activate your account, choose a password and enter it below.</p>
 					<FormField
-						values={formValues.password}
+						values={formValues}
 						setValues={setValues}
 						name='password'
 						type='password'
@@ -77,7 +77,7 @@ const ActivatePage = () => {
 						minLength={3}
 					/>
 					<FormField
-						values={formValues.confirmPassword}
+						values={formValues}
 						setValues={setValues}
 						name='confirmPassword'
 						type='password'
