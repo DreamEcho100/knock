@@ -1,8 +1,14 @@
+import { type CSSProperties } from 'react';
 import Wrapper from './components/Wrapper';
 
 const PrivatePoliciesScreen = () => {
 	return (
 		<Wrapper
+			sectionProps={{
+				style: {
+					'--ul-li-style': 'url(/svgs/gray-circle.svg)'
+				} as CSSProperties
+			}}
 			header={{
 				pChildren: (
 					<>

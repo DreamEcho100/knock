@@ -1,8 +1,14 @@
+import { type CSSProperties } from 'react';
 import Wrapper from './components/Wrapper';
 
 const ShippingPolicyScreen = () => {
 	return (
 		<Wrapper
+			sectionProps={{
+				style: {
+					'--ul-li-style': 'url(/svgs/gray-circle.svg)'
+				} as CSSProperties
+			}}
 			header={{
 				h1Children: 'shipping policy'
 			}}
