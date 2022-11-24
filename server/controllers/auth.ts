@@ -50,7 +50,8 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
-					process.env.SHOPIFY_STOREFRONT_API_TOKEN
+					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
+				'accept-encoding': 'null'
 			}
 		}
 	);
@@ -68,31 +69,33 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 const activate = async (req: NextApiRequest, res: NextApiResponse) => {
-
-	const input = z.object({
-		activationUrl:z.string(),
-		password:z.string().min(8)
-	}).parse(req.body)
-
-
+	const input = z
+		.object({
+			activationUrl: z.string(),
+			password: z.string().min(8)
+		})
+		.parse(req.body);
 
 	const customer = gql`
-	mutation customerActivateByUrl($activationUrl: URL!, $password: String!) {
-		customerActivateByUrl(activationUrl: $activationUrl, password: $password) {
-		  customer {
-			id
-		  }
-		  customerAccessToken {
-			accessToken
-			expiresAt
-		  }
-		  customerUserErrors {
-			code
-			field
-			message
-		  }
+		mutation customerActivateByUrl($activationUrl: URL!, $password: String!) {
+			customerActivateByUrl(
+				activationUrl: $activationUrl
+				password: $password
+			) {
+				customer {
+					id
+				}
+				customerAccessToken {
+					accessToken
+					expiresAt
+				}
+				customerUserErrors {
+					code
+					field
+					message
+				}
+			}
 		}
-	  }
 	`;
 
 	const response = await axios.post(
@@ -100,15 +103,16 @@ const activate = async (req: NextApiRequest, res: NextApiResponse) => {
 		{
 			query: print(customer),
 			variables: {
-				activationUrl:input.activationUrl,
-				password:input.password
+				activationUrl: input.activationUrl,
+				password: input.password
 			}
 		},
 		{
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
-					process.env.SHOPIFY_STOREFRONT_API_TOKEN
+					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
+				'accept-encoding': 'null'
 			}
 		}
 	);
@@ -121,11 +125,10 @@ const activate = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	return res.status(200).json({
 		success: true,
-		message: "You're account is activated successfully"
+		message: "You're account is activated successfully",
+		user: response.data.data.customerActivateByUrl
 	});
-
 };
-
 
 const checkToken = async (
 	req: NextApiRequest & { params: Record<string, any> },
@@ -253,7 +256,8 @@ const checkToken = async (
 				headers: {
 					'Content-Type': 'application/json',
 					'X-Shopify-Storefront-Access-Token':
-						process.env.SHOPIFY_STOREFRONT_API_TOKEN
+						process.env.SHOPIFY_STOREFRONT_API_TOKEN,
+					'accept-encoding': 'null'
 				}
 			}
 		);
@@ -308,7 +312,8 @@ const logout = async (req: NextApiRequest, res: NextApiResponse) => {
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
-					process.env.SHOPIFY_STOREFRONT_API_TOKEN
+					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
+				'accept-encoding': 'null'
 			}
 		}
 	);
@@ -381,7 +386,8 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
-					process.env.SHOPIFY_STOREFRONT_API_TOKEN
+					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
+				'accept-encoding': 'null'
 			}
 		}
 	);

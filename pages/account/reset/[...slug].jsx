@@ -4,6 +4,7 @@ import FormField from '@components/shared/core/FieldForm';
 import Button from '@components/shared/core/Button';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { setCookie } from '@utils/common/storage/cookie/document';
 
 const getAppApiPath = () =>
 	typeof window === 'undefined'
@@ -39,6 +40,16 @@ const ResetPage = () => {
 				data
 			);
 			if (response) {
+				setCookie(
+					'user-access-token',
+					JSON.stringify({
+						accessToken: response.data.user.customerAccessToken.accessToken,
+						expiresAt: response.data.user.customerAccessToken.expiresAt
+					}),
+					{
+						expires: new Date(response.data.user.customerAccessToken.expiresAt)
+					}
+				);
 				return toast.success(response.data.message);
 			}
 		} catch (error) {
