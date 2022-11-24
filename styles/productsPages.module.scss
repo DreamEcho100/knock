@@ -1,0 +1,319 @@
+
+
+.productPageContainer{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px ;
+
+    & > div:nth-child(2){
+        text-align: left;
+        margin-top: 2em;
+        width: 90%;
+        &> p:nth-child(1){
+            font-weight: 700;
+            font-size: 1.75rem;
+            color: white;
+        }
+        p{
+            font-size: 1.25rem;
+            color: #e5e7eb;
+            margin: 1em 0;
+        }
+    }
+}
+
+
+
+.ProductCardDetailsContainer{
+    display: flex;
+    justify-content: center;
+    & > div:nth-child(1){
+        top: 100px;
+        right: 100px;
+        position: absolute;
+        width: 300px;
+        height: 250px;
+        background-color: #7548fe;
+        filter: blur(150px);
+    }
+}
+
+.ProductCardDetails{
+    z-index: 1;
+    border-radius: 25px;
+    text-align: center;
+    margin: 100px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    background-color: #1A1B1D;
+    & > div:nth-child(1){
+        display: flex;
+        width: 100%;
+        img{
+        border-radius: 25px 25px 0 0;
+        width: 100%;
+        }
+    }
+
+    & > div:nth-child(2){
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        
+        h4{
+            padding: .5em;
+            font-weight: 700;
+            font-size: 2rem;
+            color: white;
+        }
+    
+        p{
+            padding: .3em;
+            font-size: 1.25rem;
+            img{
+                display: inline;
+                width: 65px;
+                height: 15px;
+            }
+        }
+    
+        span{
+            color: #7548fe;
+        }
+        div{
+            margin: .5em;
+        }
+
+        img{
+            width: 80%;
+        }
+    }
+  
+}
+
+.cardsPayments{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.productPageFeatures{
+
+    width: 90%;
+    
+    & > div:nth-child(2){
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        gap: 1.75em;
+        margin: 100px 0;
+        width: 100%;
+        & > ul:nth-child(1){
+            padding: 3em;
+            border-radius: 25px;
+            background-color: #1a1b1d;
+            width: 100%;
+            z-index: 1;
+        }
+        & > ul:nth-child(2){
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            padding: 3em;
+            border-radius: 25px;
+            background-color: #1A1B1D;
+            width: 100%;
+            z-index: 1;
+            & > li:nth-child(1){
+                color: white;
+                font-weight: 700;
+            }
+            & > li:nth-child(1)::before{
+                content: "\2022";  
+            color: transparent; 
+            font-weight: bold; 
+            display: inline-block; 
+            font-size: 1.75em;
+            width: 1em; 
+            margin-left: -2em; 
+            }
+        }
+        ul li::before {
+            content: "\2022";  
+            color: #7548fe; 
+            font-weight: bold; 
+            display: inline-block; 
+            font-size: 1.75em;
+            width: 1em; 
+            margin-left: -1em; 
+        }
+    }
+}
+
+
+
+.productPageYoutubeSections{
+    margin: 150px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+    width: 100%;
+    h4{
+        z-index: 1;
+        padding: .5em;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: white;
+    }
+    
+    & > div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        gap: 2em;
+        iframe{
+            z-index: 1;
+            border-radius: 25px;
+            width: 60%;
+            height: 400px;
+        }
+        @media (max-width:1024px) {
+            
+            iframe{
+                width: 90%;
+            }
+        }
+    }
+    @media (min-width:1024px) {
+            
+        & > div{
+        flex-direction: row;
+        }
+    }
+}
+
+
+.overLayFeaturesSection{
+    margin:100px;
+    left: 0;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: rgb(255, 0, 0);
+    filter: blur(200px);
+}
+
+.overLayYoutubeSection{
+    right: 200px;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: rgb(44, 226, 165);
+    filter: blur(200px);
+}
+
+.productPageDetailsUl{
+    height: 100% !important; 
+}
+
+
+// desktop 
+
+@media (min-width:1024px) {
+    .productPageFeatures{
+        justify-content: center;
+        display: flex;
+        flex-direction: row;
+        gap: 2em;
+        width: 100%;
+        
+        & > div:nth-child(2){
+            flex-direction: row;
+            justify-content: center;
+            & > ul:nth-child(1){
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                height: 680px;
+                width: 80%;
+            }
+        
+            & > ul:nth-child(2){
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                height: 680px;
+                width: 80%;
+            }
+        }
+
+    }
+    .ProductCardDetails{
+        border-radius: 25px;
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+        text-align: left;
+        width: 80%;
+        & > div:nth-child(1){
+            width: 600px;
+            height: 100%;
+            display: block;
+            margin: 0;
+            img{
+                height: 100%;
+                border-radius: 0px 0px  0px 0px ;
+            }
+        }
+    
+        & > div:nth-child(2){
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-evenly;
+            gap: .5em;
+            img{
+                width: 70%;
+            }
+            div{
+                display: flex;
+                align-items: center;
+                gap: 2em;
+                button{
+                    width: 50%;
+                }
+            }
+            h4{
+                font-size: 2.25rem;
+            }
+        
+            p{
+                margin-left: .5em;
+                font-size: 1.35rem;
+                img{
+                    display: inline;
+                    width: 65px;
+                    height: 15px;
+                }
+            }
+        }
+        
+    }
+
+    .productPageContainer{
+
+    
+        & > div:nth-child(2){
+            text-align: center;
+            width: 70%;
+        }
+    }
+}
