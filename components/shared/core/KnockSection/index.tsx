@@ -138,7 +138,7 @@ const KnockSection = ({
 						width={800}
 						height={800}
 						priority
-						className='select-none absolute top-0 right-0 left-0 bottom-0 w-full h-full object-contain scale-150'
+						className='pointer-events-none select-none absolute top-0 right-0 left-0 bottom-0 w-full h-full object-contain scale-150'
 						style={{
 							transform:
 								'translate(8%, -2%) scale(2.4, 2.4) rotateZ(-198deg) rotateY(180deg)'

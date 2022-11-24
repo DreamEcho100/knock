@@ -55,7 +55,7 @@ const DigitalProductsSection = ({
 
 	return (
 		<section className='bg-primary-1 section-p-v1 relative'>
-			<div className='select-none grid grid-rows-4 justify-items-center items-center absolute top-0 right-0 bottom-0 left-0 w-full h-full'>
+			<div className='pointer-events-none select-none grid grid-rows-4 justify-items-center items-center absolute top-0 right-0 bottom-0 left-0 w-full h-full'>
 				<CustomNextImage
 					className='w-full h-full object-contain scale-x-[2.5] scale-y-[2] translate-y-[20%]'
 					src='/images/Rectangle 47.png'

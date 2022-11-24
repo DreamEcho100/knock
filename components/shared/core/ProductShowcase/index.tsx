@@ -77,7 +77,7 @@ const ProductShowcase = ({
 							src='/images/Rectangle 47.png'
 							width={800}
 							height={500}
-							className={`${backgroundImgClassName} select-none object-contain mx-auto w-full h-full scale-[2.25] translate-y-[12.5%]`}
+							className={`${backgroundImgClassName} pointer-events-none select-none object-contain mx-auto w-full h-full scale-[2.25] translate-y-[12.5%]`}
 							{...backgroundImgProps}
 						/>
 					</div>

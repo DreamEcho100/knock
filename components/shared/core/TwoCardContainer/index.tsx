@@ -31,7 +31,7 @@ const TwoCardContainer = ({
 					src='/images/Rectangle 48.png'
 					width={200}
 					height={200}
-					className='select-none aspect-square absolute w-1/2 top-0 left-0 scale-150 -translate-y-1/3 -translate-x-1/4'
+					className='pointer-events-none select-none aspect-square absolute w-1/2 top-0 left-0 scale-150 -translate-y-1/3 -translate-x-1/4'
 				/>
 			)}
 			<div className='relative max-w-lg flex flex-col gap-5 bg-primary-4 px-10 py-8 rounded-3xl w-full lg:w-1/2 lg:max-w-[420px]'>

@@ -32,10 +32,7 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 								{product.title}
 							</h1>
 							<p>${product.variants[0].price.amount}</p>
-							<p>
-								<span className='text-bg-secondary-1'>Shipping</span>
-								&nbsp;calculated at checkout.
-							</p>
+
 							<p className=''>
 								Pay in 4 interest-free installments of $12.50 with
 								<span
@@ -90,7 +87,7 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 						src='/images/Rectangle 47.png'
 						width={200}
 						height={200}
-						className='select-none aspect-square absolute w-3/4 top-0 right-0 scale-125
+						className='pointer-events-none select-none aspect-square absolute w-3/4 top-0 right-0 scale-125
 						md:w-1/2
 						lg:translate-x-[4%] lg:-translate-y-[4%]'
 					/>

@@ -56,7 +56,7 @@ const ShapesYourDrumsSection = () => {
 					src='/images/Pattern[1].png'
 					width={800}
 					height={800}
-					className='select-none left-0 w-full h-full object-cover scale-[2]'
+					className='pointer-events-none select-none left-0 w-full h-full object-cover scale-[2]'
 				/>
 			</div>
 			<div
@@ -70,7 +70,7 @@ const ShapesYourDrumsSection = () => {
 					src='/images/Rectangle 105.png'
 					width={800}
 					height={800}
-					className='select-none left-0 w-full h-full'
+					className='pointer-events-none select-none left-0 w-full h-full'
 				/>
 			</div>
 			<div
