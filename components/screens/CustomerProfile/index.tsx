@@ -247,8 +247,8 @@ const UpdateUserBasicDetails = ({
 			!user.data ||
 			(user.data &&
 				user.data.email.trim() === formValues.email.trim() &&
-				user.data.firstName.trim() === formValues.firstName.trim() &&
-				user.data.lastName.trim() === formValues.lastName.trim() &&
+				user.data?.firstName?.trim() === formValues?.firstName?.trim() &&
+				user.data?.lastName?.trim() === formValues?.lastName?.trim() &&
 				user.data.acceptsMarketing === formValues.acceptsMarketing)
 		)
 			return false;

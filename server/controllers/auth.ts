@@ -68,21 +68,31 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 const activate = async (req: NextApiRequest, res: NextApiResponse) => {
-	const { id, activationToken, password } = req.body;
+
+	const input = z.object({
+		activationUrl:z.string(),
+		password:z.string().min(8)
+	}).parse(req.body)
+
+
 
 	const customer = gql`
-		mutation customerActivate($id: ID!, $input: CustomerActivateInput!) {
-			customerActivate(id: $id, input: $input) {
-				customerUserErrors {
-					code
-					field
-					message
-				}
-				customer {
-					id
-				}
-			}
+	mutation customerActivateByUrl($activationUrl: URL!, $password: String!) {
+		customerActivateByUrl(activationUrl: $activationUrl, password: $password) {
+		  customer {
+			id
+		  }
+		  customerAccessToken {
+			accessToken
+			expiresAt
+		  }
+		  customerUserErrors {
+			code
+			field
+			message
+		  }
 		}
+	  }
 	`;
 
 	const response = await axios.post(
@@ -90,11 +100,8 @@ const activate = async (req: NextApiRequest, res: NextApiResponse) => {
 		{
 			query: print(customer),
 			variables: {
-				id,
-				input: {
-					activationToken,
-					password
-				}
+				activationUrl:input.activationUrl,
+				password:input.password
 			}
 		},
 		{
@@ -106,20 +113,19 @@ const activate = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	);
 
-	if (
-		response.data.data.customerActivate.customerUserErrors[0].code ===
-		'ALREADY_ENABLED'
-	) {
+	if (response.data.data.customerActivateByUrl.customerUserErrors.length) {
 		throw new Error(
-			response.data.data.customerActivate.customerUserErrors[0].message
+			response.data.data.customerActivateByUrl.customerUserErrors[0].message
 		);
 	}
 
 	return res.status(200).json({
 		success: true,
-		message: 'We have sent you an email to confirm'
+		message: "You're account is activated successfully"
 	});
+
 };
+
 
 const checkToken = async (
 	req: NextApiRequest & { params: Record<string, any> },

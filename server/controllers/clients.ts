@@ -364,45 +364,37 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 const resetPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 	const input = z
 		.object({
-			id: z.string(),
 			password: z.string().min(8),
-			resetToken: z.string()
+			resetUrl: z.string()
 		})
 		.parse(req.body);
 
 	const customer = gql`
-		mutation customerReset($id: ID!, $input: CustomerResetInput!) {
-			customerReset(id: $id, input: $input) {
-				customer {
-					id
-					email
-					firstName
-					lastName
-					phone
-					updatedAt
-				}
-				customerAccessToken {
-					accessToken
-					expiresAt
-				}
-				customerUserErrors {
-					code
-					field
-					message
-				}
-			}
+	mutation customerResetByUrl($password: String!, $resetUrl: URL!) {
+		customerResetByUrl(password: $password, resetUrl: $resetUrl) {
+		  customer {
+			id
+			email
+		  }
+		  customerAccessToken {
+			accessToken
+			expiresAt
+		  }
+		  customerUserErrors {
+			code
+			field
+			message
+		  }
 		}
+	  }
 	`;
 	const response = await axios.post(
 		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
-				id: `gid://shopify/Customer/${input.id}`,
-				input: {
-					password: input.password,
-					resetToken: input.resetToken
-				}
+				password: input.password,
+				resetUrl: input.resetUrl
 			}
 		},
 		{
@@ -414,25 +406,29 @@ const resetPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	);
 
+	console.log('====================================');
+	console.log(response.data);
+	console.log('====================================');
+
 	if (response.data.errors) {
 		res.statusCode = 404;
 		throw new Error(response.data.errors[0].message);
 	}
 
 	if (
-		response.data.data.customerReset &&
-		response.data.data.customerReset.customerUserErrors.length
+		response.data.data.customerResetByUrl &&
+		response.data.data.customerResetByUrl.customerUserErrors.length
 	) {
 		res.statusCode = 404;
 		throw new Error(
-			response.data.data.customerReset.customerUserErrors[0].message
+			response.data.data.customerResetByUrl.customerUserErrors[0].message
 		);
 	}
 
 	return res.status(200).json({
 		success: true,
 		message: 'Reset password done successfully',
-		user: response.data.data.customerReset
+		user: response.data.data.customerResetByUrl
 	});
 };
 
