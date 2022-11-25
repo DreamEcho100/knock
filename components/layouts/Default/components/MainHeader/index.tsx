@@ -396,7 +396,7 @@ const CartContainer = () => {
 														)
 													}
 												>
-													{product.title}
+													{product.variant.product.handle === "knockclipper-pluginboutique" ? "KNOCK Clipper" : product.title}
 												</Link>
 											</h4>
 											<p title='price per product'>${product.price}</p>
