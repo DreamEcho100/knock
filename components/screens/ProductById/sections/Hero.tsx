@@ -11,12 +11,80 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 	const renderFeature = () => {
 		switch (product.handle) {
 			case 'decap-ableton-live-masterclass':
+			case 'complete-knock-bundle-v2-all-digital-products':
 				return (
-					<div className={classes.productPageFeatures}>
-						<div className={classes.overLayFeatures}></div>
+					<div>
 						<div>
+							{(product.description as unknown as any[]).map(
+								(el: any, index: any) => (
+									<p key={index}> {el} </p>
+								)
+							)}
+						</div>
+						<div className={classes.productPageFeaturesWithOneBox}>
+							<div className={classes.overLayFeatures}></div>
+							<div>
+								{product.filesIncluded.details.length ? (
+									<ul className={classes.productPageDetailsUl}>
+										{product.filesIncluded.details.map((el, index) => (
+											<li key={index}>{el}</li>
+										))}
+									</ul>
+								) : (
+									''
+								)}
+							</div>
+						</div>
+					</div>
+				);
+
+			case 'melodies-that-knock-vol-1':
+			case 'melodies-that-knock-vol-2-free-download':
+				return (
+					<div>
+						<div className={classes.productPageFeaturesWithOneBox}>
+							<div className={classes.overLayFeatures}></div>
+							<div>
+								{product.features.length ? (
+									<ul className={classes.productPageDetailsUl}>
+										{product.features.map((el, index) => (
+											<li key={index}>{el}</li>
+										))}
+									</ul>
+								) : (
+									''
+								)}
+							</div>
+						</div>
+					</div>
+				);
+
+			case 'drums-that-knock-vol-1':
+			case 'drums-that-knock-vol-2':
+			case 'drums-that-knock-vol-3':
+			case 'drums-that-knock-vol-4':
+				return (
+					<div className={classes.productPageFeaturesSmallBox}>
+						<div className={classes.overLayFeaturesSection}></div>
+						<div>
+							{product.features.length ? (
+								<ul className={classes.productPageFeaturesBox}>
+									{product.features.map((el: any, index: any) => (
+										<li key={index}>{el}</li>
+									))}
+								</ul>
+							) : (
+								''
+							)}
 							{product.filesIncluded.details.length ? (
-								<ul className={classes.productPageDetailsUl}>
+								<ul className={classes.productPageFeaturesBox}>
+									{product.filesIncluded.count ? (
+										<li className={classes.productPageIncludeLi}>
+											include: {product.filesIncluded.count} files
+										</li>
+									) : (
+										''
+									)}
 									{product.filesIncluded.details.map((el, index) => (
 										<li key={index}>{el}</li>
 									))}
@@ -68,17 +136,10 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 		<section className={classes.productPageSection}>
 			<div className={classes.productPageContainer}>
 				<ProductDetails product={product} />
-				<div>
-					{(product.description as unknown as any[]).map(
-						(el: any, index: any) => (
-							<p key={index}> {el} </p>
-						)
-					)}
-				</div>
+
 				{renderFeature()}
 				{product.video ? (
 					<div className={classes.productPageYoutubeSections}>
-						<h4>{product.video.title}</h4>
 						<div>
 							<div className={classes.overLayYoutubeSection}></div>
 							<iframe src={product.video.src} />
@@ -88,6 +149,7 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 								''
 							)}
 						</div>
+						<h4>{product.video.title}</h4>
 					</div>
 				) : (
 					''

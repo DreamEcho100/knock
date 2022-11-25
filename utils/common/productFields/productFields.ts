@@ -6,7 +6,7 @@ const setFields = (handle: any) => {
 					'DECAP - Melodies That Knock Vol. 1 melodic sample pack. This kit is perfectly paired with Drums That Knock.'
 				],
 				video: {
-					title: 'Watch DECAP - Melodies That Knock Vol. 1 (DEMO)',
+					title: '',
 					src: 'https://www.youtube.com/embed/du81OLTutOc'
 				},
 				features: [
@@ -31,7 +31,7 @@ const setFields = (handle: any) => {
 					'DECAP - Melodies That Knock Vol. 2 melodic sample pack. This kit is perfectly paired with Drums That Knock.'
 				],
 				video: {
-					title: 'Watch DECAP - Melodies That Knock Vol. 1 (DEMO)',
+					title: '',
 					src: 'https://www.youtube.com/embed/T64PcrQaC-A'
 				},
 				features: [
@@ -52,7 +52,7 @@ const setFields = (handle: any) => {
 			return {
 				description: ['DECAP - Drums That Knock Vol. 1'],
 				video: {
-					title: 'Watch DECAP - Drums That Knock Vol. 1',
+					title: '',
 					src: 'https://www.youtube.com/embed/EduPz5KmANk'
 				},
 				features: [
@@ -106,7 +106,7 @@ const setFields = (handle: any) => {
 			return {
 				description: ['DECAP - Drums That Knock Vol. 3'],
 				video: {
-					title: 'Watch DECAP - Drums That Knock Vol. 3',
+					title: '',
 					src: 'https://www.youtube.com/embed/23e9wz11lqA'
 				},
 				features: [
@@ -135,7 +135,7 @@ const setFields = (handle: any) => {
 			return {
 				description: ['DECAP - Drums That Knock Vol. 4'],
 				video: {
-					title: 'Watch DECAP - Drums That Knock Vol. 4',
+					title: '',
 					src: 'https://www.youtube.com/embed/zXklcm6yYdk'
 				},
 				features: [
@@ -165,7 +165,7 @@ const setFields = (handle: any) => {
 			return {
 				description: ['DECAP - Drums That Knock Vol. 5'],
 				video: {
-					title: 'Watch DECAP - Drums That Knock Vol. 5',
+					title: '',
 					src: 'https://www.youtube.com/embed/Vrn2jOXbtXU'
 				},
 				features: [
@@ -197,7 +197,7 @@ const setFields = (handle: any) => {
 			return {
 				description: ['DECAP - Drums That Knock Vol. 6'],
 				video: {
-					title: 'Watch DECAP - Drums That Knock Vol. 6',
+					title: '',
 					src: 'https://www.youtube.com/embed/aDbjb5wlos0'
 				},
 				features: [
@@ -232,7 +232,7 @@ const setFields = (handle: any) => {
 					'DECAP - Drums That Knock Vol.7 is now available, with top notch original sounds for use in your production.'
 				],
 				video: {
-					title: 'Watch DECAP - Drums That Knock Vol. 7',
+					title: '',
 					src: 'https://www.youtube.com/embed/OrXT2MpwHEg'
 				},
 				features: [
@@ -270,7 +270,7 @@ const setFields = (handle: any) => {
 					'DECAP - Drums That Knock Vol. 8 is now available, with top notch original sounds for your production.'
 				],
 				video: {
-					title: 'Watch DECAP - Drums That Knock Vol. 8',
+					title: '',
 					src: 'https://www.youtube.com/embed/YNKkxd2aPzI'
 				},
 				features: [
@@ -312,7 +312,7 @@ const setFields = (handle: any) => {
 					'Many of the sounds in this kit were run through Studer, and Telefunken tape machines, EMU SP-12 (crazy on the 808s) and other analog gear for extra depth, width and texture. '
 				],
 				video: {
-					title: 'Watch DECAP - Drums That Knock Vol. 9',
+					title: '',
 					src: 'https://www.youtube.com/embed/j1Fj0gm2GXE'
 				},
 				features: [
@@ -363,7 +363,7 @@ const setFields = (handle: any) => {
 					'All sounds and loops are compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, Bitwig, etc)'
 				],
 				filesIncluded: {
-					count: null,
+					count: 'those',
 					details: [
 						'808s + Bass',
 						'Drum loops',
@@ -387,7 +387,7 @@ const setFields = (handle: any) => {
 					"Many of the sounds in this kit were run through analog saturation, analog compression and analog tape for extra depth, width and texture. DECAP's plugin, KNOCK was also used for additional punch and character when designing these sounds."
 				],
 				video: {
-					title: 'Watch DRUMS THAT KNOCK X',
+					title: '',
 					src: 'https://www.youtube.com/embed/p-wek5z59IA',
 					srcTwo: 'https://www.youtube.com/embed/KG1q81qR_b4'
 				},
