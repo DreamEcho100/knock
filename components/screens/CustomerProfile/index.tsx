@@ -401,10 +401,8 @@ const UpdateUserBasicDetails = ({
 
 const CustomerProfileScreen = () => {
 	const { user } = useGetUserDataFromStore();
-	const [
-		isUpdateUserBasicDetailsOpen,
-		setIsUpdateUserBasicDetailsOpen
-	] = useState(false);
+	const [isUpdateUserBasicDetailsOpen, setIsUpdateUserBasicDetailsOpen] =
+		useState(false);
 
 	if (user.status === 'loading' && user.fetchStatus === 'fetching')
 		return (
@@ -476,11 +474,13 @@ const CustomerProfileScreen = () => {
 			title: 'Orders',
 			accordionContent: (
 				<AccordionContent className='flex flex-wrap py-8 gap-4'>
-					{!Array.isArray(orders) || orders.length === 0 ? (
+					{!Array.isArray(orders) ||
+					orders.length === 0 ||
+					!('node' in orders[0]) ? (
 						<p>
-							<span>Ther&apos;s no orders {'\u{1F625}'}</span>&nbsp;
+							<span>There&apos;s no orders {'\u{1F625}'}</span>&nbsp;
 							<Link href='/drums-that-knock' className='text-bg-secondary-1'>
-								let&apos; do something about that
+								let&apos;s do something about that
 							</Link>
 						</p>
 					) : (
