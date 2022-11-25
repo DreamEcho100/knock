@@ -177,6 +177,11 @@ const checkToken = async (
                   email
                   name
                   phone
+				  cancelReason
+				  canceledAt
+				  edited
+				  financialStatus
+				  fulfillmentStatus
 				  statusUrl
                   totalPrice {
                     amount
