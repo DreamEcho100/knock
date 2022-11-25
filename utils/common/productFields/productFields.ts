@@ -464,7 +464,7 @@ const setFields = (handle: any) => {
 					"In this live 47 minute deep dive Masterclass, DECAP (Billboard Top 10, Platinum Certified Producer) dives into some intermediate / advanced production and sound design techniques during the track breakdown of his release 'Who's There?!'."
 				],
 				video: {
-					title: 'Free Preview:',
+					title: 'Free Preview',
 					src: 'https://www.youtube.com/embed/LwIgcY5CpjI'
 				},
 				features: [],

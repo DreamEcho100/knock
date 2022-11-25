@@ -4,7 +4,7 @@ import Logo from '@components/shared/core/Logo';
 import { useSharedCustomerState } from '@context/Customer';
 import { customerGlobalActions } from '@context/Customer/actions';
 import { useQuery } from '@tanstack/react-query';
-import { setCookie } from '@utils/common/storage/cookie/document';
+import { setCookie , removeCookie } from '@utils/common/storage/cookie/document';
 import { checkoutApi } from '@utils/core/API';
 import {
 	useGetUserCheckoutDetailsAndIdAndKey,
@@ -126,6 +126,11 @@ const MainHeader = () => {
 
 		const { checkout } = userCheckoutDetailsAndIdAndKey;
 
+		if (checkout.completedAt) {
+			removeCookie('checkoutIdAndKey');
+			return
+		}		
+		
 		if (checkout.lineItems.length === 0) return;
 
 		customerGlobalActions.cart.set(customerDispatch, {

@@ -96,6 +96,40 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 					</div>
 				);
 
+			case 'drums-that-knock-x':
+				return (
+					<div className={classes.productPageFeaturesBigBox}>
+						<div className={classes.overLayFeaturesSection}></div>
+						<div>
+							{product.features.length ? (
+								<ul className={classes.productPageFeaturesBox}>
+									{product.features.map((el: any, index: any) => (
+										<li key={index}>{el}</li>
+									))}
+								</ul>
+							) : (
+								''
+							)}
+							{product.filesIncluded.details.length ? (
+								<ul className={classes.productPageFeaturesBox}>
+									{product.filesIncluded.count ? (
+										<li className={classes.productPageIncludeLi}>
+											include: {product.filesIncluded.count} files
+										</li>
+									) : (
+										''
+									)}
+									{product.filesIncluded.details.map((el, index) => (
+										<li key={index}>{el}</li>
+									))}
+								</ul>
+							) : (
+								''
+							)}
+						</div>
+					</div>
+				);
+
 			default:
 				return (
 					<div className={classes.productPageFeatures}>
@@ -113,9 +147,7 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 							{product.filesIncluded.details.length ? (
 								<ul>
 									{product.filesIncluded.count ? (
-										<li className={classes.productPageIncludeLi}>
-											include: {product.filesIncluded.count} files
-										</li>
+										<li>include: {product.filesIncluded.count} files</li>
 									) : (
 										''
 									)}
@@ -140,6 +172,7 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 				{renderFeature()}
 				{product.video ? (
 					<div className={classes.productPageYoutubeSections}>
+						<h4>{product.video.title}</h4>
 						<div>
 							<div className={classes.overLayYoutubeSection}></div>
 							<iframe src={product.video.src} />
@@ -149,7 +182,6 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 								''
 							)}
 						</div>
-						<h4>{product.video.title}</h4>
 					</div>
 				) : (
 					''
