@@ -230,12 +230,12 @@
         justify-content: center;
         flex-direction: column;
         width: 100%;
-        gap: 2em;
+        gap: 3em;
         iframe{
             z-index: 1;
             border-radius: 25px;
-            width: 50%;
-            height: 320px;
+            width: 450px;
+            height: 270px;
         }
         @media (max-width:1024px) {
             
