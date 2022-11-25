@@ -21,7 +21,14 @@ import type { IGenericErrorResponse, IUser } from 'types';
 
 import { cx } from 'class-variance-authority';
 
-import { Dispatch, FormEvent, SetStateAction, useMemo, useState } from 'react';
+import {
+	Dispatch,
+	FormEvent,
+	Fragment,
+	SetStateAction,
+	useMemo,
+	useState
+} from 'react';
 
 import { BiChevronUpCircle } from 'react-icons/bi';
 import Dialog from '@components/shared/common/Dialog';
@@ -186,36 +193,40 @@ const ProductsOnOrder = ({
 				setIsOpen={setIsOpen}
 			>
 				<div className='flex flex-col gap-4'>
-					{lineItems.map(({ node: item }) => (
-						<div key={item.variant.id}>
-							<div className='flex'>
-								<div className='w-36 flex items-center bg-black'>
-									{item?.variant?.image?.url && (
-										<CustomNextImage
-											unoptimized
-											src={item.variant.image.url}
-											alt={item.variant.image.altText || ''}
-											width={150}
-											height={150}
-											className='w-full h-full aspect-square object-contain'
+					{lineItems.map(({ node: item }, index) => {
+						if (!item?.variant?.id) return <Fragment key={index} />;
+
+						return (
+							<div key={item.variant.id}>
+								<div className='flex'>
+									<div className='w-36 flex items-center bg-black'>
+										{item?.variant?.image?.url && (
+											<CustomNextImage
+												unoptimized
+												src={item.variant.image.url}
+												alt={item.variant.image.altText || ''}
+												width={150}
+												height={150}
+												className='w-full h-full aspect-square object-contain'
+											/>
+										)}
+									</div>
+									<div className='p-2'>
+										<TitleValue
+											title='id'
+											value={getIdFromGid(item.variant.id)}
 										/>
-									)}
-								</div>
-								<div className='p-2'>
-									<TitleValue
-										title='id'
-										value={getIdFromGid(item.variant.id)}
-									/>
-									<TitleValue title='title' value={item.title} />
-									<TitleValue
-										title='original total price'
-										value={`${item.originalTotalPrice.amount} ${item.originalTotalPrice.currencyCode}`}
-									/>
-									<TitleValue title='quantity' value={item.quantity} />
+										<TitleValue title='title' value={item.title} />
+										<TitleValue
+											title='original total price'
+											value={`${item.originalTotalPrice.amount} ${item.originalTotalPrice.currencyCode}`}
+										/>
+										<TitleValue title='quantity' value={item.quantity} />
+									</div>
 								</div>
 							</div>
-						</div>
-					))}
+						);
+					})}
 				</div>
 			</Dialog>
 		</>
@@ -487,10 +498,12 @@ const CustomerProfileScreen = () => {
 						<>
 							<table className='orders-table max-w-screen-lg w-full border-collapse mx-auto overflow-x-auto table-fixed'>
 								<thead className='border border-gray-500 font-bold'>
-									<td className='px-8 py-6 md:px-12 md:py-8'>Order</td>
-									<td className='px-8 py-6 md:px-12 md:py-8'>Payment</td>
-									<td className='px-8 py-6 md:px-12 md:py-8'>Fulfillment</td>
-									<td className='px-8 py-6 md:px-12 md:py-8'>Total</td>
+									<tr>
+										<th className='px-8 py-6 md:px-12 md:py-8'>Order</th>
+										<th className='px-8 py-6 md:px-12 md:py-8'>Payment</th>
+										<th className='px-8 py-6 md:px-12 md:py-8'>Fulfillment</th>
+										<th className='px-8 py-6 md:px-12 md:py-8'>Total</th>
+									</tr>
 								</thead>
 								<tbody>
 									{orders.map(({ node: itemNode }) => (
@@ -517,17 +530,17 @@ const CustomerProfileScreen = () => {
 													)}
 												</span>
 											</td>
-											<td className='px-8 py-6 md:px-12 md:py-8 border border-gray-500'>
+											<td className='px-8 py-6 md:px-12 md:py-8 border border-gray-500 capitalize'>
 												<span className='title font-bold hidden'>
 													Payment:&nbsp;
 												</span>
-												Paid
+												{itemNode.financialStatus?.toLowerCase()}
 											</td>
-											<td className='px-8 py-6 md:px-12 md:py-8 border border-gray-500'>
+											<td className='px-8 py-6 md:px-12 md:py-8 border border-gray-500 capitalize'>
 												<span className='title font-bold hidden'>
 													Fulfillment:&nbsp;
 												</span>
-												Fulfilled
+												{itemNode.fulfillmentStatus?.toLowerCase()}
 											</td>
 											<td className='px-8 py-6 md:px-12 md:py-8 border border-gray-500'>
 												<span className='title font-bold hidden'>

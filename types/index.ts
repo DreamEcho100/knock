@@ -30,16 +30,16 @@ export interface IProduct {
 	vendor: string;
 	publishedAt: string;
 	onlineStoreUrl: string;
-	features:[];
-	video:{
-		title:string
-		src:string
-		srcTwo:string
-	}
-	filesIncluded:{
-		count:number
-		details:[]
-	}
+	features: [];
+	video: {
+		title: string;
+		src: string;
+		srcTwo: string;
+	};
+	filesIncluded: {
+		count: number;
+		details: [];
+	};
 	hasNextPage: {
 		value: boolean;
 	};
@@ -215,27 +215,20 @@ export interface IUser {
 		edges: {
 			node: {
 				id: string;
-				statusUrl: string;
 				orderNumber: number;
 				email: string;
 				name: string;
-				phone: null;
-				totalPrice: {
-					amount: string;
-					currencyCode: string;
-				};
-				totalShippingPrice: {
-					amount: string;
-					currencyCode: string;
-				};
-				totalTax: {
-					amount: string;
-					currencyCode: string;
-				};
-				totalRefunded: {
-					amount: string;
-					currencyCode: string;
-				};
+				phone: string | null;
+				cancelReason: string | null;
+				canceledAt: string | null;
+				edited: boolean;
+				financialStatus: string; // 'PAID';
+				fulfillmentStatus: string; // 'FULFILLED';
+				statusUrl: string;
+				totalPrice: { amount: string; currencyCode: string };
+				totalShippingPrice: { amount: string; currencyCode: string };
+				totalTax: { amount: string; currencyCode: string };
+				totalRefunded: { amount: string; currencyCode: string };
 				lineItems: {
 					edges: {
 						node: {
@@ -253,34 +246,33 @@ export interface IUser {
 									height: number;
 									width: number;
 									url: string;
-									altText: null;
+									altText: string | null;
 								};
 								price: {
 									amount: string;
-									currencyCode: string;
-								};
-								product: {
-									id: string;
-									handle: string;
-									title: string;
-									totalInventory: number;
-									availableForSale: boolean;
-									description: string;
-									images: {
-										edges: {
-											node: {
-												id: string;
-												width: number;
-												height: number;
-												url: string;
-											};
-										}[];
+									product: {
+										id: string;
+										handle: string;
+										title: string;
+										totalInventory: 994297;
+										availableForSale: true;
+										description: string;
+										images: {
+											edges: {
+												node: {
+													id: string;
+													width: number;
+													height: number;
+													url: string;
+												};
+											}[];
+										};
+										updatedAt: string;
+										createdAt: string;
 									};
-									updatedAt: string;
-									createdAt: string;
+									quantityAvailable: number;
+									title: string;
 								};
-								quantityAvailable: number;
-								title: string;
 							};
 						};
 					}[];

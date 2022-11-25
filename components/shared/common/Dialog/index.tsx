@@ -22,7 +22,7 @@ interface Props {
 const handlerContentVariants = cva(
 	[
 		'fixed z-50',
-		'w-[95vw] max-w-xl rounded-lg px-10 py-4 md:w-full',
+		'w-[95vw] max-h-[95vh] overflow-y-auto max-w-xl rounded-lg px-10 py-4 md:w-full',
 		'top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]',
 		'focus:outline-none focus-visible:ring-[0.125rem] focus-visible:ring-purple-500 focus-visible:ring-opacity-75'
 	],
