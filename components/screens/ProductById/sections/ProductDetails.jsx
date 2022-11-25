@@ -17,8 +17,12 @@ const ProductDetails = ({product}) => {
        </div>
         <div>
         <h4> DECAP - {product.title}</h4>
-        <p> ${product.variants[0].price.amount} </p>
-        <p> <span>Shipping</span> calculated at checkout.</p>
+        {product.variants[0].compareAtPrice?.amount ? <div className={classes.ProductCardDetailsPriceSales} >
+        <p  > ${product.variants[0].compareAtPrice.amount}0 </p> <p> ${product.variants[0].price.amount}0 </p>
+        </div> : 
+        <div className={classes.ProductCardDetailsPrice} >
+         <p  > ${product.variants[0].price.amount}0 </p> 
+        </div>}
         <p>Pay in 4 interest-free installments of $12.50 with <Image width={143} height={32} src={"/images/shoppay.png"} alt='shoppay' /> </p> 
         <div>
            <Button 
