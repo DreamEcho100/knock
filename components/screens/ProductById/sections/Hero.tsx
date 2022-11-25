@@ -6,14 +6,8 @@ import CustomNextImage from '@components/shared/common/CustomNextImage';
 
 import classes from '@styles/productsPages.module.scss';
 import ProductDetails from '@components/screens/ProductById/sections/ProductDetails';
-import { useEffect, useState } from 'react';
 
 const HeroSection = ({ product }: IProductByIdPageProps) => {
-	console.log('====================================');
-	console.log(product.handle);
-	console.log('====================================');
-
-
 	const renderFeature = () => {
 		switch (product.handle) {
 			case 'decap-ableton-live-masterclass':
@@ -74,7 +68,7 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 						<div className={classes.overLayFeaturesSection}></div>
 						<div>
 							{product.features.length ? (
-								<ul  className={classes.productPageFeaturesBox} >
+								<ul className={classes.productPageFeaturesBox}>
 									{product.features.map((el: any, index: any) => (
 										<li key={index}>{el}</li>
 									))}
@@ -83,7 +77,7 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 								''
 							)}
 							{product.filesIncluded.details.length ? (
-								<ul  className={classes.productPageFeaturesBox} >
+								<ul className={classes.productPageFeaturesBox}>
 									{product.filesIncluded.count ? (
 										<li className={classes.productPageIncludeLi}>
 											include: {product.filesIncluded.count} files
