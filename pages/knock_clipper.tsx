@@ -15,7 +15,7 @@ export default KnockClipperPage;
 
 export const getServerSideProps: GetServerSideProps = async () => {
 	const knockClipperPlugin = JSON.parse(
-		JSON.stringify(await getOneProductByHandle('knockclipper-pluginboutique')) // knockclipper-pluginboutique
+		JSON.stringify(await getOneProductByHandle('knock-clipper')) // knockclipper-pluginboutique
 	);
 
 	return {
