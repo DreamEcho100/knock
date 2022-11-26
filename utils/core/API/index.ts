@@ -104,7 +104,14 @@ export const getOneCheckout = async (
 	checkoutKey: string
 ) => {
 	const response = await fetch(
-		`${getAppApiPath()}/checkouts/get-one/?checkoutId=${checkoutId}&checkoutKey=${checkoutKey}`
+		`${getAppApiPath()}/checkouts/get-one/?checkoutId=${checkoutId}&checkoutKey=${checkoutKey}`,
+		{
+			headers: {
+				'Cache-Control': 'no-cache',
+				Pragma: 'no-cache',
+				Expires: '0'
+			}
+		}
 	);
 
 	// await throwIfResponseError(response);
