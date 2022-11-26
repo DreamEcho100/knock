@@ -387,7 +387,7 @@ const CartContainer = () => {
 														product?.variant?.product?.handle === 'knock-plugin'
 															? '/knock'
 															: product?.variant?.product?.handle ===
-															  'knockclipper-pluginboutique'
+															  'knock-clipper'
 															? '/knock_clipper'
 															: `/products/${getIdFromGid(
 																	product.variant.product.id
@@ -401,7 +401,7 @@ const CartContainer = () => {
 														)
 													}
 												>
-													{product.variant.product.handle === "knockclipper-pluginboutique" ? "KNOCK Clipper" : product.title}
+													{product.title}
 												</Link>
 											</h4>
 											<p title='price per product'>${product.price}</p>
