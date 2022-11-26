@@ -56,7 +56,6 @@ export const useGetUserData = ({
 		{
 			enabled: enabled && !!accessToken,
 			refetchInterval: 10 * 60 * 1000,
-			refetchOnWindowFocus: true,
 			onError: (error) => {}
 		}
 	);

@@ -3,7 +3,7 @@ import Button from '@components/shared/core/Button';
 import Logo from '@components/shared/core/Logo';
 import { useSharedCustomerState } from '@context/Customer';
 import { customerGlobalActions } from '@context/Customer/actions';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { setCookie, removeCookie } from '@utils/common/storage/cookie/document';
 import { checkoutApi } from '@utils/core/API';
 import {
@@ -60,6 +60,8 @@ const MainHeader = () => {
 	const [isSmallScreenNaveOpen, setIsSmallScreenNaveOpen] = useState(false);
 	const [isCheckoutFound, setIsCheckoutFound] = useState(false);
 
+	const queryClient = useQueryClient();
+
 	const userCheckoutIdAndKeyFromCookie = useGetUserCheckoutIdAndKeyCookie();
 
 	const createCheckout = useQuery(
@@ -96,8 +98,6 @@ const MainHeader = () => {
 		},
 		{
 			enabled: !!userCheckoutIdAndKeyFromCookie && !isCheckoutFound,
-			refetchOnWindowFocus: true,
-			refetchIntervalInBackground: true,
 			refetchInterval: 10 * 60 * 1000,
 			onSuccess: (result) => {
 				setIsCheckoutFound(true);
@@ -150,6 +150,14 @@ const MainHeader = () => {
 		customerDispatch,
 		userCheckoutDetailsAndIdAndKey
 	]);
+
+	useEffect(() => {
+		if (localStorage.getItem('refetch-checkout')) {
+			queryClient.invalidateQueries(['get-one-checkout']);
+			queryClient.refetchQueries(['get-one-checkout']);
+			localStorage.removeItem('refetch-checkout');
+		}
+	}, [queryClient]);
 
 	return (
 		<header
@@ -486,6 +494,9 @@ const CartContainer = () => {
 								: { href: userCheckoutDetailsAndIdAndKey.checkout.webUrl })}
 							disabled={productsData.length === 0 || disableAllButtons}
 							classesIntent={{ w: 'full', display: 'flex-xy-center' }}
+							onClick={() => {
+								localStorage.setItem('refetch-checkout', 'true');
+							}}
 						>
 							{productsData.length === 0 ? 'Cart Is Empty' : 'checkout'}
 						</Button>
