@@ -387,7 +387,7 @@ const CartContainer = () => {
 														product?.variant?.product?.handle === 'knock-plugin'
 															? '/knock'
 															: product?.variant?.product?.handle ===
-															  'knockclipper-pluginboutique'
+															  'knock-clipper'
 															? '/knock_clipper'
 															: `/products/${getIdFromGid(
 																	product.variant.product.id
