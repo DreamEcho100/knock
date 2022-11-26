@@ -97,6 +97,7 @@ const MainHeader = () => {
 		{
 			enabled: !!userCheckoutIdAndKeyFromCookie && !isCheckoutFound,
 			refetchOnWindowFocus: true,
+			refetchIntervalInBackground: true,
 			refetchInterval: 10 * 60 * 1000,
 			onSuccess: (result) => {
 				setIsCheckoutFound(true);
