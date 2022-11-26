@@ -4,7 +4,7 @@ import Logo from '@components/shared/core/Logo';
 import { useSharedCustomerState } from '@context/Customer';
 import { customerGlobalActions } from '@context/Customer/actions';
 import { useQuery } from '@tanstack/react-query';
-import { setCookie , removeCookie } from '@utils/common/storage/cookie/document';
+import { setCookie, removeCookie } from '@utils/common/storage/cookie/document';
 import { checkoutApi } from '@utils/core/API';
 import {
 	useGetUserCheckoutDetailsAndIdAndKey,
@@ -96,6 +96,7 @@ const MainHeader = () => {
 		},
 		{
 			enabled: !!userCheckoutIdAndKeyFromCookie && !isCheckoutFound,
+			refetchOnWindowFocus: true,
 			onSuccess: (result) => {
 				setIsCheckoutFound(true);
 			}
@@ -128,9 +129,9 @@ const MainHeader = () => {
 
 		if (checkout.completedAt) {
 			removeCookie('checkoutIdAndKey');
-			return
-		}		
-		
+			return;
+		}
+
 		if (checkout.lineItems.length === 0) return;
 
 		customerGlobalActions.cart.set(customerDispatch, {
@@ -401,7 +402,10 @@ const CartContainer = () => {
 														)
 													}
 												>
-													{product.variant.product.handle === "knockclipper-pluginboutique" ? "KNOCK Clipper" : product.title}
+													{product.variant.product.handle ===
+													'knockclipper-pluginboutique'
+														? 'KNOCK Clipper'
+														: product.title}
 												</Link>
 											</h4>
 											<p title='price per product'>${product.price}</p>
