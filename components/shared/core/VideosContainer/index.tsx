@@ -26,7 +26,7 @@ const VideosContainer = ({
 					<iframe
 						key={index}
 						width='450'
-						height='350'
+						height='325'
 						// src='https://www.youtube.com/embed/4fiC6Zi0Wnw'
 						// title='YouTube video player'
 						{...iframe}

@@ -152,9 +152,10 @@ export const getGetAccessTokenFromCookie = () => {
 
 export const useGetUserCheckoutDetailsAndIdAndKey = () => {
 	const queryClient = useQueryClient();
-	const createOneCheckout = queryClient.getQueryData<
-		TCreateOneCheckoutReturnType
-	>(['create-one-checkout']);
+	const createOneCheckout =
+		queryClient.getQueryData<TCreateOneCheckoutReturnType>([
+			'create-one-checkout'
+		]);
 	const getOneCheckout = queryClient.getQueryData<TGetOneCheckoutReturnType>([
 		'get-one-checkout'
 	]);
@@ -243,7 +244,7 @@ export const useAddProductsToCheckoutAndCart = () => {
 				)
 			};
 		},
-		onSuccess: ({ products, result }) => {
+		onSuccess: ({ products, result }) =>
 			customerGlobalActions.cart.set(customerDispatch, {
 				cartObj: {
 					productsData: result.map((item) =>
@@ -251,10 +252,10 @@ export const useAddProductsToCheckoutAndCart = () => {
 					),
 					updatedAt: new Date()
 				}
-			});
+			}),
 
-			customerGlobalActions.setIsVisibleOnly(customerDispatch, 'headerCart');
-		}
+		onSettled: () =>
+			customerGlobalActions.setIsVisibleOnly(customerDispatch, 'headerCart')
 	});
 };
 export const useUpdateProductsToCheckoutAndCart = () => {
