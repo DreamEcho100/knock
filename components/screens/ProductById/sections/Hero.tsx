@@ -6,6 +6,7 @@ import CustomNextImage from '@components/shared/common/CustomNextImage';
 
 import classes from '@styles/productsPages.module.scss';
 import ProductDetails from '@components/screens/ProductById/sections/ProductDetails';
+import Link from 'next/link';
 
 const HeroSection = ({ product }: IProductByIdPageProps) => {
 	const renderFeature = () => {
@@ -78,13 +79,7 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 							)}
 							{product.filesIncluded.details.length ? (
 								<ul className={classes.productPageFeaturesBox}>
-									{product.filesIncluded.count ? (
-										<li className={classes.productPageIncludeLi}>
-											include: {product.filesIncluded.count} files
-										</li>
-									) : (
-										''
-									)}
+									
 									{product.filesIncluded.details.map((el, index) => (
 										<li key={index}>{el}</li>
 									))}
@@ -112,13 +107,6 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 							)}
 							{product.filesIncluded.details.length ? (
 								<ul className={classes.productPageFeaturesBox}>
-									{product.filesIncluded.count ? (
-										<li className={classes.productPageIncludeLi}>
-											include: {product.filesIncluded.count} files
-										</li>
-									) : (
-										''
-									)}
 									{product.filesIncluded.details.map((el, index) => (
 										<li key={index}>{el}</li>
 									))}
@@ -146,11 +134,6 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 							)}
 							{product.filesIncluded.details.length ? (
 								<ul>
-									{product.filesIncluded.count ? (
-										<li>include: {product.filesIncluded.count} files</li>
-									) : (
-										''
-									)}
 									{product.filesIncluded.details.map((el, index) => (
 										<li key={index}>{el}</li>
 									))}
@@ -186,6 +169,7 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 				) : (
 					''
 				)}
+				<Link className={classes.GoBackLink} href={'/drums-that-knock'} > GO BACK </Link>
 			</div>
 		</section>
 	);
