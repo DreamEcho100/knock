@@ -22,9 +22,9 @@ const VideosSection = ({
 						allowFullScreen: true
 					},
 					{
-						src: 'https://www.youtube.com/embed/amdBTeGw7ks',
+						src: 'https://www.youtube.com/embed/LMOG2rvxqGk',
 						title:
-							'KNOCK Plugin by DECAP | Before & After - YouTube video player',
+							'KNOCK: Before and After | Before & After - YouTube video player',
 						frameBorder: '0',
 						allow:
 							'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',

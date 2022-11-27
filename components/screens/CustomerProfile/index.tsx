@@ -61,114 +61,16 @@ const TitleValue = ({
 	</p>
 );
 
-const OrderCard = ({
-	order
-}: {
-	order: IUser['orders']['edges'][0]['node'];
-}) => {
-	const [isOpen, setIsOpen] = useState(false);
-
-	const lineItems = order.lineItems.edges;
-
-	return (
-		<>
-			<div
-				className={cx(
-					'max-w-[400px] ring-[0.125rem] ring-white ring-opacity-50 p-4',
-					'flex flex-col',
-					'duration-300 transition-all',
-					'hover:scale-110 hover:relative hover:bg-black'
-				)}
-				key={order.id}
-			>
-				<TitleValue title='id:' value={order.id} />
-				<TitleValue
-					title='total price:'
-					value={priceCurrencyFormatter(
-						order.totalPrice.amount,
-						order.totalPrice.currencyCode
-					)}
-				/>
-				<TitleValue
-					title='total tax:'
-					value={priceCurrencyFormatter(
-						order.totalTax.amount,
-						order.totalTax.currencyCode
-					)}
-				/>
-				<TitleValue
-					title='total shipping price:'
-					value={priceCurrencyFormatter(
-						order.totalShippingPrice.amount,
-						order.totalShippingPrice.currencyCode
-					)}
-				/>
-				{!!parseFloat(order.totalRefunded.amount) && (
-					<TitleValue
-						title='total refunded:'
-						value={priceCurrencyFormatter(
-							order.totalRefunded.amount,
-							order.totalRefunded.currencyCode
-						)}
-					/>
-				)}
-				<Button
-					classesIntent={{ rounded: 'none', p: 'wide' }}
-					onClick={() => setIsOpen(true)}
-				>
-					See Cart Items
-				</Button>
-			</div>
-			<Dialog
-				header={{ title: 'Products' }}
-				isOpen={isOpen}
-				setIsOpen={setIsOpen}
-			>
-				<div className=''>
-					{lineItems.map(({ node: item }) => (
-						<div key={item.variant.id}>
-							<div className='flex'>
-								<div className='w-36 flex items-center bg-black'>
-									{item?.variant?.image?.url && (
-										<CustomNextImage
-											unoptimized
-											src={item.variant.image.url}
-											alt={item.variant.image.altText || ''}
-											width={150}
-											height={150}
-											className='w-full h-full aspect-square object-contain'
-										/>
-									)}
-								</div>
-								<div className='p-2'>
-									<TitleValue
-										title='id'
-										value={getIdFromGid(item.variant.id)}
-									/>
-									<TitleValue title='title' value={item.title} />
-									<TitleValue
-										title='original total price'
-										value={`${item.originalTotalPrice.amount} ${item.originalTotalPrice.currencyCode}`}
-									/>
-									<TitleValue title='quantity' value={item.quantity} />
-								</div>
-							</div>
-						</div>
-					))}
-				</div>
-			</Dialog>
-		</>
-	);
-};
-
 const ProductsOnOrder = ({
 	lineItems,
 	buttonText,
-	statusUrl
+	statusUrl,
+	financialStatus
 }: {
 	lineItems: IUser['orders']['edges'][0]['node']['lineItems']['edges'];
 	buttonText: string;
 	statusUrl: string;
+	financialStatus: string;
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -178,16 +80,17 @@ const ProductsOnOrder = ({
 			<Dialog
 				contentVariants={{ bg: 'primary-2' }}
 				header={{
-					title: (
-						<>
-							Products{' '}
-							<small className='text-sm text-purple-700'>
-								<a href={statusUrl} target='_blank' rel='noreferrer'>
-									Go to the download page
-								</a>
-							</small>
-						</>
-					)
+					title:
+						financialStatus === 'PAID' ? (
+							<>
+								{buttonText}{' '}
+								<small className='text-sm text-purple-700'>
+									<a href={statusUrl} target='_blank' rel='noreferrer'>
+										Go to the download page
+									</a>
+								</small>
+							</>
+						) : undefined
 				}}
 				isOpen={isOpen}
 				setIsOpen={setIsOpen}
@@ -212,16 +115,15 @@ const ProductsOnOrder = ({
 										)}
 									</div>
 									<div className='p-2'>
-										<TitleValue
-											title='id'
-											value={getIdFromGid(item.variant.id)}
-										/>
-										<TitleValue title='title' value={item.title} />
-										<TitleValue
-											title='original total price'
-											value={`${item.originalTotalPrice.amount} ${item.originalTotalPrice.currencyCode}`}
-										/>
-										<TitleValue title='quantity' value={item.quantity} />
+										<p>{item.title}</p>
+										<p>
+											Total Price{' '}
+											{priceCurrencyFormatter(
+												item.originalTotalPrice.amount,
+												item.originalTotalPrice.currencyCode,
+												{ toFixed: 2 }
+											)}
+										</p>
 									</div>
 								</div>
 							</div>
@@ -415,6 +317,19 @@ const CustomerProfileScreen = () => {
 	const [isUpdateUserBasicDetailsOpen, setIsUpdateUserBasicDetailsOpen] =
 		useState(false);
 
+	const orders = useMemo(() => {
+		let aNum: number;
+		let bNum: number;
+
+		return user?.data?.orders?.edges?.slice().sort(function (a, b) {
+			aNum = Date.parse(a.node.processedAt);
+			bNum = Date.parse(b.node.processedAt);
+			if (aNum === bNum) return 0;
+
+			return aNum > bNum ? -1 : 1;
+		});
+	}, [user?.data?.orders?.edges]);
+
 	if (user.status === 'loading' && user.fetchStatus === 'fetching')
 		return (
 			<>
@@ -432,10 +347,12 @@ const CustomerProfileScreen = () => {
 			<>
 				<Head>
 					<title>
-						{!user.isSuccess
-							? 'Please login first to view your data, or reload the page and make sure you have a good internet connection'
-							: "Your data doesn't exist \u{1F928}"}{' '}
-						| KNOCK Plugin - Make Your Drums Knock
+						<>
+							{!user.isSuccess
+								? 'Please login first to view your data, or reload the page and make sure you have a good internet connection'
+								: "Your data doesn't exist \u{1F928}"}{' '}
+							| KNOCK Plugin - Make Your Drums Knock
+						</>
 					</title>
 				</Head>
 				<section className='bg-primary-1 section-p-v1'>
@@ -448,15 +365,30 @@ const CustomerProfileScreen = () => {
 			</>
 		);
 
-	const orders = user?.data?.orders?.edges;
+	return (
+		<>
+			<Head>
+				<title>
+					{user.data.firstName} {user.data.lastName} | Customer Profile | KNOCK
+					Plugin - Make Your Drums Knock
+				</title>
+			</Head>
+			<section className='bg-primary-1 section-p-v1'>
+				<div className='max-w-screen-md mx-auto flex flex-col gap-16'>
+					<header className='flex flex-col items-center'>
+						<h1 className='text-h1'>Account</h1>
+					</header>
+					<div className='flex flex-col gap-1 text-primary-1'>
+						<p className='capitalize'>
+							{user.data.firstName} {user.data.lastName}
+						</p>
+						<p>{user.data.email}</p>
+						<TitleValue
+							title='Account Created:'
+							value={new Date(user.data.createdAt).toLocaleString()}
+							isSmall
+						/>
 
-	const accordionDetails = [
-		{
-			key: 'personalDetails',
-			title: 'Personal Details',
-			accordionContent: (
-				<AccordionContent className='py-4'>
-					<header>
 						<Button
 							onClick={() => setIsUpdateUserBasicDetailsOpen(true)}
 							classesIntent={{ rounded: 'none', p: 'wide' }}
@@ -467,237 +399,163 @@ const CustomerProfileScreen = () => {
 							isOpen={isUpdateUserBasicDetailsOpen}
 							setIsOpen={setIsUpdateUserBasicDetailsOpen}
 						/>
-						<hr className='w-[75%] border-bg-secondary-1 my-2' />
-					</header>
-					<TitleValue title='first Name:' value={user.data.firstName} />
-					<TitleValue title='last Name:' value={user.data.lastName} />
-					<TitleValue title='email:' value={user.data.email} />
-					<TitleValue
-						title='created at:'
-						value={new Date(user.data.createdAt).toLocaleString()}
-						isSmall
-					/>
-				</AccordionContent>
-			)
-		},
-		{
-			key: 'orders',
-			title: 'Orders',
-			accordionContent: (
-				<AccordionContent className='flex flex-wrap py-8 gap-4'>
-					{!Array.isArray(orders) ||
-					orders.length === 0 ||
-					!('node' in orders[0]) ? (
-						<p>
-							<span>There&apos;s no orders {'\u{1F625}'}</span>&nbsp;
-							<Link href='/drums-that-knock' className='text-bg-secondary-1'>
-								let&apos;s do something about that
-							</Link>
-						</p>
-					) : (
-						<>
-							<table className='orders-table max-w-screen-lg w-full border-collapse mx-auto overflow-x-auto table-fixed'>
-								<thead className='border border-gray-500 font-bold'>
-									<tr>
-										<th className='px-8 py-6 md:px-12 md:py-8'>Order</th>
-										<th className='px-8 py-6 md:px-12 md:py-8'>Payment</th>
-										<th className='px-8 py-6 md:px-12 md:py-8'>Fulfillment</th>
-										<th className='px-8 py-6 md:px-12 md:py-8'>Total</th>
-									</tr>
-								</thead>
-								<tbody>
-									{orders.map(({ node: itemNode }) => (
-										<tr key={itemNode.id}>
-											<td className='px-8 py-6 md:px-12 md:py-8 border border-gray-500'>
-												<span className='title font-bold hidden'>
-													Order:&nbsp;
-												</span>
-												<span className='text-bg-secondary-1'>
-													{/* {itemNode.name} */}
-													<ProductsOnOrder
-														lineItems={itemNode.lineItems.edges}
-														buttonText={itemNode.name}
-														statusUrl={itemNode.statusUrl}
-													/>
-												</span>
-												&nbsp;-&nbsp;
-												<span>
-													{new Date(itemNode.processedAt).toLocaleDateString(
-														undefined,
+					</div>
+
+					<div className=''>
+						{!Array.isArray(orders) ||
+						orders.length === 0 ||
+						!('node' in orders[0]) ? (
+							<p>
+								<span>There&apos;s no orders {'\u{1F625}'}</span>&nbsp;
+								<Link href='/drums-that-knock' className='text-bg-secondary-1'>
+									let&apos;s do something about that
+								</Link>
+							</p>
+						) : (
+							<>
+								<table className='orders-table w-full border-collapse overflow-x-auto table-fixed'>
+									<thead className='border border-gray-500 font-bold'>
+										<tr>
+											<th className='px-8 py-6 md:px-12 md:py-8'>Order</th>
+											<th className='px-8 py-6 md:px-12 md:py-8'>Payment</th>
+											<th className='px-8 py-6 md:px-12 md:py-8'>Total</th>
+										</tr>
+									</thead>
+									<tbody>
+										{orders.map(({ node: itemNode }) => (
+											<tr key={itemNode.id}>
+												<td className='px-8 py-6 md:px-12 md:py-8 border border-gray-500'>
+													<span className='title font-bold hidden'>
+														Order:&nbsp;
+													</span>
+													<span className='text-bg-secondary-1'>
+														{/* {itemNode.name} */}
+														<ProductsOnOrder
+															lineItems={itemNode.lineItems.edges}
+															buttonText={itemNode.name}
+															statusUrl={itemNode.statusUrl}
+															financialStatus={itemNode.financialStatus}
+														/>
+													</span>
+													&nbsp;-&nbsp;
+													<span>
+														{new Date(itemNode.processedAt).toLocaleDateString(
+															undefined,
+															{
+																dateStyle: 'medium'
+															}
+														)}
+													</span>
+												</td>
+												<td className='px-8 py-6 md:px-12 md:py-8 border border-gray-500 capitalize'>
+													<span className='title font-bold hidden'>
+														Payment:&nbsp;
+													</span>
+													{itemNode.financialStatus?.toLowerCase()}
+												</td>
+												<td className='px-8 py-6 md:px-12 md:py-8 border border-gray-500'>
+													<span className='title font-bold hidden'>
+														Total:&nbsp;
+													</span>
+													{priceCurrencyFormatter(
+														parseFloat(itemNode.totalPrice.amount).toString(),
+														itemNode.totalPrice.currencyCode,
 														{
-															dateStyle: 'medium'
+															toFixed: 2
 														}
 													)}
-												</span>
-											</td>
-											<td className='px-8 py-6 md:px-12 md:py-8 border border-gray-500 capitalize'>
-												<span className='title font-bold hidden'>
-													Payment:&nbsp;
-												</span>
-												{itemNode.financialStatus?.toLowerCase()}
-											</td>
-											<td className='px-8 py-6 md:px-12 md:py-8 border border-gray-500 capitalize'>
-												<span className='title font-bold hidden'>
-													Fulfillment:&nbsp;
-												</span>
-												{itemNode.fulfillmentStatus?.toLowerCase()}
-											</td>
-											<td className='px-8 py-6 md:px-12 md:py-8 border border-gray-500'>
-												<span className='title font-bold hidden'>
-													Total:&nbsp;
-												</span>
-												{priceCurrencyFormatter(
-													parseFloat(itemNode.totalPrice.amount)
-														// + parseFloat(itemNode.totalShippingPrice.amount) +
-														// parseFloat(itemNode.totalTax.amount) -
-														// parseFloat(itemNode.totalRefunded.amount)
-														.toString(),
-													itemNode.totalPrice.currencyCode,
-													{
-														toFixed: 2
-													}
-												)}
-											</td>
-										</tr>
-									))}
-								</tbody>
-							</table>
-							<style jsx>{`
-								.orders-table {
-									border-collapse: collapse;
-									width: 100%;
-								}
+												</td>
+											</tr>
+										))}
+									</tbody>
+								</table>
+								<style jsx>{`
+									.orders-table {
+										border-collapse: collapse;
+										width: 100%;
+									}
 
-								/* .orders-table tr {
+									/* .orders-table tr {
 									padding: 0.35em;
 								} */
 
-								.orders-table th,
-								.orders-table td {
-									text-align: center;
-								}
+									.orders-table th,
+									.orders-table td {
+										text-align: center;
+									}
 
-								/* .orders-table th {
+									/* .orders-table th {
 									text-transform: uppercase;
 								} */
 
-								@media screen and (max-width: 600px) {
-									.orders-table {
-										border: 0;
-									}
+									@media screen and (max-width: 600px) {
+										.orders-table {
+											border: 0;
+										}
 
-									.orders-table caption {
-										font-size: 1.3em;
-									}
+										.orders-table caption {
+											font-size: 1.3em;
+										}
 
-									.orders-table thead {
-										border: none;
-										clip: rect(0 0 0 0);
-										height: 1px;
-										margin: -1px;
-										overflow: hidden;
-										padding: 0;
-										position: absolute;
-										width: 1px;
-									}
+										.orders-table thead {
+											border: none;
+											clip: rect(0 0 0 0);
+											height: 1px;
+											margin: -1px;
+											overflow: hidden;
+											padding: 0;
+											position: absolute;
+											width: 1px;
+										}
 
-									.orders-table tr {
-										border-bottom: 3px solid #ddd;
-										display: block;
-										margin-bottom: 0.625em;
-									}
+										.orders-table tr {
+											border-bottom: 3px solid #ddd;
+											display: block;
+											margin-bottom: 0.625em;
+										}
 
-									.orders-table td {
-										border-bottom: 1px solid #ddd;
-										display: block;
-										font-size: 0.8em;
-										text-align: initial;
-									}
+										.orders-table td {
+											border-bottom: 1px solid #ddd;
+											display: block;
+											font-size: 0.8em;
+											text-align: initial;
+										}
 
-									.orders-table td .title {
-										display: inline-block;
-										width: 25%;
-										max-width: fit-content;
-									}
+										.orders-table td .title {
+											display: inline-block;
+											width: 25%;
+											max-width: fit-content;
+										}
 
-									.orders-table td::before {
-										/*
+										.orders-table td::before {
+											/*
     * aria-label has no advantage, it won't be read inside a table
     content: attr(aria-label);
     */
-										content: attr(data-label);
-										float: left;
-										font-weight: bold;
-										text-transform: uppercase;
-									}
+											content: attr(data-label);
+											float: left;
+											font-weight: bold;
+											text-transform: uppercase;
+										}
 
-									.orders-table td:last-child {
-										border-bottom: 0;
+										.orders-table td:last-child {
+											border-bottom: 0;
+										}
 									}
-								}
-								@media screen and (max-width: 400px) {
-									.orders-table td {
-										padding: 0.5rem;
-										white-space: break-spaces;
+									@media screen and (max-width: 400px) {
+										.orders-table td {
+											padding: 0.5rem;
+											white-space: break-spaces;
+										}
+										.orders-table td .title {
+											width: auto;
+										}
 									}
-									.orders-table td .title {
-										width: auto;
-									}
-								}
-							`}</style>
-						</>
-					)}
-					{/* orders.map(({ node: order }) => (
-							<OrderCard key={order.id} order={order} />
-						)) */}
-				</AccordionContent>
-			)
-		}
-	];
-
-	return (
-		<>
-			<Head>
-				<title>
-					{user.data.firstName} {user.data.lastName} | Customer Profile | KNOCK
-					Plugin - Make Your Drums Knock
-				</title>
-			</Head>
-			<section className='bg-primary-1 section-p-v1'>
-				<AccordionRoot
-					type='multiple'
-					className='my-8 flex flex-col gap-8'
-					defaultValue={['personalDetails']}
-				>
-					{accordionDetails.map((item) => (
-						<AccordionItem key={item.key} value={item.key}>
-							<AccordionHeader className='p-0 m-0'>
-								<AccordionTrigger
-									className={cx(
-										'p-0 m-0 w-full text-h2',
-										'border-0 cursor-pointer bg-transparent font-semibold p-0 w-full',
-										'flex items-center justify-between',
-										'border-b border-b-bg-secondary-1'
-									)}
-								>
-									<span className='flex flex-wrap text-align-initial'>
-										{item.title}
-									</span>
-									<BiChevronUpCircle
-										aria-hidden
-										className={cx(
-											'min-w-fit',
-											'border-0 cursor-pointer bg-transparent font-semibold text-bg-secondary-1',
-											accordionClasses.rotate180OnOpen,
-											'duration-150 text-3xl'
-										)}
-									/>
-								</AccordionTrigger>
-							</AccordionHeader>
-							{item.accordionContent}
-						</AccordionItem>
-					))}
-				</AccordionRoot>
+								`}</style>
+							</>
+						)}
+					</div>
+				</div>
 			</section>
 		</>
 	);

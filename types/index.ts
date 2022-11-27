@@ -117,8 +117,14 @@ export interface ILineItem {
 		weight: number;
 		available: boolean;
 		sku: string;
-		compareAtPrice: null;
-		compareAtPriceV2: null;
+		compareAtPrice: null | {
+			amount: string;
+			currencyCode: string;
+		};
+		compareAtPriceV2: null | {
+			amount: string;
+			currencyCode: string;
+		};
 		image: {
 			id: string;
 			src: string;

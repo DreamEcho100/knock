@@ -15,7 +15,7 @@ import {
 	useUpdateProductsToCheckoutAndCart
 } from '@utils/core/hooks';
 import { convertProductToCartItem } from '@utils/core/products';
-import { getIdFromGid } from '@utils/core/shopify';
+import { getIdFromGid, priceCurrencyFormatter } from '@utils/core/shopify';
 import { cx } from 'class-variance-authority';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -428,7 +428,30 @@ const CartContainer = () => {
 													{product.title}
 												</Link>
 											</h4>
-											<p title='price per product'>${product.price}</p>
+											<p title='price per product'>
+												{product.variant.compareAtPrice ? (
+													<>
+														<del>
+															{priceCurrencyFormatter(
+																product.variant.compareAtPrice.amount,
+																product.variant.compareAtPrice.currencyCode
+															)}
+														</del>
+														&nbsp;
+														<span className='text-bg-secondary-2'>
+															{priceCurrencyFormatter(
+																product.variant.price.amount,
+																product.variant.price.currencyCode
+															)}
+														</span>
+													</>
+												) : (
+													priceCurrencyFormatter(
+														product.variant.price.amount,
+														product.variant.price.currencyCode
+													)
+												)}
+											</p>
 										</header>
 										<div className='flex flex-col gap-1 sm:flex-row sm:gap-2 sm:justify-between'>
 											{/* <div className='w-fit border-[0.125rem] border-bg-secondary-1 rounded-2xl p-1 flex gap-3'>
