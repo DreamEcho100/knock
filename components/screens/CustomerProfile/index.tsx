@@ -5,8 +5,7 @@ import {
 	getGetAccessTokenFromCookie,
 	useGetUserCheckoutDetailsAndIdAndKey,
 	useGetUserDataFromStore,
-	useLogoutUser,
-	useSleep
+	useLogoutUser
 } from '@utils/core/hooks';
 import { priceCurrencyFormatter } from '@utils/core/shopify';
 
@@ -26,7 +25,6 @@ import FormField from '@components/shared/core/FieldForm';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 const TitleValue = ({
 	title,
@@ -304,24 +302,13 @@ const UpdateUserBasicDetails = ({
 };
 
 const CustomerProfileScreen = () => {
-	const router = useRouter();
 	const { user } = useGetUserDataFromStore();
-	const handleSleep = useSleep(150);
 
 	// const [isLoggingOut, setIsLoggingOut] = useState(false);
 	const userCheckoutDetailsAndIdAndKey = useGetUserCheckoutDetailsAndIdAndKey();
 	const [isUpdateUserBasicDetailsOpen, setIsUpdateUserBasicDetailsOpen] =
 		useState(false);
 	const logoutUser = useLogoutUser({
-		onSuccess: async () => {
-			setTimeout(() =>
-				router
-					.push('/')
-					.then(
-						async () => (await handleSleep.sleep()) && window.location.reload()
-					)
-			);
-		},
 		userCheckoutDetailsAndIdAndKey
 	});
 
