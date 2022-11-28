@@ -319,7 +319,7 @@ const UpdateUserBasicDetails = ({
 const CustomerProfileScreen = () => {
 	const router = useRouter();
 	const { user } = useGetUserDataFromStore();
-	const handleSleep = useSleep(300);
+	const handleSleep = useSleep(1000);
 
 	const [isLoggingOut, setIsLoggingOut] = useState(false);
 	const userCheckoutDetailsAndIdAndKey = useGetUserCheckoutDetailsAndIdAndKey();
