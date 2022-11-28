@@ -353,8 +353,10 @@ const CustomerProfileScreen = () => {
 					<meta name='robots' content='noindex, nofollow' />
 					<title>Loading... | KNOCK Plugin - Make Your Drums Knock</title>
 				</Head>
-				<section className='bg-primary-1 section-p-v1 h-[75vh] max-h-[45rem] min-h-fit max-w-screen-md mx-auto'>
-					<p>Loading...</p>
+				<section className='bg-primary-1 section-p-v1 h-[75vh] max-h-[45rem] min-h-fit'>
+					<div className='max-w-screen-md mx-auto'>
+						<p>Loading...</p>
+					</div>
 				</section>
 			</>
 		);
@@ -370,12 +372,14 @@ const CustomerProfileScreen = () => {
 							: "Your data doesn't exist | KNOCK Plugin - Make Your Drums Knock"}
 					</title>
 				</Head>
-				<section className='bg-primary-1 section-p-v1 h-[75vh] max-h-[45rem] min-h-fit max-w-screen-md mx-auto'>
-					<p>
-						{!user.isSuccess
-							? 'Please login first to view your data, or reload the page and make sure you have a good internet connection'
-							: "Your data doesn't exist "}
-					</p>
+				<section className='bg-primary-1 section-p-v1 h-[75vh] max-h-[45rem] min-h-fit'>
+					<div className='max-w-screen-md mx-auto'>
+						<p>
+							{!user.isSuccess
+								? 'Please login first to view your data, or reload the page and make sure you have a good internet connection'
+								: "Your data doesn't exist "}
+						</p>
+					</div>
 				</section>
 			</>
 		);
