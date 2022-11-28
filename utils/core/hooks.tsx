@@ -6,7 +6,7 @@ import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
 import { getCookie, removeCookie } from '@utils/common/storage/cookie/document';
 
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import type { IGenericErrorResponse, ILineItem, IProduct, IUser } from 'types';
 
@@ -67,18 +67,18 @@ export const useGetUserCheckoutIdAndKeyCookie = () =>
 	getUserCheckoutIdAndKeyFromCookie(); // useMemo(() => getUserCheckoutIdAndKeyFromCookie(), []);
 
 export const useLogoutUser = ({
-	enabled,
 	onError,
 	onSuccess,
 	userCheckoutDetailsAndIdAndKey
 }: {
-	enabled: boolean;
 	onError?: () => void;
 	onSuccess?: () => void;
 	userCheckoutDetailsAndIdAndKey: ReturnType<
 		typeof useGetUserCheckoutDetailsAndIdAndKey
 	>;
 }) => {
+	const [isLoggingOut, setIsLoggingOut] = useState(false);
+
 	const { user } = useGetUserDataFromStore();
 	const [
 		{
@@ -89,60 +89,66 @@ export const useLogoutUser = ({
 	const queryClient = useQueryClient();
 	const accessToken = getGetAccessTokenFromCookie();
 
-	return useQuery<
-		IUser & {
-			userCheckoutDetailsAndIdAndKey: NonNullable<
-				typeof userCheckoutDetailsAndIdAndKey
-			>;
-			userGId: string;
-		},
-		IGenericErrorResponse
-	>(
-		['logout'],
-		() => {
-			if (!user.isSuccess)
-				if (!accessToken) throw new Error('Access token is required');
-
-			return fetch(
-				`${process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH}/auth/logout`,
-				{
-					headers: {
-						'Content-type': 'application/json',
-						accesstoken: accessToken
-					}
-				}
-			)
-				.then((response) => response.json())
-				.then((result) => ({
-					...result,
-					userCheckoutDetailsAndIdAndKey,
-					userGId: user?.data?.id
-				}));
-		},
-		{
-			enabled,
-			onSuccess: async ({ userCheckoutDetailsAndIdAndKey, userGId }) => {
-				removeCookie('user-access-token');
-
-				// uetUserCheckoutDetailsAndIdAndKey(user?.data?.id);
-
-				if (userCheckoutDetailsAndIdAndKey)
-					checkoutApi.products.removeMany(
-						`gid://shopify/Checkout/${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId}?key=${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutKey}`,
-						productsData.map((product) => product.id)
-					);
-				// removeCookie('checkoutIdAndKey');
-
-				if (onSuccess) await onSuccess();
-
-				queryClient.invalidateQueries<IUser | undefined>(['check-token']);
-				window.location.reload();
+	return {
+		...useQuery<
+			IUser & {
+				userCheckoutDetailsAndIdAndKey: NonNullable<
+					typeof userCheckoutDetailsAndIdAndKey
+				>;
+				userGId: string;
 			},
-			onError: (error) => {
-				if (onError) onError();
+			IGenericErrorResponse
+		>(
+			['logout'],
+			() => {
+				if (!user.isSuccess)
+					if (!accessToken) throw new Error('Access token is required');
+
+				return fetch(
+					`${process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH}/auth/logout`,
+					{
+						headers: {
+							'Content-type': 'application/json',
+							accesstoken: accessToken
+						}
+					}
+				)
+					.then((response) => response.json())
+					.then((result) => ({
+						...result,
+						userCheckoutDetailsAndIdAndKey,
+						userGId: user?.data?.id
+					}));
+			},
+			{
+				enabled: user && userCheckoutDetailsAndIdAndKey && isLoggingOut,
+				onSuccess: async ({ userCheckoutDetailsAndIdAndKey, userGId }) => {
+					removeCookie('user-access-token');
+
+					if (userCheckoutDetailsAndIdAndKey)
+						checkoutApi.products.removeMany(
+							`gid://shopify/Checkout/${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId}?key=${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutKey}`,
+							productsData.map((product) => product.id)
+						);
+
+					queryClient.invalidateQueries<IUser | undefined>(['check-token']);
+
+					if (onSuccess) await onSuccess();
+					else window.location.reload();
+
+					setIsLoggingOut(false);
+
+					window.location.reload();
+				},
+				onError: (error) => {
+					if (onError) return onError();
+					setIsLoggingOut(false);
+				}
 			}
-		}
-	);
+		),
+		isLoggingOut,
+		setIsLoggingOut
+	};
 };
 
 export const getGetAccessTokenFromCookie = () => {

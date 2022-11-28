@@ -321,18 +321,16 @@ const CustomerProfileScreen = () => {
 	const { user } = useGetUserDataFromStore();
 	const handleSleep = useSleep(1000);
 
-	const [isLoggingOut, setIsLoggingOut] = useState(false);
+	// const [isLoggingOut, setIsLoggingOut] = useState(false);
 	const userCheckoutDetailsAndIdAndKey = useGetUserCheckoutDetailsAndIdAndKey();
 	const [isUpdateUserBasicDetailsOpen, setIsUpdateUserBasicDetailsOpen] =
 		useState(false);
 	const logoutUser = useLogoutUser({
-		enabled: !!(user && userCheckoutDetailsAndIdAndKey && isLoggingOut),
 		onSuccess: async () => {
-			setIsLoggingOut(false);
 			router.push('/');
 			await handleSleep.sleep();
+			window.location.reload();
 		},
-		onError: () => setIsLoggingOut(false),
 		userCheckoutDetailsAndIdAndKey
 	});
 
@@ -400,8 +398,8 @@ const CustomerProfileScreen = () => {
 							Logged in as{' '}
 							<span className='text-bg-secondary-1'>{user.data.email}</span> (
 							<Button
-								onClick={() => setIsLoggingOut(true)}
-								disabled={logoutUser.isLoading && isLoggingOut}
+								onClick={() => logoutUser.setIsLoggingOut(true)}
+								disabled={logoutUser.isLoading && logoutUser.isLoggingOut}
 								classesIntent={{ rounded: 'none', p: 'none', theme: 'none' }}
 								className='text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600'
 							>

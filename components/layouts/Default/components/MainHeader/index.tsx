@@ -55,7 +55,6 @@ const MainHeader = () => {
 	const { user } = useGetUserDataFromStore();
 	const router = useRouter();
 
-	const [isLoggingOut, setIsLoggingOut] = useState(false);
 	const [isRegisterDialogOpen, setIsRegisterDialogOpen] = useState(false);
 	const [isSmallScreenNaveOpen, setIsSmallScreenNaveOpen] = useState(false);
 	const [isCheckoutFound, setIsCheckoutFound] = useState(false);
@@ -127,9 +126,6 @@ const MainHeader = () => {
 	const userCheckoutDetailsAndIdAndKey = useGetUserCheckoutDetailsAndIdAndKey();
 
 	const logoutUser = useLogoutUser({
-		enabled: !!isLoggingOut,
-		onSuccess: () => setIsLoggingOut(false),
-		onError: () => setIsLoggingOut(false),
 		userCheckoutDetailsAndIdAndKey
 	});
 	const cartProductsCount = useMemo(
@@ -277,8 +273,8 @@ const MainHeader = () => {
 								<button
 									title='cart'
 									className='flex items-center justify-center disabled:bg-slate-400'
-									onClick={() => setIsLoggingOut(true)}
-									disabled={logoutUser.isLoading && isLoggingOut}
+									onClick={() => logoutUser.setIsLoggingOut(true)}
+									disabled={logoutUser.isLoading && logoutUser.isLoggingOut}
 								>
 									logout
 								</button>
