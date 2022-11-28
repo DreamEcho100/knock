@@ -6,7 +6,7 @@ import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
 import { getCookie, removeCookie } from '@utils/common/storage/cookie/document';
 
-import { useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 
 import type { IGenericErrorResponse, ILineItem, IProduct, IUser } from 'types';
 
@@ -346,4 +346,32 @@ export const useRemoveProductsToCheckoutAndCart = () => {
 			);
 		}
 	});
+};
+
+export const useSleep = (time: number) => {
+	const configRef = useRef<{
+		timeoutId?: NodeJS.Timeout;
+	}>({
+		timeoutId: undefined
+	});
+
+	const clearSleepTimeout = () =>
+		configRef.current.timeoutId && clearTimeout(configRef.current.timeoutId);
+
+	const sleep = async () =>
+		await new Promise((resolve) => {
+			configRef.current.timeoutId = setTimeout(() => {
+				resolve(time);
+				clearSleepTimeout();
+			}, time);
+		});
+
+	useEffect(() => {
+		return () => clearSleepTimeout();
+	}, []);
+
+	return {
+		sleep,
+		clearSleepTimeout
+	};
 };

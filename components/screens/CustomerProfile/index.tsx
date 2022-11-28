@@ -15,7 +15,8 @@ import {
 	getGetAccessTokenFromCookie,
 	useGetUserCheckoutDetailsAndIdAndKey,
 	useGetUserDataFromStore,
-	useLogoutUser
+	useLogoutUser,
+	useSleep
 } from '@utils/core/hooks';
 import { getIdFromGid, priceCurrencyFormatter } from '@utils/core/shopify';
 
@@ -318,6 +319,7 @@ const UpdateUserBasicDetails = ({
 const CustomerProfileScreen = () => {
 	const router = useRouter();
 	const { user } = useGetUserDataFromStore();
+	const handleSleep = useSleep(300);
 
 	const [isLoggingOut, setIsLoggingOut] = useState(false);
 	const userCheckoutDetailsAndIdAndKey = useGetUserCheckoutDetailsAndIdAndKey();
@@ -325,8 +327,9 @@ const CustomerProfileScreen = () => {
 		useState(false);
 	const logoutUser = useLogoutUser({
 		enabled: !!(user && userCheckoutDetailsAndIdAndKey && isLoggingOut),
-		onSuccess: () => {
+		onSuccess: async () => {
 			setIsLoggingOut(false);
+			await handleSleep.sleep();
 			router.push('/');
 		},
 		onError: () => setIsLoggingOut(false),
