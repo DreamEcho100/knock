@@ -137,7 +137,7 @@ const RegisterType = ({
 						Have an account?{' '}
 						<button
 							type='button'
-							className='text-bg-secondary-1'
+							className='text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600'
 							onClick={() => setType(EWindowType.LOGIN)}
 						>
 							login
@@ -300,7 +300,7 @@ const LoginType = ({
 						Don&apos;t have an account?{' '}
 						<button
 							type='button'
-							className='text-bg-secondary-1'
+							className='text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600'
 							onClick={() => setType(EWindowType.REGISTER)}
 						>
 							Create a new one
@@ -339,7 +339,7 @@ const LoginType = ({
 						<div className=''>
 							<button
 								type='button'
-								className='text-bg-secondary-1'
+								className='text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600'
 								onClick={() => setType(EWindowType.FORGET_PASSWORD)}
 							>
 								forget password?
@@ -430,7 +430,7 @@ const ForgetPasswordType = ({
 						&nbsp;Have an account?&nbsp;
 						<button
 							type='button'
-							className='text-bg-secondary-1'
+							className='text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600'
 							onClick={() => setType(EWindowType.LOGIN)}
 						>
 							Login

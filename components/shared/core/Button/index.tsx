@@ -2,7 +2,6 @@ import Link from 'next/link';
 import type { ButtonHTMLAttributes } from 'react';
 import { buttonClasses } from 'utils/core/cva';
 import type { VariantProps } from 'class-variance-authority';
-import twClasses from 'utils/core/tailwind';
 
 export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	classesIntent?: VariantProps<typeof buttonClasses>;

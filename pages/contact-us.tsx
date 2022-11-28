@@ -34,7 +34,10 @@ const ContactUsPage: NextPage = () => {
 						<h1 className='text-h2 font-semibold'>Contact Us</h1>
 						<p className='text-text-primary-2'>
 							If you have a question, please review{' '}
-							<Link href='/faqs' className='text-bg-secondary-1'>
+							<Link
+								href='/faqs'
+								className='text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600'
+							>
 								FAQs
 							</Link>{' '}
 							before submitting a ticket.

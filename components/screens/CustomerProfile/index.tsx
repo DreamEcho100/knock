@@ -13,7 +13,9 @@ import accordionClasses from '@styles/accordion.module.css';
 
 import {
 	getGetAccessTokenFromCookie,
-	useGetUserDataFromStore
+	useGetUserCheckoutDetailsAndIdAndKey,
+	useGetUserDataFromStore,
+	useLogoutUser
 } from '@utils/core/hooks';
 import { getIdFromGid, priceCurrencyFormatter } from '@utils/core/shopify';
 
@@ -314,8 +316,17 @@ const UpdateUserBasicDetails = ({
 
 const CustomerProfileScreen = () => {
 	const { user } = useGetUserDataFromStore();
+
+	const [isLoggingOut, setIsLoggingOut] = useState(false);
+	const userCheckoutDetailsAndIdAndKey = useGetUserCheckoutDetailsAndIdAndKey();
 	const [isUpdateUserBasicDetailsOpen, setIsUpdateUserBasicDetailsOpen] =
 		useState(false);
+	const logoutUser = useLogoutUser({
+		enabled: !!(user && userCheckoutDetailsAndIdAndKey && isLoggingOut),
+		onSuccess: () => setIsLoggingOut(false),
+		onError: () => setIsLoggingOut(false),
+		userCheckoutDetailsAndIdAndKey
+	});
 
 	const orders = useMemo(() => {
 		let aNum: number;
@@ -350,7 +361,7 @@ const CustomerProfileScreen = () => {
 						<>
 							{!user.isSuccess
 								? 'Please login first to view your data, or reload the page and make sure you have a good internet connection'
-								: "Your data doesn't exist \u{1F928}"}{' '}
+								: "Your data doesn't exist "}{' '}
 							| KNOCK Plugin - Make Your Drums Knock
 						</>
 					</title>
@@ -359,7 +370,7 @@ const CustomerProfileScreen = () => {
 					<p>
 						{!user.isSuccess
 							? 'Please login first to view your data, or reload the page and make sure you have a good internet connection'
-							: "Your data doesn't exist \u{1F928}"}
+							: "Your data doesn't exist "}
 					</p>
 				</section>
 			</>
@@ -376,10 +387,22 @@ const CustomerProfileScreen = () => {
 			<section className='bg-primary-1 section-p-v1'>
 				<div className='max-w-screen-md mx-auto flex flex-col gap-16'>
 					<header className='flex flex-col items-center'>
-						<h1 className='text-h1'>Account</h1>
+						<h1 className='text-h1 uppercase'>Account</h1>
+						<p>
+							Logged in as{' '}
+							<span className='text-bg-secondary-1'>{user.data.email}</span> (
+							<Button
+								onClick={() => setIsLoggingOut(true)}
+								classesIntent={{ rounded: 'none', p: 'none', theme: 'none' }}
+								className='text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600'
+							>
+								logout
+							</Button>
+							)
+						</p>
 					</header>
-					<div className='flex flex-col gap-1 text-primary-1'>
-						<p className='capitalize'>
+					<div className='flex flex-col gap-1'>
+						<p className='capitalize text-primary-1'>
 							{user.data.firstName} {user.data.lastName}
 						</p>
 						<p>{user.data.email}</p>
@@ -391,7 +414,8 @@ const CustomerProfileScreen = () => {
 
 						<Button
 							onClick={() => setIsUpdateUserBasicDetailsOpen(true)}
-							classesIntent={{ rounded: 'none', p: 'wide' }}
+							classesIntent={{ rounded: 'none', p: 'none', theme: 'none' }}
+							className='text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600'
 						>
 							Edit
 						</Button>
@@ -406,8 +430,11 @@ const CustomerProfileScreen = () => {
 						orders.length === 0 ||
 						!('node' in orders[0]) ? (
 							<p>
-								<span>There&apos;s no orders {'\u{1F625}'}</span>&nbsp;
-								<Link href='/drums-that-knock' className='text-bg-secondary-1'>
+								<span>There&apos;s no orders</span>&nbsp;
+								<Link
+									href='/drums-that-knock'
+									className='text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600'
+								>
 									let&apos;s do something about that
 								</Link>
 							</p>
@@ -428,7 +455,7 @@ const CustomerProfileScreen = () => {
 													<span className='title font-bold hidden'>
 														Order:&nbsp;
 													</span>
-													<span className='text-bg-secondary-1'>
+													<span className='text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600'>
 														{/* {itemNode.name} */}
 														<ProductsOnOrder
 															lineItems={itemNode.lineItems.edges}

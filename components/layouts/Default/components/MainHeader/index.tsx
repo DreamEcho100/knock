@@ -231,7 +231,7 @@ const MainHeader = () => {
 									// href={`/customers/${getIdFromGid(user.data.id)}`}
 									href='/account/profile'
 									title='profile'
-									className='flex items-center justify-center text-bg-secondary-1'
+									className='flex items-center justify-center text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600'
 								>
 									<BsFillPersonFill className='text-xl' />
 								</Link>
@@ -260,7 +260,7 @@ const MainHeader = () => {
 									/>
 									<span
 										className={cx(
-											'text-sm absolute top-0 text-bg-secondary-1 font-black p-2 bg-opacity-70 rounded-full',
+											'text-sm absolute top-0 text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600  font-black p-2 bg-opacity-70 rounded-full',
 											'duration-300 transition-all',
 											cartProductsCount === 0
 												? ''

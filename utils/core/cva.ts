@@ -31,7 +31,8 @@ export const buttonClasses = cva(
 			p: {
 				wide: 'px-4 py-[0.125rem]',
 				wider: 'px-8 py-[0.25rem]',
-				'extra-wide': 'px-10 py-[0.125rem]'
+				'extra-wide': 'px-10 py-[0.125rem]',
+				none: ''
 			},
 			rounded: {
 				'3xl': 'rounded-3xl',
@@ -42,7 +43,8 @@ export const buttonClasses = cva(
 					'text-white bg-secondary-1',
 					'hover:bg-purple-800',
 					'focus:ring focus:ring-bg-secondary-1'
-				)
+				),
+				none: ''
 			},
 			display: {
 				'flex-xy-center': 'flex items-center justify-center'
