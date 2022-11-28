@@ -398,7 +398,7 @@ const CustomerProfileScreen = () => {
 							<span className='text-bg-secondary-1'>{user.data.email}</span> (
 							<Button
 								onClick={() => setIsLoggingOut(true)}
-								disabled={logoutUser.isLoading}
+								disabled={logoutUser.isLoading && logoutUser.isFetching}
 								classesIntent={{ rounded: 'none', p: 'none', theme: 'none' }}
 								className='text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600'
 							>
