@@ -350,6 +350,7 @@ const CustomerProfileScreen = () => {
 		return (
 			<>
 				<Head>
+					<meta name='robots' content='noindex, nofollow' />
 					<title>Loading... | KNOCK Plugin - Make Your Drums Knock</title>
 				</Head>
 				<section className='bg-primary-1 section-p-v1 h-[75vh] max-h-[45rem] min-h-fit'>
@@ -362,6 +363,7 @@ const CustomerProfileScreen = () => {
 		return (
 			<>
 				<Head>
+					<meta name='robots' content='noindex, nofollow' />
 					<title>
 						{!user.isSuccess
 							? 'Please login first to view your data, or reload the page and make sure you have a good internet connection | KNOCK Plugin - Make Your Drums Knock'
@@ -381,6 +383,7 @@ const CustomerProfileScreen = () => {
 	return (
 		<>
 			<Head>
+				<meta name='robots' content='noindex, nofollow' />
 				<title>
 					{user.data.firstName} {user.data.lastName} | Customer Profile | KNOCK
 					Plugin - Make Your Drums Knock

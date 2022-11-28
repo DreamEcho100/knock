@@ -48,6 +48,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 								name='viewport'
 								content='width=device-width, initial-scale=1.0'
 							/>
+							<meta name='robots' content='index, follow' />
 							<meta
 								name='description'
 								content='The KNOCK Plugin created by DECAP will help you make Drums That Knock hard and punch through your mix. Easy to use for music producers at all levels.'
