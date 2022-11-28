@@ -363,12 +363,9 @@ const CustomerProfileScreen = () => {
 			<>
 				<Head>
 					<title>
-						<>
-							{!user.isSuccess
-								? 'Please login first to view your data, or reload the page and make sure you have a good internet connection'
-								: "Your data doesn't exist "}{' '}
-							| KNOCK Plugin - Make Your Drums Knock
-						</>
+						{!user.isSuccess
+							? 'Please login first to view your data, or reload the page and make sure you have a good internet connection | KNOCK Plugin - Make Your Drums Knock'
+							: "Your data doesn't exist | KNOCK Plugin - Make Your Drums Knock"}
 					</title>
 				</Head>
 				<section className='bg-primary-1 section-p-v1 h-[75vh] max-h-[45rem] min-h-fit'>
