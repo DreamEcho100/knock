@@ -38,6 +38,7 @@ import FormField from '@components/shared/core/FieldForm';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const TitleValue = ({
 	title,
@@ -315,6 +316,7 @@ const UpdateUserBasicDetails = ({
 };
 
 const CustomerProfileScreen = () => {
+	const router = useRouter();
 	const { user } = useGetUserDataFromStore();
 
 	const [isLoggingOut, setIsLoggingOut] = useState(false);
@@ -323,7 +325,10 @@ const CustomerProfileScreen = () => {
 		useState(false);
 	const logoutUser = useLogoutUser({
 		enabled: !!(user && userCheckoutDetailsAndIdAndKey && isLoggingOut),
-		onSuccess: () => setIsLoggingOut(false),
+		onSuccess: () => {
+			setIsLoggingOut(false);
+			router.push('/');
+		},
 		onError: () => setIsLoggingOut(false),
 		userCheckoutDetailsAndIdAndKey
 	});
@@ -393,6 +398,7 @@ const CustomerProfileScreen = () => {
 							<span className='text-bg-secondary-1'>{user.data.email}</span> (
 							<Button
 								onClick={() => setIsLoggingOut(true)}
+								disabled={logoutUser.isLoading}
 								classesIntent={{ rounded: 'none', p: 'none', theme: 'none' }}
 								className='text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600'
 							>
