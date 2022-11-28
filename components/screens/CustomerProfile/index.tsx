@@ -5,7 +5,8 @@ import {
 	getGetAccessTokenFromCookie,
 	useGetUserCheckoutDetailsAndIdAndKey,
 	useGetUserDataFromStore,
-	useLogoutUser
+	useLogoutUser,
+	useSleep
 } from '@utils/core/hooks';
 import { priceCurrencyFormatter } from '@utils/core/shopify';
 
@@ -305,6 +306,7 @@ const UpdateUserBasicDetails = ({
 const CustomerProfileScreen = () => {
 	const router = useRouter();
 	const { user } = useGetUserDataFromStore();
+	const handleSleep = useSleep(150);
 
 	// const [isLoggingOut, setIsLoggingOut] = useState(false);
 	const userCheckoutDetailsAndIdAndKey = useGetUserCheckoutDetailsAndIdAndKey();
@@ -312,7 +314,13 @@ const CustomerProfileScreen = () => {
 		useState(false);
 	const logoutUser = useLogoutUser({
 		onSuccess: async () => {
-			setTimeout(() => router.push('/').then(() => window.location.reload()));
+			setTimeout(() =>
+				router
+					.push('/')
+					.then(
+						async () => (await handleSleep.sleep()) && window.location.reload()
+					)
+			);
 		},
 		userCheckoutDetailsAndIdAndKey
 	});

@@ -359,8 +359,12 @@ export const useSleep = (time: number) => {
 		timeoutId: undefined
 	});
 
-	const clearSleepTimeout = () =>
-		configRef.current.timeoutId && clearTimeout(configRef.current.timeoutId);
+	const clearSleepTimeout = () => {
+		if (configRef.current.timeoutId) {
+			clearTimeout(configRef.current.timeoutId);
+			configRef.current.timeoutId = undefined;
+		}
+	};
 
 	const sleep = async () =>
 		await new Promise((resolve) => {
