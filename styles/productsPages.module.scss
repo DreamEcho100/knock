@@ -190,8 +190,7 @@
 
 
 .productPageFeaturesSmallBox{
-    @extend .productPageFeatures 
-
+    @extend .productPageFeatures ;
 }
 
 .productPageFeaturesBigBox{
@@ -211,7 +210,7 @@
     flex-direction: column;
     align-items: center;
     gap: 2em;
-    width: 100%;
+    width: 90%;
     h4{
         z-index: 1;
         padding: .5em;
@@ -230,19 +229,22 @@
         iframe{
             z-index: 1;
             border-radius: 25px;
-            width: 450px;
+            width: 90%;
             height: 270px;
         }
-        @media (max-width:1024px) {
+        @media (min-width:1024px) {
             
             iframe{
-                width: 90%;
+                width: 450px;
             }
         }
     }
-    @media (min-width:1024px) {
+    @media (min-width:768px) {
             
         & > div{
+         iframe{
+            width: 450px;
+         }
         flex-direction: row;
         }
     }
@@ -310,11 +312,7 @@
 
 
 .GoBackLink{
-    color: #7548fe;
-    font-weight: 600;
-    text-transform: capitalize;
-    font-size: 1.5rem;
-    margin: 3em 0;
+    margin-bottom: 100px ;
 }
 
 
@@ -336,7 +334,11 @@
         height: 530px !important;
     }
     
-
+    .productPageFeaturesSmallBox{
+        ul{
+            height: 510px !important;
+        }
+    }
 
     .ProductCardDetailsPriceSales{
         position: relative;
@@ -449,5 +451,37 @@
             text-align: center;
 
         }
+    }
+}
+
+@media (min-width:1200px) {
+
+    .productPageFeaturesBox{
+
+        height: 550px !important;
+        
+    }
+    .productPageFeaturesBigBox{
+        & > div:nth-child(2){
+            width: 90% !important;
+        }
+    }
+    .productPageFeatures{
+
+        & > div:nth-child(2){
+            width: 90%;
+            gap: 3em;
+        }
+
+    }
+    .productPageFeatures{
+
+        & > div:nth-child(2){
+            width: 90%;
+            gap: 3em;
+        }
+    }
+    .ProductCardDetails{
+        width: 80%;
     }
 }
