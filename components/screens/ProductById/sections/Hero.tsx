@@ -79,7 +79,6 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 							)}
 							{product.filesIncluded.details.length ? (
 								<ul className={classes.productPageFeaturesBox}>
-									
 									{product.filesIncluded.details.map((el, index) => (
 										<li key={index}>{el}</li>
 									))}
@@ -155,7 +154,7 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 				{renderFeature()}
 				{product.video ? (
 					<div className={classes.productPageYoutubeSections}>
-						<h4>{product.video.title}</h4>
+						{product.video.title ? <h4>{product.video.title}</h4> : ''}
 						<div>
 							<div className={classes.overLayYoutubeSection}></div>
 							<iframe src={product.video.src} />
@@ -169,7 +168,10 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 				) : (
 					''
 				)}
-				<Link className={classes.GoBackLink} href={'/drums-that-knock'} > GO BACK </Link>
+				<Button className={classes.GoBackLink} href={'/drums-that-knock'}>
+					{' '}
+					GO BACK{' '}
+				</Button>
 			</div>
 		</section>
 	);

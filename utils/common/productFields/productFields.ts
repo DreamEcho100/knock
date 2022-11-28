@@ -363,7 +363,7 @@ const setFields = (handle: any) => {
 					'All sounds and loops are compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, Bitwig, etc)'
 				],
 				filesIncluded: {
-					count: 'those',
+					count: '',
 					details: [
 						'808s + Bass',
 						'Drum loops',
