@@ -7,11 +7,9 @@ import {
 	useGetUserDataFromStore,
 	useLogoutUser
 } from '@utils/core/hooks';
-import { getIdFromGid, priceCurrencyFormatter } from '@utils/core/shopify';
+import { priceCurrencyFormatter } from '@utils/core/shopify';
 
 import type { IGenericErrorResponse, IUser } from 'types';
-
-import { cx } from 'class-variance-authority';
 
 import {
 	Dispatch,
@@ -22,7 +20,6 @@ import {
 	useState
 } from 'react';
 
-import { BiChevronUpCircle } from 'react-icons/bi';
 import Dialog from '@components/shared/common/Dialog';
 import FormField from '@components/shared/core/FieldForm';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
