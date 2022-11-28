@@ -329,8 +329,8 @@ const CustomerProfileScreen = () => {
 		enabled: !!(user && userCheckoutDetailsAndIdAndKey && isLoggingOut),
 		onSuccess: async () => {
 			setIsLoggingOut(false);
-			await handleSleep.sleep();
 			router.push('/');
+			await handleSleep.sleep();
 		},
 		onError: () => setIsLoggingOut(false),
 		userCheckoutDetailsAndIdAndKey
