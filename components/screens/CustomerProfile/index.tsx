@@ -352,7 +352,7 @@ const CustomerProfileScreen = () => {
 				<Head>
 					<title>Loading... | KNOCK Plugin - Make Your Drums Knock</title>
 				</Head>
-				<section className='bg-primary-1 section-p-v1'>
+				<section className='bg-primary-1 section-p-v1 h-[75vh] max-h-[45rem] min-h-fit'>
 					<p>Loading...</p>
 				</section>
 			</>
@@ -371,7 +371,7 @@ const CustomerProfileScreen = () => {
 						</>
 					</title>
 				</Head>
-				<section className='bg-primary-1 section-p-v1'>
+				<section className='bg-primary-1 section-p-v1 h-[75vh] max-h-[45rem] min-h-fit'>
 					<p>
 						{!user.isSuccess
 							? 'Please login first to view your data, or reload the page and make sure you have a good internet connection'
