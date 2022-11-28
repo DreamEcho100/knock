@@ -137,8 +137,6 @@ export const useLogoutUser = ({
 					else window.location.reload();
 
 					setIsLoggingOut(false);
-
-					window.location.reload();
 				},
 				onError: (error) => {
 					if (onError) return onError();

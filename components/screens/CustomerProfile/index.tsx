@@ -327,9 +327,8 @@ const CustomerProfileScreen = () => {
 		useState(false);
 	const logoutUser = useLogoutUser({
 		onSuccess: async () => {
-			router.push('/');
+			router.push('/').then(() => window.location.reload());
 			await handleSleep.sleep();
-			window.location.reload();
 		},
 		userCheckoutDetailsAndIdAndKey
 	});
