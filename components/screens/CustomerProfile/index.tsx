@@ -2,21 +2,10 @@ import Button from '@components/shared/core/Button';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 
 import {
-	Root as AccordionRoot,
-	Item as AccordionItem,
-	Header as AccordionHeader,
-	Trigger as AccordionTrigger,
-	Content as AccordionContent
-} from '@radix-ui/react-accordion';
-
-import accordionClasses from '@styles/accordion.module.css';
-
-import {
 	getGetAccessTokenFromCookie,
 	useGetUserCheckoutDetailsAndIdAndKey,
 	useGetUserDataFromStore,
-	useLogoutUser,
-	useSleep
+	useLogoutUser
 } from '@utils/core/hooks';
 import { getIdFromGid, priceCurrencyFormatter } from '@utils/core/shopify';
 
@@ -319,7 +308,6 @@ const UpdateUserBasicDetails = ({
 const CustomerProfileScreen = () => {
 	const router = useRouter();
 	const { user } = useGetUserDataFromStore();
-	const handleSleep = useSleep(1000);
 
 	// const [isLoggingOut, setIsLoggingOut] = useState(false);
 	const userCheckoutDetailsAndIdAndKey = useGetUserCheckoutDetailsAndIdAndKey();
@@ -327,8 +315,7 @@ const CustomerProfileScreen = () => {
 		useState(false);
 	const logoutUser = useLogoutUser({
 		onSuccess: async () => {
-			router.push('/').then(() => window.location.reload());
-			await handleSleep.sleep();
+			setTimeout(() => router.push('/').then(() => window.location.reload()));
 		},
 		userCheckoutDetailsAndIdAndKey
 	});
