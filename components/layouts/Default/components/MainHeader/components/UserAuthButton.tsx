@@ -201,7 +201,7 @@ const RegisterType = ({
 									}
 								/>
 								&nbsp;
-								<span>Accepting marketing</span>
+								<span>Accept Marketing</span>
 							</label>
 						</div>
 						<div className='mt-4 flex justify-end'>

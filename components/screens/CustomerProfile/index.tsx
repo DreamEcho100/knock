@@ -277,7 +277,7 @@ const UpdateUserBasicDetails = ({
 								}
 							/>
 							&nbsp;
-							<span>Accepting marketing</span>
+							<span>Accept Marketing</span>
 						</label>
 					</div>
 
