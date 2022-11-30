@@ -1,7 +1,11 @@
 import Link from 'next/link';
 import KnockTrademark from '../KnockTrademark';
 
-const Logo = (props: Partial<Parameters<typeof Link>[0]>) => {
+interface IProps extends Partial<Parameters<typeof Link>[0]> {
+	whatKnocks?: string;
+}
+
+const Logo = ({ whatKnocks = 'PLUGINS THAT', ...props }: IProps) => {
 	return (
 		<Link
 			{...props}
@@ -9,7 +13,7 @@ const Logo = (props: Partial<Parameters<typeof Link>[0]>) => {
 			className='font-black whitespace-nowrap flex flex-wrap'
 			style={{ fontFamily: "'decap_v1regular', sans-serif" }}
 		>
-			PLUGINS THAT&nbsp;
+			{whatKnocks}&nbsp;
 			<KnockTrademark />
 		</Link>
 	);

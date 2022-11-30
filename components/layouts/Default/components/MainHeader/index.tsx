@@ -63,39 +63,35 @@ const MainHeader = () => {
 
 	const userCheckoutIdAndKeyFromCookie = useGetUserCheckoutIdAndKeyCookie();
 
-	const createCheckout = useQuery(
-		['create-one-checkout'],
-		() => checkoutApi.createOne(),
-		{
-			enabled: !userCheckoutIdAndKeyFromCookie && !isCheckoutFound,
-			onSuccess: ({ checkout, checkoutIdAndKey }) => {
-				setCookie(
-					'checkoutIdAndKey',
-					JSON.stringify({
-						checkoutId: checkoutIdAndKey.checkoutId,
-						checkoutKey: checkoutIdAndKey.checkoutKey
-					}),
-					{
-						expires: new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000)
+	useQuery(['create-one-checkout'], () => checkoutApi.createOne(), {
+		enabled: !userCheckoutIdAndKeyFromCookie && !isCheckoutFound,
+		onSuccess: ({ checkout, checkoutIdAndKey }) => {
+			setCookie(
+				'checkoutIdAndKey',
+				JSON.stringify({
+					checkoutId: checkoutIdAndKey.checkoutId,
+					checkoutKey: checkoutIdAndKey.checkoutKey
+				}),
+				{
+					expires: new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000)
+				}
+			);
+
+			if (checkout.lineItems.length !== 0)
+				customerGlobalActions.cart.set(customerDispatch, {
+					cartObj: {
+						productsData: checkout.lineItems.map((item) =>
+							convertProductToCartItem({ product: item })
+						),
+						updatedAt: new Date()
 					}
-				);
+				});
 
-				if (checkout.lineItems.length !== 0)
-					customerGlobalActions.cart.set(customerDispatch, {
-						cartObj: {
-							productsData: checkout.lineItems.map((item) =>
-								convertProductToCartItem({ product: item })
-							),
-							updatedAt: new Date()
-						}
-					});
-
-				setIsCheckoutFound(true);
-			}
+			setIsCheckoutFound(true);
 		}
-	);
+	});
 
-	const getCheckout = useQuery(
+	useQuery(
 		['get-one-checkout'],
 		() => {
 			if (!userCheckoutIdAndKeyFromCookie)
@@ -149,16 +145,6 @@ const MainHeader = () => {
 			removeCookie('checkoutIdAndKey');
 			return;
 		}
-
-		// if (checkout.lineItems.length !== 0)
-		// 	customerGlobalActions.cart.set(customerDispatch, {
-		// 		cartObj: {
-		// 			productsData: checkout.lineItems.map((item) =>
-		// 				convertProductToCartItem({ product: item })
-		// 			),
-		// 			updatedAt: new Date()
-		// 		}
-		// 	});
 	}, [
 		cart.productsData.length,
 		cart.updatedAt,
@@ -185,7 +171,15 @@ const MainHeader = () => {
 						className='flex items-center justify-center text-primary-1'
 						style={{ '--sup-t': '0ch' } as CSSProperties}
 					>
-						<Logo onClick={() => setIsSmallScreenNaveOpen(false)} />
+						<Logo
+							onClick={() => setIsSmallScreenNaveOpen(false)}
+							whatKnocks={
+								router.pathname.startsWith('/products/[productId]') ||
+								router.pathname.startsWith('/drums-that-knock')
+									? 'DRUMS THAT'
+									: undefined
+							}
+						/>
 					</div>
 					<nav className='hidden lg:flex lg:justify-center'>
 						<ul className='text-center flex items-center justify-center gap-10 font-semibold'>
