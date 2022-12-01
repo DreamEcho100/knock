@@ -380,8 +380,8 @@ const CustomerProfileScreen = () => {
 							Logged in as{' '}
 							<span className='text-bg-secondary-1'>{user.data.email}</span> (
 							<Button
-								onClick={() => logoutUser.setIsLoggingOut(true)}
-								disabled={logoutUser.isLoading && logoutUser.isLoggingOut}
+								onClick={() => logoutUser.mutate()}
+								disabled={logoutUser.isLoading}
 								classesIntent={{ rounded: 'none', p: 'none', theme: 'none' }}
 								className='text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600'
 							>

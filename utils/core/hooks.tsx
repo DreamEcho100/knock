@@ -77,8 +77,6 @@ export const useLogoutUser = ({
 		typeof useGetUserCheckoutDetailsAndIdAndKey
 	>;
 }) => {
-	const [isLoggingOut, setIsLoggingOut] = useState(false);
-
 	const { user } = useGetUserDataFromStore();
 	const [
 		{
@@ -87,66 +85,56 @@ export const useLogoutUser = ({
 	] = useSharedCustomerState();
 
 	const queryClient = useQueryClient();
-	const accessToken = getGetAccessTokenFromCookie();
 
-	return {
-		...useQuery<
-			IUser & {
-				userCheckoutDetailsAndIdAndKey: NonNullable<
-					typeof userCheckoutDetailsAndIdAndKey
-				>;
-				userGId: string;
-			},
-			IGenericErrorResponse
-		>(
-			['logout'],
-			() => {
-				if (!user.isSuccess)
-					if (!accessToken) throw new Error('Access token is required');
+	return useMutation<
+		IUser & {
+			userCheckoutDetailsAndIdAndKey: NonNullable<
+				typeof userCheckoutDetailsAndIdAndKey
+			>;
+		},
+		IGenericErrorResponse
+	>(
+		['logout'],
+		() => {
+			const accessToken = getGetAccessTokenFromCookie();
 
-				return fetch(
-					`${process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH}/auth/logout`,
-					{
-						headers: {
-							'Content-type': 'application/json',
-							accesstoken: accessToken
-						}
+			if (!accessToken) throw new Error('Access token is required');
+
+			return fetch(
+				`${process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH}/auth/logout`,
+				{
+					headers: {
+						'Content-type': 'application/json',
+						accesstoken: accessToken
 					}
-				)
-					.then((response) => response.json())
-					.then((result) => ({
-						...result,
-						userCheckoutDetailsAndIdAndKey,
-						userGId: user?.data?.id
-					}));
-			},
-			{
-				enabled: user && userCheckoutDetailsAndIdAndKey && isLoggingOut,
-				onSuccess: async ({ userCheckoutDetailsAndIdAndKey, userGId }) => {
-					removeCookie('user-access-token');
-
-					if (userCheckoutDetailsAndIdAndKey)
-						checkoutApi.products.removeMany(
-							`gid://shopify/Checkout/${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId}?key=${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutKey}`,
-							productsData.map((product) => product.id)
-						);
-
-					queryClient.invalidateQueries<IUser | undefined>(['check-token']);
-
-					if (onSuccess) await onSuccess();
-					else window.location.reload();
-
-					setIsLoggingOut(false);
-				},
-				onError: (error) => {
-					if (onError) return onError();
-					setIsLoggingOut(false);
 				}
+			)
+				.then((response) => response.json())
+				.then((result) => ({
+					...result,
+					userCheckoutDetailsAndIdAndKey
+				}));
+		},
+		{
+			onSuccess: async ({ userCheckoutDetailsAndIdAndKey }) => {
+				removeCookie('user-access-token');
+
+				if (userCheckoutDetailsAndIdAndKey)
+					checkoutApi.products.removeMany(
+						`gid://shopify/Checkout/${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId}?key=${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutKey}`,
+						productsData.map((product) => product.id)
+					);
+
+				queryClient.invalidateQueries<IUser | undefined>(['check-token']);
+
+				if (onSuccess) await onSuccess();
+				else window.location.reload();
+			},
+			onError: (error) => {
+				if (onError) return onError();
 			}
-		),
-		isLoggingOut,
-		setIsLoggingOut
-	};
+		}
+	);
 };
 
 export const getGetAccessTokenFromCookie = () => {

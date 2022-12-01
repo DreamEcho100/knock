@@ -267,8 +267,8 @@ const MainHeader = () => {
 								<button
 									title='cart'
 									className='flex items-center justify-center disabled:bg-slate-400'
-									onClick={() => logoutUser.setIsLoggingOut(true)}
-									disabled={logoutUser.isLoading && logoutUser.isLoggingOut}
+									onClick={() => logoutUser.mutate()}
+									disabled={logoutUser.isLoading}
 								>
 									logout
 								</button>
