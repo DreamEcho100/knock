@@ -164,6 +164,7 @@ const KnockSection = ({
 							title='knock plugin'
 							loop
 							controls={false}
+							poster='/images/29f8b3dde3b1d7e7a476bf19c95536f1.png'
 							className='object-cover w-3/4 relative rounded-[7%]'
 						/>
 					)}
