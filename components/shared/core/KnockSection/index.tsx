@@ -100,7 +100,7 @@ const KnockSection = ({
 	pTheme = {},
 	sectionTheme,
 	imageSrc,
-	videoSrc = '/videos/534aaf62a986c03ee09ee62a138d3845.mp4',
+	videoSrc = '/videos/knock.mp4',
 	h2theme,
 	imagesContainerTheme,
 	textContainerTheme,
@@ -164,8 +164,8 @@ const KnockSection = ({
 							title='knock plugin'
 							loop
 							controls={false}
-							poster='/images/29f8b3dde3b1d7e7a476bf19c95536f1.png'
-							className='object-cover w-3/4 relative rounded-[7%]'
+							poster='/images/knock poster.png'
+							className='object-fill w-3/4 relative rounded-[7%]'
 						/>
 					)}
 				</div>
