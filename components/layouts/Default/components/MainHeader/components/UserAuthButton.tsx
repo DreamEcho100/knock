@@ -13,6 +13,7 @@ import { setCookie } from '@utils/common/storage/cookie/document';
 import { useGetUserData } from '@utils/core/hooks';
 import { BsFillPersonFill } from 'react-icons/bs';
 import FormField from '@components/shared/core/FieldForm';
+import { toast } from 'react-toastify';
 
 interface IProps {
 	isOpen: boolean;
@@ -148,7 +149,7 @@ const RegisterType = ({
 		>
 			{!registerMutation.isSuccess && (
 				<form
-					className='sm:w-11/12 mx-auto my-4'
+					className='mx-auto my-4 sm:w-11/12'
 					onSubmit={registerMutation.mutate}
 				>
 					<fieldset className='mt-2 space-y-4'>
@@ -204,7 +205,7 @@ const RegisterType = ({
 								<span>Accept Marketing</span>
 							</label>
 						</div>
-						<div className='mt-4 flex justify-end'>
+						<div className='flex justify-end mt-4'>
 							<Button
 								type='submit'
 								classesIntent={{ w: 'full' }}
@@ -311,7 +312,7 @@ const LoginType = ({
 		>
 			{!loginMutation.isSuccess && (
 				<form
-					className='sm:w-11/12 mx-auto my-4'
+					className='mx-auto my-4 sm:w-11/12'
 					onSubmit={loginMutation.mutate}
 				>
 					<fieldset
@@ -345,7 +346,7 @@ const LoginType = ({
 								forget password?
 							</button>
 						</div>
-						<div className='mt-4 flex justify-end'>
+						<div className='flex justify-end mt-4'>
 							<Button
 								type='submit'
 								classesIntent={{ w: 'full' }}
@@ -405,7 +406,7 @@ const ForgetPasswordType = ({
 				});
 		},
 		onSuccess: (result) => {
-			// setIsOpen(false);
+			toast.success('Please check your email');
 		}
 	});
 
@@ -420,14 +421,11 @@ const ForgetPasswordType = ({
 			setIsOpen={setIsOpen}
 			header={{
 				title: loginMutation.isSuccess
-					? 'Logged successfully'
+					? 'Please check your email'
 					: "Don't remember the password?",
 				description: (
 					<>
-						{loginMutation.isSuccess
-							? 'Please check your email, '
-							: 'Have an account?'}
-						&nbsp;Have an account?&nbsp;
+						Have an account?&nbsp;
 						<button
 							type='button'
 							className='text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600'
@@ -441,7 +439,7 @@ const ForgetPasswordType = ({
 		>
 			{!loginMutation.isSuccess && (
 				<form
-					className='sm:w-11/12 mx-auto my-4'
+					className='mx-auto my-4 sm:w-11/12'
 					onSubmit={loginMutation.mutate}
 				>
 					<fieldset
@@ -457,7 +455,7 @@ const ForgetPasswordType = ({
 							autoComplete='email'
 							minLength={3}
 						/>
-						<div className='mt-4 flex justify-end'>
+						<div className='flex justify-end mt-4'>
 							<Button
 								type='submit'
 								classesIntent={{ w: 'full' }}
