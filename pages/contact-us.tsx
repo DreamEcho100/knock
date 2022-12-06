@@ -10,28 +10,33 @@ import { useMutation } from '@tanstack/react-query';
 import type { IGenericErrorResponse } from 'types';
 import { toast } from 'react-toastify';
 import { CountryDropdown } from 'react-country-region-selector';
-import moment from 'moment';
+// import moment from 'moment';
 
 const ContactUsPage: NextPage = () => {
-	const date = Date.now()
+	const date = Date.now();
 	const [formValues, setFormValues] = useState({
 		fullName: '',
 		email: '',
-		subject: `New customer message on ${moment(new Date(date)).format('MMMM Do YYYY,h:mm:ss a')}`,
+		subject: `New customer message on ${
+			// moment(new Date(date)).format('MMMM Do YYYY,h:mm:ss a')
+			new Date().toLocaleString('en-UK', {
+				dateStyle: 'long',
+				timeStyle: 'short',
+				hourCycle: 'h12'
+			})
+		}`,
 		message: '',
-		countryCode:''
+		countryCode: ''
 	});
 
 	const configRef = useRef({
 		toNotSubmit: false
 	});
 
-	
-
 	const submitForm = useMutation<
 		{
 			success: true;
-			message: string; 
+			message: string;
 			user: {
 				customerAccessToken: { accessToken: string; expiresAt: string };
 			};
@@ -42,7 +47,6 @@ const ContactUsPage: NextPage = () => {
 		mutationFn: (event) => {
 			event.preventDefault();
 
-			
 			return fetch(
 				`${process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH}/clients/contact-us`,
 				{
@@ -92,24 +96,27 @@ const ContactUsPage: NextPage = () => {
 					</header>
 
 					<form
-						className='flex flex-col items-center sm:items-start gap-10 my-8 border-[0.125rem] border-bg-secondary-1 rounded-2xl p-12'
+						className='flex flex-col items-center sm:items-start gap-10 my-8 border-[0.125rem] border-bg-secondary-1 rounded-2xl py-12 px-8 sm:px-12'
 						method='POST'
 						onSubmit={submitForm.mutate}
 					>
 						<input type='hidden' name='_template' value='box' />
 						<input type='text' name='_honey' style={{ display: 'none' }} />
 						{/* <input type="hidden" name="_next" value="https://yourdomain.co/thanks.html" /> */}
-						<div className="w-full">
-						<h4 className="pb-4" >Country</h4>
-						<CountryDropdown
-							classes='w-full bg-transparent outline-none transition-all duration-150 border-[0.125rem] border-slate-500 focus:border-slate-700 rounded-md px-3 py-2'
-         					 value={formValues.countryCode}
-          					 onChange={(value) => setFormValues((oldValue) => {
-								return {
-									...oldValue,
-									countryCode:value
+						<div className='w-full'>
+							<h4 className='pb-4'>Country</h4>
+							<CountryDropdown
+								classes='w-full bg-transparent outline-none transition-all duration-150 border-[0.125rem] border-slate-500 focus:border-slate-700 rounded-md px-3 py-2'
+								value={formValues.countryCode}
+								onChange={(value) =>
+									setFormValues((oldValue) => {
+										return {
+											...oldValue,
+											countryCode: value
+										};
+									})
 								}
-							 })} />
+							/>
 						</div>
 						<FormInput
 							spanTitleProps={{ children: 'Name', className: 'capitalize' }}
