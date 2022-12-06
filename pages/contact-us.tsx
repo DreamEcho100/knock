@@ -95,8 +95,8 @@ const ContactUsPage: NextPage = () => {
 						<input type='hidden' name='_template' value='box' />
 						<input type='text' name='_honey' style={{ display: 'none' }} />
 						{/* <input type="hidden" name="_next" value="https://yourdomain.co/thanks.html" /> */}
-						<div className='w-full'>
-							<h4 className='pb-4'>Country</h4>
+						<label className='w-full flex flex-col'>
+							<span className='pb-4'>Country</span>
 							<CountryDropdown
 								classes='w-full bg-transparent outline-none transition-all duration-150 border-[0.125rem] border-slate-500 focus:border-slate-700 rounded-md px-3 py-2'
 								value={formValues.countryCode}
@@ -109,7 +109,7 @@ const ContactUsPage: NextPage = () => {
 									})
 								}
 							/>
-						</div>
+						</label>
 						<FormInput
 							spanTitleProps={{ children: 'Name', className: 'capitalize' }}
 							labelContainerProps={{ className: 'w-full gap-2' }}
