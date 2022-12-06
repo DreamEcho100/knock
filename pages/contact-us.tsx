@@ -13,10 +13,11 @@ import { CountryDropdown } from 'react-country-region-selector';
 import moment from 'moment';
 
 const ContactUsPage: NextPage = () => {
+	const date = Date.now()
 	const [formValues, setFormValues] = useState({
 		fullName: '',
 		email: '',
-		subject: `New customer message on ${moment(new Date().toString()).format('MMMM Do YYYY, h:mm:ss a')}`,
+		subject: `New customer message on ${moment(new Date(date)).format('MMMM Do YYYY,h:mm:ss a')}`,
 		message: '',
 		countryCode:''
 	});
