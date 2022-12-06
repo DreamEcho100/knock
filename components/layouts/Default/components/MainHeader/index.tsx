@@ -44,7 +44,7 @@ ${keepCase ? '' : 'uppercase'}
 
 const headerLinks = [
 	{ href: '/knock', text: 'knock' },
-	{ href: '/knock_clipper', text: 'KNOCK Clipper', keepCase: true },
+	{ href: '/knock-clipper', text: 'KNOCK Clipper', keepCase: true },
 	{ href: '/drums-that-knock', text: 'drums that knock' },
 	{ href: '/faqs', text: 'FAQs', keepCase: true }
 	// { href: '/contact-us', text: 'contact' }
@@ -402,7 +402,7 @@ const CartContainer = () => {
 															? '/knock'
 															: product?.variant?.product?.handle ===
 															  'knock-clipper'
-															? '/knock_clipper'
+															? '/knock-clipper'
 															: `/products/${getIdFromGid(
 																	product.variant.product.id
 															  )}`

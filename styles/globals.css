@@ -71,6 +71,9 @@ a {
 	box-sizing: border-box;
 }
 
+option{
+	color: #000;
+}
 label,
 button,
 select {

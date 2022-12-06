@@ -35,6 +35,8 @@ export interface IProduct {
 		title: string;
 		src: string;
 		srcTwo: string;
+		srcDoc1:string
+		srcDoc2:string
 	};
 	filesIncluded: {
 		count: number;

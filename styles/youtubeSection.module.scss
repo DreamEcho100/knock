@@ -1,0 +1,16 @@
+.youtubeIframe{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+}
+
+@media (max-width:668px) {
+    .youtubeIframe{
+        align-items: flex-start;
+        width: 100% !important;
+        iframe{
+            max-width: 100% !important;
+        }
+    }
+}

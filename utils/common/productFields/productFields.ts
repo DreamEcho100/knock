@@ -7,7 +7,8 @@ const setFields = (handle: any) => {
 				],
 				video: {
 					title: '',
-					src: 'https://www.youtube.com/embed/du81OLTutOc'
+					src: 'https://www.youtube.com/embed/du81OLTutOc?autoplay=1',
+					srcDoc1:'https://i.ytimg.com/vi_webp/du81OLTutOc/sddefault.webp'
 				},
 				features: [
 					'14 original samples composed by DECAP',
@@ -32,7 +33,8 @@ const setFields = (handle: any) => {
 				],
 				video: {
 					title: '',
-					src: 'https://www.youtube.com/embed/T64PcrQaC-A'
+					src: 'https://www.youtube.com/embed/T64PcrQaC-A?autoplay=1',
+					srcDoc1:'https://i.ytimg.com/vi/T64PcrQaC-A/sddefault.jpg'
 				},
 				features: [
 					'10 original samples composed by DECAP',
@@ -53,7 +55,8 @@ const setFields = (handle: any) => {
 				description: ['DECAP - Drums That Knock Vol. 1'],
 				video: {
 					title: '',
-					src: 'https://www.youtube.com/embed/EduPz5KmANk'
+					src: 'https://www.youtube.com/embed/EduPz5KmANk?autoplay=1',
+					srcDoc1:'https://i.ytimg.com/vi_webp/EduPz5KmANk/sddefault.webp'
 				},
 				features: [
 					'All sounds and loops are 100% royalty free',
@@ -107,7 +110,8 @@ const setFields = (handle: any) => {
 				description: ['DECAP - Drums That Knock Vol. 3'],
 				video: {
 					title: '',
-					src: 'https://www.youtube.com/embed/23e9wz11lqA'
+					src: 'https://www.youtube.com/embed/23e9wz11lqA?autoplay=1',
+					srcDoc1:'https://i.ytimg.com/vi/23e9wz11lqA/sddefault.jpg'
 				},
 				features: [
 					'All sounds and loops are 100% royalty free',
@@ -136,7 +140,8 @@ const setFields = (handle: any) => {
 				description: ['DECAP - Drums That Knock Vol. 4'],
 				video: {
 					title: '',
-					src: 'https://www.youtube.com/embed/zXklcm6yYdk'
+					src: 'https://www.youtube.com/embed/zXklcm6yYdk?autoplay=1',
+					srcDoc1:'https://i.ytimg.com/vi/zXklcm6yYdk/sd2.jpg?sqp=-oaymwEoCIAFEOAD8quKqQMcGADwAQH4AbYIgAK4CIoCDAgAEAEYfyATKCMwDw==&rs=AOn4CLA1jOk_LSV1wP9QsG0jUa-gOgKl_w'
 				},
 				features: [
 					'All sounds and loops are 100% royalty free',
@@ -166,7 +171,8 @@ const setFields = (handle: any) => {
 				description: ['DECAP - Drums That Knock Vol. 5'],
 				video: {
 					title: '',
-					src: 'https://www.youtube.com/embed/Vrn2jOXbtXU'
+					src: 'https://www.youtube.com/embed/Vrn2jOXbtXU?autoplay=1',
+					srcDoc1:"https://i.ytimg.com/vi_webp/Vrn2jOXbtXU/sddefault.webp"
 				},
 				features: [
 					'All sounds and loops are 100% royalty free',
@@ -198,7 +204,8 @@ const setFields = (handle: any) => {
 				description: ['DECAP - Drums That Knock Vol. 6'],
 				video: {
 					title: '',
-					src: 'https://www.youtube.com/embed/aDbjb5wlos0'
+					src: 'https://www.youtube.com/embed/aDbjb5wlos0?autoplay=1',
+					srcDoc1:'https://i.ytimg.com/vi_webp/aDbjb5wlos0/sddefault.webp'
 				},
 				features: [
 					'All sounds and loops are 100% royalty free',
@@ -233,7 +240,8 @@ const setFields = (handle: any) => {
 				],
 				video: {
 					title: '',
-					src: 'https://www.youtube.com/embed/OrXT2MpwHEg'
+					src: 'https://www.youtube.com/embed/OrXT2MpwHEg?autoplay=1',
+					srcDoc1:'https://i.ytimg.com/vi_webp/OrXT2MpwHEg/sddefault.webp'
 				},
 				features: [
 					'All sounds and loops are 100% royalty free',
@@ -271,7 +279,8 @@ const setFields = (handle: any) => {
 				],
 				video: {
 					title: '',
-					src: 'https://www.youtube.com/embed/YNKkxd2aPzI'
+					src: 'https://www.youtube.com/embed/YNKkxd2aPzI?autoplay=1',
+					srcDoc1:'https://i.ytimg.com/vi_webp/YNKkxd2aPzI/sddefault.webp'
 				},
 				features: [
 					'All sounds and loops are 100% royalty free',
@@ -297,7 +306,8 @@ const setFields = (handle: any) => {
 						'41 Percussion loops',
 						'11 Rap vocal loops',
 						'24 Shouts + ad-libs',
-						'30 Snares + Claps + Rimshots',
+						'30 Snares + Claps ',
+						'Rimshots',
 						'5  Textures',
 						'8  Toms'
 					]
@@ -313,7 +323,8 @@ const setFields = (handle: any) => {
 				],
 				video: {
 					title: '',
-					src: 'https://www.youtube.com/embed/j1Fj0gm2GXE'
+					srcDoc1:"https://i.ytimg.com/vi_webp/j1Fj0gm2GXE/sddefault.webp",
+					src: 'https://www.youtube.com/embed/j1Fj0gm2GXE?autoplay=1'
 				},
 				features: [
 					'All sounds and loops are 100% royalty free',
@@ -328,7 +339,8 @@ const setFields = (handle: any) => {
 					details: [
 						'23 808s + Bass',
 						'27 Kicks',
-						'32 Snares + Claps + Rimshots',
+						'32 Snares + Claps ',
+						'Rimshots',
 						'38 Hihats',
 						'28 Drum Loops',
 						'54 Percussive One Shots',
@@ -388,8 +400,10 @@ const setFields = (handle: any) => {
 				],
 				video: {
 					title: '',
-					src: 'https://www.youtube.com/embed/p-wek5z59IA',
-					srcTwo: 'https://www.youtube.com/embed/KG1q81qR_b4'
+					src: 'https://www.youtube.com/embed/p-wek5z59IA?autoplay=1',
+					srcTwo: 'https://www.youtube.com/embed/KG1q81qR_b4?autoplay=1',
+					srcDoc1:'https://i.ytimg.com/vi_webp/p-wek5z59IA/sddefault.webp',
+					srcDoc2:"https://i.ytimg.com/vi_webp/KG1q81qR_b4/sddefault.webp"
 				},
 				features: [
 					'All sounds and loops are 100% royalty free - no clearance required',
@@ -420,7 +434,8 @@ const setFields = (handle: any) => {
 						'6 Rap Vocal Loops',
 						'18 Risers + Falls',
 						'53 Shouts + Ad-libs',
-						'40 Snares + Claps + Rimshots'
+						'40 Snares + Claps ',
+						'Rimshots'
 					]
 				}
 			};
@@ -465,7 +480,8 @@ const setFields = (handle: any) => {
 				],
 				video: {
 					title: 'Free Preview',
-					src: 'https://www.youtube.com/embed/LwIgcY5CpjI'
+					src: 'https://www.youtube.com/embed/LwIgcY5CpjI?autoplay=1',
+					srcDoc1:'https://i.ytimg.com/vi_webp/LwIgcY5CpjI/sddefault.webp'
 				},
 				features: [],
 				filesIncluded: {

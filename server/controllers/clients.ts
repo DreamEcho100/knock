@@ -830,19 +830,19 @@ const supportForm = async (
 			subject: z.string(),
 			message: z.string(),
 			fullName: z.string().min(2),
-			countryCode: z.string().max(2)
+			countryCode: z.string().min(3)
 		})
 		.parse(req.body);
 
 	const email = await new SibApiV3Sdk.TransactionalEmailsApi().sendTransacEmail(
 		{
-			sender: { email: input.email, name: input.fullName },
+			sender: { email: process.env.NEXT_PUPLIC_FORMSUBMIT_EMAIL, name: input.fullName },
 			subject: input.subject,
 			htmlContent:
 				'<!DOCTYPE html><html><body><h1>Contact form</h1></body></html>',
 			messageVersions: [
 				{
-					to: [{ email: process.env.CLIENT_EMAIL, name: 'PLUGINSTHATKNOCK' }],
+					to: [{ email: process.env.NEXT_PUPLIC_FORMSUBMIT_EMAIL , name: 'PLUGINSTHATKNOCK' }],
 					htmlContent: `<!DOCTYPE html>
 						<html lang="en">
 						<head>

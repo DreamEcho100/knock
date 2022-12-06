@@ -234,7 +234,7 @@
         }
         @media (min-width:1024px) {
                 iframe{
-                    width: 450px !important; 
+                    width: 450px !important;
                 }
         }
     }
@@ -278,6 +278,33 @@
     background-color: #095672;
     filter: blur(100px);
 }
+.youtubeVideo{
+    width: 500px;
+    height: 270px;
+    position: relative;
+    & > div:nth-child(1){
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        border-radius: 25px;
+        width: 100%;
+        height: 100%;
+        button{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #7548fe;
+            width: 85px;
+            height: 55px;
+            border-radius: 20px;
+            color: white;
+        }
+    }
+    @media (max-width:668px) {
+        width: 100%;
+    }
+}
 
 .productPageDetailsUl{
     height: 100% !important; 
@@ -299,7 +326,6 @@
     }
 }
 
-// desktop 
 
 
 .ProductCardDetailsPrice{
@@ -313,6 +339,8 @@
 .GoBackLink{
     margin-bottom: 100px ;
 }
+
+
 
 // media --- 650px ---
 @media (min-width:650px) {
