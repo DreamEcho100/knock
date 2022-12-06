@@ -1,4 +1,4 @@
-import type { IKnockClipperPageProps } from '@pages/knock_clipper';
+import type { IKnockClipperPageProps } from '@pages/knock-clipper';
 
 import KnockTrademark from '@components/shared/core/KnockTrademark';
 import ProductShowcase from '@components/shared/core/ProductShowcase';

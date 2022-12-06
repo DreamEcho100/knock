@@ -9,7 +9,7 @@ import { useState } from 'react';
 import Dialog from '@components/shared/common/Dialog';
 import { useMutation } from '@tanstack/react-query';
 import Button from '@components/shared/core/Button';
-import { setCookie } from '@utils/common/storage/cookie/document';
+import { getCookie, setCookie } from '@utils/common/storage/cookie/document';
 import { useGetUserData } from '@utils/core/hooks';
 import { BsFillPersonFill } from 'react-icons/bs';
 import FormField from '@components/shared/core/FieldForm';
@@ -278,7 +278,23 @@ const LoginType = ({
 					expires: new Date(user.expiresAt)
 				}
 			);
-
+			let checkout:any = getCookie('checkoutIdAndKey')
+				checkout = JSON.parse(checkout)			
+				
+				 fetch(
+					`${process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH}/checkouts/associate`, 
+					{
+						method:'POST',
+						headers:{
+							'Content-type': 'application/json',
+						},
+						body:JSON.stringify({
+							checkoutId: checkout.checkoutId,
+							checkoutKey:checkout.checkoutKey,
+							customerAccessToken:user.accessToken
+						})
+					}
+				)
 			setIsOpen(false);
 		}
 	});

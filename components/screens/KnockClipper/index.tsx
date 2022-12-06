@@ -1,4 +1,4 @@
-import { IKnockClipperPageProps } from '@pages/knock_clipper';
+import { IKnockClipperPageProps } from '@pages/knock-clipper';
 import Head from 'next/head';
 import {
 	DescriptionSection,

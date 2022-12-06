@@ -1,6 +1,6 @@
 import KnockTrademark from '@components/shared/core/KnockTrademark';
 
-import type { IKnockClipperPageProps } from '@pages/knock_clipper';
+import type { IKnockClipperPageProps } from '@pages/knock-clipper';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 import AddItemOnHeroSectionButton from '@components/shared/core/AddItemOnHeroSectionButton';
 import { type CSSProperties } from 'react';

@@ -1,23 +1,25 @@
-import type { IGenericErrorResponse } from 'types';
-import { type FormEvent, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import FormField from '@components/shared/core/FieldForm';
 import Button from '@components/shared/core/Button';
 import { toast } from 'react-toastify';
 import { setCookie } from '@utils/common/storage/cookie/document';
-import { useRouter } from 'next/router';
 import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
+import type { IGenericErrorResponse } from 'types';
 
-const ResetPage = () => {
+
+
+const ActivatePage = () => {
 	const router = useRouter();
 	const [formValues, setValues] = useState({
 		password: '',
 		confirmPassword: ''
 	});
 
-	const resetAccount = useMutation<
+	const activateAccount = useMutation<
 		{
 			success: true;
-			message: string; // "Account created successfully!",
+			message: string; 
 			user: {
 				customerAccessToken: { accessToken: string; expiresAt: string };
 			};
@@ -28,18 +30,18 @@ const ResetPage = () => {
 		mutationFn: (event) => {
 			event.preventDefault();
 
-			const resetUrl = window.location.href;
+			const activationUrl = window.location.href;
 
 			if (formValues.confirmPassword !== formValues.password) {
 				throw new Error('Confirm password is not the same as password');
 			}
 
 			const data = {
-				resetUrl,
+				activationUrl,
 				password: formValues.password
 			};
 			return fetch(
-				`${process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH}/clients/reset-password`,
+				`${process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH}/auth/activate`,
 				{
 					method: 'POST',
 					headers: { 'Content-type': 'application/json' },
@@ -72,11 +74,14 @@ const ResetPage = () => {
 			setTimeout(() => toast(result.message, { type: 'error' }), 0)
 	});
 
+
+
+
 	return (
 		<section className='flex items-center justify-center w-full min-h-[75vh]'>
-			<div className='flex items-center justify-center w-[1200px] border  lg:max-w-screen-xl w-full'>
+			<div className='flex items-center justify-center w-[1200px] lg:max-w-screen-xl w-full border'>
 				<form
-					onSubmit={resetAccount.mutate}
+					onSubmit={activateAccount.mutate}
 					className='flex flex-col justify-center gap-6 w-full h-full p-8'
 				>
 					<header className='flex flex-col gap-2'>
@@ -101,11 +106,11 @@ const ResetPage = () => {
 						autoComplete='confirm password'
 						minLength={3}
 					/>
-					<Button disabled={resetAccount.isLoading}>RESET</Button>
+					<Button disabled={activateAccount.isLoading}>Activate</Button>
 				</form>
 			</div>
 		</section>
 	);
 };
 
-export default ResetPage;
+export default ActivatePage;

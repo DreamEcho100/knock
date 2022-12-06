@@ -7,8 +7,13 @@ import CustomNextImage from '@components/shared/common/CustomNextImage';
 import classes from '@styles/productsPages.module.scss';
 import ProductDetails from '@components/screens/ProductById/sections/ProductDetails';
 import Link from 'next/link';
+import { FaPlay } from 'react-icons/fa';
+import { useState } from 'react';
 
 const HeroSection = ({ product }: IProductByIdPageProps) => {
+
+	const [isYoutubeVideo  , setIsYoutubeVideo] = useState(10)
+
 	const renderFeature = () => {
 		switch (product.handle) {
 			case 'decap-ableton-live-masterclass':
@@ -157,9 +162,27 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 						{product.video.title ? <h4>{product.video.title}</h4> : ''}
 						<div>
 							<div className={classes.overLayYoutubeSection}></div>
-							<iframe src={product.video.src} />
+							<div className={classes.youtubeVideo} >
+							 {isYoutubeVideo !== 1 ?<div onClick={() => setIsYoutubeVideo(1)} style={{backgroundImage:`url(${product.video.srcDoc1})` , backgroundPosition:'center' , backgroundSize:'cover'} } >
+								 <button >
+									<FaPlay  />
+								 </button>
+							 </div> :
+							<iframe src={product.video.src}
+							allow={"autoplay"}
+							/>}
+							</div>
 							{product.video.srcTwo ? (
-								<iframe src={product.video.srcTwo} />
+							<div className={classes.youtubeVideo} >
+							{isYoutubeVideo !== 2 ? <div onClick={() => setIsYoutubeVideo(2)} style={{backgroundImage:`url(${product.video.srcDoc2})` , backgroundPosition:'center' , backgroundSize:'cover'}} >
+								<button>
+								   <FaPlay  />
+								</button>
+							</div> :
+						   <iframe src={product.video.srcTwo} 
+						   allow={"autoplay"}
+						   />}
+						   </div>
 							) : (
 								''
 							)}

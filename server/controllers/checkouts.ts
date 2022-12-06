@@ -178,7 +178,8 @@ export const associateClientToCheckout = async (
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
-					process.env.SHOPIFY_STOREFRONT_API_TOKEN
+					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
+				'accept-encoding':'null'
 			}
 		}
 	);
@@ -244,7 +245,8 @@ export const disassociateClientToCheckout = async (
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
-					process.env.SHOPIFY_STOREFRONT_API_TOKEN
+					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
+				'accept-encoding':'null'
 			}
 		}
 	);

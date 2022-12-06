@@ -56,7 +56,7 @@ export const useGetUserData = ({
 		{
 			enabled: enabled && !!accessToken,
 			refetchInterval: 10 * 60 * 1000,
-			onError: (error) => {}
+			onError: async (error) => {}
 		}
 	);
 
@@ -117,14 +117,36 @@ export const useLogoutUser = ({
 		},
 		{
 			onSuccess: async ({ userCheckoutDetailsAndIdAndKey }) => {
-				removeCookie('user-access-token');
 
+				const accessToken = getGetAccessTokenFromCookie();
+
+				let checkout:any = getCookie('checkoutIdAndKey')
+				checkout = JSON.parse(checkout)			
+				
+				 fetch(
+					`${process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH}/checkouts/disassociate`, 
+					{
+						method:'POST',
+						headers:{
+							'Content-type': 'application/json',
+						},
+						body:JSON.stringify({
+							checkoutId: checkout.checkoutId,
+							checkoutKey:checkout.checkoutKey,
+							customerAccessToken:accessToken
+						})
+					}
+				)
+
+				removeCookie('user-access-token');
+				removeCookie('checkoutIdAndKey');
+/*
 				if (userCheckoutDetailsAndIdAndKey)
 					checkoutApi.products.removeMany(
 						`gid://shopify/Checkout/${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId}?key=${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutKey}`,
 						productsData.map((product) => product.id)
 					);
-
+*/
 				queryClient.invalidateQueries<IUser | undefined>(['check-token']);
 
 				if (onSuccess) await onSuccess();
