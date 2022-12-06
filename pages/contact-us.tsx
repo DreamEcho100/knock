@@ -10,27 +10,19 @@ import { useMutation } from '@tanstack/react-query';
 import type { IGenericErrorResponse } from 'types';
 import { toast } from 'react-toastify';
 import { CountryDropdown } from 'react-country-region-selector';
-// import moment from 'moment';
 
 const ContactUsPage: NextPage = () => {
 	const date = Date.now();
 	const [formValues, setFormValues] = useState({
 		fullName: '',
 		email: '',
-		subject: `New customer message on ${
-			// moment(new Date(date)).format('MMMM Do YYYY,h:mm:ss a')
-			new Date().toLocaleString('en-UK', {
-				dateStyle: 'long',
-				timeStyle: 'short',
-				hourCycle: 'h12'
-			})
-		}`,
+		subject: `New customer message on ${new Date().toLocaleString('en-UK', {
+			dateStyle: 'long',
+			timeStyle: 'short',
+			hourCycle: 'h12'
+		})}`,
 		message: '',
 		countryCode: ''
-	});
-
-	const configRef = useRef({
-		toNotSubmit: false
 	});
 
 	const submitForm = useMutation<
@@ -168,15 +160,17 @@ const ContactUsPage: NextPage = () => {
 									event.shiftKey &&
 									(event.keyCode === 13 || event.key === 'Enter')
 								) {
-									return (configRef.current.toNotSubmit = true);
+									event.preventDefault();
+									setFormValues((prev) => ({
+										...prev,
+										subject: prev.subject + '\n'
+									}));
 								}
-								configRef.current.toNotSubmit = false;
-							}}
-							onKeyUp={() => {
-								configRef.current.toNotSubmit = false;
 							}}
 						/>
-						<Button>Submit</Button>
+						<Button type='submit' disabled={submitForm.isLoading}>
+							Submit
+						</Button>
 					</form>
 				</div>
 			</section>
