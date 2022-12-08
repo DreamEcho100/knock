@@ -41,7 +41,12 @@ const LinksListContainer = ({
 					.filter((item) => !item.isHidden)
 					.map((item) => (
 						<li key={item.text}>
-							<Link href={item.href}>{item.text}</Link>
+							<Link
+								href={item.href}
+								className='hover:text-primary-1 transition-all duration-100'
+							>
+								{item.text}
+							</Link>
 						</li>
 					))}
 			</ul>

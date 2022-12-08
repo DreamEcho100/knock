@@ -1,4 +1,4 @@
-import type { VariantProps } from 'class-variance-authority';
+import { cx, VariantProps } from 'class-variance-authority';
 import type { CSSProperties, ReactNode } from 'react';
 
 import Button from '@components/shared/core/Button';
@@ -6,6 +6,7 @@ import Button from '@components/shared/core/Button';
 import KnockTrademark from '@components/shared/core/KnockTrademark';
 import { cva } from 'class-variance-authority';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
+import { useRouter } from 'next/router';
 
 export const pClasses = cva('text-primary-2 mt-2 mb-5 leading-6', {
 	variants: {
@@ -104,7 +105,8 @@ const KnockSection = ({
 	h2theme,
 	imagesContainerTheme,
 	textContainerTheme,
-	sectionInnerWrapperTheme
+	sectionInnerWrapperTheme,
+	mainImgOrVideoLink
 }: {
 	title?: ReactNode;
 	description: string;
@@ -118,7 +120,22 @@ const KnockSection = ({
 	sectionInnerWrapperTheme?: VariantProps<typeof sectionInnerWrapperClasses>;
 	imageSrc?: string;
 	videoSrc?: string;
+	mainImgOrVideoLink?: string;
 }) => {
+	const router = useRouter();
+
+	const mainImgOrVideoProps = {
+		onClick: mainImgOrVideoLink
+			? () => router.push(mainImgOrVideoLink)
+			: undefined,
+		className: cx(
+			mainImgOrVideoLink ? 'cursor-pointer' : '',
+			imageSrc
+				? 'object-cover w-3/4 relative'
+				: 'object-fill w-3/4 relative rounded-[7%]'
+		)
+	};
+
 	return (
 		<section
 			className={sectionClasses(sectionTheme)}
@@ -148,24 +165,24 @@ const KnockSection = ({
 						<CustomNextImage
 							src={imageSrc}
 							alt='knock plugin'
-							width={800}
-							height={800}
+							width={1000}
+							height={1000}
 							priority
 							unoptimized
-							className='object-cover w-3/4 relative'
+							{...mainImgOrVideoProps}
 						/>
 					) : (
 						<video
 							src={videoSrc}
 							autoPlay
 							muted
-							width={800}
-							height={800}
+							width={1000}
+							height={1000}
 							title='knock plugin'
 							loop
 							controls={false}
 							poster='/images/knock poster.png'
-							className='object-fill w-3/4 relative rounded-[7%]'
+							{...mainImgOrVideoProps}
 						/>
 					)}
 				</div>

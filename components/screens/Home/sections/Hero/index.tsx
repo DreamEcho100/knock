@@ -7,6 +7,8 @@ const HeroSection = () => {
 			description='Make your drums KNOCK and punch through the mix.'
 			title={<KnockTrademark />}
 			pTheme={{ width: 'small' }}
+			mainImgOrVideoLink='/knock'
+			imageSrc='/images/534aaf62a986c03ee09ee62a138d3845.gif'
 			buttonProps={{
 				className: 'capitalize',
 				href: '/knock',
