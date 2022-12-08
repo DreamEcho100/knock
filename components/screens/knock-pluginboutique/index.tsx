@@ -1,6 +1,6 @@
 import Button from '@components/shared/core/Button';
 import FormInput from '@components/shared/core/FormInput';
-import { IKnockPluginBoutiqueProps } from '@pages/[pluginsBoutique]';
+import { IKnockPluginBoutiqueProps } from '@pages/boutique/[pluginsBoutique]';
 import { useMutation } from '@tanstack/react-query';
 import type { IGenericErrorResponse } from 'types';
 import Head from 'next/head';
@@ -56,7 +56,6 @@ const KnockScreen = ({ knockPluginBoutique }: IKnockPluginBoutiqueProps) => {
 				});
 		},
 		onSuccess: (result) => {
-			console.log(result , 'result');
 			
 			if (result) {
 				setOpenRedeem(prev => !prev)
@@ -64,7 +63,6 @@ const KnockScreen = ({ knockPluginBoutique }: IKnockPluginBoutiqueProps) => {
 			setTimeout(() => toast(result.message), 0);
 		},
 		onError: (error) => {
-			console.log(error);
 			setTimeout(() => toast(error.message, { type: 'error' }), 0);
 		}
 	});
@@ -103,7 +101,6 @@ const KnockScreen = ({ knockPluginBoutique }: IKnockPluginBoutiqueProps) => {
 				});
 		},
 		onSuccess: (result) => {
-			console.log(result , 'result');
 			
 			if (result) {
 				setOpenRedeem(prev => !prev)
@@ -111,7 +108,6 @@ const KnockScreen = ({ knockPluginBoutique }: IKnockPluginBoutiqueProps) => {
 			setTimeout(() => toast(result.message), 0);
 		},
 		onError: (error) => {
-			console.log(error);
 			setTimeout(() => toast(error.message, { type: 'error' }), 0);
 		}
 	});
