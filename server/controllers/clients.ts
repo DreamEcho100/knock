@@ -412,8 +412,6 @@ const resetPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	);
 
-
-
 	if (response.data.errors) {
 		res.statusCode = 404;
 		throw new Error(response.data.errors[0].message);
@@ -836,13 +834,21 @@ const supportForm = async (
 
 	const email = await new SibApiV3Sdk.TransactionalEmailsApi().sendTransacEmail(
 		{
-			sender: { email: process.env.NEXT_PUPLIC_FORMSUBMIT_EMAIL, name: input.fullName },
+			sender: {
+				email: process.env.NEXT_PUPLIC_FORMSUBMIT_EMAIL,
+				name: input.fullName
+			},
 			subject: input.subject,
 			htmlContent:
 				'<!DOCTYPE html><html><body><h1>Contact form</h1></body></html>',
 			messageVersions: [
 				{
-					to: [{ email: process.env.NEXT_PUPLIC_FORMSUBMIT_EMAIL , name: 'PLUGINSTHATKNOCK' }],
+					to: [
+						{
+							email: process.env.NEXT_PUPLIC_FORMSUBMIT_EMAIL,
+							name: 'PLUGINSTHATKNOCK'
+						}
+					],
 					htmlContent: `<!DOCTYPE html>
 						<html lang="en">
 						<head>
@@ -973,6 +979,119 @@ const supportForm = async (
 		});
 	}
 };
+
+const redeemCode = async (
+	req: NextApiRequest & { params: Record<string, any> },
+	res: NextApiResponse
+) => {
+
+	const data = req.body
+
+	const response = await axios.post(
+		`https://redeem2.${process.env.REDEEM_DOMAIN}/api/price-rules`,
+		data ,
+		{
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}
+	);
+	 
+	if (response.data.verified === false) {
+		res.statusCode = 404;
+		throw new Error('INVALID CODE!');
+	}
+
+	return res.status(200).json({
+		success: true,
+		message: 'VALID CODE',
+		data: response.data
+	});
+};
+
+const createOrderRedeemCode = async (
+	req: NextApiRequest & { params: Record<string, any> },
+	res: NextApiResponse
+) => {
+	const input = z.object({
+		redeemCode: z.string().min(4),
+		firstName:z.string().min(2),
+		lastName:z.string().min(2),
+		email:z.string().email(),
+		variantId:z.string(),
+		productId:z.string(),
+		price:z.number()
+	}).parse(req.body)
+
+	const isRedeemCodeWork = await axios.post(
+		`https://redeem2.${process.env.REDEEM_DOMAIN}/api/price-rules`,
+		{
+			data: {
+				customer_code: input.redeemCode,
+				product_id: input.productId,
+				variant_id: input.variantId
+			}
+		} ,
+		{
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}
+	);
+	 
+	if (isRedeemCodeWork.data.verified === false) {
+		res.statusCode = 404;
+		throw new Error('INVALID CODE!');
+	}
+
+	const response = await axios.post(
+		`https://redeem2.${process.env.REDEEM_DOMAIN}/api/create-order`,
+		{
+			data:{
+				customer_code:input.redeemCode
+			},
+			order:{
+				billing_address:{
+					first_name:input.firstName,
+					last_name:input.lastName
+				},
+				customer:{
+					email:input.email,
+					first_name:input.firstName,
+					last_name:input.lastName
+				},
+				email:input.email,
+				line_items:[{
+				 price: input.price,
+				 quantity: 1,
+				 variant_id: input.variantId
+				}],
+				shipping_address: {
+				first_name: input.firstName,
+				last_name: input.lastName
+				}
+			}
+		},
+		{
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}
+	);
+	 
+	if (!response.data.order_created) {
+		res.statusCode = 404;
+		throw new Error(JSON.parse(response.data.response.errors));
+	}
+
+	return res.status(200).json({
+		success: true,
+		message: 'Thanks for ordering from Plugins That Knock. Your payment has cleared',
+		data: response.data
+	});
+};
+
+
 const clientsController = {
 	address: {
 		deleteOne: deleteAddress,
@@ -990,7 +1109,9 @@ const clientsController = {
 	recoverPassword,
 	resetPassword,
 	subscribeToNewsLetters,
-	supportForm
+	supportForm,
+	redeemCode,
+	createOrderRedeemCode
 };
 
 export default clientsController;

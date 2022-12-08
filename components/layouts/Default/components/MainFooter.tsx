@@ -197,6 +197,7 @@ const MainFooter = () => {
 										rel='noopener noreferrer'
 										title='instagram'
 										className='text-gray-400'
+										target={'_blank'}
 									>
 										<FaInstagram />
 									</a>
@@ -207,6 +208,7 @@ const MainFooter = () => {
 										rel='noopener noreferrer'
 										title='facebook'
 										className='text-gray-400'
+										target={'_blank'}
 									>
 										<FaFacebook />
 									</a>
@@ -217,6 +219,7 @@ const MainFooter = () => {
 										rel='noopener noreferrer'
 										title='twitter'
 										className='text-gray-400'
+										target={'_blank'}
 									>
 										<FaTwitter />
 									</a>
@@ -227,6 +230,7 @@ const MainFooter = () => {
 										rel='noopener noreferrer'
 										title='youtube'
 										className='text-gray-400'
+										target={'_blank'}
 									>
 										<FaYoutube />
 									</a>

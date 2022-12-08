@@ -81,7 +81,7 @@ const getAllProductsController = async (
 	const category = req.query.category;
 
 	const products = await getAllProducts();
-
+	
 	return res.status(200).json({
 		success: true,
 		message: '',

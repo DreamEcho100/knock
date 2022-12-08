@@ -13,6 +13,8 @@ const clientsAPIRouteHandler = nextConnect({ attachParams: true })
 	.post(`${basePath}/addresses/add-one`, clientsController.address.addOne)
 	.post(`${basePath}/subscribe-newsletters`, clientsController.subscribeToNewsLetters)
 	.post(`${basePath}/contact-us`, clientsController.supportForm)
+	.post(`${basePath}/redeem-code`, clientsController.redeemCode)
+	.post(`${basePath}/create-redeem-order`, clientsController.createOrderRedeemCode)
 	.put(`${basePath}/addresses/default`, clientsController.address.default)
 	.put(`${basePath}/addresses/edit-one`, clientsController.address.editOne)
 	.delete(`${basePath}/addresses/delete-one`,clientsController.address.deleteOne);

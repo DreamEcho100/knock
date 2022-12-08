@@ -79,13 +79,13 @@ const ActivatePage = () => {
 
 	return (
 		<section className='flex items-center justify-center w-full min-h-[75vh]'>
-			<div className='flex items-center justify-center w-[1200px] lg:max-w-screen-xl w-full border'>
+			<div className='flex items-center justify-center w-[1200px] lg:max-w-screen-xl w-full '>
 				<form
 					onSubmit={activateAccount.mutate}
 					className='flex flex-col justify-center gap-6 w-full h-full p-8'
 				>
 					<header className='flex flex-col gap-2'>
-						<h2 className='text-primary-1 text-h2'>RESET PASSWORD</h2>
+						<h2 className='text-primary-1 text-h2'>ACTIVATE ACCOUNT</h2>
 						<p>Enter a new password for your email here:</p>
 					</header>
 					<FormField
