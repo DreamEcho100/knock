@@ -13,10 +13,23 @@ const ProductByIdPage: NextPage<IProductByIdPageProps> = ({ product }) => {
 	return <ProductByIdScreen product={product} />;
 };
 
+const pages_redirects_map: Record<string, any> = {
+	'knock-plugin': '/knock',
+	'knock-clipper': '/knock-clipper'
+};
+
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const productId = params?.productId;
 	if (typeof productId !== 'string')
 		throw new Error('productId must be a string');
+
+	if (typeof pages_redirects_map[productId] === 'string')
+		return {
+			redirect: {
+				destination: pages_redirects_map[productId],
+				permanent: true
+			}
+		};
 
 	// !!!
 	// Handle errors
