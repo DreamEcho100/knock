@@ -1,6 +1,8 @@
-import { IframeHTMLAttributes, useState } from 'react';
 import type { IButtonProps } from '@components/shared/core/Button';
 import Button from '@components/shared/core/Button';
+
+import { IframeHTMLAttributes, useState } from 'react';
+
 import { FaPlay } from 'react-icons/fa';
 
 const VideosContainer = ({
@@ -39,7 +41,7 @@ const VideosContainer = ({
 									height: '230px',
 									borderRadius: '25px'
 								}}
-								className={`bg-cover bg-center rounded-2xl flex flex-col items-center justify-center w-full cursor-pointer `}
+								className={`bg-size-150 sm:bg-cover bg-center rounded-2xl flex flex-col items-center justify-center w-full cursor-pointer `}
 							>
 								<button
 									className={

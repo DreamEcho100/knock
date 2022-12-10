@@ -33,7 +33,7 @@ const LinksListContainer = ({
 }) => {
 	return (
 		<nav className='flex flex-col gap-2 p-2'>
-			<h3 className='capitalize font-semibold text-2xl text-primary-5'>
+			<h3 className='capitalize font-semibold text-2xl text-primary-1'>
 				{headerText}
 			</h3>
 			<ul className={linksListClassName}>

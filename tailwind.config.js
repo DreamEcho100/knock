@@ -57,6 +57,9 @@ module.exports = {
 			},
 			spacing: {
 				'main-nav-h': 'var(--main-nav-h, 6rem)'
+			},
+			backgroundSize: {
+				'size-150': '150%'
 			}
 		}
 	},
