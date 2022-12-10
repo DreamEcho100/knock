@@ -41,7 +41,7 @@ const VideosContainer = ({
 									height: '230px',
 									borderRadius: '25px'
 								}}
-								className={`bg-size-150 sm:bg-cover bg-center rounded-2xl flex flex-col items-center justify-center w-full cursor-pointer `}
+								className={`extra-sm:bg-cover bg-center rounded-2xl flex flex-col items-center justify-center w-full cursor-pointer `}
 							>
 								<button
 									className={

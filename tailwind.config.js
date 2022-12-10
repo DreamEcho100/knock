@@ -9,6 +9,25 @@ module.exports = {
 	darkMode: 'class',
 	theme: {
 		extend: {
+			screens: {
+				'extra-xl-sm': '384px',
+				// // => @media (min-width: 384px) { ... }
+				'extra-sm': '512px',
+				// => @media (min-width: 512px) { ... }
+
+				sm: '640px',
+				// => @media (min-width: 640px) { ... }
+				md: '768px',
+				// => @media (min-width: 768px) { ... }
+				lg: '1024px',
+				// => @media (min-width: 1024px) { ... }
+				// ...defaultTheme,
+
+				xl: '1280px',
+				// => @media (min-width: 1280px) { ... }
+				'2xl': '1536px'
+				// => @media (min-width: 1536px) { ... }
+			},
 			backgroundColor: {
 				primary: {
 					1: '#000000',
@@ -57,9 +76,6 @@ module.exports = {
 			},
 			spacing: {
 				'main-nav-h': 'var(--main-nav-h, 6rem)'
-			},
-			backgroundSize: {
-				'size-150': '150%'
 			}
 		}
 	},
