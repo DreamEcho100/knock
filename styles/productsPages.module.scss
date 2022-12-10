@@ -299,7 +299,16 @@
             height: 55px;
             border-radius: 20px;
             color: white;
+           
         }
+        &:hover{
+            button{
+                transition: all ;
+                transition-duration: 150;
+                background-color: rgb(126 34 206);
+            }
+        }
+       
     }
     @media (max-width:668px) {
         width: 100%;
