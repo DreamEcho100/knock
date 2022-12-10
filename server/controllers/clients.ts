@@ -958,7 +958,7 @@ const supportForm = async (
 
 			to: [
 				{
-					email: 'phonesys58@gmail.com',
+					email: process.env.NEXT_PUPLIC_FORMSUBMIT_EMAIL,
 				}
 			]
 		}
