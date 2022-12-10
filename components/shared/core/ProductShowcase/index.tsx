@@ -86,9 +86,10 @@ const ProductShowcase = ({
 					{...mainImg}
 					width={800}
 					height={500}
-					className={`${
-						mainImg.className || ''
-					} relative mx-auto w-full object-contain max-w-[80%] sm:max-w-[60%] lg:max-w-full`}
+					className={cx(
+						mainImg.className,
+						'relative mx-auto w-full object-contain max-w-[80%] sm:max-w-[60%] lg:max-w-full'
+					)}
 				/>
 			</div>
 		</div>

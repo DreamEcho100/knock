@@ -1,7 +1,10 @@
 import KnockTrademark from '@components/shared/core/KnockTrademark';
 import ProductShowcase from '@components/shared/core/ProductShowcase';
+import { useRouter } from 'next/router';
 
 const OneProductShowCaseSection = () => {
+	const router = useRouter();
+
 	return (
 		<section className='bg-primary-2 text-primary-2 section-p-v1'>
 			<ProductShowcase
@@ -23,7 +26,9 @@ const OneProductShowCaseSection = () => {
 				imageContainer={{
 					mainImg: {
 						src: '/images/knock-clipper.png',
-						alt: ''
+						alt: '',
+						onClick: () => router.push('/knock-clipper'),
+						className: 'cursor-pointer'
 					},
 					backgroundImg: false
 				}}
