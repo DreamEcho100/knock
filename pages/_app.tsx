@@ -6,8 +6,9 @@ import {
 	QueryClient,
 	QueryClientProvider
 } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DefaultLayout from '@components/layouts/Default';
+
 const DynamicTopProgressBar = dynamic(
 	() => import('@components/shared/common/TopProgressBar'),
 	{
@@ -20,8 +21,12 @@ import '@styles/swiper.css';
 import '@styles/customNProgressStyles.css';
 import { SharedCustomerStateProvider } from 'context/Customer';
 import Head from 'next/head';
+import Script from 'next/script';
+import { useRouter } from 'next/router';
 
 function MyApp({ Component, pageProps }: AppProps) {
+	const router = useRouter()
+
 	const [queryClient] = useState(
 		() =>
 			new QueryClient({
@@ -34,6 +39,20 @@ function MyApp({ Component, pageProps }: AppProps) {
 				}
 			})
 	);
+
+
+	useEffect(() => {
+		import('react-facebook-pixel')
+		  .then((x) => x.default)
+		  .then((ReactPixel) => {
+			ReactPixel.init(process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID as string) // facebookPixelId
+			ReactPixel.pageView()
+	
+			router.events.on('routeChangeComplete', () => {
+			  ReactPixel.pageView()
+			})
+		  })
+	  }, [router.events])
 
 	return (
 		<QueryClientProvider client={queryClient}>
@@ -61,6 +80,18 @@ function MyApp({ Component, pageProps }: AppProps) {
 					</DefaultLayout>
 				</SharedCustomerStateProvider>
 			</Hydrate>
+			<Script
+				strategy='afterInteractive'
+				src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+			/>
+			<Script id='ga-analytics'>
+				{`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+          `}
+			</Script>
 		</QueryClientProvider>
 	);
 }
