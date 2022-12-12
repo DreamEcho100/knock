@@ -9,6 +9,30 @@ const nextConfig = (phase, { defaultConfig }) => {
 		experimental: {
 			// appDir: true
 			// runtime: 'experimental-edge'
+		},
+		redirects: async () => {
+			return [
+				{
+					source: '/pages/contact',
+					destination: '/contact-us',
+					permanent: true
+				},
+				{
+					source: '/collections/frontpage',
+					destination: '/',
+					permanent: true
+				},
+				{
+					source: '/collections/all',
+					destination: '/',
+					permanent: true
+				},
+				{
+					source: '/collections',
+					destination: '/',
+					permanent: true
+				}
+			];
 		}
 	};
 };
