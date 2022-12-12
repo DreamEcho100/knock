@@ -13,7 +13,7 @@ interface IProductCardProps {
 	extraDetailsElement?: JSX.Element;
 	imageVariants?: VariantProps<typeof handleImageVariants>;
 	productData: IProduct;
-	cardVariants: VariantProps<typeof cardClasses>;
+	cardVariants?: VariantProps<typeof cardClasses>;
 }
 
 interface ExtraProductCardDetails {
