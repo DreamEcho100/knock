@@ -7,12 +7,13 @@ import { useAddProductsToCheckoutAndCart } from '@utils/core/hooks';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 import AddItemOnHeroSectionButton from '../../AddItemOnHeroSectionButton';
 
-interface IProductCardProps extends VariantProps<typeof cardClasses> {
+interface IProductCardProps {
 	// images: NonNullable<IProduct['images']> // { src: string; alt?: string };
 	link: Parameters<typeof Link>['0'];
 	extraDetailsElement?: JSX.Element;
 	imageVariants?: VariantProps<typeof handleImageVariants>;
 	productData: IProduct;
+	cardVariants: VariantProps<typeof cardClasses>;
 }
 
 interface ExtraProductCardDetails {
@@ -42,11 +43,11 @@ const ProductBasicCard = ({
 	productData: { images, title },
 	link,
 	extraDetailsElement,
-	intent,
+	cardVariants,
 	imageVariants
 }: IProductCardProps) => {
 	return (
-		<div className={cardClasses({ intent })}>
+		<div className={cardClasses(cardVariants)}>
 			<Link
 				{...link}
 				// style={{ aspectRatio: 1, }}
@@ -95,7 +96,7 @@ const ExtraProductCardDetails = ({
 
 export const ProductCardWithDetails = ({
 	link,
-	intent,
+	cardVariants,
 	imageVariants,
 	//
 	productData,
@@ -105,7 +106,7 @@ export const ProductCardWithDetails = ({
 	return (
 		<ProductBasicCard
 			link={link}
-			intent={intent}
+			cardVariants={cardVariants}
 			imageVariants={imageVariants}
 			productData={productData}
 			extraDetailsElement={

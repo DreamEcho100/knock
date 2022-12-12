@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { ImageProps } from 'next/dist/client/image.d';
+import { useState } from 'react';
 
 export interface ICustomNextImageProps extends Omit<ImageProps, 'alt'> {
 	className?: string;
@@ -17,14 +18,19 @@ const CustomNextImage = ({
 	blurDataURL,
 	...props
 }: ICustomNextImageProps) => {
-	// !!!
-	const wrapperProps = {
-		className
-	};
+	const [_src, setSrc] = useState(src);
+
 	const handleImageProps = () => {
 		const imageProps: Omit<ICustomNextImageProps, 'alt'> & { alt: string } = {
+			onError: () =>
+				setSrc(
+					// '/images/image-error.png'
+					'/svg/bbblurry.svg'
+				),
+			// placeholder:"blur",
+			// blurDataURL:"/assets/image-placeholder.png",
 			unoptimized,
-			src,
+			src: _src,
 			placeholder,
 			className,
 			alt: '',

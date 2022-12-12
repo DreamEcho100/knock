@@ -14,24 +14,31 @@ const VideosSection = ({
 				iframes={[
 					{
 						src: 'https://www.youtube.com/embed/0u4-MZiPtPI?autoplay=1',
-						srcDoc:"https://i.ytimg.com/vi/0u4-MZiPtPI/sddefault.jpg",
+						srcDoc: 'https://i.ytimg.com/vi/0u4-MZiPtPI/sddefault.jpg',
 						title:
 							"The only soft clipper you'll ever need 🥁🔥 - YouTube video player",
 						frameBorder: '0',
-						allow:'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
+						allow:
+							'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
 						allowFullScreen: true
 					},
 					{
 						src: 'https://www.youtube.com/embed/hM3IMIPc6DA?autoplay=1',
-						srcDoc:"https://i.ytimg.com/vi/hM3IMIPc6DA/sddefault.jpg",
+						srcDoc: 'https://i.ytimg.com/vi/hM3IMIPc6DA/sddefault.jpg',
 						title:
 							'KNOCK Clipper vs Fruity Soft Clipper vs Glue Compressor - Shootout - YouTube video player',
 						frameBorder: '0',
-						allow:'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
+						allow:
+							'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
 						allowFullScreen: true
 					}
 				]}
-				buttonElem={<AddItemOnHeroSectionButton product={knockClipperPlugin} />}
+				buttonElem={
+					<AddItemOnHeroSectionButton
+						product={knockClipperPlugin}
+						buttonProps={{ children: 'Add To Cart' }}
+					/>
+				}
 			/>
 		</section>
 	);

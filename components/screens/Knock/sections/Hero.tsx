@@ -10,7 +10,12 @@ const HeroSection = ({
 }) => {
 	return (
 		<KnockSection
-			buttonElem={<AddItemOnHeroSectionButton product={knockPlugin} />}
+			buttonElem={
+				<AddItemOnHeroSectionButton
+					product={knockPlugin}
+					buttonProps={{ children: 'Add To Cart' }}
+				/>
+			}
 			title={
 				<>
 					MAKE YOUR DRUMS&nbsp;

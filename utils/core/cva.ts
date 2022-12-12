@@ -6,6 +6,9 @@ export const cardClasses = cva(
 		focus-within:rounded-none`,
 	{
 		variants: {
+			w: {
+				full: 'w-full'
+			},
 			intent: {
 				allCorners: 'rounded-2xl',
 				bottomCorners: 'rounded-b-2xl',

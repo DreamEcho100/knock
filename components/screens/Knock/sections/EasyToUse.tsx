@@ -27,7 +27,7 @@ const EasyToUseSection = ({
 							</>
 						)
 					},
-					button: { children: 'Buy it now' }
+					button: { children: 'Add To Cart' }
 				}}
 				imageContainer={{
 					mainImg: {

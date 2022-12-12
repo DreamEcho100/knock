@@ -49,7 +49,10 @@ const HeroSection = ({
 				<p className='text-primary-2 mt-2 mb-5 leading-6 max-w-[350px] sm:text-[1.3rem]'>
 					Adjustable hard & soft clipper module from KNOCK.
 				</p>
-				<AddItemOnHeroSectionButton product={knockClipperPlugin} />
+				<AddItemOnHeroSectionButton
+					product={knockClipperPlugin}
+					buttonProps={{ children: 'Add To Cart' }}
+				/>
 			</div>
 		</section>
 	);

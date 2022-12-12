@@ -521,7 +521,7 @@ const CartContainer = () => {
 							disabled={productsData.length === 0 || disableAllButtons}
 							classesIntent={{ w: 'full', display: 'flex-xy-center' }}
 						>
-							{productsData.length === 0 ? 'Cart Is Empty' : 'checkout'}
+							{productsData.length === 0 ? 'Cart Is Empty' : 'Checkout'}
 						</Button>
 					</div>
 				</div>

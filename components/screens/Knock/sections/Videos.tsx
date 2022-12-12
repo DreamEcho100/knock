@@ -14,24 +14,32 @@ const VideosSection = ({
 				iframes={[
 					{
 						src: 'https://www.youtube.com/embed/adhIJxIHzkg?autoplay=1',
-						srcDoc:"https://i.ytimg.com/vi/adhIJxIHzkg/sddefault.jpg",
+						srcDoc: 'https://i.ytimg.com/vi/adhIJxIHzkg/sddefault.jpg',
 						title:
 							'This plugin will make your drums KNOCK - YouTube video player',
 						frameBorder: '0',
-						allow:'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
+						allow:
+							'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
 						allowFullScreen: true
 					},
 					{
 						src: 'https://www.youtube.com/embed/LMOG2rvxqGk?autoplay=1',
-						srcDoc:"https://i.ytimg.com/vi/LMOG2rvxqGk/sddefault.jpg?sqp=-oaymwEmCIAFEOAD8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGGMgYyhjMA8=&rs=AOn4CLCBtGH38Chf3EaWBsf4pnHCWR6oQw",
+						srcDoc:
+							'https://i.ytimg.com/vi/LMOG2rvxqGk/sddefault.jpg?sqp=-oaymwEmCIAFEOAD8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGGMgYyhjMA8=&rs=AOn4CLCBtGH38Chf3EaWBsf4pnHCWR6oQw',
 						title:
 							'KNOCK: Before and After | Before & After - YouTube video player',
 						frameBorder: '0',
-						allow:'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
+						allow:
+							'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
 						allowFullScreen: true
 					}
 				]}
-				buttonElem={<AddItemOnHeroSectionButton product={knockPlugin} />}
+				buttonElem={
+					<AddItemOnHeroSectionButton
+						product={knockPlugin}
+						buttonProps={{ children: 'Add To Cart' }}
+					/>
+				}
 			/>
 		</section>
 	);

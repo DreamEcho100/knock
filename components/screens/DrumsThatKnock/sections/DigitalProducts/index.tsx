@@ -62,6 +62,8 @@ const DigitalProductsSection = ({
 					alt=''
 					width={800}
 					height={800}
+					placeholder='blur'
+					blurDataURL='/svg/bbblurry.svg'
 				/>
 				<CustomNextImage
 					className='w-full h-full object-contain scale-x-[2.8] scale-y-[2.4] translate-x-[5%] rtl:-translate-x-[5%]'
@@ -69,6 +71,8 @@ const DigitalProductsSection = ({
 					alt=''
 					width={800}
 					height={800}
+					placeholder='blur'
+					blurDataURL='/svg/bbblurry.svg'
 				/>
 				<CustomNextImage
 					className='w-full h-full object-contain scale-x-[2.8] scale-y-[2.4] translate-x-[15%] rtl:-translate-x-[15%]'
@@ -76,6 +80,8 @@ const DigitalProductsSection = ({
 					alt=''
 					width={800}
 					height={800}
+					placeholder='blur'
+					blurDataURL='/svg/bbblurry.svg'
 				/>
 				<CustomNextImage
 					className='w-full h-full object-contain -translate-y-[10%] scale-x-[1.1] scale-y-[1.1] translate-x-[5%] rtl:-translate-x-[5%]'
@@ -83,6 +89,8 @@ const DigitalProductsSection = ({
 					alt=''
 					width={800}
 					height={800}
+					placeholder='blur'
+					blurDataURL='/svg/bbblurry.svg'
 				/>
 			</div>
 			<div
@@ -104,7 +112,7 @@ const DigitalProductsSection = ({
 						{...item}
 						toAddToCart
 						productData={item}
-						intent='none'
+						cardVariants={{ intent: 'none', w: 'full' }}
 						imageVariants={{ onHover: 'to-dimmer' }}
 					/>
 				))}
