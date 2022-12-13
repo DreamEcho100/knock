@@ -132,7 +132,7 @@ const UpdateUserBasicDetails = ({
 	setIsOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
 	const queryClient = useQueryClient();
-	const { user } = useGetUserDataFromStore();
+	const { user: user } = useGetUserDataFromStore();
 	const accessTokenFrom = getGetAccessTokenFromCookie();
 
 	const initFromValues = () => ({
@@ -148,9 +148,9 @@ const UpdateUserBasicDetails = ({
 		if (
 			!user.data ||
 			(user.data &&
-				user.data.email.trim() === formValues.email.trim() &&
-				user.data?.firstName?.trim() === formValues?.firstName?.trim() &&
-				user.data?.lastName?.trim() === formValues?.lastName?.trim() &&
+				user.data.email.trim() === formValues.email?.trim() &&
+				user.data.firstName.trim() === formValues?.firstName?.trim() &&
+				user.data.lastName.trim() === formValues?.lastName?.trim() &&
 				user.data.acceptsMarketing === formValues.acceptsMarketing)
 		)
 			return false;
@@ -182,15 +182,15 @@ const UpdateUserBasicDetails = ({
 					},
 					body: JSON.stringify({
 						email:
-							user.data.email.trim() !== formValues.email.trim()
+							user.data.email.trim() !== formValues.email
 								? formValues.email
 								: undefined,
 						firstName:
-							user.data.firstName.trim() !== formValues.firstName.trim()
+							user.data.firstName.trim() !== formValues.firstName
 								? formValues.firstName
 								: undefined,
 						lastName:
-							user.data.lastName.trim() !== formValues.lastName.trim()
+							user.data.lastName.trim() !== formValues.lastName
 								? formValues.lastName
 								: undefined,
 						acceptsMarketing:
