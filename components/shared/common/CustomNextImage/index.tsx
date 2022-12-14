@@ -23,11 +23,13 @@ const CustomNextImage = ({
 
 	const handleImageProps = () => {
 		const imageProps: Omit<ICustomNextImageProps, 'alt'> & { alt: string } = {
-			onError: () =>
+			onError: () => {
+				setIsLoaded(true);
 				setSrc(
 					// '/images/image-error.png'
 					'/svg/bbblurry.svg'
-				),
+				);
+			},
 			// placeholder:"blur",
 			// blurDataURL:"/assets/image-placeholder.png",
 			unoptimized,
@@ -35,7 +37,9 @@ const CustomNextImage = ({
 			placeholder,
 			className: `${className} ${isLoaded ? '' : 'no-content'}`,
 			alt: '',
-			onLoad: () => setIsLoaded,
+			onLoadingComplete: (img) => {
+				setIsLoaded(true);
+			},
 			...props
 		};
 
