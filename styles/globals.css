@@ -71,7 +71,7 @@ a {
 	box-sizing: border-box;
 }
 
-option{
+option {
 	color: #000;
 }
 label,
@@ -103,6 +103,11 @@ main > section > *,
 
 #main-header {
 	font-size: 1.1rem;
+}
+
+img {
+	max-width: 100%;
+	content: '';
 }
 
 @media (max-width: 640px) {
