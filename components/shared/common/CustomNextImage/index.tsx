@@ -19,6 +19,7 @@ const CustomNextImage = ({
 	...props
 }: ICustomNextImageProps) => {
 	const [_src, setSrc] = useState(src);
+	const [isLoaded, setIsLoaded] = useState(false);
 
 	const handleImageProps = () => {
 		const imageProps: Omit<ICustomNextImageProps, 'alt'> & { alt: string } = {
@@ -32,8 +33,9 @@ const CustomNextImage = ({
 			unoptimized,
 			src: _src,
 			placeholder,
-			className,
+			className: `${className} ${isLoaded ? '' : 'no-content'}`,
 			alt: '',
+			onLoad: () => setIsLoaded,
 			...props
 		};
 
