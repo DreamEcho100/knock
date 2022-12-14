@@ -157,12 +157,9 @@ const MainHeader = () => {
 			id='main-header'
 			className={`${commonClasses} bg-primary-1 z-10 fixed top-0 right-0 left-0 w-full flex flex-col`}
 		>
-			<div
-				className='relative w-full mx-auto
-				px-4 sm:px-8'
-			>
+			<div className='relative w-full px-4 mx-auto sm:px-8'>
 				<div
-					className='relative z-10 h-main-nav-h flex justify-between gap-2 sm:gap-4 text-primary-2 lg:grid'
+					className='relative z-10 flex justify-between gap-2 h-main-nav-h sm:gap-4 text-primary-2 lg:grid'
 					style={{
 						gridTemplateColumns: '12rem 1fr 12rem'
 					}}
@@ -182,7 +179,7 @@ const MainHeader = () => {
 						/>
 					</div>
 					<nav className='hidden lg:flex lg:justify-center'>
-						<ul className='text-center flex items-center justify-center gap-10 font-semibold'>
+						<ul className='flex items-center justify-center gap-10 font-semibold text-center'>
 							{headerLinks.map((link) => (
 								<li key={link.text}>
 									<Link
@@ -365,16 +362,21 @@ const CartContainer = () => {
 			></div>
 			<div
 				className={cx(
-					'absolute translate-y-main-nav-h top-0 right-0 h-fit max-h-[80vh] overflow-auto text-primary-1 bg-primary-4 w-[28rem] max-w-full origin-top transition-all p-8',
+					'absolute translate-y-main-nav-h top-0 right-0 h-fit max-h-[80vh] text-primary-1 bg-primary-4 w-[28rem] max-w-full origin-top transition-all p-8',
 					isCartVisible
 						? 'scale-y-100 duration-150'
-						: 'scale-y-0 duration-75 opacity-0'
+						: 'scale-y-0 duration-75 opacity-0',
+					// 'grid'
+					'flex flex-col'
 				)}
+				// style={{
+				// 	gridTemplateRows: '5% 1fr 20%'
+				// }}
 			>
 				<header className='pb-4'>
-					<h3 className='text-h5 uppercase font-semibold'>cart</h3>
+					<h3 className='font-semibold uppercase text-h5'>cart</h3>
 				</header>
-				<div className='flex flex-col gap-4'>
+				<div className='flex flex-col gap-4 overflow-auto'>
 					{productsData.length === 0
 						? "You don't have any items in your cart yet."
 						: productsData.map((product) => (
@@ -389,11 +391,11 @@ const CartContainer = () => {
 												alt={product.preferredImage?.alt || ''}
 												width={112}
 												height={112}
-												className='aspect-square object-contain w-full h-full'
+												className='object-contain w-full h-full aspect-square'
 											/>
 										)}
 									</div>
-									<div className='flex flex-col px-4 py-2 gap-2 flex-grow'>
+									<div className='flex flex-col flex-grow gap-2 px-4 py-2'>
 										<header className='flex flex-col gap-1 sm:flex-row sm:gap-2 sm:justify-between'>
 											<h4>
 												<Link
@@ -507,9 +509,9 @@ const CartContainer = () => {
 								</article>
 						  ))}
 				</div>
-				<div className='pt-8 flex flex-col gap-8'>
-					<header className='flex gap-2 justify-between'>
-						<h3 className='text-h5 uppercase font-semibold'>subtotal</h3>
+				<div className='flex flex-col gap-8 pt-8'>
+					<header className='flex justify-between gap-2'>
+						<h3 className='font-semibold uppercase text-h5'>subtotal</h3>
 						<p title='price per product'>${productsTotalPrice}</p>
 					</header>
 					<div className=''>

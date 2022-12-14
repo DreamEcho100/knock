@@ -2,12 +2,14 @@ import KnockTrademark from '@components/shared/core/KnockTrademark';
 import ProductShowcase from '@components/shared/core/ProductShowcase';
 import { IDrumsThatKnockPageProps } from '@pages/drums-that-knock';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const KnockProductShowcaseSection = ({
 	knockPlugin
 }: {
 	knockPlugin: IDrumsThatKnockPageProps['knockPlugin'];
 }) => {
+	const router = new useRouter();
 	return (
 		<section className='bg-primary-1 text-primary-2 section-p-v1'>
 			<ProductShowcase
@@ -44,7 +46,8 @@ const KnockProductShowcaseSection = ({
 						src: knockPlugin.images[0] && knockPlugin.images[0]?.src,
 						alt:
 							(knockPlugin.images[0] && knockPlugin.images[0]?.altText) || '',
-						className: 'lg:px-[5%]'
+						className: 'lg:px-[5%] cursor-pointer',
+						onClick: () => router.push('/knock-clipper')
 					},
 					index: {
 						className: 'lg:w-[50%]' // scale-[1.5]'
