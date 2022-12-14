@@ -9,7 +9,7 @@ const KnockProductShowcaseSection = ({
 }: {
 	knockPlugin: IDrumsThatKnockPageProps['knockPlugin'];
 }) => {
-	const router = new useRouter();
+	const router = useRouter();
 	return (
 		<section className='bg-primary-1 text-primary-2 section-p-v1'>
 			<ProductShowcase

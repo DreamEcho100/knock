@@ -11,8 +11,7 @@ import { FaPlay } from 'react-icons/fa';
 import { useState } from 'react';
 
 const HeroSection = ({ product }: IProductByIdPageProps) => {
-
-	const [isYoutubeVideo  , setIsYoutubeVideo] = useState(10)
+	const [isYoutubeVideo, setIsYoutubeVideo] = useState(10);
 
 	const renderFeature = () => {
 		switch (product.handle) {
@@ -20,7 +19,7 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 			case 'complete-knock-bundle-v2-all-digital-products':
 				return (
 					<div>
-						<div>
+						<div className='px-8'>
 							{(product.description as unknown as any[]).map(
 								(el: any, index: any) => (
 									<p key={index}> {el} </p>
@@ -162,27 +161,43 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 						{product.video.title ? <h4>{product.video.title}</h4> : ''}
 						<div>
 							<div className={classes.overLayYoutubeSection}></div>
-							<div className={classes.youtubeVideo} >
-							 {isYoutubeVideo !== 1 ?<div onClick={() => setIsYoutubeVideo(1)} style={{backgroundImage:`url(${product.video.srcDoc1})` , backgroundPosition:'center' , backgroundSize:'cover'} } >
-								 <button >
-									<FaPlay  />
-								 </button>
-							 </div> :
-							<iframe src={product.video.src}
-							allow={"autoplay"}
-							/>}
+							<div className={classes.youtubeVideo}>
+								{isYoutubeVideo !== 1 ? (
+									<div
+										onClick={() => setIsYoutubeVideo(1)}
+										style={{
+											backgroundImage: `url(${product.video.srcDoc1})`,
+											backgroundPosition: 'center',
+											backgroundSize: 'cover'
+										}}
+									>
+										<button>
+											<FaPlay />
+										</button>
+									</div>
+								) : (
+									<iframe src={product.video.src} allow={'autoplay'} />
+								)}
 							</div>
 							{product.video.srcTwo ? (
-							<div className={classes.youtubeVideo} >
-							{isYoutubeVideo !== 2 ? <div onClick={() => setIsYoutubeVideo(2)} style={{backgroundImage:`url(${product.video.srcDoc2})` , backgroundPosition:'center' , backgroundSize:'cover'}} >
-								<button>
-								   <FaPlay  />
-								</button>
-							</div> :
-						   <iframe src={product.video.srcTwo} 
-						   allow={"autoplay"}
-						   />}
-						   </div>
+								<div className={classes.youtubeVideo}>
+									{isYoutubeVideo !== 2 ? (
+										<div
+											onClick={() => setIsYoutubeVideo(2)}
+											style={{
+												backgroundImage: `url(${product.video.srcDoc2})`,
+												backgroundPosition: 'center',
+												backgroundSize: 'cover'
+											}}
+										>
+											<button>
+												<FaPlay />
+											</button>
+										</div>
+									) : (
+										<iframe src={product.video.srcTwo} allow={'autoplay'} />
+									)}
+								</div>
 							) : (
 								''
 							)}
