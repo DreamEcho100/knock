@@ -105,9 +105,12 @@ main > section > *,
 	font-size: 1.1rem;
 }
 
+img[src=''] {
+	content: '';
+}
+
 img {
 	max-width: 100%;
-	content: '';
 }
 
 @media (max-width: 640px) {
