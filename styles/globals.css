@@ -105,11 +105,8 @@ main > section > *,
 	font-size: 1.1rem;
 }
 
-img[src=''] {
-	content: '';
-}
-
 img {
+	content: '';
 	max-width: 100%;
 }
 
