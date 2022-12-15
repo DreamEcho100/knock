@@ -13,15 +13,19 @@ const KnockClipperPage: NextPage<IKnockClipperPageProps> = (props) => {
 
 export default KnockClipperPage;
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const knockClipperPlugin = JSON.parse(
 		JSON.stringify(await getOneProductByHandle('knock-clipper')) // knockclipper-pluginboutique
 	);
 
+	res.setHeader(
+		'Cache-Control',
+		'public, s-maxage=10, stale-while-revalidate=59'
+	);
+
 	return {
 		props: {
-			knockClipperPlugin,
-			revalidate: 5 * 60
+			knockClipperPlugin
 		}
 	};
 };

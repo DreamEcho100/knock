@@ -21,7 +21,7 @@ const DrumsThatKnockPage: NextPage<IDrumsThatKnockPageProps> = ({
 
 export default DrumsThatKnockPage;
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const products = JSON.parse(
 		JSON.stringify(
 			await getAllProducts({ typesToExclude: ['Sound Editing Software'] })
@@ -30,6 +30,11 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 	const knockPlugin = JSON.parse(
 		JSON.stringify(await getOneProductByHandle('knock-plugin'))
+	);
+
+	res.setHeader(
+		'Cache-Control',
+		'public, s-maxage=10, stale-while-revalidate=59'
 	);
 
 	return {

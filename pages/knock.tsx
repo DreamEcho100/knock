@@ -14,15 +14,19 @@ const KnockPluginPage: NextPage<IKnockPluginPageProps> = (props) => {
 
 export default KnockPluginPage;
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const knockPlugin = JSON.parse(
 		JSON.stringify(await getOneProductByHandle('knock-plugin'))
 	);
 
+	res.setHeader(
+		'Cache-Control',
+		'public, s-maxage=10, stale-while-revalidate=59'
+	);
+
 	return {
 		props: {
-			knockPlugin,
-			revalidate: 5 * 60
+			knockPlugin
 		}
 	};
 };

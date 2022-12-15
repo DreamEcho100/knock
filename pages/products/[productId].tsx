@@ -1,9 +1,8 @@
-import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 
 import ProductByIdScreen from '@components/screens/ProductById';
-import { getIdFromGid } from '@utils/core/shopify';
 import { IProduct } from 'types';
-import { getAllProducts, getOneProductById } from 'server/controllers/products';
+import { getOneProductById } from 'server/controllers/products';
 
 export interface IProductByIdPageProps {
 	product: IProduct;
@@ -18,7 +17,10 @@ const pages_redirects_map: Record<string, any> = {
 	'knock-clipper': '/knock-clipper'
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+	params,
+	res
+}) => {
 	const productId = params?.productId;
 	if (typeof productId !== 'string')
 		throw new Error('productId must be a string');
@@ -42,28 +44,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 			notFound: true
 		};
 
+	res.setHeader(
+		'Cache-Control',
+		'public, s-maxage=10, stale-while-revalidate=59'
+	);
+
 	return {
 		props: {
 			product
 		}
 	};
 };
-
-export const getStaticPaths: GetStaticPaths<{ productId: string }> = async (
-	context
-) => {
-	const paths = await getAllProducts({
-		typesToExclude: ['Sound Editing Software']
-	}).then((products: any) =>
-		products.map((product: any) => ({
-			params: { productId: getIdFromGid(product.id) }
-		}))
-	);
-
-	return {
-		paths,
-		fallback: 'blocking'
-	};
-};
-
 export default ProductByIdPage;
