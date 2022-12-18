@@ -8,7 +8,7 @@ import { useMutation } from '@tanstack/react-query';
 import type { IGenericErrorResponse } from 'types';
 import { toast } from 'react-toastify';
 import { CountryDropdown } from 'react-country-region-selector';
-import { defaultSiteName3, websiteBasePath } from 'next-seo.config';
+import { defaultSiteName3, websiteBasePath } from '@utils/core/next-seo.config';
 import CustomNextSeo from '@components/shared/common/CustomNextSeo';
 
 const ContactUsPage: NextPage = () => {

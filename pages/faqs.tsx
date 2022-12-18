@@ -1,7 +1,7 @@
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 import CustomNextSeo from '@components/shared/common/CustomNextSeo';
 import type { NextPage } from 'next';
-import { defaultSiteName3 } from 'next-seo.config';
+import { defaultSiteName3 } from '@utils/core/next-seo.config';
 
 const faqs: (
 	| {

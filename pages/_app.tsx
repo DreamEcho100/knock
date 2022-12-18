@@ -24,7 +24,7 @@ import { SharedCustomerStateProvider } from 'context/Customer';
 import Head from 'next/head';
 import Script from 'next/script';
 import { useRouter } from 'next/router';
-import SEODefaults from 'next-seo.config';
+import SEODefaults from '@utils/core/next-seo.config';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const router = useRouter();
