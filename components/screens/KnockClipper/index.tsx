@@ -1,8 +1,6 @@
+import CustomNextSeo from '@components/shared/common/CustomNextSeo';
 import { IKnockClipperPageProps } from '@pages/knock-clipper';
-import { NextSeo } from 'next-seo';
-import { defaultSiteName, websiteBasePath } from 'next-seo.config';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
+import { defaultSiteName } from 'next-seo.config';
 import {
 	DescriptionSection,
 	HeroSection,
@@ -12,20 +10,13 @@ import {
 } from './sections';
 
 const KnockScreen = ({ knockClipperPlugin }: IKnockClipperPageProps) => {
-	const router = useRouter();
 	const pageTitle = `KNOCK Clipper | ${defaultSiteName}`;
 	const pageDescription =
 		"This is the only soft clipper you'll ever need. KNOCK Clipper is a premium quality, user adjustable hard &amp; soft clipper designed by DECAP. It is the CLIP module from his acclaimed plugin, KNOCK. It is inspired by the signature sound of his popular drum kit series DRUMS THAT KNOCK, which has helped shaped the sonics";
 
 	return (
 		<>
-			<NextSeo
-				title={pageTitle}
-				description={pageDescription}
-				canonical={`${websiteBasePath}${router.pathname}`}
-				twitter={{ handle: pageTitle }}
-				openGraph={{ title: pageTitle, description: pageDescription }}
-			/>
+			<CustomNextSeo pageTitle={pageTitle} pageDescription={pageDescription} />
 			<HeroSection knockClipperPlugin={knockClipperPlugin} />
 			<DescriptionSection />
 			<ProductShowcaseSection knockClipperPlugin={knockClipperPlugin} />

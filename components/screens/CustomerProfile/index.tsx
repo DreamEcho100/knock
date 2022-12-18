@@ -23,10 +23,9 @@ import {
 import Dialog from '@components/shared/common/Dialog';
 import FormField from '@components/shared/core/FieldForm';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import Head from 'next/head';
 import Link from 'next/link';
-import { NextSeo } from 'next-seo';
 import { defaultSiteName3 } from 'next-seo.config';
+import CustomNextSeo from '@components/shared/common/CustomNextSeo';
 
 const TitleValue = ({
 	title,
@@ -332,10 +331,8 @@ const CustomerProfileScreen = () => {
 	if (user.status === 'loading' && user.fetchStatus === 'fetching')
 		return (
 			<>
-				<NextSeo
-					title={pageTitle}
-					twitter={{ handle: pageTitle }}
-					openGraph={{ title: pageTitle }}
+				<CustomNextSeo
+					pageTitle={pageTitle}
 					additionalMetaTags={[
 						{ name: 'robots', content: 'noindex, nofollow' }
 					]}
@@ -355,10 +352,8 @@ const CustomerProfileScreen = () => {
 
 		return (
 			<>
-				<NextSeo
-					title={pageTitle}
-					twitter={{ handle: pageTitle }}
-					openGraph={{ title: pageTitle }}
+				<CustomNextSeo
+					pageTitle={pageTitle}
 					additionalMetaTags={[
 						{ name: 'robots', content: 'noindex, nofollow' }
 					]}
@@ -380,10 +375,8 @@ const CustomerProfileScreen = () => {
 
 	return (
 		<>
-			<NextSeo
-				title={pageTitle}
-				twitter={{ handle: pageTitle }}
-				openGraph={{ title: pageTitle }}
+			<CustomNextSeo
+				pageTitle={pageTitle}
 				additionalMetaTags={[{ name: 'robots', content: 'noindex, nofollow' }]}
 			/>
 			<section className='bg-primary-1 section-p-v1'>

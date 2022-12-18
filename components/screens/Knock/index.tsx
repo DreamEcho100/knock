@@ -1,8 +1,6 @@
+import CustomNextSeo from '@components/shared/common/CustomNextSeo';
 import type { IKnockPluginPageProps } from '@pages/knock';
-import { NextSeo } from 'next-seo';
-import { defaultSiteName, websiteBasePath } from 'next-seo.config';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
+import { defaultSiteName } from 'next-seo.config';
 import { SystemRequirementsSection } from '../KnockClipper/sections';
 import {
 	DescriptionSection,
@@ -141,20 +139,13 @@ const reviews = [
 // const shortReviews = reviews.filter((review) => review.review.length < 100);
 
 const KnockScreen = ({ knockPlugin }: IKnockPluginPageProps) => {
-	const router = useRouter();
 	const pageTitle = `KNOCK Plugin | ${defaultSiteName}`;
 	const pageDescription =
 		'This is the last plugin you will ever need to make your drums KNOCK and punch through your mix. This plugin was meticulously crafted by platinum producer &amp; award winning sound designer, DECAP. It is inspired by the signature sound of his popular drum kit series DRUMS THAT KNOCK, which has helped shaped the sonics o';
 
 	return (
 		<>
-			<NextSeo
-				title={pageTitle}
-				description={pageDescription}
-				canonical={`${websiteBasePath}${router.pathname}`}
-				twitter={{ handle: pageTitle }}
-				openGraph={{ title: pageTitle, description: pageDescription }}
-			/>
+			<CustomNextSeo pageTitle={pageTitle} pageDescription={pageDescription} />
 			<HeroSection knockPlugin={knockPlugin} />
 			<DescriptionSection />
 			<ShapesYourDrumsSection />

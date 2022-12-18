@@ -1,10 +1,9 @@
 import type { ReactNode } from 'react';
 
 import classes from '@styles/content.module.css';
-import Head from 'next/head';
-import { defaultSiteName3, websiteBasePath } from 'next-seo.config';
-import { NextSeo } from 'next-seo';
+import { defaultSiteName3 } from 'next-seo.config';
 import { useRouter } from 'next/router';
+import CustomNextSeo from '@components/shared/common/CustomNextSeo';
 
 interface IProps {
 	header: {
@@ -20,20 +19,13 @@ interface IProps {
 }
 
 const Wrapper = ({ head, header, children, sectionProps = {} }: IProps) => {
-	const router = useRouter();
 	const pageTitle = `${head.title} | ${defaultSiteName3}`;
 	const pageDescription =
 		typeof head.description === 'string' ? head.description : undefined;
 
 	return (
 		<>
-			<NextSeo
-				title={pageTitle}
-				description={pageDescription}
-				canonical={`${websiteBasePath}${router.pathname}`}
-				twitter={{ handle: pageTitle }}
-				openGraph={{ title: pageTitle, description: pageDescription }}
-			/>
+			<CustomNextSeo pageTitle={pageTitle} pageDescription={pageDescription} />
 			<section className='bg-primary-1 section-p-v1' {...sectionProps}>
 				<div className='md:max-w-[800px] mx-auto'>
 					<header className='flex flex-col gap-4 text-text-primary-1'>
