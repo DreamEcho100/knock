@@ -1,9 +1,11 @@
-import type { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
 import KnockScreen from '@components/screens/knock-pluginboutique';
 import type { IProduct } from 'types';
-import { getAllProducts, getOneProductByHandle } from 'server/controllers/products';
-import { getIdFromGid } from '@utils/core/shopify';
+import {
+	getAllProducts,
+	getOneProductByHandle
+} from 'server/controllers/products';
 
 export interface IKnockPluginBoutiqueProps {
 	knockPluginBoutique: IProduct; // ShopifyBuy.Product;
@@ -38,9 +40,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	};
 };
 
-export const getStaticPaths: GetStaticPaths<{ pluginsBoutique: string }> = async (
-	context
-) => {
+export const getStaticPaths: GetStaticPaths<{
+	pluginsBoutique: string;
+}> = async (context) => {
 	const paths = await getAllProducts({
 		typesToExclude: ['Sound Editing Software']
 	}).then((products: any) =>
