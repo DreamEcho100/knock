@@ -75,8 +75,8 @@ const ProductShowcase = ({
 					<div className='absolute w-full h-full'>
 						<CustomNextImage
 							src='/images/Rectangle 47.png'
-							width={800}
-							height={500}
+							width={600}
+							height={600}
 							className={`${backgroundImgClassName} pointer-events-none select-none object-contain mx-auto w-full h-full scale-[2.25] translate-y-[12.5%]`}
 							{...backgroundImgProps}
 						/>
@@ -84,8 +84,8 @@ const ProductShowcase = ({
 				)}
 				<CustomNextImage
 					{...mainImg}
-					width={800}
-					height={500}
+					width={600}
+					height={600}
 					className={cx(
 						mainImg.className,
 						'relative mx-auto w-full object-contain max-w-[80%] sm:max-w-[60%] lg:max-w-full'
