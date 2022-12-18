@@ -12,16 +12,13 @@ import { DefaultSeo } from 'next-seo';
 
 const DynamicTopProgressBar = dynamic(
 	() => import('@components/shared/common/TopProgressBar'),
-	{
-		ssr: false
-	}
+	{ ssr: false }
 );
 
 import '@styles/globals.css';
 import '@styles/swiper.css';
 import '@styles/customNProgressStyles.css';
 import { SharedCustomerStateProvider } from 'context/Customer';
-import Head from 'next/head';
 import Script from 'next/script';
 import { useRouter } from 'next/router';
 import SEODefaults from '@utils/core/next-seo.config';
