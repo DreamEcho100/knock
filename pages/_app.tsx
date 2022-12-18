@@ -8,6 +8,7 @@ import {
 } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import DefaultLayout from '@components/layouts/Default';
+import { DefaultSeo } from 'next-seo';
 
 const DynamicTopProgressBar = dynamic(
 	() => import('@components/shared/common/TopProgressBar'),
@@ -23,9 +24,10 @@ import { SharedCustomerStateProvider } from 'context/Customer';
 import Head from 'next/head';
 import Script from 'next/script';
 import { useRouter } from 'next/router';
+import SEODefaults from 'next-seo.config';
 
 function MyApp({ Component, pageProps }: AppProps) {
-	const router = useRouter()
+	const router = useRouter();
 
 	const [queryClient] = useState(
 		() =>
@@ -40,19 +42,18 @@ function MyApp({ Component, pageProps }: AppProps) {
 			})
 	);
 
-
 	useEffect(() => {
 		import('react-facebook-pixel')
-		  .then((x) => x.default)
-		  .then((ReactPixel) => {
-			ReactPixel.init(process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID as string) // facebookPixelId
-			ReactPixel.pageView()
-	
-			router.events.on('routeChangeComplete', () => {
-			  ReactPixel.pageView()
-			})
-		  })
-	  }, [router.events])
+			.then((x) => x.default)
+			.then((ReactPixel) => {
+				ReactPixel.init(process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID as string); // facebookPixelId
+				ReactPixel.pageView();
+
+				router.events.on('routeChangeComplete', () => {
+					ReactPixel.pageView();
+				});
+			});
+	}, [router.events]);
 
 	return (
 		<QueryClientProvider client={queryClient}>
@@ -60,22 +61,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 				<SharedCustomerStateProvider>
 					<DefaultLayout>
 						<DynamicTopProgressBar />
-						<Head>
-							<meta charSet='UTF-8' />
-							<meta httpEquiv='X-UA-Compatible' content='IE=edge' />
-							<meta
-								name='viewport'
-								content='width=device-width, initial-scale=1.0'
-							/>
-							<meta name='robots' content='index, follow' />
-							<meta
-								name='description'
-								content='The KNOCK Plugin created by DECAP will help you make Drums That Knock hard and punch through your mix. Easy to use for music producers at all levels.'
-							/>
-							<title>
-								PLUGINS THAT KNOCK | KNOCK Plugin - Make Your Drums Knock
-							</title>
-						</Head>
+						<DefaultSeo {...SEODefaults} />
 						<Component {...pageProps} />
 					</DefaultLayout>
 				</SharedCustomerStateProvider>

@@ -1,6 +1,9 @@
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 import type { NextPage } from 'next';
+import { NextSeo } from 'next-seo';
+import { defaultSiteName3, websiteBasePath } from 'next-seo.config';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 const faqs: (
 	| {
@@ -62,15 +65,20 @@ const faqs: (
 ];
 
 const FAQSPages: NextPage = () => {
+	const router = useRouter();
+	const pageTitle = `FAQs | ${defaultSiteName3}`;
+	const pageDescription = 'Frequently asked questions about us.';
+
 	return (
 		<>
-			<Head>
-				<title>FAQs | KNOCK Plugin - Make Your Drums Knock</title>
-				<meta
-					name='description'
-					content='Frequently asked questions about us'
-				/>
-			</Head>
+			<NextSeo
+				title={pageTitle}
+				description={pageDescription}
+				canonical={`${websiteBasePath}${router.pathname}`}
+				twitter={{ handle: pageTitle }}
+				openGraph={{ title: pageTitle, description: pageDescription }}
+			/>
+
 			<section className='bg-primary-1 section-p-v1 flex flex-col'>
 				<div className='max-w-full md:max-w-[800px] mx-auto text-primary-4'>
 					<header>

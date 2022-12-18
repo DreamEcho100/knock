@@ -10,8 +10,12 @@ import { useMutation } from '@tanstack/react-query';
 import type { IGenericErrorResponse } from 'types';
 import { toast } from 'react-toastify';
 import { CountryDropdown } from 'react-country-region-selector';
+import { NextSeo } from 'next-seo';
+import { defaultSiteName3, websiteBasePath } from 'next-seo.config';
+import { useRouter } from 'next/router';
 
 const ContactUsPage: NextPage = () => {
+	const router = useRouter();
 	const date = Date.now();
 	const [formValues, setFormValues] = useState({
 		fullName: '',
@@ -61,16 +65,19 @@ const ContactUsPage: NextPage = () => {
 		onError: (result) =>
 			setTimeout(() => toast(result.message, { type: 'error' }), 0)
 	});
+	const pageTitle = `Contact Us | ${defaultSiteName3}`;
+	const pageDescription =
+		'If you have a question, please review FAQs before submitting a ticket.';
 
 	return (
 		<>
-			<Head>
-				<title>Contact Us | KNOCK Plugin - Make Your Drums Knock</title>
-				<meta
-					name='description'
-					content='If you have a question, please review FAQs before submitting a ticket.'
-				/>
-			</Head>
+			<NextSeo
+				title={pageTitle}
+				description={pageDescription}
+				canonical={`${websiteBasePath}${router.pathname}`}
+				twitter={{ handle: pageTitle }}
+				openGraph={{ title: pageTitle, description: pageDescription }}
+			/>
 			<section className='bg-primary-1 section-p-v1'>
 				<div className='max-w-[800px] mx-auto'>
 					<header className='flex flex-col gap-4 text-text-primary-1'>
