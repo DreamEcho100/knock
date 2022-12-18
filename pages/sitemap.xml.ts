@@ -1,8 +1,8 @@
+import { getIdFromGid } from '@utils/core/shopify';
+
 import type { GetServerSideProps } from 'next';
 
 import { getAllProducts } from 'server/controllers/products';
-
-import { getIdFromGid } from './../_ignore/knock/utils/core/shopify';
 
 //pages/sitemap.xml.js
 const EXTERNAL_DATA_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;

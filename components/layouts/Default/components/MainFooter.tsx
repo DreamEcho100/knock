@@ -28,7 +28,12 @@ const LinksListContainer = ({
 	linksListClassName = 'capitalize flex flex-col text-md sm:text-size-inherit'
 }: {
 	headerText: string;
-	links: { href: string; text: string; isHidden?: boolean }[];
+	links: {
+		href: string;
+		text: string;
+		isHidden?: boolean;
+		isNormalLink?: boolean;
+	}[];
 	linksListClassName?: string;
 }) => {
 	return (
@@ -41,12 +46,23 @@ const LinksListContainer = ({
 					.filter((item) => !item.isHidden)
 					.map((item) => (
 						<li key={item.text}>
-							<Link
-								href={item.href}
-								className='hover:text-primary-1 transition-all duration-100'
-							>
-								{item.text}
-							</Link>
+							{item.isNormalLink ? (
+								<a
+									href={item.href}
+									className='hover:text-primary-1 transition-all duration-100'
+									target='_blank'
+									rel='noreferrer noopener'
+								>
+									{item.text}
+								</a>
+							) : (
+								<Link
+									href={item.href}
+									className='hover:text-primary-1 transition-all duration-100'
+								>
+									{item.text}
+								</Link>
+							)}
 						</li>
 					))}
 			</ul>
@@ -111,6 +127,7 @@ const MainFooter = () => {
 						<LinksListContainer
 							headerText='useful links'
 							links={[
+								{ href: '/sitemap.xml', text: 'sitemap', isNormalLink: true },
 								{ href: '/contact-us', text: 'Support' },
 								{
 									href: '/policies/terms-of-service',
