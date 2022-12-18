@@ -23,13 +23,18 @@ const CustomNextImage = ({
 }: ICustomNextImageProps) => {
 	const [isWeservNlOptimized, setIsWeservNlOptimized] =
 		useState(weservNlOptimized);
+	const [isWeservNlLoaded, setIsWeservNlLoaded] = useState(false);
 	const [_src, setSrc] = useState(src);
 	const [isLoaded, setIsLoaded] = useState(false);
 
 	const handleImageProps = () => {
 		const imageProps: Omit<ICustomNextImageProps, 'alt'> & { alt: string } = {
-			onError: (err) => {
-				if (isWeservNlOptimized) return setIsWeservNlOptimized(false);
+			onError: () => {
+				if (isWeservNlOptimized) {
+					setIsLoaded(true);
+					setIsWeservNlOptimized(false);
+					return;
+				}
 
 				setIsLoaded(true);
 				setSrc(
