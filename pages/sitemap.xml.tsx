@@ -5,7 +5,7 @@ import type { GetServerSideProps } from 'next';
 import { getAllProducts } from 'server/controllers/products';
 
 //pages/sitemap.xml.js
-const EXTERNAL_DATA_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
+const EXTERNAL_DATA_URL = `https://${process.env.REDEEM_DOMAIN}`;
 
 function generateSiteMap({
 	products,
