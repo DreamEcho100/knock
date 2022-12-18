@@ -106,7 +106,9 @@ const KnockSection = ({
 	imagesContainerTheme,
 	textContainerTheme,
 	sectionInnerWrapperTheme,
-	mainImgOrVideoLink
+	mainImgOrVideoLink,
+	// mainImgOrVideoProps = {}
+	...props
 }: {
 	title?: ReactNode;
 	description: string;
@@ -121,6 +123,7 @@ const KnockSection = ({
 	imageSrc?: string;
 	videoSrc?: string;
 	mainImgOrVideoLink?: string;
+	mainImgOrVideoProps?: Record<string, any>;
 }) => {
 	const router = useRouter();
 
@@ -133,7 +136,8 @@ const KnockSection = ({
 			imageSrc
 				? 'object-cover w-3/4 relative'
 				: 'object-fill w-3/4 relative rounded-[7%]'
-		)
+		),
+		...(props.mainImgOrVideoProps || {})
 	};
 
 	return (

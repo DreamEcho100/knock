@@ -28,7 +28,8 @@ const OneProductShowCaseSection = () => {
 						src: '/images/knock-clipper.png',
 						alt: '',
 						onClick: () => router.push('/knock-clipper'),
-						className: 'cursor-pointer'
+						className: 'cursor-pointer',
+						priority: true
 					},
 					backgroundImg: false
 				}}

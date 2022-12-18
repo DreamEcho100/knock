@@ -7,23 +7,30 @@ export interface ICustomNextImageProps extends Omit<ImageProps, 'alt'> {
 	placeholder?: 'blur' | 'empty';
 	role?: string;
 	alt?: string;
+	weservNlOptimized?: boolean;
 }
 
 const CustomNextImage = ({
 	className = '',
 	unoptimized = true,
+	weservNlOptimized = true,
 	src,
 	alt = '',
 	placeholder = 'empty',
 	blurDataURL,
 	...props
 }: ICustomNextImageProps) => {
+	const [isWeservNlOptimized, setIsWeservNlOptimized] =
+		useState(weservNlOptimized);
 	const [_src, setSrc] = useState(src);
 	const [isLoaded, setIsLoaded] = useState(false);
 
 	const handleImageProps = () => {
 		const imageProps: Omit<ICustomNextImageProps, 'alt'> & { alt: string } = {
-			onError: () => {
+			onError: (err) => {
+				console.log('err', err);
+				if (isWeservNlOptimized) return setIsWeservNlOptimized(false);
+
 				setIsLoaded(true);
 				setSrc(
 					// '/images/image-error.png'
@@ -33,7 +40,11 @@ const CustomNextImage = ({
 			// placeholder:"blur",
 			// blurDataURL:"/assets/image-placeholder.png",
 			unoptimized,
-			src: _src,
+			src: isWeservNlOptimized
+				? `//images.weserv.nl/?url=${_src}&w=${props.width}${
+						props.height ? `&h=${props.height}` : ''
+				  }`
+				: _src,
 			placeholder,
 			className: `${className} ${isLoaded ? '' : 'no-content'}`,
 			alt: '',

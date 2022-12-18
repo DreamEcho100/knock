@@ -9,6 +9,7 @@ const HeroSection = () => {
 			pTheme={{ width: 'small' }}
 			mainImgOrVideoLink='/knock'
 			imageSrc='/images/534aaf62a986c03ee09ee62a138d3845.gif'
+			mainImgOrVideoProps={{ weservNlOptimized: false }}
 			buttonProps={{
 				className: 'capitalize',
 				href: '/knock',
