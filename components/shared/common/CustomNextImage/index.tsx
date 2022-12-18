@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { ImageProps } from 'next/dist/client/image.d';
 import { useState } from 'react';
+import { websiteBasePath } from 'next-seo.config';
 
 export interface ICustomNextImageProps extends Omit<ImageProps, 'alt'> {
 	className?: string;
@@ -28,7 +29,6 @@ const CustomNextImage = ({
 	const handleImageProps = () => {
 		const imageProps: Omit<ICustomNextImageProps, 'alt'> & { alt: string } = {
 			onError: (err) => {
-				console.log('err', err);
 				if (isWeservNlOptimized) return setIsWeservNlOptimized(false);
 
 				setIsLoaded(true);
@@ -41,9 +41,11 @@ const CustomNextImage = ({
 			// blurDataURL:"/assets/image-placeholder.png",
 			unoptimized,
 			src: isWeservNlOptimized
-				? `//images.weserv.nl/?url=${_src}&w=${props.width}${
-						props.height ? `&h=${props.height}` : ''
-				  }`
+				? `//images.weserv.nl/?url=${
+						typeof _src === 'string' && _src.startsWith('/')
+							? `${websiteBasePath}${_src}`
+							: _src
+				  }&w=${props.width}${props.height ? `&h=${props.height}` : ''}`
 				: _src,
 			placeholder,
 			className: `${className} ${isLoaded ? '' : 'no-content'}`,
