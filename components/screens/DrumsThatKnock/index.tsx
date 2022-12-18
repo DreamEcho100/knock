@@ -1,5 +1,12 @@
 import { IDrumsThatKnockPageProps } from '@pages/drums-that-knock';
+import { NextSeo } from 'next-seo';
+import {
+	defaultSiteName2,
+	defaultSiteName3,
+	websiteBasePath
+} from 'next-seo.config';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import {
 	ArtistsSection,
 	DigitalProductsSection,
@@ -239,16 +246,20 @@ const DrumsThatKnock = ({
 	products,
 	knockPlugin
 }: IDrumsThatKnockPageProps) => {
+	const router = useRouter();
+	const pageTitle = `DRUMS THAT KNOCK | ${defaultSiteName3} | ${defaultSiteName2}`;
+	const pageDescription =
+		'Designed from scratch by DECAP. Premium quality, groundbreaking as always.';
+
 	return (
 		<>
-			<Head>
-				<title>DRUMS THAT KNOCK | KNOCK Plugin - Make Your Drums Knock</title>
-				<meta
-					name='description'
-					content='Designed from scratch by DECAP. Premium quality, groundbreaking as
-				always.'
-				/>
-			</Head>
+			<NextSeo
+				title={pageTitle}
+				description={pageDescription}
+				canonical={`${websiteBasePath}${router.pathname}`}
+				twitter={{ handle: pageTitle }}
+				openGraph={{ title: pageTitle, description: pageDescription }}
+			/>
 			<HeroSection />
 			<DigitalProductsSection products={products} />
 			{/* <MerchSection /> */}

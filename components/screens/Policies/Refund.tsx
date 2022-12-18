@@ -1,3 +1,4 @@
+import { defaultSiteName3 } from 'next-seo.config';
 import Wrapper from './components/Wrapper';
 
 const RefundPolicyScreen = () => {
@@ -7,7 +8,7 @@ const RefundPolicyScreen = () => {
 				h1Children: 'refund policy'
 			}}
 			head={{
-				title: 'Refund Policy | KNOCK Plugin - Make Your Drums Knock',
+				title: `Refund Policy | ${defaultSiteName3}`,
 				description: 'Refund Policy'
 			}}
 		>

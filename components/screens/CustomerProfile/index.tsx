@@ -25,6 +25,8 @@ import FormField from '@components/shared/core/FieldForm';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Head from 'next/head';
 import Link from 'next/link';
+import { NextSeo } from 'next-seo';
+import { defaultSiteName3 } from 'next-seo.config';
 
 const TitleValue = ({
 	title,
@@ -325,13 +327,19 @@ const CustomerProfileScreen = () => {
 		});
 	}, [user?.data?.orders?.edges]);
 
+	let pageTitle = `Loading... | ${defaultSiteName3}`;
+
 	if (user.status === 'loading' && user.fetchStatus === 'fetching')
 		return (
 			<>
-				<Head>
-					<meta name='robots' content='noindex, nofollow' />
-					<title>Loading... | KNOCK Plugin - Make Your Drums Knock</title>
-				</Head>
+				<NextSeo
+					title={pageTitle}
+					twitter={{ handle: pageTitle }}
+					openGraph={{ title: pageTitle }}
+					additionalMetaTags={[
+						{ name: 'robots', content: 'noindex, nofollow' }
+					]}
+				/>
 				<section className='bg-primary-1 section-p-v1 h-[75vh] max-h-[45rem] min-h-fit'>
 					<div className='max-w-screen-md mx-auto'>
 						<p>Loading...</p>
@@ -340,17 +348,21 @@ const CustomerProfileScreen = () => {
 			</>
 		);
 
-	if (!user.isSuccess)
+	if (!user.isSuccess) {
+		pageTitle = !user.isSuccess
+			? `Please login first to view your data, or reload the page and make sure you have a good internet connection | ${defaultSiteName3}`
+			: `Your data doesn't exist | ${defaultSiteName3}`;
+
 		return (
 			<>
-				<Head>
-					<meta name='robots' content='noindex, nofollow' />
-					<title>
-						{!user.isSuccess
-							? 'Please login first to view your data, or reload the page and make sure you have a good internet connection | KNOCK Plugin - Make Your Drums Knock'
-							: "Your data doesn't exist | KNOCK Plugin - Make Your Drums Knock"}
-					</title>
-				</Head>
+				<NextSeo
+					title={pageTitle}
+					twitter={{ handle: pageTitle }}
+					openGraph={{ title: pageTitle }}
+					additionalMetaTags={[
+						{ name: 'robots', content: 'noindex, nofollow' }
+					]}
+				/>
 				<section className='bg-primary-1 section-p-v1 h-[75vh] max-h-[45rem] min-h-fit'>
 					<div className='max-w-screen-md mx-auto'>
 						<p>
@@ -362,16 +374,18 @@ const CustomerProfileScreen = () => {
 				</section>
 			</>
 		);
+	}
+
+	pageTitle = `${user.data.firstName} ${user.data.lastName} | Customer Profile | ${defaultSiteName3}`;
 
 	return (
 		<>
-			<Head>
-				<meta name='robots' content='noindex, nofollow' />
-				<title>
-					{user.data.firstName} {user.data.lastName} | Customer Profile | KNOCK
-					Plugin - Make Your Drums Knock
-				</title>
-			</Head>
+			<NextSeo
+				title={pageTitle}
+				twitter={{ handle: pageTitle }}
+				openGraph={{ title: pageTitle }}
+				additionalMetaTags={[{ name: 'robots', content: 'noindex, nofollow' }]}
+			/>
 			<section className='bg-primary-1 section-p-v1'>
 				<div className='max-w-screen-md mx-auto flex flex-col gap-16'>
 					<header className='flex flex-col items-center'>

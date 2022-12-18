@@ -10,15 +10,13 @@ import { toast } from 'react-toastify';
 import FormField from '@components/shared/core/FieldForm';
 
 const KnockScreen = ({ knockPluginBoutique }: IKnockPluginBoutiqueProps) => {
-
-	const [openRedeem , setOpenRedeem] = useState(false)
+	const [openRedeem, setOpenRedeem] = useState(false);
 	const [formValues, setFormValues] = useState({
 		redeemCode: '',
-		firstName:'',
-		lastName:'',
-		email:''
+		firstName: '',
+		lastName: '',
+		email: ''
 	});
-
 
 	const redeemMutation = useMutation<
 		{
@@ -51,14 +49,12 @@ const KnockScreen = ({ knockPluginBoutique }: IKnockPluginBoutiqueProps) => {
 					if ('success' in result && !result.success)
 						throw new Error(result.message);
 
-
 					return result;
 				});
 		},
 		onSuccess: (result) => {
-			
 			if (result) {
-				setOpenRedeem(prev => !prev)
+				setOpenRedeem((prev) => !prev);
 			}
 			setTimeout(() => toast(result.message), 0);
 		},
@@ -66,7 +62,6 @@ const KnockScreen = ({ knockPluginBoutique }: IKnockPluginBoutiqueProps) => {
 			setTimeout(() => toast(error.message, { type: 'error' }), 0);
 		}
 	});
-
 
 	const createOrderRedeem = useMutation<
 		{
@@ -87,9 +82,9 @@ const KnockScreen = ({ knockPluginBoutique }: IKnockPluginBoutiqueProps) => {
 					headers: { 'Content-type': 'application/json' },
 					body: JSON.stringify({
 						...formValues,
-						price:Number(knockPluginBoutique.variants[0].price.amount),
-						variantId:knockPluginBoutique.variants[0].id.split('/')[4],
-						productId: knockPluginBoutique.id.split('/')[4],
+						price: Number(knockPluginBoutique.variants[0].price.amount),
+						variantId: knockPluginBoutique.variants[0].id.split('/')[4],
+						productId: knockPluginBoutique.id.split('/')[4]
 					})
 				}
 			)
@@ -101,9 +96,8 @@ const KnockScreen = ({ knockPluginBoutique }: IKnockPluginBoutiqueProps) => {
 				});
 		},
 		onSuccess: (result) => {
-			
 			if (result) {
-				setOpenRedeem(prev => !prev)
+				setOpenRedeem((prev) => !prev);
 			}
 			setTimeout(() => toast(result.message), 0);
 		},
@@ -111,7 +105,6 @@ const KnockScreen = ({ knockPluginBoutique }: IKnockPluginBoutiqueProps) => {
 			setTimeout(() => toast(error.message, { type: 'error' }), 0);
 		}
 	});
-
 
 	return (
 		<>
@@ -124,7 +117,6 @@ const KnockScreen = ({ knockPluginBoutique }: IKnockPluginBoutiqueProps) => {
 			</Head>
 
 			<section className='relative flex items-center justify-center  flex-col max-w-[1200px]  m-auto'>
-				
 				<div className='my-[80px]'>
 					<h2 className='text-4xl font-bold'>{knockPluginBoutique.title}</h2>
 				</div>
@@ -136,63 +128,69 @@ const KnockScreen = ({ knockPluginBoutique }: IKnockPluginBoutiqueProps) => {
 						src={knockPluginBoutique.images[0].src}
 					/>
 				</div>
-				{openRedeem ? <form onSubmit={createOrderRedeem.mutate} className={'my-[80px]  w-[80%] h-[350px] border rounded-2xl bg-black '} >
-					 <div className='flex flex-col p-5 gap-5'  >
-					 <FormField
-							values={formValues}
-							setValues={setFormValues}
-							name='firstName'
-							placeholder='*first name'
-							autoComplete='first-name'
-							minLength={3}
-						/>
-						<FormField
-							values={formValues}
-							setValues={setFormValues}
-							name='lastName'
-							placeholder='*last name'
-							autoComplete='last-name'
-							minLength={3}
-						/>
-					 <FormField
-							values={formValues}
-							setValues={setFormValues}
-							name='email'
-							type='email'
-							placeholder='*email'
-							autoComplete='email'
-							minLength={3}
-						/>
+				{openRedeem ? (
+					<form
+						onSubmit={createOrderRedeem.mutate}
+						className={
+							'my-[80px]  w-[80%] h-[350px] border rounded-2xl bg-black '
+						}
+					>
+						<div className='flex flex-col p-5 gap-5'>
+							<FormField
+								values={formValues}
+								setValues={setFormValues}
+								name='firstName'
+								placeholder='*first name'
+								autoComplete='first-name'
+								minLength={3}
+							/>
+							<FormField
+								values={formValues}
+								setValues={setFormValues}
+								name='lastName'
+								placeholder='*last name'
+								autoComplete='last-name'
+								minLength={3}
+							/>
+							<FormField
+								values={formValues}
+								setValues={setFormValues}
+								name='email'
+								type='email'
+								placeholder='*email'
+								autoComplete='email'
+								minLength={3}
+							/>
+							<FormInput
+								placeholder='Your Access Code'
+								values={formValues}
+								setValues={setFormValues}
+								name='redeemCode'
+								required
+								minLength={3}
+							/>
+						</div>
+						<div className='flex items-center justify-center p-2 '>
+							<Button>REDEEM</Button>
+						</div>
+					</form>
+				) : (
+					<form
+						onSubmit={redeemMutation.mutate}
+						className='flex gap-3 items-center my-[80px]'
+					>
 						<FormInput
-						placeholder='Your Access Code'
-						values={formValues}
-						setValues={setFormValues}
-						name='redeemCode'
-						required
-						minLength={3}
-					/>
-					 </div>
-					 <div className='flex items-center justify-center p-2 '>
-						<Button> 
-							REDEEM
-						</Button>
-					 </div>
-				</form>:
-				<form
-					onSubmit={redeemMutation.mutate}
-					className='flex gap-3 items-center my-[80px]'
-				> 
-					<FormInput
-						placeholder='Your Access Code'
-						values={formValues}
-						setValues={setFormValues}
-						name='redeemCode'
-						required
-						minLength={3}
-						variants={{ border: 'all', rounded: 'md', p: 'sm' }}
-					/>
-					<Button className=''> REDEEM </Button>
-				</form>}
+							placeholder='Your Access Code'
+							values={formValues}
+							setValues={setFormValues}
+							name='redeemCode'
+							required
+							minLength={3}
+							variants={{ border: 'all', rounded: 'md', p: 'sm' }}
+						/>
+						<Button className=''> REDEEM </Button>
+					</form>
+				)}
 			</section>
 		</>
 	);

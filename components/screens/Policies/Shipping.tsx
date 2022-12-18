@@ -1,3 +1,4 @@
+import { defaultSiteName3 } from 'next-seo.config';
 import { type CSSProperties } from 'react';
 import Wrapper from './components/Wrapper';
 
@@ -13,7 +14,7 @@ const ShippingPolicyScreen = () => {
 				h1Children: 'shipping policy'
 			}}
 			head={{
-				title: 'Shipping Policy | KNOCK Plugin - Make Your Drums Knock',
+				title: `Shipping Policy | ${defaultSiteName3}`,
 				description:
 					'This Shipping Policy describes is for the Digital Products and the Physical Products'
 			}}

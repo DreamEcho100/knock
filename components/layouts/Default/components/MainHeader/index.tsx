@@ -334,8 +334,6 @@ const CartContainer = () => {
 		removeProductsToCheckoutAndCart.isLoading ||
 		updateProductsToCheckoutAndCart.isLoading;
 
-	// console.log('productsData', productsData);
-
 	const productsTotalPrice = useMemo(
 		() =>
 			productsData.reduce(
