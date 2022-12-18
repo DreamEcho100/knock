@@ -3,20 +3,15 @@ import type { NextPage } from 'next';
 import Button from '@components/shared/core/Button';
 import FormInput from '@components/shared/core/FormInput';
 import { FormEvent, useState } from 'react';
-import Head from 'next/head';
-import { useRef } from 'react';
 import Link from 'next/link';
 import { useMutation } from '@tanstack/react-query';
 import type { IGenericErrorResponse } from 'types';
 import { toast } from 'react-toastify';
 import { CountryDropdown } from 'react-country-region-selector';
-import { NextSeo } from 'next-seo';
 import { defaultSiteName3, websiteBasePath } from 'next-seo.config';
-import { useRouter } from 'next/router';
+import CustomNextSeo from '@components/shared/common/CustomNextSeo';
 
 const ContactUsPage: NextPage = () => {
-	const router = useRouter();
-	const date = Date.now();
 	const [formValues, setFormValues] = useState({
 		fullName: '',
 		email: '',
@@ -71,13 +66,7 @@ const ContactUsPage: NextPage = () => {
 
 	return (
 		<>
-			<NextSeo
-				title={pageTitle}
-				description={pageDescription}
-				canonical={`${websiteBasePath}${router.pathname}`}
-				twitter={{ handle: pageTitle }}
-				openGraph={{ title: pageTitle, description: pageDescription }}
-			/>
+			<CustomNextSeo pageTitle={pageTitle} pageDescription={pageDescription} />
 			<section className='bg-primary-1 section-p-v1'>
 				<div className='max-w-[800px] mx-auto'>
 					<header className='flex flex-col gap-4 text-text-primary-1'>
