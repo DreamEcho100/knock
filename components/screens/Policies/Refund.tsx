@@ -1,4 +1,4 @@
-import { defaultSiteName3 } from 'next-seo.config';
+import { defaultSiteName3 } from '@utils/core/next-seo.config';
 import Wrapper from './components/Wrapper';
 
 const RefundPolicyScreen = () => {

@@ -1,6 +1,6 @@
 import CustomNextSeo from '@components/shared/common/CustomNextSeo';
 import type { IKnockPluginPageProps } from '@pages/knock';
-import { defaultSiteName } from 'next-seo.config';
+import { defaultSiteName } from '@utils/core/next-seo.config';
 import { SystemRequirementsSection } from '../KnockClipper/sections';
 import {
 	DescriptionSection,

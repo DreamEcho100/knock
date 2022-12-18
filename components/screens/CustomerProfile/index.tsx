@@ -24,7 +24,7 @@ import Dialog from '@components/shared/common/Dialog';
 import FormField from '@components/shared/core/FieldForm';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
-import { defaultSiteName3 } from 'next-seo.config';
+import { defaultSiteName3 } from '@utils/core/next-seo.config';
 import CustomNextSeo from '@components/shared/common/CustomNextSeo';
 
 const TitleValue = ({

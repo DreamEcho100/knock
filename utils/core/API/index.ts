@@ -20,8 +20,8 @@ const throwIfResponseError = async (response: Response) => {
 const getAppApiPath = () =>
 	typeof window === 'undefined'
 		? // !!!
-		  process.env.NEXT_PUBLIC_VERCEL_URL
-			? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api`
+		  process.env.NEXT_PUBLIC_APP_DOMAINE
+			? `https://${process.env.NEXT_PUBLIC_APP_DOMAINE}/api`
 			: process.env.NEXT_PUBLIC_BACKEND_ABSOLUTE_PATH
 		: process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH;
 

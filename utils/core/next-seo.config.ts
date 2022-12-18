@@ -1,6 +1,6 @@
 import { DefaultSeoProps } from 'next-seo';
 
-export const websiteBasePath = `https://${process.env.REDEEM_DOMAIN}`;
+export const websiteBasePath = `https://${process.env.NEXT_PUBLIC_APP_DOMAINE}`;
 
 export const defaultSiteName = 'PLUGINS THAT KNOCK';
 export const defaultSiteName2 = 'DRUMS THAT KNOCK';

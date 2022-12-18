@@ -7,7 +7,7 @@ import {
 	VideoSection
 } from './sections';
 
-import { defaultSiteName3 } from 'next-seo.config';
+import { defaultSiteName3 } from '@utils/core/next-seo.config';
 import CustomNextSeo from '@components/shared/common/CustomNextSeo';
 
 const ProductByIdScreen = ({ product }: IProductByIdPageProps) => {

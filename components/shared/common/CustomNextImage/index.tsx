@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { ImageProps } from 'next/dist/client/image.d';
 import { useState } from 'react';
-import { websiteBasePath } from 'next-seo.config';
+import { websiteBasePath } from '@utils/core/next-seo.config';
 
 export interface ICustomNextImageProps extends Omit<ImageProps, 'alt'> {
 	className?: string;

@@ -1,5 +1,5 @@
 import { NextSeo } from 'next-seo';
-import { websiteBasePath } from 'next-seo.config';
+import { websiteBasePath } from '@utils/core/next-seo.config';
 import { useRouter } from 'next/router';
 
 const CustomNextSeo = ({

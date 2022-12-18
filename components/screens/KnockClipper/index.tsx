@@ -1,6 +1,6 @@
 import CustomNextSeo from '@components/shared/common/CustomNextSeo';
 import { IKnockClipperPageProps } from '@pages/knock-clipper';
-import { defaultSiteName } from 'next-seo.config';
+import { defaultSiteName } from '@utils/core/next-seo.config';
 import {
 	DescriptionSection,
 	HeroSection,

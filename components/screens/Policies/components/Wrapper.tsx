@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
 import classes from '@styles/content.module.css';
-import { defaultSiteName3 } from 'next-seo.config';
+import { defaultSiteName3 } from '@utils/core/next-seo.config';
 import { useRouter } from 'next/router';
 import CustomNextSeo from '@components/shared/common/CustomNextSeo';
 

@@ -1,6 +1,9 @@
 import CustomNextSeo from '@components/shared/common/CustomNextSeo';
 import { IDrumsThatKnockPageProps } from '@pages/drums-that-knock';
-import { defaultSiteName2, defaultSiteName3 } from 'next-seo.config';
+import {
+	defaultSiteName2,
+	defaultSiteName3
+} from '@utils/core/next-seo.config';
 import {
 	ArtistsSection,
 	DigitalProductsSection,
