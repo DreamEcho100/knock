@@ -57,8 +57,8 @@ const ProductBasicCard = ({
 					<CustomNextImage
 						src={images[0].src}
 						alt={images[0].altText || title || ''}
-						width={800}
-						height={800}
+						width={350}
+						height={350}
 						className='w-full h-full object-contain
 						transition-all duration-300'
 					/>
