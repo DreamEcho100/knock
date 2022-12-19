@@ -100,7 +100,7 @@ const KnockSection = ({
 	title,
 	pTheme = {},
 	sectionTheme,
-	imageSrc = '29f8b3dde3b1d7e7a476bf19c95536f1.png',
+	imageSrc = '/images/29f8b3dde3b1d7e7a476bf19c95536f1.png',
 	videoSrc, //  = '/videos/knock.mp4',
 	h2theme,
 	imagesContainerTheme,
