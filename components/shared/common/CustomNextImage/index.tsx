@@ -11,6 +11,20 @@ export interface ICustomNextImageProps extends Omit<ImageProps, 'alt'> {
 	weservNlOptimized?: boolean;
 }
 
+const myLoader = ({
+	src,
+	width,
+	height
+}: {
+	src: string;
+	width: number;
+	height?: number;
+}) => {
+	return `//images.weserv.nl/?url=${src}&w=${width}${
+		height ? `&h=${height}` : ''
+	}`;
+};
+
 const CustomNextImage = ({
 	className = '',
 	unoptimized = true,
@@ -45,13 +59,15 @@ const CustomNextImage = ({
 			// placeholder:"blur",
 			// blurDataURL:"/assets/image-placeholder.png",
 			unoptimized,
-			src: isWeservNlOptimized
-				? `//images.weserv.nl/?url=${
-						typeof _src === 'string' && _src.startsWith('/')
-							? `${websiteBasePath}${_src}`
-							: _src
-				  }&w=${props.width}${props.height ? `&h=${props.height}` : ''}`
-				: _src,
+			loader: isWeservNlOptimized ? myLoader : undefined,
+			// src: isWeservNlOptimized
+			// 	? `//images.weserv.nl/?url=${
+			// 			typeof _src === 'string' && _src.startsWith('/')
+			// 				? `${websiteBasePath}${_src}`
+			// 				: _src
+			// 	  }&w=${props.width}${props.height ? `&h=${props.height}` : ''}`
+			// 	: _src,
+			src: _src,
 			placeholder,
 			className: `${className} ${isLoaded ? '' : 'no-content'}`,
 			alt: '',
