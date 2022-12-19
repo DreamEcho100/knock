@@ -64,9 +64,6 @@ const CustomNextImage = ({
 
 		return imageProps;
 	};
-	console.log('isWeservNlOptimized', isWeservNlOptimized);
-	console.log('typeof _src', typeof _src);
-	console.log('handleImageProps().src', handleImageProps().src);
 
 	// eslint-disable-next-line jsx-a11y/alt-text
 	return <Image {...handleImageProps()} />;
