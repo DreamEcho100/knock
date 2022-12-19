@@ -20,7 +20,8 @@ const myLoader = ({
 	width: number;
 	height?: number;
 }) => {
-	return `//images.weserv.nl/?url=${src}&w=${width}${
+	console.log('____', src, width, height);
+	return `//images.weserv.nl/?url=${websiteBasePath}${src}&w=${width}${
 		height ? `&h=${height}` : ''
 	}`;
 };
@@ -37,7 +38,6 @@ const CustomNextImage = ({
 }: ICustomNextImageProps) => {
 	const [isWeservNlOptimized, setIsWeservNlOptimized] =
 		useState(weservNlOptimized);
-	const [isWeservNlLoaded, setIsWeservNlLoaded] = useState(false);
 	const [_src, setSrc] = useState(src);
 	const [isLoaded, setIsLoaded] = useState(false);
 
@@ -59,15 +59,14 @@ const CustomNextImage = ({
 			// placeholder:"blur",
 			// blurDataURL:"/assets/image-placeholder.png",
 			unoptimized,
-			loader: isWeservNlOptimized ? myLoader : undefined,
-			// src: isWeservNlOptimized
-			// 	? `//images.weserv.nl/?url=${
-			// 			typeof _src === 'string' && _src.startsWith('/')
-			// 				? `${websiteBasePath}${_src}`
-			// 				: _src
-			// 	  }&w=${props.width}${props.height ? `&h=${props.height}` : ''}`
-			// 	: _src,
-			src: _src,
+			// loader: isWeservNlOptimized ? myLoader : undefined,
+			// src: _src,
+			src:
+				isWeservNlOptimized && typeof _src === 'string'
+					? `//images.weserv.nl/?url=${encodeURIComponent(
+							_src.startsWith('/') ? `${websiteBasePath}${_src}` : _src
+					  )}&w=${props.width}${props.height ? `&h=${props.height}` : ''}`
+					: _src,
 			placeholder,
 			className: `${className} ${isLoaded ? '' : 'no-content'}`,
 			alt: '',
@@ -84,6 +83,7 @@ const CustomNextImage = ({
 
 		return imageProps;
 	};
+	console.log('handleImageProps()', handleImageProps());
 
 	// eslint-disable-next-line jsx-a11y/alt-text
 	return <Image {...handleImageProps()} />;
