@@ -11,21 +11,6 @@ export interface ICustomNextImageProps extends Omit<ImageProps, 'alt'> {
 	weservNlOptimized?: boolean;
 }
 
-const myLoader = ({
-	src,
-	width,
-	height
-}: {
-	src: string;
-	width: number;
-	height?: number;
-}) => {
-	console.log('____', src, width, height);
-	return `//images.weserv.nl/?url=${websiteBasePath}${src}&w=${width}${
-		height ? `&h=${height}` : ''
-	}`;
-};
-
 const CustomNextImage = ({
 	className = '',
 	unoptimized = true,
@@ -56,11 +41,7 @@ const CustomNextImage = ({
 					'/svg/bbblurry.svg'
 				);
 			},
-			// placeholder:"blur",
-			// blurDataURL:"/assets/image-placeholder.png",
 			unoptimized,
-			// loader: isWeservNlOptimized ? myLoader : undefined,
-			// src: _src,
 			src:
 				isWeservNlOptimized && typeof _src === 'string'
 					? `//images.weserv.nl/?url=${encodeURIComponent(
