@@ -169,8 +169,8 @@ const KnockSection = ({
 						<CustomNextImage
 							src={imageSrc}
 							alt='knock plugin'
-							width={1000}
-							height={1000}
+							width={700}
+							height={700}
 							priority
 							unoptimized
 							{...mainImgOrVideoProps}
@@ -180,8 +180,8 @@ const KnockSection = ({
 							src={videoSrc}
 							autoPlay
 							muted
-							width={1000}
-							height={1000}
+							width={700}
+							height={700}
 							title='knock plugin'
 							loop
 							controls={false}
