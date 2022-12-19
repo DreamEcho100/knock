@@ -9,6 +9,7 @@ export interface ICustomNextImageProps extends Omit<ImageProps, 'alt'> {
 	role?: string;
 	alt?: string;
 	weservNlOptimized?: boolean;
+	isAnimated?: boolean;
 }
 
 const CustomNextImage = ({
@@ -19,6 +20,7 @@ const CustomNextImage = ({
 	alt = '',
 	placeholder = 'empty',
 	blurDataURL,
+	isAnimated,
 	...props
 }: ICustomNextImageProps) => {
 	const [isWeservNlOptimized, setIsWeservNlOptimized] =
@@ -46,7 +48,9 @@ const CustomNextImage = ({
 				isWeservNlOptimized && typeof _src === 'string'
 					? `//images.weserv.nl/?url=${encodeURIComponent(
 							_src.startsWith('/') ? `${websiteBasePath}${_src}` : _src
-					  )}&w=${props.width}${props.height ? `&h=${props.height}` : ''}`
+					  )}&w=${props.width}${props.height ? `&h=${props.height}` : ''}${
+							isAnimated ? '&n=-1' : ''
+					  }`
 					: _src,
 			placeholder,
 			className: `${className} ${isLoaded ? '' : 'no-content'}`,
