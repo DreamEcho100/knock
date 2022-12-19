@@ -6,7 +6,7 @@ import {
 	QueryClient,
 	QueryClientProvider
 } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import DefaultLayout from '@components/layouts/Default';
 import { DefaultSeo } from 'next-seo';
 
@@ -22,10 +22,9 @@ import { SharedCustomerStateProvider } from 'context/Customer';
 import Script from 'next/script';
 import { useRouter } from 'next/router';
 import SEODefaults from '@utils/core/next-seo.config';
+import ExternalGlobalScripts from '@components/shared/core/ExternalGlobalScripts';
 
 function MyApp({ Component, pageProps }: AppProps) {
-	const router = useRouter();
-
 	const [queryClient] = useState(
 		() =>
 			new QueryClient({
@@ -33,24 +32,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 					queries: {
 						refetchIntervalInBackground: false,
 						refetchOnWindowFocus: false,
-						refetchInterval: 5 * 60 * 1000
+						refetchInterval: 3 * 60 * 1000
 					}
 				}
 			})
 	);
-
-	useEffect(() => {
-		import('react-facebook-pixel')
-			.then((x) => x.default)
-			.then((ReactPixel) => {
-				ReactPixel.init(process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID as string); // facebookPixelId
-				ReactPixel.pageView();
-
-				router.events.on('routeChangeComplete', () => {
-					ReactPixel.pageView();
-				});
-			});
-	}, [router.events]);
 
 	return (
 		<QueryClientProvider client={queryClient}>
@@ -63,18 +49,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 					</DefaultLayout>
 				</SharedCustomerStateProvider>
 			</Hydrate>
-			<Script
-				strategy='afterInteractive'
-				src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-			/>
-			<Script id='ga-analytics'>
-				{`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-          `}
-			</Script>
+			<ExternalGlobalScripts />
 		</QueryClientProvider>
 	);
 }

@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = (phase, { defaultConfig }) => {
 	return {
-		...defaultConfig,
 		reactStrictMode: true,
 		swcMinify: true,
 		images: {
