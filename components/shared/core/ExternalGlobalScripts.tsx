@@ -42,16 +42,18 @@ const ExternalGlobalScripts = () => {
 	return (
 		<>
 			<Script
-				strategy='worker'
+				strategy='lazyOnload'
 				src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
 				id='googletagmanager'
 			/>
-			<Script id='ga-analytics' strategy='worker'>
+			<Script id='ga-analytics' strategy='lazyOnload'>
 				{`
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+			page_path: window.location.pathname,
+			});
           `}
 			</Script>
 		</>

@@ -278,23 +278,7 @@ const LoginType = ({
 					expires: new Date(user.expiresAt)
 				}
 			);
-			let checkout:any = getCookie('checkoutIdAndKey')
-				checkout = JSON.parse(checkout)			
-				
-				 fetch(
-					`${process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH}/checkouts/associate`, 
-					{
-						method:'POST',
-						headers:{
-							'Content-type': 'application/json',
-						},
-						body:JSON.stringify({
-							checkoutId: checkout.checkoutId,
-							checkoutKey:checkout.checkoutKey,
-							customerAccessToken:user.accessToken
-						})
-					}
-				)
+			
 			setIsOpen(false);
 		}
 	});
