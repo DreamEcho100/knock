@@ -22,9 +22,9 @@ const SEODefaults: DefaultSeoProps = {
 		title: defaultTitle,
 		images: [
 			{
-				url: `${websiteBasePath}/images/29f8b3dde3b1d7e7a476bf19c95536f1.png`,
-				width: 525,
-				height: 285,
+				url: `${websiteBasePath}/images/_.jpeg`,
+				width: 700,
+				height: 470,
 				alt: 'PLUGINS THAT KNOCK Logo'
 			}
 		]
