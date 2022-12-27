@@ -23,8 +23,8 @@ const SEODefaults: DefaultSeoProps = {
 		images: [
 			{
 				url: `${websiteBasePath}/images/29f8b3dde3b1d7e7a476bf19c95536f1.png`,
-				width: 250,
-				height: 250,
+				width: 525,
+				height: 285,
 				alt: 'PLUGINS THAT KNOCK Logo'
 			}
 		]
