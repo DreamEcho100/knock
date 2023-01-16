@@ -825,6 +825,7 @@ const supportForm = async (
 	const input = z
 		.object({
 			email: z.string().email(),
+			orderNumber: z.string().optional(),
 			subject: z.string(),
 			message: z.string(),
 			fullName: z.string().min(2),
@@ -930,6 +931,21 @@ const supportForm = async (
 											</p>
 										</td>
 										</tr>
+										${
+											input.orderNumber
+												? `
+										<tr>
+										<td style="height: 1%; padding: 10px 30px">
+											<p style="font-weight: 900 ;">
+											Order Number:
+											</p>
+											<p style="font-weight: 500 ;"  >
+											#${input.orderNumber}
+											</p>
+										</td>
+										</tr>`
+												: ''
+										}
 										<tr>
 										<td style="height: 1%; padding: 0 30px">
 											<p style="font-weight: 900 ;" >
