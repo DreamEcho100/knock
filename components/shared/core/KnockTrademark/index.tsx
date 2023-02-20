@@ -1,9 +1,9 @@
 import { cx } from 'class-variance-authority';
 
-const KnockTrademark = () => {
+const KnockTrademark = ({h2}:{h2?:string}) => {
 	return (
 		<span className='flex w-fit relative'>
-			KNOCK
+		 	 {h2 || 'KNOCK'}
 			<sup
 				className={cx(
 					'right-0 ml-[-0.25ch] translate-x-1/4',
