@@ -5,7 +5,7 @@ import { useSharedCustomerState } from '@context/Customer';
 import { customerGlobalActions } from '@context/Customer/actions';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { setCookie, removeCookie } from '@utils/common/storage/cookie/document';
-import { checkoutApi } from '@utils/core/API';
+import { checkoutApi, getBanner } from '@utils/core/API';
 import {
 	useGetUserCheckoutDetailsAndIdAndKey,
 	useGetUserCheckoutIdAndKeyCookie,
@@ -19,13 +19,15 @@ import { getIdFromGid, priceCurrencyFormatter } from '@utils/core/shopify';
 import { cx } from 'class-variance-authority';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { CSSProperties } from 'react';
+import { CSSProperties, Dispatch, SetStateAction } from 'react';
 import { useEffect, useMemo, useState } from 'react';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { HiShoppingBag } from 'react-icons/hi';
 import { commonClasses } from '../..';
 import UserAuthButton from './components/UserAuthButton';
+import { AiFillCloseCircle } from 'react-icons/ai';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 const linkClasses = ({
 	isActive,
@@ -50,7 +52,7 @@ const headerLinks = [
 	// { href: '/contact-us', text: 'contact' }
 ];
 
-const MainHeader = () => {
+const MainHeader = ({setBanner , openBanner}:{setBanner:Dispatch<SetStateAction<boolean>> , openBanner:boolean}) => {
 	const [{ cart }, customerDispatch] = useSharedCustomerState();
 	const { user } = useGetUserDataFromStore();
 	const router = useRouter();
@@ -152,166 +154,217 @@ const MainHeader = () => {
 		userCheckoutDetailsAndIdAndKey
 	]);
 
+	const banner = useQuery(['banner'], () => getBanner(), {
+		onSuccess(data) {
+			return data;
+		},
+		refetchInterval: 3000
+	});
+
+
 	return (
-		<header
-			id='main-header'
-			className={`${commonClasses} bg-primary-1 z-10 fixed top-0 right-0 left-0 w-full flex flex-col`}
-		>
-			<div className='relative w-full px-4 mx-auto sm:px-8'>
+		<>
+			{openBanner && banner.data && !banner.data.disable ? (
 				<div
-					className='relative z-10 flex justify-between gap-2 h-main-nav-h sm:gap-4 text-primary-2 lg:grid'
-					style={{
-						gridTemplateColumns: '12rem 1fr 12rem'
-					}}
+					style={{ background: banner.data.background }}
+					className={`${commonClasses} z-10 fixed ${
+						openBanner ? 'h-14' : 'h-0'
+					}  right-0 left-0 w-full flex items-center justify-center`}
 				>
-					<div
-						className='flex items-center justify-center text-primary-1'
-						style={{ '--sup-t': '0ch' } as CSSProperties}
-					>
-						<Logo
-							onClick={() => setIsSmallScreenNaveOpen(false)}
-							whatKnocks={
-								router.pathname.startsWith('/products/[productId]') ||
-								router.pathname.startsWith('/drums-that-knock')
-									? 'DRUMS THAT'
-									: undefined
-							}
+					<div>
+						<div
+							className='flex flex-col  md:flex-row items-center gap-0 md:gap-3'
+							style={{ color: banner.data.textColor }}
+						>
+							<h4>{banner.data.text}</h4>
+							<div className=''>
+								<Link
+									href={banner.data.bannerUrl || '/'}
+									className='text-bold border rounded-3xl	 px-5'
+								>
+									{banner.data.bannerUrlText}
+								</Link>
+							</div>
+						</div>
+					</div>
+					<div className='hidden absolute sm:block  right-0 p-4'>
+						<AiFillCloseCircle
+							onClick={() => setBanner(false)}
+							style={{ color: banner.data.textColor }}
 						/>
 					</div>
-					<nav className='hidden lg:flex lg:justify-center'>
-						<ul className='flex items-center justify-center gap-10 font-semibold text-center'>
-							{headerLinks.map((link) => (
-								<li key={link.text}>
-									<Link
-										href={link.href}
-										className={linkClasses({
-											isActive: link.href === router.pathname,
-											keepCase: link.keepCase
-										})}
-									>
-										{link.text}
-									</Link>
-								</li>
-							))}
-						</ul>
-					</nav>
-					<ul className='flex items-center justify-end gap-2 sm:gap-4'>
-						<li className='block lg:hidden'>
-							<button
-								onClick={() => setIsSmallScreenNaveOpen((prev) => !prev)}
-								title={`press or click to ${
-									isSmallScreenNaveOpen ? 'hide' : 'show'
-								} the nav menu`}
-								className='flex items-center justify-center'
-							>
-								<GiHamburgerMenu className='text-xl' />
-							</button>
-						</li>
-						<li>
-							{!user?.data ? (
-								<UserAuthButton
-									isOpen={isRegisterDialogOpen}
-									setIsOpen={setIsRegisterDialogOpen}
-								/>
-							) : (
-								<Link
-									// href={`/customers/${getIdFromGid(user.data.id)}`}
-									href='/account/profile'
-									title='profile'
-									className='flex items-center justify-center text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600'
-								>
-									<BsFillPersonFill className='text-xl' />
-								</Link>
-							)}
-						</li>
-						<li>
-							<button
-								title='cart'
-								className='flex items-center justify-center'
-								onClick={() =>
-									customerGlobalActions.setIsVisibleOnly(
-										customerDispatch,
-										'headerCart'
-									)
+				</div>
+			) : (
+				<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+					<Skeleton
+						count={1}
+						height={60}
+						className={` z-10 fixed  h-14 right-0 left-0 w-full flex items-center justify-center`}
+					/>
+				</SkeletonTheme>
+			)}
+			<header
+				id='main-header'
+				className={`${commonClasses} bg-primary-1 z-10 fixed ${
+					openBanner && (banner.data &&!banner.data.disable) ? 'top-14' : 'top-0'
+				} right-0 left-0 w-full flex flex-col`}
+			>
+				<div className='relative w-full px-4 mx-auto sm:px-8'>
+					<div
+						className='relative z-10 flex justify-between gap-2 h-main-nav-h sm:gap-4 text-primary-2 lg:grid'
+						style={{
+							gridTemplateColumns: '12rem 1fr 12rem'
+						}}
+					>
+						<div
+							className='flex items-center justify-center text-primary-1'
+							style={{ '--sup-t': '0ch' } as CSSProperties}
+						>
+							<Logo
+								onClick={() => setIsSmallScreenNaveOpen(false)}
+								whatKnocks={
+									router.pathname.startsWith('/products/[productId]') ||
+									router.pathname.startsWith('/drums-that-knock')
+										? 'DRUMS THAT'
+										: undefined
 								}
-							>
-								<span className='relative'>
-									<HiShoppingBag
-										className={cx(
-											'text-xl',
-											'duration-300 transition-all',
-											cartProductsCount === 0
-												? ''
-												: 'relative -translate-y-[20%] -translate-x-[20%] text-opacity-0'
-										)}
+							/>
+						</div>
+						<nav className='hidden lg:flex lg:justify-center'>
+							<ul className='flex items-center justify-center gap-10 font-semibold text-center'>
+								{headerLinks.map((link) => (
+									<li key={link.text}>
+										<Link
+											href={link.href}
+											className={linkClasses({
+												isActive: link.href === router.pathname,
+												keepCase: link.keepCase
+											})}
+										>
+											{link.text}
+										</Link>
+									</li>
+								))}
+							</ul>
+						</nav>
+						<ul className='flex items-center justify-end gap-2 sm:gap-4'>
+							<li className='block lg:hidden'>
+								<button
+									onClick={() => setIsSmallScreenNaveOpen((prev) => !prev)}
+									title={`press or click to ${
+										isSmallScreenNaveOpen ? 'hide' : 'show'
+									} the nav menu`}
+									className='flex items-center justify-center'
+								>
+									<GiHamburgerMenu className='text-xl' />
+								</button>
+							</li>
+							<li>
+								{!user?.data ? (
+									<UserAuthButton
+										isOpen={isRegisterDialogOpen}
+										setIsOpen={setIsRegisterDialogOpen}
 									/>
-									<span
-										className={cx(
-											'text-sm absolute top-0 text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600  font-black p-2 bg-opacity-70 rounded-full',
-											'duration-300 transition-all',
-											cartProductsCount === 0
-												? ''
-												: 'top-0 left-1/4  -translate-x-[15%]'
-										)}
+								) : (
+									<Link
+										// href={`/customers/${getIdFromGid(user.data.id)}`}
+										href='/account/profile'
+										title='profile'
+										className='flex items-center justify-center text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600'
 									>
-										{cartProductsCount}
-									</span>
-								</span>
-							</button>
-						</li>
-						{user?.data && (
+										<BsFillPersonFill className='text-xl' />
+									</Link>
+								)}
+							</li>
 							<li>
 								<button
 									title='cart'
-									className='flex items-center justify-center disabled:bg-slate-400'
-									onClick={() => logoutUser.mutate()}
-									disabled={logoutUser.isLoading}
+									className='flex items-center justify-center'
+									onClick={() =>
+										customerGlobalActions.setIsVisibleOnly(
+											customerDispatch,
+											'headerCart'
+										)
+									}
 								>
-									logout
+									<span className='relative'>
+										<HiShoppingBag
+											className={cx(
+												'text-xl',
+												'duration-300 transition-all',
+												cartProductsCount === 0
+													? ''
+													: 'relative -translate-y-[20%] -translate-x-[20%] text-opacity-0'
+											)}
+										/>
+										<span
+											className={cx(
+												'text-sm absolute top-0 text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600  font-black p-2 bg-opacity-70 rounded-full',
+												'duration-300 transition-all',
+												cartProductsCount === 0
+													? ''
+													: 'top-0 left-1/4  -translate-x-[15%]'
+											)}
+										>
+											{cartProductsCount}
+										</span>
+									</span>
 								</button>
 							</li>
-						)}
-					</ul>
-				</div>
-				<div
-					aria-hidden={!isSmallScreenNaveOpen}
-					className={`mt-main-nav-h bg-primary-1 block lg:hidden overflow-hidden absolute top-0 right-0 left-0 w-full ${
-						isSmallScreenNaveOpen
-							? // ? 'scale-y-100'
-							  // : 'scale-y-0 opacity-0 pointer-events-none'
-							  'translate-y-0'
-							: '-translate-y-full opacity-0 pointer-events-none select-none' // mt-0
-					}
+							{user?.data && (
+								<li>
+									<button
+										title='cart'
+										className='flex items-center justify-center disabled:bg-slate-400'
+										onClick={() => logoutUser.mutate()}
+										disabled={logoutUser.isLoading}
+									>
+										logout
+									</button>
+								</li>
+							)}
+						</ul>
+					</div>
+					<div
+						aria-hidden={!isSmallScreenNaveOpen}
+						className={`mt-main-nav-h bg-primary-1 block lg:hidden overflow-hidden absolute top-0 right-0 left-0 w-full ${
+							isSmallScreenNaveOpen
+								? // ? 'scale-y-100'
+								  // : 'scale-y-0 opacity-0 pointer-events-none'
+								  'translate-y-0'
+								: '-translate-y-full opacity-0 pointer-events-none select-none' // mt-0
+						}
 				origin-top
 				transition-all duration-300`}
-				>
-					<nav className='flex'>
-						<ul
-							className={cx(
-								'flex flex-col gap-2 font-semibold px-4 sm:px-8 pt-0 pb-4  w-full text-xl',
-								'sm:text-size-inherit sm:gap-4'
-							)}
-						>
-							{headerLinks.map((link) => (
-								<li key={link.text} className='w-full'>
-									<Link
-										href={link.href}
-										className={`${linkClasses({
-											isActive: link.href === router.pathname,
-											keepCase: link.keepCase
-										})} block w-fit`}
-										onClick={() => setIsSmallScreenNaveOpen(false)}
-									>
-										{link.text}
-									</Link>
-								</li>
-							))}
-						</ul>
-					</nav>
+					>
+						<nav className='flex'>
+							<ul
+								className={cx(
+									'flex flex-col gap-2 font-semibold px-4 sm:px-8 pt-0 pb-4  w-full text-xl',
+									'sm:text-size-inherit sm:gap-4'
+								)}
+							>
+								{headerLinks.map((link) => (
+									<li key={link.text} className='w-full'>
+										<Link
+											href={link.href}
+											className={`${linkClasses({
+												isActive: link.href === router.pathname,
+												keepCase: link.keepCase
+											})} block w-fit`}
+											onClick={() => setIsSmallScreenNaveOpen(false)}
+										>
+											{link.text}
+										</Link>
+									</li>
+								))}
+							</ul>
+						</nav>
+					</div>
+					<CartContainer />
 				</div>
-				<CartContainer />
-			</div>
-		</header>
+			</header>
+		</>
 	);
 };
 

@@ -7,6 +7,7 @@ import { IoMdClose } from 'react-icons/io';
 import { Fragment } from 'react';
 import { cva, cx, VariantProps } from 'class-variance-authority';
 import { createPortal } from 'react-dom';
+import { setCookie } from '@utils/common/storage/cookie/document';
 
 interface Props {
 	setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -17,6 +18,7 @@ interface Props {
 	};
 	children: ReactNode;
 	contentVariants?: VariantProps<typeof handlerContentVariants>;
+	isMarketingPopup?: Boolean;
 }
 
 const handlerContentVariants = cva(
@@ -46,12 +48,26 @@ const Dialog = ({
 	setIsOpen,
 	header,
 	children,
-	contentVariants
+	contentVariants,
+	isMarketingPopup
 }: Props) => {
 	if (typeof document === 'undefined') return <></>;
+	let expirationDate = new Date();
+	expirationDate.setDate(expirationDate.getDate() + 2);
 
 	return createPortal(
-		<DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
+		<DialogPrimitive.Root
+			open={isOpen}
+			onOpenChange={() => {
+				setIsOpen(false),
+					isMarketingPopup
+						? setCookie('hide-marketing-popup', 'true', {
+								path: '/',
+								expires: expirationDate
+						  })
+						: '';
+			}}
+		>
 			<Transition.Root show={isOpen}>
 				<Transition.Child
 					as={Fragment}
