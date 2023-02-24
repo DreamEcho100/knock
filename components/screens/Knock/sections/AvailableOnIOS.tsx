@@ -28,7 +28,11 @@ const AvailableOnIOSSection = (props: Props) => {
 								<BsApple /> App Store
 							</>
 						),
-						onClick: () => ''
+						onClick: () =>
+							window.open(
+								'https://apps.apple.com/us/app/knock/id6443654114',
+								'_blank'
+							)
 					}
 				}}
 				imageContainer={{
