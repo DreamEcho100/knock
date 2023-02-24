@@ -6,7 +6,30 @@ import CustomNextImage from '@components/shared/common/CustomNextImage';
 import Button from '@components/shared/core/Button';
 import type { IProduct } from 'types';
 import { useAddProductsToCheckoutAndCart } from '@utils/core/hooks';
-import { cx } from 'class-variance-authority';
+import { cva, cx, VariantProps } from 'class-variance-authority';
+
+const handleBackgroundImgVariants = cva(
+	'pointer-events-none select-none object-contain mx-auto w-full h-full',
+	{
+		variants: {
+			translateY: { small: 'translate-y-[12.5%]' },
+			translateX: { small: 'translate-x-[10%]' },
+			scale: { lg: 'scale-[2.25]', md: 'scale-[1.75]' }
+		},
+		defaultVariants: { translateY: 'small', scale: 'lg' }
+	}
+);
+const handleWrapperVariants = cva('h-full flex max-w-[1280px] items-center', {
+	variants: {
+		flexDir: {
+			'col-lg:row': 'flex-col lg:flex-row',
+			'col-reverse-lg:row': 'flex-col-reverse lg:flex-row',
+			'col-lg:row-reverse': 'flex-col lg:flex-row-reverse',
+			'col-reverse-lg:row-reverse': 'flex-col-reverse lg:flex-row'
+		}
+	},
+	defaultVariants: { flexDir: 'col-lg:row' }
+});
 
 interface IProps {
 	textContainer: {
@@ -16,10 +39,16 @@ interface IProps {
 	};
 	imageContainer: {
 		mainImg: ICustomNextImageProps;
-		backgroundImg?: Partial<ICustomNextImageProps> | false;
+		backgroundImg?:
+			| (Partial<ICustomNextImageProps> & {
+					variants?: VariantProps<typeof handleBackgroundImgVariants>;
+			  })
+			| false;
 		index?: HTMLAttributes<HTMLDivElement>;
 	};
-	wrapper?: HTMLAttributes<HTMLDivElement>;
+	wrapper?: HTMLAttributes<HTMLDivElement> & {
+		variants?: VariantProps<typeof handleWrapperVariants>;
+	};
 	product?: IProduct;
 }
 
@@ -27,19 +56,20 @@ const ProductShowcase = ({
 	product,
 	textContainer: { h2 = {}, p = {}, button = {} },
 	imageContainer: { mainImg, backgroundImg = {}, index: imageContainerIndex },
-	wrapper: { className: wrapperClassName = '', ...wrapper } = {}
+	wrapper = {}
 }: IProps) => {
 	const addProductsToCheckoutAndCart = useAddProductsToCheckoutAndCart();
-
-	const { className: backgroundImgClassName = '', ...backgroundImgProps } =
-		backgroundImg || {};
 
 	return (
 		<div
 			{...wrapper}
-			className={`
-					h-full flex flex-col max-w-[1280px] items-center
-					lg:flex-row ${wrapperClassName}`}
+			// className={`
+			// 		h-full flex flex-col max-w-[1280px] items-center
+			// 		lg:flex-row ${wrapperClassName}`}
+			className={handleWrapperVariants({
+				...(wrapper.variants || {}),
+				className: wrapper.className
+			})}
 		>
 			<div
 				className='w-full h-full flex flex-col items-center justify-center text-center gap-2 md:px-4 pb-4
@@ -53,7 +83,7 @@ const ProductShowcase = ({
 				<p className='md:max-w-[450px]' {...p} />
 
 				<Button
-					className='capitalize mt-3'
+					className='capitalize mt-3 flex gap-1 items-center flex-wrap'
 					onClick={() =>
 						product &&
 						addProductsToCheckoutAndCart.mutate({
@@ -77,8 +107,11 @@ const ProductShowcase = ({
 							src='/images/Rectangle 47.png'
 							width={600}
 							height={600}
-							className={`${backgroundImgClassName} pointer-events-none select-none object-contain mx-auto w-full h-full scale-[2.25] translate-y-[12.5%]`}
-							{...backgroundImgProps}
+							{...backgroundImg}
+							className={handleBackgroundImgVariants({
+								...(backgroundImg.variants || {}),
+								className: backgroundImg.className
+							})} //{`${backgroundImgClassName}`}
 						/>
 					</div>
 				)}

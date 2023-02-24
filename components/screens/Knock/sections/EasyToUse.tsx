@@ -37,7 +37,8 @@ const EasyToUseSection = ({
 					}
 				}}
 				wrapper={{
-					className: 'flex-col-reverse gap-4 lg:justify-center lg:gap-10'
+					className: 'gap-4 lg:justify-center lg:gap-10',
+					variants: { flexDir: 'col-reverse-lg:row' }
 				}}
 			/>
 		</section>

@@ -40,8 +40,8 @@ const ProductShowcaseSection = ({
 					}
 				}}
 				wrapper={{
-					className:
-						'lg:flex-row-reverse flex-col-reverse gap-10 lg:justify-center'
+					className: 'gap-10 lg:justify-center',
+					variants: { flexDir: 'col-reverse-lg:row-reverse' }
 				}}
 			/>
 		</section>

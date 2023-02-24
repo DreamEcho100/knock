@@ -55,7 +55,8 @@ const KnockProductShowcaseSection = ({
 					backgroundImg: { className: 'scale-[3]' }
 				}}
 				wrapper={{
-					className: 'lg:flex-row-reverse flex-col-reverse lg:justify-center'
+					className: 'lg:flex-row-reverse lg:justify-center',
+					variants: { flexDir: 'col-reverse-lg:row' }
 				}}
 			/>
 		</section>

@@ -38,7 +38,7 @@ const faqs: (
 				{
 					title: 'OS/Processor:',
 					items: [
-						'Mac: Intel Core i5, i7, i9, Xeon, Apple M1 - OSX 10.12+ - AU, VST3, AAX',
+						'Mac: Intel Core i5, i7, i9, Xeon, Apple M1 - OSX 11+ - AU, VST3, AAX',
 						'Windows: Intel Core i5, i7, i9, Xeon (all Gen 5 and above), AMD Quad Core - WIN 8.1, 10 - 64 bit  VST3, AAX',
 						'HDD Space requirements: Minimum of 500MB - 8GB RAM required, 16GB recommended'
 					]

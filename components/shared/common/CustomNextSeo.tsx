@@ -22,11 +22,8 @@ const CustomNextSeo = ({
 					let pathname = router.pathname;
 
 					Object.entries(router.query).forEach((item) => {
-						console.log('item', item);
-
 						const key = item[0];
 						const value = item[1];
-						console.log("typeof value === 'string'", typeof value === 'string');
 						if (typeof value === 'string')
 							pathname = pathname.replace(`[${key}]`, value);
 					});

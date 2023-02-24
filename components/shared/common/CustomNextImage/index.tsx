@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { ImageProps } from 'next/dist/client/image.d';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { websiteBasePath } from '@utils/core/next-seo.config';
 
 export interface ICustomNextImageProps extends Omit<ImageProps, 'alt'> {
@@ -28,6 +28,13 @@ const CustomNextImage = ({
 	const [_src, setSrc] = useState(src);
 	const [isLoaded, setIsLoaded] = useState(false);
 
+	useEffect(() => {
+		if (src !== _src) {
+			setSrc(src);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [src]);
+
 	const handleImageProps = () => {
 		const imageProps: Omit<ICustomNextImageProps, 'alt'> & { alt: string } = {
 			onError: () => {
@@ -43,7 +50,6 @@ const CustomNextImage = ({
 					'/svg/bbblurry.svg'
 				);
 			},
-			unoptimized,
 			src:
 				isWeservNlOptimized && typeof _src === 'string'
 					? `//images.weserv.nl/?url=${encodeURIComponent(
@@ -52,6 +58,7 @@ const CustomNextImage = ({
 							isAnimated ? '&n=-1' : ''
 					  }`
 					: _src,
+			unoptimized,
 			placeholder,
 			className: `${className} ${isLoaded ? '' : 'no-content'}`,
 			alt: '',
