@@ -7,6 +7,7 @@ import KnockTrademark from '@components/shared/core/KnockTrademark';
 import { cva } from 'class-variance-authority';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 import { useRouter } from 'next/router';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 export const pClasses = cva('text-primary-2 mt-2 mb-5 leading-6', {
 	variants: {
@@ -107,6 +108,7 @@ const KnockSection = ({
 	textContainerTheme,
 	sectionInnerWrapperTheme,
 	mainImgOrVideoLink,
+	colorText,
 	// mainImgOrVideoProps = {}
 	...props
 }: {
@@ -124,6 +126,7 @@ const KnockSection = ({
 	videoSrc?: string;
 	mainImgOrVideoLink?: string;
 	mainImgOrVideoProps?: Record<string, any>;
+	colorText?:any
 }) => {
 	const router = useRouter();
 
@@ -176,23 +179,19 @@ const KnockSection = ({
 							{...mainImgOrVideoProps}
 						/>
 					) : (
-						<video
-							src={videoSrc}
-							autoPlay
-							muted
-							width={700}
-							height={700}
-							title='knock plugin'
-							loop
-							controls={false}
-							poster='/images/knock poster.png'
-							{...mainImgOrVideoProps}
-						/>
+						<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+							<Skeleton
+								width={500}
+								count={1}
+								height={300}
+								className={'rounded-3xl '}
+							/>
+						</SkeletonTheme>
 					)}
 				</div>
 				<div className={textContainerClasses(textContainerTheme)}>
 					{
-						<h2 className={h2Classes(h2theme)}>
+						<h2 style={{color: `${colorText ? colorText.h2 : ''}`}}  className={h2Classes(h2theme)}>
 							{title || (
 								<>
 									DRUMS THAT&nbsp;
@@ -201,8 +200,19 @@ const KnockSection = ({
 							)}
 						</h2>
 					}
-					<p className={pClasses(pTheme)}>{description}</p>
-					{buttonElem || <Button className='capitalize' {...buttonProps} />}
+					<p style={{color: `${colorText ?  colorText.p :''}`}}  className={pClasses(pTheme)}>{description}</p>
+					{buttonElem ? buttonElem : buttonProps.children ? (
+						<Button className='capitalize' {...buttonProps} />
+					) : (
+						<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+							<Skeleton
+								width={100}
+								count={1}
+								height={20}
+								className={'rounded-3xl '}
+							/>
+						</SkeletonTheme>
+					)}
 				</div>
 			</div>
 		</section>

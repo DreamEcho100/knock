@@ -1,3 +1,4 @@
+import axios from 'axios';
 import type { ICheckout, ICheckoutIdAndKey, ILineItem, IProduct } from 'types';
 
 const throwIfResponseError = async (response: Response) => {
@@ -16,6 +17,45 @@ const throwIfResponseError = async (response: Response) => {
 // 		if (typeof func === 'function') func();
 // 	} catch (error) {}
 // };
+
+export const getBanner = async () => {
+	const response = await axios.get(
+		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-banner`,
+		{
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}
+	);
+
+	return response.data.banner;
+};
+
+export const getMainSection = async () => {
+	const response = await axios.get(
+		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-main-section`,
+		{
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}
+	);
+
+	return response.data.main;
+};
+
+export const getPopup = async () => {
+	const response = await axios.get(
+		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-popup`,
+		{
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}
+	);
+
+	return response.data.popup;
+};
 
 const getAppApiPath = () =>
 	typeof window === 'undefined'

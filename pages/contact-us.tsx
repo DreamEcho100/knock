@@ -15,6 +15,7 @@ const ContactUsPage: NextPage = () => {
 	const [formValues, setFormValues] = useState({
 		fullName: '',
 		email: '',
+		orderNumber:'',
 		subject: `New customer message on ${new Date().toLocaleString('en-UK', {
 			dateStyle: 'long',
 			timeStyle: 'short',
@@ -128,6 +129,17 @@ const ContactUsPage: NextPage = () => {
 							minLength={3}
 							variants={{ border: 'all', rounded: 'md', p: 'sm' }}
 							type='email'
+						/>
+						<FormInput
+							spanTitleProps={{ children: 'Order Number', className: 'capitalize' }}
+							labelContainerProps={{ className: 'w-full gap-2' }}
+							placeholder='Order Number'
+							values={formValues}
+							setValues={setFormValues}
+							name='orderNumber'
+							minLength={3}
+							type='text'
+							variants={{ border: 'all', rounded: 'md', p: 'sm' }}
 						/>
 						<FormInput
 							spanTitleProps={{ children: 'Subject', className: 'capitalize' }}
