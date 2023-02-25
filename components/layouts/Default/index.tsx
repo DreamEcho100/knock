@@ -30,16 +30,15 @@ const DefaultLayout = ({
 	setBanner: Dispatch<SetStateAction<boolean>>;
 	setOpenPop: Dispatch<SetStateAction<boolean>>;
 	openBanner: boolean;
-	openPopUp:boolean;
+	openPopUp: boolean;
 }) => {
-
 	const accessToken = getGetAccessTokenFromCookie();
 
-	const popup = useQuery(["get-popup"], () => getPopup(), {
+	const popup = useQuery(['get-popup'], () => getPopup(), {
 		onSuccess(data) {
-		  return data;
+			return data;
 		},
-		refetchInterval: 10000,
+		refetchInterval: 10000
 	});
 
 	useGetUserData({
@@ -50,7 +49,7 @@ const DefaultLayout = ({
 	return (
 		<>
 			<MainHeader openBanner={openBanner} setBanner={setBanner} />
-			{popup.data ? (
+			{popup.data && !popup.data.disable ? (
 				<MarketingPopup
 					popup={popup.data}
 					open={openPopUp}
