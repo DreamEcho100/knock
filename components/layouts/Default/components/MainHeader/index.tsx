@@ -52,7 +52,13 @@ const headerLinks = [
 	// { href: '/contact-us', text: 'contact' }
 ];
 
-const MainHeader = ({setBanner , openBanner}:{setBanner:Dispatch<SetStateAction<boolean>> , openBanner:boolean}) => {
+const MainHeader = ({
+	setBanner,
+	openBanner
+}: {
+	setBanner: Dispatch<SetStateAction<boolean>>;
+	openBanner: boolean;
+}) => {
 	const [{ cart }, customerDispatch] = useSharedCustomerState();
 	const { user } = useGetUserDataFromStore();
 	const router = useRouter();
@@ -161,7 +167,6 @@ const MainHeader = ({setBanner , openBanner}:{setBanner:Dispatch<SetStateAction<
 		refetchInterval: 3000
 	});
 
-
 	return (
 		<>
 			{openBanner && banner.data && !banner.data.disable ? (
@@ -176,15 +181,19 @@ const MainHeader = ({setBanner , openBanner}:{setBanner:Dispatch<SetStateAction<
 							className='flex flex-col  md:flex-row items-center gap-0 md:gap-3'
 							style={{ color: banner.data.textColor }}
 						>
-							<h4>{banner.data.text}</h4>
-							<div className=''>
-								<Link
-									href={banner.data.bannerUrl || '/'}
-									className='text-bold border rounded-3xl	 px-5'
-								>
-									{banner.data.bannerUrlText}
-								</Link>
-							</div>
+							{banner && banner.data.text ? <h4>{banner.data.text}</h4> : ''}
+							{banner && banner.data.bannerUrlText ? (
+								<div className=''>
+									<Link
+										href={banner.data.bannerUrl || '/'}
+										className='text-bold border rounded-3xl	 px-5'
+									>
+										{banner.data.bannerUrlText}
+									</Link>
+								</div>
+							) : (
+								''
+							)}
 						</div>
 					</div>
 					<div className='hidden absolute sm:block  right-0 p-4'>
@@ -206,7 +215,7 @@ const MainHeader = ({setBanner , openBanner}:{setBanner:Dispatch<SetStateAction<
 			<header
 				id='main-header'
 				className={`${commonClasses} bg-primary-1 z-10 fixed ${
-					openBanner && (banner.data &&!banner.data.disable) ? 'top-14' : 'top-0'
+					openBanner && banner.data && !banner.data.disable ? 'top-14' : 'top-0'
 				} right-0 left-0 w-full flex flex-col`}
 			>
 				<div className='relative w-full px-4 mx-auto sm:px-8'>

@@ -1,43 +1,58 @@
 import ProductShowcase from '@components/shared/core/ProductShowcase';
 import React from 'react';
 import { BsApple } from 'react-icons/bs';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
-type Props = {};
-
-const AvailableOnIOSSection = (props: Props) => {
+const AvailableOnIOSSection = ({ data }: { data: any }) => {
 	return (
 		<section className='bg-primary-1 text-primary-2 section-p-v1'>
 			<ProductShowcase
 				// product={knockPlugin}
 				textContainer={{
 					h2: {
-						children: 'AVAILABLE ON IOS'
+						children: data ? (
+							data.h2
+						) : (
+							<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+								<Skeleton
+									width={350}
+									count={1}
+									height={30}
+									className={'rounded-3xl '}
+								/>
+							</SkeletonTheme>
+						)
 					},
 					p: {
-						children: (
-							<>
-								KNOCK is now available for both iPad and iPhone on the Apple
-								Store. Use KNOCK in your favorite mobile DAW that supports AUv3
-								plugins.
-							</>
+						children: data ? (
+							<>{data.p}</>
+						) : (
+							<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+								<Skeleton
+									width={300}
+									count={1}
+									height={100}
+									className={'rounded-3xl '}
+								/>
+							</SkeletonTheme>
 						)
 					},
 					button: {
-						children: (
+						children: data ? (
 							<>
-								<BsApple /> App Store
+								<BsApple /> {data.button}
 							</>
+						) : (
+							false
 						),
-						onClick: () =>
-							window.open(
-								'https://apps.apple.com/us/app/knock/id6443654114',
-								'_blank'
-							)
+						onClick: () => window.open(data.buttonUrl || '/', '_blank')
 					}
 				}}
 				imageContainer={{
 					mainImg: {
-						src: '/images/7f06f68fcc36f36e4fc8dee2d1991a8ad6be59e0.png',
+						src: data
+							? process.env.NEXT_PUBLIC_KNOCK_URL_API + data.imageUrl
+							: false,
 						alt: '',
 						className: 'scale-[1.4]'
 					},

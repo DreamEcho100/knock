@@ -4,6 +4,7 @@ import { priceCurrencyFormatter } from '@utils/core/shopify';
 import Button from './Button';
 import { useMemo } from 'react';
 import { cx } from 'class-variance-authority';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 const AddItemOnHeroSectionButton = ({
 	product,
@@ -46,21 +47,32 @@ const AddItemOnHeroSectionButton = ({
 
 	return (
 		<div className='flex flex-col gap-[0.35rem] items-center justify-center relative'>
-			<div className='flex flex-wrap gap-[0.35rem] text-[95%]'>
-				{prices.compareToPrice && (
-					<del className='line-through font-normal'>
-						{prices.compareToPrice}
-					</del>
-				)}
-				<span
-					className={cx(
-						prices.compareToPrice ? 'text-bg-secondary-2' : '',
-						'font-semibold'
+			{buttonProps.children ? (
+				<div className='flex flex-wrap gap-[0.35rem] text-[95%]'>
+					{prices.compareToPrice && (
+						<del className='line-through font-normal'>
+							{prices.compareToPrice}
+						</del>
 					)}
-				>
-					{prices.price}
-				</span>
-			</div>
+					<span
+						className={cx(
+							prices.compareToPrice ? 'text-bg-secondary-2' : '',
+							'font-semibold'
+						)}
+					>
+						{prices.price}
+					</span>
+				</div>
+			) : (
+				<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+					<Skeleton
+						width={50}
+						count={1}
+						height={20}
+						className={'rounded-3xl '}
+					/>
+				</SkeletonTheme>
+			)}
 			{!hideButton && <Button {...buttonProps} />}
 		</div>
 	);

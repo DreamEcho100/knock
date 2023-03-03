@@ -1,37 +1,60 @@
 import ProductShowcase from '@components/shared/core/ProductShowcase';
 import { IKnockPluginPageProps } from '@pages/knock';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 const EasyToUseSection = ({
-	knockPlugin
+	knockPlugin,
+	data
 }: {
 	knockPlugin: IKnockPluginPageProps['knockPlugin'];
+	data: any;
 }) => {
+
+
 	return (
 		<section className='bg-primary-1 text-primary-2 section-p-v1'>
 			<ProductShowcase
 				product={knockPlugin}
 				textContainer={{
 					h2: {
-						children: 'EASY TO USE'
+						children: data ? (
+							data.h2
+						) : (
+							<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+								<Skeleton
+									width={350}
+									count={1}
+									height={20}
+									className={'rounded-3xl '}
+								/>
+							</SkeletonTheme>
+						)
 					},
 					p: {
 						children: (
 							<>
-								KNOCK is optimized for extreme ease of use for beginners and
-								professionals alike. Use KNOCK to make your drums slap, and take
-								you to the next level. Whether you are new to producing, or a
-								seasoned pro, KNOCK will seamlessly fit into your workflow.
-								It&apos;s lightweight on your CPU too - use it
-								<br />
-								on a bunch of tracks!
+								{data ? (
+									data.p
+								) : (
+									<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+										<Skeleton
+											width={300}
+											count={1}
+											height={20}
+											className={'rounded-3xl '}
+										/>
+									</SkeletonTheme>
+								)}
 							</>
 						)
 					},
-					button: { children: 'Add To Cart' }
+					button: { children: data ? data.button : '' }
 				}}
 				imageContainer={{
 					mainImg: {
-						src: '/images/laptop final 1.png',
+						src: data
+							? process.env.NEXT_PUBLIC_KNOCK_URL_API + data.imageUrl
+							: false,
 						alt: '',
 						className: 'lg:px-[10%]'
 					}
