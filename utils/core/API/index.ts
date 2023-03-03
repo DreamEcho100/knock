@@ -44,6 +44,97 @@ export const getMainSection = async () => {
 	return response.data.main;
 };
 
+export const getHomePageData = async () => {
+	const response = await axios.get(
+		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-homepage`,
+		{
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}
+	);
+
+	return response.data;
+};
+
+export const getKnockPageData = async () => {
+	const response = await axios.get(
+		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-knockpage`,
+		{
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}
+	);
+
+	return response.data;
+};
+
+export const getDTKPageData = async () => {
+	const response = await axios.get(
+		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-DTK`,
+		{
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}
+	);
+
+	return response.data;
+};
+
+export const getFaqPageData = async () => {
+	const response = await axios.get(
+		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-FAQ`,
+		{
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}
+	);
+
+	return response.data;
+};
+
+export const getKnockClipperPageData = async () => {
+	const response = await axios.get(
+		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-knockclipperpage`,
+		{
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}
+	);
+
+	return response.data;
+};
+
+export const getKnockMainSection = async () => {
+	const response = await axios.get(
+		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-knock-main-section`,
+		{
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}
+	);
+
+	return response.data;
+};
+
+export const getKnockClipperMainSection = async () => {
+	const response = await axios.get(
+		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-knock-clipper-main-section`,
+		{
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}
+	);
+
+	return response.data;
+};
+
 export const getPopup = async () => {
 	const response = await axios.get(
 		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-popup`,

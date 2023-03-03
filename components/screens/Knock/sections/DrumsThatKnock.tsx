@@ -2,27 +2,51 @@ import type { IKnockPluginPageProps } from '@pages/knock';
 
 import KnockSection from '@components/shared/core/KnockSection';
 import AddItemOnHeroSectionButton from '@components/shared/core/AddItemOnHeroSectionButton';
+import KnockTrademark from '@components/shared/core/KnockTrademark';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 const DrumsThatKnockSection = ({
-	knockPlugin
+	knockPlugin,
+	data
 }: {
 	knockPlugin: IKnockPluginPageProps['knockPlugin'];
+	data: any;
 }) => {
+
 	return (
 		<KnockSection
 			buttonElem={
 				<AddItemOnHeroSectionButton
 					product={knockPlugin}
-					buttonProps={{ children: 'Add To Cart' }}
+					buttonProps={{ children: data ? data.button : false }}
 				/>
 			}
-			imageSrc='/images/29f8b3dde3b1d7e7a476bf19c95536f1.png'
-			description="This plugin includes every feature DECAP used in order to craft his signature sound heard in DRUMS THAT KNOCK, and has been optimized for the highest quality sound possible. Every feature has been fine tuned to perfection to DECAP's production standards. KNOCK also comes bundled with factory presets crafted by DECAP."
+			imageSrc={
+				data ? process.env.NEXT_PUBLIC_KNOCK_URL_API + data.imageUrl : false
+			}
+			description={data ? data.p : ''}
 			// sectionTheme={{ p: 'section-p-x-v1' }}
 			textContainerTheme={{ 'sm:gap': 6 }}
 			pTheme={{ width: 'medium-2' }}
 			h2theme={{ 'text-size': 'md' }}
 			imagesContainerTheme={{ pb: 'none' }}
+			title={
+				data ? (
+					<>
+						{data.h2}&nbsp;
+						<KnockTrademark tradeMark={data.tradeMark} />
+					</>
+				) : (
+					<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+						<Skeleton
+							width={200}
+							count={1}
+							height={30}
+							className={'rounded-3xl mt-5 '}
+						/>
+					</SkeletonTheme>
+				)
+			}
 		/>
 	);
 };

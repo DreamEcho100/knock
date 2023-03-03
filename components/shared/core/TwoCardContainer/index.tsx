@@ -1,7 +1,8 @@
 import type { ICustomNextImageProps } from '@components/shared/common/CustomNextImage';
 
 import CustomNextImage from '@components/shared/common/CustomNextImage';
-import type { HTMLAttributes } from 'react';
+import { HTMLAttributes, useEffect } from 'react';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 const TwoCardContainer = ({
 	items1,
@@ -10,16 +11,26 @@ const TwoCardContainer = ({
 	items2HeaderText,
 	items1ListProps = {},
 	items2ListProps = {},
-	backgroundImg = {}
+	backgroundImg = {},
+	data
 }: {
-	items1: string[];
-	items2: string[];
+	items1: {
+		id: number;
+		li: string;
+	}[];
+	items2: {
+		id: number;
+		li: string;
+	}[];
 	items1HeaderText?: string;
 	items2HeaderText?: string;
 	items1ListProps?: HTMLAttributes<HTMLUListElement>;
 	items2ListProps?: HTMLAttributes<HTMLUListElement>;
 	backgroundImg?: Partial<ICustomNextImageProps> | false;
+	data: any;
 }) => {
+	const array = [1, 2, 3, 4];
+
 	return (
 		<div
 			className='relative
@@ -37,9 +48,22 @@ const TwoCardContainer = ({
 			<div className='relative max-w-lg flex flex-col gap-5 bg-primary-4 px-10 py-8 rounded-3xl w-full lg:w-1/2 lg:max-w-[420px]'>
 				{items1HeaderText && (
 					<header>
-						<h3 className='text-2xl font-semibold capitalize'>
-							{items1HeaderText}
-						</h3>
+						{data ? (
+							<h3 className='text-2xl font-semibold capitalize'>
+								{items1HeaderText}
+							</h3>
+						) : (
+							<div className='w-[100%] h-[30px]  md:w-[40%] '>
+								<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+									<Skeleton
+										width={'100%'}
+										count={1}
+										height={'100%'}
+										className={'rounded-3xl '}
+									/>
+								</SkeletonTheme>
+							</div>
+						)}
 					</header>
 				)}
 				<ul
@@ -53,17 +77,45 @@ const TwoCardContainer = ({
 						...(items1ListProps.style || {})
 					}}
 				>
-					{items1.map((item) => (
-						<li key={item}>{item}</li>
-					))}
+					{items1.length
+						? items1.map((item: any) => (
+								<>
+									<li key={item.id}>{item.li}</li>
+								</>
+						  ))
+						: array.map((el: any) => (
+								<div key={el} className='w-[100%] h-[40px]  md:w-[100%] '>
+									<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+										<Skeleton
+											width={'100%'}
+											count={1}
+											height={'100%'}
+											className={'rounded-3xl  '}
+										/>
+									</SkeletonTheme>
+								</div>
+						  ))}
 				</ul>
 			</div>
 			<div className='relative max-w-lg flex flex-col gap-5 bg-primary-4 px-12 py-8 rounded-3xl w-full lg:w-1/2 lg:max-w-[420px]'>
 				{items2HeaderText && (
 					<header>
-						<h3 className='text-2xl font-semibold capitalize'>
-							{items2HeaderText}
-						</h3>
+						{data ? (
+							<h3 className='text-2xl font-semibold capitalize'>
+								{items2HeaderText}
+							</h3>
+						) : (
+							<div className='w-[100%] h-[30px]  md:w-[40%] '>
+								<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+									<Skeleton
+										width={'100%'}
+										count={1}
+										height={'100%'}
+										className={'rounded-3xl  '}
+									/>
+								</SkeletonTheme>
+							</div>
+						)}
 					</header>
 				)}
 				<ul
@@ -77,9 +129,24 @@ const TwoCardContainer = ({
 						...(items2ListProps.style || {})
 					}}
 				>
-					{items2.map((item) => (
-						<li key={item}>{item}</li>
-					))}
+					{items2.length
+						? items2.map((item) => (
+								<>
+									<li key={item.id}>{item.li}</li>
+								</>
+						  ))
+						: array.map((el: any) => (
+								<div key={el} className='w-[100%] h-[40px]  md:w-[100%] '>
+									<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+										<Skeleton
+											width={'100%'}
+											count={1}
+											height={'100%'}
+											className={'rounded-3xl  '}
+										/>
+									</SkeletonTheme>
+								</div>
+						  ))}
 				</ul>
 			</div>
 		</div>

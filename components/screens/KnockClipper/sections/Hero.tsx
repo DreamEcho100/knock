@@ -4,11 +4,24 @@ import type { IKnockClipperPageProps } from '@pages/knock-clipper';
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 import AddItemOnHeroSectionButton from '@components/shared/core/AddItemOnHeroSectionButton';
 import { type CSSProperties } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { getKnockClipperMainSection } from '@utils/core/API';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 const HeroSection = ({
 	knockClipperPlugin
 }: {
 	knockClipperPlugin: IKnockClipperPageProps['knockClipperPlugin'];
 }) => {
+	const { data } = useQuery(
+		['knockClipperMainSection'],
+		() => getKnockClipperMainSection(),
+		{
+			onSuccess(data) {
+				return data;
+			}
+		}
+	);
+	
 	return (
 		<section
 			className='bg-primary-1 section-p-v1 section-h-v1'
@@ -32,26 +45,61 @@ const HeroSection = ({
 						style={{ transform: 'translate(18%, 2%) scale(2.4, 2)' }}
 					/>
 
-					<CustomNextImage
-						src='/images/abc59a63fe5ed68da58bff746fd14cce.png'
-						width={400}
-						height={400}
-						priority
-						unoptimized
-						className='object-cover relative'
-						style={{ aspectRatio: '16 / 16' }}
-					/>
+					{data && data.main ? (
+						<CustomNextImage
+							src={process.env.NEXT_PUBLIC_KNOCK_URL_API + data.main.mainImageUrl}
+							width={400}
+							height={400}
+							priority
+							unoptimized
+							className='object-cover relative'
+							style={{ aspectRatio: '16 / 16' }}
+						/>
+					) : (
+						<div className='w-[300px] h-[200px] md:w-[500px] h-[300px]'>
+							<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+								<Skeleton
+									width={'100%'}
+									count={1}
+									height={'100%'}
+									className={'rounded-3xl '}
+								/>
+							</SkeletonTheme>
+						</div>
+					)}
 				</div>
-				<h2 className='text-h3 font-semibold text-primary-1 mt-4 mb-3 flex flex-wrap justify-center uppercase'>
-					<KnockTrademark />
-					Clipper
-				</h2>
-				<p className='text-primary-2 mt-2 mb-5 leading-6 max-w-[350px] sm:text-[1.3rem]'>
-					Adjustable hard & soft clipper module from KNOCK.
-				</p>
+				{data && data.main ? (
+					<h2 className='text-h3 font-semibold text-primary-1 mt-4 mb-3 flex flex-wrap justify-center uppercase'>
+						<KnockTrademark tradeMark={data.main.tradeMark} />
+						{data.main.h2}
+					</h2>
+				) : (
+					<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+						<Skeleton
+							width={250}
+							count={1}
+							height={25}
+							className={'rounded-3xl  '}
+						/>
+					</SkeletonTheme>
+				)}
+				{data && data.main ? (
+					<p className='text-primary-2 mt-2 mb-5 leading-6 max-w-[350px] sm:text-[1.3rem]'>
+						{data.main.p}
+					</p>
+				) : (
+					<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+						<Skeleton
+							width={150}
+							count={1}
+							height={20}
+							className={'rounded-3xl mt-2 '}
+						/>
+					</SkeletonTheme>
+				)}
 				<AddItemOnHeroSectionButton
 					product={knockClipperPlugin}
-					buttonProps={{ children: 'Add To Cart' }}
+					buttonProps={{ children: data ? data.main.buttonText : false }}
 				/>
 			</div>
 		</section>

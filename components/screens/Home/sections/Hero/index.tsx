@@ -30,7 +30,7 @@ const HeroSection = () => {
 			}
 			title={
 				data ? (
-					<KnockTrademark h2={data.h2} />
+					<KnockTrademark tradeMark={data.h2} />
 				) : (
 					<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
 						<Skeleton

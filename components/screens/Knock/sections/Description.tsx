@@ -1,15 +1,25 @@
 import Description from '@components/shared/core/Description';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
-const DescriptionSection = () => {
+const DescriptionSection = ({ data }: { data: any }) => {
 	return (
 		<section className='bg-primary-2 section-p-v1'>
-			<Description variants={{ 'max-w': 'none' }} className='max-w-[600px]'>
-				KNOCK is the last plugin you will ever need to make your drums slap and
-				punch through your mix. This plugin was meticulously crafted by platinum
-				producer & award winning sound designer, DECAP. It is inspired by the
-				signature sound of his popular drum kit series DRUMS THAT KNOCK, which
-				has helped shaped the sonics of modern music.
-			</Description>
+			{data ? (
+				<Description variants={{ 'max-w': 'none' }} className='max-w-[600px]'>
+					{data.p}
+				</Description>
+			) : (
+				<div className='flex items-center justify-center'>
+					<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+						<Skeleton
+							width={500}
+							count={1}
+							height={300}
+							className={'rounded-3xl '}
+						/>
+					</SkeletonTheme>
+				</div>
+			)}
 		</section>
 	);
 };
