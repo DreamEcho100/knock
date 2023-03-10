@@ -101,7 +101,10 @@ const Reviews = ({
 										<div className='flex justify-center gap-2'>
 											<CustomNextImage
 												src={
-													process.env.NEXT_PUBLIC_KNOCK_URL_API + item.imageUrl
+													item.imageUrl
+														? process.env.NEXT_PUBLIC_KNOCK_URL_API +
+														  item.imageUrl
+														: '/images/icon1.png'
 												}
 												width={250}
 												height={250}

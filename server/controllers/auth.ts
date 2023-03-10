@@ -36,7 +36,7 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 	`;
 
 	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2023-01/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -99,7 +99,7 @@ const activate = async (req: NextApiRequest, res: NextApiResponse) => {
 	`;
 
 	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2023-01/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -139,7 +139,7 @@ const checkToken = async (
 	//const {checkoutId , checkoutKey} = req.params
 	if (accessToken) {
 		const { data } = await axios.post(
-			`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
+			`https://${process.env.DOMAINE}/api/2023-01/graphql.json`,
 			{
 				query: `
           query {
@@ -306,7 +306,7 @@ const logout = async (req: NextApiRequest, res: NextApiResponse) => {
 	`;
 
 	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2023-01/graphql.json`,
 		{
 			query: print(deletedAccessToken),
 			variables: {
@@ -373,7 +373,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
 	`;
 
 	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2023-01/graphql.json`,
 		{
 			query: print(createCustomer),
 			variables: {
