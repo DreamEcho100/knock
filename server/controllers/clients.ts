@@ -31,7 +31,7 @@ const deleteAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2023-01/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -118,7 +118,7 @@ const addAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2023-01/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -190,7 +190,7 @@ const defaultAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 	`;
 
 	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2023-01/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -261,7 +261,7 @@ const editAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 	`;
 
 	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2023-01/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -326,7 +326,7 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2023-01/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -394,7 +394,7 @@ const resetPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2023-01/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -495,7 +495,7 @@ const updateOneController = async (
 	`;
 
 	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2023-01/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -554,7 +554,7 @@ const getAllOrdersForOneClientByIdController = async (
 
 	if (accessToken) {
 		const { data } = await axios.post(
-			`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
+			`https://${process.env.DOMAINE}/api/2023-01/graphql.json`,
 			{
 				query: `
           query {
@@ -673,7 +673,7 @@ const getOneOrderForOneClientByIdController = async (
 	const { select, orderKey } = req.query;
 
 	const { data } = await axios.post(
-		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2023-01/graphql.json`,
 		{
 			query: `
             query {
@@ -974,7 +974,7 @@ const supportForm = async (
 
 			to: [
 				{
-					email: process.env.NEXT_PUPLIC_FORMSUBMIT_EMAIL,
+					email: process.env.NEXT_PUPLIC_FORMSUBMIT_EMAIL
 				}
 			]
 		}
@@ -1090,7 +1090,6 @@ const createOrderRedeemCode = async (
 			}
 		}
 	);
-
 
 	return res.status(200).json({
 		success: true,

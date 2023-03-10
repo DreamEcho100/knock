@@ -28,7 +28,7 @@ const KnockProductShowcaseSection = ({
 										{item.toLowerCase() === 'knock' ? <KnockTrademark /> : item}
 									</span>
 								))} */}
-										<KnockTrademark tradeMark={data.button} />
+										<KnockTrademark tradeMark={data.tradeMark} />
 									</Link>
 								) : (
 									<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
@@ -75,7 +75,7 @@ const KnockProductShowcaseSection = ({
 						alt:
 							(knockPlugin.images[0] && knockPlugin.images[0]?.altText) || '',
 						className: 'lg:px-[5%] cursor-pointer',
-						onClick: () => router.push('/knock-clipper')
+						onClick: () => router.push(data.buttonUrl || '/')
 					},
 					index: {
 						className: 'lg:w-[50%]' // scale-[1.5]'

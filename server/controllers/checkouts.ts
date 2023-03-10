@@ -166,7 +166,7 @@ export const associateClientToCheckout = async (
 	`;
 
 	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2023-01/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -234,7 +234,7 @@ export const disassociateClientToCheckout = async (
 	`;
 
 	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2022-10/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2023-01/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
