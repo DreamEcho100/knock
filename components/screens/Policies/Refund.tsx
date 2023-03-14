@@ -18,7 +18,7 @@ const RefundPolicyScreen = () => {
 				h1Children: 'refund policy'
 			}}
 			head={{
-				title: `Refund Policy | `,
+				title: `Refund Policy | ${defaultSiteName3}`,
 				description: 'Refund Policy'
 			}}
 		>

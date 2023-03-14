@@ -15,7 +15,9 @@ const ShippingPolicyScreen = () => {
 	return (
 		<Wrapper
 			head={{
-				title: 'Shipping Policy'
+				title: `Shipping Policy | ${defaultSiteName3}`,
+				description:
+					'This Shipping Policy describes is for the Digital Products and the Physical Products'
 			}}
 			header={{
 				h1Children: 'Shipping Policy'
