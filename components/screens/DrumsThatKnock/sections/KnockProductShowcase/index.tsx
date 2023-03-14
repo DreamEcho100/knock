@@ -28,7 +28,7 @@ const KnockProductShowcaseSection = ({
 										{item.toLowerCase() === 'knock' ? <KnockTrademark /> : item}
 									</span>
 								))} */}
-										{<h2>{data.h2}&nbsp; </h2> || ""}
+										{data.h2 ? <h2>{data.h2}&nbsp; </h2> : '' || ""}
 										<KnockTrademark tradeMark={data.tradeMark} />
 									</Link>
 								) : (

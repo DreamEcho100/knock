@@ -156,8 +156,9 @@ const HeroSection = ({ product }: { product: any }) => {
 													backgroundPosition: 'center',
 													backgroundSize: 'cover'
 												}}
+												onClick={() => setIsYoutubeVideo(el.id)}
 											>
-												<button onClick={() => setIsYoutubeVideo(el.id)}>
+												<button >
 													<FaPlay />
 												</button>
 											</div>
