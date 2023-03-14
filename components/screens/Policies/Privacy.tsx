@@ -86,7 +86,6 @@ const PrivatePoliciesScreen = () => {
 					{data.collecting[0].li.map((el: any) => (
 						<li key={el.id}>
 							<strong>{el.strong}</strong>
-							<span>&nbsp;</span>
 							{el.text}
 						</li>
 					))}
