@@ -70,6 +70,58 @@ export const getKnockPageData = async () => {
 	return response.data;
 };
 
+export const getPrivacyPolicy = async () => {
+	const response = await axios.get(
+		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-privacy-policy`,
+		{
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}
+	);
+
+	return response.data.PrivacyPolicy;
+};
+
+export const getRefundPolicy = async () => {
+	const response = await axios.get(
+		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-refund-policy`,
+		{
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}
+	);
+
+	return response.data.RefundPolicy;
+};
+
+export const getShippingPolicy = async () => {
+	const response = await axios.get(
+		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-shipping-policy`,
+		{
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}
+	);
+
+	return response.data.ShippingPolicy[0];
+};
+
+export const getTermsOfService = async () => {
+	const response = await axios.get(
+		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-terms-of-service`,
+		{
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}
+	);
+
+	return response.data.termsOfService;
+};
+
 export const getDTKPageData = async () => {
 	const response = await axios.get(
 		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-DTK`,
