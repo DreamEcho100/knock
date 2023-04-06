@@ -8,10 +8,10 @@ import classes from '@styles/productsPages.module.scss';
 import ProductDetails from '@components/screens/ProductById/sections/ProductDetails';
 import Link from 'next/link';
 import { FaPlay } from 'react-icons/fa';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 
-const HeroSection = ({ product }: IProductByIdPageProps) => {
-	const [isYoutubeVideo, setIsYoutubeVideo] = useState(10);
+const HeroSection = ({ product }: { product: any }) => {
+	const [isYoutubeVideo, setIsYoutubeVideo] = useState(null);
 
 	const renderFeature = () => {
 		switch (product.handle) {
@@ -20,19 +20,22 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 				return (
 					<div>
 						<div className='px-8'>
-							{(product.description as unknown as any[]).map(
-								(el: any, index: any) => (
-									<p key={index}> {el} </p>
-								)
-							)}
+							{(product.description as unknown as any[]).map((el: any) => (
+								<Fragment key={el.id}>
+									<p key={el.id}> {el.h3} </p>
+									{el.text.map((el: string, index: any) => (
+										<p key={index}> {el} </p>
+									))}
+								</Fragment>
+							))}
 						</div>
 						<div className={classes.productPageFeaturesWithOneBox}>
 							<div className={classes.overLayFeatures}></div>
 							<div>
-								{product.filesIncluded.details.length ? (
+								{product.filesIncluded.length ? (
 									<ul className={classes.productPageDetailsUl}>
-										{product.filesIncluded.details.map((el, index) => (
-											<li key={index}>{el}</li>
+										{product.filesIncluded.map((el: any) => (
+											<li key={el.id}>{el.li}</li>
 										))}
 									</ul>
 								) : (
@@ -52,8 +55,8 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 							<div>
 								{product.features.length ? (
 									<ul className={classes.productPageDetailsUl}>
-										{product.features.map((el, index) => (
-											<li key={index}>{el}</li>
+										{product.features.map((el: any) => (
+											<li key={el.id}>{el.li}</li>
 										))}
 									</ul>
 								) : (
@@ -64,54 +67,31 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 					</div>
 				);
 
-			case 'drums-that-knock-vol-1':
-			case 'drums-that-knock-vol-2':
-			case 'drums-that-knock-vol-3':
-			case 'drums-that-knock-vol-4':
-				return (
-					<div className={classes.productPageFeaturesSmallBox}>
-						<div className={classes.overLayFeaturesSection}></div>
-						<div>
-							{product.features.length ? (
-								<ul className={classes.productPageFeaturesBox}>
-									{product.features.map((el: any, index: any) => (
-										<li key={index}>{el}</li>
-									))}
-								</ul>
-							) : (
-								''
-							)}
-							{product.filesIncluded.details.length ? (
-								<ul className={classes.productPageFeaturesBox}>
-									{product.filesIncluded.details.map((el, index) => (
-										<li key={index}>{el}</li>
-									))}
-								</ul>
-							) : (
-								''
-							)}
-						</div>
-					</div>
-				);
-
+			case 'drums-that-knock-vol-8':
+			case 'drums-that-knock-vol-9':
+			case 'drums-that-knock-vol-7':
 			case 'drums-that-knock-x':
 				return (
-					<div className={classes.productPageFeaturesBigBox}>
+					<div className={classes.productPageFeatures}>
 						<div className={classes.overLayFeaturesSection}></div>
 						<div>
 							{product.features.length ? (
-								<ul className={classes.productPageFeaturesBox}>
-									{product.features.map((el: any, index: any) => (
-										<li key={index}>{el}</li>
+								<ul>
+									{product.features.map((el: any) => (
+										<div key={el.id} className='flex flex-col'>
+											<li>{el.li}</li>
+										</div>
 									))}
 								</ul>
 							) : (
 								''
 							)}
-							{product.filesIncluded.details.length ? (
-								<ul className={classes.productPageFeaturesBox}>
-									{product.filesIncluded.details.map((el, index) => (
-										<li key={index}>{el}</li>
+							{product.filesIncluded.length ? (
+								<ul className={classes.ul}>
+									{product.filesIncluded.map((el: any) => (
+										<div key={el.id}>
+											<li>{el.li}</li>
+										</div>
 									))}
 								</ul>
 							) : (
@@ -128,17 +108,17 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 						<div>
 							{product.features.length ? (
 								<ul>
-									{product.features.map((el: any, index: any) => (
-										<li key={index}>{el}</li>
+									{product.features.map((el: any) => (
+										<li key={el.id}>{el.li}</li>
 									))}
 								</ul>
 							) : (
 								''
 							)}
-							{product.filesIncluded.details.length ? (
+							{product.filesIncluded.length ? (
 								<ul>
-									{product.filesIncluded.details.map((el, index) => (
-										<li key={index}>{el}</li>
+									{product.filesIncluded.map((el: any) => (
+										<li key={el.id}>{el.li}</li>
 									))}
 								</ul>
 							) : (
@@ -156,59 +136,45 @@ const HeroSection = ({ product }: IProductByIdPageProps) => {
 				<ProductDetails product={product} />
 
 				{renderFeature()}
-				{product.video ? (
+				{product.youtubeVideo.length ? (
 					<div className={classes.productPageYoutubeSections}>
-						{product.video.title ? <h4>{product.video.title}</h4> : ''}
+						{product.youtubeVideo[0].title ? (
+							<h4>{product.youtubeVideo[0].title}</h4>
+						) : (
+							''
+						)}
 						<div>
 							<div className={classes.overLayYoutubeSection}></div>
-							<div className={classes.youtubeVideo}>
-								{isYoutubeVideo !== 1 ? (
-									<div
-										onClick={() => setIsYoutubeVideo(1)}
-										style={{
-											backgroundImage: `url(${product.video.srcDoc1})`,
-											backgroundPosition: 'center',
-											backgroundSize: 'cover'
-										}}
-									>
-										<button>
-											<FaPlay />
-										</button>
-									</div>
-								) : (
-									<iframe src={product.video.src} allow={'autoplay'} />
-								)}
-							</div>
-							{product.video.srcTwo ? (
-								<div className={classes.youtubeVideo}>
-									{isYoutubeVideo !== 2 ? (
-										<div
-											onClick={() => setIsYoutubeVideo(2)}
-											style={{
-												backgroundImage: `url(${product.video.srcDoc2})`,
-												backgroundPosition: 'center',
-												backgroundSize: 'cover'
-											}}
-										>
-											<button>
-												<FaPlay />
-											</button>
-										</div>
+							{product.youtubeVideo.map((el: any) => (
+								<div key={el.id} className={classes.youtubeVideo}>
+									{isYoutubeVideo !== el.id ? (
+										<>
+											<div
+												className='flex flex-col'
+												style={{
+													backgroundImage: `url(${el.srcImage})`,
+													backgroundPosition: 'center',
+													backgroundSize: 'cover'
+												}}
+												onClick={() => setIsYoutubeVideo(el.id)}
+											>
+												<button >
+													<FaPlay />
+												</button>
+											</div>
+										</>
 									) : (
-										<iframe src={product.video.srcTwo} allow={'autoplay'} />
+										<iframe src={el.src + '?autoplay=1'} allow={'autoplay'} />
 									)}
 								</div>
-							) : (
-								''
-							)}
+							))}
 						</div>
 					</div>
 				) : (
 					''
 				)}
 				<Button className={classes.GoBackLink} href={'/drums-that-knock'}>
-					{' '}
-					GO BACK{' '}
+					GO BACK
 				</Button>
 			</div>
 		</section>

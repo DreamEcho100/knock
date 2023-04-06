@@ -3,11 +3,14 @@ import ProductShowcase from '@components/shared/core/ProductShowcase';
 import { IDrumsThatKnockPageProps } from '@pages/drums-that-knock';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 const KnockProductShowcaseSection = ({
-	knockPlugin
+	knockPlugin,
+	data
 }: {
 	knockPlugin: IDrumsThatKnockPageProps['knockPlugin'];
+	data: any;
 }) => {
 	const router = useRouter();
 	return (
@@ -17,37 +20,63 @@ const KnockProductShowcaseSection = ({
 				textContainer={{
 					h2: {
 						children: (
-							<Link href='/knock' className='flex flex-wrap'>
-								{/* {knockPlugin.title.split(' ').map((item, index) => (
+							<>
+								{data ? (
+									<Link href={data.buttonUrl} className='flex flex-wrap'>
+										{/* {knockPlugin.title.split(' ').map((item, index) => (
 									<span key={index}>
 										{item.toLowerCase() === 'knock' ? <KnockTrademark /> : item}
 									</span>
 								))} */}
-								<KnockTrademark />
-							</Link>
+										{data.h2 ? <h2>{data.h2}&nbsp; </h2> : '' || ""}
+										<KnockTrademark tradeMark={data.tradeMark} />
+									</Link>
+								) : (
+									<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+										<Skeleton
+											width={250}
+											count={1}
+											height={20}
+											className={'rounded-3xl mt-5 '}
+										/>
+									</SkeletonTheme>
+								)}
+							</>
 						)
 					},
 					p: {
-						children:
-							'This is the last plugin you will ever need to make your drums KNOCK and punch through your mix. This plugin was meticulously crafted by DECAP. It is inspired by the signature sound of Drums That Knock, which has helped shaped the sonics of modern music.',
+						children: data ? (
+							data.p
+						) : (
+							<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+								<Skeleton
+									width={150}
+									count={1}
+									height={20}
+									className={'rounded-3xl '}
+								/>
+							</SkeletonTheme>
+						),
 						className: 'lg:max-w-[410px]'
 					},
 					button: {
-						children: 'Learn More',
+						children: data ? data.button : false,
 						onClick: () => {
 							return;
 						},
-						href: '/knock'
+						href: data.buttonUrl
 					}
 				}}
 				imageContainer={{
 					mainImg: {
 						// src: '/images/534aaf62a986c03ee09ee62a138d3845.gif',
-						src: knockPlugin.images[0] && knockPlugin.images[0]?.src,
+						src: data
+							? process.env.NEXT_PUBLIC_KNOCK_URL_API + data.imageUrl
+							: false,
 						alt:
 							(knockPlugin.images[0] && knockPlugin.images[0]?.altText) || '',
 						className: 'lg:px-[5%] cursor-pointer',
-						onClick: () => router.push('/knock-clipper')
+						onClick: () => router.push(data.buttonUrl || '/')
 					},
 					index: {
 						className: 'lg:w-[50%]' // scale-[1.5]'

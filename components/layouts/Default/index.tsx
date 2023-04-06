@@ -15,7 +15,7 @@ import CustomNextImage from '@components/shared/common/CustomNextImage';
 import MainFooter from './components/MainFooter';
 import MarketingPopup from '@components/shared/common/MarketingPopup/MarketingPopup';
 import { useQuery } from '@tanstack/react-query';
-import { getPopup } from '@utils/core/API';
+import { getBanner, getPopup } from '@utils/core/API';
 
 export const commonClasses = 'leading-relaxed text-primary-2 mx-auto';
 
@@ -30,16 +30,22 @@ const DefaultLayout = ({
 	setBanner: Dispatch<SetStateAction<boolean>>;
 	setOpenPop: Dispatch<SetStateAction<boolean>>;
 	openBanner: boolean;
-	openPopUp:boolean;
+	openPopUp: boolean;
 }) => {
-
 	const accessToken = getGetAccessTokenFromCookie();
 
-	const popup = useQuery(["get-popup"], () => getPopup(), {
+	const popup = useQuery(['get-popup'], () => getPopup(), {
 		onSuccess(data) {
-		  return data;
+			return data;
 		},
-		refetchInterval: 10000,
+		refetchInterval: 10000
+	});
+
+	const banner = useQuery(['banner-data'], () => getBanner(), {
+		onSuccess(data) {
+			return data;
+		},
+		refetchInterval: 3000
 	});
 
 	useGetUserData({
@@ -50,7 +56,7 @@ const DefaultLayout = ({
 	return (
 		<>
 			<MainHeader openBanner={openBanner} setBanner={setBanner} />
-			{popup.data ? (
+			{popup.data && !popup.data.disable ? (
 				<MarketingPopup
 					popup={popup.data}
 					open={openPopUp}
@@ -61,7 +67,9 @@ const DefaultLayout = ({
 			)}
 			<main
 				className={`${commonClasses} relative bg-primary-2 ${
-					openBanner ? 'mt-[70px]' : 'mt-[30px]'
+					banner.data?.disable
+						? 'mt-[40px]'
+						: `${openBanner ? 'mt-[100px]' : 'mt-[5px]'}`
 				}  w-full flex flex-col`}
 			>
 				{children}

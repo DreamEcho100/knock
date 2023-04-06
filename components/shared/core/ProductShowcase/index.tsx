@@ -7,6 +7,7 @@ import Button from '@components/shared/core/Button';
 import type { IProduct } from 'types';
 import { useAddProductsToCheckoutAndCart } from '@utils/core/hooks';
 import { cva, cx, VariantProps } from 'class-variance-authority';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 const handleBackgroundImgVariants = cva(
 	'pointer-events-none select-none object-contain mx-auto w-full h-full',
@@ -115,15 +116,27 @@ const ProductShowcase = ({
 						/>
 					</div>
 				)}
-				<CustomNextImage
-					{...mainImg}
-					width={600}
-					height={600}
-					className={cx(
-						mainImg.className,
-						'relative mx-auto w-full object-contain max-w-[80%] sm:max-w-[60%] lg:max-w-full'
-					)}
-				/>
+				{mainImg.src ? (
+					<CustomNextImage
+						{...mainImg}
+						width={600}
+						height={600}
+						className={cx(
+							mainImg.className,
+							'relative mx-auto w-full object-contain max-w-[80%] sm:max-w-[60%] lg:max-w-full'
+						)}
+					/>
+				) : (
+					<div
+						className={cx(
+							'relative mx-auto w-[90%] h-[200px] object-contain md:w-[70%] md:h-[400px]  '
+						)}
+					>
+						<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+							<Skeleton count={1} width={'100%'} height={'100%'} />
+						</SkeletonTheme>
+					</div>
+				)}
 			</div>
 		</div>
 	);

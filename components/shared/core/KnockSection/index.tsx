@@ -101,7 +101,7 @@ const KnockSection = ({
 	title,
 	pTheme = {},
 	sectionTheme,
-	imageSrc = '/images/29f8b3dde3b1d7e7a476bf19c95536f1.png',
+	imageSrc,
 	videoSrc, //  = '/videos/knock.mp4',
 	h2theme,
 	imagesContainerTheme,
@@ -126,7 +126,7 @@ const KnockSection = ({
 	videoSrc?: string;
 	mainImgOrVideoLink?: string;
 	mainImgOrVideoProps?: Record<string, any>;
-	colorText?:any
+	colorText?: any;
 }) => {
 	const router = useRouter();
 
@@ -179,19 +179,24 @@ const KnockSection = ({
 							{...mainImgOrVideoProps}
 						/>
 					) : (
-						<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
-							<Skeleton
-								width={500}
-								count={1}
-								height={300}
-								className={'rounded-3xl '}
-							/>
-						</SkeletonTheme>
+						<div className='w-[300px] h-[200px] md:w-[500px] h-[300px]'>
+							<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+								<Skeleton
+									width={'100%'}
+									count={1}
+									height={'100%'}
+									className={'rounded-3xl '}
+								/>
+							</SkeletonTheme>
+						</div>
 					)}
 				</div>
 				<div className={textContainerClasses(textContainerTheme)}>
 					{
-						<h2 style={{color: `${colorText ? colorText.h2 : ''}`}}  className={h2Classes(h2theme)}>
+						<h2
+							style={{ color: `${colorText ? colorText.h2 : ''}` }}
+							className={h2Classes(h2theme)}
+						>
 							{title || (
 								<>
 									DRUMS THAT&nbsp;
@@ -200,8 +205,15 @@ const KnockSection = ({
 							)}
 						</h2>
 					}
-					<p style={{color: `${colorText ?  colorText.p :''}`}}  className={pClasses(pTheme)}>{description}</p>
-					{buttonElem ? buttonElem : buttonProps.children ? (
+					<p
+						style={{ color: `${colorText ? colorText.p : ''}` }}
+						className={pClasses(pTheme)}
+					>
+						{description}
+					</p>
+					{buttonElem ? (
+						buttonElem
+					) : buttonProps.children ? (
 						<Button className='capitalize' {...buttonProps} />
 					) : (
 						<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>

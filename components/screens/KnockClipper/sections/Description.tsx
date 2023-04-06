@@ -1,15 +1,25 @@
 import Description from '@components/shared/core/Description';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
-const DescriptionSection = () => {
+const DescriptionSection = ({ data }: { data: any }) => {
 	return (
 		<section className='bg-primary-2 section-p-v1'>
-			<Description variants={{ 'max-w': 'none' }} className='max-w-[610px]'>
-				KNOCK Clipper is a premium quality, user adjustable hard / soft clipper
-				designed by DECAP. It is the CLIP module from his acclaimed plugin,
-				KNOCK. It is inspired by the signature sound of his popular drum kit
-				series DRUMS THAT KNOCK, which has helped shaped the sonics of modern
-				music.
-			</Description>
+			{data ? (
+				<Description variants={{ 'max-w': 'none' }} className='max-w-[610px]'>
+					{data.p}
+				</Description>
+			) : (
+				<div className='flex items-center justify-center'>
+					<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+						<Skeleton
+							width={500}
+							count={1}
+							height={300}
+							className={'rounded-3xl '}
+						/>
+					</SkeletonTheme>
+				</div>
+			)}
 		</section>
 	);
 };

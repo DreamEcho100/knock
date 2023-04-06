@@ -4,17 +4,19 @@ import VideosContainer from '@components/shared/core/VideosContainer';
 import AddItemOnHeroSectionButton from '@components/shared/core/AddItemOnHeroSectionButton';
 
 const VideosSection = ({
-	knockPlugin
+	knockPlugin,
+	data
 }: {
 	knockPlugin: IKnockPluginPageProps['knockPlugin'];
+	data: any;
 }) => {
 	return (
 		<section className='bg-primary-1 text-primary-2 section-p-x-v1 section-pb-v1'>
 			<VideosContainer
 				iframes={[
 					{
-						src: 'https://www.youtube.com/embed/adhIJxIHzkg?autoplay=1',
-						srcDoc: 'https://i.ytimg.com/vi/adhIJxIHzkg/sddefault.jpg',
+						src: `${data.youtubeUrl}?autoplay=1`,
+						srcDoc: data.youtubeImageUrl,
 						title:
 							'This plugin will make your drums KNOCK - YouTube video player',
 						frameBorder: '0',
@@ -23,9 +25,8 @@ const VideosSection = ({
 						allowFullScreen: true
 					},
 					{
-						src: 'https://www.youtube.com/embed/LMOG2rvxqGk?autoplay=1',
-						srcDoc:
-							'https://i.ytimg.com/vi/LMOG2rvxqGk/sddefault.jpg?sqp=-oaymwEmCIAFEOAD8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGGMgYyhjMA8=&rs=AOn4CLCBtGH38Chf3EaWBsf4pnHCWR6oQw',
+						src: `${data.youtubeUrl2}?autoplay=1`,
+						srcDoc: data.youtubeImageUrl2,
 						title:
 							'KNOCK: Before and After | Before & After - YouTube video player',
 						frameBorder: '0',
@@ -37,9 +38,10 @@ const VideosSection = ({
 				buttonElem={
 					<AddItemOnHeroSectionButton
 						product={knockPlugin}
-						buttonProps={{ children: 'Add To Cart' }}
+						buttonProps={{ children: data ? data.button : false }}
 					/>
 				}
+				data={data ? data : ''}
 			/>
 		</section>
 	);

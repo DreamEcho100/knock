@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { ButtonHTMLAttributes } from 'react';
 import { buttonClasses } from 'utils/core/cva';
 import type { VariantProps } from 'class-variance-authority';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	classesIntent?: VariantProps<typeof buttonClasses>;
@@ -16,17 +17,47 @@ export interface ILinkProps extends _ILinkProps {
 const Button = ({ classesIntent, ...props }: IButtonProps | ILinkProps) => {
 	if ('href' in props)
 		return (
-			<Link
-				{...props}
-				className={`${buttonClasses(classesIntent)} ${props.className || ''} `}
-			/>
+			<>
+				{props.children ? (
+					<Link
+						{...props}
+						className={`${buttonClasses(classesIntent)} ${
+							props.className || ''
+						} `}
+					/>
+				) : (
+					<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+						<Skeleton
+							width={150}
+							count={1}
+							height={45}
+							className={'rounded-3xl '}
+						/>
+					</SkeletonTheme>
+				)}
+			</>
 		);
 
 	return (
-		<button
-			{...props}
-			className={`${buttonClasses(classesIntent)} ${props.className || ''} `}
-		/>
+		<>
+			{props.children ? (
+				<button
+					{...props}
+					className={`${buttonClasses(classesIntent)} ${
+						props.className || ''
+					} `}
+				/>
+			) : (
+				<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
+					<Skeleton
+						width={150}
+						count={1}
+						height={45}
+						className={'rounded-3xl '}
+					/>
+				</SkeletonTheme>
+			)}
+		</>
 	);
 };
 
