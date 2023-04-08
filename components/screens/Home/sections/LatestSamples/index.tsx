@@ -94,16 +94,14 @@ const LatestSamplesSection = ({
 							)
 							.map((item) => (
 								<>
-									<div className='sm:flex-1' key={item.id}>
-										<ProductBasicCard
-											cardVariants={{ 'max-w': null }}
-											link={{
-												children: item.title,
-												href: `/products/${getIdFromGid(item.id)}`
-											}}
-											productData={item}
-										/>
-									</div>
+									<ProductBasicCard
+										cardVariants={{ 'max-w': null }}
+										link={{
+											children: item.title,
+											href: `/products/${getIdFromGid(item.id)}`
+										}}
+										productData={item}
+									/>
 								</>
 							))
 					) : (
