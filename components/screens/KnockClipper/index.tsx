@@ -17,12 +17,9 @@ const KnockScreen = ({ knockClipperPlugin }: IKnockClipperPageProps) => {
 		"This is the only soft clipper you'll ever need. KNOCK Clipper is a premium quality, user adjustable hard &amp; soft clipper designed by DECAP. It is the CLIP module from his acclaimed plugin, KNOCK. It is inspired by the signature sound of his popular drum kit series DRUMS THAT KNOCK, which has helped shaped the sonics";
 	const { data } = useQuery(
 		['knockClipper-page-data'],
-		() => getKnockClipperPageData(),
+		getKnockClipperPageData,
 		{
-			onSuccess(data) {
-				return data;
-			},
-			refetchInterval: 3000
+			refetchOnWindowFocus: true
 		}
 	);
 

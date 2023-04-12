@@ -9,11 +9,8 @@ import {
 } from './sections';
 
 const HomeScreen = ({ products }: IHomePageProps) => {
-	const { data } = useQuery(['home-page-data'], () => getHomePageData(), {
-		onSuccess(data) {
-			return data;
-		},
-		refetchInterval: 3000
+	const { data } = useQuery(['home-page-data'], getHomePageData, {
+		refetchOnWindowFocus: true
 	});
 
 	return (
@@ -21,7 +18,10 @@ const HomeScreen = ({ products }: IHomePageProps) => {
 			<HeroSection />
 			<OneProductShowCaseSection data={data ? data.secondSection : ''} />
 			<AboutSection data={data ? data.thirdSection : ''} />
-			<LatestSamplesSection data={data ? data.forthSection : ''} products={products} />
+			<LatestSamplesSection
+				data={data ? data.forthSection : ''}
+				products={products}
+			/>
 		</>
 	);
 };

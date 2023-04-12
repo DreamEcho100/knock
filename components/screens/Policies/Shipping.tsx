@@ -6,11 +6,8 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import Wrapper from './components/Wrapper';
 
 const ShippingPolicyScreen = () => {
-	const { data } = useQuery(['shipping-policy'], () => getShippingPolicy(), {
-		onSuccess(data) {
-			return data;
-		},
-		refetchInterval: 3000
+	const { data } = useQuery(['shipping-policy'], getShippingPolicy, {
+		refetchOnWindowFocus: true
 	});
 	return (
 		<Wrapper

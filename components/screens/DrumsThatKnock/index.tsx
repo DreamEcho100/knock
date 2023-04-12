@@ -20,17 +20,14 @@ const DrumsThatKnock = ({
 	const pageTitle = `DRUMS THAT KNOCK | ${defaultSiteName3} | ${defaultSiteName2}`;
 	const pageDescription =
 		'Designed from scratch by DECAP. Premium quality, groundbreaking as always.';
-	const { data } = useQuery(['dtk-data'], () => getDTKPageData(), {
-		onSuccess(data) {
-			return data;
-		},
-		refetchInterval: 3000
+	const { data } = useQuery(['dtk-data'], getDTKPageData , {
+		refetchOnWindowFocus: true
 	});
 
 	return (
 		<>
 			<CustomNextSeo pageTitle={pageTitle} pageDescription={pageDescription} />
-			<HeroSection />
+			<HeroSection data={data ? data.main_section : ''} />
 			<DigitalProductsSection products={products} />
 			{/* <MerchSection /> */}
 			<ArtistsSection

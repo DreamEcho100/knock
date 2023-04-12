@@ -5,11 +5,8 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import Wrapper from './components/Wrapper';
 
 const RefundPolicyScreen = () => {
-	const { data } = useQuery(['refund-policy'], () => getRefundPolicy(), {
-		onSuccess(data) {
-			return data;
-		},
-		refetchInterval: 3000
+	const { data } = useQuery(['refund-policy'], getRefundPolicy, {
+		refetchOnWindowFocus: true
 	});
 
 	return (

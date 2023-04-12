@@ -1,7 +1,7 @@
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 import KnockTrademark from '@components/shared/core/KnockTrademark';
 
-const HeroSection = () => {
+const HeroSection = ({ data }: { data: any }) => {
 	return (
 		<section className='bg-primary-1 section-p-v1 leading-[1] sm:leading-[1.7]'>
 			<div className='relative py-4 my-6 flex items-center justify-center text-center text-primary-1 min-h-fit max-h-[30rem]'>
@@ -15,22 +15,32 @@ const HeroSection = () => {
 				/>
 				<div className='relative flex flex-col items-center justify-center text-center gap-4 text-primary-2 py-10 sm:p-0'>
 					<h1 className='font-semibold text-h2 uppercase text-primary-1'>
-						DRUMS <br />
-						<div className='flex flex-wrap items-center justify-center text-center'>
-							THAT&nbsp;
-							<KnockTrademark />
-						</div>
+						{data && data.br ? data.br : ''}
+						<span className='flex flex-wrap items-center justify-center text-center'>
+							{data && data.h2 ? <>{data.h2}&nbsp;</> : ''}
+							<KnockTrademark tradeMark={data ? data.tradeMark : ''} />
+						</span>
 					</h1>
-					<p className='text-[1rem] sm:text-2xl max-w-[600px]'>
-						Designed from scratch by DECAP.
-					</p>
-					<p className='text-[1rem] sm:text-2xl max-w-[600px]'>
-						Premium quality, groundbreaking as always.
-					</p>
-					<p className='text-[1rem] sm:text-2xl flex flex-wrap items-center justify-center text-center'>
-						These drums &nbsp;
-						<KnockTrademark />.
-					</p>
+					{data
+						? data.p.map((el: any) =>
+								el.tradeMark ? (
+									<p
+										key={el.id}
+										className='text-[1rem] sm:text-2xl flex flex-wrap items-center justify-center text-center'
+									>
+										{el.text} &nbsp;
+										<KnockTrademark tradeMark={el.tradeMark} />.
+									</p>
+								) : (
+									<p
+										key={el.id}
+										className='text-[1rem] sm:text-2xl max-w-[600px]'
+									>
+										{el.text}
+									</p>
+								)
+						  )
+						: ''}
 				</div>
 			</div>
 		</section>
