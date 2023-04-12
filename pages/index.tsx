@@ -4,7 +4,7 @@ import HomeScreen from 'components/screens/Home';
 import { getAllProducts } from 'server/controllers/products';
 import type { IProduct } from 'types';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
-import { getHomePageData } from '@utils/core/API';
+import { getHomePageData, getMainSection } from '@utils/core/API';
 
 export interface IHomePageProps {
 	products: IProduct[]; // ShopifyBuy.Product[];
@@ -28,7 +28,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 	const queryClient = new QueryClient();
 
 	await queryClient.prefetchQuery(['home-page-data'], getHomePageData );
-	await queryClient.prefetchQuery(['HeroSection'], getHomePageData);
+	await queryClient.prefetchQuery(['HeroSection'], getMainSection);
 
 	return {
 		props: {
