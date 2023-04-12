@@ -45,7 +45,13 @@ const HeroSection = () => {
 			}}
 			pTheme={{ width: 'small' }}
 			mainImgOrVideoLink={data ? data.buttonUrl : ''}
-			imageSrc={data ? `${process.env.NEXT_PUBLIC_KNOCK_URL_API}${data.mainImageUrl}` : ''}
+			imageSrc={
+				data
+					? data.mainImageUrl
+						? `${process.env.NEXT_PUBLIC_KNOCK_URL_API}${data.mainImageUrl}`
+						: ''
+					: ''
+			}
 			mainImgOrVideoProps={{ isAnimated: true }}
 			buttonProps={{
 				className: 'capitalize',
