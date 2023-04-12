@@ -21,11 +21,8 @@ const KnockScreen = ({ knockPlugin }: IKnockPluginPageProps) => {
 	const pageDescription =
 		'This is the last plugin you will ever need to make your drums KNOCK and punch through your mix. This plugin was meticulously crafted by platinum producer &amp; award winning sound designer, DECAP. It is inspired by the signature sound of his popular drum kit series DRUMS THAT KNOCK, which has helped shaped the sonics o';
 
-	const { data } = useQuery(['knock-page-data'], () => getKnockPageData(), {
-		onSuccess(data) {
-			return data;
-		},
-		refetchInterval: 3000
+	const { data } = useQuery(['knock-page-data'], getKnockPageData, {
+		refetchOnWindowFocus: true
 	});
 
 	return (

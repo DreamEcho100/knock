@@ -34,18 +34,12 @@ const DefaultLayout = ({
 }) => {
 	const accessToken = getGetAccessTokenFromCookie();
 
-	const popup = useQuery(['get-popup'], () => getPopup(), {
-		onSuccess(data) {
-			return data;
-		},
-		refetchInterval: 10000
+	const popup = useQuery(['get-popup'], getPopup, {
+		refetchOnWindowFocus: true
 	});
 
-	const banner = useQuery(['banner-data'], () => getBanner(), {
-		onSuccess(data) {
-			return data;
-		},
-		refetchInterval: 3000
+	const banner = useQuery(['banner-data'], getBanner, {
+		refetchOnWindowFocus: true
 	});
 
 	useGetUserData({

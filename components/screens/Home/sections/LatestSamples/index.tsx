@@ -93,16 +93,15 @@ const LatestSamplesSection = ({
 									item.handle === (data ? data.itemTwoHandle : '')
 							)
 							.map((item) => (
-								<>
-									<ProductBasicCard
-										cardVariants={{ 'max-w': null }}
-										link={{
-											children: item.title,
-											href: `/products/${getIdFromGid(item.id)}`
-										}}
-										productData={item}
-									/>
-								</>
+								<ProductBasicCard
+									key={item.id}
+									cardVariants={{ 'max-w': null }}
+									link={{
+										children: item.title,
+										href: `/products/${getIdFromGid(item.id)}`
+									}}
+									productData={item}
+								/>
 							))
 					) : (
 						<>

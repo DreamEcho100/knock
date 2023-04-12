@@ -5,11 +5,8 @@ import { getMainSection } from '@utils/core/API';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 const HeroSection = () => {
-	const { data } = useQuery(['HeroSection'], () => getMainSection(), {
-		onSuccess(data) {
-			return data;
-		},
-		refetchInterval: 3000
+	const { data } = useQuery(['HeroSection'], getMainSection, {
+		refetchOnWindowFocus: true
 	});
 
 	return (

@@ -5,11 +5,8 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import Wrapper from './components/Wrapper';
 
 const PrivatePoliciesScreen = () => {
-	const { data } = useQuery(['privacy-page'], () => getPrivacyPolicy(), {
-		onSuccess(data) {
-			return data;
-		},
-		refetchInterval: 3000
+	const { data } = useQuery(['privacy-page'], getPrivacyPolicy, {
+		refetchOnWindowFocus: true
 	});
 	return (
 		<Wrapper
@@ -187,19 +184,17 @@ const PrivatePoliciesScreen = () => {
 			{data ? (
 				<ul>
 					{data.behavioural[0].ul.map((el: any) => (
-						<>
-							<li>
-								{el.li || ''}
-								<span>&nbsp;</span>
-								{el.a ? (
-									<a rel='noreferrer noopener' href={el.a} target='_blank'>
-										{el.a}
-									</a>
-								) : (
-									''
-								)}
-							</li>
-						</>
+						<li key={el.id}>
+							{el.li || ''}
+							<span>&nbsp;</span>
+							{el.a ? (
+								<a rel='noreferrer noopener' href={el.a} target='_blank'>
+									{el.a}
+								</a>
+							) : (
+								''
+							)}
+						</li>
 					))}
 				</ul>
 			) : (
@@ -237,16 +232,14 @@ const PrivatePoliciesScreen = () => {
 					<p>{data.behavioural[0].p2}</p>
 					<ul>
 						{data.behavioural[0].ul2.map((el: any) => (
-							<>
-								<li>
-									<em>
-										{el.em} -<span>&nbsp;</span>
-									</em>
-									<a rel='noreferrer noopener' href={el.li} target='_blank'>
-										{el.li}
-									</a>
-								</li>
-							</>
+							<li key={el.id}>
+								<em>
+									{el.em} -<span>&nbsp;</span>
+								</em>
+								<a rel='noreferrer noopener' href={el.li} target='_blank'>
+									{el.li}
+								</a>
+							</li>
 						))}
 					</ul>
 					<p>
@@ -267,9 +260,7 @@ const PrivatePoliciesScreen = () => {
 					<p>{data.lawfulBasis[0].p}</p>
 					<ul>
 						{data.lawfulBasis[0].ul.map((el: any) => (
-							<>
-								<li key={el.id}>{el.li}</li>
-							</>
+							<li key={el.id}>{el.li}</li>
 						))}
 					</ul>
 
@@ -277,49 +268,39 @@ const PrivatePoliciesScreen = () => {
 					<p>{data.retention[0].p}</p>
 					<h3>{data.automatic[0].h3}</h3>
 					{data.automatic[0].p.map((el: any) => (
-						<>
-							<p key={el.id}>{el.text}</p>
-						</>
+						<p key={el.id}>{el.text}</p>
 					))}
 					<ul>
 						{data.automatic[0].ul.map((el: any) => (
-							<>
-								<li key={el.id}>{el.text}</li>
-							</>
+							<li key={el.id}>{el.text}</li>
 						))}
 					</ul>
 					<h2>{data.yourRights[0].h2}</h2>
 					<h3>{data.yourRights[0].h3}</h3>
 					{data.yourRights[0].p.map((el: any) => (
-						<>
-							<p>
-								{el.text}
-								<span>&nbsp;</span>
-								{el.em ? <em>[{el.em}].</em> : ''}
-								{el.a ? (
-									<a rel='noreferrer noopener' href={el.a} target='_blank'>
-										{el.a}
-									</a>
-								) : (
-									''
-								)}
-							</p>
-						</>
+						<p key={el.id}>
+							{el.text}
+							<span>&nbsp;</span>
+							{el.em ? <em>[{el.em}].</em> : ''}
+							{el.a ? (
+								<a rel='noreferrer noopener' href={el.a} target='_blank'>
+									{el.a}
+								</a>
+							) : (
+								''
+							)}
+						</p>
 					))}
 					<p>
 						<br />
 					</p>
 					<h3>{data.ccpa[0].h3}</h3>
 					{data.ccpa[0].p.map((el: any) => (
-						<>
-							<p key={el.id}>{el.text}</p>
-						</>
+						<p key={el.id}>{el.text}</p>
 					))}
 					<h2>{data.cookies[0].h2}</h2>
 					{data.cookies[0].p.map((el: any) => (
-						<>
-							<p key={el.id}>{el.text}</p>
-						</>
+						<p key={el.id}>{el.text}</p>
 					))}
 					<h3>{data.necessary[0].h3}</h3>
 					<table>
@@ -392,26 +373,22 @@ const PrivatePoliciesScreen = () => {
 					<p>{data.changes[0].p}</p>
 					<h2>{data.contact[0].h2}</h2>
 					{data.contact[0].p.map((el: any) => (
-						<>
-							<p key={el.id}>{el.text}</p>
-						</>
+						<p key={el.id}>{el.text}</p>
 					))}
 					<em>{data.contact[0].em}</em>
 
 					<span></span>
 					{data.contact[0].p2.map((el: any) => (
-						<>
-							<p>
-								{el.text}
-								<span>&nbsp;</span>
-								<em>[{el.em}</em>
-								<span>&nbsp;</span>
-								<a rel='noreferrer noopener' href={el.a} target='_blank'>
-									{el.a}
-								</a>
-								<em>]</em>
-							</p>
-						</>
+						<p key={el.id}>
+							{el.text}
+							<span>&nbsp;</span>
+							<em>[{el.em}</em>
+							<span>&nbsp;</span>
+							<a rel='noreferrer noopener' href={el.a} target='_blank'>
+								{el.a}
+							</a>
+							<em>]</em>
+						</p>
 					))}
 				</>
 			) : (

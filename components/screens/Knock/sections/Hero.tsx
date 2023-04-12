@@ -11,15 +11,9 @@ const HeroSection = ({
 }: {
 	knockPlugin: IKnockPluginPageProps['knockPlugin'];
 }) => {
-	const { data } = useQuery(
-		['knock-main-section'],
-		() => getKnockMainSection(),
-		{
-			onSuccess(data) {
-				return data;
-			}
-		}
-	);
+	const { data } = useQuery(['knock-main-section'], getKnockMainSection, {
+		refetchOnWindowFocus: true
+	});
 
 	return (
 		<KnockSection

@@ -14,14 +14,12 @@ const HeroSection = ({
 }) => {
 	const { data } = useQuery(
 		['knockClipperMainSection'],
-		() => getKnockClipperMainSection(),
+		getKnockClipperMainSection,
 		{
-			onSuccess(data) {
-				return data;
-			}
+			refetchOnWindowFocus: true
 		}
 	);
-	
+
 	return (
 		<section
 			className='bg-primary-1 section-p-v1 section-h-v1'

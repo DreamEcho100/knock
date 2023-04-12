@@ -6,6 +6,8 @@ import {
 	getAllProducts,
 	getOneProductByHandle
 } from 'server/controllers/products';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
+import { getDTKPageData } from '@utils/core/API';
 
 export interface IDrumsThatKnockPageProps {
 	products: IProduct[]; // ShopifyBuy.Product[];
@@ -37,10 +39,15 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 		'public, s-maxage=10, stale-while-revalidate=59'
 	);
 
+	const queryClient = new QueryClient();
+
+	await queryClient.prefetchQuery(['dtk-data'], getDTKPageData);
+
 	return {
 		props: {
 			products,
 			knockPlugin,
+			dehydratedState: dehydrate(queryClient),
 			revalidate: 5 * 60
 		}
 	};

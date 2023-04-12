@@ -77,7 +77,7 @@ const ProductShowcase = ({
 							lg:gap-4 lg:w-fit lg:max-w-[60%]  lg:text-align-initial lg:items-start lg:py-4'
 			>
 				<h2
-					className='text-h3 font-semibold text-primary-1 uppercase flex flex-wrap text-center justify-center
+					className='text-h3 font-semibold text-primary-1 flex flex-wrap text-center justify-center
 						lg:text-align-initial lg:justify-start'
 					{...h2}
 				/>

@@ -2,13 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import { getTermsOfService } from '@utils/core/API';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import Wrapper from './components/Wrapper';
+import { Fragment } from 'react';
 
 const TermsOfServiceScreen = () => {
-	const { data } = useQuery(['terms'], () => getTermsOfService(), {
-		onSuccess(data) {
-			return data;
-		},
-		refetchInterval: 3000
+	const { data } = useQuery(['terms'], getTermsOfService, {
+		refetchOnWindowFocus: true
 	});
 	return (
 		<Wrapper
@@ -22,14 +20,14 @@ const TermsOfServiceScreen = () => {
 		>
 			{data ? (
 				data?.map((item: any) => (
-					<>
+					<Fragment key={item.id}>
 						{item.id === 1 ? ' ' : <br />}
 						<div className='flex gap-2'>
 							<strong>{item.h3} </strong>
 						</div>
 
 						{item.p.map((el: any) => (
-							<>
+							<Fragment key={el.id}>
 								{el.id === 2 || el.id === 3 || el.id === 4 || el.id === 5 ? (
 									<br />
 								) : (
@@ -37,9 +35,9 @@ const TermsOfServiceScreen = () => {
 								)}
 								{el.text}
 								<br />
-							</>
+							</Fragment>
 						))}
-					</>
+					</Fragment>
 				))
 			) : (
 				<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>

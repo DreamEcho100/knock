@@ -78,11 +78,7 @@ const TwoCardContainer = ({
 					}}
 				>
 					{items1.length
-						? items1.map((item: any) => (
-								<>
-									<li key={item.id}>{item.li}</li>
-								</>
-						  ))
+						? items1.map((item: any) => <li key={item.id}>{item.li}</li>)
 						: array.map((el: any) => (
 								<div key={el} className='w-[100%] h-[40px]  md:w-[100%] '>
 									<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
@@ -131,9 +127,7 @@ const TwoCardContainer = ({
 				>
 					{items2.length
 						? items2.map((item) => (
-								<>
 									<li key={item.id}>{item.li}</li>
-								</>
 						  ))
 						: array.map((el: any) => (
 								<div key={el} className='w-[100%] h-[40px]  md:w-[100%] '>

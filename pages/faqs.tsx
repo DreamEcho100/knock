@@ -1,8 +1,8 @@
 import CustomNextImage from '@components/shared/common/CustomNextImage';
 import CustomNextSeo from '@components/shared/common/CustomNextSeo';
-import type { NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 import { defaultSiteName3 } from '@utils/core/next-seo.config';
-import { useQuery } from '@tanstack/react-query';
+import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { getFaqPageData } from '@utils/core/API';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
@@ -11,11 +11,8 @@ const FAQSPages: NextPage = () => {
 	const pageTitle = `FAQs | ${defaultSiteName3}`;
 	const pageDescription = 'Frequently asked questions about us.';
 
-	const { data } = useQuery(['faq'], () => getFaqPageData(), {
-		onSuccess(data) {
-			return data;
-		},
-		refetchInterval: 3000
+	const { data } = useQuery(['faq'], getFaqPageData, {
+		refetchOnWindowFocus: true
 	});
 
 	const array = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -178,3 +175,15 @@ const FAQSPages: NextPage = () => {
 };
 
 export default FAQSPages;
+
+export const getServerSideProps: GetServerSideProps = async () => {
+	const queryClient = new QueryClient();
+
+	await queryClient.prefetchQuery(['faq'], getFaqPageData);
+
+	return {
+		props: {
+			dehydratedState: dehydrate(queryClient)
+		}
+	};
+};

@@ -7,6 +7,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { setCookie, removeCookie } from '@utils/common/storage/cookie/document';
 import { checkoutApi, getBanner } from '@utils/core/API';
 import {
+	useAddProductsToCheckoutAndCart,
 	useGetUserCheckoutDetailsAndIdAndKey,
 	useGetUserCheckoutIdAndKeyCookie,
 	useGetUserDataFromStore,
@@ -28,6 +29,8 @@ import { commonClasses } from '../..';
 import UserAuthButton from './components/UserAuthButton';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const linkClasses = ({
 	isActive,
@@ -167,6 +170,44 @@ const MainHeader = ({
 		refetchInterval: 3000
 	});
 
+	const id = banner.data && banner.data.bannerUrl.split('/')[1];
+
+	const addProductsToCheckoutAndCart = useAddProductsToCheckoutAndCart();
+
+	const addToCart = async () => {
+		if (parseInt(id)) {
+			try {
+				const { data } = await axios.get(`/api/products/product?id=${id}`);
+				if (!data.product) {
+					throw new Error(data.response.data.message);
+				}
+				addProductsToCheckoutAndCart.mutate({
+					products: [{ ...data.product, quantity: 1 }]
+				});
+			} catch (error) {
+				if (error.response) {
+					return toast.warn('Product not found');
+				}
+			}
+		} else {
+			try {
+				const { data } = await axios.get(
+					`/api/products/product?handle=${id === 'knock' ? 'knock-plugin' : id}`
+				);
+				if (!data.product) {
+					throw new Error(data.response.data.message);
+				}
+				addProductsToCheckoutAndCart.mutate({
+					products: [{ ...data.product, quantity: 1 }]
+				});
+			} catch (error) {
+				if (error.response) {
+					return toast.warn(error.response.data.message);
+				}
+			}
+		}
+	};
+
 	return (
 		<>
 			{openBanner && banner.data && !banner.data.disable ? (
@@ -182,15 +223,26 @@ const MainHeader = ({
 							style={{ color: banner.data.textColor }}
 						>
 							{banner && banner.data.text ? <h4>{banner.data.text}</h4> : ''}
-							{banner && banner.data.bannerUrlText ? (
-								<div className=''>
-									<Link
-										href={banner.data.bannerUrl || '/'}
+							{banner.data.bannerUrlText ? (
+								!banner.data.isAddToCartButton ? (
+									<div>
+										<Link
+											href={
+												Number(id) ? '/products/' + id : banner.data.bannerUrl
+											}
+											className='text-bold border rounded-3xl	 px-5'
+										>
+											{banner.data.bannerUrlText}
+										</Link>
+									</div>
+								) : (
+									<button
 										className='text-bold border rounded-3xl	 px-5'
+										onClick={addToCart}
 									>
 										{banner.data.bannerUrlText}
-									</Link>
-								</div>
+									</button>
+								)
 							) : (
 								''
 							)}
