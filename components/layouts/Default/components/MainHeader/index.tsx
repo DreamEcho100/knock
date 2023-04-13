@@ -422,7 +422,7 @@ const MainHeader = ({
 							</ul>
 						</nav>
 					</div>
-					<CartContainer />
+					<CartContainer openBanner={openBanner} banner={banner.data} />
 				</div>
 			</header>
 		</>
@@ -431,7 +431,13 @@ const MainHeader = ({
 
 export default MainHeader;
 
-const CartContainer = () => {
+const CartContainer = ({
+	openBanner,
+	banner
+}: {
+	openBanner: boolean;
+	banner: any;
+}) => {
 	const [
 		{
 			isVisible: { headerCart: isCartVisible },
@@ -463,7 +469,7 @@ const CartContainer = () => {
 			<div
 				aria-hidden={!isCartVisible}
 				className={cx(
-					'fixed translate-y-main-nav-h top-0 right-0 w-full h-full bg-primary-3 bg-opacity-60 transition-all',
+					`fixed translate-y-main-nav-h ${!banner?.disable && openBanner ?'top-14'  : 'top-0'} right-0 w-full h-full bg-primary-3 bg-opacity-60 transition-all`,
 					isCartVisible
 						? 'duration-300'
 						: 'pointer-events-none select-none opacity-0 duration-150'
