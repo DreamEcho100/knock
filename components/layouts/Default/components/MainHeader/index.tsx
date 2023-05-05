@@ -5,7 +5,12 @@ import { useSharedCustomerState } from '@context/Customer';
 import { customerGlobalActions } from '@context/Customer/actions';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { setCookie, removeCookie } from '@utils/common/storage/cookie/document';
-import { checkoutApi, getBanner } from '@utils/core/API';
+import {
+	checkoutApi,
+	getAllProducts,
+	getBanner,
+	getUpSellingPopup
+} from '@utils/core/API';
 import {
 	useAddProductsToCheckoutAndCart,
 	useGetUserCheckoutDetailsAndIdAndKey,
@@ -31,6 +36,7 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import CheckoutPopup from '@components/shared/common/CheckoutPopup/CheckoutPopup';
 
 const linkClasses = ({
 	isActive,
@@ -464,12 +470,26 @@ const CartContainer = ({
 		[productsData]
 	);
 
+	const [isOpen, setIsOpen] = useState(false);
+
+	const upselling = useQuery(['get-upselling-popup'], getUpSellingPopup, {
+		refetchInterval: 3000
+	});
+
+	const { data } = useQuery(['all-products'], getAllProducts, {
+		refetchOnWindowFocus: true
+	});
+
+	const [isAlreadyInCart, setAlreadyInCart] = useState(false);
+
 	return (
 		<>
 			<div
 				aria-hidden={!isCartVisible}
 				className={cx(
-					`fixed translate-y-main-nav-h ${!banner?.disable && openBanner ?'top-14'  : 'top-0'} right-0 w-full h-full bg-primary-3 bg-opacity-60 transition-all`,
+					`fixed translate-y-main-nav-h ${
+						!banner?.disable && openBanner ? 'top-14' : 'top-0'
+					} right-0 w-full h-full bg-primary-3 bg-opacity-60 transition-all`,
 					isCartVisible
 						? 'duration-300'
 						: 'pointer-events-none select-none opacity-0 duration-150'
@@ -628,16 +648,43 @@ const CartContainer = ({
 						  ))}
 				</div>
 				<div className='flex flex-col gap-8 pt-8'>
+					{upselling.data &&
+					upselling.data.upselling &&
+					upselling.data.upselling.length ? (
+						<CheckoutPopup
+							data={upselling.data}
+							products={data}
+							setIsOpen={setIsOpen}
+							isOpen={isOpen}
+							setAlreadyInCart={setAlreadyInCart}
+						/>
+					) : (
+						''
+					)}
 					<header className='flex justify-between gap-2'>
 						<h3 className='font-semibold uppercase text-h5'>subtotal</h3>
 						<p title='price per product'>${productsTotalPrice}</p>
 					</header>
-					<div className=''>
+					<div>
 						<Button
 							{...(productsData.length === 0 ||
 							!userCheckoutDetailsAndIdAndKey?.checkout?.webUrl
 								? ''
-								: { href: userCheckoutDetailsAndIdAndKey.checkout.webUrl })}
+								: !upselling.data
+								? { href: userCheckoutDetailsAndIdAndKey.checkout.webUrl }
+								: isAlreadyInCart
+								? { href: userCheckoutDetailsAndIdAndKey.checkout.webUrl }
+								: !upselling.data.upselling.length
+								? { href: userCheckoutDetailsAndIdAndKey.checkout.webUrl }
+								: upselling.data &&
+								  upselling.data.success &&
+								  upselling.data.upsellingSettings[0].disable
+								? { href: userCheckoutDetailsAndIdAndKey.checkout.webUrl }
+								: {
+										onClick: () => {
+											setIsOpen(true);
+										}
+								  })}
 							disabled={productsData.length === 0 || disableAllButtons}
 							classesIntent={{ w: 'full', display: 'flex-xy-center' }}
 						>
