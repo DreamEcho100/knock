@@ -29,7 +29,7 @@ const HeroSection = ({ data }: { data: any }) => {
 										className='text-[1rem] sm:text-2xl flex flex-wrap items-center justify-center text-center'
 									>
 										{el.text} &nbsp;
-										<KnockTrademark tradeMark={el.tradeMark} />.
+										<KnockTrademark tradeMark={el.tradeMark} />
 									</p>
 								) : (
 									<p

@@ -179,7 +179,7 @@ export const associateClientToCheckout = async (
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
 					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding':'null'
+				'accept-encoding': 'null'
 			}
 		}
 	);
@@ -246,7 +246,7 @@ export const disassociateClientToCheckout = async (
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
 					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding':'null'
+				'accept-encoding': 'null'
 			}
 		}
 	);
