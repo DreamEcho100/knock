@@ -45,14 +45,13 @@ const CheckoutPopup = (props: any) => {
 				setInterestedProduct([]);
 			}
 		}
-	}, [props.data.upselling.length]);
+	}, [props.data.upselling, props.products]);
 
 	const addProductsToCheckoutAndCart = useAddProductsToCheckoutAndCart();
 
 	const userCheckoutDetailsAndIdAndKey = useGetUserCheckoutDetailsAndIdAndKey();
 
 	const cartProduct = productsData.map((el) => el.variant.product.handle);
-
 
 	return (
 		<Dialog
