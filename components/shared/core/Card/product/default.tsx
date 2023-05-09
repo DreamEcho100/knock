@@ -47,7 +47,7 @@ const ProductBasicCard = ({
 	imageVariants
 }: IProductCardProps) => {
 	return (
-		<div className={cardClasses(cardVariants)}>
+		<article className={cardClasses(cardVariants)}>
 			<Link
 				{...link}
 				// style={{ aspectRatio: 1, }}
@@ -59,18 +59,17 @@ const ProductBasicCard = ({
 						alt={images[0].altText || title || ''}
 						width={350}
 						height={350}
-						className='w-full h-full object-contain
-						transition-all duration-300'
+						className='object-contain w-full h-full transition-all duration-300'
 					/>
 				)}
 			</Link>
-			<div className='flex-grow text-center p-4 bg-primary-3 text-primary-2 flex flex-col items-center gap-2 justify-center'>
+			<div className='flex flex-col items-center justify-center flex-grow gap-2 p-4 text-center bg-primary-3 text-primary-2'>
 				<p className='text-[110%]'>
 					<Link {...link} />
 				</p>
 				{extraDetailsElement}
 			</div>
-		</div>
+		</article>
 	);
 };
 

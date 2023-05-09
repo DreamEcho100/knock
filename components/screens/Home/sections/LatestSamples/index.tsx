@@ -28,16 +28,16 @@ const LatestSamplesSection = ({
 
 	return (
 		<section className='bg-primary-2 section-p-v1'>
-			<div className='flex flex-col gap-4 md:flex-row lg:gap-6'>
-				<div className='flex flex-col items-center gap-4 p-4 text-center md:p-8 md:items-start md:text-align-initial md:flex-grow md:w-1/2 md:justify-center'>
+			<div className='flex flex-col gap-4 lg:flex-row lg:gap-6'>
+				<div className='flex flex-col items-center gap-4 p-4 text-center lg:p-8 lg:items-start lg:text-align-initial lg:flex-grow lg:w-1/2 lg:justify-center'>
 					{data ? (
-						<h2 className='flex flex-wrap justify-center font-semibold text-center text-h3 text-primary-1 md:text-align-initial md:justify-start'>
+						<h2 className='flex flex-wrap justify-center font-semibold text-center text-h3 text-primary-1 lg:text-align-initial lg:justify-start'>
 							{data.h2[0]}&nbsp;
 							<KnockTrademark tradeMark={data.tradeMark} />
 							{data.h2[1]}
 						</h2>
 					) : (
-						<div className='w-[100%] h-[30px]  md:w-[40%] '>
+						<div className='w-[100%] h-[30px]  lg:w-[40%] '>
 							<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
 								<Skeleton
 									width={'100%'}
@@ -53,7 +53,7 @@ const LatestSamplesSection = ({
 							{data.p[0]} <br /> {data.p[1]}
 						</p>
 					) : (
-						<div className='w-[70%] h-[50px]  md:w-[50%] '>
+						<div className='w-[70%] h-[50px]  lg:w-[50%] '>
 							<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
 								<Skeleton
 									width={'100%'}
@@ -65,11 +65,11 @@ const LatestSamplesSection = ({
 						</div>
 					)}
 					{data ? (
-						<Button className='hidden md:block' href={data.buttonUrl}>
+						<Button className='hidden lg:block' href={data.buttonUrl}>
 							{data.button}
 						</Button>
 					) : (
-						<div className='w-[50%] h-[50px]  md:w-[30%] '>
+						<div className='w-[50%] h-[50px]  lg:w-[30%] '>
 							<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
 								<Skeleton
 									width={'100%'}
@@ -81,10 +81,10 @@ const LatestSamplesSection = ({
 						</div>
 					)}
 				</div>
-				{/* <div className='flex items-center justify-center md:flex-grow md:w-1/2'>
+				{/* <div className='flex items-center justify-center lg:flex-grow lg:w-1/2'>
 					<ProductCardSlider products={products} />
 				</div> */}
-				<div className='md:w-1/2 md:flex-grow grid grid-cols-[repeat(auto-fit,_minmax(10rem,_1fr))] gap-8'>
+				<div className='lg:w-1/2 lg:flex-grow grid grid-cols-[repeat(auto-fit,_minmax(10rem,_1fr))] gap-8'>
 					{data ? (
 						filteredProducts
 							.filter(
@@ -130,11 +130,11 @@ const LatestSamplesSection = ({
 					{/*
 					 */}
 				</div>
-				<div className='flex items-center justify-center p-5 md:hidden'>
+				<div className='flex items-center justify-center p-5 lg:hidden'>
 					{data ? (
 						<Button href={data.buttonUrl}>{data.button}</Button>
 					) : (
-						<div className='w-[50%] h-[50px]  md:w-[30%] '>
+						<div className='w-[50%] h-[50px]  lg:w-[30%] '>
 							<SkeletonTheme baseColor='#000' highlightColor='#7d7b78'>
 								<Skeleton
 									width={'100%'}

@@ -7,7 +7,7 @@ type TRes = NextApiResponse; // & ServerResponse;
 type TNext = NextApiHandler; // & ServerResponse;
 
 const onError = (err: Error, req: TReq, res: TRes, next: TNext) => {
-	console.log('err', err);
+	console.error('err', err);
 	const statusCode = res.statusCode < 400 ? 500 : res.statusCode;
 	let statusMessage: string | any[] = res.statusMessage
 		? res.statusMessage
