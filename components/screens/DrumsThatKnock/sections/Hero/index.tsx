@@ -10,11 +10,11 @@ const HeroSection = ({ data }: { data: any }) => {
 					width={800}
 					height={800}
 					priority
-					className='pointer-events-none select-none absolute top-0 right-0 left-0 bottom-0 w-full h-full object-contain'
+					className='absolute top-0 bottom-0 left-0 right-0 object-contain w-full h-full pointer-events-none select-none'
 					style={{ transform: 'translate(5%, -3%) scale(2.8, 2.6)' }}
 				/>
-				<div className='relative flex flex-col items-center justify-center text-center gap-4 text-primary-2 py-10 sm:p-0'>
-					<h1 className='font-semibold text-h2 uppercase text-primary-1'>
+				<div className='relative flex flex-col items-center justify-center gap-4 py-10 text-center text-primary-2 sm:p-0'>
+					<h1 className='font-semibold uppercase text-h2 text-primary-1'>
 						{data && data.br ? data.br : ''}
 						<span className='flex flex-wrap items-center justify-center text-center'>
 							{data && data.h2 ? <>{data.h2}&nbsp;</> : ''}
@@ -28,7 +28,7 @@ const HeroSection = ({ data }: { data: any }) => {
 										key={el.id}
 										className='text-[1rem] sm:text-2xl flex flex-wrap items-center justify-center text-center'
 									>
-										{el.text} &nbsp;
+										{el.text}&nbsp;
 										<KnockTrademark tradeMark={el.tradeMark} />
 									</p>
 								) : (
