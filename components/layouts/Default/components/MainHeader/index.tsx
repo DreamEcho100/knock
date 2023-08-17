@@ -480,7 +480,6 @@ const CartContainer = ({
 		refetchOnWindowFocus: true
 	});
 
-	const [isAlreadyInCart, setAlreadyInCart] = useState(false);
 
 	return (
 		<>
@@ -650,13 +649,13 @@ const CartContainer = ({
 				<div className='flex flex-col gap-8 pt-8'>
 					{upselling.data &&
 					upselling.data.upselling &&
-					upselling.data.upselling.length ? (
+					upselling.data.upselling.length &&
+					data ? (
 						<CheckoutPopup
 							data={upselling.data}
 							products={data}
 							setIsOpen={setIsOpen}
 							isOpen={isOpen}
-							setAlreadyInCart={setAlreadyInCart}
 						/>
 					) : (
 						''
@@ -672,8 +671,7 @@ const CartContainer = ({
 								? ''
 								: !upselling.data
 								? { href: userCheckoutDetailsAndIdAndKey.checkout.webUrl }
-								: isAlreadyInCart
-								? { href: userCheckoutDetailsAndIdAndKey.checkout.webUrl }
+								
 								: !upselling.data.upselling.length
 								? { href: userCheckoutDetailsAndIdAndKey.checkout.webUrl }
 								: upselling.data &&
