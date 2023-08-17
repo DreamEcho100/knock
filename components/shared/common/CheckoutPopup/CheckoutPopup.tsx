@@ -11,7 +11,6 @@ import {
 } from '@utils/core/hooks';
 import { AiFillCheckCircle, AiFillCopy } from 'react-icons/ai';
 
-
 const CheckoutPopup = (props: any) => {
 	const [interestedProduct, setInterestedProduct] = useState([]);
 	const [isCopied, setIsCopied] = useState(null);
@@ -207,7 +206,7 @@ const CheckoutPopup = (props: any) => {
 				className='mt-5 w-full'
 				classesIntent={{ w: 'full', display: 'flex-xy-center' }}
 			>
-				Checkout
+				Continue to Checkout
 			</Button>
 		</Dialog>
 	);
