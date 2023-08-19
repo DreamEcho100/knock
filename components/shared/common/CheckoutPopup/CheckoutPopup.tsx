@@ -96,60 +96,90 @@ const CheckoutPopup = (props: any) => {
 												>
 													{product.title}
 												</Link>
-												<div className='flex items-center gap-1'>
-													<p
-														className='cursor-pointer'
-														onClick={() => {
-															navigator.clipboard.writeText(
-																product.discount_code
-															),
-																setIsCopied(product.handle);
-														}}
-													>
-														{product.discount_code}
-													</p>
-													<AiFillCopy
-														className='cursor-pointer'
-														onClick={() => {
-															navigator.clipboard.writeText(
-																product.discount_code
-															),
-																setIsCopied(product.handle);
-														}}
-													/>
-													{isCopied === product.handle ? <p>Copied</p> : ''}
-												</div>
+												{product.hasDiscount ? (
+													<div className='flex items-center gap-1'>
+														<p
+															className='cursor-pointer'
+															onClick={() => {
+																navigator.clipboard.writeText(
+																	product.discount_code
+																),
+																	setIsCopied(product.handle);
+															}}
+														>
+															{product.discount_code}
+														</p>
+														<AiFillCopy
+															className='cursor-pointer'
+															onClick={() => {
+																navigator.clipboard.writeText(
+																	product.discount_code
+																),
+																	setIsCopied(product.handle);
+															}}
+														/>
+														{isCopied === product.handle ? <p>Copied</p> : ''}
+													</div>
+												) : (
+													''
+												)}
 											</h4>
 											<p title='price per product'>
 												{
 													<>
 														<del>
 															{priceCurrencyFormatter(
-																product.variants[0].price.amount,
-																product.variants[0].price.currencyCode
+																product.variants[0].compareAtPrice
+																	? product.variants[0].compareAtPrice.amount
+																	: product.variants[0].price.amount,
+																product.variants[0].compareAtPrice
+																	? product.variants[0].compareAtPrice
+																			.currencyCode
+																	: product.variants[0].price.currencyCode
 															)}
 														</del>
 														&nbsp;
 														<span className='text-bg-secondary-2'>
-															{priceCurrencyFormatter(
-																(
-																	product.variants[0].price.amount -
-																	(product.variants[0].price.amount *
-																		product.discount_percentage) /
-																		100
-																)
-																	.toString()
-																	.split('.')[0],
-																product.variants[0].price.currencyCode
-															)}
+															{product.variants[0].compareAtPrice
+																? priceCurrencyFormatter(
+																		(
+																			product.variants[0].compareAtPrice
+																				.amount -
+																			(product.variants[0].compareAtPrice
+																				.amount *
+																				product.discount_percentage) /
+																				100
+																		)
+																			.toString()
+																			.split('.')[0],
+																		product.variants[0].compareAtPrice
+																			.currencyCode
+																  )
+																: priceCurrencyFormatter(
+																		(
+																			product.variants[0].price.amount -
+																			(product.variants[0].price.amount *
+																				product.discount_percentage) /
+																				100
+																		)
+																			.toString()
+																			.split('.')[0],
+																		product.variants[0].price.currencyCode
+																  )}
 														</span>
 													</>
 												}
 											</p>
 										</header>
-										<div className='flex flex-col sm:flex-row  items-center justify-between gap-1 h-full'>
-											<p className='text-xs'>
-												use the code and get {product.discount_percentage}%
+										<div className='flex flex-col sm:flex-row  items-end justify-between gap-1 h-full'>
+											<p className='text-xs w-[50%]'>
+												{product.hasDiscount
+													? `Use the above code to get ${product.discount_percentage?.toFixed(
+															0
+													  )} % off your purchase `
+													: `Product is ${
+															product.discount_percentage?.toFixed(0) || 0
+													  } % off your purchase`}
 											</p>
 											{cartProduct.includes(product.handle) ? (
 												<Button
@@ -161,6 +191,7 @@ const CheckoutPopup = (props: any) => {
 															  )
 															: null;
 													}}
+													className='text-sm px-1'
 												>
 													in Cart
 												</Button>
@@ -175,6 +206,7 @@ const CheckoutPopup = (props: any) => {
 															'headerCart'
 														);
 													}}
+													className='text-sm px-1'
 												>
 													{props.data &&
 														props.data.upsellingSettings &&
