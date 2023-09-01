@@ -83,7 +83,7 @@ const CheckoutPopup = (props: any) => {
 									</div>
 									<div className='flex flex-col flex-grow gap-2 px-4 py-2'>
 										<header className='flex  flex-col gap-1 sm:flex-row sm:gap-2 sm:justify-between'>
-											<h4>
+											<h4 className='max-w-[15rem]'>
 												<Link
 													href={
 														product.handle === 'knock-plugin'
@@ -92,7 +92,6 @@ const CheckoutPopup = (props: any) => {
 															? '/knock-clipper'
 															: `/products/${getIdFromGid(product.id)}`
 													}
-													className='inline-block whitespace-nowrap max-w-[10rem] text-ellipsis overflow-hidden'
 												>
 													{product.title}
 												</Link>
@@ -176,10 +175,10 @@ const CheckoutPopup = (props: any) => {
 												{product.hasDiscount
 													? `Use the above code to get ${product.discount_percentage?.toFixed(
 															0
-													  )} % off your purchase `
+													  )}% off your purchase `
 													: `Product is ${
 															product.discount_percentage?.toFixed(0) || 0
-													  } % off your purchase`}
+													  }% off your purchase`}
 											</p>
 											{cartProduct.includes(product.handle) ? (
 												<Button
@@ -191,9 +190,9 @@ const CheckoutPopup = (props: any) => {
 															  )
 															: null;
 													}}
-													className='text-sm px-1'
+													className='text-sm px-1 capitalize'
 												>
-													in Cart
+													in cart
 												</Button>
 											) : (
 												<Button
