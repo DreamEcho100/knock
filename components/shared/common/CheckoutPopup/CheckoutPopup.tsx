@@ -175,10 +175,10 @@ const CheckoutPopup = (props: any) => {
 												{product.hasDiscount
 													? `Use the above code to get ${product.discount_percentage?.toFixed(
 															0
-													  )}% off your purchase `
+													  )}% off`
 													: `Product is ${
 															product.discount_percentage?.toFixed(0) || 0
-													  }% off your purchase`}
+													  }% off`}
 											</p>
 											{cartProduct.includes(product.handle) ? (
 												<Button
