@@ -6,7 +6,7 @@ import SEODefaults from '~/utils/core/next-seo.config';
 import '~/app/styles/globals.css';
 import '~/app/styles/swiper.css';
 import 'react-toastify/dist/ReactToastify.css';
-import { sourceSansPro } from './libs/fonts/index';
+import { decapv16, sourceSansPro } from './libs/fonts';
 import { cx } from 'class-variance-authority';
 
 export const metadata: Metadata = SEODefaults;
@@ -19,8 +19,13 @@ export default function RootLayout(props: PropsWithChildren) {
 				<link rel="preload" href="/svg/bbblurry.svg" />
 			</head>
 			<body
-				style={{ fontFamily: "'Source Sans Pro', sans-serif" }}
-				className={cx('dark', sourceSansPro.variable, sourceSansPro.className)}
+				className={cx(
+					'dark',
+					sourceSansPro.variable,
+					sourceSansPro.className,
+					decapv16.variable,
+					decapv16.className,
+				)}
 			>
 				<Providers>{props.children}</Providers>
 			</body>

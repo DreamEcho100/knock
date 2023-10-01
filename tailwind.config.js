@@ -43,6 +43,7 @@ module.exports = {
 			},
 			fontFamily: {
 				'source-sans-pro': ['var(--font-source-sans-pro)'],
+				decapv16: ['var(--font-decapv16)'],
 			},
 			textColor: {
 				primary: {

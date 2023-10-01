@@ -10,8 +10,7 @@ const Logo = ({ whatKnocks = 'PLUGINS THAT', ...props }: IProps) => {
 		<Link
 			{...props}
 			href="/"
-			className="font-black whitespace-nowrap flex flex-wrap"
-			style={{ fontFamily: "'decap_v1regular', sans-serif" }}
+			className="font-black whitespace-nowrap flex flex-wrap font-decapv16"
 		>
 			{whatKnocks}&nbsp;
 			<KnockTrademark />

@@ -1,7 +1,6 @@
 import localFont from 'next/font/local';
 
 export const sourceSansPro = localFont({
-	// weight: ['300', '400', '500', '600', '700', '800', '900'],
 	src: [
 		{
 			path: './source-sans-pro/SourceSansPro-ExtraLight.otf',
@@ -64,9 +63,16 @@ export const sourceSansPro = localFont({
 			style: 'italic',
 		},
 	],
-	// subsets: ['latin'],
 	display: 'swap',
 	preload: true,
 	fallback: ['sans-serif'],
 	variable: '--font-source-sans-pro',
+});
+
+export const decapv16 = localFont({
+	src: './decapv16/DECAPV16/decapv16-webfont.woff2',
+	display: 'swap',
+	preload: true,
+	fallback: ['sans-serif'],
+	variable: '--font-decapv16',
 });
