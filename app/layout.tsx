@@ -15,7 +15,6 @@ export default function RootLayout(props: PropsWithChildren) {
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<head>
-				<meta charSet="UTF-8" />
 				<link rel="preload" href="/svg/bbblurry.svg" />
 			</head>
 			<body

@@ -175,7 +175,7 @@ const getAllProductsController = async (
 	req: NextApiRequest,
 	res: NextApiResponse,
 ) => {
-	const category = req.query.category;
+	// const category = req.query.category;
 
 	const products = await getAllProducts();
 

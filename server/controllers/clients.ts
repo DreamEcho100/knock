@@ -1,14 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-
 import { z } from 'zod';
-
 import axios from 'axios';
-
 import gql from 'graphql-tag';
-
 import { print } from 'graphql';
+import SibApiV3Sdk from 'sib-api-v3-sdk';
 
-const SibApiV3Sdk = require('sib-api-v3-sdk');
 SibApiV3Sdk.ApiClient.instance.authentications['api-key'].apiKey =
 	process.env.SENDINBLUE_API_SMTP;
 
@@ -560,7 +556,7 @@ const getAllOrdersForOneClientByIdController = async (
           query {
           customer(customerAccessToken: ${JSON.stringify(accessToken)}) {
             id
-            orders (first:${select || '250'})  {
+            orders (first:${select ?? '250'})  {
                 edges{
                     node{
                         id
@@ -582,7 +578,7 @@ const getAllOrdersForOneClientByIdController = async (
                             amount
                             currencyCode
                         }
-                        lineItems(first:${select || '250'}){
+                        lineItems(first:${select ?? '250'}){
                             edges{
                                 node{
                                     title
@@ -681,7 +677,7 @@ const getOneOrderForOneClientByIdController = async (
 									clientAccessToken,
 								)}) {
                   id
-                  orders (first:${select || '250'})  {
+                  orders (first:${select ?? '250'})  {
                       edges{
                           node{
                               id
@@ -703,7 +699,7 @@ const getOneOrderForOneClientByIdController = async (
                                   amount
                                   currencyCode
                               }
-                              lineItems(first:${select || '250'}){
+                              lineItems(first:${select ?? '250'}){
                                   edges{
                                       node{
                                           title
@@ -802,7 +798,7 @@ const subscribeToNewsLetters = async (
 	let apiInstance = new SibApiV3Sdk.ContactsApi();
 
 	try {
-		let createContact = new SibApiV3Sdk.CreateContact();
+		const createContact = new SibApiV3Sdk.CreateContact();
 
 		createContact.email = email;
 		createContact.listIds = [51];

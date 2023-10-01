@@ -1,13 +1,8 @@
 import { getShopifyClient } from '~/utils/core/shopify';
-
 import axios from 'axios';
-
 import { print } from 'graphql';
-
 import gql from 'graphql-tag';
-
 import type { NextApiRequest, NextApiResponse } from 'next';
-
 import { z } from 'zod';
 
 export const createCheckout = async (

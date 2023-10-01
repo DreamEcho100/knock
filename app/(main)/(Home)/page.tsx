@@ -8,6 +8,7 @@ import {
 } from './sections';
 import { getAllProducts } from '~/server/controllers/products';
 
+export const runtime = 'edge';
 export const revalidate = 360;
 
 export default async function HomeScreen() {
