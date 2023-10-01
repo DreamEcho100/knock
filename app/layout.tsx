@@ -24,7 +24,6 @@ export default function RootLayout(props: PropsWithChildren) {
 					sourceSansPro.variable,
 					sourceSansPro.className,
 					decapv16.variable,
-					decapv16.className,
 				)}
 			>
 				<Providers>{props.children}</Providers>
