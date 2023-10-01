@@ -30,17 +30,12 @@ export interface IProduct {
 	vendor: string;
 	publishedAt: string;
 	onlineStoreUrl: string;
-	features: [];
 	video: {
 		title: string;
 		src: string;
 		srcTwo: string;
-		srcDoc1:string
-		srcDoc2:string
-	};
-	filesIncluded: {
-		count: number;
-		details: [];
+		srcDoc1: string;
+		srcDoc2: string;
 	};
 	hasNextPage: {
 		value: boolean;
@@ -84,7 +79,7 @@ export interface IProduct {
 			{
 				name: string;
 				value: string;
-			}
+			},
 		];
 		unitPrice: null;
 		unitPriceMeasurement: {
@@ -99,6 +94,30 @@ export interface IProduct {
 		variableValues: {
 			first: 20;
 		};
+	}[];
+}
+
+export interface ICustomProduct extends Omit<IProduct, 'description'> {
+	originalDescription: string;
+	description: {
+		id: number;
+		text: string[];
+		h3: string;
+	}[];
+	filesIncluded: {
+		id: number;
+		li: string;
+	}[];
+	fileCount: number;
+	features: {
+		id: number;
+		li: string;
+	}[];
+	youtubeVideo: {
+		id: number;
+		src: string;
+		srcImage: string;
+		title: string;
 	}[];
 }
 
@@ -138,7 +157,7 @@ export interface ILineItem {
 			{
 				name: string;
 				value: string;
-			}
+			},
 		];
 		unitPrice: null;
 		unitPriceMeasurement: {

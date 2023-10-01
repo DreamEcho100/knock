@@ -31,7 +31,7 @@ export const setCookie = (
 		sameSite = 'lax',
 		secure = true,
 		...options
-	}: SetCookieOptionsType
+	}: SetCookieOptionsType,
 ): void => {
 	let cookieString = `${cookieName}=${cookieValue};Path=${path};SameSite=${sameSite};${
 		secure && ' secure;'
@@ -69,7 +69,7 @@ export const checkCookieByName = (cookieName: string): boolean =>
 	!!getCookie(cookieName);
 export const checkCookieByNameAndValue = (
 	cookieName: string,
-	cookieValue: string
+	cookieValue: string,
 ): boolean => {
 	const result = getCookie(cookieName);
 	return !!result && result === cookieValue;
@@ -77,9 +77,9 @@ export const checkCookieByNameAndValue = (
 
 export const removeCookie = (
 	cookieName: string,
-	options: SetCookieOptionsType | {} = {}
+	options: SetCookieOptionsType | {} = {},
 ): void =>
 	setCookie(cookieName, '', {
 		...options,
-		expires: new Date('Thu, 01 Jan 1970 00:00:00 GMT')
+		expires: new Date('Thu, 01 Jan 1970 00:00:00 GMT'),
 	});

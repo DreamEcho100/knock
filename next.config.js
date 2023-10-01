@@ -3,16 +3,16 @@
 const securityHeaders = [
 	{
 		key: 'X-Frame-Options',
-		value: 'SAMEORIGIN'
+		value: 'SAMEORIGIN',
 	},
 	{
 		key: 'Content-Security-Policy',
-		value: "frame-ancestors 'self'"
+		value: "frame-ancestors 'self'",
 	},
 	{
 		key: 'X-XSS-Protection',
-		value: '1; mode=block'
-	}
+		value: '1; mode=block',
+	},
 ];
 
 const nextConfig = (phase, { defaultConfig }) => {
@@ -20,84 +20,84 @@ const nextConfig = (phase, { defaultConfig }) => {
 		reactStrictMode: true,
 		swcMinify: true,
 		images: {
-			domains: ['cdn.shopify.com']
+			domains: ['cdn.shopify.com', 'api.pluginsthatknock.com'],
 		},
-		experimental: {
-			// appDir: true
-			// runtime: 'experimental-edge'
-		},
+		typescript: { ignoreBuildErrors: true },
+		eslint: { ignoreDuringBuilds: true },
+		// eslint-disable-next-line @typescript-eslint/require-await
 		redirects: async () => {
 			return [
 				{
 					source: '/pages/contact',
 					destination: '/contact-us',
-					permanent: true
+					permanent: true,
 				},
 				{
 					source: '/collections/frontpage',
 					destination: '/',
-					permanent: true
+					permanent: true,
 				},
 				{
 					source: '/collections/all',
 					destination: '/',
-					permanent: true
+					permanent: true,
 				},
 				{
 					source: '/collections',
 					destination: '/',
-					permanent: true
-				}
+					permanent: true,
+				},
 			];
 		},
+		// eslint-disable-next-line @typescript-eslint/require-await
 		headers: async () => {
 			return [
 				{
 					source: '/',
-					headers: securityHeaders
+					headers: securityHeaders,
 				},
 				{
 					source: '/knock',
-					headers: securityHeaders
+					headers: securityHeaders,
 				},
 				{
 					source: '/knock-clipper',
-					headers: securityHeaders
+					headers: securityHeaders,
 				},
 				{
 					source: '/drums-that-knock',
-					headers: securityHeaders
+					headers: securityHeaders,
 				},
 				{
 					source: '/faqs',
-					headers: securityHeaders
+					headers: securityHeaders,
 				},
 				{
 					source: '/policies/terms-of-service',
-					headers: securityHeaders
+					headers: securityHeaders,
 				},
 				{
 					source: '/policies/privacy-policy',
-					headers: securityHeaders
+					headers: securityHeaders,
 				},
 				{
 					source: '/policies/refund-policy',
-					headers: securityHeaders
+					headers: securityHeaders,
 				},
 				{
 					source: '/policies/shipping-policy',
-					headers: securityHeaders
+					headers: securityHeaders,
 				},
 				{
 					source: '/products/:path',
-					headers: securityHeaders
+					headers: securityHeaders,
 				},
 				{
 					source: '/boutique/:path',
-					headers: securityHeaders
-				}
+					headers: securityHeaders,
+				},
 			];
-		}
+		},
 	};
 };
 

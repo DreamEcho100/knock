@@ -36,17 +36,17 @@ const deleteAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 			query: print(customer),
 			variables: {
 				customerAccessToken: data.customerAccessToken,
-				id: data.addressId
-			}
+				id: data.addressId,
+			},
 		},
 		{
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
 					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding': 'null'
-			}
-		}
+				'accept-encoding': 'null',
+			},
+		},
 	);
 
 	if (response.data.errors) {
@@ -62,7 +62,7 @@ const deleteAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	return res.status(200).json({
 		success: true,
-		message: 'Customer address delete successfully'
+		message: 'Customer address delete successfully',
 	});
 };
 
@@ -132,19 +132,19 @@ const addAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 					lastName: data.address.lastName,
 					phone: data.address.phone,
 					province: data.address.province,
-					zip: data.address.zip
+					zip: data.address.zip,
 				},
-				customerAccessToken: data.customerAccessToken
-			}
+				customerAccessToken: data.customerAccessToken,
+			},
 		},
 		{
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
 					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding': 'null'
-			}
-		}
+				'accept-encoding': 'null',
+			},
+		},
 	);
 
 	if (!response.data.data.customerAddressCreate) {
@@ -154,11 +154,11 @@ const addAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (response.data.data.customerAddressCreate.customerAddress) {
 		return res.status(200).json({
 			success: true,
-			message: 'Address added successfully'
+			message: 'Address added successfully',
 		});
 	} else {
 		throw new Error(
-			response.data.data.customerAddressCreate.customerUserErrors[0].message
+			response.data.data.customerAddressCreate.customerUserErrors[0].message,
 		);
 	}
 };
@@ -195,17 +195,17 @@ const defaultAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 			query: print(customer),
 			variables: {
 				addressId,
-				customerAccessToken
-			}
+				customerAccessToken,
+			},
 		},
 		{
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
 					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding': 'null'
-			}
-		}
+				'accept-encoding': 'null',
+			},
+		},
 	);
 
 	if (response.data.errors) {
@@ -221,7 +221,7 @@ const defaultAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	return res.status(200).json({
 		success: true,
-		message: 'Customer address is now setted up default successfully'
+		message: 'Customer address is now setted up default successfully',
 	});
 };
 
@@ -275,20 +275,20 @@ const editAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 					lastName: data.address.lastName,
 					phone: data.address.phone,
 					province: data.address.province,
-					zip: data.address.zip
+					zip: data.address.zip,
 				},
 				customerAccessToken: data.customerAccessToken,
-				id: data.id
-			}
+				id: data.id,
+			},
 		},
 		{
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
 					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding': 'null'
-			}
-		}
+				'accept-encoding': 'null',
+			},
+		},
 	);
 
 	if (response.data.errors) {
@@ -301,13 +301,13 @@ const editAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	if (!response.data.data.customerAddressUpdate.customerAddress) {
 		throw new Error(
-			response.data.data.customerAddressUpdate.customerUserErrors[0].message
+			response.data.data.customerAddressUpdate.customerUserErrors[0].message,
 		);
 	}
 
 	return res.status(200).json({
 		success: true,
-		message: 'Address edited successfully'
+		message: 'Address edited successfully',
 	});
 };
 
@@ -330,23 +330,23 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 		{
 			query: print(customer),
 			variables: {
-				email: input.email
-			}
+				email: input.email,
+			},
 		},
 		{
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
 					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding': 'null'
-			}
-		}
+				'accept-encoding': 'null',
+			},
+		},
 	);
 
 	if (!response.data.data.customerRecover) {
 		res.statusCode = 429;
 		throw new Error(
-			'The user sent too many requests in a given amount of time.'
+			'The user sent too many requests in a given amount of time.',
 		);
 	}
 
@@ -356,13 +356,13 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 	) {
 		res.statusCode = 404;
 		throw new Error(
-			response.data.data.customerRecover.customerUserErrors[0].message
+			response.data.data.customerRecover.customerUserErrors[0].message,
 		);
 	}
 
 	return res.status(200).json({
 		success: true,
-		message: 'Recovery email sent successfully'
+		message: 'Recovery email sent successfully',
 	});
 };
 
@@ -370,7 +370,7 @@ const resetPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 	const input = z
 		.object({
 			password: z.string().min(8),
-			resetUrl: z.string()
+			resetUrl: z.string(),
 		})
 		.parse(req.body);
 
@@ -399,17 +399,17 @@ const resetPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 			query: print(customer),
 			variables: {
 				password: input.password,
-				resetUrl: input.resetUrl
-			}
+				resetUrl: input.resetUrl,
+			},
 		},
 		{
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
 					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding': 'null'
-			}
-		}
+				'accept-encoding': 'null',
+			},
+		},
 	);
 
 	if (response.data.errors) {
@@ -423,20 +423,20 @@ const resetPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 	) {
 		res.statusCode = 404;
 		throw new Error(
-			response.data.data.customerResetByUrl.customerUserErrors[0].message
+			response.data.data.customerResetByUrl.customerUserErrors[0].message,
 		);
 	}
 
 	return res.status(200).json({
 		success: true,
 		message: 'Reset password done successfully',
-		user: response.data.data.customerResetByUrl
+		user: response.data.data.customerResetByUrl,
 	});
 };
 
 const updateOneController = async (
 	req: NextApiRequest & { params: Record<string, any> },
-	res: NextApiResponse
+	res: NextApiResponse,
 ) => {
 	const customerAccessToken = req.headers.clientaccesstoken;
 
@@ -447,7 +447,7 @@ const updateOneController = async (
 			phone: z.string().optional(),
 			password: z.string().min(8).optional(),
 			firstName: z.string().min(2).optional(),
-			lastName: z.string().min(2).optional()
+			lastName: z.string().min(2).optional(),
 		})
 		.parse(req.body);
 
@@ -505,19 +505,19 @@ const updateOneController = async (
 					firstName: input.firstName,
 					lastName: input.lastName,
 					password: input.password,
-					phone: input.phone
+					phone: input.phone,
 				},
-				customerAccessToken
-			}
+				customerAccessToken,
+			},
 		},
 		{
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
 					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding': 'null'
-			}
-		}
+				'accept-encoding': 'null',
+			},
+		},
 	);
 
 	if (response.data.errors) {
@@ -533,7 +533,7 @@ const updateOneController = async (
 				.map((el: any) => {
 					return el.message;
 				})
-				.join(', ')
+				.join(', '),
 		);
 	}
 
@@ -541,13 +541,13 @@ const updateOneController = async (
 		success: true,
 		message: `Successful Update for user with id: ${response.data.data.customerUpdate.customer.id}`,
 		client: response.data.data.customerUpdate.customer,
-		accessTokenDetails: response.data.data.customerUpdate.customerAccessToken
+		accessTokenDetails: response.data.data.customerUpdate.customerAccessToken,
 	});
 };
 
 const getAllOrdersForOneClientByIdController = async (
 	req: NextApiRequest & { params: Record<string, any> },
-	res: NextApiResponse
+	res: NextApiResponse,
 ) => {
 	const accessToken = req.headers.clientaccesstoken;
 	const select = req.query.select;
@@ -639,15 +639,15 @@ const getAllOrdersForOneClientByIdController = async (
             }
           }
         }
-         `
+         `,
 			},
 			{
 				headers: {
 					'Content-Type': 'application/json',
 					'X-Shopify-Storefront-Access-Token':
-						process.env.SHOPIFY_STOREFRONT_API_TOKEN
-				}
-			}
+						process.env.SHOPIFY_STOREFRONT_API_TOKEN,
+				},
+			},
 		);
 
 		const customer = data.data.customer;
@@ -660,13 +660,13 @@ const getAllOrdersForOneClientByIdController = async (
 		return res.status(200).json({
 			success: true,
 			message: `Successful Request for user with id: ${customer.id}`,
-			...customer
+			...customer,
 		});
 	}
 };
 const getOneOrderForOneClientByIdController = async (
 	req: NextApiRequest & { params: Record<string, any> },
-	res: NextApiResponse
+	res: NextApiResponse,
 ) => {
 	const { orderId } = req.params;
 	const clientAccessToken = req.headers.clientaccesstoken;
@@ -678,7 +678,7 @@ const getOneOrderForOneClientByIdController = async (
 			query: `
             query {
                 customer(customerAccessToken: ${JSON.stringify(
-									clientAccessToken
+									clientAccessToken,
 								)}) {
                   id
                   orders (first:${select || '250'})  {
@@ -755,16 +755,16 @@ const getOneOrderForOneClientByIdController = async (
                   }
                 }
               }
-     `
+     `,
 		},
 		{
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
 					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding': 'null'
-			}
-		}
+				'accept-encoding': 'null',
+			},
+		},
 	);
 
 	const customer = data.data.customer;
@@ -777,7 +777,8 @@ const getOneOrderForOneClientByIdController = async (
 	const orders = customer.orders.edges;
 
 	const filterOrder = orders.filter(
-		(el: any) => el.node.id === `gid://shopify/Order/${orderId}?key=${orderKey}`
+		(el: any) =>
+			el.node.id === `gid://shopify/Order/${orderId}?key=${orderKey}`,
 	);
 
 	if (!filterOrder.length) {
@@ -788,13 +789,13 @@ const getOneOrderForOneClientByIdController = async (
 	return res.status(200).json({
 		success: true,
 		message: `Successful Request for user with id: ${clientAccessToken} and order with id: ${req.params.orderId}`,
-		order: filterOrder
+		order: filterOrder,
 	});
 };
 
 const subscribeToNewsLetters = async (
 	req: NextApiRequest & { params: Record<string, any> },
-	res: NextApiResponse
+	res: NextApiResponse,
 ) => {
 	const email = z.string().email().parse(req.body.email);
 
@@ -810,7 +811,7 @@ const subscribeToNewsLetters = async (
 		return res.status(200).json({
 			success: true,
 			message: 'You have been subscribed successfully!',
-			response
+			response,
 		});
 	} catch (error) {
 		res.statusCode = error.status;
@@ -820,7 +821,7 @@ const subscribeToNewsLetters = async (
 
 const supportForm = async (
 	req: NextApiRequest & { params: Record<string, any> },
-	res: NextApiResponse
+	res: NextApiResponse,
 ) => {
 	const input = z
 		.object({
@@ -829,7 +830,7 @@ const supportForm = async (
 			subject: z.string(),
 			message: z.string(),
 			fullName: z.string().min(2),
-			countryCode: z.string().min(3)
+			countryCode: z.string().min(3),
 		})
 		.parse(req.body);
 
@@ -837,7 +838,7 @@ const supportForm = async (
 		{
 			sender: {
 				email: input.email,
-				name: input.fullName
+				name: input.fullName,
 			},
 			subject: input.subject,
 			htmlContent: `<!DOCTYPE html>
@@ -974,24 +975,24 @@ const supportForm = async (
 
 			to: [
 				{
-					email: process.env.NEXT_PUPLIC_FORMSUBMIT_EMAIL
-				}
-			]
-		}
+					email: process.env.NEXT_PUPLIC_FORMSUBMIT_EMAIL,
+				},
+			],
+		},
 	);
 
 	if (email) {
 		return res.status(200).json({
 			success: true,
 			message: 'The form was sent successfully!',
-			email
+			email,
 		});
 	}
 };
 
 const redeemCode = async (
 	req: NextApiRequest & { params: Record<string, any> },
-	res: NextApiResponse
+	res: NextApiResponse,
 ) => {
 	const data = req.body;
 
@@ -1000,9 +1001,9 @@ const redeemCode = async (
 		data,
 		{
 			headers: {
-				'Content-Type': 'application/json'
-			}
-		}
+				'Content-Type': 'application/json',
+			},
+		},
 	);
 
 	if (response.data.verified === false) {
@@ -1013,13 +1014,13 @@ const redeemCode = async (
 	return res.status(200).json({
 		success: true,
 		message: 'VALID CODE',
-		data: response.data
+		data: response.data,
 	});
 };
 
 const createOrderRedeemCode = async (
 	req: NextApiRequest & { params: Record<string, any> },
-	res: NextApiResponse
+	res: NextApiResponse,
 ) => {
 	const input = z
 		.object({
@@ -1029,7 +1030,7 @@ const createOrderRedeemCode = async (
 			email: z.string().email(),
 			variantId: z.string(),
 			productId: z.string(),
-			price: z.number()
+			price: z.number(),
 		})
 		.parse(req.body);
 
@@ -1039,14 +1040,14 @@ const createOrderRedeemCode = async (
 			data: {
 				customer_code: input.redeemCode,
 				product_id: input.productId,
-				variant_id: input.variantId
-			}
+				variant_id: input.variantId,
+			},
 		},
 		{
 			headers: {
-				'Content-Type': 'application/json'
-			}
-		}
+				'Content-Type': 'application/json',
+			},
+		},
 	);
 
 	if (isRedeemCodeWork.data.verified === false) {
@@ -1058,44 +1059,44 @@ const createOrderRedeemCode = async (
 		`https://redeem2.${process.env.REDEEM_DOMAIN}/api/create-order`,
 		{
 			data: {
-				customer_code: input.redeemCode
+				customer_code: input.redeemCode,
 			},
 			order: {
 				billing_address: {
 					first_name: input.firstName,
-					last_name: input.lastName
+					last_name: input.lastName,
 				},
 				customer: {
 					email: input.email,
 					first_name: input.firstName,
-					last_name: input.lastName
+					last_name: input.lastName,
 				},
 				email: input.email,
 				line_items: [
 					{
 						price: input.price,
 						quantity: 1,
-						variant_id: input.variantId
-					}
+						variant_id: input.variantId,
+					},
 				],
 				shipping_address: {
 					first_name: input.firstName,
-					last_name: input.lastName
-				}
-			}
+					last_name: input.lastName,
+				},
+			},
 		},
 		{
 			headers: {
-				'Content-Type': 'application/json'
-			}
-		}
+				'Content-Type': 'application/json',
+			},
+		},
 	);
 
 	return res.status(200).json({
 		success: true,
 		message:
 			'Thanks for ordering from Plugins That Knock. Your payment has cleared',
-		data: response.data
+		data: response.data,
 	});
 };
 
@@ -1104,13 +1105,13 @@ const clientsController = {
 		deleteOne: deleteAddress,
 		addOne: addAddress,
 		default: defaultAddress,
-		editOne: editAddress
+		editOne: editAddress,
 	},
 	one: {
 		orders: {
 			getOne: getOneOrderForOneClientByIdController,
-			getAll: getAllOrdersForOneClientByIdController
-		}
+			getAll: getAllOrdersForOneClientByIdController,
+		},
 	},
 	updateOne: updateOneController,
 	recoverPassword,
@@ -1118,7 +1119,7 @@ const clientsController = {
 	subscribeToNewsLetters,
 	supportForm,
 	redeemCode,
-	createOrderRedeemCode
+	createOrderRedeemCode,
 };
 
 export default clientsController;

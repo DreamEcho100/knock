@@ -19,7 +19,7 @@ import {
 	TMinOfDates,
 	TSetDateValues,
 	TSubtractDateValues,
-	TTwoDateDifference
+	TTwoDateDifference,
 } from './ts';
 
 export const getDateValues: TGetDateValues = (
@@ -34,8 +34,8 @@ export const getDateValues: TGetDateValues = (
 		year,
 		dayOfWeek,
 		time,
-		date
-	} = {}
+		date,
+	} = {},
 ) => {
 	const dateObject = new Date(dateValue);
 	const result: ReturnType<TGetDateValues> = {};
@@ -62,8 +62,8 @@ export const setDateValues: TSetDateValues = (
 		daysInMonth,
 		month,
 		year,
-		weekOfYear
-	} = {}
+		weekOfYear,
+	} = {},
 ) => {
 	const dateObject = new Date(dateValue);
 
@@ -80,12 +80,12 @@ export const setDateValues: TSetDateValues = (
 		const firstDayOfWeek = 1; // monday as the first dateObject (0 = sunday)
 		const startOfYear = new Date(dateObject.getFullYear(), 0, 1);
 		startOfYear.setDate(
-			startOfYear.getDate() + (firstDayOfWeek - (startOfYear.getDay() % 7))
+			startOfYear.getDate() + (firstDayOfWeek - (startOfYear.getDay() % 7)),
 		);
 		const dayWeek =
 			Math.round(
 				(new Date(dateObject).getTime() - new Date(startOfYear).getTime()) /
-					MILLISECONDS_IN_WEEK
+					MILLISECONDS_IN_WEEK,
 			) + 1;
 		dateObject.setDate(dateObject.getDate() - (dayWeek - weekOfYear) * 7);
 		// dateObject.toISOString();
@@ -99,13 +99,13 @@ export const setDateValues: TSetDateValues = (
 const calcBasicDateValues: TCalcBasicDateValues = (
 	dateValue = new Date(),
 	options = {},
-	calcFunc
+	calcFunc,
 ) => {
 	const dateObject = new Date(dateValue);
 
 	const dateValues: typeof options = getDateValues(
 		dateObject,
-		options as unknown as IDateBasicValuesOptions<boolean>
+		options as unknown as IDateBasicValuesOptions<boolean>,
 	);
 
 	let item: keyof typeof options;
@@ -140,25 +140,25 @@ const calcBasicDateValues: TCalcBasicDateValues = (
 // Add the specified number of days to the given date.
 export const addDateValues: TAddDateValues = (
 	dateValue = new Date(),
-	options = {}
+	options = {},
 ) =>
 	calcBasicDateValues(
 		dateValue,
 		options,
 		(dateIMilliseconds1, dateIMilliseconds2) =>
-			dateIMilliseconds1 + dateIMilliseconds2
+			dateIMilliseconds1 + dateIMilliseconds2,
 	);
 // Start of Time
 // Return the start of a unit of time for the given date.
 export const subtractDateValues: TSubtractDateValues = (
 	dateValue = new Date(),
-	options = {}
+	options = {},
 ) =>
 	calcBasicDateValues(
 		dateValue,
 		options,
 		(dateIMilliseconds1, dateIMilliseconds2) =>
-			dateIMilliseconds1 - dateIMilliseconds2
+			dateIMilliseconds1 - dateIMilliseconds2,
 	);
 
 // Maximum of the given dates
@@ -167,8 +167,8 @@ export const maxOfDates: TMaxOfDates = (datesArray) =>
 	new Date(
 		Math.max.apply(
 			null,
-			datesArray.map((item) => new Date(item).getTime())
-		)
+			datesArray.map((item) => new Date(item).getTime()),
+		),
 	);
 // new Date(Math.max(...datesArray.map(item => new Date(item).getTime())));
 
@@ -178,8 +178,8 @@ export const minOfDates: TMinOfDates = (datesArray) =>
 	new Date(
 		Math.min.apply(
 			null,
-			datesArray.map((item) => new Date(item).getTime())
-		)
+			datesArray.map((item) => new Date(item).getTime()),
+		),
 	);
 // new Date(Math.min(...datesArray.map(item => new Date(item).getTime())));
 
@@ -202,7 +202,7 @@ export const formatDate: TFormatDate = (providedDate, options) => {
 	const result = options
 		? addZeroToStringStartIfLessThanLimit(
 				providedDate.toLocaleDateString(options.locales, options.format),
-				2
+				2,
 				// eslint-disable-next-line no-mixed-spaces-and-tabs
 		  )
 		: addZeroToStringStartIfLessThanLimit(providedDate.toLocaleDateString(), 2);
@@ -211,7 +211,7 @@ export const formatDate: TFormatDate = (providedDate, options) => {
 
 	if (tempArray.length === 1)
 		return {
-			date: tempArray[0]
+			date: tempArray[0],
 		};
 
 	const fullTimeString: string = tempArray[tempArray.length - 1];
@@ -231,13 +231,13 @@ export const formatDate: TFormatDate = (providedDate, options) => {
 		return {
 			date: fullDateString,
 			time,
-			timeZoneName
+			timeZoneName,
 		};
 	} else {
 		time = fullTimeString;
 		return {
 			date: fullDateString,
-			time
+			time,
 		};
 	}
 };

@@ -13,7 +13,7 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 	const input = z
 		.object({
 			email: z.string().email(),
-			password: z.string().min(5)
+			password: z.string().min(5),
 		})
 		.parse(req.body);
 
@@ -42,18 +42,18 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 			variables: {
 				input: {
 					email: input.email,
-					password: input.password
-				}
-			}
+					password: input.password,
+				},
+			},
 		},
 		{
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
 					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding': 'null'
-			}
-		}
+				'accept-encoding': 'null',
+			},
+		},
 	);
 
 	if (!response.data.data.customerAccessTokenCreate.customerAccessToken) {
@@ -64,7 +64,7 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 	return res.status(200).json({
 		success: true,
 		message: 'Connected successfully!',
-		user: response.data.data.customerAccessTokenCreate.customerAccessToken
+		user: response.data.data.customerAccessTokenCreate.customerAccessToken,
 	});
 };
 
@@ -72,7 +72,7 @@ const activate = async (req: NextApiRequest, res: NextApiResponse) => {
 	const input = z
 		.object({
 			activationUrl: z.string(),
-			password: z.string().min(8)
+			password: z.string().min(8),
 		})
 		.parse(req.body);
 
@@ -104,35 +104,35 @@ const activate = async (req: NextApiRequest, res: NextApiResponse) => {
 			query: print(customer),
 			variables: {
 				activationUrl: input.activationUrl,
-				password: input.password
-			}
+				password: input.password,
+			},
 		},
 		{
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
 					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding': 'null'
-			}
-		}
+				'accept-encoding': 'null',
+			},
+		},
 	);
 
 	if (response.data.data.customerActivateByUrl.customerUserErrors.length) {
 		throw new Error(
-			response.data.data.customerActivateByUrl.customerUserErrors[0].message
+			response.data.data.customerActivateByUrl.customerUserErrors[0].message,
 		);
 	}
 
 	return res.status(200).json({
 		success: true,
 		message: "You're account is activated successfully",
-		user: response.data.data.customerActivateByUrl
+		user: response.data.data.customerActivateByUrl,
 	});
 };
 
 const checkToken = async (
 	req: NextApiRequest & { params: Record<string, any> },
-	res: NextApiResponse
+	res: NextApiResponse,
 ) => {
 	const accessToken = req.headers.accesstoken;
 
@@ -255,16 +255,16 @@ const checkToken = async (
             
           }
         }
-         `
+         `,
 			},
 			{
 				headers: {
 					'Content-Type': 'application/json',
 					'X-Shopify-Storefront-Access-Token':
 						process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-					'accept-encoding': 'null'
-				}
-			}
+					'accept-encoding': 'null',
+				},
+			},
 		);
 
 		if (!data.data.customer) {
@@ -281,7 +281,7 @@ const checkToken = async (
 		return res.status(200).json({
 			success: true,
 			message: '',
-			user: data.data.customer
+			user: data.data.customer,
 			//checkoutUrl
 		});
 	} else {
@@ -290,7 +290,7 @@ const checkToken = async (
 };
 
 const logout = async (req: NextApiRequest, res: NextApiResponse) => {
-	let accessToken = req.headers.accesstoken;
+	const accessToken = req.headers.accesstoken;
 
 	const deletedAccessToken = gql`
 		mutation customerAccessTokenDelete($customerAccessToken: String!) {
@@ -310,17 +310,17 @@ const logout = async (req: NextApiRequest, res: NextApiResponse) => {
 		{
 			query: print(deletedAccessToken),
 			variables: {
-				customerAccessToken: accessToken
-			}
+				customerAccessToken: accessToken,
+			},
 		},
 		{
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
 					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding': 'null'
-			}
-		}
+				'accept-encoding': 'null',
+			},
+		},
 	);
 	if (!response.data.data.customerAccessTokenDelete) {
 		throw new Error('Access Token not valid');
@@ -328,7 +328,7 @@ const logout = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	return res.status(200).json({
 		success: true,
-		message: 'Logout successfully!'
+		message: 'Logout successfully!',
 	});
 };
 
@@ -340,7 +340,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
 			phone: z.string().optional(),
 			password: z.string().min(8),
 			firstName: z.string().min(2),
-			lastName: z.string().min(2)
+			lastName: z.string().min(2),
 		})
 		.parse(req.body);
 
@@ -383,23 +383,23 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
 					password: input.password,
 					firstName: input.firstName,
 					lastName: input.lastName,
-					phone: input.phone
-				}
-			}
+					phone: input.phone,
+				},
+			},
 		},
 		{
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
 					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding': 'null'
-			}
-		}
+				'accept-encoding': 'null',
+			},
+		},
 	);
 
 	if (!response.data.data.customerCreate) {
 		throw new Error(
-			'Account already exists check your email for confirmation '
+			'Account already exists check your email for confirmation ',
 		);
 	}
 
@@ -413,7 +413,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
 	return res.status(201).json({
 		success: true,
 		message: `Account created successfully!`,
-		response: response.data.data.customerCreate.customer
+		response: response.data.data.customerCreate.customer,
 	});
 };
 
@@ -422,7 +422,7 @@ const authController = {
 	activate,
 	checkToken,
 	logout,
-	register
+	register,
 };
 
 export default authController;

@@ -32,7 +32,7 @@ const ls = {
 	set: setItem,
 	get: getItem,
 	check: checkItem,
-	remove: removeItem
+	remove: removeItem,
 };
 
 export default ls;

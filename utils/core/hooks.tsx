@@ -1,10 +1,13 @@
-import { useSharedCustomerState } from '@context/Customer';
-import { customerGlobalActions } from '@context/Customer/actions';
-import { ICartProduct } from '@context/Customer/ts';
+import { useSharedCustomerState } from '~/app/components/providers/CustomerContext';
+import { customerGlobalActions } from '~/app/components/providers/CustomerContext/actions';
+import { ICartProduct } from '~/app/components/providers/CustomerContext/ts';
 
 import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
-import { getCookie, removeCookie } from '@utils/common/storage/cookie/document';
+import {
+	getCookie,
+	removeCookie,
+} from '~/utils/common/storage/cookie/document';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 
@@ -13,7 +16,7 @@ import type { IGenericErrorResponse, ILineItem, IProduct, IUser } from 'types';
 import { checkoutApi } from './API';
 import type {
 	TCreateOneCheckoutReturnType,
-	TGetOneCheckoutReturnType
+	TGetOneCheckoutReturnType,
 } from './API';
 import { getUserCheckoutIdAndKeyFromCookie } from './cookie';
 import { convertProductToCartItem } from './products';
@@ -25,13 +28,13 @@ export const useGetUserDataFromStore = () => {
 
 	return {
 		user,
-		getUser: () => queryClient.getQueryData<IUser>(['check-token'])
+		getUser: () => queryClient.getQueryData<IUser>(['check-token']),
 	};
 };
 
 export const useGetUserData = ({
 	enabled,
-	accessToken
+	accessToken,
 }: {
 	enabled: boolean;
 	accessToken?: string;
@@ -46,9 +49,9 @@ export const useGetUserData = ({
 				{
 					headers: {
 						'Content-type': 'application/json',
-						accesstoken: accessToken
-					}
-				}
+						accesstoken: accessToken,
+					},
+				},
 			)
 				.then((response) => response.json())
 				.then((result) => result.user);
@@ -56,8 +59,8 @@ export const useGetUserData = ({
 		{
 			enabled: enabled && !!accessToken,
 			refetchInterval: 10 * 60 * 1000,
-			onError: async (error) => {}
-		}
+			onError: async (error) => {},
+		},
 	);
 
 	return query;
@@ -69,7 +72,7 @@ export const useGetUserCheckoutIdAndKeyCookie = () =>
 export const useLogoutUser = ({
 	onError,
 	onSuccess,
-	userCheckoutDetailsAndIdAndKey
+	userCheckoutDetailsAndIdAndKey,
 }: {
 	onError?: () => void;
 	onSuccess?: () => void;
@@ -80,8 +83,8 @@ export const useLogoutUser = ({
 	const { user } = useGetUserDataFromStore();
 	const [
 		{
-			cart: { productsData }
-		}
+			cart: { productsData },
+		},
 	] = useSharedCustomerState();
 
 	const queryClient = useQueryClient();
@@ -105,42 +108,41 @@ export const useLogoutUser = ({
 				{
 					headers: {
 						'Content-type': 'application/json',
-						accesstoken: accessToken
-					}
-				}
+						accesstoken: accessToken,
+					},
+				},
 			)
 				.then((response) => response.json())
 				.then((result) => ({
 					...result,
-					userCheckoutDetailsAndIdAndKey
+					userCheckoutDetailsAndIdAndKey,
 				}));
 		},
 		{
 			onSuccess: async ({ userCheckoutDetailsAndIdAndKey }) => {
-
 				const accessToken = getGetAccessTokenFromCookie();
 
-				let checkout:any = getCookie('checkoutIdAndKey')
-				checkout = JSON.parse(checkout)			
-				
-				 fetch(
-					`${process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH}/checkouts/disassociate`, 
+				let checkout: any = getCookie('checkoutIdAndKey');
+				checkout = JSON.parse(checkout);
+
+				fetch(
+					`${process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH}/checkouts/disassociate`,
 					{
-						method:'POST',
-						headers:{
+						method: 'POST',
+						headers: {
 							'Content-type': 'application/json',
 						},
-						body:JSON.stringify({
+						body: JSON.stringify({
 							checkoutId: checkout.checkoutId,
-							checkoutKey:checkout.checkoutKey,
-							customerAccessToken:accessToken
-						})
-					}
-				)
+							checkoutKey: checkout.checkoutKey,
+							customerAccessToken: accessToken,
+						}),
+					},
+				);
 
 				removeCookie('user-access-token');
 				removeCookie('checkoutIdAndKey');
-/*
+				/*
 				if (userCheckoutDetailsAndIdAndKey)
 					checkoutApi.products.removeMany(
 						`gid://shopify/Checkout/${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId}?key=${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutKey}`,
@@ -154,8 +156,8 @@ export const useLogoutUser = ({
 			},
 			onError: (error) => {
 				if (onError) return onError();
-			}
-		}
+			},
+		},
 	);
 };
 
@@ -169,17 +171,17 @@ export const useGetUserCheckoutDetailsAndIdAndKey = () => {
 	const queryClient = useQueryClient();
 	const createOneCheckout =
 		queryClient.getQueryData<TCreateOneCheckoutReturnType>([
-			'create-one-checkout'
+			'create-one-checkout',
 		]);
 	const getOneCheckout = queryClient.getQueryData<TGetOneCheckoutReturnType>([
-		'get-one-checkout'
+		'get-one-checkout',
 	]);
 
 	return useMemo(() => {
 		if (createOneCheckout?.checkout && createOneCheckout?.checkoutIdAndKey) {
 			return {
 				checkoutIdAndKey: createOneCheckout?.checkoutIdAndKey,
-				checkout: createOneCheckout?.checkout
+				checkout: createOneCheckout?.checkout,
 			};
 		} else if (getOneCheckout?.checkout) {
 			const checkoutIdAndKeyFromCookie = getUserCheckoutIdAndKeyFromCookie();
@@ -187,23 +189,23 @@ export const useGetUserCheckoutDetailsAndIdAndKey = () => {
 			if (checkoutIdAndKeyFromCookie) {
 				return {
 					checkoutIdAndKey: checkoutIdAndKeyFromCookie,
-					checkout: getOneCheckout?.checkout
+					checkout: getOneCheckout?.checkout,
 				};
 			}
 		}
 	}, [
 		createOneCheckout?.checkout,
 		createOneCheckout?.checkoutIdAndKey,
-		getOneCheckout?.checkout
+		getOneCheckout?.checkout,
 	]);
 };
 
 export const useAddProductsToCheckoutAndCart = () => {
 	const [
 		{
-			cart: { productsData }
+			cart: { productsData },
 		},
-		customerDispatch
+		customerDispatch,
 	] = useSharedCustomerState();
 	const userCheckoutDetailsAndIdAndKey = useGetUserCheckoutDetailsAndIdAndKey();
 
@@ -218,12 +220,12 @@ export const useAddProductsToCheckoutAndCart = () => {
 			const products = _products.filter(
 				(product) =>
 					!productsData.find(
-						(productOnCart) => productOnCart.variant.product.id === product.id
-					)
+						(productOnCart) => productOnCart.variant.product.id === product.id,
+					),
 			);
 			if (products.length === 0)
 				throw new Error(
-					"No product Added either it's already exists or something wrong happened"
+					"No product Added either it's already exists or something wrong happened",
 				);
 			if (
 				!userCheckoutDetailsAndIdAndKey?.checkoutIdAndKey?.checkoutId ||
@@ -240,11 +242,11 @@ export const useAddProductsToCheckoutAndCart = () => {
 						typeof product !== 'object' ||
 						!product.quantity ||
 						!product.variants[0] ||
-						!product.variants[0]?.id
+						!product.variants[0]?.id,
 				)
 			)
 				throw new Error(
-					'The passed product must be an object with quantity and variants information available in the products list'
+					'The passed product must be an object with quantity and variants information available in the products list',
 				);
 
 			return {
@@ -254,23 +256,23 @@ export const useAddProductsToCheckoutAndCart = () => {
 					`gid://shopify/Checkout/${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId}?key=${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutKey}`,
 					products.map((product) => ({
 						quantity: product.quantity,
-						variantId: product.variants[0].id
-					}))
-				)
+						variantId: product.variants[0].id,
+					})),
+				),
 			};
 		},
 		onSuccess: ({ products, result }) =>
 			customerGlobalActions.cart.set(customerDispatch, {
 				cartObj: {
 					productsData: result.map((item) =>
-						convertProductToCartItem({ product: item })
+						convertProductToCartItem({ product: item }),
 					),
-					updatedAt: new Date()
-				}
+					updatedAt: new Date(),
+				},
 			}),
 
 		onSettled: () =>
-			customerGlobalActions.setIsVisibleOnly(customerDispatch, 'headerCart')
+			customerGlobalActions.setIsVisibleOnly(customerDispatch, 'headerCart'),
 	});
 };
 export const useUpdateProductsToCheckoutAndCart = () => {
@@ -294,11 +296,11 @@ export const useUpdateProductsToCheckoutAndCart = () => {
 						!product ||
 						typeof product !== 'object' ||
 						!product.quantity ||
-						!product.variant?.id
+						!product.variant?.id,
 				)
 			)
 				throw new Error(
-					'The passed product must be an object with quantity and variants information available in the products list'
+					'The passed product must be an object with quantity and variants information available in the products list',
 				);
 
 			return {
@@ -307,21 +309,21 @@ export const useUpdateProductsToCheckoutAndCart = () => {
 					`gid://shopify/Checkout/${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId}?key=${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutKey}`,
 					products.map((product) => ({
 						quantity: product.quantity,
-						id: product.id
-					}))
-				)
+						id: product.id,
+					})),
+				),
 			};
 		},
 		onSuccess: ({ products, result }) => {
 			customerGlobalActions.cart.set(customerDispatch, {
 				cartObj: {
 					productsData: result.map((item) =>
-						convertProductToCartItem({ product: item })
+						convertProductToCartItem({ product: item }),
 					),
-					updatedAt: new Date()
-				}
+					updatedAt: new Date(),
+				},
 			});
-		}
+		},
 	});
 };
 export const useRemoveProductsToCheckoutAndCart = () => {
@@ -348,17 +350,17 @@ export const useRemoveProductsToCheckoutAndCart = () => {
 				productsIds,
 				result: await checkoutApi.products.removeMany(
 					`gid://shopify/Checkout/${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId}?key=${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutKey}`,
-					productsIds
-				)
+					productsIds,
+				),
 			};
 		},
 		onSuccess: ({ productsIds, result }) => {
 			productsIds.forEach((productId) =>
 				customerGlobalActions.cart.deleteOneProduct(customerDispatch, {
-					productId
-				})
+					productId,
+				}),
 			);
-		}
+		},
 	});
 };
 
@@ -366,7 +368,7 @@ export const useSleep = (time: number) => {
 	const configRef = useRef<{
 		timeoutId?: NodeJS.Timeout;
 	}>({
-		timeoutId: undefined
+		timeoutId: undefined,
 	});
 
 	const clearSleepTimeout = () => {
@@ -390,6 +392,6 @@ export const useSleep = (time: number) => {
 
 	return {
 		sleep,
-		clearSleepTimeout
+		clearSleepTimeout,
 	};
 };

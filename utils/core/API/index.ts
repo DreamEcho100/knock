@@ -3,29 +3,20 @@ import type { ICheckout, ICheckoutIdAndKey, ILineItem, IProduct } from 'types';
 
 const throwIfResponseError = async (response: Response) => {
 	if (!response.ok) {
-		let errorMessage: string;
-		const text = await response.text();
-
-		errorMessage = text;
+		const errorMessage = await response.text();
 
 		throw new Error(`Error, ${response.statusText}, ${errorMessage}`);
 	}
 };
-
-// const tryCatch = async <T>(func: T) => {
-// 	try {
-// 		if (typeof func === 'function') func();
-// 	} catch (error) {}
-// };
 
 export const getBanner = async () => {
 	const response = await axios.get(
 		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-banner`,
 		{
 			headers: {
-				'Content-Type': 'application/json'
-			}
-		}
+				'Content-Type': 'application/json',
+			},
+		},
 	);
 
 	return response.data.banner;
@@ -36,9 +27,9 @@ export const getUpSellingPopup = async () => {
 		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-upselling-popup`,
 		{
 			headers: {
-				'Content-Type': 'application/json'
-			}
-		}
+				'Content-Type': 'application/json',
+			},
+		},
 	);
 
 	return response.data;
@@ -49,9 +40,9 @@ export const getMainSection = async () => {
 		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-main-section`,
 		{
 			headers: {
-				'Content-Type': 'application/json'
-			}
-		}
+				'Content-Type': 'application/json',
+			},
+		},
 	);
 
 	return response.data.main;
@@ -62,9 +53,9 @@ export const getHomePageData = async () => {
 		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-homepage`,
 		{
 			headers: {
-				'Content-Type': 'application/json'
-			}
-		}
+				'Content-Type': 'application/json',
+			},
+		},
 	);
 
 	return response.data;
@@ -75,9 +66,9 @@ export const getKnockPageData = async () => {
 		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-knockpage`,
 		{
 			headers: {
-				'Content-Type': 'application/json'
-			}
-		}
+				'Content-Type': 'application/json',
+			},
+		},
 	);
 
 	return response.data;
@@ -88,9 +79,9 @@ export const getPrivacyPolicy = async () => {
 		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-privacy-policy`,
 		{
 			headers: {
-				'Content-Type': 'application/json'
-			}
-		}
+				'Content-Type': 'application/json',
+			},
+		},
 	);
 
 	return response.data.PrivacyPolicy;
@@ -101,9 +92,9 @@ export const getRefundPolicy = async () => {
 		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-refund-policy`,
 		{
 			headers: {
-				'Content-Type': 'application/json'
-			}
-		}
+				'Content-Type': 'application/json',
+			},
+		},
 	);
 
 	return response.data.RefundPolicy;
@@ -114,9 +105,9 @@ export const getShippingPolicy = async () => {
 		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-shipping-policy`,
 		{
 			headers: {
-				'Content-Type': 'application/json'
-			}
-		}
+				'Content-Type': 'application/json',
+			},
+		},
 	);
 
 	return response.data.ShippingPolicy[0];
@@ -127,9 +118,9 @@ export const getTermsOfService = async () => {
 		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-terms-of-service`,
 		{
 			headers: {
-				'Content-Type': 'application/json'
-			}
-		}
+				'Content-Type': 'application/json',
+			},
+		},
 	);
 
 	return response.data.termsOfService;
@@ -140,9 +131,9 @@ export const getDTKPageData = async () => {
 		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-DTK`,
 		{
 			headers: {
-				'Content-Type': 'application/json'
-			}
-		}
+				'Content-Type': 'application/json',
+			},
+		},
 	);
 
 	return response.data;
@@ -153,9 +144,9 @@ export const getFaqPageData = async () => {
 		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-FAQ`,
 		{
 			headers: {
-				'Content-Type': 'application/json'
-			}
-		}
+				'Content-Type': 'application/json',
+			},
+		},
 	);
 
 	return response.data;
@@ -166,9 +157,9 @@ export const getKnockClipperPageData = async () => {
 		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-knockclipperpage`,
 		{
 			headers: {
-				'Content-Type': 'application/json'
-			}
-		}
+				'Content-Type': 'application/json',
+			},
+		},
 	);
 
 	return response.data;
@@ -179,9 +170,9 @@ export const getKnockMainSection = async () => {
 		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-knock-main-section`,
 		{
 			headers: {
-				'Content-Type': 'application/json'
-			}
-		}
+				'Content-Type': 'application/json',
+			},
+		},
 	);
 
 	return response.data;
@@ -192,9 +183,9 @@ export const getKnockClipperMainSection = async () => {
 		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-knock-clipper-main-section`,
 		{
 			headers: {
-				'Content-Type': 'application/json'
-			}
-		}
+				'Content-Type': 'application/json',
+			},
+		},
 	);
 
 	return response.data;
@@ -205,9 +196,9 @@ export const getPopup = async () => {
 		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-popup`,
 		{
 			headers: {
-				'Content-Type': 'application/json'
-			}
-		}
+				'Content-Type': 'application/json',
+			},
+		},
 	);
 
 	return response.data.popup;
@@ -224,9 +215,9 @@ const getAppApiPath = () =>
 export const getAllProducts = async () => {
 	const response = await fetch(`${getAppApiPath()}/products`);
 
-	const productsResult: {
+	const productsResult = (await response.json()) as {
 		products: IProduct[];
-	} = await response.json();
+	};
 
 	// await throwIfResponseError(response);
 
@@ -237,56 +228,56 @@ export const getProductById = async (id: string) => {
 
 	// await throwIfResponseError(response);
 
-	const productResult: {
+	const productResult = (await response.json()) as {
 		product: IProduct;
-	} = await response.json();
+	};
 
 	return productResult.product;
 };
 export const getProductByHandle = async (handle: string) => {
 	const response = await fetch(
-		`${getAppApiPath()}/products/product/?handle=${handle}`
+		`${getAppApiPath()}/products/product/?handle=${handle}`,
 	);
 
 	// await throwIfResponseError(response);
 
-	const productResult: {
+	const productResult = (await response.json()) as {
 		product: IProduct;
-	} = await response.json();
+	};
 
 	return productResult.product;
 };
 export const createOneCheckout = async () => {
 	const response = await fetch(`${getAppApiPath()}/checkouts/create-one`);
 
-	const result: {
+	const result = (await response.json()) as {
 		checkoutIdAndKey: ICheckoutIdAndKey;
 		checkout: ICheckout;
-	} = await response.json();
+	};
 
 	// await throwIfResponseError(response);
 
 	return {
 		checkoutIdAndKey: result.checkoutIdAndKey,
-		checkout: result.checkout
+		checkout: result.checkout,
 	};
 };
 export const deleteOneCheckout = async (
 	checkoutId: string,
-	lineItemIdsToRemove: string[]
+	lineItemIdsToRemove: string[],
 ) => {
 	const response = await fetch(`${getAppApiPath()}/checkouts/products`, {
 		method: 'DELETE',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify(
 			{
 				checkoutId,
-				lineItemIdsToRemove
-			}
+				lineItemIdsToRemove,
+			},
 			// productsData.map((product) => product.id)
-		)
+		),
 	});
 
 	// await throwIfResponseError(response);
@@ -297,7 +288,7 @@ export const deleteOneCheckout = async (
 };
 export const getOneCheckout = async (
 	checkoutId: string,
-	checkoutKey: string
+	checkoutKey: string,
 ) => {
 	const response = await fetch(
 		`${getAppApiPath()}/checkouts/get-one/?checkoutId=${checkoutId}&checkoutKey=${checkoutKey}`,
@@ -305,19 +296,19 @@ export const getOneCheckout = async (
 			headers: {
 				'Cache-Control': 'no-cache',
 				Pragma: 'no-cache',
-				Expires: '0'
-			}
-		}
+				Expires: '0',
+			},
+		},
 	);
 
 	// await throwIfResponseError(response);
 
-	const result: {
+	const result = (await response.json()) as {
 		checkout: ICheckout;
-	} = await response.json();
+	};
 
 	return {
-		checkout: result.checkout
+		checkout: result.checkout,
 	};
 };
 export const addManyProductsToCheckout = async (
@@ -325,23 +316,23 @@ export const addManyProductsToCheckout = async (
 	lineItemsToAdd: {
 		variantId: string; //'gid://shopify/ProductVariant/41485788053727';
 		quantity: number;
-	}[]
+	}[],
 ) => {
 	const response = await fetch(`${getAppApiPath()}/checkouts/products`, {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ checkoutId, lineItemsToAdd })
+		body: JSON.stringify({ checkoutId, lineItemsToAdd }),
 	});
 
 	// await throwIfResponseError(response);
 
-	const result: {
+	const result = (await response.json()) as {
 		item: {
 			lineItems: ILineItem[];
 		};
-	} = await response.json();
+	};
 
 	return result.item.lineItems;
 };
@@ -350,45 +341,45 @@ export const updateManyProductsToCheckout = async (
 	lineItemsToUpdate: {
 		id: string; //'gid://shopify/ProductVariant/41485788053727';
 		quantity: number;
-	}[]
+	}[],
 ) => {
 	const response = await fetch(`${getAppApiPath()}/checkouts/products`, {
 		method: 'PUT',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ checkoutId, lineItemsToUpdate })
+		body: JSON.stringify({ checkoutId, lineItemsToUpdate }),
 	});
 
 	// await throwIfResponseError(response);
 
-	const result: {
+	const result = (await response.json()) as {
 		item: {
 			lineItems: ILineItem[];
 		};
-	} = await response.json();
+	};
 
 	return result.item.lineItems;
 };
 export const removeManyProductsToCheckout = async (
 	checkoutId: string,
-	lineItemIdsToRemove: string[]
+	lineItemIdsToRemove: string[],
 ) => {
 	const response = await fetch(`${getAppApiPath()}/checkouts/products`, {
 		method: 'DELETE',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ checkoutId, lineItemIdsToRemove })
+		body: JSON.stringify({ checkoutId, lineItemIdsToRemove }),
 	});
 
 	// await throwIfResponseError(response);
 
-	const result: {
+	const result = (await response.json()) as {
 		item: {
 			lineItems: ILineItem[];
 		};
-	} = await response.json();
+	};
 
 	return result.item.lineItems;
 };
@@ -400,15 +391,15 @@ export const checkoutApi = {
 	products: {
 		addMany: addManyProductsToCheckout,
 		removeMany: removeManyProductsToCheckout,
-		updateMany: updateManyProductsToCheckout
-	}
+		updateMany: updateManyProductsToCheckout,
+	},
 };
 
 const appApi = {
 	checkout: checkoutApi,
 	Products: {
-		getAll: getAllProducts
-	}
+		getAll: getAllProducts,
+	},
 };
 
 export default appApi;

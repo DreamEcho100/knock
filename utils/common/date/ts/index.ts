@@ -32,17 +32,17 @@ export interface TSetDateValuesOptionsNumber
 
 export type TGetDateValues = (
 	dateValue: TDate,
-	options: TGetDateValuesOptions
+	options: TGetDateValuesOptions,
 ) => TGetDateValuesReturn;
 
 export type TSetDateValues = (
 	dateValue: TDate,
-	options: TSetDateValuesOptionsNumber
+	options: TSetDateValuesOptionsNumber,
 ) => Date;
 
 export type TAddZeroToStringStartIfLessThanLimit = (
 	str: string,
-	limit: number
+	limit: number,
 ) => string;
 export interface TFormatDateOptions {
 	locales?: string | string[];
@@ -50,7 +50,7 @@ export interface TFormatDateOptions {
 }
 export type TFormatDate = (
 	providedDate: Date,
-	options?: TFormatDateOptions
+	options?: TFormatDateOptions,
 ) => {
 	date: string;
 	time?: string;
@@ -63,11 +63,11 @@ export type TMinOfDates = (datesArray: TDate[]) => Date;
 export type TCalcBasicDateValues = (
 	dateValue: TDate,
 	options: IDateBasicValuesOptions<boolean | number>,
-	calcFunc: (dateIMilliseconds1: number, dateIMilliseconds2: number) => number
+	calcFunc: (dateIMilliseconds1: number, dateIMilliseconds2: number) => number,
 ) => Date;
 export type TAddOrSubtractDateValues = (
 	dateValue: TDate,
-	options: IDateBasicValuesOptions<number>
+	options: IDateBasicValuesOptions<number>,
 ) => Date;
 export type TAddDateValues = TAddOrSubtractDateValues;
 export type TSubtractDateValues = TAddOrSubtractDateValues;
@@ -81,7 +81,7 @@ export type TDateIsAfter = twoDateOneReturn<boolean>;
 export type TDateIsBetween = (
 	date: TDate,
 	dateMin: TDate,
-	dateMax: TDate
+	dateMax: TDate,
 ) => boolean;
 
 type oneDateOneReturn<R> = (date: TDate) => R;

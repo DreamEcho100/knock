@@ -6,8 +6,8 @@ focus:ring focus:ring-bg-secondary-1`;
 
 const twClasses = {
 	button: {
-		default: buttonDefault
-	}
+		default: buttonDefault,
+	},
 };
 
 export default twClasses;

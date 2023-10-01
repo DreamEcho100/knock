@@ -5,7 +5,7 @@ import type { ILineItem } from 'types';
 export const convertProductToCartItem = ({
 	product,
 	preferredImage,
-	selectedAmount
+	selectedAmount,
 }: {
 	product: ILineItem;
 	preferredImage?: ICartProduct['preferredImage'];
@@ -18,7 +18,7 @@ export const convertProductToCartItem = ({
 			: product.variant.image
 			? {
 					src: product.variant.image.src,
-					alt: product.variant.image.altText || ''
+					alt: product.variant.image.altText || '',
 			  }
 			: null,
 		price:
@@ -29,6 +29,6 @@ export const convertProductToCartItem = ({
 			? product.quantity
 			: selectedAmount
 			? selectedAmount
-			: 1
+			: 1,
 	};
 };

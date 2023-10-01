@@ -10,14 +10,15 @@ export const getShopifyClient = () => {
 		throw new Error("DOMAINE doesn't exist on the environment variables");
 	if (!process.env.SHOPIFY_STOREFRONT_API_TOKEN)
 		throw new Error(
-			"SHOPIFY_STOREFRONT_API_TOKEN doesn't exist on the environment variables"
+			"SHOPIFY_STOREFRONT_API_TOKEN doesn't exist on the environment variables",
 		);
 	const DOMAINE = process.env.DOMAINE;
 	const SHOPIFY_STOREFRONT_API_TOKEN = process.env.SHOPIFY_STOREFRONT_API_TOKEN;
 
 	return Client.buildClient({
 		domain: DOMAINE,
-		storefrontAccessToken: SHOPIFY_STOREFRONT_API_TOKEN
+		storefrontAccessToken: SHOPIFY_STOREFRONT_API_TOKEN,
+		apiVersion: '2023-04',
 	});
 };
 
@@ -26,7 +27,7 @@ export const priceCurrencyFormatter = (
 	currency: string,
 	options?: {
 		toFixed?: number;
-	}
+	},
 ) => {
 	let formattedPrice =
 		parseInt(price) === parseFloat(price) ? parseInt(price).toString() : price;

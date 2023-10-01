@@ -1,4 +1,4 @@
-import { getShopifyClient } from '@utils/core/shopify';
+import { getShopifyClient } from '~/utils/core/shopify';
 
 import axios from 'axios';
 
@@ -12,7 +12,7 @@ import { z } from 'zod';
 
 export const createCheckout = async (
 	req: NextApiRequest,
-	res: NextApiResponse
+	res: NextApiResponse,
 ) => {
 	const client = getShopifyClient();
 	const checkout = await client.checkout.create();
@@ -22,20 +22,20 @@ export const createCheckout = async (
 
 	const data = {
 		checkoutId: checkoutId.split('/')[4].split('?key=')[0],
-		checkoutKey: checkoutId.split('/')[4].split('?key=')[1]
+		checkoutKey: checkoutId.split('/')[4].split('?key=')[1],
 	};
 
 	return res.status(200).json({
 		success: true,
 		message: '',
 		checkoutIdAndKey: data,
-		checkout
+		checkout,
 	});
 };
 
 export const updateCheckout = async (
 	req: NextApiRequest,
-	res: NextApiResponse
+	res: NextApiResponse,
 ) => {
 	const { checkoutId, input } = req.body;
 
@@ -46,38 +46,38 @@ export const updateCheckout = async (
 	return res.status(200).json({
 		success: true,
 		message: '',
-		checkout
+		checkout,
 	});
 };
 
 export const getCheckout = async (
 	req: NextApiRequest,
-	res: NextApiResponse
+	res: NextApiResponse,
 ) => {
 	const { checkoutId, checkoutKey } = req.query;
 
 	const client = getShopifyClient();
 	const checkout = await client.checkout.fetch(
-		`gid://shopify/Checkout/${checkoutId}?key=${checkoutKey}`
+		`gid://shopify/Checkout/${checkoutId}?key=${checkoutKey}`,
 	);
 
 	if (!checkout) {
 		return res.status(404).json({
 			success: false,
-			message: 'Checkout not found'
+			message: 'Checkout not found',
 		});
 	}
 
 	return res.status(200).json({
 		success: true,
 		message: '',
-		checkout
+		checkout,
 	});
 };
 
 export const addItemToCheckout = async (
 	req: NextApiRequest,
-	res: NextApiResponse
+	res: NextApiResponse,
 ) => {
 	const { checkoutId, lineItemsToAdd } = req.body;
 
@@ -87,57 +87,57 @@ export const addItemToCheckout = async (
 	return res.status(200).json({
 		success: true,
 		message: '',
-		item
+		item,
 	});
 };
 
 export const updateItemInCheckout = async (
 	req: NextApiRequest,
-	res: NextApiResponse
+	res: NextApiResponse,
 ) => {
 	const { checkoutId, lineItemsToUpdate } = req.body;
 
 	const client = getShopifyClient();
 	const item = await client.checkout.updateLineItems(
 		checkoutId,
-		lineItemsToUpdate
+		lineItemsToUpdate,
 	);
 
 	return res.status(200).json({
 		success: true,
 		message: '',
-		item
+		item,
 	});
 };
 
 export const removeItemInCheckout = async (
 	req: NextApiRequest,
-	res: NextApiResponse
+	res: NextApiResponse,
 ) => {
 	const { checkoutId, lineItemIdsToRemove } = req.body;
 
 	const client = getShopifyClient();
 	const item = await client.checkout.removeLineItems(
 		checkoutId,
-		lineItemIdsToRemove
+		lineItemIdsToRemove,
 	);
 
 	return res.status(200).json({
 		success: true,
 		message: '',
-		item
+		item,
 	});
 };
 
 export const associateClientToCheckout = async (
 	req: NextApiRequest,
-	res: NextApiResponse
+	res: NextApiResponse,
 ) => {
 	const input = z
 		.object({
 			checkoutId: z.string(),
 			checkoutKey: z.string(),
-			customerAccessToken: z.string()
+			customerAccessToken: z.string(),
 		})
 		.parse(req.body);
 
@@ -171,17 +171,17 @@ export const associateClientToCheckout = async (
 			query: print(customer),
 			variables: {
 				checkoutId: `gid://shopify/Checkout/${input.checkoutId}?key=${input.checkoutKey}`,
-				customerAccessToken: input.customerAccessToken
-			}
+				customerAccessToken: input.customerAccessToken,
+			},
 		},
 		{
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
 					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding': 'null'
-			}
-		}
+				'accept-encoding': 'null',
+			},
+		},
 	);
 
 	if (response.data.errors) {
@@ -195,25 +195,25 @@ export const associateClientToCheckout = async (
 	) {
 		res.statusCode = 401;
 		throw new Error(
-			response.data.data.checkoutCustomerAssociateV2.checkoutUserErrors[0].message
+			response.data.data.checkoutCustomerAssociateV2.checkoutUserErrors[0].message,
 		);
 	}
 
 	return res.status(200).json({
 		success: true,
 		message: 'Costumer associated successfully!',
-		customer: response.data.data.checkoutCustomerAssociateV2.customer
+		customer: response.data.data.checkoutCustomerAssociateV2.customer,
 	});
 };
 
 export const disassociateClientToCheckout = async (
 	req: NextApiRequest,
-	res: NextApiResponse
+	res: NextApiResponse,
 ) => {
 	const input = z
 		.object({
 			checkoutId: z.string(),
-			checkoutKey: z.string()
+			checkoutKey: z.string(),
 		})
 		.parse(req.body);
 
@@ -238,17 +238,17 @@ export const disassociateClientToCheckout = async (
 		{
 			query: print(customer),
 			variables: {
-				checkoutId: `gid://shopify/Checkout/${input.checkoutId}?key=${input.checkoutKey}`
-			}
+				checkoutId: `gid://shopify/Checkout/${input.checkoutId}?key=${input.checkoutKey}`,
+			},
 		},
 		{
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
 					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding': 'null'
-			}
-		}
+				'accept-encoding': 'null',
+			},
+		},
 	);
 
 	if (response.data.errors) {
@@ -262,14 +262,14 @@ export const disassociateClientToCheckout = async (
 	) {
 		res.statusCode = 401;
 		throw new Error(
-			response.data.data.checkoutCustomerDisassociateV2.checkoutUserErrors[0].message
+			response.data.data.checkoutCustomerDisassociateV2.checkoutUserErrors[0].message,
 		);
 	}
 
 	return res.status(200).json({
 		success: true,
 		message: 'Costumer disassociated successfully!',
-		customer: response.data.data.checkoutCustomerDisassociateV2.checkout
+		customer: response.data.data.checkoutCustomerDisassociateV2.checkout,
 	});
 };
 const checkoutsController = {
@@ -280,7 +280,7 @@ const checkoutsController = {
 	update: updateCheckout,
 	getAll: getCheckout,
 	associateClient: associateClientToCheckout,
-	disassociateClient: disassociateClientToCheckout
+	disassociateClient: disassociateClientToCheckout,
 };
 
 export default checkoutsController;

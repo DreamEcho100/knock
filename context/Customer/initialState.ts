@@ -2,7 +2,7 @@ import type { IInitialState } from './ts';
 
 export const initIsVisible = (): IInitialState['isVisible'] => ({
 	sideNav: false,
-	headerCart: false
+	headerCart: false,
 });
 
 export const initState = (cart?: IInitialState['cart']): IInitialState => ({
@@ -10,6 +10,6 @@ export const initState = (cart?: IInitialState['cart']): IInitialState => ({
 	cart: cart || {
 		productsData: [],
 		// updatedAt: new Date()
-		updatedAt: null
-	}
+		updatedAt: null,
+	},
 });

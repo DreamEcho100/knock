@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"target": "es5",
+		"target": "es2017",
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
 		"skipLibCheck": true,
@@ -15,20 +15,9 @@
 		"isolatedModules": true,
 		"jsx": "preserve",
 		"incremental": true,
-		"plugins": [
-			{
-				"name": "next"
-			}
-		],
+		"plugins": [{ "name": "next" }],
 		"baseUrl": ".",
-		"paths": {
-			"@components/*": ["./components/*"],
-			"@context/*": ["./context/*"],
-			"@pages/*": ["./pages/*"],
-			"@styles/*": ["./styles/*"],
-			"@types/*": ["./types/*"],
-			"@utils/*": ["./utils/*"]
-		}
+		"paths": { "~/*": ["./*"] }
 	},
 	"include": [
 		"next-env.d.ts",
@@ -36,7 +25,10 @@
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
-		"pages/account/activate/[...slug].jsx"
+		"pages/account/activate/[...slug].jsx",
+		".eslintrc.cjs",
+		"tailwind.config.js",
+		"next.config.js"
 	],
 	"exclude": ["node_modules"]
 }

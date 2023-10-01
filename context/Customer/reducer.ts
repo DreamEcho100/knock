@@ -1,4 +1,4 @@
-import { isDate } from '@utils/common/date';
+import { isDate } from '~/utils/common/date';
 
 import { ECustomerContextConsts } from './constants';
 import { initIsVisible } from './initialState';
@@ -6,7 +6,7 @@ import { IInitialState, IReducerActions, ICartProduct } from './ts';
 
 export const reducer = (
 	state: IInitialState,
-	action: IReducerActions
+	action: IReducerActions,
 ): IInitialState => {
 	if (process.env.NODE_ENV === 'development') {
 		console.log('%cPrevious State', 'color: darkred');
@@ -21,8 +21,9 @@ export const reducer = (
 				...state,
 				isVisible: {
 					...initIsVisible(),
-					[action.payload.isVisible]: !state.isVisible[action.payload.isVisible]
-				}
+					[action.payload.isVisible]:
+						!state.isVisible[action.payload.isVisible],
+				},
 			};
 		}
 
@@ -33,8 +34,8 @@ export const reducer = (
 				...state,
 				cart: {
 					...state.cart,
-					...cartObj
-				}
+					...cartObj,
+				},
 			};
 
 			if (cartObj && typeof cartObj === 'object') {
@@ -104,7 +105,7 @@ export const reducer = (
 
 							if (isAValidProduct) productsIds.push(item.id);
 							return isAValidProduct;
-						}
+						},
 					);
 				} else {
 					cartObj.productsData = [];
@@ -119,8 +120,8 @@ export const reducer = (
 					...state,
 					cart: {
 						...state.cart,
-						...cartObj
-					}
+						...cartObj,
+					},
 				};
 			}
 
@@ -138,13 +139,13 @@ export const reducer = (
 						return {
 							...item,
 							...newProduct,
-							updatedOnCartAt: new Date()
+							updatedOnCartAt: new Date(),
 						};
 					}
 
 					return item;
 				}),
-				updatedAt: new Date()
+				updatedAt: new Date(),
 			};
 
 			return {
@@ -155,10 +156,10 @@ export const reducer = (
 							...state.cart,
 							productsData: [
 								...state.cart.productsData,
-								{ ...newProduct, addedOnCartAt: new Date() }
+								{ ...newProduct, addedOnCartAt: new Date() },
 							],
-							updatedAt: new Date()
-					  }
+							updatedAt: new Date(),
+					  },
 			};
 		}
 		case ECustomerContextConsts.UPDATE_ONE_PRODUCT_ON_CART: {
@@ -172,13 +173,13 @@ export const reducer = (
 							return {
 								...item,
 								...productNewData,
-								updatedOnCartAt: new Date()
+								updatedOnCartAt: new Date(),
 							};
 						}
 						return item;
 					}),
-					updatedAt: new Date()
-				}
+					updatedAt: new Date(),
+				},
 			};
 		}
 		case ECustomerContextConsts.UPDATE_MANY_PRODUCT_ON_CART: {
@@ -191,7 +192,7 @@ export const reducer = (
 					productsData: state.cart.productsData
 						.map((item) => {
 							const productUpToDateFound = productsUpToDate.find(
-								(productUpToDate) => productUpToDate.id === item.id
+								(productUpToDate) => productUpToDate.id === item.id,
 							);
 
 							if (productUpToDateFound) {
@@ -203,14 +204,14 @@ export const reducer = (
 									// 	item.selectedAmount > productUpToDateFound.countInStock
 									// 		? productUpToDateFound.countInStock
 									// 		: item.selectedAmount,
-									updatedOnCartAt: new Date()
+									updatedOnCartAt: new Date(),
 								};
 							} else undefined;
 							return item;
 						})
 						.filter((item) => item),
-					updatedAt: new Date()
-				}
+					updatedAt: new Date(),
+				},
 			};
 		}
 		case ECustomerContextConsts.DELETE_ONE_PRODUCT_ON_CART: {
@@ -220,10 +221,10 @@ export const reducer = (
 				cart: {
 					...state.cart,
 					productsData: state.cart.productsData.filter(
-						(item) => item.id !== productId
+						(item) => item.id !== productId,
 					),
-					updatedAt: new Date()
-				}
+					updatedAt: new Date(),
+				},
 			};
 		}
 		default:

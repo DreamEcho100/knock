@@ -2,7 +2,8 @@
 
 @font-face {
 	font-family: 'decap_v1regular';
-	src: url('decapv16-webfont.woff2') format('woff2'),
+	src:
+		url('decapv16-webfont.woff2') format('woff2'),
 		url('decapv16-webfont.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
@@ -10,7 +11,8 @@
 
 @font-face {
 	font-family: 'decap_v1regular';
-	src: url('decapv16-webfont.woff2') format('woff2'),
+	src:
+		url('decapv16-webfont.woff2') format('woff2'),
 		url('decapv16-webfont.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;

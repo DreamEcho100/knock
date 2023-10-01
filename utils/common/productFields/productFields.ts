@@ -3,12 +3,12 @@ const setFields = (handle: any) => {
 		case 'melodies-that-knock-vol-1':
 			return {
 				description: [
-					'DECAP - Melodies That Knock Vol. 1 melodic sample pack. This kit is perfectly paired with Drums That Knock.'
+					'DECAP - Melodies That Knock Vol. 1 melodic sample pack. This kit is perfectly paired with Drums That Knock.',
 				],
 				video: {
 					title: '',
 					src: 'https://www.youtube.com/embed/du81OLTutOc?autoplay=1',
-					srcDoc1:'https://i.ytimg.com/vi_webp/du81OLTutOc/sddefault.webp'
+					srcDoc1: 'https://i.ytimg.com/vi_webp/du81OLTutOc/sddefault.webp',
 				},
 				features: [
 					'14 original samples composed by DECAP',
@@ -18,23 +18,23 @@ const setFields = (handle: any) => {
 					'Samples and stems are in high quality 44.1kHz/32bit format',
 					'2.48gb of top notch content',
 					'Compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, Bitwig, etc)',
-					'Contact info for sample clearance contained in download file. Clearance is guaranteed.'
+					'Contact info for sample clearance contained in download file. Clearance is guaranteed.',
 				],
 				filesIncluded: {
 					count: 0,
-					details: []
-				}
+					details: [],
+				},
 			};
 
 		case 'melodies-that-knock-vol-2-free-download':
 			return {
 				description: [
-					'DECAP - Melodies That Knock Vol. 2 melodic sample pack. This kit is perfectly paired with Drums That Knock.'
+					'DECAP - Melodies That Knock Vol. 2 melodic sample pack. This kit is perfectly paired with Drums That Knock.',
 				],
 				video: {
 					title: '',
 					src: 'https://www.youtube.com/embed/T64PcrQaC-A?autoplay=1',
-					srcDoc1:'https://i.ytimg.com/vi/T64PcrQaC-A/sddefault.jpg'
+					srcDoc1: 'https://i.ytimg.com/vi/T64PcrQaC-A/sddefault.jpg',
 				},
 				features: [
 					'10 original samples composed by DECAP',
@@ -42,12 +42,12 @@ const setFields = (handle: any) => {
 					'All samples can be re-arranged, chopped, flipped, stretched, etc',
 					'Samples and stems are in high quality 44.1kHz/24bit format',
 					'Compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, Bitwig, etc)',
-					'Contact info for sample clearance contained in download file. Clearance is guaranteed.'
+					'Contact info for sample clearance contained in download file. Clearance is guaranteed.',
 				],
 				filesIncluded: {
 					count: 0,
-					details: []
-				}
+					details: [],
+				},
 			};
 
 		case 'drums-that-knock-vol-1':
@@ -56,7 +56,7 @@ const setFields = (handle: any) => {
 				video: {
 					title: '',
 					src: 'https://www.youtube.com/embed/EduPz5KmANk?autoplay=1',
-					srcDoc1:'https://i.ytimg.com/vi_webp/EduPz5KmANk/sddefault.webp'
+					srcDoc1: 'https://i.ytimg.com/vi_webp/EduPz5KmANk/sddefault.webp',
 				},
 				features: [
 					'All sounds and loops are 100% royalty free',
@@ -64,7 +64,7 @@ const setFields = (handle: any) => {
 					'All sounds are 100% original (no recycled sounds)',
 					'All loops are labeled with the tempo and ready to drop right into your DAW with no editing required',
 					'All sounds are 24bit/44.1kHz format',
-					'Drums That Knock is compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, Bitwig, etc)'
+					'Drums That Knock is compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, Bitwig, etc)',
 				],
 				filesIncluded: {
 					count: 95,
@@ -74,9 +74,9 @@ const setFields = (handle: any) => {
 						'14 Snares',
 						'12 Hihats',
 						'20 Loops',
-						'25 Percussion + Other'
-					]
-				}
+						'25 Percussion + Other',
+					],
+				},
 			};
 
 		case 'drums-that-knock-vol-2':
@@ -89,7 +89,7 @@ const setFields = (handle: any) => {
 					'All sounds are 100% original (no recycled sounds)',
 					'All loops are labeled with the tempo and ready to drop right into your DAW with no editing required',
 					'All sounds are 24bit/44.1kHz format',
-					'Drums That Knock is compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, etc)'
+					'Drums That Knock is compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, etc)',
 				],
 				filesIncluded: {
 					count: 105,
@@ -100,9 +100,9 @@ const setFields = (handle: any) => {
 						'25 loopsforbeats',
 						'20 Hihats',
 						'25 Shouts',
-						'25 Textures'
-					]
-				}
+						'25 Textures',
+					],
+				},
 			};
 
 		case 'drums-that-knock-vol-3':
@@ -111,7 +111,7 @@ const setFields = (handle: any) => {
 				video: {
 					title: '',
 					src: 'https://www.youtube.com/embed/23e9wz11lqA?autoplay=1',
-					srcDoc1:'https://i.ytimg.com/vi/23e9wz11lqA/sddefault.jpg'
+					srcDoc1: 'https://i.ytimg.com/vi/23e9wz11lqA/sddefault.jpg',
 				},
 				features: [
 					'All sounds and loops are 100% royalty free',
@@ -119,7 +119,7 @@ const setFields = (handle: any) => {
 					'All sounds are 100% original (no recycled sounds)',
 					'All loops are labeled with the tempo and ready to drop right into your DAW with no editing required',
 					'All sounds are 24bit/44.1kHz format',
-					'Drums That Knock is compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, etc)'
+					'Drums That Knock is compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, etc)',
 				],
 				filesIncluded: {
 					count: 154,
@@ -130,9 +130,9 @@ const setFields = (handle: any) => {
 						'25 loopsforbeats',
 						'20 Hihats',
 						'25 Shouts',
-						'25 Textures'
-					]
-				}
+						'25 Textures',
+					],
+				},
 			};
 
 		case 'drums-that-knock-vol-4':
@@ -141,7 +141,8 @@ const setFields = (handle: any) => {
 				video: {
 					title: '',
 					src: 'https://www.youtube.com/embed/zXklcm6yYdk?autoplay=1',
-					srcDoc1:'https://i.ytimg.com/vi/zXklcm6yYdk/sd2.jpg?sqp=-oaymwEoCIAFEOAD8quKqQMcGADwAQH4AbYIgAK4CIoCDAgAEAEYfyATKCMwDw==&rs=AOn4CLA1jOk_LSV1wP9QsG0jUa-gOgKl_w'
+					srcDoc1:
+						'https://i.ytimg.com/vi/zXklcm6yYdk/sd2.jpg?sqp=-oaymwEoCIAFEOAD8quKqQMcGADwAQH4AbYIgAK4CIoCDAgAEAEYfyATKCMwDw==&rs=AOn4CLA1jOk_LSV1wP9QsG0jUa-gOgKl_w',
 				},
 				features: [
 					'All sounds and loops are 100% royalty free',
@@ -149,7 +150,7 @@ const setFields = (handle: any) => {
 					'All sounds are 100% original (no recycled sounds)',
 					'All loops are labeled with the tempo and ready to drop right into your DAW with no editing required',
 					'All sounds are 24bit/44.1kHz format',
-					'Drums That Knock is compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, etc)'
+					'Drums That Knock is compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, etc)',
 				],
 				filesIncluded: {
 					count: 132,
@@ -161,9 +162,9 @@ const setFields = (handle: any) => {
 						'19 Melodic Loops',
 						'14 Percussion One Shots',
 						'22 Shouts',
-						'14 Textures'
-					]
-				}
+						'14 Textures',
+					],
+				},
 			};
 
 		case 'drums-that-knock-vol-5':
@@ -172,7 +173,7 @@ const setFields = (handle: any) => {
 				video: {
 					title: '',
 					src: 'https://www.youtube.com/embed/Vrn2jOXbtXU?autoplay=1',
-					srcDoc1:"https://i.ytimg.com/vi_webp/Vrn2jOXbtXU/sddefault.webp"
+					srcDoc1: 'https://i.ytimg.com/vi_webp/Vrn2jOXbtXU/sddefault.webp',
 				},
 				features: [
 					'All sounds and loops are 100% royalty free',
@@ -180,7 +181,7 @@ const setFields = (handle: any) => {
 					'All sounds are 100% original (no recycled sounds)',
 					'All loops are labeled with the tempo and ready to drop right into your DAW with no editing required',
 					'All sounds are 24bit/44.1kHz format',
-					'Drums That Knock is compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, etc)'
+					'Drums That Knock is compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, etc)',
 				],
 				filesIncluded: {
 					count: 190,
@@ -194,9 +195,9 @@ const setFields = (handle: any) => {
 						'23 Percussion Loops',
 						'29 One Shots + Textures',
 						'17 Melodic Loops',
-						'6 Drum Loops'
-					]
-				}
+						'6 Drum Loops',
+					],
+				},
 			};
 
 		case 'drums-that-knock-vol-6':
@@ -205,7 +206,7 @@ const setFields = (handle: any) => {
 				video: {
 					title: '',
 					src: 'https://www.youtube.com/embed/aDbjb5wlos0?autoplay=1',
-					srcDoc1:'https://i.ytimg.com/vi_webp/aDbjb5wlos0/sddefault.webp'
+					srcDoc1: 'https://i.ytimg.com/vi_webp/aDbjb5wlos0/sddefault.webp',
 				},
 				features: [
 					'All sounds and loops are 100% royalty free',
@@ -213,7 +214,7 @@ const setFields = (handle: any) => {
 					'All sounds are 100% original (no recycled sounds)',
 					'All loops are labeled with the tempo and ready to drop right into your DAW with no editing required',
 					'All sounds are 24bit/44.1kHz format',
-					'Drums That Knock is compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, etc)'
+					'Drums That Knock is compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, etc)',
 				],
 				filesIncluded: {
 					count: 229,
@@ -228,20 +229,20 @@ const setFields = (handle: any) => {
 						'11 MIDI Files',
 						'34 Melodic + Percussive One Shots',
 						'12 Textures',
-						'6 Drum Loops'
-					]
-				}
+						'6 Drum Loops',
+					],
+				},
 			};
 
 		case 'drums-that-knock-vol-7':
 			return {
 				description: [
-					'DECAP - Drums That Knock Vol.7 is now available, with top notch original sounds for use in your production.'
+					'DECAP - Drums That Knock Vol.7 is now available, with top notch original sounds for use in your production.',
 				],
 				video: {
 					title: '',
 					src: 'https://www.youtube.com/embed/OrXT2MpwHEg?autoplay=1',
-					srcDoc1:'https://i.ytimg.com/vi_webp/OrXT2MpwHEg/sddefault.webp'
+					srcDoc1: 'https://i.ytimg.com/vi_webp/OrXT2MpwHEg/sddefault.webp',
 				},
 				features: [
 					'All sounds and loops are 100% royalty free',
@@ -249,7 +250,7 @@ const setFields = (handle: any) => {
 					'All sounds are 100% original (no recycled sounds)',
 					'All loops are labeled with the tempo and ready to drop right into your DAW with no editing required',
 					'All sounds are 24bit/44.1kHz format',
-					'Drums That Knock is compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, etc)'
+					'Drums That Knock is compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, etc)',
 				],
 				filesIncluded: {
 					count: 337,
@@ -267,20 +268,20 @@ const setFields = (handle: any) => {
 						'20 Percussion loops',
 						'2 Rap vocal loops',
 						'36 Shouts + ad-libs',
-						'23 Snares + claps'
-					]
-				}
+						'23 Snares + claps',
+					],
+				},
 			};
 
 		case 'drums-that-knock-vol-8':
 			return {
 				description: [
-					'DECAP - Drums That Knock Vol. 8 is now available, with top notch original sounds for your production.'
+					'DECAP - Drums That Knock Vol. 8 is now available, with top notch original sounds for your production.',
 				],
 				video: {
 					title: '',
 					src: 'https://www.youtube.com/embed/YNKkxd2aPzI?autoplay=1',
-					srcDoc1:'https://i.ytimg.com/vi_webp/YNKkxd2aPzI/sddefault.webp'
+					srcDoc1: 'https://i.ytimg.com/vi_webp/YNKkxd2aPzI/sddefault.webp',
 				},
 				features: [
 					'All sounds and loops are 100% royalty free',
@@ -288,7 +289,7 @@ const setFields = (handle: any) => {
 					'All sounds are 100% original (no recycled sounds)',
 					'All loops are labeled with the tempo and ready to drop right into your DAW with no editing required',
 					'All sounds are 24bit/44.1kHz format',
-					'Drums That Knock is compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, etc)'
+					'Drums That Knock is compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, etc)',
 				],
 				filesIncluded: {
 					count: 361,
@@ -309,9 +310,9 @@ const setFields = (handle: any) => {
 						'30 Snares + Claps ',
 						'Rimshots',
 						'5  Textures',
-						'8  Toms'
-					]
-				}
+						'8  Toms',
+					],
+				},
 			};
 
 		case 'drums-that-knock-vol-9':
@@ -319,12 +320,12 @@ const setFields = (handle: any) => {
 				description: [
 					'DECAP - Drums That Knock Vol. 9 is available now, with top notch original sounds for your production.',
 					'All BRAND NEW, never heard before sounds designed from scratch by DECAP. Premium quality, groundbreaking as always.',
-					'Many of the sounds in this kit were run through Studer, and Telefunken tape machines, EMU SP-12 (crazy on the 808s) and other analog gear for extra depth, width and texture. '
+					'Many of the sounds in this kit were run through Studer, and Telefunken tape machines, EMU SP-12 (crazy on the 808s) and other analog gear for extra depth, width and texture. ',
 				],
 				video: {
 					title: '',
-					srcDoc1:"https://i.ytimg.com/vi_webp/j1Fj0gm2GXE/sddefault.webp",
-					src: 'https://www.youtube.com/embed/j1Fj0gm2GXE?autoplay=1'
+					srcDoc1: 'https://i.ytimg.com/vi_webp/j1Fj0gm2GXE/sddefault.webp',
+					src: 'https://www.youtube.com/embed/j1Fj0gm2GXE?autoplay=1',
 				},
 				features: [
 					'All sounds and loops are 100% royalty free',
@@ -332,7 +333,7 @@ const setFields = (handle: any) => {
 					'All sounds are 100% original (no recycled sounds)',
 					'All loops are labeled with the tempo and ready to drop right into your DAW with no editing required',
 					'All sounds are 24bit/44.1kHz format',
-					'Drums That Knock is compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, etc)'
+					'Drums That Knock is compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, etc)',
 				],
 				filesIncluded: {
 					count: 453,
@@ -353,9 +354,9 @@ const setFields = (handle: any) => {
 						'9 Fills',
 						'22 Hihat Loops',
 						'8 Rap Vocal Loops',
-						'52 Shouts + Adlibs'
-					]
-				}
+						'52 Shouts + Adlibs',
+					],
+				},
 			};
 
 		case 'drums-that-knock-free-download':
@@ -363,7 +364,7 @@ const setFields = (handle: any) => {
 				description: [
 					'DECAP - Drums That Knock Free Vol. 1 (Free Download)',
 					'All BRAND NEW, never heard before sounds designed from scratch by DECAP. Premium quality, groundbreaking as always.',
-					'Download this free drum kit right now, and make some 🔥'
+					'Download this free drum kit right now, and make some 🔥',
 				],
 				video: null,
 				features: [
@@ -372,7 +373,7 @@ const setFields = (handle: any) => {
 					'All sounds are 100% original and crafted from scratch (no recycled sounds)',
 					'All loops are labeled with tempo, key, and ready to drop right into your DAW with no editing required',
 					'All sounds are in 24bit/44.1kHz format',
-					'All sounds and loops are compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, Bitwig, etc)'
+					'All sounds and loops are compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, Bitwig, etc)',
 				],
 				filesIncluded: {
 					count: '',
@@ -386,9 +387,9 @@ const setFields = (handle: any) => {
 						'Percussion loops',
 						'Risers',
 						'Shouts',
-						'Snares + Claps + Rimshots'
-					]
-				}
+						'Snares + Claps + Rimshots',
+					],
+				},
 			};
 
 		case 'drums-that-knock-x':
@@ -396,14 +397,14 @@ const setFields = (handle: any) => {
 				description: [
 					"The long awaited 10th volume of DECAP's Drums That Knock series, DRUMS THAT KNOCK X is available now, with top notch original sounds for your production.",
 					'All BRAND NEW, never heard before sounds designed from scratch by DECAP. Premium quality, groundbreaking as always.',
-					"Many of the sounds in this kit were run through analog saturation, analog compression and analog tape for extra depth, width and texture. DECAP's plugin, KNOCK was also used for additional punch and character when designing these sounds."
+					"Many of the sounds in this kit were run through analog saturation, analog compression and analog tape for extra depth, width and texture. DECAP's plugin, KNOCK was also used for additional punch and character when designing these sounds.",
 				],
 				video: {
 					title: '',
 					src: 'https://www.youtube.com/embed/p-wek5z59IA?autoplay=1',
 					srcTwo: 'https://www.youtube.com/embed/KG1q81qR_b4?autoplay=1',
-					srcDoc1:'https://i.ytimg.com/vi_webp/p-wek5z59IA/sddefault.webp',
-					srcDoc2:"https://i.ytimg.com/vi_webp/KG1q81qR_b4/sddefault.webp"
+					srcDoc1: 'https://i.ytimg.com/vi_webp/p-wek5z59IA/sddefault.webp',
+					srcDoc2: 'https://i.ytimg.com/vi_webp/KG1q81qR_b4/sddefault.webp',
 				},
 				features: [
 					'All sounds and loops are 100% royalty free - no clearance required',
@@ -413,7 +414,7 @@ const setFields = (handle: any) => {
 					'All sounds are in 24bit/44.1kHz format',
 					'All sounds and loops are compatible with any DAW software or beat machine (Ableton, FL Studio, Logic, Reason, MPC, Maschine, Studio One, Bitwig, etc)',
 					'All 808s and One Shots are tuned to C for easy playability',
-					'Includes more sounds than any DTK kit ever!'
+					'Includes more sounds than any DTK kit ever!',
 				],
 				filesIncluded: {
 					count: 693,
@@ -435,9 +436,9 @@ const setFields = (handle: any) => {
 						'18 Risers + Falls',
 						'53 Shouts + Ad-libs',
 						'40 Snares + Claps ',
-						'Rimshots'
-					]
-				}
+						'Rimshots',
+					],
+				},
 			};
 
 		case 'complete-knock-bundle-v2-all-digital-products':
@@ -445,7 +446,7 @@ const setFields = (handle: any) => {
 				description: [
 					// 'DECAP - Complete Knock Bundle (Version 2)',
 					"This is truly the last drum kit bundle you'll ever need!",
-					'This bundle features every digital product available on the Drums That Knock store, including Drums That Knock Limited Edition, which was previously only available for a short time during Black Friday 2021. You get 15 total products!'
+					'This bundle features every digital product available on the Drums That Knock store, including Drums That Knock Limited Edition, which was previously only available for a short time during Black Friday 2021. You get 15 total products!',
 				],
 				features: [],
 				video: null,
@@ -466,9 +467,9 @@ const setFields = (handle: any) => {
 						'Melodies That Knock Vol. 1',
 						'Melodies That Knock Vol. 2',
 						'DECAP Ableton Live Masterclass',
-						'Drums That Knock Limited Edition'
-					]
-				}
+						'Drums That Knock Limited Edition',
+					],
+				},
 			};
 
 		case 'decap-ableton-live-masterclass':
@@ -476,12 +477,12 @@ const setFields = (handle: any) => {
 				description: [
 					'DECAP - Ableton Masterclass',
 					'Level: Intermediate / Advanced ',
-					"In this live 47 minute deep dive Masterclass, DECAP (Billboard Top 10, Platinum Certified Producer) dives into some intermediate / advanced production and sound design techniques during the track breakdown of his release 'Who's There?!'."
+					"In this live 47 minute deep dive Masterclass, DECAP (Billboard Top 10, Platinum Certified Producer) dives into some intermediate / advanced production and sound design techniques during the track breakdown of his release 'Who's There?!'.",
 				],
 				video: {
 					title: 'Free Preview',
 					src: 'https://www.youtube.com/embed/LwIgcY5CpjI?autoplay=1',
-					srcDoc1:'https://i.ytimg.com/vi_webp/LwIgcY5CpjI/sddefault.webp'
+					srcDoc1: 'https://i.ytimg.com/vi_webp/LwIgcY5CpjI/sddefault.webp',
 				},
 				features: [],
 				filesIncluded: {
@@ -503,9 +504,9 @@ const setFields = (handle: any) => {
 						'38:35-41:24 Proper stereo imaging explained',
 						'41:39-43:36 Balancing productivity and creative sound design',
 						"43:46-44:44 Why I don't layer drums, how to layer properly if you do",
-						'44:44-End Learn the rules to break them'
-					]
-				}
+						'44:44-End Learn the rules to break them',
+					],
+				},
 			};
 		default:
 			break;

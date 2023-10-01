@@ -4,7 +4,7 @@ module.exports = {
 		'./app/**/*.{js,ts,jsx,tsx}',
 		'./utils/**/*.{js,ts,jsx,tsx}',
 		'./pages/**/*.{js,ts,jsx,tsx}',
-		'./components/**/*.{js,ts,jsx,tsx}'
+		'./components/**/*.{js,ts,jsx,tsx}',
 	],
 	darkMode: 'class',
 	theme: {
@@ -25,7 +25,7 @@ module.exports = {
 
 				xl: '1280px',
 				// => @media (min-width: 1280px) { ... }
-				'2xl': '1536px'
+				'2xl': '1536px',
 				// => @media (min-width: 1536px) { ... }
 			},
 			backgroundColor: {
@@ -34,12 +34,15 @@ module.exports = {
 					2: '#111111',
 					3: '#151515',
 					4: '#1A1B1D',
-					5: '#303030'
+					5: '#303030',
 				},
 				secondary: {
 					1: '#7548FE ',
-					2: '#EF4370'
-				}
+					2: '#EF4370',
+				},
+			},
+			fontFamily: {
+				'source-sans-pro': ['var(--font-source-sans-pro)'],
 			},
 			textColor: {
 				primary: {
@@ -47,8 +50,8 @@ module.exports = {
 					2: '#C5C5C5', // '#b4b4b4'
 					3: '#A1A1A1',
 					4: '#A5A5A5',
-					5: '#BEBEBE'
-				}
+					5: '#BEBEBE',
+				},
 			},
 			colors: {
 				bg: {
@@ -57,12 +60,12 @@ module.exports = {
 						2: '#111111',
 						3: '#151515',
 						4: '#1A1B1D',
-						5: '#303030'
+						5: '#303030',
 					},
 					secondary: {
 						1: '#7548FE ',
-						2: '#EF4370'
-					}
+						2: '#EF4370',
+					},
 				},
 				text: {
 					primary: {
@@ -70,14 +73,14 @@ module.exports = {
 						2: '#C5C5C5', // '#b4b4b4'
 						3: '#A1A1A1',
 						4: '#A5A5A5',
-						5: '#BEBEBE'
-					}
-				}
+						5: '#BEBEBE',
+					},
+				},
 			},
 			spacing: {
-				'main-nav-h': 'var(--main-nav-h, 6rem)'
-			}
-		}
+				'main-nav-h': 'var(--main-nav-h, 6rem)',
+			},
+		},
 	},
-	plugins: []
+	plugins: [],
 };

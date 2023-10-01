@@ -1,49 +1,51 @@
-import { getShopifyClient } from '@utils/core/shopify';
+import { getShopifyClient } from '~/utils/core/shopify';
 
-import { IProduct } from 'types';
+import { type ICustomProduct, type IProduct } from 'types';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
-import setFields from '@utils/common/productFields/productFields';
 import axios from 'axios';
 import { print } from 'graphql';
 import gql from 'graphql-tag';
 
 //------------ get one product by id
 
-export const getOneProductById = async (id: string) => {
+export const getOneCustomProductByHandle = async (handle: string) => {
 	const client = getShopifyClient();
 
-	const product: any = await client.product.fetch(
-		`gid://shopify/Product/${id}`
+	const product = await client.product
+		.fetchByHandle(handle)
+		.then((res) => JSON.parse(JSON.stringify(res)) as unknown as IProduct);
+
+	const response = await axios.get(
+		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-DTK-product?productHandle=${product.handle}`,
 	);
 
-	let response = await axios.get(
-		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-DTK-product?productHandle=${product.handle}`
-	);
-
-	let newFieldsApi = response.data.DTKproduct;
+	const newFieldsApi = response.data.DTKproduct;
 	delete newFieldsApi.id;
 
 	const newProductObject = {
 		...product,
-		...newFieldsApi
-	};
+		...newFieldsApi,
+		originalDescription: product.description,
+	} as ICustomProduct;
 
-	return newProductObject as unknown as IProduct;
+	return newProductObject;
 };
 export const getOneProductByHandle = async (handle: string) => {
 	const client = getShopifyClient();
 
-	return (await client.product.fetchByHandle(handle)) as unknown as IProduct;
+	return (await client.product.fetchByHandle(
+		handle,
+	)) as unknown as Promise<IProduct>;
 };
 
-const getOneProductController = async (
+const getOneProductByHanleController = async (
 	req: NextApiRequest,
-	res: NextApiResponse
+	res: NextApiResponse,
 ) => {
 	const product =
-		typeof req.query.id === 'string'
-			? await getOneProductById(req.query.id)
+		typeof req.query.handle === 'string'
+			? await getOneCustomProductByHandle(req.query.handle)
 			: typeof req.query.handle === 'string'
 			? await getOneProductByHandle(req.query.handle)
 			: undefined;
@@ -56,7 +58,7 @@ const getOneProductController = async (
 	return res.status(200).json({
 		success: true,
 		message: '',
-		product
+		product,
 	});
 };
 
@@ -65,7 +67,7 @@ type productType = 'Tutorial' | 'Sound Editing Software';
 
 export const getAllProducts = async ({
 	typesToExclude,
-	typesToInclude
+	typesToInclude,
 }: { typesToExclude?: productType[]; typesToInclude?: productType[] } = {}) => {
 	const product = gql`
 		query getCollectionById($id: ID!) {
@@ -76,6 +78,7 @@ export const getAllProducts = async ({
 						node {
 							id
 							title
+							handle
 							availableForSale
 							descriptionHtml
 							vendor
@@ -130,27 +133,27 @@ export const getAllProducts = async ({
 		{
 			query: print(product),
 			variables: {
-				id: `gid://shopify/Collection/398064812255`
-			}
+				id: `gid://shopify/Collection/398064812255`,
+			},
 		},
 		{
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Shopify-Storefront-Access-Token':
 					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding': 'null'
-			}
-		}
+				'accept-encoding': 'null',
+			},
+		},
 	);
 
 	const productArray = response.data.data.collection.products.edges.map(
-		(el: any) => el.node
+		(el: any) => el.node,
 	);
 	const newArray = productArray.map((el: any) => {
 		return {
 			...el,
 			variants: [el.variants.edges[0].node],
-			images: [el.images.edges[0].node]
+			images: [el.images.edges[0].node],
 		};
 	});
 
@@ -158,11 +161,11 @@ export const getAllProducts = async ({
 
 	if (Array.isArray(typesToExclude))
 		products = products.filter(
-			(product) => !typesToExclude.includes((product as any).productType)
+			(product) => !typesToExclude.includes((product as any).productType),
 		);
 	if (Array.isArray(typesToInclude))
 		products = products.filter((product) =>
-			typesToInclude.includes((product as any).productType)
+			typesToInclude.includes((product as any).productType),
 		);
 
 	return products;
@@ -170,7 +173,7 @@ export const getAllProducts = async ({
 
 const getAllProductsController = async (
 	req: NextApiRequest,
-	res: NextApiResponse
+	res: NextApiResponse,
 ) => {
 	const category = req.query.category;
 
@@ -179,13 +182,13 @@ const getAllProductsController = async (
 	return res.status(200).json({
 		success: true,
 		message: '',
-		products
+		products,
 	});
 };
 
 const productsController = {
-	getOneProduct: getOneProductController,
-	getAllProducts: getAllProductsController
+	getOneProductByHandle: getOneProductByHanleController,
+	getAllProducts: getAllProductsController,
 };
 
 export default productsController;
