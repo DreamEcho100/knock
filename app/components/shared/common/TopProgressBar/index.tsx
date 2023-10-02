@@ -1,3 +1,4 @@
+'use client';
 // Credit to (Use NProgress with Next.js (Router and fetch events))[https://dev.to/vvo/show-a-top-progress-bar-on-fetch-and-router-events-in-next-js-4df3]
 import 'nprogress/nprogress.css';
 import Router from 'next/router';
