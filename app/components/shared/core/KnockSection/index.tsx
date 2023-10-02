@@ -159,8 +159,8 @@ const KnockSection = ({
 				<div className={imagesContainerClasses(imagesContainerTheme)}>
 					<CustomNextImage
 						src="/images/Group 179.png"
-						width={800}
-						height={800}
+						width={700}
+						height={700}
 						priority
 						className="pointer-events-none select-none absolute top-0 right-0 left-0 bottom-0 w-full h-full object-contain scale-150"
 						style={{
@@ -172,8 +172,8 @@ const KnockSection = ({
 						<CustomNextImage
 							src={imageSrc}
 							alt="knock plugin"
-							width={800}
-							height={800}
+							width={700}
+							height={700}
 							priority
 							{...mainImgOrVideoProps}
 						/>
