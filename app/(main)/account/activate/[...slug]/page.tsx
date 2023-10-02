@@ -1,3 +1,4 @@
+'use client';
 import { type FormEvent, useState } from 'react';
 import FormField from '~/app/components/shared/core/FieldForm';
 import Button from '~/app/components/shared/core/Button';

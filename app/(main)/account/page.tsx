@@ -304,7 +304,7 @@ const UpdateUserBasicDetails = ({
 	);
 };
 
-const CustomerProfileScreen = () => {
+export default function CustomerProfilePage() {
 	const { user } = useGetUserDataFromStore();
 
 	// const [isLoggingOut, setIsLoggingOut] = useState(false);
@@ -584,6 +584,4 @@ const CustomerProfileScreen = () => {
 			</section>
 		</>
 	);
-};
-
-export default CustomerProfileScreen;
+}

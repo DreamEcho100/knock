@@ -1,3 +1,4 @@
+'use client';
 import type { IGenericErrorResponse } from 'types';
 import { type FormEvent, useState } from 'react';
 import FormField from '~/app/components/shared/core/FieldForm';

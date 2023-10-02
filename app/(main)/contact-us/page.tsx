@@ -1,3 +1,4 @@
+'use client';
 import type { NextPage } from 'next';
 
 import Button from '~/app/components/shared/core/Button';
