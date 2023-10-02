@@ -8,6 +8,12 @@ import '~/app/styles/swiper.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { decapv16, sourceSansPro } from './libs/fonts';
 import { cx } from 'class-variance-authority';
+import dynamic from 'next/dynamic';
+
+const DynamicTopProgressBar = dynamic(
+	() => import('~/app/components/shared/common/TopProgressBar'),
+	{ ssr: false },
+);
 
 export const metadata: Metadata = SEODefaults;
 
@@ -25,7 +31,10 @@ export default function RootLayout(props: PropsWithChildren) {
 					decapv16.variable,
 				)}
 			>
-				<Providers>{props.children}</Providers>
+				<Providers>
+					<DynamicTopProgressBar />
+					{props.children}
+				</Providers>
 			</body>
 		</html>
 	);
