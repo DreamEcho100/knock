@@ -1,6 +1,8 @@
+import { isDate } from '~/utils/common/date';
+
 import { ECustomerContextConsts } from './constants';
 import { initIsVisible } from './initialState';
-import { type IInitialState, type IReducerActions } from './ts';
+import { IInitialState, IReducerActions, ICartProduct } from './ts';
 
 export const reducer = (
 	state: IInitialState,
@@ -14,25 +16,13 @@ export const reducer = (
 	}
 
 	switch (action.type) {
-		case ECustomerContextConsts.SET_TOGGLE_IS_VISIBLE_ONE_ITEM_AND_INIT_EVERYTHING_ELSE: {
+		case ECustomerContextConsts.TOGGLE_IS_VISIBLE_ONE_ITEM_AND_INIT_EVERYTHING_ELSE: {
 			return {
 				...state,
 				isVisible: {
 					...initIsVisible(),
 					[action.payload.isVisible]:
 						!state.isVisible[action.payload.isVisible],
-				},
-			};
-		}
-		case ECustomerContextConsts.SET_IS_VISIBLE_ONE_ITEM_AND_INIT_EVERYTHING_ELSE: {
-			return {
-				...state,
-				isVisible: {
-					...initIsVisible(),
-					[action.payload.item]:
-						typeof action.payload.isVisible === 'function'
-							? action.payload.isVisible(state.isVisible[action.payload.item])
-							: action.payload.isVisible,
 				},
 			};
 		}
@@ -47,6 +37,95 @@ export const reducer = (
 					...cartObj,
 				},
 			};
+
+			if (cartObj && typeof cartObj === 'object') {
+				if (
+					Array.isArray(cartObj.productsData) &&
+					cartObj.productsData.length !== 0
+				) {
+					const productsIds = [];
+					cartObj.productsData = cartObj.productsData.filter(
+						(item: ICartProduct) => {
+							if (
+								!item ||
+								typeof item !== 'object' ||
+								typeof item.id !== 'string'
+							)
+								return false;
+
+							let isAValidProduct = true;
+
+							let _key: keyof typeof item;
+							for (_key in item) {
+								if (!('addedOnCartAt' in item) || !isDate(item.addedOnCartAt)) {
+									item.addedOnCartAt = new Date();
+								} else if (
+									!('id' in item) ||
+									typeof item.id !== 'string' ||
+									item.id.length < 1
+								) {
+									isAValidProduct = false;
+									break;
+								} else if (
+									!('preferredImage' in item) ||
+									typeof item.preferredImage !== 'object'
+								) {
+									item.preferredImage = null; //{ id: '??', alt: '', src: '' };
+								}
+								// else if (
+								// 	!('price' in item) ||
+								// 	typeof item.price !== 'number' ||
+								// 	item.price < 1
+								// ) {
+								// 	isAValidProduct = false;
+								// 	break;
+								// }
+								else if (
+									!('selectedAmount' in item) ||
+									typeof item.selectedAmount !== 'number' ||
+									item.selectedAmount < 1
+								) {
+									isAValidProduct = false;
+									break;
+								} else if (
+									!('title' in item) ||
+									typeof item.title !== 'string' ||
+									item.title.length < 1
+								) {
+									isAValidProduct = false;
+									break;
+								}
+								if (
+									!('updatedOnCartAt' in item) ||
+									!isDate(item.updatedOnCartAt)
+								) {
+									item.updatedOnCartAt = undefined;
+								}
+							}
+
+							if (isAValidProduct) productsIds.push(item.id);
+							return isAValidProduct;
+						},
+					);
+				} else {
+					cartObj.productsData = [];
+				}
+
+				if (!isDate(cartObj.updatedAt)) {
+					cartObj.updatedAt;
+				} else cartObj.updatedAt = null;
+
+				// setCart(cartObj)
+				return {
+					...state,
+					cart: {
+						...state.cart,
+						...cartObj,
+					},
+				};
+			}
+
+			return state;
 		}
 		case ECustomerContextConsts.ADD_TO_CART: {
 			const { newProduct } = action.payload;
