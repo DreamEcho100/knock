@@ -42,7 +42,7 @@ const ArtistsSection = ({ reviews, data }: { reviews: any; data: any }) => {
 							</div>
 						)}
 					</header>
-					<div className="w-[1200px] max-w-full mx-auto">
+					<div className="max-w-[1200px] w-full mx-auto">
 						<Swiper
 							modules={[Navigation, A11y, Autoplay]}
 							navigation

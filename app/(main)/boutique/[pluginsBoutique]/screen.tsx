@@ -99,7 +99,7 @@ const KnockScreen = ({ knockPluginBoutique }: IKnockPluginBoutiqueProps) => {
 	});
 
 	return (
-		<section className="relative flex items-center justify-center  flex-col max-w-[1200px]  m-auto">
+		<section className="relative flex items-center justify-center  flex-col max-w-[1200px] w-full mx-auto">
 			<div className="my-[80px]">
 				<h2 className="text-4xl font-bold">{knockPluginBoutique.title}</h2>
 			</div>
