@@ -5,6 +5,8 @@ import SEODefaults from '~/utils/core/next-seo.config';
 
 import '~/app/styles/globals.css';
 import '~/app/styles/swiper.css';
+import '~/app/styles/customNProgressStyles.css';
+
 import 'react-toastify/dist/ReactToastify.css';
 import { decapv16, sourceSansPro } from './libs/fonts';
 import { cx } from 'class-variance-authority';
