@@ -24,6 +24,18 @@ export const reducer = (
 				},
 			};
 		}
+		case ECustomerContextConsts.SET_IS_VISIBLE_ONE_ITEM_AND_INIT_EVERYTHING_ELSE: {
+			return {
+				...state,
+				isVisible: {
+					...initIsVisible(),
+					[action.payload.item]:
+						typeof action.payload.isVisible === 'function'
+							? action.payload.isVisible(state.isVisible[action.payload.item])
+							: action.payload.isVisible,
+				},
+			};
+		}
 
 		case ECustomerContextConsts.SET_CART: {
 			const { cartObj } = action.payload;

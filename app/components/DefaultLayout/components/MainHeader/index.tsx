@@ -4,7 +4,7 @@ import Button from '~/app/components/shared/core/Button';
 import Logo from '~/app/components/shared/core/Logo';
 import { useSharedCustomerState } from '~/app/components/providers/CustomerContext';
 import { customerGlobalActions } from '~/app/components/providers/CustomerContext/actions';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import {
 	setCookie,
 	removeCookie,
@@ -29,7 +29,7 @@ import { priceCurrencyFormatter } from '~/utils/core/shopify';
 import { cx } from 'class-variance-authority';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { type CSSProperties, type Dispatch, type SetStateAction } from 'react';
+import { type CSSProperties } from 'react';
 import { useEffect, useMemo, useState } from 'react';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -40,7 +40,11 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import CheckoutPopup from '~/app/components/shared/common/CheckoutPopup/CheckoutPopup';
+import dynamic from 'next/dynamic';
+
+const CheckoutPopupDynamic = dynamic(
+	() => import('~/app/components/shared/common/CheckoutPopup/CheckoutPopup'),
+);
 
 const linkClasses = ({
 	isActive,
@@ -65,14 +69,19 @@ const headerLinks = [
 	// { href: '/contact-us', text: 'contact' }
 ];
 
-const MainHeader = ({
-	setBanner,
-	openBanner,
-}: {
-	setBanner: Dispatch<SetStateAction<boolean>>;
-	openBanner: boolean;
+const MainHeader = ({} // setBanner,
+// isBannerVisible: isBannerVisible,
+: {
+	// setBanner: Dispatch<SetStateAction<boolean>>;
+	// isBannerVisible: boolean;
 }) => {
-	const [{ cart }, customerDispatch] = useSharedCustomerState();
+	const [
+		{
+			cart,
+			isVisible: { banner: isBannerVisible },
+		},
+		customerDispatch,
+	] = useSharedCustomerState();
 	const { user } = useGetUserDataFromStore();
 	const pathname = usePathname();
 
@@ -220,11 +229,11 @@ const MainHeader = ({
 
 	return (
 		<>
-			{openBanner && banner.data && !banner.data.disable ? (
+			{isBannerVisible && banner.data && !banner.data.disable ? (
 				<div
 					style={{ background: banner.data.background }}
 					className={`${commonClasses} z-10 fixed ${
-						openBanner ? 'h-14' : 'h-0'
+						isBannerVisible ? 'h-14' : 'h-0'
 					}  right-0 left-0 w-full flex items-center justify-center`}
 				>
 					<div>
@@ -233,8 +242,8 @@ const MainHeader = ({
 							style={{ color: banner.data.textColor }}
 						>
 							{banner?.data.text ? <h4>{banner.data.text}</h4> : ''}
-							{banner.data.bannerUrlText ? (
-								!banner.data.isAddToCartButton ? (
+							{banner.data.bannerUrlText &&
+								(!banner.data.isAddToCartButton ? (
 									<div>
 										<Link
 											href={
@@ -253,15 +262,17 @@ const MainHeader = ({
 									>
 										{banner.data.bannerUrlText}
 									</button>
-								)
-							) : (
-								''
-							)}
+								))}
 						</div>
 					</div>
 					<div className="hidden absolute sm:block  right-0 p-4">
 						<AiFillCloseCircle
-							onClick={() => setBanner(false)}
+							onClick={() =>
+								customerGlobalActions.setIsVisibleOnly(customerDispatch, {
+									item: 'banner',
+									isVisible: false,
+								})
+							}
 							style={{ color: banner.data.textColor }}
 						/>
 					</div>
@@ -278,7 +289,9 @@ const MainHeader = ({
 			<header
 				id="main-header"
 				className={`${commonClasses} bg-primary-1 z-10 fixed ${
-					openBanner && banner.data && !banner.data.disable ? 'top-14' : 'top-0'
+					isBannerVisible && banner.data && !banner.data.disable
+						? 'top-14'
+						: 'top-0'
 				} right-0 left-0 w-full flex flex-col`}
 			>
 				<div className="relative w-full px-4 mx-auto sm:px-8">
@@ -354,7 +367,7 @@ const MainHeader = ({
 									title="cart"
 									className="flex items-center justify-center"
 									onClick={() =>
-										customerGlobalActions.setIsVisibleOnly(
+										customerGlobalActions.toggleIsVisibleOnly(
 											customerDispatch,
 											'headerCart',
 										)
@@ -434,7 +447,7 @@ const MainHeader = ({
 							</ul>
 						</nav>
 					</div>
-					<CartContainer openBanner={openBanner} banner={banner.data} />
+					<CartContainer banner={banner.data} />
 				</div>
 			</header>
 		</>
@@ -443,13 +456,13 @@ const MainHeader = ({
 
 export default MainHeader;
 
-const CartContainer = ({
-	openBanner,
-	banner,
-}: {
-	openBanner: boolean;
-	banner: any;
-}) => {
+const CartContainer = ({ banner }: { banner: any }) => {
+	const [
+		{
+			isVisible: { banner: isBannerVisible },
+		},
+	] = useSharedCustomerState();
+
 	const [
 		{
 			isVisible: { headerCart: isCartVisible },
@@ -492,14 +505,17 @@ const CartContainer = ({
 				aria-hidden={!isCartVisible}
 				className={cx(
 					`fixed translate-y-main-nav-h ${
-						!banner?.disable && openBanner ? 'top-14' : 'top-0'
+						!banner?.disable && isBannerVisible ? 'top-14' : 'top-0'
 					} right-0 w-full h-full bg-primary-3 bg-opacity-60 transition-all`,
 					isCartVisible
 						? 'duration-300'
 						: 'pointer-events-none select-none opacity-0 duration-150',
 				)}
 				onClick={() =>
-					customerGlobalActions.setIsVisibleOnly(customerDispatch, 'headerCart')
+					customerGlobalActions.toggleIsVisibleOnly(
+						customerDispatch,
+						'headerCart',
+					)
 				}
 			></div>
 			<div
@@ -508,12 +524,8 @@ const CartContainer = ({
 					isCartVisible
 						? 'scale-y-100 duration-150'
 						: 'scale-y-0 duration-75 opacity-0',
-					// 'grid'
 					'flex flex-col',
 				)}
-				// style={{
-				// 	gridTemplateRows: '5% 1fr 20%'
-				// }}
 			>
 				<header className="pb-4">
 					<h3 className="font-semibold uppercase text-h5">cart</h3>
@@ -551,7 +563,7 @@ const CartContainer = ({
 													}
 													className="inline-block whitespace-nowrap max-w-[10rem] text-ellipsis overflow-hidden"
 													onClick={() =>
-														customerGlobalActions.setIsVisibleOnly(
+														customerGlobalActions.toggleIsVisibleOnly(
 															customerDispatch,
 															'headerCart',
 														)
@@ -651,7 +663,7 @@ const CartContainer = ({
 				</div>
 				<div className="flex flex-col gap-8 pt-8">
 					{upselling.data?.upselling?.length && data ? (
-						<CheckoutPopup
+						<CheckoutPopupDynamic
 							data={upselling.data}
 							products={data}
 							setIsOpen={setIsOpen}

@@ -185,7 +185,7 @@ const CheckoutPopup = (props: any) => {
 												<Button
 													onClick={() => {
 														!isCartVisible
-															? customerGlobalActions.setIsVisibleOnly(
+															? customerGlobalActions.toggleIsVisibleOnly(
 																	customerDispatch,
 																	'headerCart',
 															  )
@@ -201,7 +201,7 @@ const CheckoutPopup = (props: any) => {
 														addProductsToCheckoutAndCart.mutate({
 															products: [{ ...product, quantity: 1 }],
 														});
-														customerGlobalActions.setIsVisibleOnly(
+														customerGlobalActions.toggleIsVisibleOnly(
 															customerDispatch,
 															'headerCart',
 														);

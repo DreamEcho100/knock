@@ -4,16 +4,29 @@ import { setCookie } from '~/utils/common/storage/cookie/document';
 import React from 'react';
 import CustomNextImage from '../CustomNextImage';
 import Dialog from '../Dialog';
+import { useSharedCustomerState } from '~/app/components/providers/CustomerContext';
+import { customerGlobalActions } from '~/app/components/providers/CustomerContext/actions';
 
 const MarketingPopup = (props: any) => {
 	const expirationDate = new Date();
 	expirationDate.setDate(expirationDate.getDate() + 2);
+	const [
+		{
+			isVisible: { marketingPopup: isMarketingPopupVisible },
+		},
+		customerDispatch,
+	] = useSharedCustomerState();
 
 	return (
 		<Dialog
 			isMarketingPopup={true}
-			isOpen={props.open}
-			setIsOpen={props.onOpenChange}
+			isOpen={isMarketingPopupVisible}
+			setIsOpen={(isVisible) =>
+				customerGlobalActions.setIsVisibleOnly(customerDispatch, {
+					item: 'marketingPopup',
+					isVisible,
+				})
+			}
 		>
 			<div className=" m-4 flex justify-center">
 				<CustomNextImage

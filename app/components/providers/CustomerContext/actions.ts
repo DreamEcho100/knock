@@ -9,15 +9,27 @@ import type {
 	TUpdateOneProductOnCartReducerActionData,
 } from './ts';
 
-export const setIsVisibleOnly = (
+export const toggleIsVisibleOnly = (
 	dispatch: TCustomerDispatch,
 	isVisible: keyof IInitialState['isVisible'],
 ) => {
 	dispatch({
-		type: ECustomerContextConsts.SET_TOGGLE_IS_VISIBLE_ONE_ITEM_AND_INIT_EVERYTHING_ELSE,
+		type: ECustomerContextConsts.TOGGLE_IS_VISIBLE_ONE_ITEM_AND_INIT_EVERYTHING_ELSE,
 		payload: {
 			isVisible,
 		},
+	});
+};
+export const setIsVisibleOnly = (
+	dispatch: TCustomerDispatch,
+	payload: {
+		item: keyof IInitialState['isVisible'];
+		isVisible: boolean | ((isVisible: boolean) => boolean);
+	},
+) => {
+	dispatch({
+		type: ECustomerContextConsts.Set_IS_VISIBLE_ONE_ITEM_AND_INIT_EVERYTHING_ELSE,
+		payload: payload,
 	});
 };
 
@@ -72,6 +84,7 @@ const deleteOneProductOnCart = (
 };
 
 export const customerGlobalActions = {
+	toggleIsVisibleOnly,
 	setIsVisibleOnly,
 	cart: {
 		set: setCart,

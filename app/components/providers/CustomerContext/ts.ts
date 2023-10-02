@@ -29,6 +29,8 @@ export interface IInitialState {
 	isVisible: {
 		sideNav: boolean;
 		headerCart: boolean;
+		marketingPopup: boolean;
+		banner: boolean;
 	};
 	cart: ICart; // | ICartUpdatedIdle | ICartUpdatedLoading;
 }
@@ -38,10 +40,18 @@ interface ISetReducerAction<Type, Payload = undefined> {
 	payload: Payload;
 }
 
-type TSetItemVisibility = ISetReducerAction<
-	ECustomerContextConsts.SET_TOGGLE_IS_VISIBLE_ONE_ITEM_AND_INIT_EVERYTHING_ELSE,
+type TToggleItemVisibility = ISetReducerAction<
+	ECustomerContextConsts.TOGGLE_IS_VISIBLE_ONE_ITEM_AND_INIT_EVERYTHING_ELSE,
 	{
 		isVisible: keyof IInitialState['isVisible'];
+	}
+>;
+
+type TSetItemVisibility = ISetReducerAction<
+	ECustomerContextConsts.Set_IS_VISIBLE_ONE_ITEM_AND_INIT_EVERYTHING_ELSE,
+	{
+		item: keyof IInitialState['isVisible'];
+		isVisible: boolean | ((isVisible: boolean) => boolean);
 	}
 >;
 
@@ -83,6 +93,7 @@ export type TDeleteOneProductOnCartReducerActionData = ISetReducerAction<
 >;
 
 export type IReducerActions =
+	| TToggleItemVisibility
 	| TSetItemVisibility
 	| TSetCartReducerActionData
 	| TAddOneProductToCartReducerActionData

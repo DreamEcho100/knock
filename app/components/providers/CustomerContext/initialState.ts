@@ -3,6 +3,8 @@ import type { IInitialState } from './ts';
 export const initIsVisible = (): IInitialState['isVisible'] => ({
 	sideNav: false,
 	headerCart: false,
+	marketingPopup: false,
+	banner: false,
 });
 
 export const initState = (cart?: IInitialState['cart']): IInitialState => ({

@@ -1,6 +1,6 @@
 import { useSharedCustomerState } from '~/app/components/providers/CustomerContext';
 import { customerGlobalActions } from '~/app/components/providers/CustomerContext/actions';
-import { ICartProduct } from '~/app/components/providers/CustomerContext/ts';
+import { type ICartProduct } from '~/app/components/providers/CustomerContext/ts';
 
 import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
@@ -9,7 +9,7 @@ import {
 	removeCookie,
 } from '~/utils/common/storage/cookie/document';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 
 import type { IGenericErrorResponse, ILineItem, IProduct, IUser } from 'types';
 
@@ -59,7 +59,6 @@ export const useGetUserData = ({
 		{
 			enabled: enabled && !!accessToken,
 			refetchInterval: 10 * 60 * 1000,
-			onError: async (error) => {},
 		},
 	);
 
@@ -75,7 +74,7 @@ export const useLogoutUser = ({
 	userCheckoutDetailsAndIdAndKey,
 }: {
 	onError?: () => void;
-	onSuccess?: () => void;
+	onSuccess?: () => void | Promise<void>;
 	userCheckoutDetailsAndIdAndKey: ReturnType<
 		typeof useGetUserCheckoutDetailsAndIdAndKey
 	>;
@@ -125,7 +124,7 @@ export const useLogoutUser = ({
 				let checkout: any = getCookie('checkoutIdAndKey');
 				checkout = JSON.parse(checkout);
 
-				fetch(
+				await fetch(
 					`${process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH}/checkouts/disassociate`,
 					{
 						method: 'POST',
@@ -149,7 +148,7 @@ export const useLogoutUser = ({
 						productsData.map((product) => product.id)
 					);
 */
-				queryClient.invalidateQueries<IUser | undefined>(['check-token']);
+				await queryClient.invalidateQueries<IUser | undefined>(['check-token']);
 
 				if (onSuccess) await onSuccess();
 				else window.location.reload();
@@ -272,7 +271,7 @@ export const useAddProductsToCheckoutAndCart = () => {
 			}),
 
 		onSettled: () =>
-			customerGlobalActions.setIsVisibleOnly(customerDispatch, 'headerCart'),
+			customerGlobalActions.toggleIsVisibleOnly(customerDispatch, 'headerCart'),
 	});
 };
 export const useUpdateProductsToCheckoutAndCart = () => {
