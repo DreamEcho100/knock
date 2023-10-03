@@ -20,6 +20,7 @@ const nextConfig = (phase, { defaultConfig }) => {
 		reactStrictMode: true,
 		swcMinify: true,
 		images: {
+			formats: ['image/avif', 'image/webp'],
 			domains: ['cdn.shopify.com', 'api.pluginsthatknock.com'],
 		},
 		typescript: { ignoreBuildErrors: true },
