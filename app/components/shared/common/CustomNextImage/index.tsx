@@ -9,6 +9,7 @@ export interface ICustomNextImageProps extends Omit<ImageProps, 'alt'> {
 	alt?: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const shimmer = (w: number, h: number) => `
 <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
@@ -23,6 +24,7 @@ const shimmer = (w: number, h: number) => `
   <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
 </svg>`;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const toBase64 = (str: string) =>
 	typeof window === 'undefined'
 		? Buffer.from(str).toString('base64')
@@ -38,8 +40,8 @@ const CustomNextImage = forwardRef<HTMLImageElement, ICustomNextImageProps>(
 					elem.currentTarget.src = '/svgs/bbblurry.svg';
 					elem.currentTarget.classList.add('no-content');
 				}}
-				placeholder="blur"
-				blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+				// placeholder="blur"
+				// blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(props.width, props.height))}`}
 				{...props}
 				className={cx('no-content', props.className)}
 				alt={props.alt ?? ''}

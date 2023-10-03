@@ -1,7 +1,12 @@
+/**
+ *
+ * **Warning:** Doesn't work with circler references
+ */
 export function getClassInstanceValues<TValue>(obj: TValue) {
 	const objCopy: Record<PropertyKey, unknown> = {};
 
-	for (const key in obj) {
+	let key: keyof TValue;
+	for (key in obj) {
 		if (typeof obj[key] === 'function') continue;
 		objCopy[key] =
 			obj[key] && typeof obj[key] === 'object'
