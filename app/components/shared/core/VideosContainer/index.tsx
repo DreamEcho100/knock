@@ -64,6 +64,7 @@ const VideosContainer = ({
 								allow={iframe.allow}
 								// title='YouTube video player'
 								className="overflow-hidden rounded-2xl w-full aspect-video"
+								loading="lazy"
 							/>
 						)}
 					</div>

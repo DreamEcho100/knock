@@ -5,13 +5,12 @@ import {
 	getKnockClipperPageData,
 } from '~/utils/core/API';
 import { defaultSiteName } from '~/utils/core/next-seo.config';
-import dynamic from 'next/dynamic';
 import HeroSection from './sections/Hero';
 import DescriptionSection from './sections/Description';
 import ProductShowcaseSection from './sections/ProductShowcase';
 import SystemRequirementsSection from '~/app/components/shared/core/SystemRequirements';
 
-const VideosSection = dynamic(() => import('./sections/Videos'));
+import VideosSection from './sections/Videos';
 
 export interface IKnockClipperPageProps {
 	knockClipperPlugin: IProduct;
