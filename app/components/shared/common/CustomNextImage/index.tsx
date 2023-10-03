@@ -6,8 +6,6 @@ import { forwardRef } from 'react';
 export const websiteBasePath = `https://${process.env.NEXT_PUBLIC_APP_DOMAINE}`;
 
 export interface ICustomNextImageProps extends Omit<ImageProps, 'alt'> {
-	className?: string;
-	role?: string;
 	alt?: string;
 }
 

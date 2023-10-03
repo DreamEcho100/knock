@@ -167,6 +167,7 @@ const KnockSection = ({
 							transform:
 								'translate(8%, -2%) scale(2.4, 2.4) rotateZ(-198deg) rotateY(180deg)',
 						}}
+						sizes="80vw"
 					/>
 					{imageSrc && (
 						<CustomNextImage
@@ -175,6 +176,7 @@ const KnockSection = ({
 							width={700}
 							height={400}
 							priority
+							sizes="80vw"
 							{...mainImgOrVideoProps}
 						/>
 					)}
