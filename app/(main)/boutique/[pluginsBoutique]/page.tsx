@@ -6,6 +6,7 @@ import {
 } from 'server/controllers/products';
 import { type Metadata, type ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
+import { getClassInstanceValues } from '~/app/libs/utils';
 
 export interface IKnockPluginBoutiqueProps {
 	knockPluginBoutique: IProduct; // ShopifyBuy.Product;
@@ -19,7 +20,7 @@ export const revalidate = 360;
 
 async function getPageData(props: Props) {
 	const data = await getOneProductByHandle(props.params.pluginsBoutique).then(
-		(res) => JSON.parse(JSON.stringify(res)) as IProduct,
+		(res) => getClassInstanceValues(res),
 	);
 
 	if (!data) {

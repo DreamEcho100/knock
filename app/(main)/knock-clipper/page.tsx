@@ -11,6 +11,7 @@ import ProductShowcaseSection from './sections/ProductShowcase';
 import SystemRequirementsSection from '~/app/components/shared/core/SystemRequirements';
 
 import VideosSection from './sections/Videos';
+import { getClassInstanceValues } from '~/app/libs/utils';
 
 export interface IKnockClipperPageProps {
 	knockClipperPlugin: IProduct;
@@ -25,8 +26,8 @@ export const metadata = {
 
 async function getPageData() {
 	return await Promise.all([
-		getOneProductByHandle('knock-clipper').then(
-			(res) => JSON.parse(JSON.stringify(res)) as IProduct,
+		getOneProductByHandle('knock-clipper').then((res) =>
+			getClassInstanceValues(res),
 		),
 		getKnockClipperPageData(),
 		getKnockClipperMainSection(),

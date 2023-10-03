@@ -12,6 +12,7 @@ import HeroSection from './sections/Hero';
 import DigitalProductsSection from './sections/DigitalProducts';
 import ArtistsSection from './sections/Artists';
 import KnockProductShowcaseSection from './sections/KnockProductShowcase';
+import { getClassInstanceValues } from '~/app/libs/utils';
 
 export interface IDrumsThatKnockPageProps {
 	products: IProduct[]; // ShopifyBuy.Product[];
@@ -27,11 +28,11 @@ export const metadata = {
 
 async function getPageData() {
 	return await Promise.all([
-		getAllProducts({ typesToExclude: ['Sound Editing Software'] }).then(
-			(res) => JSON.parse(JSON.stringify(res)) as IProduct[],
+		getAllProducts({ typesToExclude: ['Sound Editing Software'] }).then((res) =>
+			getClassInstanceValues(res),
 		),
-		getOneProductByHandle('knock-plugin').then(
-			(res) => JSON.parse(JSON.stringify(res)) as IProduct,
+		getOneProductByHandle('knock-plugin').then((res) =>
+			getClassInstanceValues(res),
 		),
 		getDTKPageData(),
 	]);

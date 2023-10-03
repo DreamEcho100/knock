@@ -13,6 +13,7 @@ import type { IProduct } from 'types';
 import { getOneProductByHandle } from 'server/controllers/products';
 import { getKnockMainSection, getKnockPageData } from '~/utils/core/API';
 import SystemRequirementsSection from '~/app/components/shared/core/SystemRequirements';
+import { getClassInstanceValues } from '~/app/libs/utils';
 
 export interface IKnockPluginPageProps {
 	knockPlugin: IProduct; // ShopifyBuy.Product;
@@ -28,7 +29,7 @@ export const metadata = {
 export default async function KnockPluginPage() {
 	const [knockPlugin, knockPageData, knockMainSection] = await Promise.all([
 		getOneProductByHandle('knock-plugin').then((res) =>
-			JSON.parse(JSON.stringify(res)),
+			getClassInstanceValues(res),
 		),
 		getKnockPageData(),
 		getKnockMainSection(),
