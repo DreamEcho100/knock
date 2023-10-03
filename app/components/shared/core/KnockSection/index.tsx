@@ -44,17 +44,20 @@ export const h2Classes = cva(
 	},
 );
 
-export const sectionClasses = cva('bg-primary-1 sm:section-h-v1', {
-	variants: {
-		p: {
-			'section-p-v1': 'section-p-v1',
-			'section-p-x-v1': 'section-p-x-v1',
+export const sectionClasses = cva(
+	'bg-primary-1 sm:section-h-v1 overflow-x-hidden',
+	{
+		variants: {
+			p: {
+				'section-p-v1': 'section-p-v1',
+				'section-p-x-v1': 'section-p-x-v1',
+			},
+		},
+		defaultVariants: {
+			p: 'section-p-v1',
 		},
 	},
-	defaultVariants: {
-		p: 'section-p-v1',
-	},
-});
+);
 
 export const sectionInnerWrapperClasses = cva(
 	'w-full flex items-center justify-center flex-col sm:gap-2 text-center',
