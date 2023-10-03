@@ -43,6 +43,7 @@ import dynamic from 'next/dynamic';
 
 const CheckoutPopupDynamic = dynamic(
 	() => import('~/app/components/shared/common/CheckoutPopup/CheckoutPopup'),
+	{ ssr: false },
 );
 
 const linkClasses = ({

@@ -1,26 +1,17 @@
 'use client';
-import type {
-	IGenericErrorResponse,
-	ILoginSuccess,
-	IRegisterSuccess,
-} from 'types';
-import type { Dispatch, FormEvent, SetStateAction } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 
 import { useState } from 'react';
-import Dialog from '~/app/components/shared/common/Dialog';
-import { useMutation } from '@tanstack/react-query';
-import Button from '~/app/components/shared/core/Button';
-import { setCookie } from '~/utils/common/storage/cookie/document';
-import { useGetUserData } from '~/utils/core/hooks';
 import { BsFillPersonFill } from 'react-icons/bs';
-import FormField from '~/app/components/shared/core/FieldForm';
-import { toast } from 'react-toastify';
 import dynamic from 'next/dynamic';
 
-const RegisterTypeDynamic = dynamic(() => import('./Types/Register'));
-const LoginTypeDynamic = dynamic(() => import('./Types/Login'));
+const RegisterTypeDynamic = dynamic(() => import('./Types/Register'), {
+	ssr: false,
+});
+const LoginTypeDynamic = dynamic(() => import('./Types/Login'), { ssr: false });
 const ForgetPasswordTypeDynamic = dynamic(
 	() => import('./Types/ForgetPassword'),
+	{ ssr: false },
 );
 
 export interface IProps {

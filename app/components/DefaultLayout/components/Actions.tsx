@@ -8,6 +8,7 @@ import {
 
 const MarketingPopupDynamic = dynamic(
 	() => import('~/app/components/shared/common/MarketingPopup/MarketingPopup'),
+	{ ssr: false },
 );
 
 export default function LazyLoadedActions() {
