@@ -1,5 +1,4 @@
 import CustomNextImage from '~/app/components/shared/common/CustomNextImage';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 /*
 const features = [
@@ -82,22 +81,9 @@ export default function ShapesYourDrumsSection({ data }: { data: any }) {
 					relative flex flex-col gap-10 sm:gap-20"
 			>
 				<header className="text-center">
-					{data ? (
-						<h2 className="text-h3 font-semibold uppercase text-primary-1">
-							{data.h2}
-						</h2>
-					) : (
-						<div className="flex items-center justify-center">
-							<SkeletonTheme baseColor="#000" highlightColor="#7d7b78">
-								<Skeleton
-									width={300}
-									count={1}
-									height={40}
-									className={'rounded-3xl '}
-								/>
-							</SkeletonTheme>
-						</div>
-					)}
+					<h2 className="text-h3 font-semibold uppercase text-primary-1">
+						{data.h2}
+					</h2>
 				</header>
 				<div className="flex flex-wrap items-baseline justify-center gap-12">
 					{data.third_section_knock_page_content?.map((item: any) => (
@@ -105,44 +91,14 @@ export default function ShapesYourDrumsSection({ data }: { data: any }) {
 							key={item.id}
 							className="text-center w-[18rem] max-w-full flex flex-col items-center justify-start gap-6"
 						>
-							{item ? (
-								<CustomNextImage
-									src={process.env.NEXT_PUBLIC_KNOCK_URL_API + item.image}
-									width={175}
-									height={175}
-									className="aspect-square max-w-[10rem]"
-								/>
-							) : (
-								<div className="flex items-center justify-center">
-									<SkeletonTheme baseColor="#000" highlightColor="#7d7b78">
-										<Skeleton
-											width={150}
-											count={1}
-											height={150}
-											className={'rounded-3xl '}
-											style={{ borderRadius: '50%' }}
-										/>
-									</SkeletonTheme>
-								</div>
-							)}
-							{item ? (
-								<p className="font-bold">{item.h3}</p>
-							) : (
-								<div className="flex items-center justify-center">
-									<SkeletonTheme baseColor="#000" highlightColor="#7d7b78">
-										<Skeleton width={150} count={1} height={30} />
-									</SkeletonTheme>
-								</div>
-							)}
-							{item ? (
-								<p className="mt-[-0.75rem]">{item.p}</p>
-							) : (
-								<div className="flex items-center justify-center">
-									<SkeletonTheme baseColor="#000" highlightColor="#7d7b78">
-										<Skeleton width={200} count={1} height={100} />
-									</SkeletonTheme>
-								</div>
-							)}
+							<CustomNextImage
+								src={process.env.NEXT_PUBLIC_KNOCK_URL_API + item.image}
+								width={175}
+								height={175}
+								className="aspect-square max-w-[10rem]"
+							/>
+							<p className="font-bold">{item.h3}</p>
+							<p className="mt-[-0.75rem]">{item.p}</p>
 						</div>
 					))}
 				</div>

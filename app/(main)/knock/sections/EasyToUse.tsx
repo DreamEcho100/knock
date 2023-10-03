@@ -1,5 +1,4 @@
 import ProductShowcase from '~/app/components/shared/core/ProductShowcase';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { type IProduct } from '~/types';
 
 export default function EasyToUseSection({
@@ -15,18 +14,8 @@ export default function EasyToUseSection({
 				product={knockPlugin}
 				textContainer={{
 					h2: {
-						children: data ? (
-							data.h2
-						) : (
-							<SkeletonTheme baseColor="#000" highlightColor="#7d7b78">
-								<Skeleton
-									width={350}
-									count={1}
-									height={20}
-									className={'rounded-3xl '}
-								/>
-							</SkeletonTheme>
-						),
+						children:
+						data.h2,
 					},
 					p: {
 						children: data.p,

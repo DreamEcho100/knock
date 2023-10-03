@@ -37,7 +37,6 @@ import { HiShoppingBag } from 'react-icons/hi';
 import { commonClasses } from '../..';
 import UserAuthButton from './components/UserAuthButton';
 import { AiFillCloseCircle } from 'react-icons/ai';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import dynamic from 'next/dynamic';
@@ -229,7 +228,7 @@ const MainHeader = ({} // setBanner,
 
 	return (
 		<>
-			{isBannerVisible && banner.data && !banner.data.disable ? (
+			{isBannerVisible && banner.data && !banner.data.disable && (
 				<div
 					style={{ background: banner.data.background }}
 					className={`${commonClasses} z-10 fixed ${
@@ -277,14 +276,6 @@ const MainHeader = ({} // setBanner,
 						/>
 					</div>
 				</div>
-			) : (
-				<SkeletonTheme baseColor="#000" highlightColor="#7d7b78">
-					<Skeleton
-						count={1}
-						height={60}
-						className={` z-10 fixed  h-14 right-0 left-0 w-full flex items-center justify-center`}
-					/>
-				</SkeletonTheme>
 			)}
 			<header
 				id="main-header"
