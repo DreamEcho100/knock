@@ -45,7 +45,7 @@ export const h2Classes = cva(
 );
 
 export const sectionClasses = cva(
-	'bg-primary-1 sm:section-h-v1 overflow-x-hidden',
+	'bg-primary-1 sm:section-h-v1 overflow-hidden',
 	{
 		variants: {
 			p: {
