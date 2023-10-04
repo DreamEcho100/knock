@@ -10,8 +10,11 @@ const defaultDescription =
 const defaultTitle = `${defaultSiteName} | KNOCK Plugin - Make Your Drums Knock`;
 
 const SEODefaults: Metadata = {
+	metadataBase: new URL(websiteBasePath),
 	description: defaultDescription,
 	title: defaultTitle,
+	themeColor: 'black',
+	colorScheme: 'dark',
 	openGraph: {
 		type: 'website',
 		locale: 'en_US',
@@ -36,15 +39,6 @@ const SEODefaults: Metadata = {
 	},
 	creator: 'DECAP',
 	applicationName: defaultSiteName,
-	// {
-	// 	httpEquiv: 'x-ua-compatible',
-	// 	content: 'IE=edge, chrome=1'
-	// },
-	// {
-	// 	name: 'viewport',
-	// 	content: 'width=device-width, initial-scale=1.0'
-	// },
-	colorScheme: 'dark',
 	robots: 'index, follow',
 };
 
