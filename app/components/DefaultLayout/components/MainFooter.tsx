@@ -112,7 +112,7 @@ const MainFooter = () => {
 	return (
 		<footer
 			id="main-footer"
-			className={`${commonClasses} max-w bg-primary-1 border-t-[0.125rem] border-t-text-primary-4`}
+			className={`${commonClasses} w-full bg-primary-1 border-t-[0.125rem] border-t-text-primary-4`}
 		>
 			<div
 				className="flex flex-col m-auto text-primary-2 px-4 py-8
@@ -157,7 +157,7 @@ const MainFooter = () => {
                 { href: '/', text: 'All sample packs' },
               ]}
             /> */}
-						<div className="flex flex-col p-2 gap-4 md:p-0 max-w-[700px] lg:w-1/2">
+						<div className="flex flex-col p-2 gap-4 md:p-0 lg:w-1/2">
 							<div className="flex flex-col gap-4">
 								<h2 className="text-h3 font-semibold text-white uppercase">
 									subscribe
