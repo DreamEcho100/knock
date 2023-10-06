@@ -4,6 +4,7 @@ import ProductBasicCard from '~/app/components/shared/core/Card/product/default'
 import KnockTrademark from '~/app/components/shared/core/KnockTrademark';
 import { useMemo } from 'react';
 import { type IProduct } from '~/types';
+import { cx } from 'class-variance-authority';
 
 const LatestSamplesSection = ({
 	products,
@@ -44,7 +45,13 @@ const LatestSamplesSection = ({
 				{/* <div className='flex items-center justify-center lg:flex-grow lg:w-1/2'>
 					<ProductCardSlider products={products} />
 				</div> */}
-				<div className="lg:w-1/2 lg:flex-grow grid grid-cols-[repeat(auto-fit,_minmax(10rem,_1fr))] gap-8">
+				<div
+					className={cx(
+						'lg:w-1/2 lg:flex-grow grid grid-cols-[repeat(auto-fit,_minmax(10rem,_1fr))] gap-8',
+						'max-w-screen-sm mx-auto',
+						'lg:max-w-none lg:mx-0',
+					)}
+				>
 					{filteredProducts
 						.filter(
 							(item) =>
