@@ -47,7 +47,7 @@ const LatestSamplesSection = ({
 				</div> */}
 				<div
 					className={cx(
-						'lg:w-1/2 lg:flex-grow grid grid-cols-[repeat(auto-fit,_minmax(10rem,_1fr))] gap-8',
+						'lg:w-1/2 lg:flex-grow grid grid-cols-1 extra-sm:grid-cols-[repeat(auto-fit,_minmax(10rem,_1fr))] gap-8',
 						'max-w-screen-sm mx-auto',
 						'lg:max-w-none lg:mx-0',
 					)}
