@@ -22,7 +22,7 @@ const MarketingPopup = (props: any) => {
 			isMarketingPopup={true}
 			isOpen={isMarketingPopupVisible}
 			setIsOpen={(isVisible) =>
-				customerGlobalActions.setIsVisibleOnly(customerDispatch, {
+				customerGlobalActions.setIsVisible(customerDispatch, {
 					item: 'marketingPopup',
 					isVisible,
 				})

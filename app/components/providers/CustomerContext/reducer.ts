@@ -22,21 +22,25 @@ export const reducer = (
 	}
 
 	switch (action.type) {
-		case ECustomerContextConsts.TOGGLE_IS_VISIBLE_ONE_ITEM_AND_INIT_EVERYTHING_ELSE: {
+		case ECustomerContextConsts.TOGGLE_IS_ONE_ITEM_VISIBLE: {
 			return {
 				...state,
 				isVisible: {
-					...initIsVisible(),
+					...(action.payload.closeEverythingElse
+						? initIsVisible()
+						: state.isVisible),
 					[action.payload.isVisible]:
 						!state.isVisible[action.payload.isVisible],
 				},
 			};
 		}
-		case ECustomerContextConsts.Set_IS_VISIBLE_ONE_ITEM_AND_INIT_EVERYTHING_ELSE: {
+		case ECustomerContextConsts.SET_IS_ONE_ITEM_VISIBLE: {
 			return {
 				...state,
 				isVisible: {
-					...initIsVisible(),
+					...(action.payload.closeEverythingElse
+						? initIsVisible()
+						: state.isVisible),
 					[action.payload.item]:
 						typeof action.payload.isVisible === 'function'
 							? action.payload.isVisible(state.isVisible[action.payload.item])

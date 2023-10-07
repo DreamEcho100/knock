@@ -262,7 +262,7 @@ const MainHeader = () => {
 					</div>
 					<button
 						onClick={() =>
-							customerGlobalActions.setIsVisibleOnly(customerDispatch, {
+							customerGlobalActions.setIsVisible(customerDispatch, {
 								item: 'banner',
 								isVisible: false,
 							})
@@ -358,9 +358,10 @@ const MainHeader = () => {
 									title="cart"
 									className="flex items-center justify-center"
 									onClick={() =>
-										customerGlobalActions.toggleIsVisibleOnly(
+										customerGlobalActions.toggleIsVisible(
 											customerDispatch,
 											'headerCart',
+											true,
 										)
 									}
 								>
@@ -503,9 +504,10 @@ const CartContainer = ({ banner }: { banner: any }) => {
 						: 'pointer-events-none select-none opacity-0 duration-150',
 				)}
 				onClick={() =>
-					customerGlobalActions.toggleIsVisibleOnly(
+					customerGlobalActions.toggleIsVisible(
 						customerDispatch,
 						'headerCart',
+						true,
 					)
 				}
 			></div>
@@ -554,9 +556,10 @@ const CartContainer = ({ banner }: { banner: any }) => {
 													}
 													className="inline-block whitespace-nowrap max-w-[10rem] text-ellipsis overflow-hidden"
 													onClick={() =>
-														customerGlobalActions.toggleIsVisibleOnly(
+														customerGlobalActions.toggleIsVisible(
 															customerDispatch,
 															'headerCart',
+															true,
 														)
 													}
 												>

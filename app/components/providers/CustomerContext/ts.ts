@@ -41,17 +41,19 @@ interface ISetReducerAction<Type, Payload = undefined> {
 }
 
 type TToggleItemVisibility = ISetReducerAction<
-	ECustomerContextConsts.TOGGLE_IS_VISIBLE_ONE_ITEM_AND_INIT_EVERYTHING_ELSE,
+	ECustomerContextConsts.TOGGLE_IS_ONE_ITEM_VISIBLE,
 	{
 		isVisible: keyof IInitialState['isVisible'];
+		closeEverythingElse?: boolean;
 	}
 >;
 
 type TSetItemVisibility = ISetReducerAction<
-	ECustomerContextConsts.Set_IS_VISIBLE_ONE_ITEM_AND_INIT_EVERYTHING_ELSE,
+	ECustomerContextConsts.SET_IS_ONE_ITEM_VISIBLE,
 	{
 		item: keyof IInitialState['isVisible'];
 		isVisible: boolean | ((isVisible: boolean) => boolean);
+		closeEverythingElse?: boolean;
 	}
 >;
 
