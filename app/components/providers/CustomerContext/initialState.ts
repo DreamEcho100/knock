@@ -4,7 +4,7 @@ export const initIsVisible = (): IInitialState['isVisible'] => ({
 	sideNav: false,
 	headerCart: false,
 	marketingPopup: false,
-	banner: false,
+	banner: true,
 });
 
 export const initState = (cart?: IInitialState['cart']): IInitialState => ({

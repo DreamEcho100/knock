@@ -66,15 +66,9 @@ const headerLinks = [
 	{ href: '/knock-clipper', text: 'KNOCK Clipper', keepCase: true },
 	{ href: '/drums-that-knock', text: 'drums that knock' },
 	{ href: '/faqs', text: 'FAQs', keepCase: true },
-	// { href: '/contact-us', text: 'contact' }
 ];
 
-const MainHeader = ({} // setBanner,
-// isBannerVisible: isBannerVisible,
-: {
-	// setBanner: Dispatch<SetStateAction<boolean>>;
-	// isBannerVisible: boolean;
-}) => {
+const MainHeader = () => {
 	const [
 		{
 			cart,
@@ -235,6 +229,7 @@ const MainHeader = ({} // setBanner,
 					className={`${commonClasses} z-10 fixed ${
 						isBannerVisible ? 'h-14' : 'h-0'
 					}  right-0 left-0 w-full flex items-center justify-center`}
+					id="test2"
 				>
 					<div>
 						<div
@@ -265,17 +260,21 @@ const MainHeader = ({} // setBanner,
 								))}
 						</div>
 					</div>
-					<div className="hidden absolute sm:block  right-0 p-4">
+					<button
+						onClick={() =>
+							customerGlobalActions.setIsVisibleOnly(customerDispatch, {
+								item: 'banner',
+								isVisible: false,
+							})
+						}
+						type="button"
+						className="hidden absolute sm:block  right-0 p-4"
+					>
 						<AiFillCloseCircle
-							onClick={() =>
-								customerGlobalActions.setIsVisibleOnly(customerDispatch, {
-									item: 'banner',
-									isVisible: false,
-								})
-							}
+							id="AiFillCloseCircle"
 							style={{ color: banner.data.textColor }}
 						/>
-					</div>
+					</button>
 				</div>
 			)}
 			<header
