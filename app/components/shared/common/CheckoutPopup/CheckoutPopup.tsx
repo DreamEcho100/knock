@@ -188,6 +188,7 @@ const CheckoutPopup = (props: any) => {
 															? customerGlobalActions.toggleIsVisible(
 																	customerDispatch,
 																	'headerCart',
+																	true,
 															  )
 															: null;
 													}}
@@ -204,6 +205,7 @@ const CheckoutPopup = (props: any) => {
 														customerGlobalActions.toggleIsVisible(
 															customerDispatch,
 															'headerCart',
+															true,
 														);
 													}}
 													className="text-sm px-1"
