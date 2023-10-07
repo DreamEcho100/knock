@@ -21,7 +21,7 @@ export const metadata: Metadata = SEODefaults;
 
 export default function RootLayout(props: PropsWithChildren) {
 	return (
-		<html lang="en" suppressHydrationWarning>
+		<html lang="en">
 			<head>
 				<link rel="preload" href="/svg/bbblurry.svg" />
 			</head>
@@ -32,6 +32,7 @@ export default function RootLayout(props: PropsWithChildren) {
 					sourceSansPro.className,
 					decapv16.variable,
 				)}
+				suppressHydrationWarning
 			>
 				<Providers>
 					<DynamicTopProgressBar />
