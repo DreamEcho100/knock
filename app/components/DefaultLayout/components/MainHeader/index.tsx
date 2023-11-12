@@ -125,8 +125,9 @@ const MainHeader = () => {
 			);
 		},
 		{
-			enabled: !!userCheckoutIdAndKeyFromCookie && !isCheckoutFound,
-			refetchInterval: 10 * 60 * 1000,
+			enabled: !!userCheckoutIdAndKeyFromCookie,
+			staleTime: 40 * 1000,
+			refetchInterval: 3 * 1000,
 			onSuccess: ({ checkout }) => {
 				if (checkout.lineItems.length !== 0)
 					customerGlobalActions.cart.set(customerDispatch, {
@@ -357,13 +358,17 @@ const MainHeader = () => {
 								<button
 									title="cart"
 									className="flex items-center justify-center"
-									onClick={() =>
+									onClick={() => {
 										customerGlobalActions.toggleIsVisible(
 											customerDispatch,
 											'headerCart',
 											true,
-										)
-									}
+										);
+										customerGlobalActions.setIsVisible(customerDispatch, {
+											item: 'marketingPopup',
+											isVisible: false,
+										});
+									}}
 								>
 									<span className="relative">
 										<HiShoppingBag
@@ -471,14 +476,40 @@ const CartContainer = ({ banner }: { banner: any }) => {
 		removeProductsToCheckoutAndCart.isLoading ||
 		updateProductsToCheckoutAndCart.isLoading;
 
+	const [isCartHasAutomaticDiscount, setIsCartHasAutomaticDiscount] =
+		useState(false);
+
+	useEffect(() => {
+		if (productsData.length) {
+			productsData.map((el) => {
+				if (el.discountAllocations.length > 0) {
+					setIsCartHasAutomaticDiscount(true);
+				} else {
+					setIsCartHasAutomaticDiscount(false);
+				}
+			});
+		}
+	}, [productsData.length]);
+
 	const productsTotalPrice = useMemo(
 		() =>
-			productsData.reduce(
-				(previousValue, currentValue) =>
-					previousValue + currentValue.price * currentValue.selectedAmount,
-				0,
-			),
-		[productsData],
+			productsData.reduce((previousValue, currentValue) => {
+				if (currentValue.discountAllocations[0]) {
+					return (
+						previousValue +
+						(currentValue.price -
+							parseInt(
+								currentValue.discountAllocations[0]?.allocatedAmount?.amount,
+							)) *
+							currentValue.selectedAmount
+					);
+				} else {
+					return (
+						previousValue + currentValue.price * currentValue.selectedAmount
+					);
+				}
+			}, 0),
+		[productsData, isCartHasAutomaticDiscount],
 	);
 
 	const [isOpen, setIsOpen] = useState(false);
@@ -567,7 +598,21 @@ const CartContainer = ({ banner }: { banner: any }) => {
 												</Link>
 											</h4>
 											<p title="price per product">
-												{product.variant.compareAtPrice ? (
+												{product.discountAllocations.length ? (
+													<span className="text-bg-secondary-2">
+														{priceCurrencyFormatter(
+															(
+																product.price -
+																parseInt(
+																	product.discountAllocations[0].allocatedAmount
+																		.amount,
+																)
+															).toString(),
+															product.discountAllocations[0].allocatedAmount
+																.currencyCode,
+														)}
+													</span>
+												) : product.variant.compareAtPrice ? (
 													<>
 														<del>
 															{priceCurrencyFormatter(
@@ -634,24 +679,58 @@ const CartContainer = ({ banner }: { banner: any }) => {
 													+
 												</button>
 											</div> */}
-
-											<button
-												className={cx(
-													'w-fit py-1 text-primary-3 hover:text-primary-2 focus:text-primary-1',
-													'transition-all duration-150',
+											<div className="flex flex-col">
+												{product.discountAllocations.length ? (
+													<div className="flex items-center border border-[#666666] p-1 gap-2 text-[#666666] ">
+														<span className="w-[15px] ">
+															<svg
+																xmlns="http://www.w3.org/2000/svg"
+																viewBox="0 0 14 14"
+																focusable="false"
+																aria-hidden="true"
+																className="fill-[#666666]"
+															>
+																<path
+																	stroke-linecap="round"
+																	d="M7.284 1.402h4.964a.35.35 0 0 1 .35.35v4.964a.7.7 0 0 1-.205.495L7.49 12.115a.7.7 0 0 1-.99 0L1.885 7.5a.7.7 0 0 1 0-.99L6.79 1.607a.7.7 0 0 1 .495-.205Z"
+																></path>
+																<circle cx="9.1" cy="4.9" r="0.7"></circle>
+																<path
+																	stroke-linecap="round"
+																	stroke-linejoin="round"
+																	d="M9.102 4.897h-.005v.005h.005v-.005Z"
+																></path>
+															</svg>
+														</span>
+														<span>
+															<p className="text-xs">
+																{
+																	product.discountAllocations[0]
+																		.discountApplication.title
+																}
+															</p>
+														</span>
+													</div>
+												) : (
+													''
 												)}
-												disabled={disableAllButtons}
-												onClick={() =>
-													removeProductsToCheckoutAndCart.mutate({
-														productsIds: [product.id],
-													})
-												}
-											>
-												remove
-											</button>
+												<button
+													className={cx(
+														'w-fit py-1 text-primary-3 hover:text-primary-2 focus:text-primary-1',
+														'transition-all duration-150',
+													)}
+													disabled={disableAllButtons}
+													onClick={() =>
+														removeProductsToCheckoutAndCart.mutate({
+															productsIds: [product.id],
+														})
+													}
+												>
+													remove
+												</button>
+											</div>
 										</div>
 									</div>
-									<div className=""></div>
 								</article>
 						  ))}
 				</div>
