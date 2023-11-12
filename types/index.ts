@@ -174,7 +174,7 @@ export interface ILineItem {
 	};
 	quantity: number;
 	customAttributes: [];
-	discountAllocations: [];
+	discountAllocations: any[];
 	hasNextPage: {
 		value: boolean;
 	};

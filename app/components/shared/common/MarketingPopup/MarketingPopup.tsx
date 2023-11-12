@@ -1,7 +1,7 @@
 'use client';
 import Button from '~/app/components/shared/core/Button';
-import { setCookie } from '~/utils/common/storage/cookie/document';
-import React from 'react';
+import { getCookie, setCookie } from '~/utils/common/storage/cookie/document';
+import React, { useEffect } from 'react';
 import CustomNextImage from '../CustomNextImage';
 import Dialog from '../Dialog';
 import { useSharedCustomerState } from '~/app/components/providers/CustomerContext';
@@ -10,12 +10,28 @@ import { customerGlobalActions } from '~/app/components/providers/CustomerContex
 const MarketingPopup = (props: any) => {
 	const expirationDate = new Date();
 	expirationDate.setDate(expirationDate.getDate() + 2);
+	const popupCookies = getCookie('hide-marketing-popup');
+	
 	const [
 		{
 			isVisible: { marketingPopup: isMarketingPopupVisible },
 		},
 		customerDispatch,
 	] = useSharedCustomerState();
+
+	useEffect(() => {
+		if (popupCookies === 'true') {
+			customerGlobalActions.setIsVisible(customerDispatch, {
+				item: 'marketingPopup',
+				isVisible: false,
+			});
+		} else {
+			customerGlobalActions.setIsVisible(customerDispatch, {
+				item: 'marketingPopup',
+				isVisible: true,
+			});
+		}
+	}, [popupCookies]);
 
 	return (
 		<Dialog

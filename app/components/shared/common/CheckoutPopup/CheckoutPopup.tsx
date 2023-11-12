@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import Dialog from '../Dialog';
 import Link from 'next/link';
 import CustomNextImage from '../CustomNextImage';
@@ -65,7 +65,7 @@ const CheckoutPopup = (props: any) => {
 			{!interestedProduct.length
 				? ''
 				: interestedProduct.map((product: any) => (
-						<>
+						<Fragment key={product.id}>
 							{!product.title.endsWith('(PIB)') ? (
 								<article
 									key={product.id}
@@ -221,7 +221,7 @@ const CheckoutPopup = (props: any) => {
 							) : (
 								''
 							)}
-						</>
+						</Fragment>
 				  ))}
 			<Button
 				{...(productsData.length === 0 ||
