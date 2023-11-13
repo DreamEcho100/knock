@@ -4,6 +4,7 @@
 	flex-direction: column;
 	align-items: center;
 	max-width: 1200px;
+	min-height: fit-content;
 
 	& > div:nth-child(2) {
 		text-align: left;
