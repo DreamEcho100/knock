@@ -6,6 +6,7 @@ import { notFound, redirect } from 'next/navigation';
 import ProductByHandleScreen from './screen';
 import { type Metadata, type ResolvingMetadata } from 'next';
 import { defaultSiteName3 } from '~/utils/core/next-seo.config';
+import { cache } from 'react';
 
 type Props = {
 	params: { productHandle: string };
@@ -16,7 +17,7 @@ const pages_redirects_map: Record<string, string> = {
 	'knock-clipper': '/knock-clipper',
 };
 
-async function getPageData(props: Props) {
+const getPageData = cache(async (props: Props) => {
 	if (props.params.productHandle.search('boutique') !== -1) {
 		notFound();
 	}
@@ -32,7 +33,7 @@ async function getPageData(props: Props) {
 	}
 
 	return product;
-}
+});
 
 export const revalidate = 360;
 export async function generateMetadata(

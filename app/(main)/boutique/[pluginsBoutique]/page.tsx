@@ -7,6 +7,7 @@ import {
 import { type Metadata, type ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getClassInstanceValues } from '~/app/libs/utils';
+import { cache } from 'react';
 
 export interface IKnockPluginBoutiqueProps {
 	knockPluginBoutique: IProduct; // ShopifyBuy.Product;
@@ -18,7 +19,7 @@ type Props = {
 
 export const revalidate = 360;
 
-async function getPageData(props: Props) {
+const getPageData = cache(async (props: Props) => {
 	const data = await getOneProductByHandle(props.params.pluginsBoutique).then(
 		(res) => getClassInstanceValues(res),
 	);
@@ -28,7 +29,7 @@ async function getPageData(props: Props) {
 	}
 
 	return data;
-}
+});
 
 export async function generateMetadata(
 	props: Props,
