@@ -47,7 +47,8 @@ const LatestSamplesSection = ({
 				</div> */}
 				<div
 					className={cx(
-						'lg:w-1/2 lg:flex-grow grid grid-cols-1 extra-sm:grid-cols-[repeat(auto-fit,_minmax(10rem,_1fr))] gap-8',
+						// 'lg:w-1/2 lg:flex-grow grid grid-cols-1 extra-sm:grid-cols-[repeat(auto-fit,_minmax(10rem,_1fr))] gap-8',
+						'flex gap-8 flex-wrap extra-sm:flex-nowrap',
 						'max-w-screen-sm mx-auto',
 						'lg:max-w-none lg:mx-0',
 					)}
@@ -62,6 +63,7 @@ const LatestSamplesSection = ({
 							<ProductBasicCard
 								key={item.id}
 								cardVariants={{ 'max-w': null }}
+								className="flex-grow w-full extra-sm:w-1/2"
 								link={{
 									children: item.title,
 									href: `/products/${item.handle}`,

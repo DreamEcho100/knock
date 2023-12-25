@@ -6,6 +6,7 @@ import { cardClasses } from 'utils/core/cva';
 // import { useAddProductsToCheckoutAndCart } from '~/utils/core/hooks';
 import CustomNextImage from '~/app/components/shared/common/CustomNextImage';
 import AddItemOnHeroSectionButton from '../../AddItemOnHeroSectionButton';
+import * as AspectRatio from '@radix-ui/react-aspect-ratio';
 
 interface IProductCardProps {
 	// images: NonNullable<IProduct['images']> // { src: string; alt?: string };
@@ -14,6 +15,7 @@ interface IProductCardProps {
 	imageVariants?: VariantProps<typeof handleImageVariants>;
 	productData: IProduct;
 	cardVariants?: VariantProps<typeof cardClasses>;
+	className?: string
 }
 
 interface ExtraProductCardDetails {
@@ -45,22 +47,25 @@ const ProductBasicCard = ({
 	extraDetailsElement,
 	cardVariants,
 	imageVariants,
+	className
 }: IProductCardProps) => {
 	return (
-		<article className={cardClasses(cardVariants)}>
+		<article className={cardClasses({...cardVariants, className})}>
 			<Link
 				{...link}
 				// style={{ aspectRatio: 1, }}
 				className={handleImageVariants(imageVariants)}
 			>
 				{images && images[0] && (
-					<CustomNextImage
-						src={images[0].src}
-						alt={images[0].altText ? title : ''}
-						width={350}
-						height={350}
-						className="object-contain w-full h-full transition-all duration-300"
-					/>
+					<AspectRatio.Root ratio={1 / 1}>
+						<CustomNextImage
+							src={images[0].src}
+							alt={images[0].altText ? title : ''}
+							width={350}
+							height={350}
+							className="object-contain w-full h-full transition-all duration-300"
+						/>
+					</AspectRatio.Root>
 				)}
 			</Link>
 			<div className="flex flex-col items-center justify-center flex-grow gap-2 p-4 text-center bg-primary-3 text-primary-2">
