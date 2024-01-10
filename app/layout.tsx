@@ -10,19 +10,13 @@ import '~/app/styles/customNProgressStyles.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { decapv16, sourceSansPro } from './libs/fonts';
 import { cx } from 'class-variance-authority';
-import dynamic from 'next/dynamic';
-
-const DynamicTopProgressBar = dynamic(
-	() => import('~/app/components/shared/common/TopProgressBar'),
-	{ ssr: false },
-);
 
 export const metadata: Metadata = SEODefaults;
 
 export default function RootLayout(props: PropsWithChildren) {
 	return (
 		<html lang="en">
-			<head>
+			<head suppressHydrationWarning>
 				<link rel="preload" href="/svg/bbblurry.svg" />
 			</head>
 			<body
@@ -34,10 +28,7 @@ export default function RootLayout(props: PropsWithChildren) {
 				)}
 				suppressHydrationWarning
 			>
-				<Providers>
-					<DynamicTopProgressBar />
-					{props.children}
-				</Providers>
+				<Providers>{props.children}</Providers>
 			</body>
 		</html>
 	);

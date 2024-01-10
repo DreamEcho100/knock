@@ -271,7 +271,7 @@ export const useAddProductsToCheckoutAndCart = () => {
 			}),
 
 		onSettled: () =>
-			customerGlobalActions.toggleIsVisibleOnly(customerDispatch, 'headerCart'),
+			customerGlobalActions.toggleIsVisible(customerDispatch, 'headerCart'),
 	});
 };
 export const useUpdateProductsToCheckoutAndCart = () => {

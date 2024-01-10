@@ -13,9 +13,7 @@ export const getBanner = async () => {
 	const response = await axios.get(
 		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-banner`,
 		{
-			headers: {
-				'Content-Type': 'application/json',
-			},
+			headers: { 'Content-Type': 'application/json' },
 		},
 	);
 
@@ -207,7 +205,7 @@ export const getPopup = async () => {
 const getAppApiPath = () =>
 	typeof window === 'undefined'
 		? // !!!
-		  process.env.NEXT_PUBLIC_APP_DOMAINE
+			process.env.NEXT_PUBLIC_APP_DOMAINE
 			? `https://${process.env.NEXT_PUBLIC_APP_DOMAINE}/api`
 			: process.env.NEXT_PUBLIC_BACKEND_ABSOLUTE_PATH
 		: process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH;
@@ -291,7 +289,7 @@ export const getOneCheckout = async (
 	checkoutKey: string,
 ) => {
 	const response = await fetch(
-		`${getAppApiPath()}/checkouts/get-one/?checkoutId=${checkoutId}&checkoutKey=${checkoutKey}`,
+		`${getAppApiPath()}/checkouts/get-one/?checkoutId=${checkoutId}&checkoutKey=${checkoutKey}&ignoreProgressIndicator=true}`,
 		{
 			headers: {
 				'Cache-Control': 'no-cache',

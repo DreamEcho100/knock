@@ -126,8 +126,6 @@ const MainHeader = () => {
 		},
 		{
 			enabled: !!userCheckoutIdAndKeyFromCookie,
-			staleTime: 40 * 1000,
-			refetchInterval: 3 * 1000,
 			onSuccess: ({ checkout }) => {
 				if (checkout.lineItems.length !== 0)
 					customerGlobalActions.cart.set(customerDispatch, {
@@ -175,11 +173,8 @@ const MainHeader = () => {
 		userCheckoutDetailsAndIdAndKey,
 	]);
 
-	const banner = useQuery(['banner'], () => getBanner(), {
-		onSuccess(data) {
-			return data;
-		},
-		refetchInterval: 3000,
+	const banner = useQuery(['banner-data'], getBanner, {
+		refetchOnWindowFocus: true,
 	});
 
 	const id = banner.data?.bannerUrl.split('/')[1];
@@ -234,7 +229,7 @@ const MainHeader = () => {
 				>
 					<div>
 						<div
-							className="flex flex-col  md:flex-row items-center gap-0 md:gap-3"
+							className="flex flex-col items-center gap-0 md:flex-row md:gap-3"
 							style={{ color: banner.data.textColor }}
 						>
 							{banner?.data.text ? <h4>{banner.data.text}</h4> : ''}
@@ -245,14 +240,14 @@ const MainHeader = () => {
 											href={
 												Number(id) ? '/products/' + id : banner.data.bannerUrl
 											}
-											className="text-bold border rounded-3xl	 px-5"
+											className="px-5 border text-bold rounded-3xl"
 										>
 											{banner.data.bannerUrlText}
 										</Link>
 									</div>
 								) : (
 									<button
-										className="text-bold border rounded-3xl	 px-5"
+										className="px-5 border text-bold rounded-3xl"
 										// eslint-disable-next-line @typescript-eslint/no-misused-promises
 										onClick={addToCart}
 									>
@@ -269,7 +264,7 @@ const MainHeader = () => {
 							})
 						}
 						type="button"
-						className="hidden absolute sm:block  right-0 p-4"
+						className="absolute right-0 hidden p-4 sm:block"
 					>
 						<AiFillCloseCircle
 							id="AiFillCloseCircle"
@@ -413,8 +408,8 @@ const MainHeader = () => {
 						className={`mt-main-nav-h bg-primary-1 block lg:hidden overflow-hidden absolute top-0 right-0 left-0 w-full ${
 							isSmallScreenNaveOpen
 								? // ? 'scale-y-100'
-								  // : 'scale-y-0 opacity-0 pointer-events-none'
-								  'translate-y-0'
+									// : 'scale-y-0 opacity-0 pointer-events-none'
+									'translate-y-0'
 								: '-translate-y-full opacity-0 pointer-events-none select-none' // mt-0
 						}
 				origin-top
@@ -515,7 +510,7 @@ const CartContainer = ({ banner }: { banner: any }) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const upselling = useQuery(['get-upselling-popup'], getUpSellingPopup, {
-		refetchInterval: 3000,
+		refetchOnWindowFocus: true,
 	});
 
 	const { data } = useQuery(['all-products'], getAllProducts, {
@@ -581,9 +576,9 @@ const CartContainer = ({ banner }: { banner: any }) => {
 														product?.variant?.product?.handle === 'knock-plugin'
 															? '/knock'
 															: product?.variant?.product?.handle ===
-															  'knock-clipper'
-															? '/knock-clipper'
-															: `/products/${product.variant.product.handle}`
+																  'knock-clipper'
+																? '/knock-clipper'
+																: `/products/${product.variant.product.handle}`
 													}
 													className="inline-block whitespace-nowrap max-w-[10rem] text-ellipsis overflow-hidden"
 													onClick={() =>
@@ -732,7 +727,7 @@ const CartContainer = ({ banner }: { banner: any }) => {
 										</div>
 									</div>
 								</article>
-						  ))}
+							))}
 				</div>
 				<div className="flex flex-col gap-8 pt-8">
 					{upselling.data?.upselling?.length && data ? (
@@ -755,17 +750,17 @@ const CartContainer = ({ banner }: { banner: any }) => {
 							!userCheckoutDetailsAndIdAndKey?.checkout?.webUrl
 								? ''
 								: !upselling.data
-								? { href: userCheckoutDetailsAndIdAndKey.checkout.webUrl }
-								: !upselling.data.upselling.length
-								? { href: userCheckoutDetailsAndIdAndKey.checkout.webUrl }
-								: upselling.data?.success &&
-								  upselling.data.upsellingSettings[0].disable
-								? { href: userCheckoutDetailsAndIdAndKey.checkout.webUrl }
-								: {
-										onClick: () => {
-											setIsOpen(true);
-										},
-								  })}
+									? { href: userCheckoutDetailsAndIdAndKey.checkout.webUrl }
+									: !upselling.data.upselling.length
+										? { href: userCheckoutDetailsAndIdAndKey.checkout.webUrl }
+										: upselling.data?.success &&
+											  upselling.data.upsellingSettings[0].disable
+											? { href: userCheckoutDetailsAndIdAndKey.checkout.webUrl }
+											: {
+													onClick: () => {
+														setIsOpen(true);
+													},
+												})}
 							disabled={productsData.length === 0 || disableAllButtons}
 							classesIntent={{ w: 'full', display: 'flex-xy-center' }}
 						>
