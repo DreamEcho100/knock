@@ -30,8 +30,6 @@ export default function Actions() {
 		],
 	});
 
-	console.log('popup', popup);
-
 	useGetUserData({
 		enabled: !!accessToken,
 		accessToken: accessToken,

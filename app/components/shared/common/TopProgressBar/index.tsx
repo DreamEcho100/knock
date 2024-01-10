@@ -38,22 +38,6 @@ Router.events.on('routeChangeError', stop);
 
 const originalFetch = window.fetch;
 window.fetch = async (...args) => {
-	// const url =
-	// 	typeof args[0] === 'string'
-	// 		? new URL(args[0])
-	// 		: args[0] instanceof URL
-	// 			? args[0]
-	// 			: null;
-
-	// if (
-	// 	url
-	// 	// && url.pathname === '/api/graphql'
-	// ) {
-	// 	console.log('url', url);
-	// 	return originalFetch(...args);
-	// }
-	console.log('args', args);
-
 	if (activeRequests === 0) {
 		load();
 	}

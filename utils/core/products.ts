@@ -1,4 +1,4 @@
-import type { ICartProduct } from '@context/Customer/ts';
+import type { ICartProduct } from '~/app/components/providers/CustomerContext/ts';
 
 import type { ILineItem } from 'types';
 
@@ -16,11 +16,11 @@ export const convertProductToCartItem = ({
 		preferredImage: preferredImage
 			? preferredImage
 			: product.variant.image
-			? {
-					src: product.variant.image.src,
-					alt: product.variant.image.altText || '',
-			  }
-			: null,
+				? {
+						src: product.variant.image.src,
+						alt: product.variant.image.altText || '',
+					}
+				: null,
 		price:
 			typeof product.variant.price.amount === 'string'
 				? parseFloat(product.variant.price.amount)
@@ -28,7 +28,7 @@ export const convertProductToCartItem = ({
 		selectedAmount: product.quantity
 			? product.quantity
 			: selectedAmount
-			? selectedAmount
-			: 1,
+				? selectedAmount
+				: 1,
 	};
 };
