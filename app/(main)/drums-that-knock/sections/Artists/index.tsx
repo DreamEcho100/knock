@@ -8,14 +8,16 @@ import 'swiper/css/navigation';
 import KnockTrademark from '~/app/components/shared/core/KnockTrademark';
 import CustomNextImage from '~/app/components/shared/common/CustomNextImage';
 import Reviews from '~/app/components/shared/core/Reviews';
+import { AspectRatio } from '~/app/components/shared/common/AspectRatio';
+// import { AspectRatio } from '@radix-ui/react-aspect-ratio';
 
 const ArtistsSection = ({ reviews, data }: { reviews: any; data: any }) => {
 	return (
 		<>
-			<section className="bg-primary-2 section-p-v1 pb-0">
+			<section className="pb-0 bg-primary-2 section-p-v1">
 				<div className="flex flex-col gap-2 lg:px-8 sm:gap-4">
-					<header className="text-center flex items-center justify-center">
-						<h2 className="text-h4 font-semibold capitalize flex flex-wrap justify-center">
+					<header className="flex items-center justify-center text-center">
+						<h2 className="flex flex-wrap justify-center font-semibold capitalize text-h4">
 							{data.h2}&nbsp;
 							<KnockTrademark tradeMark={data.tradeMark} />
 						</h2>
@@ -37,25 +39,28 @@ const ArtistsSection = ({ reviews, data }: { reviews: any; data: any }) => {
 							className="select-none"
 						>
 							{data.artist_section_dtk_page_content.map((item: any) => (
-								<SwiperSlide
-									key={item.id}
-									className="p-2 flex flex-col justify-center items-center text-center"
-								>
-									<CustomNextImage
-										src={process.env.NEXT_PUBLIC_KNOCK_URL_API + item.imageUrl}
-										alt={item.alt}
-										width={100}
-										height={100}
-										className="rounded-full"
-									/>
-									<p className="select-auto">{item.name}</p>
+								<SwiperSlide key={item.id}>
+									<div className="flex flex-col items-center justify-center gap-1 p-2 text-center">
+										<AspectRatio ratio={1}>
+											<CustomNextImage
+												src={
+													process.env.NEXT_PUBLIC_KNOCK_URL_API + item.imageUrl
+												}
+												alt={item.alt}
+												width={100}
+												height={100}
+												className="rounded-full"
+											/>
+										</AspectRatio>
+										<p>{item.name}</p>
+									</div>
 								</SwiperSlide>
 							))}
 						</Swiper>
 					</div>
 				</div>
 			</section>
-			<section className="bg-primary-1 section-p-v1 pb-0">
+			<section className="pb-0 bg-primary-1 section-p-v1">
 				<div className="-translate-y-6">
 					<Reviews
 						reviews={reviews}

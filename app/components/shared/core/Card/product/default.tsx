@@ -6,7 +6,7 @@ import { cardClasses } from 'utils/core/cva';
 // import { useAddProductsToCheckoutAndCart } from '~/utils/core/hooks';
 import CustomNextImage from '~/app/components/shared/common/CustomNextImage';
 import AddItemOnHeroSectionButton from '../../AddItemOnHeroSectionButton';
-import * as AspectRatio from '@radix-ui/react-aspect-ratio';
+import { AspectRatio } from '../../../common/AspectRatio';
 
 interface IProductCardProps {
 	// images: NonNullable<IProduct['images']> // { src: string; alt?: string };
@@ -57,7 +57,7 @@ const ProductBasicCard = ({
 				className={handleImageVariants(imageVariants)}
 			>
 				{images && images[0] && (
-					<AspectRatio.Root ratio={1 / 1}>
+					<AspectRatio ratio={1 / 1}>
 						<CustomNextImage
 							src={images[0].url}
 							alt={images[0].altText ? title : ''}
@@ -65,7 +65,7 @@ const ProductBasicCard = ({
 							height={350}
 							className="object-contain w-full h-full transition-all duration-300"
 						/>
-					</AspectRatio.Root>
+					</AspectRatio>
 				)}
 			</Link>
 			<div className="flex flex-col items-center justify-center flex-grow gap-2 p-4 text-center bg-primary-3 text-primary-2">

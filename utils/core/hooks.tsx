@@ -1,3 +1,5 @@
+'use client';
+
 import { useSharedCustomerState } from '~/app/components/providers/CustomerContext';
 import { customerGlobalActions } from '~/app/components/providers/CustomerContext/actions';
 import { type ICartProduct } from '~/app/components/providers/CustomerContext/ts';
