@@ -18,7 +18,7 @@ export const getShopifyClient = () => {
 	return Client.buildClient({
 		domain: DOMAINE,
 		storefrontAccessToken: SHOPIFY_STOREFRONT_API_TOKEN,
-		apiVersion: '2023-04',
+		apiVersion: '2024-01',
 	});
 };
 

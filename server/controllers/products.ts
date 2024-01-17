@@ -47,8 +47,8 @@ const getOneProductByHanleController = async (
 		typeof req.query.handle === 'string'
 			? await getOneCustomProductByHandle(req.query.handle)
 			: typeof req.query.handle === 'string'
-			? await getOneProductByHandle(req.query.handle)
-			: undefined;
+				? await getOneProductByHandle(req.query.handle)
+				: undefined;
 
 	if (!product) {
 		res.statusCode = 404;
@@ -129,7 +129,7 @@ export const getAllProducts = async ({
 	`;
 
 	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2023-01/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2024-01/graphql.json`,
 		{
 			query: print(product),
 			variables: {

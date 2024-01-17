@@ -50,7 +50,7 @@ export async function generateMetadata(
 		description: productData.originalDescription,
 		openGraph: {
 			images: [
-				...productData.images.map((image) => image.src),
+				...productData.images.map((image) => image.url),
 				...previousImages,
 			],
 		},

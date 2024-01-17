@@ -108,7 +108,7 @@ const KnockScreen = ({ knockPluginBoutique }: IKnockPluginBoutiqueProps) => {
 					width={knockPluginBoutique.images[0].width}
 					height={knockPluginBoutique.images[0].height}
 					alt={knockPluginBoutique.title}
-					src={knockPluginBoutique.images[0].src}
+					src={knockPluginBoutique.images[0].url}
 				/>
 			</div>
 			{openRedeem ? (

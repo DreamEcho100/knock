@@ -22,7 +22,7 @@ export default function ProductDetails({
 						alt={product.title}
 						width={product.variants[0].image.width}
 						height={product.variants[0].image.height}
-						src={product.variants[0].image.src}
+						src={product.variants[0].image.url}
 						priority
 					/>
 				</div>

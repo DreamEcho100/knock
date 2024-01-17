@@ -15,7 +15,7 @@ interface IProductCardProps {
 	imageVariants?: VariantProps<typeof handleImageVariants>;
 	productData: IProduct;
 	cardVariants?: VariantProps<typeof cardClasses>;
-	className?: string
+	className?: string;
 }
 
 interface ExtraProductCardDetails {
@@ -47,10 +47,10 @@ const ProductBasicCard = ({
 	extraDetailsElement,
 	cardVariants,
 	imageVariants,
-	className
+	className,
 }: IProductCardProps) => {
 	return (
-		<article className={cardClasses({...cardVariants, className})}>
+		<article className={cardClasses({ ...cardVariants, className })}>
 			<Link
 				{...link}
 				// style={{ aspectRatio: 1, }}
@@ -59,7 +59,7 @@ const ProductBasicCard = ({
 				{images && images[0] && (
 					<AspectRatio.Root ratio={1 / 1}>
 						<CustomNextImage
-							src={images[0].src}
+							src={images[0].url}
 							alt={images[0].altText ? title : ''}
 							width={350}
 							height={350}

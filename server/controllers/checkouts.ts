@@ -12,8 +12,7 @@ export const createCheckout = async (
 	const client = getShopifyClient();
 	const checkout = await client.checkout.create();
 
-	const checkoutId =
-		typeof checkout.id === 'string' ? checkout.id : checkout.id.toString();
+	const checkoutId = checkout.id;
 
 	const data = {
 		checkoutId: checkoutId.split('/')[4].split('?key=')[0],
@@ -49,7 +48,12 @@ export const getCheckout = async (
 	req: NextApiRequest,
 	res: NextApiResponse,
 ) => {
-	const { checkoutId, checkoutKey } = req.query;
+	const { checkoutId, checkoutKey } = z
+		.object({
+			checkoutId: z.string(),
+			checkoutKey: z.string(),
+		})
+		.parse(req.query);
 
 	const client = getShopifyClient();
 	const checkout = await client.checkout.fetch(
@@ -161,7 +165,7 @@ export const associateClientToCheckout = async (
 	`;
 
 	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2023-01/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2024-01/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -229,7 +233,7 @@ export const disassociateClientToCheckout = async (
 	`;
 
 	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2023-01/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2024-01/graphql.json`,
 		{
 			query: print(customer),
 			variables: {

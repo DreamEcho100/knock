@@ -1,16 +1,14 @@
 interface IProductOption {
 	id: string;
 	name: string;
-	values: {
-		value: string;
-	}[];
+	values: [string, ...string[]];
 }
 interface IProductImage {
 	id: string;
-	src: string;
+	url: string;
 	altText: null;
-	width: number;
-	height: number;
+	width?: number;
+	height?: number;
 	hasNextPage: boolean;
 	hasPreviousPage: boolean;
 	variableValues: {
@@ -18,18 +16,6 @@ interface IProductImage {
 	};
 }
 export interface IProduct {
-	id: string;
-	availableForSale: boolean;
-	createdAt: string;
-	updatedAt: string;
-	descriptionHtml: string;
-	description: string;
-	handle: string;
-	productType: string;
-	title: string;
-	vendor: string;
-	publishedAt: string;
-	onlineStoreUrl: string;
 	video: {
 		title: string;
 		src: string;
@@ -57,7 +43,6 @@ export interface IProduct {
 			amount: string;
 			currencyCode: string;
 		};
-		weight: 0;
 		available: boolean;
 		sku: string;
 		compareAtPrice: {
@@ -68,18 +53,16 @@ export interface IProduct {
 			amount: string;
 			currencyCode: string;
 		};
-		image: {
-			id: string;
-			src: string;
-			altText: null;
-			width: 3000;
-			height: 3000;
-		};
+		image: IProductImage;
 		selectedOptions: [
 			{
 				name: string;
 				value: string;
 			},
+			...{
+				name: string;
+				value: string;
+			}[],
 		];
 		unitPrice: null;
 		unitPriceMeasurement: {
@@ -94,7 +77,42 @@ export interface IProduct {
 		variableValues: {
 			first: 20;
 		};
+
+		availableForSale: boolean;
+		barcode?: string | null;
+		currentlyNotInStock: boolean;
+		quantityAvailable?: number | null;
+		requiresShipping: boolean;
+		taxable: boolean;
+		// unitPriceMeasurement?: UnitPriceMeasurement | null;
+		weight?: number | null;
+		weightUnit: string;
 	}[];
+
+	//
+	availableForSale: boolean;
+	createdAt: string;
+	description: string;
+	descriptionHtml: string;
+	featuredImage?: IProductImage | null;
+	handle: string;
+	id: string;
+	isGiftCard: boolean;
+	onlineStoreUrl?: string | null;
+	productType: string;
+	publishedAt: string;
+	requiresSellingPlan: boolean;
+	// seo: SEO;
+	tags: string[];
+	title: string;
+	totalInventory?: number | null;
+	trackingParameters?: string | null;
+	updatedAt: string;
+	// variantBySelectedOptions?: ProductVariant | null;
+	vendor: string;
+	// collections: Collection[];
+	// media: Media[];
+	// sellingPlanGroups: SellingPlanGroup[];
 }
 
 export interface ICustomProduct extends Omit<IProduct, 'description'> {
