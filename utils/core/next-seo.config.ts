@@ -13,8 +13,6 @@ const SEODefaults: Metadata = {
 	metadataBase: new URL(websiteBasePath),
 	description: defaultDescription,
 	title: defaultTitle,
-	themeColor: 'black',
-	colorScheme: 'dark',
 	openGraph: {
 		type: 'website',
 		locale: 'en_US',

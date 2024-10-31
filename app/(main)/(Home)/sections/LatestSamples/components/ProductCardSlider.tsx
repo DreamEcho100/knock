@@ -1,13 +1,13 @@
 'use client';
-import ProductBasicCard from '~/app/components/shared/core/Card/product/default';
+import ProductBasicCard from '~/app/_components/shared/core/Card/product/default';
 import { Navigation, A11y, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { type IProduct } from '~/types';
+import type { Product } from '~/libs/shopify/types';
 
-const ProductCardSlider = ({ products }: { products: IProduct[] }) => {
+const ProductCardSlider = ({ products }: { products: Product[] }) => {
 	return (
 		<Swiper
 			modules={[Navigation, A11y, Autoplay]}

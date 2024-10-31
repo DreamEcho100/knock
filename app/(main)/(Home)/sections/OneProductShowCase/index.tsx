@@ -1,6 +1,6 @@
 'use client';
-import KnockTrademark from '~/app/components/shared/core/KnockTrademark';
-import ProductShowcase from '~/app/components/shared/core/ProductShowcase';
+import KnockTrademark from '~/app/_components/shared/core/KnockTrademark';
+import ProductShowcase from '~/app/_components/shared/core/ProductShowcase';
 import { useRouter } from 'next/navigation';
 
 const OneProductShowCaseSection = ({ data }: { data: any }) => {

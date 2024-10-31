@@ -1,14 +1,14 @@
-import KnockTrademark from '~/app/components/shared/core/KnockTrademark';
-import CustomNextImage from '~/app/components/shared/common/CustomNextImage';
-import AddItemOnHeroSectionButton from '~/app/components/shared/core/AddItemOnHeroSectionButton';
+import KnockTrademark from '~/app/_components/shared/core/KnockTrademark';
+import CustomNextImage from '~/app/_components/shared/common/CustomNextImage';
+import AddItemOnHeroSectionButton from '~/app/_components/shared/core/AddItemOnHeroSectionButton';
 import { type CSSProperties } from 'react';
-import { type IProduct } from '~/types';
+import type { Product } from '~/libs/shopify/types';
 
 const HeroSection = ({
 	knockClipperPlugin,
 	knockClipperMainSection,
 }: {
-	knockClipperPlugin: IProduct;
+	knockClipperPlugin: Product;
 	knockClipperMainSection: any;
 }) => {
 	return (

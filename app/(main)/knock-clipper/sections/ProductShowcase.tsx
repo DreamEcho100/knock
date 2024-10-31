@@ -1,18 +1,18 @@
-import { type IProduct } from '~/types';
-import KnockTrademark from '~/app/components/shared/core/KnockTrademark';
-import ProductShowcase from '~/app/components/shared/core/ProductShowcase';
+import KnockTrademark from '~/app/_components/shared/core/KnockTrademark';
+import ProductShowcase from '~/app/_components/shared/core/ProductShowcase';
+import type { Product } from '~/libs/shopify/types';
 
 const ProductShowcaseSection = ({
-	knockClipperPlugin,
+	product,
 	data,
 }: {
-	knockClipperPlugin: IProduct;
+	product: Product;
 	data: any;
 }) => {
 	return (
 		<section className="bg-primary-1 text-primary-2 px-8 py-16 md:section-p-v1">
 			<ProductShowcase
-				product={knockClipperPlugin}
+				product={product}
 				textContainer={{
 					h2: {
 						children: (

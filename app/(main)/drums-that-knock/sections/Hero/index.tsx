@@ -1,5 +1,5 @@
-import CustomNextImage from '~/app/components/shared/common/CustomNextImage';
-import KnockTrademark from '~/app/components/shared/core/KnockTrademark';
+import CustomNextImage from '~/app/_components/shared/common/CustomNextImage';
+import KnockTrademark from '~/app/_components/shared/core/KnockTrademark';
 
 const HeroSection = ({ data }: { data: any }) => {
 	return (

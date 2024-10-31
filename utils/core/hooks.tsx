@@ -1,27 +1,16 @@
 'use client';
 
-import { useSharedCustomerState } from '~/app/components/providers/CustomerContext';
-import { customerGlobalActions } from '~/app/components/providers/CustomerContext/actions';
-import { type ICartProduct } from '~/app/components/providers/CustomerContext/ts';
-
 import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
-import {
-	getCookie,
-	removeCookie,
-} from '~/utils/common/storage/cookie/document';
+import { getCookie } from '~/utils/common/storage/cookie/document';
 
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
-import type { IGenericErrorResponse, ILineItem, IProduct, IUser } from 'types';
+import type { IGenericErrorResponse, ILineItem, IUser } from 'types';
 
-import { checkoutApi } from './API';
-import type {
-	TCreateOneCheckoutReturnType,
-	TGetOneCheckoutReturnType,
-} from './API';
-import { getUserCheckoutIdAndKeyFromCookie } from './cookie';
+// import { checkoutApi } from './API';
 import { convertProductToCartItem } from './products';
+import type { Product } from '~/libs/shopify/types';
 
 export const useGetUserDataFromStore = () => {
 	const user = useGetUserData({ enabled: true });
@@ -67,37 +56,14 @@ export const useGetUserData = ({
 	return query;
 };
 
-export const useGetUserCheckoutIdAndKeyCookie = () =>
-	getUserCheckoutIdAndKeyFromCookie(); // useMemo(() => getUserCheckoutIdAndKeyFromCookie(), []);
-
 export const useLogoutUser = ({
 	onError,
 	onSuccess,
-	userCheckoutDetailsAndIdAndKey,
 }: {
 	onError?: () => void;
 	onSuccess?: () => void | Promise<void>;
-	userCheckoutDetailsAndIdAndKey: ReturnType<
-		typeof useGetUserCheckoutDetailsAndIdAndKey
-	>;
-}) => {
-	const { user } = useGetUserDataFromStore();
-	const [
-		{
-			cart: { productsData },
-		},
-	] = useSharedCustomerState();
-
-	const queryClient = useQueryClient();
-
-	return useMutation<
-		IUser & {
-			userCheckoutDetailsAndIdAndKey: NonNullable<
-				typeof userCheckoutDetailsAndIdAndKey
-			>;
-		},
-		IGenericErrorResponse
-	>(
+} = {}) => {
+	return useMutation<IUser, IGenericErrorResponse>(
 		['logout'],
 		() => {
 			const accessToken = getGetAccessTokenFromCookie();
@@ -112,45 +78,11 @@ export const useLogoutUser = ({
 						accesstoken: accessToken,
 					},
 				},
-			)
-				.then((response) => response.json())
-				.then((result) => ({
-					...result,
-					userCheckoutDetailsAndIdAndKey,
-				}));
+			).then((response) => response.json());
 		},
 		{
-			onSuccess: async ({ userCheckoutDetailsAndIdAndKey }) => {
-				const accessToken = getGetAccessTokenFromCookie();
-
-				let checkout: any = getCookie('checkoutIdAndKey');
-				checkout = JSON.parse(checkout);
-
-				await fetch(
-					`${process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH}/checkouts/disassociate`,
-					{
-						method: 'POST',
-						headers: {
-							'Content-type': 'application/json',
-						},
-						body: JSON.stringify({
-							checkoutId: checkout.checkoutId,
-							checkoutKey: checkout.checkoutKey,
-							customerAccessToken: accessToken,
-						}),
-					},
-				);
-
-				removeCookie('user-access-token');
-				removeCookie('checkoutIdAndKey');
-				/*
-				if (userCheckoutDetailsAndIdAndKey)
-					checkoutApi.products.removeMany(
-						`gid://shopify/Checkout/${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId}?key=${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutKey}`,
-						productsData.map((product) => product.id)
-					);
-*/
-				await queryClient.invalidateQueries<IUser | undefined>(['check-token']);
+			onSuccess: async () => {
+				// @ts-expect-error - Add away somewhere to remove the associated cart to the user on logout
 
 				if (onSuccess) await onSuccess();
 				else window.location.reload();
@@ -164,205 +96,11 @@ export const useLogoutUser = ({
 
 export const getGetAccessTokenFromCookie = () => {
 	const accessTokenStr = getCookie<string>('user-access-token');
-
-	return accessTokenStr ? JSON.parse(accessTokenStr).accessToken : '';
-};
-
-export const useGetUserCheckoutDetailsAndIdAndKey = () => {
-	const queryClient = useQueryClient();
-	const createOneCheckout =
-		queryClient.getQueryData<TCreateOneCheckoutReturnType>([
-			'create-one-checkout',
-		]);
-	const getOneCheckout = queryClient.getQueryData<TGetOneCheckoutReturnType>([
-		'get-one-checkout',
-	]);
-
-	return useMemo(() => {
-		if (createOneCheckout?.checkout && createOneCheckout?.checkoutIdAndKey) {
-			return {
-				checkoutIdAndKey: createOneCheckout?.checkoutIdAndKey,
-				checkout: createOneCheckout?.checkout,
-			};
-		} else if (getOneCheckout?.checkout) {
-			const checkoutIdAndKeyFromCookie = getUserCheckoutIdAndKeyFromCookie();
-
-			if (checkoutIdAndKeyFromCookie) {
-				return {
-					checkoutIdAndKey: checkoutIdAndKeyFromCookie,
-					checkout: getOneCheckout?.checkout,
-				};
-			}
-		}
-	}, [
-		createOneCheckout?.checkout,
-		createOneCheckout?.checkoutIdAndKey,
-		getOneCheckout?.checkout,
-	]);
-};
-
-export const useAddProductsToCheckoutAndCart = () => {
-	const [
-		{
-			cart: { productsData },
-		},
-		customerDispatch,
-	] = useSharedCustomerState();
-	const userCheckoutDetailsAndIdAndKey = useGetUserCheckoutDetailsAndIdAndKey();
-
-	return useMutation<
-		{ products: (IProduct & { quantity: number })[]; result: ILineItem[] },
-		IGenericErrorResponse,
-		{ products: (IProduct & { quantity: number })[] }
-	>({
-		mutationFn: async ({ products: _products }) => {
-			// !!!
-			// Abstract it?
-			const products = _products.filter(
-				(product) =>
-					!productsData.find(
-						(productOnCart) => productOnCart.variant.product.id === product.id,
-					),
-			);
-			if (products.length === 0)
-				throw new Error(
-					"No product Added either it's already exists or something wrong happened",
-				);
-			if (
-				!userCheckoutDetailsAndIdAndKey?.checkoutIdAndKey?.checkoutId ||
-				!userCheckoutDetailsAndIdAndKey?.checkoutIdAndKey?.checkoutKey
-			)
-				throw new Error('Missing checkout details');
-
-			if (
-				!Array.isArray(products) ||
-				products.length === 0 ||
-				products.some(
-					(product) =>
-						!product ||
-						typeof product !== 'object' ||
-						!product.quantity ||
-						!product.variants[0] ||
-						!product.variants[0]?.id,
-				)
-			)
-				throw new Error(
-					'The passed product must be an object with quantity and variants information available in the products list',
-				);
-
-			return {
-				products,
-				result: await checkoutApi.products.addMany(
-					// userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId,
-					`gid://shopify/Checkout/${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId}?key=${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutKey}`,
-					products.map((product) => ({
-						quantity: product.quantity,
-						variantId: product.variants[0].id,
-					})),
-				),
-			};
-		},
-		onSuccess: ({ products, result }) =>
-			customerGlobalActions.cart.set(customerDispatch, {
-				cartObj: {
-					productsData: result.map((item) =>
-						convertProductToCartItem({ product: item }),
-					),
-					updatedAt: new Date(),
-				},
-			}),
-
-		onSettled: () =>
-			customerGlobalActions.toggleIsVisible(customerDispatch, 'headerCart'),
-	});
-};
-export const useUpdateProductsToCheckoutAndCart = () => {
-	const [, customerDispatch] = useSharedCustomerState();
-	const userCheckoutDetailsAndIdAndKey = useGetUserCheckoutDetailsAndIdAndKey();
-
-	return useMutation<
-		{ products: (ICartProduct & { quantity: number })[]; result: ILineItem[] },
-		IGenericErrorResponse,
-		{ products: (ICartProduct & { quantity: number })[] }
-	>({
-		mutationFn: async ({ products }) => {
-			if (!userCheckoutDetailsAndIdAndKey?.checkoutIdAndKey?.checkoutId)
-				throw new Error('Missing checkout details');
-
-			if (
-				!Array.isArray(products) ||
-				products.length === 0 ||
-				products.some(
-					(product) =>
-						!product ||
-						typeof product !== 'object' ||
-						!product.quantity ||
-						!product.variant?.id,
-				)
-			)
-				throw new Error(
-					'The passed product must be an object with quantity and variants information available in the products list',
-				);
-
-			return {
-				products,
-				result: await checkoutApi.products.updateMany(
-					`gid://shopify/Checkout/${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId}?key=${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutKey}`,
-					products.map((product) => ({
-						quantity: product.quantity,
-						id: product.id,
-					})),
-				),
-			};
-		},
-		onSuccess: ({ products, result }) => {
-			customerGlobalActions.cart.set(customerDispatch, {
-				cartObj: {
-					productsData: result.map((item) =>
-						convertProductToCartItem({ product: item }),
-					),
-					updatedAt: new Date(),
-				},
-			});
-		},
-	});
-};
-export const useRemoveProductsToCheckoutAndCart = () => {
-	const [, customerDispatch] = useSharedCustomerState();
-	const userCheckoutDetailsAndIdAndKey = useGetUserCheckoutDetailsAndIdAndKey();
-
-	return useMutation<
-		{ productsIds: string[]; result: ILineItem[] },
-		IGenericErrorResponse,
-		{ productsIds: string[] }
-	>({
-		mutationFn: async ({ productsIds }) => {
-			if (!userCheckoutDetailsAndIdAndKey?.checkoutIdAndKey?.checkoutId)
-				throw new Error('Missing checkout details');
-
-			if (
-				!Array.isArray(productsIds) ||
-				productsIds.length === 0 ||
-				productsIds.some((product) => typeof product !== 'string')
-			)
-				throw new Error('The passed productsIds must be an array of strings');
-
-			return {
-				productsIds,
-				result: await checkoutApi.products.removeMany(
-					`gid://shopify/Checkout/${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutId}?key=${userCheckoutDetailsAndIdAndKey.checkoutIdAndKey.checkoutKey}`,
-					productsIds,
-				),
-			};
-		},
-		onSuccess: ({ productsIds, result }) => {
-			productsIds.forEach((productId) =>
-				customerGlobalActions.cart.deleteOneProduct(customerDispatch, {
-					productId,
-				}),
-			);
-		},
-	});
+	try {
+		return accessTokenStr ? JSON.parse(accessTokenStr).accessToken : '';
+	} catch (error) {
+		return '';
+	}
 };
 
 export const useSleep = (time: number) => {

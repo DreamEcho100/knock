@@ -6,7 +6,7 @@ import {
 	OneProductShowCaseSection,
 	LatestSamplesSection,
 } from './sections';
-import { getAllProducts } from '~/server/controllers/products';
+import { getProducts } from '~/libs/shopify';
 
 export const revalidate = 360;
 
@@ -14,8 +14,12 @@ export default async function HomeScreen() {
 	const [homePageData, heroSection, products] = await Promise.all([
 		getHomePageData(),
 		getMainSection(),
-		getAllProducts({
-			typesToExclude: ['Sound Editing Software', 'Tutorial'],
+		getProducts().then((products) => {
+			const typesToExclude = ['Sound Editing Software', 'Tutorial'];
+
+			return products.filter(
+				(product) => !typesToExclude.includes(product.productType),
+			);
 		}),
 	]);
 

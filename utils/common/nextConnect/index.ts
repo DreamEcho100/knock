@@ -5,7 +5,7 @@ import {
 } from 'next';
 
 import { createRouter } from 'next-connect';
-import { NodeRouter } from 'next-connect/dist/types/node';
+import { type NodeRouter } from 'next-connect/dist/types/node';
 
 type TReq = NextApiRequest & { params: Record<string, any> }; // & IncomingMessage;
 type TRes = NextApiResponse; // & ServerResponse;
@@ -30,29 +30,34 @@ const nextConnect = (
 
 	return router.handler({
 		onError: (err, req, res) => {
-			console.error('err', err);
+			console.error('err', err, typeof err);
 			const statusCode = res.statusCode < 400 ? 500 : res.statusCode;
 			let statusMessage: string | any[] = res.statusMessage
 				? res.statusMessage
 				: err instanceof Error
-				? err.message
-				: String(err);
+					? err.message
+					: Array.isArray(err)
+						? err.map((item) => item.message).join(', ')
+						: String(err);
 
-			if (Array.isArray(statusMessage))
-				statusMessage = statusMessage.map((item) => item.message).join(', ');
 			if (
 				statusMessage.trim().startsWith('[') &&
 				statusMessage.trim().endsWith(']')
 			)
-				statusMessage = JSON.parse(statusMessage)
-					.map((item: Record<string, any>) =>
-						typeof item === 'string'
-							? item
-							: typeof item === 'object' && 'message' in item
-							? item.message
-							: JSON.stringify(item),
-					)
-					.join(', ');
+				try {
+					statusMessage = (JSON.parse(statusMessage) as any[])
+						.map((item: Record<string, any>) =>
+							// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+							typeof item === 'string'
+								? item
+								: typeof item === 'object' && 'message' in item
+									? item.message
+									: JSON.stringify(item),
+						)
+						.join(', ');
+				} catch (error) {
+					console.error('error', error);
+				}
 
 			if (process.env.NODE_ENV === 'development' && err instanceof Error) {
 				console.log('\n');

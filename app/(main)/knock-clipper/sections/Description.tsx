@@ -1,4 +1,4 @@
-import Description from '~/app/components/shared/core/Description';
+import Description from '~/app/_components/shared/core/Description';
 
 const DescriptionSection = ({ data }: { data: any }) => {
 	return (

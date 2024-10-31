@@ -1,5 +1,3 @@
-import { type IProduct } from 'types';
-import { getOneProductByHandle } from 'server/controllers/products';
 import {
 	getKnockClipperMainSection,
 	getKnockClipperPageData,
@@ -8,13 +6,14 @@ import { defaultSiteName } from '~/utils/core/next-seo.config';
 import HeroSection from './sections/Hero';
 import DescriptionSection from './sections/Description';
 import ProductShowcaseSection from './sections/ProductShowcase';
-import SystemRequirementsSection from '~/app/components/shared/core/SystemRequirements';
+import SystemRequirementsSection from '~/app/_components/shared/core/SystemRequirements';
 
 import VideosSection from './sections/Videos';
-import { getClassInstanceValues } from '~/app/libs/utils';
+import type { Product } from '~/libs/shopify/types';
+import { getProduct } from '~/libs/shopify';
 
 export interface IKnockClipperPageProps {
-	knockClipperPlugin: IProduct;
+	knockClipperPlugin: Product;
 }
 
 export const revalidate = 360;
@@ -26,9 +25,7 @@ export const metadata = {
 
 async function getPageData() {
 	return await Promise.all([
-		getOneProductByHandle('knock-clipper').then((res) =>
-			getClassInstanceValues(res),
-		),
+		getProduct('knock-clipper'),
 		getKnockClipperPageData(),
 		getKnockClipperMainSection(),
 	]);
@@ -41,15 +38,25 @@ export default async function KnockClipperPage() {
 
 	return (
 		<>
-			<HeroSection
-				knockClipperPlugin={knockClipperPlugin}
-				knockClipperMainSection={knockClipperMainSection}
-			/>
+			{
+				// @ts-expect-error - There should be a fallback component
+				knockClipperPlugin && (
+					<HeroSection
+						knockClipperPlugin={knockClipperPlugin}
+						knockClipperMainSection={knockClipperMainSection}
+					/>
+				)
+			}
 			<DescriptionSection data={knockClipperPageData.secondSection} />
-			<ProductShowcaseSection
-				data={knockClipperPageData.thirdSection}
-				knockClipperPlugin={knockClipperPlugin}
-			/>
+			{
+				// @ts-expect-error - There should be a fallback component
+				knockClipperPlugin && (
+					<ProductShowcaseSection
+						data={knockClipperPageData.thirdSection}
+						product={knockClipperPlugin}
+					/>
+				)
+			}
 			<SystemRequirementsSection
 				items1={
 					knockClipperPageData.forthSection.forth_section_knock_clipper_page_mac
@@ -62,10 +69,15 @@ export default async function KnockClipperPage() {
 				backgroundImg={false}
 				data={knockClipperPageData.forthSection}
 			/>
-			<VideosSection
-				data={knockClipperPageData.fifthSection}
-				knockClipperPlugin={knockClipperPlugin}
-			/>
+			{
+				// @ts-expect-error - There should be a fallback component
+				knockClipperPlugin && (
+					<VideosSection
+						pageData={knockClipperPageData.fifthSection}
+						product={knockClipperPlugin}
+					/>
+				)
+			}
 		</>
 	);
 }

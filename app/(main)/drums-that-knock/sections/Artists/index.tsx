@@ -5,10 +5,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import KnockTrademark from '~/app/components/shared/core/KnockTrademark';
-import CustomNextImage from '~/app/components/shared/common/CustomNextImage';
-import Reviews from '~/app/components/shared/core/Reviews';
-import { AspectRatio } from '~/app/components/shared/common/AspectRatio';
+import KnockTrademark from '~/app/_components/shared/core/KnockTrademark';
+import CustomNextImage from '~/app/_components/shared/common/CustomNextImage';
+import Reviews from '~/app/_components/shared/core/Reviews';
+import { AspectRatio } from '~/app/_components/shared/common/AspectRatio';
 // import { AspectRatio } from '@radix-ui/react-aspect-ratio';
 
 const ArtistsSection = ({ reviews, data }: { reviews: any; data: any }) => {

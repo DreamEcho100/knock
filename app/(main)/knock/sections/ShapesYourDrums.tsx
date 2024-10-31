@@ -1,4 +1,4 @@
-import CustomNextImage from '~/app/components/shared/common/CustomNextImage';
+import CustomNextImage from '~/app/_components/shared/common/CustomNextImage';
 
 /*
 const features = [

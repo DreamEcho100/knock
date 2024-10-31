@@ -1,13 +1,13 @@
 'use client';
-import Button from '~/app/components/shared/core/Button';
-import FormInput from '~/app/components/shared/core/FormInput';
+import Button from '~/app/_components/shared/core/Button';
+import FormInput from '~/app/_components/shared/core/FormInput';
 import { type IKnockPluginBoutiqueProps } from './page';
 import { useMutation } from '@tanstack/react-query';
 import type { IGenericErrorResponse } from 'types';
 import Image from 'next/image';
 import { type FormEvent, useState } from 'react';
 import { toast } from 'react-toastify';
-import FormField from '~/app/components/shared/core/FieldForm';
+import FormField from '~/app/_components/shared/core/FieldForm';
 
 const KnockScreen = ({ knockPluginBoutique }: IKnockPluginBoutiqueProps) => {
 	const [openRedeem, setOpenRedeem] = useState(false);

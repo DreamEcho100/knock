@@ -1,44 +1,53 @@
-import { type IProduct } from '~/types';
-import { useAddProductsToCheckoutAndCart } from '~/utils/core/hooks';
+import { useStore } from 'zustand';
+import {
+	cartStore,
+	getCartLineItemPendingUpsertOrUpdateKey,
+} from '~/libs/shopify/stores/cart';
+import type { Product, ProductVariant } from '~/libs/shopify/types';
 import { priceCurrencyFormatter } from '~/utils/core/shopify';
 
 export function useAddKnockPluginToCartButtonProps({
-	knockPlugin,
+	variant,
+	product,
 	text,
 }: {
-	knockPlugin: IProduct;
+	variant: ProductVariant;
+	product: Product;
 	text?: string;
 }) {
-	const addProductsToCheckoutAndCart = useAddProductsToCheckoutAndCart();
+	const isPending = useStore(
+		cartStore,
+		(state) =>
+			state.pendingActions[
+				getCartLineItemPendingUpsertOrUpdateKey(product.id, variant.id)
+			],
+	);
 
 	return {
-		onClick: () =>
-			addProductsToCheckoutAndCart.mutate({
-				products: [{ ...knockPlugin, quantity: 1 }],
-			}),
-
+		onClick: () => cartStore.getState().upsertCartItem(variant, product),
+		disabled: isPending,
 		children: text ? (
 			text
-		) : knockPlugin.variants[0].compareAtPrice ? (
+		) : variant.compareAtPrice ? (
 			<>
 				Buy it now{' '}
 				<span className="bg-secondary-2">
 					{priceCurrencyFormatter(
-						knockPlugin.variants[0].price.amount,
-						knockPlugin.variants[0].price.currencyCode,
+						variant.price.amount,
+						variant.price.currencyCode,
 					)}
 				</span>
 				<del>
 					{priceCurrencyFormatter(
-						knockPlugin.variants[0].compareAtPrice.amount,
-						knockPlugin.variants[0].compareAtPrice.currencyCode,
+						variant.compareAtPrice.amount,
+						variant.compareAtPrice.currencyCode,
 					)}
 				</del>
 			</>
 		) : (
 			`Buy it now ${priceCurrencyFormatter(
-				knockPlugin.variants[0].price.amount,
-				knockPlugin.variants[0].price.currencyCode,
+				variant.price.amount,
+				variant.price.currencyCode,
 			)}`
 		),
 	};

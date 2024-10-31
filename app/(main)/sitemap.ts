@@ -1,6 +1,6 @@
-import { getAllProducts } from '~/server/controllers/products';
-
 import { type MetadataRoute } from 'next';
+import { getProducts } from '~/libs/shopify';
+import type { Product } from '~/libs/shopify/types';
 
 const EXTERNAL_DATA_URL = `https://${process.env.REDEEM_DOMAIN}`;
 
@@ -22,7 +22,7 @@ function generateSitemap({
 	products,
 	staticPaths,
 }: {
-	products: Awaited<ReturnType<typeof getAllProducts>>;
+	products: Product[];
 	staticPaths: string[];
 }) {
 	const sitemap: Sitemap = [];
@@ -56,8 +56,12 @@ function generateSitemap({
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-	const products = await getAllProducts({
-		typesToExclude: ['Sound Editing Software'],
+	const products = await getProducts().then((products) => {
+		const typesToExclude = ['Sound Editing Software'];
+
+		return products.filter(
+			(item) => !typesToExclude.includes(item.productType),
+		);
 	});
 
 	const staticPaths = [

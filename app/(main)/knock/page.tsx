@@ -9,14 +9,14 @@ import {
 	VideosSection,
 	AvailableOnIOSSection,
 } from './sections';
-import type { IProduct } from 'types';
-import { getOneProductByHandle } from 'server/controllers/products';
 import { getKnockMainSection, getKnockPageData } from '~/utils/core/API';
-import SystemRequirementsSection from '~/app/components/shared/core/SystemRequirements';
-import { getClassInstanceValues } from '~/app/libs/utils';
+import SystemRequirementsSection from '~/app/_components/shared/core/SystemRequirements';
+import type { Product } from '~/libs/shopify/types';
+import { getProduct } from '~/libs/shopify';
+import { notFound } from 'next/navigation';
 
 export interface IKnockPluginPageProps {
-	knockPlugin: IProduct; // ShopifyBuy.Product;
+	product: Product; // ShopifyBuy.Product;
 }
 
 export const revalidate = 360;
@@ -28,12 +28,14 @@ export const metadata = {
 
 export default async function KnockPluginPage() {
 	const [knockPlugin, knockPageData, knockMainSection] = await Promise.all([
-		getOneProductByHandle('knock-plugin').then((res) =>
-			getClassInstanceValues(res),
-		),
+		getProduct('knock-plugin'),
 		getKnockPageData(),
 		getKnockMainSection(),
 	]);
+
+	if (!knockPlugin) {
+		notFound();
+	}
 
 	return (
 		<>
@@ -42,11 +44,12 @@ export default async function KnockPluginPage() {
 			<ShapesYourDrumsSection data={knockPageData.thirdSection} />
 			<EasyToUseSection
 				data={knockPageData.forthSection}
-				knockPlugin={knockPlugin}
+				product={knockPlugin}
 			/>
 			<DrumsThatKnockSection
 				data={knockPageData.fifthSection}
-				knockPlugin={knockPlugin}
+				product={knockPlugin}
+				variant={knockPlugin.variants[0]}
 			/>
 			<AvailableOnIOSSection data={knockPageData.iosSection} />
 			<ReviewsSection

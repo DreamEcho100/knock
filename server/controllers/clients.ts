@@ -414,8 +414,7 @@ const resetPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 	}
 
 	if (
-		response.data.data.customerResetByUrl &&
-		response.data.data.customerResetByUrl.customerUserErrors.length
+		response.data.data.customerResetByUrl?.customerUserErrors.length
 	) {
 		res.statusCode = 404;
 		throw new Error(
@@ -795,7 +794,7 @@ const subscribeToNewsLetters = async (
 ) => {
 	const email = z.string().email().parse(req.body.email);
 
-	let apiInstance = new SibApiV3Sdk.ContactsApi();
+	const apiInstance = new SibApiV3Sdk.ContactsApi();
 
 	try {
 		const createContact = new SibApiV3Sdk.CreateContact();

@@ -1,12 +1,11 @@
 'use client';
-import ProductShowcase from '~/app/components/shared/core/ProductShowcase';
+import ProductShowcase from '~/app/_components/shared/core/ProductShowcase';
 import { BsApple } from 'react-icons/bs';
 
 export default function AvailableOnIOSSection({ data }: { data: any }) {
 	return (
 		<section className="bg-primary-1 text-primary-2 section-p-v1">
 			<ProductShowcase
-				// product={knockPlugin}
 				textContainer={{
 					h2: { children: data.h2 },
 					p: { children: data.p },

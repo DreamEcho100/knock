@@ -1,13 +1,13 @@
-import AddItemOnHeroSectionButton from '~/app/components/shared/core/AddItemOnHeroSectionButton';
-import KnockSection from '~/app/components/shared/core/KnockSection';
-import KnockTrademark from '~/app/components/shared/core/KnockTrademark';
-import { type IProduct } from '~/types';
+import AddItemOnHeroSectionButton from '~/app/_components/shared/core/AddItemOnHeroSectionButton';
+import KnockSection from '~/app/_components/shared/core/KnockSection';
+import KnockTrademark from '~/app/_components/shared/core/KnockTrademark';
+import type { Product } from '~/libs/shopify/types';
 
 export default function HeroSection({
 	knockPlugin,
 	data,
 }: {
-	knockPlugin: IProduct;
+	knockPlugin: Product;
 	data: any;
 }) {
 	return (
@@ -24,7 +24,7 @@ export default function HeroSection({
 					<KnockTrademark tradeMark={data.main.tradeMark} />
 				</>
 			}
-			description={data.main && data.main.p}
+			description={data.main?.p}
 			pTheme={{ width: 'small' }}
 			imageSrc={process.env.NEXT_PUBLIC_KNOCK_URL_API + data.main.mainImageUrl}
 		/>

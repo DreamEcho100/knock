@@ -1,8 +1,3 @@
-import { type IProduct } from 'types';
-import {
-	getAllProducts,
-	getOneProductByHandle,
-} from 'server/controllers/products';
 import { getDTKPageData } from '~/utils/core/API';
 import {
 	defaultSiteName2,
@@ -12,11 +7,12 @@ import HeroSection from './sections/Hero';
 import DigitalProductsSection from './sections/DigitalProducts';
 import ArtistsSection from './sections/Artists';
 import KnockProductShowcaseSection from './sections/KnockProductShowcase';
-import { getClassInstanceValues } from '~/app/libs/utils';
+import type { Product } from '~/libs/shopify/types';
+import { getProduct, getProducts } from '~/libs/shopify';
 
 export interface IDrumsThatKnockPageProps {
-	products: IProduct[]; // ShopifyBuy.Product[];
-	knockPlugin: IProduct; // ShopifyBuy.Product;
+	products: Product[]; // ShopifyBuy.Product[];
+	knockPlugin: Product; // ShopifyBuy.Product;
 }
 
 export const revalidate = 360;
@@ -28,12 +24,14 @@ export const metadata = {
 
 async function getPageData() {
 	return await Promise.all([
-		getAllProducts({ typesToExclude: ['Sound Editing Software'] }).then((res) =>
-			getClassInstanceValues(res),
-		),
-		getOneProductByHandle('knock-plugin').then((res) =>
-			getClassInstanceValues(res),
-		),
+		getProducts().then((res) => {
+			const typesToExclude = ['Sound Editing Software'];
+
+			return res.filter(
+				(product) => !typesToExclude.includes(product.productType),
+			);
+		}),
+		getProduct('knock-plugin'),
 		getDTKPageData(),
 	]);
 	// knockclipper-pluginboutique
@@ -50,10 +48,14 @@ export default async function DrumsThatKnockPage({}) {
 				data={dtkData.artist}
 				reviews={dtkData.reviews.review_section_dtk_page_content}
 			/>
-			<KnockProductShowcaseSection
-				data={dtkData.lastSection}
-				knockPlugin={knockPlugin}
-			/>
+			{/* 
+			// @ts-expect-error - a fallback should be handled */}
+			{knockPlugin && (
+				<KnockProductShowcaseSection
+					data={dtkData.lastSection}
+					product={knockPlugin}
+				/>
+			)}
 		</>
 	);
 }

@@ -1,17 +1,30 @@
 'use client';
-import Button from '~/app/components/shared/core/Button';
+import Button from '~/app/_components/shared/core/Button';
 import Image from 'next/image';
 import React from 'react';
-import classes from '../../../../styles/productsPages.module.scss';
-import { useAddProductsToCheckoutAndCart } from '~/utils/core/hooks';
-import { type IProduct, type ICustomProduct } from '~/types';
+import classes from '~/app/_styles/productsPages.module.css';
+import { type ICustomProduct } from '~/types';
+import {
+	cartStore,
+	getCartLineItemPendingUpsertOrUpdateKey,
+} from '~/libs/shopify/stores/cart';
+import { useStore } from 'zustand';
 
 export default function ProductDetails({
 	product,
 }: {
 	product: ICustomProduct;
 }) {
-	const addProductsToCheckoutAndCart = useAddProductsToCheckoutAndCart();
+	const isPending = useStore(
+		cartStore,
+		(state) =>
+			state.pendingActions[
+				getCartLineItemPendingUpsertOrUpdateKey(
+					product.id,
+					product.variants[0].id,
+				)
+			],
+	);
 
 	return (
 		<div className={classes.ProductCardDetailsContainer}>
@@ -50,12 +63,12 @@ export default function ProductDetails({
 					<div>
 						<Button
 							onClick={() =>
-								addProductsToCheckoutAndCart.mutate({
-									products: [
-										{ ...(product as unknown as IProduct), quantity: 1 },
-									],
+								void cartStore.getState().upsertCartItem(product.variants[0], {
+									...product,
+									description: product.originalDescription,
 								})
 							}
+							disabled={isPending}
 						>
 							Add To Cart
 						</Button>

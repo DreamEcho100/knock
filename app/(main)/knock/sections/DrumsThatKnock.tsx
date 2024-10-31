@@ -1,20 +1,22 @@
-import KnockSection from '~/app/components/shared/core/KnockSection';
-import AddItemOnHeroSectionButton from '~/app/components/shared/core/AddItemOnHeroSectionButton';
-import KnockTrademark from '~/app/components/shared/core/KnockTrademark';
-import { type IProduct } from '~/types';
+import KnockSection from '~/app/_components/shared/core/KnockSection';
+import AddItemOnHeroSectionButton from '~/app/_components/shared/core/AddItemOnHeroSectionButton';
+import KnockTrademark from '~/app/_components/shared/core/KnockTrademark';
+import type { Product, ProductVariant } from '~/libs/shopify/types';
 
 export default function DrumsThatKnockSection({
-	knockPlugin,
+	product,
+	variant,
 	data,
 }: {
-	knockPlugin: IProduct;
+	product: Product;
+	variant: ProductVariant;
 	data: any;
 }) {
 	return (
 		<KnockSection
 			buttonElem={
 				<AddItemOnHeroSectionButton
-					product={knockPlugin}
+					product={product}
 					buttonProps={{ children: data.button }}
 				/>
 			}

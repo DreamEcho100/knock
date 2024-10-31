@@ -1,0 +1,25 @@
+'use client';
+import type { PropsWithChildren } from 'react';
+
+import { Suspense } from 'react';
+import ReactQueryProvider from './ReactQuery';
+import DefaultLayout from '../DefaultLayout';
+import dynamic from 'next/dynamic';
+
+const DynamicTopProgressBar = dynamic(
+	() => import('~/app/_components/shared/common/TopProgressBar'),
+	{ ssr: false },
+);
+
+export default function Providers(props: PropsWithChildren) {
+	return (
+		<ReactQueryProvider>
+			<DefaultLayout>
+				{props.children}
+				<Suspense fallback={null}>
+					<DynamicTopProgressBar />
+				</Suspense>
+			</DefaultLayout>
+		</ReactQueryProvider>
+	);
+}

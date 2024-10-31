@@ -1,12 +1,12 @@
-import VideosContainer from '~/app/components/shared/core/VideosContainer';
-import AddItemOnHeroSectionButton from '~/app/components/shared/core/AddItemOnHeroSectionButton';
-import { type IProduct } from '~/types';
+import VideosContainer from '~/app/_components/shared/core/VideosContainer';
+import AddItemOnHeroSectionButton from '~/app/_components/shared/core/AddItemOnHeroSectionButton';
+import type { Product } from '~/libs/shopify/types';
 
 export default function VideosSection({
 	knockPlugin,
 	data,
 }: {
-	knockPlugin: IProduct;
+	knockPlugin: Product;
 	data: any;
 }) {
 	return (

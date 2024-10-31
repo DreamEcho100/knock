@@ -1,30 +1,28 @@
-import type { ICartProduct } from '~/app/components/providers/CustomerContext/ts';
-
-import type { ILineItem } from 'types';
+import type { CartItem } from '~/libs/shopify/types';
 
 export const convertProductToCartItem = ({
 	product,
 	preferredImage,
 	selectedAmount,
 }: {
-	product: ILineItem;
-	preferredImage?: ICartProduct['preferredImage'];
-	selectedAmount?: ICartProduct['selectedAmount'];
+	product: CartItem;
+	preferredImage?: CartItem['merchandise']['product']['featuredImage'];
+	selectedAmount?: CartItem['merchandise']['product']['featuredImage'];
 }) => {
 	return {
 		...product,
 		preferredImage: preferredImage
 			? preferredImage
-			: product.variant.image
+			: product.merchandise.product.featuredImage
 				? {
-						src: product.variant.image.src,
-						alt: product.variant.image.altText || '',
+						src: product.merchandise.product.featuredImage.url,
+						alt: product.merchandise.product.featuredImage.altText ?? '',
 					}
 				: null,
-		price:
-			typeof product.variant.price.amount === 'string'
-				? parseFloat(product.variant.price.amount)
-				: product.variant.price.amount,
+		// price:
+		// 	typeof product.cost.perItem === 'string'
+		// 		? parseFloat(product.cost.perItem)
+		// 		: product.cost.perItem,
 		selectedAmount: product.quantity
 			? product.quantity
 			: selectedAmount

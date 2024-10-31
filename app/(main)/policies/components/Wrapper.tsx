@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import classes from '~/app/styles/content.module.css';
+import classes from '~/app/_styles/content.module.css';
 
 interface IProps {
 	header: {

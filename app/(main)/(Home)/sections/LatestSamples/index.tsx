@@ -1,16 +1,16 @@
 'use client';
-import Button from '~/app/components/shared/core/Button';
-import ProductBasicCard from '~/app/components/shared/core/Card/product/default';
-import KnockTrademark from '~/app/components/shared/core/KnockTrademark';
+import Button from '~/app/_components/shared/core/Button';
+import ProductBasicCard from '~/app/_components/shared/core/Card/product/default';
+import KnockTrademark from '~/app/_components/shared/core/KnockTrademark';
 import { useMemo } from 'react';
-import { type IProduct } from '~/types';
 import { cx } from 'class-variance-authority';
+import type { Product } from '~/libs/shopify/types';
 
 const LatestSamplesSection = ({
 	products,
 	data,
 }: {
-	products: IProduct[];
+	products: Product[];
 	data: any;
 }) => {
 	const filteredProducts = useMemo(() => {

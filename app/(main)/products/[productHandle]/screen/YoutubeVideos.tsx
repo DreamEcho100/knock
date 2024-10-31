@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { type ICustomProduct } from '~/types';
 import { FaPlay } from 'react-icons/fa';
-import classes from '~/app/styles/productsPages.module.scss';
+import classes from '~/app/_styles/productsPages.module.css';
 
 type Props = {
 	youtubeVideos: ICustomProduct['youtubeVideo'];

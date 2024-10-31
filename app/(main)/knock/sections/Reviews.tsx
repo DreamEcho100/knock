@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import Reviews from '~/app/components/shared/core/Reviews';
+import Reviews from '~/app/_components/shared/core/Reviews';
 
 export default function ReviewsSection({
 	reviews,

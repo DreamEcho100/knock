@@ -1,14 +1,14 @@
 import type { Metadata } from 'next';
 import { type PropsWithChildren } from 'react';
-import Providers from './components/providers';
+import Providers from './_components/providers';
 import SEODefaults from '~/utils/core/next-seo.config';
 
-import '~/app/styles/globals.css';
-import '~/app/styles/swiper.css';
-import '~/app/styles/customNProgressStyles.css';
+import '~/app/_styles/globals.css';
+import '~/app/_styles/swiper.css';
+import '~/app/_styles/customNProgressStyles.css';
 
 import 'react-toastify/dist/ReactToastify.css';
-import { decapv16, sourceSansPro } from './libs/fonts';
+import { decapv16, sourceSansPro } from './_libs/fonts';
 import { cx } from 'class-variance-authority';
 
 export const metadata: Metadata = SEODefaults;

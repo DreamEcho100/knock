@@ -1,8 +1,8 @@
-import CustomNextImage from '~/app/components/shared/common/CustomNextImage';
-import { ProductCardWithDetails } from '~/app/components/shared/core/Card/product/default';
-import { type IProduct } from '~/types';
+import CustomNextImage from '~/app/_components/shared/common/CustomNextImage';
+import { ProductCardWithDetails } from '~/app/_components/shared/core/Card/product/default';
+import type { Product } from '~/libs/shopify/types';
 
-const DigitalProductsSection = ({ products }: { products: IProduct[] }) => {
+const DigitalProductsSection = ({ products }: { products: Product[] }) => {
 	return (
 		<section className="bg-primary-1 section-p-v1 relative">
 			<div className="pointer-events-none select-none grid grid-rows-4 justify-items-center items-center absolute top-0 right-0 bottom-0 left-0 w-full h-full">

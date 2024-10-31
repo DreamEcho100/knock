@@ -1,4 +1,4 @@
-import CustomNextImage from '~/app/components/shared/common/CustomNextImage';
+import CustomNextImage from '~/app/_components/shared/common/CustomNextImage';
 import { defaultSiteName3 } from '~/utils/core/next-seo.config';
 import { getFaqPageData } from '~/utils/core/API';
 

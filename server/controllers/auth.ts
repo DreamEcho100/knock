@@ -3,6 +3,7 @@ import axios from 'axios';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
 import { z } from 'zod';
+import { cookies } from 'next/headers';
 
 const login = async (req: NextApiRequest, res: NextApiResponse) => {
 	const input = z
@@ -131,7 +132,6 @@ const checkToken = async (
 ) => {
 	const accessToken = req.headers.accesstoken;
 
-	//const {checkoutId , checkoutKey} = req.params
 	if (accessToken) {
 		const { data } = await axios.post(
 			`https://${process.env.DOMAINE}/api/2024-01/graphql.json`,
@@ -266,13 +266,6 @@ const checkToken = async (
 			throw new Error('Customer not found');
 		}
 
-		// Construct the Multipassify encoder
-		//	const multipassify = new Multipassify(process.env.SHOPIFY_MULTIPASS_TOKEN);
-
-		//let customerData = {email: data.data.customer.email , return_to:`https://${process.env.DOMAINE}/60096020703/checkouts/$${checkoutId}?key=${checkoutKey}`};
-		//multipassify.encode(customerData);
-		//const checkoutUrl = multipassify.generateUrl(customerData,process.env.DOMAINE);
-
 		return res.status(200).json({
 			success: true,
 			message: '',
@@ -320,6 +313,8 @@ const logout = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (!response.data.data.customerAccessTokenDelete) {
 		throw new Error('Access Token not valid');
 	}
+
+	(await cookies()).set('cartId', '');
 
 	return res.status(200).json({
 		success: true,

@@ -1,21 +1,20 @@
-import ProductShowcase from '~/app/components/shared/core/ProductShowcase';
-import { type IProduct } from '~/types';
+import ProductShowcase from '~/app/_components/shared/core/ProductShowcase';
+import type { Product } from '~/libs/shopify/types';
 
 export default function EasyToUseSection({
-	knockPlugin,
+	product,
 	data,
 }: {
-	knockPlugin: IProduct;
+	product: Product;
 	data: any;
 }) {
 	return (
 		<section className="bg-primary-1 text-primary-2 section-p-v1">
 			<ProductShowcase
-				product={knockPlugin}
+				product={product}
 				textContainer={{
 					h2: {
-						children:
-						data.h2,
+						children: data.h2,
 					},
 					p: {
 						children: data.p,

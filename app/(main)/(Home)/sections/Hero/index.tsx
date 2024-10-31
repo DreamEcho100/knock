@@ -1,5 +1,5 @@
-import KnockTrademark from '~/app/components/shared/core/KnockTrademark';
-import KnockSection from '~/app/components/shared/core/KnockSection';
+import KnockTrademark from '~/app/_components/shared/core/KnockTrademark';
+import KnockSection from '~/app/_components/shared/core/KnockSection';
 
 const HeroSection = ({ data }: { data: any }) => {
 	return (

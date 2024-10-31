@@ -1,6 +1,6 @@
-import Button from '~/app/components/shared/core/Button';
+import Button from '~/app/_components/shared/core/Button';
 
-import classes from '~/app/styles/productsPages.module.scss';
+import classes from '~/app/_styles/productsPages.module.css';
 import { Fragment } from 'react';
 import { type ICustomProduct } from '~/types';
 import ProductDetails from './ProductDetails';

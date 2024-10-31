@@ -1,10 +1,9 @@
 'use client';
-import Button from '~/app/components/shared/core/Button';
-import CustomNextImage from '~/app/components/shared/common/CustomNextImage';
+import Button from '~/app/_components/shared/core/Button';
+import CustomNextImage from '~/app/_components/shared/common/CustomNextImage';
 
 import {
 	getGetAccessTokenFromCookie,
-	useGetUserCheckoutDetailsAndIdAndKey,
 	useGetUserDataFromStore,
 	useLogoutUser,
 } from '~/utils/core/hooks';
@@ -21,12 +20,12 @@ import {
 	useState,
 } from 'react';
 
-import Dialog from '~/app/components/shared/common/Dialog';
-import FormField from '~/app/components/shared/core/FieldForm';
+import Dialog from '~/app/_components/shared/common/Dialog';
+import FormField from '~/app/_components/shared/core/FieldForm';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
 import { defaultSiteName3 } from '~/utils/core/next-seo.config';
-import CustomNextSeo from '~/app/components/shared/common/CustomNextSeo';
+import Head from 'next/head';
 
 const TitleValue = ({
 	title,
@@ -94,9 +93,9 @@ const ProductsOnOrder = ({
 							<div key={item.variant.id}>
 								<div className="flex">
 									<div className="w-36 flex items-center bg-black">
-										{item?.variant?.image?.url && (
+										{item?.variant?.image?.src && (
 											<CustomNextImage
-												src={item.variant.image.url}
+												src={item.variant.image.src}
 												alt={item.variant.image.altText ?? ''}
 												width={150}
 												height={150}
@@ -307,13 +306,9 @@ const UpdateUserBasicDetails = ({
 export default function CustomerProfilePage() {
 	const { user } = useGetUserDataFromStore();
 
-	// const [isLoggingOut, setIsLoggingOut] = useState(false);
-	const userCheckoutDetailsAndIdAndKey = useGetUserCheckoutDetailsAndIdAndKey();
 	const [isUpdateUserBasicDetailsOpen, setIsUpdateUserBasicDetailsOpen] =
 		useState(false);
-	const logoutUser = useLogoutUser({
-		userCheckoutDetailsAndIdAndKey,
-	});
+	const logoutUser = useLogoutUser();
 
 	const orders = useMemo(() => {
 		let aNum: number;
@@ -333,12 +328,10 @@ export default function CustomerProfilePage() {
 	if (user.status === 'loading' && user.fetchStatus === 'fetching')
 		return (
 			<>
-				<CustomNextSeo
-					pageTitle={pageTitle}
-					additionalMetaTags={[
-						{ name: 'robots', content: 'noindex, nofollow' },
-					]}
-				/>
+				<Head>
+					<title>{pageTitle}</title>
+					<meta name="robots" content="noindex, nofollow" />
+				</Head>
 				<section className="bg-primary-1 section-p-v1 h-[75vh] max-h-[45rem] min-h-fit">
 					<div className="max-w-screen-md mx-auto">
 						<p>Loading...</p>
@@ -354,12 +347,10 @@ export default function CustomerProfilePage() {
 
 		return (
 			<>
-				<CustomNextSeo
-					pageTitle={pageTitle}
-					additionalMetaTags={[
-						{ name: 'robots', content: 'noindex, nofollow' },
-					]}
-				/>
+				<Head>
+					<title>{pageTitle}</title>
+					<meta name="robots" content="noindex, nofollow" />
+				</Head>
 				<section className="bg-primary-1 section-p-v1 h-[75vh] max-h-[45rem] min-h-fit">
 					<div className="max-w-screen-md mx-auto">
 						<p>
@@ -377,10 +368,10 @@ export default function CustomerProfilePage() {
 
 	return (
 		<>
-			<CustomNextSeo
-				pageTitle={pageTitle}
-				additionalMetaTags={[{ name: 'robots', content: 'noindex, nofollow' }]}
-			/>
+			<Head>
+				<title>{pageTitle}</title>
+				<meta name="robots" content="noindex, nofollow" />
+			</Head>
 			<section className="bg-primary-1 section-p-v1">
 				<div className="max-w-screen-md mx-auto flex flex-col gap-16">
 					<header className="flex flex-col items-center">

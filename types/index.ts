@@ -1,121 +1,5 @@
-interface IProductOption {
-	id: string;
-	name: string;
-	values: [string, ...string[]];
-}
-interface IProductImage {
-	id: string;
-	url: string;
-	altText: null;
-	width?: number;
-	height?: number;
-	hasNextPage: boolean;
-	hasPreviousPage: boolean;
-	variableValues: {
-		first: number;
-	};
-}
-export interface IProduct {
-	video: {
-		title: string;
-		src: string;
-		srcTwo: string;
-		srcDoc1: string;
-		srcDoc2: string;
-	};
-	hasNextPage: {
-		value: boolean;
-	};
-	hasPreviousPage: boolean;
-	variableValues: {
-		first: number;
-	};
-	options: IProductOption[];
-	images: IProductImage[];
-	variants: {
-		id: string;
-		title: string;
-		price: {
-			amount: string;
-			currencyCode: string;
-		};
-		priceV2: {
-			amount: string;
-			currencyCode: string;
-		};
-		available: boolean;
-		sku: string;
-		compareAtPrice: {
-			amount: string;
-			currencyCode: string;
-		};
-		compareAtPriceV2: {
-			amount: string;
-			currencyCode: string;
-		};
-		image: IProductImage;
-		selectedOptions: [
-			{
-				name: string;
-				value: string;
-			},
-			...{
-				name: string;
-				value: string;
-			}[],
-		];
-		unitPrice: null;
-		unitPriceMeasurement: {
-			measuredType: null;
-			quantityUnit: null;
-			quantityValue: 0;
-			referenceUnit: null;
-			referenceValue: 0;
-		};
-		hasNextPage: boolean;
-		hasPreviousPage: boolean;
-		variableValues: {
-			first: 20;
-		};
-
-		availableForSale: boolean;
-		barcode?: string | null;
-		currentlyNotInStock: boolean;
-		quantityAvailable?: number | null;
-		requiresShipping: boolean;
-		taxable: boolean;
-		// unitPriceMeasurement?: UnitPriceMeasurement | null;
-		weight?: number | null;
-		weightUnit: string;
-	}[];
-
-	//
-	availableForSale: boolean;
-	createdAt: string;
-	description: string;
-	descriptionHtml: string;
-	featuredImage?: IProductImage | null;
-	handle: string;
-	id: string;
-	isGiftCard: boolean;
-	onlineStoreUrl?: string | null;
-	productType: string;
-	publishedAt: string;
-	requiresSellingPlan: boolean;
-	// seo: SEO;
-	tags: string[];
-	title: string;
-	totalInventory?: number | null;
-	trackingParameters?: string | null;
-	updatedAt: string;
-	// variantBySelectedOptions?: ProductVariant | null;
-	vendor: string;
-	// collections: Collection[];
-	// media: Media[];
-	// sellingPlanGroups: SellingPlanGroup[];
-}
-
-export interface ICustomProduct extends Omit<IProduct, 'description'> {
+import type { Product } from '~/libs/shopify/types';
+export interface ICustomProduct extends Omit<Product, 'description'> {
 	originalDescription: string;
 	description: {
 		id: number;
@@ -290,30 +174,50 @@ export interface IUser {
 									id: string;
 									height: number;
 									width: number;
-									url: string;
+									src: string;
 									altText: string | null;
 								};
 								price: {
 									amount: string;
 									product: {
 										id: string;
-										handle: string;
 										title: string;
-										totalInventory: 994297;
-										availableForSale: true;
-										description: string;
-										images: {
-											edges: {
-												node: {
-													id: string;
-													width: number;
-													height: number;
-													url: string;
-												};
-											}[];
-										};
-										updatedAt: string;
+										handle: string;
+										availableForSale: boolean;
+										descriptionHtml: string;
+										vendor: string;
+										publishedAt: string;
+										onlineStoreUrl: string;
+										productType: string;
+										images: Array<{
+											id: string;
+											src: string;
+											altText: any;
+											width: number;
+											height: number;
+										}>;
+										variants: Array<{
+											id: string;
+											image: {
+												id: string;
+												src: string;
+												altText: any;
+												width: number;
+												height: number;
+											};
+											price: {
+												amount: string;
+												currencyCode: string;
+											};
+											compareAtPrice: {
+												amount: string;
+												currencyCode: string;
+											};
+										}>;
 										createdAt: string;
+										updatedAt: string;
+										totalInventory?: number;
+										description?: string;
 									};
 									quantityAvailable: number;
 									title: string;
@@ -333,66 +237,67 @@ export interface IGenericErrorResponse {
 	message: string;
 }
 
-export interface ICheckoutIdAndKey {
-	checkoutId: string;
-	checkoutKey: string;
-}
-export interface ICheckout {
-	id: string;
-	ready: boolean;
-	requiresShipping: boolean;
-	note: null;
-	paymentDue: {
-		amount: string;
-		currencyCode: string;
-	};
-	paymentDueV2: {
-		amount: string;
-		currencyCode: string;
-	};
-	webUrl: string;
-	orderStatusUrl: null;
-	taxExempt: boolean;
-	taxesIncluded: boolean;
-	currencyCode: string;
-	totalTax: {
-		amount: string;
-		currencyCode: string;
-	};
-	totalTaxV2: {
-		amount: string;
-		currencyCode: string;
-	};
-	lineItemsSubtotalPrice: {
-		amount: string;
-		currencyCode: string;
-	};
-	subtotalPrice: {
-		amount: string;
-		currencyCode: string;
-	};
-	subtotalPriceV2: {
-		amount: string;
-		currencyCode: string;
-	};
-	totalPrice: {
-		amount: string;
-		currencyCode: string;
-	};
-	totalPriceV2: {
-		amount: string;
-		currencyCode: string;
-	};
-	completedAt: null;
-	createdAt: string;
-	updatedAt: string;
-	email: null;
-	discountApplications: [];
-	appliedGiftCards: [];
-	shippingAddress: null;
-	shippingLine: null;
-	customAttributes: [];
-	order: null;
-	lineItems: ILineItem[];
-	userErrors: [];
-}
+// export interface ICheckoutIdAndKey {
+// 	checkoutId: string;
+// 	checkoutKey: string;
+// 	createdAt: Date | string;
+// }
+// export interface ICheckout {
+// 	id: string;
+// 	ready: boolean;
+// 	requiresShipping: boolean;
+// 	note: null;
+// 	paymentDue: {
+// 		amount: string;
+// 		currencyCode: string;
+// 	};
+// 	paymentDueV2: {
+// 		amount: string;
+// 		currencyCode: string;
+// 	};
+// 	webUrl: string;
+// 	orderStatusUrl: null;
+// 	taxExempt: boolean;
+// 	taxesIncluded: boolean;
+// 	currencyCode: string;
+// 	totalTax: {
+// 		amount: string;
+// 		currencyCode: string;
+// 	};
+// 	totalTaxV2: {
+// 		amount: string;
+// 		currencyCode: string;
+// 	};
+// 	lineItemsSubtotalPrice: {
+// 		amount: string;
+// 		currencyCode: string;
+// 	};
+// 	subtotalPrice: {
+// 		amount: string;
+// 		currencyCode: string;
+// 	};
+// 	subtotalPriceV2: {
+// 		amount: string;
+// 		currencyCode: string;
+// 	};
+// 	totalPrice: {
+// 		amount: string;
+// 		currencyCode: string;
+// 	};
+// 	totalPriceV2: {
+// 		amount: string;
+// 		currencyCode: string;
+// 	};
+// 	completedAt: null;
+// 	createdAt: string;
+// 	updatedAt: string;
+// 	email: null;
+// 	discountApplications: [];
+// 	appliedGiftCards: [];
+// 	shippingAddress: null;
+// 	shippingLine: null;
+// 	customAttributes: [];
+// 	order: null;
+// 	lineItems: ILineItem[];
+// 	userErrors: [];
+// }

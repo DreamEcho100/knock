@@ -1,16 +1,12 @@
 import KnockScreen from './screen';
-import type { IProduct } from 'types';
-import {
-	getAllProducts,
-	getOneProductByHandle,
-} from 'server/controllers/products';
 import { type Metadata, type ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getClassInstanceValues } from '~/app/libs/utils';
 import { cache } from 'react';
+import type { Product } from '~/libs/shopify/types';
+import { getProduct, getProducts } from '~/libs/shopify';
 
 export interface IKnockPluginBoutiqueProps {
-	knockPluginBoutique: IProduct; // ShopifyBuy.Product;
+	knockPluginBoutique: Product; // ShopifyBuy.Product;
 }
 
 type Props = {
@@ -20,9 +16,7 @@ type Props = {
 export const revalidate = 360;
 
 const getPageData = cache(async (props: Props) => {
-	const data = await getOneProductByHandle(props.params.pluginsBoutique).then(
-		(res) => getClassInstanceValues(res),
-	);
+	const data = await getProduct(props.params.pluginsBoutique);
 
 	if (!data) {
 		notFound();
@@ -54,13 +48,19 @@ export async function generateMetadata(
 }
 
 export async function getStaticPaths() {
-	const paths = await getAllProducts({
-		typesToExclude: ['Sound Editing Software'],
-	}).then((products: any) =>
-		products.map((product: any) => ({
-			params: { pluginsBoutique: product.handle },
-		})),
-	);
+	const paths = await getProducts().then((products) => {
+		const params = [];
+
+		const typesToExclude = ['Sound Editing Software'];
+
+		for (const product of products) {
+			if (!typesToExclude.includes(product.productType)) {
+				params.push({ params: { pluginsBoutique: product.handle } });
+			}
+		}
+
+		return { params };
+	});
 
 	return {
 		paths,

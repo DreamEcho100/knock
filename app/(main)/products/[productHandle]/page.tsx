@@ -1,12 +1,10 @@
-import {
-	getAllProducts,
-	getOneCustomProductByHandle,
-} from '~/server/controllers/products';
+import { getOneCustomProductByHandle } from '~/server/controllers/products';
 import { notFound, redirect } from 'next/navigation';
 import ProductByHandleScreen from './screen';
 import { type Metadata, type ResolvingMetadata } from 'next';
 import { defaultSiteName3 } from '~/utils/core/next-seo.config';
 import { cache } from 'react';
+import { getProducts } from '~/libs/shopify';
 
 type Props = {
 	params: { productHandle: string };
@@ -57,7 +55,7 @@ export async function generateMetadata(
 	};
 }
 export async function getStaticPaths() {
-	const paths = await getAllProducts().then((products) =>
+	const paths = await getProducts().then((products) =>
 		products
 			.filter(
 				(item) =>

@@ -1,7 +1,7 @@
 'use client';
 import { type FormEvent, useState } from 'react';
-import FormField from '~/app/components/shared/core/FieldForm';
-import Button from '~/app/components/shared/core/Button';
+import FormField from '~/app/_components/shared/core/FieldForm';
+import Button from '~/app/_components/shared/core/Button';
 import { toast } from 'react-toastify';
 import { setCookie } from '~/utils/common/storage/cookie/document';
 import { useMutation } from '@tanstack/react-query';

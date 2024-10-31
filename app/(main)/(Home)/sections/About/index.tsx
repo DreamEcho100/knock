@@ -1,5 +1,5 @@
-import Description from '~/app/components/shared/core/Description';
-import KnockTrademark from '~/app/components/shared/core/KnockTrademark';
+import Description from '~/app/_components/shared/core/Description';
+import KnockTrademark from '~/app/_components/shared/core/KnockTrademark';
 
 const AboutSection = ({ data }: { data: any }) => {
 	return (
