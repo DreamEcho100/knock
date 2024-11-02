@@ -5,6 +5,7 @@ import type { NextRequest } from 'next/server';
 import { TAGS } from './constants';
 import {
 	addToCartMutation,
+	cartDiscountCodesUpdateMutation,
 	createCartMutation,
 	editCartItemsMutation,
 	removeFromCartMutation,
@@ -20,25 +21,26 @@ import {
 	getProductRecommendationsQuery,
 	getProductsQuery,
 } from './queries/product';
-import type {
-	Cart,
-	Collection,
-	Menu,
-	Page,
-	Product,
-	ShopifyAddToCartOperation,
-	ShopifyCartOperation,
-	ShopifyCollectionProductsOperation,
-	ShopifyCollectionsOperation,
-	ShopifyCreateCartOperation,
-	ShopifyMenuOperation,
-	ShopifyPageOperation,
-	ShopifyPagesOperation,
-	ShopifyProductOperation,
-	ShopifyProductRecommendationsOperation,
-	ShopifyProductsOperation,
-	ShopifyRemoveFromCartOperation,
-	ShopifyUpdateCartOperation,
+import {
+	ShopifyCartDiscountCodesUpdateOperation,
+	type Cart,
+	type Collection,
+	type Menu,
+	type Page,
+	type Product,
+	type ShopifyAddToCartOperation,
+	type ShopifyCartOperation,
+	type ShopifyCollectionProductsOperation,
+	type ShopifyCollectionsOperation,
+	type ShopifyCreateCartOperation,
+	type ShopifyMenuOperation,
+	type ShopifyPageOperation,
+	type ShopifyPagesOperation,
+	type ShopifyProductOperation,
+	type ShopifyProductRecommendationsOperation,
+	type ShopifyProductsOperation,
+	type ShopifyRemoveFromCartOperation,
+	type ShopifyUpdateCartOperation,
 } from './types';
 import { headers } from 'next/headers';
 import { revalidateTag } from 'next/cache';
@@ -271,6 +273,119 @@ export async function addToCart(
 	});
 
 	return reshapeCart(res.body.data.cartLinesAdd.cart);
+}
+
+/*
+cartDiscountCodesUpdate
+mutation
+
+Updates the discount codes applied to the cart.
+Anchor to section titled 'Arguments'
+Arguments
+
+Anchor to cartId
+cartId
+ID!
+required
+
+    The ID of the cart.
+
+Anchor to discountCodes
+discountCodes
+[String!]
+
+    The case-insensitive discount codes that the customer added at checkout.
+
+    The input must not contain more than 250 values.
+
+Was this section helpful?
+Anchor to section titled 'CartDiscountCodesUpdatePayload returns'
+CartDiscountCodesUpdatePayload returns
+
+Anchor to CartDiscountCodesUpdatePayload.cart
+cart
+Cart
+
+    The updated cart.
+Anchor to CartDiscountCodesUpdatePayload.userErrors
+userErrors
+[CartUserError!]!
+non-null
+
+    The list of errors that occurred from executing the mutation.
+Anchor to CartDiscountCodesUpdatePayload.warnings
+warnings
+[CartWarning!]!
+non-null
+
+    A list of warnings that occurred during the mutation.
+
+
+
+Hide code
+Mutation reference
+```
+mutation cartDiscountCodesUpdate($cartId: ID!) {
+  cartDiscountCodesUpdate(cartId: $cartId) {
+    cart {
+      # Cart fields
+    }
+    userErrors {
+      field
+      message
+    }
+    warnings {
+      # CartWarning fields
+    }
+  }
+}
+```
+
+Input - Variables
+```
+{
+  "cartId": "gid://shopify/<objectName>/10079785100",
+  "discountCodes": [
+    "<your-discountCodes>"
+  ]
+}
+```
+
+```
+export const cartDiscountCodesUpdateMutation = / * GraphQL * / `
+mutation cartDiscountCodesUpdate($cartId: ID!, $discountCodes: [String!]) {
+	cartDiscountCodesUpdate(cartId: $cartId, discountCodes: $discountCodes) {
+		cart {
+			...cart
+		}
+		userErrors {
+			field
+			message
+		}
+		warnings {
+			code
+			message
+		}
+	}
+}
+${cartFragment}
+`;
+```
+*/
+export async function updateCartDiscountCodes(
+	cartId: string,
+	discountCodes: string[],
+): Promise<Cart> {
+	const res = await shopifyFetch<ShopifyCartDiscountCodesUpdateOperation>({
+		query: cartDiscountCodesUpdateMutation,
+		variables: {
+			cartId,
+			discountCodes,
+		},
+		cache: 'no-store',
+	});
+
+	return reshapeCart(res.body.data.cartDiscountCodesUpdate.cart);
 }
 
 // This is called from `app/api/revalidate.ts` so providers can control revalidation logic.

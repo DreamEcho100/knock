@@ -272,6 +272,123 @@ export interface ShopifyAddToCartOperation {
 	};
 }
 
+/*
+cartDiscountCodesUpdate
+mutation
+
+Updates the discount codes applied to the cart.
+Anchor to section titled 'Arguments'
+Arguments
+
+Anchor to cartId
+cartId
+ID!
+required
+
+    The ID of the cart.
+
+Anchor to discountCodes
+discountCodes
+[String!]
+
+    The case-insensitive discount codes that the customer added at checkout.
+
+    The input must not contain more than 250 values.
+
+Was this section helpful?
+Anchor to section titled 'CartDiscountCodesUpdatePayload returns'
+CartDiscountCodesUpdatePayload returns
+
+Anchor to CartDiscountCodesUpdatePayload.cart
+cart
+Cart
+
+    The updated cart.
+Anchor to CartDiscountCodesUpdatePayload.userErrors
+userErrors
+[CartUserError!]!
+non-null
+
+    The list of errors that occurred from executing the mutation.
+Anchor to CartDiscountCodesUpdatePayload.warnings
+warnings
+[CartWarning!]!
+non-null
+
+    A list of warnings that occurred during the mutation.
+
+
+
+Hide code
+Mutation reference
+```
+mutation cartDiscountCodesUpdate($cartId: ID!) {
+  cartDiscountCodesUpdate(cartId: $cartId) {
+    cart {
+      # Cart fields
+    }
+    userErrors {
+      field
+      message
+    }
+    warnings {
+      # CartWarning fields
+    }
+  }
+}
+```
+
+Input - Variables
+```
+{
+  "cartId": "gid://shopify/<objectName>/10079785100",
+  "discountCodes": [
+    "<your-discountCodes>"
+  ]
+}
+```
+
+```
+export const cartDiscountCodesUpdateMutation = / * GraphQL * / `
+mutation cartDiscountCodesUpdate($cartId: ID!, $discountCodes: [String!]) {
+	cartDiscountCodesUpdate(cartId: $cartId, discountCodes: $discountCodes) {
+		cart {
+			...cart
+		}
+		userErrors {
+			field
+			message
+		}
+		warnings {
+			code
+			message
+		}
+	}
+}
+${cartFragment}
+`;
+```
+*/
+export interface ShopifyCartDiscountCodesUpdateOperation {
+	data: {
+		cartDiscountCodesUpdate: {
+			cart: ShopifyCart;
+			userErrors: {
+				field: string;
+				message: string;
+			}[];
+			warnings: {
+				code: string;
+				message: string;
+			}[];
+		};
+	};
+	variables: {
+		cartId: string;
+		discountCodes: string[];
+	};
+}
+
 export interface ShopifyProductRecommendationsOperation {
 	data: {
 		productRecommendations: ShopifyProduct[];

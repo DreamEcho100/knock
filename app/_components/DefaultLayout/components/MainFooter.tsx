@@ -11,7 +11,7 @@ import { useId } from 'react';
 import { FaInstagram, FaFacebook, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { commonClasses } from '..';
 
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useMutation } from '@tanstack/react-query';
 
@@ -36,6 +36,7 @@ const LinksListContainer = ({
 	}[];
 	linksListClassName?: string;
 }) => {
+	return null;
 	return (
 		<nav className="flex flex-col gap-2 p-2">
 			<h3 className="capitalize font-semibold text-2xl text-primary-1">
@@ -69,8 +70,7 @@ const LinksListContainer = ({
 		</nav>
 	);
 };
-
-const MainFooter = () => {
+export default function MainFooter() {
 	const formId = useId();
 	const [formValues, setFormValues] = useState({
 		email: '',
@@ -194,18 +194,6 @@ const MainFooter = () => {
 										subscribe
 										<span className="p-1" />
 									</Button>
-									<ToastContainer
-										position="top-right"
-										autoClose={5000}
-										hideProgressBar={false}
-										newestOnTop={false}
-										closeOnClick
-										rtl={false}
-										pauseOnFocusLoss
-										draggable
-										pauseOnHover
-										theme="dark"
-									/>
 								</div>
 							</form>
 							<ul className="mt-2 flex gap-4 text-xl">
@@ -276,6 +264,4 @@ const MainFooter = () => {
 			</div>
 		</footer>
 	);
-};
-
-export default MainFooter;
+}

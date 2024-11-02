@@ -9,7 +9,13 @@ import { priceCurrencyFormatter } from '~/utils/core/shopify';
 import { cx } from 'class-variance-authority';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useTransition, type CSSProperties } from 'react';
+import {
+	HTMLAttributes,
+	ReactNode,
+	SVGProps,
+	useTransition,
+	type CSSProperties,
+} from 'react';
 import { useState } from 'react';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -22,6 +28,7 @@ import { toast } from 'react-toastify';
 import dynamic from 'next/dynamic';
 import { initCart, redirectToCheckout } from '~/libs/shopify/actions/cart';
 import {
+	CartDiscountCodesPendingKey,
 	CartLinePendingDeleteKey,
 	CartLinePendingUpdateKey,
 	cartStore,
@@ -395,9 +402,14 @@ function CartContainer({ banner }: { banner: any }) {
 	// 	});
 	// }, [cartSize]);
 
-	const productsTotalPrice = useStore(
+	const totalAmount = useStore(
 		cartStore,
-		(state) => state.cart.cost.totalAmount.amount,
+		(state) => state.cart.cost.totalAmount,
+	);
+
+	const subtotalAmount = useStore(
+		cartStore,
+		(state) => state.cart.cost.subtotalAmount,
 	);
 
 	const [isOpen, setIsOpen] = useState(false);
@@ -407,6 +419,11 @@ function CartContainer({ banner }: { banner: any }) {
 	});
 
 	const productsData = useStore(cartStore, (state) => state.cart.lines);
+
+	const discountCodes = useStore(
+		cartStore,
+		(state) => state.cart.discountCodes,
+	);
 
 	const { data } = useQuery(['all-products'], () => getProducts(), {
 		refetchOnWindowFocus: true,
@@ -454,14 +471,12 @@ function CartContainer({ banner }: { banner: any }) {
 									return null;
 								}
 
-								const currencyCode = lineItem.cost.totalAmount.currencyCode;
-
 								return (
 									<article
 										key={lineItem.id}
 										className="flex border-b-[0.0625rem] border-b-primary-1 pb-4"
 									>
-										<div className="w-28 min-w-[4rem] aspect-square bg-primary-1 max-w-[30%]">
+										<div className="w-28 min-w-[4rem] aspect-square bg-primary-1 max-w-[30%] flex-shrink-0">
 											{lineItem.merchandise.product.featuredImage && (
 												<CustomNextImage
 													src={lineItem.merchandise.product.featuredImage.url}
@@ -488,7 +503,9 @@ function CartContainer({ banner }: { banner: any }) {
 																	: `/products/${lineItem.merchandise.product.handle}`
 														}
 														className="inline-block whitespace-nowrap max-w-[10rem] text-ellipsis overflow-hidden"
-														onClick={() => cartStore.getState().toggleIsOpen()}
+														onClick={() =>
+															cartStore.getState().setIsOpen(false)
+														}
 													>
 														{lineItem.merchandise.product.title}
 													</Link>
@@ -539,37 +556,7 @@ function CartContainer({ banner }: { banner: any }) {
                             </button>
                         </div> */}
 												<div className="flex flex-col">
-													{lineItem.discountAllocations.length ? (
-														<div className="flex items-center border border-[#666666] p-1 gap-2 text-[#666666] ">
-															<span className="w-[15px] ">
-																<svg
-																	xmlns="http://www.w3.org/2000/svg"
-																	viewBox="0 0 14 14"
-																	focusable="false"
-																	aria-hidden="true"
-																	className="fill-[#666666]"
-																>
-																	<path
-																		stroke-linecap="round"
-																		d="M7.284 1.402h4.964a.35.35 0 0 1 .35.35v4.964a.7.7 0 0 1-.205.495L7.49 12.115a.7.7 0 0 1-.99 0L1.885 7.5a.7.7 0 0 1 0-.99L6.79 1.607a.7.7 0 0 1 .495-.205Z"
-																	></path>
-																	<circle cx="9.1" cy="4.9" r="0.7"></circle>
-																	<path
-																		stroke-linecap="round"
-																		stroke-linejoin="round"
-																		d="M9.102 4.897h-.005v.005h.005v-.005Z"
-																	></path>
-																</svg>
-															</span>
-															<span>
-																<p className="text-xs">
-																	{lineItem.discountAllocations[0].title}
-																</p>
-															</span>
-														</div>
-													) : (
-														''
-													)}
+													<CartItemDiscounts lineItem={lineItem} />
 													<button
 														className={cx(
 															'w-fit py-1 text-primary-3 hover:text-primary-2 focus:text-primary-1',
@@ -591,7 +578,7 @@ function CartContainer({ banner }: { banner: any }) {
 								);
 							})}
 				</div>
-				<div className="flex flex-col gap-8 pt-8">
+				<div className="flex flex-col gap-4 pt-8">
 					{upselling.data?.upselling?.length && data ? (
 						<CheckoutPopupDynamic
 							data={upselling.data}
@@ -602,10 +589,151 @@ function CartContainer({ banner }: { banner: any }) {
 					) : (
 						''
 					)}
-					<header className="flex justify-between gap-2">
-						<h3 className="font-semibold uppercase text-h5">subtotal</h3>
-						<p title="price per product">${productsTotalPrice}</p>
-					</header>
+					<section className="flex flex-col gap-4">
+						<section className="flex flex-col gap-2">
+							<header className="flex justify-between gap-2">
+								<h3 className="font-semibold capitalize text-sm">discounts</h3>
+							</header>
+
+							<form
+								className="flex flex-col gap-1.5"
+								// eslint-disable-next-line @typescript-eslint/no-misused-promises
+								onSubmit={async (e) => {
+									e.preventDefault();
+
+									if (
+										cartStore.getState().pendingActions[
+											CartDiscountCodesPendingKey
+										]
+									) {
+										return;
+									}
+
+									const target = e.target as HTMLFormElement;
+									const formData = new FormData(target);
+									const discountCods = (
+										formData.get('discount-code') as string | undefined
+									)?.split(/\s+,\s+/g);
+									if (!discountCods || discountCods.length === 0) {
+										return;
+									}
+
+									target.classList.add('group', 'loading');
+
+									try {
+										const result = await cartStore
+											.getState()
+											.updateCartDiscountCodes(discountCods);
+
+										target.classList.remove('group', 'loading');
+
+										if (result.type === 'error') {
+											return toast.error(result.message);
+										}
+
+										target.reset();
+									} catch (error) {
+										console.error(error);
+										toast.error('Error updating discounts');
+										target.classList.remove('group', 'loading');
+									}
+								}}
+							>
+								<div className="flex flex-grow text-md">
+									<input
+										type="text"
+										placeholder="Enter a discount codes"
+										name="discount-code"
+										min={1}
+										required
+										aria-describedby="describe-discount-code"
+										className="ring-[0.0625rem] focus:ring-[0.03125rem] focus:ring-inset ring-bg-secondary-1/50 px-2 py-0.5 outline-none flex-grow"
+									/>
+									<Button
+										classesIntent={{
+											w: 'fit',
+											display: 'flex-xy-center',
+											rounded: null,
+											p: 'wide',
+										}}
+										className={
+											'group-[.loading]:opacity-50 group-[.loading]:cursor-not-allowed' +
+											' ring-[0.0625rem] focus:ring-[0.03125rem] focus:ring-inset ring-bg-secondary-1/50 capitalize text-sm'
+										}
+									>
+										apply
+									</Button>
+								</div>
+								<small id="describe-discount-code" className="leading-none">
+									<em>
+										Discount codes are case-insensitive and can be separated by
+										commas, for example DE223,3232
+									</em>
+								</small>
+							</form>
+
+							<div className="flex flex-wrap gap-2 items-center">
+								{discountCodes.map((code) => {
+									return (
+										<Chip
+											key={code.code}
+											className={code.code ? ' pe-0' : ''}
+											isActive={code.applicable}
+											animatedTitle={
+												code.applicable ? 'Applicable' : 'Not Applicable'
+											}
+											start={<TagIcon className="flex-shrink-0 size-3.5" />}
+											end={
+												code.code && (
+													<button
+														className="text-primary-3 px-2 hover:bg-primary-3/70 focus:bg-primary-3/70 transition-colors duration-100 h-full"
+														onClick={() => {
+															const currentDiscounts =
+																cartStore.getState().cart.discountCodes;
+
+															if (
+																cartStore.getState().pendingActions[
+																	CartDiscountCodesPendingKey
+																]
+															) {
+																return;
+															}
+
+															void cartStore
+																.getState()
+																.updateCartDiscountCodes(
+																	currentDiscounts
+																		.filter(
+																			(discount) => discount.code !== code.code,
+																		)
+																		.map((discount) => discount.code),
+																);
+														}}
+													>
+														&times;
+													</button>
+												)
+											}
+										>
+											<p>{code.code}</p>
+										</Chip>
+									);
+								})}
+							</div>
+						</section>
+
+						<h3 className="flex flex-wrap items-center justify-between gap-x-2 leading-none">
+							<span className="inline-block font-semibold uppercase text-h5">
+								subtotal
+							</span>
+							<span className="inline-block">
+								{priceCurrencyFormatter(
+									subtotalAmount.amount,
+									subtotalAmount.currencyCode,
+								)}
+							</span>
+						</h3>
+					</section>
 					<div>
 						<Button
 							{...(productsData.length === 0
@@ -654,6 +782,148 @@ function CartContainer({ banner }: { banner: any }) {
 				</div>
 			</div>
 		</>
+	);
+}
+
+function TagIcon(props: SVGProps<SVGSVGElement>) {
+	return (
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 14 14"
+			focusable="false"
+			aria-hidden="true"
+			{...props}
+		>
+			<path
+				stroke-linecap="round"
+				d="M7.284 1.402h4.964a.35.35 0 0 1 .35.35v4.964a.7.7 0 0 1-.205.495L7.49 12.115a.7.7 0 0 1-.99 0L1.885 7.5a.7.7 0 0 1 0-.99L6.79 1.607a.7.7 0 0 1 .495-.205Z"
+			></path>
+			<circle cx="9.1" cy="4.9" r="0.7"></circle>
+			<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				d="M9.102 4.897h-.005v.005h.005v-.005Z"
+			></path>
+		</svg>
+	);
+}
+
+function Chip({
+	start,
+	end,
+	children,
+	variant,
+	isActive,
+	animatedTitle,
+	...props
+}: {
+	start?: ReactNode;
+	end?: ReactNode;
+	animatedTitle?: ReactNode;
+	variant?: 'primary' | 'secondary';
+	isActive?: boolean;
+} & HTMLAttributes<HTMLDivElement>) {
+	const _variant =
+		variant === 'secondary'
+			? 'bg-primary-5 text-text-primary-1 fill-text-primary-1'
+			: 'bg-primary-2 text-text-primary-1 fill-text-primary-1';
+
+	const activeBorder = isActive ? ' border border-primary-1' : '';
+
+	return (
+		<div className="group chip relative flex items-center ">
+			{animatedTitle && (
+				<small
+					className={
+						'max-w-full max-h-full px-1 rounded-t-md w-fit transition-transform duration-300 delay-300 absolute top-0 inset-x-1/2 -translate-x-1/2 group-[.chip:hover]:-translate-y-full group-[.chip:hover]:-translate-x-1/2' +
+						`${_variant ? ` ${_variant}` : ''}` +
+						`${activeBorder ? ` ${activeBorder}` : ''}`
+					}
+				>
+					{animatedTitle}
+				</small>
+			)}
+			<div
+				{...props}
+				className={
+					'relative flex items-center gap-1 px-2 text-sm rounded-2xl overflow-hidden' +
+					(props.className ? ` ${props.className}` : '') +
+					`${_variant ? ` ${_variant}` : ''}` +
+					`${activeBorder ? ` ${activeBorder}` : ''}`
+				}
+			>
+				{start}
+				{children}
+				{end}
+			</div>
+		</div>
+	);
+}
+
+function CartItemDiscounts({ lineItem }: { lineItem: CartItem }) {
+	const activeDiscountAllocations = lineItem.discountAllocations.filter(
+		(discountAllocation) => +discountAllocation.discountedAmount.amount !== 0,
+	);
+
+	if (activeDiscountAllocations.length === 0) {
+		return null;
+	}
+
+	return (
+		<div className="flex flex-wrap gap-2 items-center p-1">
+			{activeDiscountAllocations.map((discountAllocation) => {
+				const formattedPrice = priceCurrencyFormatter(
+					discountAllocation.discountedAmount.amount,
+					discountAllocation.discountedAmount.currencyCode,
+				);
+
+				return (
+					<Chip
+						key={discountAllocation.code ?? discountAllocation.title}
+						title={formattedPrice}
+						className={discountAllocation.code ? ' pe-0' : ''}
+						animatedTitle={formattedPrice}
+						isActive
+						variant="secondary"
+						start={<TagIcon className="flex-shrink-0 size-3.5" />}
+						end={
+							discountAllocation.code && (
+								<button
+									className="text-primary-3 px-2 hover:bg-primary-3/70 focus:bg-primary-3/70 transition-colors duration-100 h-full"
+									onClick={() => {
+										const currentDiscounts =
+											cartStore.getState().cart.discountCodes;
+
+										if (
+											cartStore.getState().pendingActions[
+												CartDiscountCodesPendingKey
+											]
+										) {
+											return;
+										}
+
+										void cartStore
+											.getState()
+											.updateCartDiscountCodes(
+												currentDiscounts
+													.filter(
+														(discount) =>
+															discount.code !== discountAllocation.code,
+													)
+													.map((discount) => discount.code),
+											);
+									}}
+								>
+									&times;
+								</button>
+							)
+						}
+					>
+						<p>{discountAllocation.code ?? discountAllocation.title}</p>
+					</Chip>
+				);
+			})}
+		</div>
 	);
 }
 

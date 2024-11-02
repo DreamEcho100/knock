@@ -11,9 +11,9 @@ import {
 	addCartItem,
 	redirectToCheckout,
 	removeCartItem,
+	updateCartDiscounts,
 	updateCartItemQuantity,
 } from '../actions/cart';
-import { CustomError, isCustomError, isObject } from '~/libs/utils';
 
 type UpdateType = 'plus' | 'minus' | 'delete';
 interface CartStateRules {
@@ -32,6 +32,7 @@ type CartState = {
 	generalRules: CartStateRules;
 
 	initCart: (cart: Cart) => void;
+
 	updateCartItem: (
 		updateType: UpdateType,
 		merchandiseId: string,
@@ -42,6 +43,11 @@ type CartState = {
 		product: Product,
 		options?: { rules?: CartStateRules },
 	) => Promise<void>;
+
+	updateCartDiscountCodes: (
+		discountCodes: string[],
+	) => Promise<{ type: 'error'; message: string } | { type: 'success' }>;
+
 	pendingActions: Record<string, boolean>;
 	setPendingAction: (key: string, value: boolean) => void;
 };
@@ -74,14 +80,16 @@ export const getCartLineItemPendingUpsertOrUpdateKey = (
 	productId: string,
 	productVariantId: string,
 ) => `cart-line-item-upsert-or-update-${productId}-${productVariantId}`;
+
 export const CartLinePendingDeleteKey = 'cart-line-delete';
 export const CartLinePendingUpdateKey = 'cart-line-update';
+export const CartDiscountCodesPendingKey = 'cart-discount-codes';
 
 export const cartStore = createStore<CartState>((set, get) => ({
 	cart: createEmptyCart(),
 	state: 'idle',
 
-	isOpen: false,
+	isOpen: true,
 	setIsOpen: (isOpen) => {
 		set({ isOpen });
 	},
@@ -166,7 +174,6 @@ export const cartStore = createStore<CartState>((set, get) => ({
 
 		state.setPendingAction(pendingKey, false);
 	},
-
 	updateCartItem: async (updateType, lineId, options) => {
 		const state = get();
 		if (state.state !== 'active') {
@@ -283,6 +290,44 @@ export const cartStore = createStore<CartState>((set, get) => ({
 		}
 
 		pendingKey && state.setPendingAction(pendingKey, false);
+	},
+
+	updateCartDiscountCodes: async (discountCodes) => {
+		const state = get();
+		if (state.state !== 'active') {
+			return { type: 'error', message: 'Cart is not active' };
+		}
+
+		const pendingKey = CartDiscountCodesPendingKey;
+		state.setPendingAction(pendingKey, true);
+
+		const result = await (async () => {
+			try {
+				const result = await updateCartDiscounts(discountCodes);
+
+				if (result.type === 'error') {
+					return { type: 'error', message: result.message } as const;
+				}
+
+				return { type: 'success', data: result.data } as const;
+			} catch (error) {
+				return {
+					type: 'error',
+					message: 'Error updating discount codes',
+				} as const;
+			}
+		})();
+
+		state.setPendingAction(pendingKey, false);
+
+		switch (result.type) {
+			case 'error':
+				console.error(result.message);
+				return { type: 'error', message: result.message };
+			case 'success':
+				set({ cart: result.data });
+				return { type: 'success' };
+		}
 	},
 
 	redirectToCheckout: async () => {

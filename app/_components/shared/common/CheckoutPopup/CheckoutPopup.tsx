@@ -207,11 +207,11 @@ const CheckoutPopup = (props: {
 												</p>
 												{isProductInCart ? (
 													<Button
-														onClick={() => {
+														onClick={() =>
 															!isCartVisible
-																? cartStore.getState().toggleIsOpen()
-																: null;
-														}}
+																? cartStore.getState().setIsOpen(true)
+																: null
+														}
 														className="text-sm px-1 capitalize"
 													>
 														in cart
@@ -219,10 +219,11 @@ const CheckoutPopup = (props: {
 												) : (
 													<Button
 														onClick={() => {
+															debugger;
 															void cartStore
 																.getState()
 																.upsertCartItem(defaultVariant, product);
-															cartStore.getState().toggleIsOpen();
+															cartStore.getState().setIsOpen(true);
 														}}
 														className="text-sm px-1"
 													>

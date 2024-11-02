@@ -1,7 +1,14 @@
 'use server';
 
 import { TAGS } from '../constants';
-import { addToCart, createCart, getCart, removeFromCart, updateCart } from '..';
+import {
+	addToCart,
+	createCart,
+	getCart,
+	removeFromCart,
+	updateCart,
+	updateCartDiscountCodes,
+} from '..';
 import { revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -110,6 +117,22 @@ export async function removeCartItem(merchandiseId: string) {
 		}
 	} catch (error) {
 		return { type: 'error', message: 'Error removing item from cart' } as const;
+	}
+}
+
+export async function updateCartDiscounts(discountCodes: string[]) {
+	const cartId = (await cookies()).get('cartId')?.value;
+
+	if (!cartId) {
+		return { type: 'error', message: 'Missing cart ID' } as const;
+	}
+
+	try {
+		const cart = await updateCartDiscountCodes(cartId, discountCodes);
+		revalidateTag(TAGS.cart);
+		return { type: 'success', data: cart } as const;
+	} catch (error) {
+		return { type: 'error', message: 'Error updating discounts' } as const;
 	}
 }
 
