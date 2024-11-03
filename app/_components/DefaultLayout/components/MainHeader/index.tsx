@@ -9,13 +9,8 @@ import { priceCurrencyFormatter } from '~/utils/core/shopify';
 import { cx } from 'class-variance-authority';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import {
-	HTMLAttributes,
-	ReactNode,
-	SVGProps,
-	useTransition,
-	type CSSProperties,
-} from 'react';
+import type { HTMLAttributes, ReactNode, SVGProps, CSSProperties } from 'react';
+import { useTransition } from 'react';
 import { useState } from 'react';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { GiHamburgerMenu } from 'react-icons/gi';

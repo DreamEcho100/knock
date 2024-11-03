@@ -45,15 +45,26 @@ export async function shopifyFetch<T>({
 	headers,
 	query,
 	tags,
+	revalidate,
 	variables,
 }: {
 	cache?: RequestCache;
+	next?: NextFetchRequestConfig;
 	headers?: HeadersInit;
 	query: string;
 	tags?: string[];
+	revalidate?: number;
 	variables?: ExtractVariables<T>;
 	// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
 }): Promise<{ status: number; body: T } | never> {
+	const next: NextFetchRequestConfig | undefined =
+		typeof revalidate === 'number' || typeof tags === 'string'
+			? {
+					...(tags && { tags }),
+					...(revalidate && { revalidate }),
+				}
+			: undefined;
+
 	try {
 		const result = await fetch(endpoint, {
 			method: 'POST',
@@ -67,7 +78,7 @@ export async function shopifyFetch<T>({
 				...(variables && { variables }),
 			}),
 			cache,
-			...(tags && { next: { tags } }),
+			next,
 		});
 
 		const body = await result.json();

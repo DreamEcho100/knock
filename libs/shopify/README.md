@@ -1,0 +1,1 @@
+orsenkucher.vscode-graphql

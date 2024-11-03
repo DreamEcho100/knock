@@ -3,7 +3,7 @@ import { priceCurrencyFormatter } from '~/utils/core/shopify';
 import Button from './Button';
 import { useMemo } from 'react';
 import { cx } from 'class-variance-authority';
-import type { Product, ProductVariant } from '~/libs/shopify/types';
+import type { Product } from '~/libs/shopify/types';
 import { cartStore } from '~/libs/shopify/stores/cart';
 
 const AddItemOnHeroSectionButton = ({
@@ -17,7 +17,10 @@ const AddItemOnHeroSectionButton = ({
 }) => {
 	const variant = product.variants[0];
 	const buttonProps = {
-		onClick: () => cartStore.getState().upsertCartItem(variant, product),
+		onClick: async () => {
+			await cartStore.getState().upsertCartItem(variant, product);
+			cartStore.getState().setIsOpen(true);
+		},
 		children: 'Buy it now',
 		className: 'capitalize text-h6',
 		..._buttonProps,
@@ -29,13 +32,12 @@ const AddItemOnHeroSectionButton = ({
 				product.variants[0].price.amount,
 				product.variants[0].price.currencyCode,
 			),
-			compareToPrice:
-				product?.variants[0]?.compareAtPrice
-					? priceCurrencyFormatter(
-							product.variants[0].compareAtPrice.amount,
-							product.variants[0].compareAtPrice.currencyCode,
-						)
-					: undefined,
+			compareToPrice: product?.variants[0]?.compareAtPrice
+				? priceCurrencyFormatter(
+						product.variants[0].compareAtPrice.amount,
+						product.variants[0].compareAtPrice.currencyCode,
+					)
+				: undefined,
 		};
 
 		return prices;

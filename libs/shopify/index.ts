@@ -21,26 +21,26 @@ import {
 	getProductRecommendationsQuery,
 	getProductsQuery,
 } from './queries/product';
-import {
+import type {
 	ShopifyCartDiscountCodesUpdateOperation,
-	type Cart,
-	type Collection,
-	type Menu,
-	type Page,
-	type Product,
-	type ShopifyAddToCartOperation,
-	type ShopifyCartOperation,
-	type ShopifyCollectionProductsOperation,
-	type ShopifyCollectionsOperation,
-	type ShopifyCreateCartOperation,
-	type ShopifyMenuOperation,
-	type ShopifyPageOperation,
-	type ShopifyPagesOperation,
-	type ShopifyProductOperation,
-	type ShopifyProductRecommendationsOperation,
-	type ShopifyProductsOperation,
-	type ShopifyRemoveFromCartOperation,
-	type ShopifyUpdateCartOperation,
+	Cart,
+	Collection,
+	Menu,
+	Page,
+	Product,
+	ShopifyAddToCartOperation,
+	ShopifyCartOperation,
+	ShopifyCollectionProductsOperation,
+	ShopifyCollectionsOperation,
+	ShopifyCreateCartOperation,
+	ShopifyMenuOperation,
+	ShopifyPageOperation,
+	ShopifyPagesOperation,
+	ShopifyProductOperation,
+	ShopifyProductRecommendationsOperation,
+	ShopifyProductsOperation,
+	ShopifyRemoveFromCartOperation,
+	ShopifyUpdateCartOperation,
 } from './types';
 import { headers } from 'next/headers';
 import { revalidateTag } from 'next/cache';
@@ -58,8 +58,9 @@ import {
 
 export async function getMenu(handle: string): Promise<Menu[]> {
 	const res = await shopifyFetch<ShopifyMenuOperation>({
-		query: getMenuQuery,
 		tags: [TAGS.collections],
+		revalidate: 3600,
+		query: getMenuQuery,
 		variables: {
 			handle,
 		},
@@ -101,8 +102,9 @@ export async function getProducts({
 	sortKey?: string;
 } = {}): Promise<Product[]> {
 	const res = await shopifyFetch<ShopifyProductsOperation>({
-		query: getProductsQuery,
 		tags: [TAGS.products],
+		revalidate: 3600,
+		query: getProductsQuery,
 		variables: {
 			query,
 			reverse,
@@ -115,8 +117,9 @@ export async function getProducts({
 
 export async function getCollections(): Promise<Collection[]> {
 	const res = await shopifyFetch<ShopifyCollectionsOperation>({
-		query: getCollectionsQuery,
 		tags: [TAGS.collections],
+		revalidate: 3600,
+		query: getCollectionsQuery,
 	});
 
 	const shopifyCollections = removeEdgesAndNodes(res?.body?.data?.collections);
@@ -151,8 +154,9 @@ export async function getCollectionProducts({
 	sortKey?: string;
 }): Promise<Product[]> {
 	const res = await shopifyFetch<ShopifyCollectionProductsOperation>({
-		query: getCollectionProductsQuery,
 		tags: [TAGS.collections, TAGS.products],
+		revalidate: 3600,
+		query: getCollectionProductsQuery,
 		variables: {
 			handle: collection,
 			reverse,
@@ -172,8 +176,9 @@ export async function getCollectionProducts({
 
 export async function getProduct(handle: string): Promise<Product | undefined> {
 	const res = await shopifyFetch<ShopifyProductOperation>({
-		query: getProductQuery,
 		tags: [TAGS.products],
+		revalidate: 3600,
+		query: getProductQuery,
 		variables: {
 			handle,
 		},
@@ -185,8 +190,9 @@ export async function getProductRecommendations(
 	productId: string,
 ): Promise<Product[]> {
 	const res = await shopifyFetch<ShopifyProductRecommendationsOperation>({
-		query: getProductRecommendationsQuery,
 		tags: [TAGS.products],
+		revalidate: 3600,
+		query: getProductRecommendationsQuery,
 		variables: {
 			productId,
 		},
@@ -211,8 +217,9 @@ export async function getCart(
 
 	const res = await shopifyFetch<ShopifyCartOperation>({
 		query: getCartQuery,
-		variables: { cartId },
 		tags: [TAGS.cart],
+		revalidate: 3600,
+		variables: { cartId },
 	});
 
 	// old carts becomes 'null' when you checkout

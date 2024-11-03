@@ -117,6 +117,6 @@ export const ProductCardWithDetails = ({
 					toAddToCart={toAddToCart}
 				/>
 			}
-		></ProductBasicCard>
+		/>
 	);
 };
