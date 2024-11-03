@@ -40,6 +40,7 @@ type CartState = {
 	) => Promise<void>;
 	upsertCartItem: (
 		variant: ProductVariant,
+		// @ts-expect-error - it's not needed
 		product: Product,
 		options?: { rules?: CartStateRules },
 	) => Promise<void>;
@@ -89,7 +90,7 @@ export const cartStore = createStore<CartState>((set, get) => ({
 	cart: createEmptyCart(),
 	state: 'idle',
 
-	isOpen: true,
+	isOpen: false,
 	setIsOpen: (isOpen) => {
 		set({ isOpen });
 	},

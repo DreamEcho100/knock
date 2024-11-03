@@ -52,20 +52,21 @@ const DigitalProductsSection = ({ products }: { products: Product[] }) => {
 					gap: '4rem 3rem',
 				}}
 			>
-				{products.map((item) => (
-					<ProductCardWithDetails
-						key={item.id}
-						link={{
-							children: item.title,
-							href: `/products/${item.handle}`,
-						}}
-						{...item}
-						toAddToCart
-						productData={item}
-						cardVariants={{ intent: 'none', w: 'full' }}
-						imageVariants={{ onHover: 'to-dimmer' }}
-					/>
-				))}
+				{console.log('products', products[products.length - 1]) ||
+					products.map((item) => (
+						<ProductCardWithDetails
+							key={item.id}
+							link={{
+								children: item.title,
+								href: `/products/${item.handle}`,
+							}}
+							{...item}
+							toAddToCart
+							productData={item}
+							cardVariants={{ intent: 'none', w: 'full' }}
+							imageVariants={{ onHover: 'to-dimmer' }}
+						/>
+					))}
 			</div>
 		</section>
 	);

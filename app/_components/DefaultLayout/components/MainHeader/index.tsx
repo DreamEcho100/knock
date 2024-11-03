@@ -675,7 +675,9 @@ function CartContainer({ banner }: { banner: any }) {
 											className={code.code ? ' pe-0' : ''}
 											isActive={code.applicable}
 											animatedTitle={
-												code.applicable ? 'Applicable' : 'Not Applicable'
+												<span className="text-nowrap">
+													{code.applicable ? 'Applicable' : 'Not Applicable'}
+												</span>
 											}
 											start={<TagIcon className="flex-shrink-0 size-3.5" />}
 											end={
@@ -790,13 +792,13 @@ function TagIcon(props: SVGProps<SVGSVGElement>) {
 			{...props}
 		>
 			<path
-				stroke-linecap="round"
+				strokeLinecap="round"
 				d="M7.284 1.402h4.964a.35.35 0 0 1 .35.35v4.964a.7.7 0 0 1-.205.495L7.49 12.115a.7.7 0 0 1-.99 0L1.885 7.5a.7.7 0 0 1 0-.99L6.79 1.607a.7.7 0 0 1 .495-.205Z"
 			></path>
 			<circle cx="9.1" cy="4.9" r="0.7"></circle>
 			<path
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 				d="M9.102 4.897h-.005v.005h.005v-.005Z"
 			></path>
 		</svg>
