@@ -103,7 +103,13 @@ export const cartStore = createStore<CartState>((set, get) => ({
 	},
 
 	initCart: (cart) => {
-		set({ cart, state: 'active' });
+		set({
+			cart: {
+				...cart,
+				...updateCartTotals(cart.lines),
+			},
+			state: 'active',
+		});
 	},
 
 	upsertCartItem: async (variant, product, options) => {

@@ -165,7 +165,7 @@ export async function getCollectionProducts({
 	});
 
 	if (!res.body.data.collection) {
-		console.log(`No collection found for \`${collection}\``);
+		console.error(`No collection found for \`${collection}\``);
 		return [];
 	}
 
@@ -242,10 +242,6 @@ export async function removeFromCart(
 		},
 		cache: 'no-store',
 	});
-
-	console.log('\n\n\n___ res,');
-	console.dir(res, { depth: Number.MAX_SAFE_INTEGER });
-	console.log('\n\n\n');
 
 	return reshapeCart(res.body.data.cartLinesRemove.cart);
 }

@@ -41,7 +41,7 @@ export function isShopifyError(error: unknown): error is ShopifyErrorLike {
 }
 
 export async function shopifyFetch<T>({
-	cache = 'force-cache',
+	cache,
 	headers,
 	query,
 	tags,

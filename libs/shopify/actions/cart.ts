@@ -106,10 +106,6 @@ export async function removeCartItem(merchandiseId: string) {
 		if (lineItem?.id) {
 			const cart = await removeFromCart(cartId, [lineItem.id]);
 
-			console.log('\n\n\n___ cart,');
-			console.dir(cart, { depth: Number.MAX_SAFE_INTEGER });
-			console.log('\n\n\n');
-
 			revalidateTag(TAGS.cart);
 			return { type: 'success', data: cart } as const;
 		} else {
