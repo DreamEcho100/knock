@@ -5,7 +5,7 @@ import type { Product } from '~/libs/shopify/types';
 const DigitalProductsSection = ({ products }: { products: Product[] }) => {
 	return (
 		<section className="bg-primary-1 section-p-v1 relative">
-			<div className="pointer-events-none select-none grid grid-rows-4 justify-items-center items-center absolute top-0 right-0 bottom-0 left-0 w-full h-full">
+			<div className="pointer-events-none select-none grid grid-rows-4 justify-items-center items-center absolute top-0 right-0 bottom-0 left-0 w-full h-full max-w-full overflow-x-hidden">
 				<CustomNextImage
 					className="w-full h-full object-contain scale-x-[2.5] scale-y-[2] translate-y-[20%]"
 					src="/images/Rectangle 47.png"

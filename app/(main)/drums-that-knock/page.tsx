@@ -41,7 +41,7 @@ export default async function DrumsThatKnockPage({}) {
 	const [products, knockPlugin, dtkData] = await getPageData();
 
 	return (
-		<>
+		<div className="w-full max-w-[100vw] overflow-x-hidden">
 			<HeroSection data={dtkData.main_section} />
 			<DigitalProductsSection products={products} />
 			<ArtistsSection
@@ -56,6 +56,6 @@ export default async function DrumsThatKnockPage({}) {
 					product={knockPlugin}
 				/>
 			)}
-		</>
+		</div>
 	);
 }

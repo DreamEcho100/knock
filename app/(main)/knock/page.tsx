@@ -38,7 +38,7 @@ export default async function KnockPluginPage() {
 	}
 
 	return (
-		<>
+		<div className="w-full max-w-[100vw] overflow-x-hidden">
 			<HeroSection knockPlugin={knockPlugin} data={knockMainSection} />
 			<DescriptionSection data={knockPageData.secondSection} />
 			<ShapesYourDrumsSection data={knockPageData.thirdSection} />
@@ -69,6 +69,6 @@ export default async function KnockPluginPage() {
 				data={knockPageData.eightSection}
 				knockPlugin={knockPlugin}
 			/>
-		</>
+		</div>
 	);
 }

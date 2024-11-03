@@ -37,7 +37,7 @@ export default async function KnockClipperPage() {
 		await getPageData();
 
 	return (
-		<>
+		<div className="w-full max-w-[100vw] overflow-x-hidden">
 			{
 				// @ts-expect-error - There should be a fallback component
 				knockClipperPlugin && (
@@ -78,6 +78,6 @@ export default async function KnockClipperPage() {
 					/>
 				)
 			}
-		</>
+		</div>
 	);
 }
