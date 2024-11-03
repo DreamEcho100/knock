@@ -1,7 +1,7 @@
 'use client';
 import { cx } from 'class-variance-authority';
 import Image, { type ImageProps } from 'next/image';
-import { forwardRef, useMemo } from 'react';
+import { forwardRef, useMemo, useRef } from 'react';
 
 export const websiteBasePath = `https://${process.env.NEXT_PUBLIC_APP_DOMAINE}`;
 
@@ -32,6 +32,9 @@ const toBase64 = (str: string) =>
 
 const CustomNextImage = forwardRef<HTMLImageElement, ICustomNextImageProps>(
 	(props, ref) => {
+		const configRef = useRef({
+			loadClassNames: 'no-content',
+		});
 		const unoptimized = useMemo(() => {
 			// if the src is a .gif, we don't want to optimize it
 			if (typeof props.src === 'string' && props.src.endsWith('.gif')) {
@@ -57,7 +60,16 @@ const CustomNextImage = forwardRef<HTMLImageElement, ICustomNextImageProps>(
 			// eslint-disable-next-line jsx-a11y/alt-text
 			<Image
 				ref={ref}
+				onLoadStart={(elem) => {
+					configRef.current.loadClassNames = 'no-content';
+					elem.currentTarget.classList.add('no-content');
+				}}
+				onLoad={(elem) => {
+					configRef.current.loadClassNames = '';
+					elem.currentTarget.classList.remove('no-content');
+				}}
 				onError={(elem) => {
+					configRef.current.loadClassNames = '';
 					elem.currentTarget.src = '/svgs/bbblurry.svg';
 					elem.currentTarget.classList.add('no-content');
 				}}
@@ -65,7 +77,7 @@ const CustomNextImage = forwardRef<HTMLImageElement, ICustomNextImageProps>(
 				// blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(props.width, props.height))}`}
 				{...props}
 				src={props.src}
-				className={cx('no-content', props.className)}
+				className={cx(configRef.current.loadClassNames, props.className)}
 				alt={props.alt ?? ''}
 				unoptimized={unoptimized}
 			/>

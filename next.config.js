@@ -17,7 +17,7 @@ const securityHeaders = [
 const nextConfig = {
 	reactStrictMode: true,
 	images: {
-		formats: ['image/jpeg'], // ['image/avif', 'image/webp'],
+		formats: ['image/avif', 'image/webp'],
 		// domains: ['cdn.shopify.com', 'api.pluginsthatknock.com'],
 
 		remotePatterns: [
