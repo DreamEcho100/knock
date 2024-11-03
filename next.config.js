@@ -17,8 +17,26 @@ const securityHeaders = [
 const nextConfig = {
 	reactStrictMode: true,
 	images: {
-		formats: ['image/avif', 'image/webp'],
-		domains: ['cdn.shopify.com', 'api.pluginsthatknock.com'],
+		formats: ['image/jpeg'], // ['image/avif', 'image/webp'],
+		// domains: ['cdn.shopify.com', 'api.pluginsthatknock.com'],
+
+		remotePatterns: [
+			// {
+			//   protocol: "https",
+			//   hostname: "*.amazonaws.com",
+			//   port: "",
+			// },
+			{
+				protocol: 'https',
+				hostname: 'cdn.shopify.com',
+				port: '',
+			},
+			{
+				protocol: 'https',
+				hostname: 'api.pluginsthatknock.com',
+				port: '',
+			},
+		],
 	},
 	typescript: { ignoreBuildErrors: true },
 	eslint: { ignoreDuringBuilds: true },
