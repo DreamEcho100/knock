@@ -1,7 +1,7 @@
 'use client';
 import { cx } from 'class-variance-authority';
 import Image, { type ImageProps } from 'next/image';
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 
 export const websiteBasePath = `https://${process.env.NEXT_PUBLIC_APP_DOMAINE}`;
 
@@ -32,6 +32,15 @@ const toBase64 = (str: string) =>
 
 const CustomNextImage = forwardRef<HTMLImageElement, ICustomNextImageProps>(
 	(props, ref) => {
+		const unoptimized = useMemo(() => {
+			// if the src is a .gif, we don't want to optimize it
+			if (typeof props.src === 'string' && props.src.endsWith('.gif')) {
+				return true;
+			}
+
+			return props.unoptimized;
+		}, [props.src, props.unoptimized]);
+
 		if (!props.src) {
 			return (
 				<Image
@@ -58,6 +67,7 @@ const CustomNextImage = forwardRef<HTMLImageElement, ICustomNextImageProps>(
 				src={props.src}
 				className={cx('no-content', props.className)}
 				alt={props.alt ?? ''}
+				unoptimized={unoptimized}
 			/>
 		);
 	},
