@@ -27,6 +27,13 @@ export default function HeroSection({
 			description={data.main?.p}
 			pTheme={{ width: 'small' }}
 			imageSrc={process.env.NEXT_PUBLIC_KNOCK_URL_API + data.main.mainImageUrl}
+			imagesContainerTheme={{
+				pb: null,
+			}}
+			mainImgOrVideoProps={{
+				className: 'w-full max-w-[46rem]',
+				priority: true,
+			}}
 		/>
 	);
 }

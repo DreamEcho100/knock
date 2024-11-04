@@ -8,6 +8,7 @@ import KnockTrademark from '~/app/_components/shared/core/KnockTrademark';
 import { cva } from 'class-variance-authority';
 import CustomNextImage from '~/app/_components/shared/common/CustomNextImage';
 import { useRouter } from 'next/navigation';
+import { cn } from '~/libs/utils';
 
 export const pClasses = cva('text-primary-2 mt-2 mb-5 leading-6', {
 	variants: {
@@ -137,13 +138,13 @@ const KnockSection = ({
 		onClick: mainImgOrVideoLink
 			? () => router.push(mainImgOrVideoLink)
 			: undefined,
-		className: cx(
-			mainImgOrVideoLink ? 'cursor-pointer' : '',
-			imageSrc
-				? 'object-cover w-3/4 relative'
-				: 'object-fill w-3/4 relative rounded-[7%]',
-		),
 		...(props.mainImgOrVideoProps ?? {}),
+		className: cn(
+			mainImgOrVideoLink ? 'cursor-pointer' : '',
+			'w-3/4',
+			imageSrc ? 'object-cover relative' : 'object-fill relative rounded-[7%]',
+			props.mainImgOrVideoProps?.className,
+		),
 	};
 
 	return (
