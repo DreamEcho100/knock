@@ -77,12 +77,12 @@ const imagesContainerClasses = cva(
 	{
 		variants: {
 			pb: {
-				'mb-12': 'mb-12',
+				'mb-8': 'mb-8',
 				none: '',
 			},
 		},
 		defaultVariants: {
-			pb: 'mb-12',
+			pb: 'mb-8',
 		},
 	},
 );
