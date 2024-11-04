@@ -13,7 +13,7 @@ export default function YoutubeVideos(props: Props) {
 		null,
 	);
 
-	if (props.youtubeVideos.length === 0) return <></>;
+	if (!props.youtubeVideos || props.youtubeVideos.length === 0) return <></>;
 
 	return (
 		<div className={classes.productPageYoutubeSections}>

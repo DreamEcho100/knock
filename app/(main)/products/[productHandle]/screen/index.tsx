@@ -108,7 +108,7 @@ export default function ProductByHandleScreen({
 					<div className={classes.productPageFeatures}>
 						<div className={classes.overLayFeaturesSection}></div>
 						<div>
-							{product.features.length ? (
+							{product.features?.length ? (
 								<ul>
 									{product.features.map((el) => (
 										<li key={el.id}>{el.li}</li>
@@ -117,7 +117,7 @@ export default function ProductByHandleScreen({
 							) : (
 								''
 							)}
-							{product.filesIncluded.length ? (
+							{product.filesIncluded?.length ? (
 								<ul>
 									{product.filesIncluded.map((el) => (
 										<li key={el.id}>{el.li}</li>

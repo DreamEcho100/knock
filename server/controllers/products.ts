@@ -15,7 +15,8 @@ export const getOneCustomProductByHandle = async (handle: string) => {
 	);
 
 	const newFieldsApi = response.data.DTKproduct;
-	delete newFieldsApi.id;
+
+	newFieldsApi && delete newFieldsApi.id;
 
 	const newProductObject = {
 		...product,
