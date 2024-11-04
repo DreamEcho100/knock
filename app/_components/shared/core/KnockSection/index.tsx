@@ -73,7 +73,7 @@ export const sectionInnerWrapperClasses = cva(
 );
 
 const imagesContainerClasses = cva(
-	'relative flex items-center justify-center max-w-4xl min-h-[6rem] md:h-96',
+	'relative flex flex-shrink-0 items-center justify-center max-w-4xl min-h-[6rem] md:h-96',
 	{
 		variants: {
 			pb: {
@@ -141,7 +141,7 @@ const KnockSection = ({
 		...(props.mainImgOrVideoProps ?? {}),
 		className: cn(
 			mainImgOrVideoLink ? 'cursor-pointer' : '',
-			'w-3/4 max-w-[43rem]',
+			'w-3/4 max-w-[43rem] flex-shrink-0',
 			imageSrc ? 'object-cover relative' : 'object-fill relative rounded-[7%]',
 			props.mainImgOrVideoProps?.className,
 		),
