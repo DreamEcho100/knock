@@ -1,9 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import axios from 'axios';
-import gql from 'graphql-tag';
-import { print } from 'graphql';
 import { z } from 'zod';
 import { cookies } from 'next/headers';
+import { shopifyFetch } from '~/libs/shopify/utils';
 
 const login = async (req: NextApiRequest, res: NextApiResponse) => {
 	const input = z
@@ -13,7 +11,7 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 		})
 		.parse(req.body);
 
-	const customer = gql`
+	const customer = /* GraphQL */ `
 		mutation customerAccessTokenCreate(
 			$input: CustomerAccessTokenCreateInput!
 		) {
@@ -31,28 +29,14 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 
-	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2024-01/graphql.json`,
-		{
-			query: print(customer),
-			variables: {
-				input: {
-					email: input.email,
-					password: input.password,
-				},
-			},
+	const response = await shopifyFetch<any, any>({
+		query: customer,
+		variables: {
+			input: { email: input.email, password: input.password },
 		},
-		{
-			headers: {
-				'Content-Type': 'application/json',
-				'X-Shopify-Storefront-Access-Token':
-					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding': 'null',
-			},
-		},
-	);
+	});
 
-	if (!response.data.data.customerAccessTokenCreate.customerAccessToken) {
+	if (!response.body.data.customerAccessTokenCreate.customerAccessToken) {
 		res.statusCode = 404;
 		throw new Error('Please check your email and password');
 	}
@@ -60,7 +44,7 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 	return res.status(200).json({
 		success: true,
 		message: 'Connected successfully!',
-		user: response.data.data.customerAccessTokenCreate.customerAccessToken,
+		user: response.body.data.customerAccessTokenCreate.customerAccessToken,
 	});
 };
 
@@ -72,7 +56,7 @@ const activate = async (req: NextApiRequest, res: NextApiResponse) => {
 		})
 		.parse(req.body);
 
-	const customer = gql`
+	const customer = /* GraphQL */ `
 		mutation customerActivateByUrl($activationUrl: URL!, $password: String!) {
 			customerActivateByUrl(
 				activationUrl: $activationUrl
@@ -94,35 +78,24 @@ const activate = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 
-	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2024-01/graphql.json`,
-		{
-			query: print(customer),
-			variables: {
-				activationUrl: input.activationUrl,
-				password: input.password,
-			},
+	const response = await shopifyFetch<any, any>({
+		query: customer,
+		variables: {
+			activationUrl: input.activationUrl,
+			password: input.password,
 		},
-		{
-			headers: {
-				'Content-Type': 'application/json',
-				'X-Shopify-Storefront-Access-Token':
-					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding': 'null',
-			},
-		},
-	);
+	});
 
-	if (response.data.data.customerActivateByUrl.customerUserErrors.length) {
+	if (response.body.data.customerActivateByUrl.customerUserErrors.length) {
 		throw new Error(
-			response.data.data.customerActivateByUrl.customerUserErrors[0].message,
+			response.body.data.customerActivateByUrl.customerUserErrors[0].message,
 		);
 	}
 
 	return res.status(200).json({
 		success: true,
 		message: "You're account is activated successfully",
-		user: response.data.data.customerActivateByUrl,
+		user: response.body.data.customerActivateByUrl,
 	});
 };
 
@@ -133,10 +106,7 @@ const checkToken = async (
 	const accessToken = req.headers.accesstoken;
 
 	if (accessToken) {
-		const { data } = await axios.post(
-			`https://${process.env.DOMAINE}/api/2024-01/graphql.json`,
-			{
-				query: `
+		const customerQuery = /* GraphQL */ `
           query {
           customer(customerAccessToken: ${JSON.stringify(accessToken)}) {
             id
@@ -250,26 +220,20 @@ const checkToken = async (
             
           }
         }
-         `,
-			},
-			{
-				headers: {
-					'Content-Type': 'application/json',
-					'X-Shopify-Storefront-Access-Token':
-						process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-					'accept-encoding': 'null',
-				},
-			},
-		);
+         `;
 
-		if (!data.data.customer) {
+		const response = await shopifyFetch<any, any>({
+			query: customerQuery,
+		});
+
+		if (!response.body.data.customer) {
 			throw new Error('Customer not found');
 		}
 
 		return res.status(200).json({
 			success: true,
 			message: '',
-			user: data.data.customer,
+			user: response.body.data.customer,
 			//checkoutUrl
 		});
 	} else {
@@ -280,7 +244,7 @@ const checkToken = async (
 const logout = async (req: NextApiRequest, res: NextApiResponse) => {
 	const accessToken = req.headers.accesstoken;
 
-	const deletedAccessToken = gql`
+	const deletedAccessToken = /* GraphQL */ `
 		mutation customerAccessTokenDelete($customerAccessToken: String!) {
 			customerAccessTokenDelete(customerAccessToken: $customerAccessToken) {
 				deletedAccessToken
@@ -293,24 +257,14 @@ const logout = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 
-	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2024-01/graphql.json`,
-		{
-			query: print(deletedAccessToken),
-			variables: {
-				customerAccessToken: accessToken,
-			},
+	const response = await shopifyFetch<any, any>({
+		query: deletedAccessToken,
+		variables: {
+			customerAccessToken: accessToken,
 		},
-		{
-			headers: {
-				'Content-Type': 'application/json',
-				'X-Shopify-Storefront-Access-Token':
-					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding': 'null',
-			},
-		},
-	);
-	if (!response.data.data.customerAccessTokenDelete) {
+	});
+
+	if (!response.body.data.customerAccessTokenDelete) {
 		throw new Error('Access Token not valid');
 	}
 
@@ -334,7 +288,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
 		})
 		.parse(req.body);
 
-	const createCustomer = gql`
+	const createCustomerMutation = /* GraphQL */ `
 		mutation customerCreate($input: CustomerCreateInput!) {
 			customerCreate(input: $input) {
 				customerUserErrors {
@@ -362,40 +316,29 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 
-	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2024-01/graphql.json`,
-		{
-			query: print(createCustomer),
-			variables: {
-				input: {
-					acceptsMarketing: input.acceptsMarketing,
-					email: input.email,
-					password: input.password,
-					firstName: input.firstName,
-					lastName: input.lastName,
-					phone: input.phone,
-				},
+	const response = await shopifyFetch<any, any>({
+		query: createCustomer,
+		variables: {
+			input: {
+				acceptsMarketing: input.acceptsMarketing,
+				email: input.email,
+				password: input.password,
+				firstName: input.firstName,
+				lastName: input.lastName,
+				phone: input.phone,
 			},
 		},
-		{
-			headers: {
-				'Content-Type': 'application/json',
-				'X-Shopify-Storefront-Access-Token':
-					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding': 'null',
-			},
-		},
-	);
+	});
 
-	if (!response.data.data.customerCreate) {
+	if (!response.body.data.customerCreate) {
 		throw new Error(
 			'Account already exists check your email for confirmation ',
 		);
 	}
 
 	if (
-		response.data.data.customerCreate?.customerUserErrors[0] &&
-		response.data.data.customerCreate?.customerUserErrors[0].code === 'TAKEN'
+		response.body.data.customerCreate?.customerUserErrors[0] &&
+		response.body.data.customerCreate?.customerUserErrors[0].code === 'TAKEN'
 	) {
 		throw new Error('Account already exists check your email for confirmation');
 	}
@@ -403,7 +346,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
 	return res.status(201).json({
 		success: true,
 		message: `Account created successfully!`,
-		response: response.data.data.customerCreate.customer,
+		response: response.body.data.customerCreate.customer,
 	});
 };
 

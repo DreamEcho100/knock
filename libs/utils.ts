@@ -44,3 +44,10 @@ export function findError<T extends object>(error: T): boolean {
 	const prototype = Object.getPrototypeOf(error) as T | null;
 	return prototype === null ? false : findError(prototype);
 }
+
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+	return twMerge(clsx(inputs));
+}

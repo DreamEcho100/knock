@@ -23,17 +23,20 @@ const handleBackgroundImgVariants = cva(
 		defaultVariants: { translateY: 'small', scale: 'lg' },
 	},
 );
-const handleWrapperVariants = cva('h-full flex max-w-[1280px] items-center', {
-	variants: {
-		flexDir: {
-			'col-lg:row': 'flex-col lg:flex-row',
-			'col-reverse-lg:row': 'flex-col-reverse lg:flex-row',
-			'col-lg:row-reverse': 'flex-col lg:flex-row-reverse',
-			'col-reverse-lg:row-reverse': 'flex-col-reverse lg:flex-row',
+const handleWrapperVariants = cva(
+	'h-full flex max-w-[1280px] mx-auto items-center',
+	{
+		variants: {
+			flexDir: {
+				'col-lg:row': 'flex-col lg:flex-row',
+				'col-reverse-lg:row': 'flex-col-reverse lg:flex-row',
+				'col-lg:row-reverse': 'flex-col lg:flex-row-reverse',
+				'col-reverse-lg:row-reverse': 'flex-col-reverse lg:flex-row',
+			},
 		},
+		defaultVariants: { flexDir: 'col-lg:row' },
 	},
-	defaultVariants: { flexDir: 'col-lg:row' },
-});
+);
 
 interface IProps {
 	textContainer: {

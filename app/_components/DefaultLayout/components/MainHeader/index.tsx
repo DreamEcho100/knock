@@ -1,4 +1,11 @@
 'use client';
+import { BsInfoCircleFill } from 'react-icons/bs';
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from '~/app/_components/shared/common/Tooltip';
 import CustomNextImage from '~/app/_components/shared/common/CustomNextImage';
 import Button from '~/app/_components/shared/core/Button';
 import Logo from '~/app/_components/shared/core/Logo';
@@ -156,7 +163,7 @@ const MainHeader = () => {
 								) : (
 									<Link
 										// href={`/customers/${getIdFromGid(user.data.id)}`}
-										href="/account/profile"
+										href="/account"
 										title="profile"
 										className="flex items-center justify-center text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600"
 									>
@@ -586,8 +593,23 @@ function CartContainer({ banner }: { banner: any }) {
 					)}
 					<section className="flex flex-col gap-4">
 						<section className="flex flex-col gap-2">
-							<header className="flex justify-between gap-2">
+							<header className="flex flex-wrap gap-1">
 								<h3 className="font-semibold capitalize text-sm">discounts</h3>
+								<TooltipProvider>
+									<Tooltip>
+										<TooltipTrigger>
+											<BsInfoCircleFill className="size-3.5" />
+										</TooltipTrigger>
+										<TooltipContent className="bg-primary-4">
+											<p id="describe-discount-code" className="leading-none">
+												<em>
+													Discount codes are case-insensitive <br /> and can be
+													separated by commas, for example DE223,3232
+												</em>
+											</p>
+										</TooltipContent>
+									</Tooltip>
+								</TooltipProvider>
 							</header>
 
 							<form
@@ -637,7 +659,7 @@ function CartContainer({ banner }: { banner: any }) {
 								<div className="flex flex-grow text-md">
 									<input
 										type="text"
-										placeholder="Enter a discount codes"
+										placeholder="Enter a discount code"
 										name="discount-code"
 										min={1}
 										required
@@ -659,12 +681,6 @@ function CartContainer({ banner }: { banner: any }) {
 										apply
 									</Button>
 								</div>
-								<small id="describe-discount-code" className="leading-none">
-									<em>
-										Discount codes are case-insensitive and can be separated by
-										commas, for example DE223,3232
-									</em>
-								</small>
 							</form>
 
 							<div className="flex flex-wrap gap-2 items-center">

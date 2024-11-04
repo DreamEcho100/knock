@@ -133,7 +133,7 @@ export default function MainFooter() {
 								{ href: '/policies/refund-policy', text: 'refund policy' },
 								{ href: '/policies/shipping-policy', text: 'shipping policy' },
 								{
-									href: '/account/profile',
+									href: '/account',
 									text: 'My account',
 									isHidden: !user?.data?.id,
 								},

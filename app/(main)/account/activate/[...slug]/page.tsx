@@ -75,7 +75,7 @@ const ActivatePage = () => {
 
 	return (
 		<section className="flex items-center justify-center w-full min-h-[75vh]">
-			<div className="flex items-center justify-center max-w-[1200px] lg:max-w-screen-xl w-full ">
+			<div className="flex items-center justify-center max-w-[1200px] lg:max-w-screen-xl w-full lg:mx-auto">
 				<form
 					onSubmit={activateAccount.mutate}
 					className="flex flex-col justify-center gap-6 w-full h-full p-8"

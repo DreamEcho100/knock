@@ -77,7 +77,7 @@ export default function ShapesYourDrumsSection({ data }: { data: any }) {
 				/>
 			</div>
 			<div
-				className="max-w-screen-xl
+				className="max-w-screen-xl mx-auto
 					relative flex flex-col gap-10 sm:gap-20"
 			>
 				<header className="text-center">
