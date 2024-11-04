@@ -73,7 +73,7 @@ export const sectionInnerWrapperClasses = cva(
 );
 
 const imagesContainerClasses = cva(
-	'relative flex flex-shrink-0 items-center justify-center max-w-4xl min-h-[6rem] md:h-96',
+	'relative flex flex-shrink-0 items-center justify-center w-full max-w-4xl min-h-[6rem] md:h-96',
 	{
 		variants: {
 			pb: {
