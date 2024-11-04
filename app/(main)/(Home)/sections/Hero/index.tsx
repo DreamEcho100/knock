@@ -17,7 +17,10 @@ const HeroSection = ({ data }: { data: any }) => {
 					? `${process.env.NEXT_PUBLIC_KNOCK_URL_API}${data.mainImageUrl}`
 					: ''
 			}
-			mainImgOrVideoProps={{ priority: true, className: 'max-w-[38rem]' }}
+			mainImgOrVideoProps={{
+				priority: true,
+				className: 'w-full max-w-[38rem]',
+			}}
 			buttonProps={{
 				className: 'capitalize',
 				href: data.buttonUrl,

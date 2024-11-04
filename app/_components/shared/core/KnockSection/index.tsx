@@ -141,7 +141,7 @@ const KnockSection = ({
 		...(props.mainImgOrVideoProps ?? {}),
 		className: cn(
 			mainImgOrVideoLink ? 'cursor-pointer' : '',
-			'w-3/4 max-w-[43rem] flex-shrink-0',
+			'w-full max-w-[38rem] flex-shrink-0',
 			imageSrc ? 'object-cover relative' : 'object-fill relative rounded-[7%]',
 			props.mainImgOrVideoProps?.className,
 		),
