@@ -19,7 +19,7 @@ const HeroSection = ({ data }: { data: any }) => {
 			}
 			mainImgOrVideoProps={{
 				priority: true,
-				className: 'w-full max-w-[38rem]',
+				className: 'w-full max-w-[36rem]',
 			}}
 			buttonProps={{
 				className: 'capitalize',
