@@ -31,7 +31,7 @@ export default function HeroSection({
 				pb: null,
 			}}
 			mainImgOrVideoProps={{
-				className: 'w-full max-w-[46rem]',
+				// className: 'w-full max-w-[46rem]',
 				priority: true,
 			}}
 		/>
