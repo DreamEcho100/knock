@@ -426,7 +426,7 @@ function CartContainer({ banner }: { banner: any }) {
 													/>
 												)}
 											</div>
-											<div className="flex flex-col flex-grow gap-2 px-4 py-2">
+											<div className="flex flex-col flex-grow gap-2 p-4">
 												<header className="flex flex-col gap-1 sm:flex-row sm:gap-2 sm:justify-between">
 													<h4>
 														<Link
