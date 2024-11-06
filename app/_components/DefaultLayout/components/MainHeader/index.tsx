@@ -17,7 +17,7 @@ import { cx } from 'class-variance-authority';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { HTMLAttributes, ReactNode, SVGProps, CSSProperties } from 'react';
-import { useTransition } from 'react';
+import { Suspense, useEffect, useTransition } from 'react';
 import { useState } from 'react';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -40,6 +40,10 @@ import { getProduct, getProducts } from '~/libs/shopify';
 import type { CartItem, ShopifyProduct } from '~/libs/shopify/types';
 import { reshapeShopifyProduct } from '~/libs/shopify/utils';
 import { generalStore } from '~/libs/stores/general';
+import { createPortal } from 'react-dom';
+const CartBannerDynamic = dynamic(() => import('./components/CartBanner'), {
+	ssr: false,
+});
 
 const CheckoutPopupDynamic = dynamic(
 	() => import('~/app/_components/shared/common/CheckoutPopup/CheckoutPopup'),
@@ -83,6 +87,7 @@ const MainHeader = () => {
 	});
 
 	const logoutUser = useLogoutUser();
+
 	const isBannerVisible = useStore(
 		generalStore,
 		(state) => state.isVisible.banner,
@@ -92,17 +97,39 @@ const MainHeader = () => {
 		refetchOnWindowFocus: true,
 	});
 
+	useEffect(() => {
+		const main = document.querySelector('main');
+		const mainHeader = document.getElementById('main-header');
+
+		if (!main || !mainHeader) {
+			return;
+		}
+
+		const resizeObserver = new ResizeObserver(() => {
+			main.style.marginTop = `${mainHeader.clientHeight}px`;
+		});
+
+		resizeObserver.observe(mainHeader);
+
+		return () => {
+			resizeObserver.disconnect();
+		};
+	}, []);
+
 	return (
 		<>
-			<CartBanner data={banner.data} />
+			<Suspense fallback={null}>
+				<CartBannerDynamic data={banner.data} />
+			</Suspense>
 			<header
 				id="main-header"
-				className={`${commonClasses} bg-primary-1 z-10 fixed ${
+				className={`${commonClasses} bg-primary-1 z-10 fixed top-0 ${
 					isBannerVisible && banner.data && !banner.data.disable
 						? 'top-14'
 						: 'top-0'
 				} right-0 left-0 w-full flex flex-col`}
 			>
+				<div id="banner-container" className="empty:hidden w-full" />
 				<div className="relative w-full px-4 mx-auto sm:px-8">
 					<div
 						className="relative z-10 flex justify-between gap-2 h-main-nav-h sm:gap-4 text-primary-2 lg:grid"
@@ -232,106 +259,6 @@ const MainHeader = () => {
 };
 
 export default MainHeader;
-
-function CartBanner({ data }: { data?: any }) {
-	const isBannerVisible = useStore(
-		generalStore,
-		(state) => state.isVisible.banner,
-	);
-
-	if (!isBannerVisible || !data || !data.disable) {
-		return null;
-	}
-
-	const bannerId = data?.bannerUrl.split('/')[1];
-	const addToCart = async () => {
-		if (parseInt(bannerId)) {
-			try {
-				const data = await axios
-					.get(`/api/products/product?id=${bannerId}`)
-					.then((res) =>
-						reshapeShopifyProduct(res.data.product as ShopifyProduct),
-					);
-
-				if (!data?.variants[0]) {
-					throw new Error('Product not found');
-				}
-
-				await cartStore.getState().upsertCartItem(data?.variants[0], data);
-			} catch (error) {
-				if (error.response) {
-					return toast.warn('Product not found');
-				}
-			}
-		} else {
-			try {
-				const data = await getProduct(
-					bannerId === 'knock' ? 'knock-plugin' : bannerId,
-				);
-
-				if (!data?.variants[0]) {
-					throw new Error('Product not found');
-				}
-
-				await cartStore.getState().upsertCartItem(data?.variants[0], data);
-			} catch (error) {
-				if (error.response) {
-					return toast.warn(error.response.data.message);
-				}
-			}
-		}
-	};
-
-	return (
-		<div
-			style={{ background: data.background }}
-			className={`${commonClasses} z-10 fixed ${
-				isBannerVisible ? 'h-14' : 'h-0'
-			}  right-0 left-0 w-full flex items-center justify-center`}
-			id="test2"
-		>
-			<div>
-				<div
-					className="flex flex-col items-center gap-0 md:flex-row md:gap-3"
-					style={{ color: data.textColor }}
-				>
-					{data.text ? <h4>{data.text}</h4> : ''}
-					{data.bannerUrlText &&
-						(!data.isAddToCartButton ? (
-							<div>
-								<Link
-									href={
-										Number(bannerId) ? '/products/' + bannerId : data.bannerUrl
-									}
-									className="px-5 border text-bold rounded-3xl"
-								>
-									{data.bannerUrlText}
-								</Link>
-							</div>
-						) : (
-							<button
-								className="px-5 border text-bold rounded-3xl"
-								// eslint-disable-next-line @typescript-eslint/no-misused-promises
-								onClick={addToCart}
-							>
-								{data.bannerUrlText}
-							</button>
-						))}
-				</div>
-			</div>
-			<button
-				onClick={() => generalStore.getState().setIsVisible('banner', false)}
-				type="button"
-				className="absolute right-0 hidden p-4 sm:block"
-			>
-				<AiFillCloseCircle
-					id="AiFillCloseCircle"
-					style={{ color: data.textColor }}
-				/>
-			</button>
-		</div>
-	);
-}
 
 function CartDisplayButton() {
 	const cartProductsCount = useStore(
