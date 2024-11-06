@@ -13,7 +13,8 @@ import {
 	removeCartItem,
 	updateCartDiscounts,
 	updateCartItemQuantity,
-} from '../actions/cart';
+} from '../../actions/cart';
+import { upsertOnSuccess } from './utils';
 
 type UpdateType = 'plus' | 'minus' | 'delete';
 interface CartStateRules {
@@ -176,6 +177,7 @@ export const cartStore = createStore<CartState>((set, get) => ({
 				if (rules?.shouldOpen) {
 					state.setIsOpen(true);
 				}
+				void upsertOnSuccess(product);
 				break;
 		}
 

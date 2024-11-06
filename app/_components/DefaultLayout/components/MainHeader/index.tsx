@@ -130,7 +130,10 @@ const MainHeader = () => {
 				} right-0 left-0 w-full flex flex-col`}
 			>
 				<div id="banner-container" className="empty:hidden w-full" />
-				<div className="relative w-full px-4 mx-auto sm:px-8">
+				<div
+					className="relative w-full px-4 sm:px-8 max-w-[1280px] mx-auto"
+					id="main-header-nav-and-actions"
+				>
 					<div
 						className="relative z-10 flex justify-between gap-2 h-main-nav-h sm:gap-4 text-primary-2 lg:grid"
 						style={{
@@ -315,27 +318,6 @@ function CartContainer({ banner }: { banner: any }) {
 			isPending,
 	);
 
-	// const [isCartHasAutomaticDiscount, setIsCartHasAutomaticDiscount] =
-	// 	useState(false);
-	// const cartSize = useStore(cartStore, (state) => state.cart.totalQuantity);
-	// useEffect(() => {
-	// 	if (cartSize === 0) {
-	// 		return;
-	// 	}
-	// 	cartStore.getState().cart.lines.map((el) => {
-	// 		if (el.discountAllocations.length > 0) {
-	// 			setIsCartHasAutomaticDiscount(true);
-	// 		} else {
-	// 			setIsCartHasAutomaticDiscount(false);
-	// 		}
-	// 	});
-	// }, [cartSize]);
-
-	const totalAmount = useStore(
-		cartStore,
-		(state) => state.cart.cost.totalAmount,
-	);
-
 	const subtotalAmount = useStore(
 		cartStore,
 		(state) => state.cart.cost.subtotalAmount,
@@ -358,12 +340,35 @@ function CartContainer({ banner }: { banner: any }) {
 		refetchOnWindowFocus: true,
 	});
 
+	useEffect(() => {
+		const cartContainer = document.getElementById('cart-container');
+		const mainHeaderNavAndActions = document.getElementById(
+			'main-header-nav-and-actions',
+		);
+		const cartOverlay = document.getElementById('cart-overlay');
+
+		if (!cartContainer || !mainHeaderNavAndActions || !cartOverlay) {
+			return;
+		}
+
+		const resizeObserver = new ResizeObserver(() => {
+			cartContainer.style.marginTop = `${mainHeaderNavAndActions.clientHeight}px`;
+			cartOverlay.style.marginTop = `${mainHeaderNavAndActions.clientHeight}px`;
+		});
+
+		resizeObserver.observe(mainHeaderNavAndActions);
+
+		return () => {
+			resizeObserver.disconnect();
+		};
+	}, []);
+
 	return (
 		<>
 			<div
 				aria-hidden={!isCartVisible}
 				className={cx(
-					`fixed translate-y-main-nav-h ${
+					`fixed ${
 						!banner?.disable && isBannerVisible ? 'top-14' : 'top-0'
 					} right-0 w-full h-full bg-primary-3 bg-opacity-60 transition-all`,
 					isCartVisible
@@ -371,78 +376,81 @@ function CartContainer({ banner }: { banner: any }) {
 						: 'pointer-events-none select-none opacity-0 duration-150',
 				)}
 				onClick={() => void cartStore.getState().toggleIsOpen()}
-			></div>
-			<div
-				className={cx(
-					'absolute translate-y-main-nav-h top-0 right-0 h-fit max-h-[80vh] text-primary-1 bg-primary-4 w-[28rem] max-w-full origin-top transition-all p-8',
-					isCartVisible
-						? 'scale-y-100 duration-150'
-						: 'scale-y-0 duration-75 opacity-0',
-					'flex flex-col',
-				)}
-			>
-				<header className="pb-4">
-					<h3 className="font-semibold uppercase text-h5">cart</h3>
-				</header>
-				<div className="flex flex-col gap-4 overflow-auto">
-					{productsData.length === 0
-						? "You don't have any items in your cart yet."
-						: productsData.map((lineItem) => {
-								const selectedOptionHandle =
-									lineItem.merchandise.selectedOptions[0];
+				id="cart-overlay"
+			/>
+			<div className="absolute top-0 right-0 transition-all flex justify-end max-w-[1280px] mx-auto">
+				<div
+					className={cx(
+						'h-fit max-h-[80vh] text-primary-1 bg-primary-4 w-[28rem] max-w-full p-8 origin-top',
+						isCartVisible
+							? 'scale-y-100 duration-150'
+							: 'scale-y-0 duration-75 opacity-0',
+						'flex flex-col',
+					)}
+					id="cart-container"
+				>
+					<header className="pb-4">
+						<h3 className="font-semibold uppercase text-h5">cart</h3>
+					</header>
+					<div className="flex flex-col gap-4 overflow-auto">
+						{productsData.length === 0
+							? "You don't have any items in your cart yet."
+							: productsData.map((lineItem) => {
+									const selectedOptionHandle =
+										lineItem.merchandise.selectedOptions[0];
 
-								const selectedVariant =
-									lineItem.merchandise.product.variants.find(
-										(variant) => variant.title === selectedOptionHandle.value,
-									);
+									const selectedVariant =
+										lineItem.merchandise.product.variants.find(
+											(variant) => variant.title === selectedOptionHandle.value,
+										);
 
-								if (!selectedVariant) {
-									return null;
-								}
+									if (!selectedVariant) {
+										return null;
+									}
 
-								return (
-									<article
-										key={lineItem.id}
-										className="flex border-b-[0.0625rem] border-b-primary-1 pb-4"
-									>
-										<div className="w-28 min-w-[4rem] aspect-square bg-primary-1 max-w-[30%] flex-shrink-0">
-											{lineItem.merchandise.product.featuredImage && (
-												<CustomNextImage
-													src={lineItem.merchandise.product.featuredImage.url}
-													alt={
-														lineItem.merchandise.product.featuredImage.altText
-													}
-													width={112}
-													height={112}
-													className="object-contain w-full h-full aspect-square"
-												/>
-											)}
-										</div>
-										<div className="flex flex-col flex-grow gap-2 px-4 py-2">
-											<header className="flex flex-col gap-1 sm:flex-row sm:gap-2 sm:justify-between">
-												<h4>
-													<Link
-														href={
-															lineItem.merchandise.product.handle ===
-															'knock-plugin'
-																? '/knock'
-																: lineItem.merchandise.product.handle ===
-																	  'knock-clipper'
-																	? '/knock-clipper'
-																	: `/products/${lineItem.merchandise.product.handle}`
+									return (
+										<article
+											key={lineItem.id}
+											className="flex border-b-[0.0625rem] border-b-primary-1 pb-4"
+										>
+											<div className="w-28 min-w-[4rem] aspect-square bg-primary-1 max-w-[30%] flex-shrink-0">
+												{lineItem.merchandise.product.featuredImage && (
+													<CustomNextImage
+														src={lineItem.merchandise.product.featuredImage.url}
+														alt={
+															lineItem.merchandise.product.featuredImage.altText
 														}
-														className="inline-block whitespace-nowrap max-w-[10rem] text-ellipsis overflow-hidden"
-														onClick={() =>
-															cartStore.getState().setIsOpen(false)
-														}
-													>
-														{lineItem.merchandise.product.title}
-													</Link>
-												</h4>
-												<LineItemPrice data={lineItem} />
-											</header>
-											<div className="flex flex-col gap-1 sm:flex-row sm:gap-2 sm:justify-between">
-												{/* <div className='w-fit border-[0.125rem] border-bg-secondary-1 rounded-2xl p-1 flex gap-3'>
+														width={112}
+														height={112}
+														className="object-contain w-full h-full aspect-square"
+													/>
+												)}
+											</div>
+											<div className="flex flex-col flex-grow gap-2 px-4 py-2">
+												<header className="flex flex-col gap-1 sm:flex-row sm:gap-2 sm:justify-between">
+													<h4>
+														<Link
+															href={
+																lineItem.merchandise.product.handle ===
+																'knock-plugin'
+																	? '/knock'
+																	: lineItem.merchandise.product.handle ===
+																		  'knock-clipper'
+																		? '/knock-clipper'
+																		: `/products/${lineItem.merchandise.product.handle}`
+															}
+															className="inline-block whitespace-nowrap max-w-[10rem] text-ellipsis overflow-hidden"
+															onClick={() =>
+																cartStore.getState().setIsOpen(false)
+															}
+														>
+															{lineItem.merchandise.product.title}
+														</Link>
+													</h4>
+													<LineItemPrice data={lineItem} />
+												</header>
+												<div className="flex flex-col gap-1 sm:flex-row sm:gap-2 sm:justify-between">
+													{/* <div className='w-fit border-[0.125rem] border-bg-secondary-1 rounded-2xl p-1 flex gap-3'>
                             <button
                                 className='px-3'
                                 title='decrease the amount by 1'
@@ -484,209 +492,204 @@ function CartContainer({ banner }: { banner: any }) {
                                 +
                             </button>
                         </div> */}
-												<div className="flex flex-col">
-													<CartItemDiscounts lineItem={lineItem} />
-													<button
-														className={cx(
-															'w-fit py-1 text-primary-3 hover:text-primary-2 focus:text-primary-1',
-															'transition-all duration-150',
-														)}
-														disabled={disableAllButtons}
-														onClick={() => {
-															void cartStore
-																.getState()
-																.updateCartItem('delete', lineItem.id);
-														}}
-													>
-														remove
-													</button>
+													<div className="flex flex-col">
+														<CartItemDiscounts lineItem={lineItem} />
+														<button
+															className={cx(
+																'w-fit py-1 text-primary-3 hover:text-primary-2 focus:text-primary-1',
+																'transition-all duration-150',
+															)}
+															disabled={disableAllButtons}
+															onClick={() => {
+																void cartStore
+																	.getState()
+																	.updateCartItem('delete', lineItem.id);
+															}}
+														>
+															remove
+														</button>
+													</div>
 												</div>
 											</div>
-										</div>
-									</article>
-								);
-							})}
-				</div>
-				<div className="flex flex-col gap-4 pt-8">
-					{upselling.data?.upselling?.length && data ? (
-						<CheckoutPopupDynamic
-							data={upselling.data}
-							products={data}
-							setIsOpen={setIsOpen}
-							isOpen={isOpen}
-						/>
-					) : (
-						''
-					)}
-					<section className="flex flex-col gap-4">
-						<section className="flex flex-col gap-2">
-							<header className="flex flex-wrap gap-1">
-								<h3 className="font-semibold capitalize text-sm">discounts</h3>
-								<TooltipProvider>
-									<Tooltip>
-										<TooltipTrigger>
-											<BsInfoCircleFill className="size-3.5" />
-										</TooltipTrigger>
-										<TooltipContent className="bg-primary-4">
-											<p id="describe-discount-code" className="leading-none">
-												<em>
-													Discount codes are case-insensitive <br /> and can be
-													separated by commas, for example DE223,3232
-												</em>
-											</p>
-										</TooltipContent>
-									</Tooltip>
-								</TooltipProvider>
-							</header>
-
-							<form
-								className="flex flex-col gap-1.5"
-								// eslint-disable-next-line @typescript-eslint/no-misused-promises
-								onSubmit={async (e) => {
-									e.preventDefault();
-
-									if (
-										cartStore.getState().pendingActions[
-											CartDiscountCodesPendingKey
-										]
-									) {
-										return;
-									}
-
-									const target = e.target as HTMLFormElement;
-									const formData = new FormData(target);
-									const discountCods = (
-										formData.get('discount-code') as string | undefined
-									)?.split(/\s+,\s+/g);
-									if (!discountCods || discountCods.length === 0) {
-										return;
-									}
-
-									target.classList.add('group', 'loading');
-
-									try {
-										const result = await cartStore
-											.getState()
-											.updateCartDiscountCodes(discountCods);
-
-										target.classList.remove('group', 'loading');
-
-										if (result.type === 'error') {
-											return toast.error(result.message);
-										}
-
-										target.reset();
-									} catch (error) {
-										console.error(error);
-										toast.error('Error updating discounts');
-										target.classList.remove('group', 'loading');
-									}
-								}}
-							>
-								<div className="flex flex-grow text-md">
-									<input
-										type="text"
-										placeholder="Enter a discount code"
-										name="discount-code"
-										min={1}
-										required
-										aria-describedby="describe-discount-code"
-										className="ring-[0.0625rem] focus:ring-[0.03125rem] focus:ring-inset ring-bg-secondary-1/50 px-2 py-0.5 outline-none flex-grow"
-									/>
-									<Button
-										classesIntent={{
-											w: 'fit',
-											display: 'flex-xy-center',
-											rounded: null,
-											p: 'wide',
-										}}
-										className={
-											'group-[.loading]:opacity-50 group-[.loading]:cursor-not-allowed' +
-											' ring-[0.0625rem] focus:ring-[0.03125rem] focus:ring-inset ring-bg-secondary-1/50 capitalize text-sm'
-										}
-									>
-										apply
-									</Button>
-								</div>
-							</form>
-
-							<div className="flex flex-wrap gap-2 items-center">
-								{discountCodes.map((code) => {
-									return (
-										<Chip
-											key={code.code}
-											className={code.code ? ' pe-0' : ''}
-											isActive={code.applicable}
-											animatedTitle={
-												<span className="text-nowrap">
-													{code.applicable ? 'Applicable' : 'Not Applicable'}
-												</span>
-											}
-											start={<TagIcon className="flex-shrink-0 size-3.5" />}
-											end={
-												code.code && (
-													<button
-														className="text-primary-3 px-2 hover:bg-primary-3/70 focus:bg-primary-3/70 transition-colors duration-100 h-full"
-														onClick={() => {
-															const currentDiscounts =
-																cartStore.getState().cart.discountCodes;
-
-															if (
-																cartStore.getState().pendingActions[
-																	CartDiscountCodesPendingKey
-																]
-															) {
-																return;
-															}
-
-															void cartStore
-																.getState()
-																.updateCartDiscountCodes(
-																	currentDiscounts
-																		.filter(
-																			(discount) => discount.code !== code.code,
-																		)
-																		.map((discount) => discount.code),
-																);
-														}}
-													>
-														&times;
-													</button>
-												)
-											}
-										>
-											<p>{code.code}</p>
-										</Chip>
+										</article>
 									);
 								})}
-							</div>
-						</section>
+					</div>
+					<div className="flex flex-col gap-4 pt-8">
+						{upselling.data?.upselling?.length && data ? (
+							<CheckoutPopupDynamic
+								data={upselling.data}
+								products={data}
+								setIsOpen={setIsOpen}
+								isOpen={isOpen}
+							/>
+						) : (
+							''
+						)}
+						<section className="flex flex-col gap-4">
+							<section className="flex flex-col gap-2">
+								<header className="flex flex-wrap gap-1">
+									<h3 className="font-semibold capitalize text-sm">
+										discounts
+									</h3>
+									<TooltipProvider>
+										<Tooltip>
+											<TooltipTrigger>
+												<BsInfoCircleFill className="size-3.5" />
+											</TooltipTrigger>
+											<TooltipContent className="bg-primary-4">
+												<p id="describe-discount-code" className="leading-none">
+													<em>
+														Discount codes are case-insensitive <br /> and can
+														be separated by commas, for example DE223,3232
+													</em>
+												</p>
+											</TooltipContent>
+										</Tooltip>
+									</TooltipProvider>
+								</header>
 
-						<h3 className="flex flex-wrap items-center justify-between gap-x-2 leading-none">
-							<span className="inline-block font-semibold uppercase text-h5">
-								subtotal
-							</span>
-							<span className="inline-block">
-								{priceCurrencyFormatter(
-									subtotalAmount.amount,
-									subtotalAmount.currencyCode,
-								)}
-							</span>
-						</h3>
-					</section>
-					<div>
-						<Button
-							{...(productsData.length === 0
-								? ''
-								: !upselling.data
-									? {
-											onClick: () => {
-												startTransition(async () => {
-													await redirectToCheckout();
-												});
-											},
+								<form
+									className="flex flex-col gap-1.5"
+									// eslint-disable-next-line @typescript-eslint/no-misused-promises
+									onSubmit={async (e) => {
+										e.preventDefault();
+
+										if (
+											cartStore.getState().pendingActions[
+												CartDiscountCodesPendingKey
+											]
+										) {
+											return;
 										}
-									: !upselling.data.upselling.length
+
+										const target = e.target as HTMLFormElement;
+										const formData = new FormData(target);
+										const discountCods = (
+											formData.get('discount-code') as string | undefined
+										)?.split(/\s+,\s+/g);
+										if (!discountCods || discountCods.length === 0) {
+											return;
+										}
+
+										target.classList.add('group', 'loading');
+
+										try {
+											const result = await cartStore
+												.getState()
+												.updateCartDiscountCodes(discountCods);
+
+											target.classList.remove('group', 'loading');
+
+											if (result.type === 'error') {
+												return toast.error(result.message);
+											}
+
+											target.reset();
+										} catch (error) {
+											console.error(error);
+											toast.error('Error updating discounts');
+											target.classList.remove('group', 'loading');
+										}
+									}}
+								>
+									<div className="flex flex-grow text-md">
+										<input
+											type="text"
+											placeholder="Enter a discount code"
+											name="discount-code"
+											min={1}
+											required
+											aria-describedby="describe-discount-code"
+											className="ring-[0.0625rem] focus:ring-[0.03125rem] focus:ring-inset ring-bg-secondary-1/50 px-2 py-0.5 outline-none flex-grow"
+										/>
+										<Button
+											classesIntent={{
+												w: 'fit',
+												display: 'flex-xy-center',
+												rounded: null,
+												p: 'wide',
+											}}
+											className={
+												'group-[.loading]:opacity-50 group-[.loading]:cursor-not-allowed' +
+												' ring-[0.0625rem] focus:ring-[0.03125rem] focus:ring-inset ring-bg-secondary-1/50 capitalize text-sm'
+											}
+										>
+											apply
+										</Button>
+									</div>
+								</form>
+
+								<div className="flex flex-wrap gap-2 items-center">
+									{discountCodes.map((code) => {
+										return (
+											<Chip
+												key={code.code}
+												className={code.code ? ' pe-0' : ''}
+												isActive={code.applicable}
+												animatedTitle={
+													<span className="text-nowrap">
+														{code.applicable ? 'Applicable' : 'Not Applicable'}
+													</span>
+												}
+												start={<TagIcon className="flex-shrink-0 size-3.5" />}
+												end={
+													code.code && (
+														<button
+															className="text-primary-3 px-2 hover:bg-primary-3/70 focus:bg-primary-3/70 transition-colors duration-100 h-full"
+															onClick={() => {
+																const currentDiscounts =
+																	cartStore.getState().cart.discountCodes;
+
+																if (
+																	cartStore.getState().pendingActions[
+																		CartDiscountCodesPendingKey
+																	]
+																) {
+																	return;
+																}
+
+																void cartStore
+																	.getState()
+																	.updateCartDiscountCodes(
+																		currentDiscounts
+																			.filter(
+																				(discount) =>
+																					discount.code !== code.code,
+																			)
+																			.map((discount) => discount.code),
+																	);
+															}}
+														>
+															&times;
+														</button>
+													)
+												}
+											>
+												<p>{code.code}</p>
+											</Chip>
+										);
+									})}
+								</div>
+							</section>
+
+							<h3 className="flex flex-wrap items-center justify-between gap-x-2 leading-none">
+								<span className="inline-block font-semibold uppercase text-h5">
+									subtotal
+								</span>
+								<span className="inline-block">
+									{priceCurrencyFormatter(
+										subtotalAmount.amount,
+										subtotalAmount.currencyCode,
+									)}
+								</span>
+							</h3>
+						</section>
+						<div>
+							<Button
+								{...(productsData.length === 0
+									? ''
+									: !upselling.data
 										? {
 												onClick: () => {
 													startTransition(async () => {
@@ -694,8 +697,7 @@ function CartContainer({ banner }: { banner: any }) {
 													});
 												},
 											}
-										: upselling.data?.success &&
-											  upselling.data.upsellingSettings[0].disable
+										: !upselling.data.upselling.length
 											? {
 													onClick: () => {
 														startTransition(async () => {
@@ -703,21 +705,31 @@ function CartContainer({ banner }: { banner: any }) {
 														});
 													},
 												}
-											: {
-													onClick: () => {
-														setIsOpen(true);
-													},
-												})}
-							// onClick={() => {
-							// 	startTransition(async () => {
-							// 		await redirectToCheckout();
-							// 	});
-							// }}
-							disabled={productsData.length === 0 || disableAllButtons}
-							classesIntent={{ w: 'full', display: 'flex-xy-center' }}
-						>
-							{productsData.length === 0 ? 'Cart Is Empty' : 'Checkout'}
-						</Button>
+											: upselling.data?.success &&
+												  upselling.data.upsellingSettings[0].disable
+												? {
+														onClick: () => {
+															startTransition(async () => {
+																await redirectToCheckout();
+															});
+														},
+													}
+												: {
+														onClick: () => {
+															setIsOpen(true);
+														},
+													})}
+								// onClick={() => {
+								// 	startTransition(async () => {
+								// 		await redirectToCheckout();
+								// 	});
+								// }}
+								disabled={productsData.length === 0 || disableAllButtons}
+								classesIntent={{ w: 'full', display: 'flex-xy-center' }}
+							>
+								{productsData.length === 0 ? 'Cart Is Empty' : 'Checkout'}
+							</Button>
+						</div>
 					</div>
 				</div>
 			</div>
