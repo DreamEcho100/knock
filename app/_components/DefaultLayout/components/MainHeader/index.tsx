@@ -129,7 +129,7 @@ const MainHeader = () => {
 						: 'top-0'
 				} right-0 left-0 w-full flex flex-col`}
 			>
-				<div id="banner-container" className="empty:hidden w-full" />
+				<div id="banner-container" className="empty:hidden w-full z-50" />
 				<div
 					className="relative w-full px-4 sm:px-8 max-w-[1280px] mx-auto"
 					id="main-header-nav-and-actions"
