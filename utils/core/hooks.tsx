@@ -45,7 +45,7 @@ export const useGetUserData = ({
 				},
 			)
 				.then((response) => response.json())
-				.then((result) => result.user);
+				.then((result) => result.user ?? null);
 		},
 		{
 			enabled: enabled && !!accessToken,

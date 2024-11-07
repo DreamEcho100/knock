@@ -18,7 +18,7 @@ export default function CartBanner({ data }: { data?: any }) {
 		(state) => state.isVisible.banner,
 	);
 
-	if (!isBannerVisible || !data.disable) {
+	if (!isBannerVisible || data.disable) {
 		return null;
 	}
 
@@ -54,6 +54,7 @@ export default function CartBanner({ data }: { data?: any }) {
 				}
 
 				await cartStore.getState().upsertCartItem(data?.variants[0], data);
+				cartStore.getState().setIsOpen(true);
 			} catch (error) {
 				if (error.response) {
 					return toast.warn(error.response.data.message);

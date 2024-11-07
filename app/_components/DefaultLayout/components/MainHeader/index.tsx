@@ -125,11 +125,7 @@ const MainHeader = () => {
 			)}
 			<header
 				id="main-header"
-				className={`${commonClasses} bg-primary-1 z-10 fixed top-0 ${
-					isBannerVisible && banner.data && !banner.data.disable
-						? 'top-14'
-						: 'top-0'
-				} right-0 left-0 w-full flex flex-col`}
+				className={`${commonClasses} bg-primary-1 z-10 fixed top-0 right-0 left-0 w-full flex flex-col`}
 			>
 				<div id="banner-container" className="empty:hidden w-full z-50" />
 				<div

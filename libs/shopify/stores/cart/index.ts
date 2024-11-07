@@ -104,13 +104,15 @@ export const cartStore = createStore<CartState>((set, get) => ({
 	},
 
 	initCart: (cart) => {
-		set({
+		set((prev) => ({
+			...prev,
 			cart: {
+				...prev.cart,
 				...cart,
-				...updateCartTotals(cart.lines),
+				...updateCartTotals(cart.lines ?? []),
 			},
 			state: 'active',
-		});
+		}));
 	},
 
 	upsertCartItem: async (variant, product, options) => {
@@ -251,8 +253,8 @@ export const cartStore = createStore<CartState>((set, get) => ({
 
 			let updatedCart = {
 				...currentCart,
-				lines: updatedLines,
-				...updateCartTotals(updatedLines),
+				lines: updatedLines ?? [],
+				...updateCartTotals(updatedLines ?? []),
 			};
 
 			switch (actualUpdateType) {

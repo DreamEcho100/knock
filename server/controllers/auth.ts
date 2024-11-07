@@ -105,6 +105,10 @@ const checkToken = async (
 ) => {
 	const accessToken = req.headers.accesstoken;
 
+	if (!accessToken) {
+		throw new Error('Access Token not found');
+	}
+
 	if (accessToken) {
 		const customerQuery = /* GraphQL */ `
           query {

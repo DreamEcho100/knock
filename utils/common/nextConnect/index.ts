@@ -1,3 +1,4 @@
+import { ShopifyErrorLike } from './../../../libs/shopify/types';
 import {
 	type NextApiRequest,
 	type NextApiResponse,
@@ -6,6 +7,7 @@ import {
 
 import { createRouter } from 'next-connect';
 import { type NodeRouter } from 'next-connect/dist/types/node';
+import { isShopifyError } from '~/libs/shopify/utils';
 
 type TReq = NextApiRequest & { params: Record<string, any> }; // & IncomingMessage;
 type TRes = NextApiResponse; // & ServerResponse;
@@ -30,34 +32,19 @@ const nextConnect = (
 
 	return router.handler({
 		onError: (err, req, res) => {
-			console.error('err', err, typeof err);
 			const statusCode = res.statusCode < 400 ? 500 : res.statusCode;
-			let statusMessage: string | any[] = res.statusMessage
+			const statusMessage: string = res.statusMessage
 				? res.statusMessage
-				: err instanceof Error
-					? err.message
+				: err instanceof Error ||
+					  isShopifyError(err) ||
+					  (err &&
+							typeof err === 'object' &&
+							'message' in err &&
+							typeof err.message === 'string')
+					? (err.message as string)
 					: Array.isArray(err)
 						? err.map((item) => item.message).join(', ')
 						: String(err);
-
-			if (
-				statusMessage.trim().startsWith('[') &&
-				statusMessage.trim().endsWith(']')
-			)
-				try {
-					statusMessage = (JSON.parse(statusMessage) as any[])
-						.map((item: Record<string, any>) =>
-							// eslint-disable-next-line @typescript-eslint/no-unsafe-return
-							typeof item === 'string'
-								? item
-								: typeof item === 'object' && 'message' in item
-									? item.message
-									: JSON.stringify(item),
-						)
-						.join(', ');
-				} catch (error) {
-					console.error('error', error);
-				}
 
 			if (process.env.NODE_ENV === 'development' && err instanceof Error) {
 				console.log('\n');
@@ -66,6 +53,7 @@ const nextConnect = (
 				console.error(`Name: ${err.name}`);
 				console.error(`Message: ${statusMessage.toString()}`);
 				console.error(`Stack: ${err.stack}`);
+				console.error(`Cause: ${String(err.cause)}`);
 				console.log('----------------------------------------');
 				console.log('\n');
 			}
