@@ -366,9 +366,7 @@ function CartContainer({ banner }: { banner: any }) {
 			<div
 				aria-hidden={!isCartVisible}
 				className={cx(
-					`fixed ${
-						!banner?.disable && isBannerVisible ? 'top-14' : 'top-0'
-					} right-0 w-full h-full bg-primary-3 bg-opacity-60 transition-all`,
+					`fixed top-0 right-0 w-full h-full bg-primary-3 bg-opacity-60 transition-all`,
 					isCartVisible
 						? 'duration-300'
 						: 'pointer-events-none select-none opacity-0 duration-150',
