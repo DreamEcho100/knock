@@ -37,6 +37,7 @@ export default function CartBanner({ data }: { data?: any }) {
 				}
 
 				await cartStore.getState().upsertCartItem(data?.variants[0], data);
+				cartStore.getState().setIsOpen(true);
 			} catch (error) {
 				if (error.response) {
 					return toast.warn('Product not found');

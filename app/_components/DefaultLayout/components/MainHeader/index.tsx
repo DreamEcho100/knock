@@ -118,9 +118,11 @@ const MainHeader = () => {
 
 	return (
 		<>
-			<Suspense fallback={null}>
-				<CartBannerDynamic data={banner.data} />
-			</Suspense>
+			{banner.data && !banner.data.disable && (
+				<Suspense fallback={null}>
+					<CartBannerDynamic data={banner.data} />
+				</Suspense>
+			)}
 			<header
 				id="main-header"
 				className={`${commonClasses} bg-primary-1 z-10 fixed top-0 ${
