@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { z } from 'zod';
 import { cookies } from 'next/headers';
 import { shopifyFetch } from '~/libs/shopify/utils';
+import { updateCartBuyerIdentity } from '~/libs/shopify';
 
 const login = async (req: NextApiRequest, res: NextApiResponse) => {
 	const input = z
@@ -272,7 +273,12 @@ const logout = async (req: NextApiRequest, res: NextApiResponse) => {
 		throw new Error('Access Token not valid');
 	}
 
-	(await cookies()).set('cartId', '');
+	const cartId = (await cookies()).get('cartId')?.value;
+
+	if (cartId) {
+		await updateCartBuyerIdentity(cartId, { customerAccessToken: null });
+		(await cookies()).set('cartId', '');
+	}
 
 	return res.status(200).json({
 		success: true,

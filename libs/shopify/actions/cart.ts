@@ -7,6 +7,7 @@ import {
 	getCart,
 	removeFromCart,
 	updateCart,
+	updateCartBuyerIdentity,
 	updateCartDiscountCodes,
 } from '..';
 import { revalidateTag } from 'next/cache';
@@ -151,26 +152,49 @@ export async function redirectToCheckout() {
 export async function initCart() {
 	const cookiesManger = await cookies();
 	// Check if a cart ID cookie exists
-	const cartId = cookiesManger.get('cartId')?.value;
+	let cartId = cookiesManger.get('cartId')?.value;
+
+	let cart: Cart | undefined;
 
 	try {
 		// If a cart ID cookie exists, fetch the cart
 		if (cartId) {
-			const cart = await getCart(cartId);
-
-			// If the cart exists, return it
-			if (cart) {
-				return cart;
+			const _cart = await getCart(cartId);
+			if (_cart) {
+				cart = _cart;
 			}
+		}
+
+		if (!cart) {
+			cart = await createCart();
+		}
+
+		const userAccessToken = cookiesManger.get('user-access-token')?.value;
+
+		cartId = cart.id;
+
+		// @ts-expect-error - Needs to get the customer data first
+		if (
+			cartId &&
+			typeof userAccessToken === 'string' &&
+			userAccessToken.startsWith('{') &&
+			userAccessToken.endsWith('}') &&
+			!cart.buyerIdentity?.customer?.id
+		) {
+			const customerAccessToken = JSON.parse(userAccessToken)
+				.accessToken as string;
+			const _cart = await updateCartBuyerIdentity(cartId, {
+				customerAccessToken,
+			});
+			cart = _cart;
 		}
 	} catch (error) {
 		console.error('????', error);
 		return { type: 'error', message: 'Error fetching cart' } as const;
 	}
 
-	// If the cart ID cookie doesn't exist or the cart doesn't exist, create a new cart
-	const cart = await createCart();
 	// Set the cart ID cookie
 	cookiesManger.set('cartId', cart.id!);
+
 	return cart;
 }

@@ -84,6 +84,12 @@ export const useLogoutUser = ({
 			onSuccess: async () => {
 				// @ts-expect-error - Add away somewhere to remove the associated cart to the user on logout
 
+				// Remove the user-access-token and cartId cookies nativly
+				document.cookie =
+					'user-access-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+				document.cookie =
+					'cartId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+
 				if (onSuccess) await onSuccess();
 				else window.location.reload();
 			},

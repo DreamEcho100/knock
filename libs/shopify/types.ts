@@ -210,6 +210,14 @@ export interface ShopifyCart {
 	}[];
 	lines: Connection<ShopifyCartItem>;
 	totalQuantity: number;
+	buyerIdentity: {
+		countryCode?: string;
+		email?: string;
+		phone?: string;
+		customer?: {
+			id: string;
+		};
+	};
 }
 
 export interface ShopifyCartOperation {
@@ -386,6 +394,242 @@ export interface ShopifyCartDiscountCodesUpdateOperation {
 	variables: {
 		cartId: string;
 		discountCodes: string[];
+	};
+}
+
+/*
+CartBuyerIdentityInput
+input_object
+
+Specifies the input fields to update the buyer information associated with a cart. Buyer identity is used to determine international pricing and should match the customer's shipping address.
+Anchor to section titled 'Fields'
+Fields
+
+Anchor to CartBuyerIdentityInput.companyLocationId
+companyLocationId
+ID
+
+    The company location of the buyer that is interacting with the cart.
+Anchor to CartBuyerIdentityInput.countryCode
+countryCode
+CountryCode
+
+    The country where the buyer is located.
+Anchor to CartBuyerIdentityInput.customerAccessToken
+customerAccessToken
+String
+
+    The access token used to identify the customer associated with the cart.
+Anchor to CartBuyerIdentityInput.deliveryAddressPreferences
+deliveryAddressPreferences
+[DeliveryAddressInput!]
+
+    An ordered set of delivery addresses tied to the buyer that is interacting with the cart. The rank of the preferences is determined by the order of the addresses in the array. Preferences can be used to populate relevant fields in the checkout flow.
+
+    The input must not contain more than 250 values.
+
+customerAddressId
+ID
+
+    The ID of a customer address that is associated with the buyer that is interacting with the cart.
+deliveryAddress
+MailingAddressInput
+
+    A delivery address preference of a buyer that is interacting with the cart.
+
+    address1
+    String
+
+        The first line of the address. Typically the street address or PO Box number.
+    address2
+    String
+
+        The second line of the address. Typically the number of the apartment, suite, or unit.
+    city
+    String
+
+        The name of the city, district, village, or town.
+    company
+    String
+
+        The name of the customer's company or organization.
+    country
+    String
+
+        The name of the country.
+    firstName
+    String
+
+        The first name of the customer.
+    lastName
+    String
+
+        The last name of the customer.
+    phone
+    String
+
+        A unique phone number for the customer.
+
+        Formatted using E.164 standard. For example, +16135551111.
+    province
+    String
+
+        The region of the address, such as the province, state, or district.
+    zip
+    String
+
+        The zip or postal code of the address.
+
+deliveryAddressValidationStrategy
+DeliveryAddressValidationStrategy
+default:COUNTRY_CODE_ONLY
+
+    Defines what kind of address validation is requested.
+
+        COUNTRY_CODE_ONLY
+
+            Only the country code is validated.
+        STRICT
+
+            Strict validation is performed, i.e. all fields in the address are validated according to Shopify's checkout rules. If the address fails validation, the cart will not be updated.
+
+    oneTimeUse
+    Boolean
+    default:false
+
+        Whether the given delivery address is considered to be a one-time use address. One-time use addresses do not get persisted to the buyer's personal addresses when checking out.
+
+Anchor to CartBuyerIdentityInput.email
+email
+String
+
+    The email address of the buyer that is interacting with the cart.
+Anchor to CartBuyerIdentityInput.phone
+phone
+String
+
+    The phone number of the buyer that is interacting with the cart.
+Anchor to CartBuyerIdentityInput.preferences
+preferences
+CartPreferencesInput
+
+    A set of preferences tied to the buyer interacting with the cart. Preferences are used to prefill fields in at checkout to streamline information collection. Preferences are not synced back to the cart if they are overwritten.
+
+delivery
+CartDeliveryPreferenceInput
+
+    Delivery preferences can be used to prefill the delivery section in at checkout.
+
+coordinates
+CartDeliveryCoordinatesPreferenceInput
+
+    The coordinates of a delivery location in order of preference.
+
+countryCode
+CountryCode!
+required
+
+    The two-letter code for the country of the preferred location.
+
+    For example, US.
+
+    latitude
+    Float!
+    required
+
+        The geographic latitude for a given location. Coordinates are required in order to set pickUpHandle for pickup points.
+    longitude
+    Float!
+    required
+
+        The geographic longitude for a given location. Coordinates are required in order to set pickUpHandle for pickup points.
+
+deliveryMethod
+[PreferenceDeliveryMethodType!]
+
+    The preferred delivery methods such as shipping, local pickup or through pickup points.
+
+    The input must not contain more than 250 values.
+
+        PICKUP_POINT
+
+            A delivery method used to let buyers collect purchases at designated locations like parcel lockers.
+        PICK_UP
+
+            A delivery method used to let buyers receive items directly from a specific location within an area.
+        SHIPPING
+
+            A delivery method used to send items directly to a buyer’s specified address.
+
+    pickupHandle
+    [String!]
+
+        The pickup handle prefills checkout fields with the location for either local pickup or pickup points delivery methods. It accepts both location ID for local pickup and external IDs for pickup points.
+
+        The input must not contain more than 250 values.
+
+wallet
+[String!]
+
+    Wallet preferences are used to populate relevant payment fields in the checkout flow. Accepted value: ["shop_pay"].
+
+    The input must not contain more than 250 values.
+
+*/
+
+export interface ShopifyCartBuyerIdentityInput {
+	companyLocationId?: string;
+	countryCode?: string;
+	customerAccessToken?: string | null;
+	deliveryAddressPreferences?: {
+		customerAddressId?: string;
+		deliveryAddress: {
+			address1: string;
+			address2: string;
+			city: string;
+			company: string;
+			country: string;
+			firstName: string;
+			lastName: string;
+			phone: string;
+			province: string;
+			zip: string;
+		};
+		deliveryAddressValidationStrategy?: string;
+		oneTimeUse?: boolean;
+	}[];
+	email?: string;
+	phone?: string;
+	preferences?: {
+		delivery?: {
+			coordinates: {
+				countryCode: string;
+				latitude: number;
+				longitude: number;
+			};
+			deliveryMethod: string[];
+			pickupHandle: string[];
+		};
+		wallet: string[];
+	};
+}
+export interface ShopifyCartBuyerIdentityUpdateOperation {
+	data: {
+		cartBuyerIdentityUpdate: {
+			cart: ShopifyCart;
+			userErrors: {
+				field: string;
+				message: string;
+			}[];
+			warnings: {
+				code: string;
+				message: string;
+			}[];
+		};
+	};
+	variables: {
+		buyerIdentity: ShopifyCartBuyerIdentityInput;
+		cartId: string;
 	};
 }
 

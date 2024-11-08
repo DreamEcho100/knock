@@ -5,6 +5,7 @@ import type { NextRequest } from 'next/server';
 import { TAGS } from './constants';
 import {
 	addToCartMutation,
+	cartBuyerIdentityUpdateMutation,
 	cartDiscountCodesUpdateMutation,
 	createCartMutation,
 	editCartItemsMutation,
@@ -41,6 +42,8 @@ import type {
 	ShopifyProductsOperation,
 	ShopifyRemoveFromCartOperation,
 	ShopifyUpdateCartOperation,
+	ShopifyCartBuyerIdentityUpdateOperation,
+	ShopifyCartBuyerIdentityInput,
 } from './types';
 import { headers } from 'next/headers';
 import { revalidateTag } from 'next/cache';
@@ -389,6 +392,22 @@ export async function updateCartDiscountCodes(
 	});
 
 	return reshapeCart(res.body.data.cartDiscountCodesUpdate.cart);
+}
+
+export async function updateCartBuyerIdentity(
+	cartId: string,
+	buyerIdentity: ShopifyCartBuyerIdentityInput,
+): Promise<Cart> {
+	const res = await shopifyFetch<ShopifyCartBuyerIdentityUpdateOperation>({
+		query: cartBuyerIdentityUpdateMutation,
+		variables: {
+			cartId,
+			buyerIdentity,
+		},
+		cache: 'no-store',
+	});
+
+	return reshapeCart(res.body.data.cartBuyerIdentityUpdate.cart);
 }
 
 // This is called from `app/api/revalidate.ts` so providers can control revalidation logic.

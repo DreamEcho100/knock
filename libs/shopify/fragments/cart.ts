@@ -86,6 +86,14 @@ const cartFragment = /* GraphQL */ `
 			}
 		}
 		totalQuantity
+		buyerIdentity {
+			countryCode
+			email
+			phone
+			customer {
+				id
+			}
+		}
 	}
 	${productFragment}
 `;
