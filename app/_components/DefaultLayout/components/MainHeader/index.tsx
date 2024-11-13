@@ -523,7 +523,7 @@ function CartContainer({ banner }: { banner: any }) {
 							''
 						)}
 						<section className="flex flex-col gap-4">
-							<section className="flex flex-col gap-2">
+							<section className="flex flex-col gap-2 hidden">
 								<header className="flex flex-wrap gap-1">
 									<h3 className="font-semibold capitalize text-sm">
 										discounts
