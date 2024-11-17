@@ -37,6 +37,7 @@ import { useStore } from 'zustand';
 import { getProducts } from '~/libs/shopify';
 import type { CartItem } from '~/libs/shopify/types';
 import { generalStore } from '~/libs/stores/general';
+import { cn } from '~/libs/utils';
 const CartBannerDynamic = dynamic(() => import('./components/CartBanner'), {
 	ssr: false,
 });
@@ -370,12 +371,17 @@ function CartContainer({ banner }: { banner: any }) {
 				onClick={() => void cartStore.getState().toggleIsOpen()}
 				id="cart-overlay"
 			/>
-			<div className="absolute right-0 transition-all flex justify-end w-[1280px] max-w-full mx-auto">
+			<div
+				className={cn(
+					'absolute right-0 transition-all flex justify-end w-[1280px] max-w-full mx-auto',
+					'pointer-events-none',
+				)}
+			>
 				<div
 					className={cx(
 						'h-fit max-h-[80vh] text-primary-1 bg-primary-4 w-[28rem] max-w-full p-8 origin-top',
 						isCartVisible
-							? 'scale-y-100 duration-150'
+							? 'scale-y-100 duration-150 pointer-events-auto'
 							: 'scale-y-0 duration-75 opacity-0',
 						'flex flex-col',
 					)}
