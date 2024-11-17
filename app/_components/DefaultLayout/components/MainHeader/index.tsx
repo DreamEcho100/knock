@@ -24,8 +24,6 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { HiShoppingBag } from 'react-icons/hi';
 import { commonClasses } from '../..';
 import UserAuthButton from './components/UserAuthButton';
-import { AiFillCloseCircle } from 'react-icons/ai';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import dynamic from 'next/dynamic';
 import { initCart, redirectToCheckout } from '~/libs/shopify/actions/cart';
@@ -36,11 +34,9 @@ import {
 	cartStore,
 } from '~/libs/shopify/stores/cart';
 import { useStore } from 'zustand';
-import { getProduct, getProducts } from '~/libs/shopify';
-import type { CartItem, ShopifyProduct } from '~/libs/shopify/types';
-import { reshapeShopifyProduct } from '~/libs/shopify/utils';
+import { getProducts } from '~/libs/shopify';
+import type { CartItem } from '~/libs/shopify/types';
 import { generalStore } from '~/libs/stores/general';
-import { createPortal } from 'react-dom';
 const CartBannerDynamic = dynamic(() => import('./components/CartBanner'), {
 	ssr: false,
 });
@@ -88,10 +84,10 @@ const MainHeader = () => {
 
 	const logoutUser = useLogoutUser();
 
-	const isBannerVisible = useStore(
-		generalStore,
-		(state) => state.isVisible.banner,
-	);
+	// const isBannerVisible = useStore(
+	// 	generalStore,
+	// 	(state) => state.isVisible.banner,
+	// );
 
 	const banner = useQuery(['banner-data'], getBanner, {
 		refetchOnWindowFocus: true,
@@ -301,10 +297,10 @@ function CartDisplayButton() {
 }
 
 function CartContainer({ banner }: { banner: any }) {
-	const isBannerVisible = useStore(
-		generalStore,
-		(state) => state.isVisible.banner,
-	);
+	// const isBannerVisible = useStore(
+	// 	generalStore,
+	// 	(state) => state.isVisible.banner,
+	// );
 	const [isPending, startTransition] = useTransition();
 	const isCartVisible = useStore(cartStore, (state) => state.isOpen);
 
@@ -338,35 +334,35 @@ function CartContainer({ banner }: { banner: any }) {
 		refetchOnWindowFocus: true,
 	});
 
-	useEffect(() => {
-		const cartContainer = document.getElementById('cart-container');
-		const mainHeaderNavAndActions = document.getElementById(
-			'main-header-nav-and-actions',
-		);
-		const cartOverlay = document.getElementById('cart-overlay');
+	// useEffect(() => {
+	// 	const cartContainer = document.getElementById('cart-container');
+	// 	const mainHeaderNavAndActions = document.getElementById(
+	// 		'main-header-nav-and-actions',
+	// 	);
+	// 	const cartOverlay = document.getElementById('cart-overlay');
 
-		if (!cartContainer || !mainHeaderNavAndActions || !cartOverlay) {
-			return;
-		}
+	// 	if (!cartContainer || !mainHeaderNavAndActions || !cartOverlay) {
+	// 		return;
+	// 	}
 
-		const resizeObserver = new ResizeObserver(() => {
-			cartContainer.style.marginTop = `${mainHeaderNavAndActions.clientHeight}px`;
-			cartOverlay.style.marginTop = `${mainHeaderNavAndActions.clientHeight}px`;
-		});
+	// 	const resizeObserver = new ResizeObserver(() => {
+	// 		cartContainer.style.marginTop = `${mainHeaderNavAndActions.clientHeight}px`;
+	// 		// cartOverlay.style.marginTop = `${mainHeaderNavAndActions.clientHeight}px`;
+	// 	});
 
-		resizeObserver.observe(mainHeaderNavAndActions);
+	// 	resizeObserver.observe(mainHeaderNavAndActions);
 
-		return () => {
-			resizeObserver.disconnect();
-		};
-	}, []);
+	// 	return () => {
+	// 		resizeObserver.disconnect();
+	// 	};
+	// }, []);
 
 	return (
 		<>
 			<div
 				aria-hidden={!isCartVisible}
 				className={cx(
-					`fixed top-0 right-0 w-full h-full bg-primary-3 bg-opacity-60 transition-all`,
+					`fixed right-0 w-full h-full bg-primary-3 bg-opacity-60 transition-all`,
 					isCartVisible
 						? 'duration-300'
 						: 'pointer-events-none select-none opacity-0 duration-150',
@@ -374,7 +370,7 @@ function CartContainer({ banner }: { banner: any }) {
 				onClick={() => void cartStore.getState().toggleIsOpen()}
 				id="cart-overlay"
 			/>
-			<div className="absolute top-0 right-0 transition-all flex justify-end max-w-[1280px] mx-auto">
+			<div className="absolute right-0 transition-all flex justify-end w-[1280px] max-w-full mx-auto">
 				<div
 					className={cx(
 						'h-fit max-h-[80vh] text-primary-1 bg-primary-4 w-[28rem] max-w-full p-8 origin-top',
