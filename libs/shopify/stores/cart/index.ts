@@ -67,6 +67,7 @@ function createEmptyCart(): Cart {
 		},
 		discountAllocations: [],
 		discountCodes: [],
+		buyerIdentity: {},
 	};
 }
 

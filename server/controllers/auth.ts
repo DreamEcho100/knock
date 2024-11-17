@@ -327,7 +327,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
 	`;
 
 	const response = await shopifyFetch<any, any>({
-		query: createCustomer,
+		query: createCustomerMutation,
 		variables: {
 			input: {
 				acceptsMarketing: input.acceptsMarketing,
