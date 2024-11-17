@@ -97,7 +97,7 @@ export default function CartBanner({ data }: { data?: any }) {
 						</div>
 					) : (
 						<button
-							className="px-5 border text-bold rounded-3xl"
+							className="px-5 py-1 leading-none border text-bold rounded-3xl"
 							// eslint-disable-next-line @typescript-eslint/no-misused-promises
 							onClick={addToCart}
 						>
