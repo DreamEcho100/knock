@@ -33,18 +33,31 @@ const nextConnect = (
 	return router.handler({
 		onError: (err, req, res) => {
 			const statusCode = res.statusCode < 400 ? 500 : res.statusCode;
+			console.log(
+				'___ err',
+				err,
+				typeof err === 'object' &&
+					err &&
+					'error' in err &&
+					typeof err.error === 'string',
+			);
 			const statusMessage: string = res.statusMessage
 				? res.statusMessage
-				: err instanceof Error ||
-					  isShopifyError(err) ||
-					  (err &&
-							typeof err === 'object' &&
-							'message' in err &&
-							typeof err.message === 'string')
-					? (err.message as string)
-					: Array.isArray(err)
-						? err.map((item) => item.message).join(', ')
-						: String(err);
+				: typeof err === 'object' &&
+					  err &&
+					  'error' in err &&
+					  typeof err.error === 'string'
+					? err.error
+					: err instanceof Error ||
+						  isShopifyError(err) ||
+						  (err &&
+								typeof err === 'object' &&
+								'message' in err &&
+								typeof err.message === 'string')
+						? (err.message as string)
+						: Array.isArray(err)
+							? err.map((item) => item.message).join(', ')
+							: String(err);
 
 			if (process.env.NODE_ENV === 'development' && err instanceof Error) {
 				console.log('\n');

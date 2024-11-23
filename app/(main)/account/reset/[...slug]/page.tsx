@@ -28,7 +28,6 @@ const ResetPage = () => {
 	>({
 		mutationFn: (event) => {
 			event.preventDefault();
-
 			const resetUrl = window.location.href;
 
 			if (formValues.confirmPassword !== formValues.password) {
@@ -69,8 +68,9 @@ const ResetPage = () => {
 			router.push('/');
 			setTimeout(() => toast.success(result.message), 0);
 		},
-		onError: (result) =>
-			setTimeout(() => toast(result.message, { type: 'error' }), 0),
+		onError: (result) => {
+			setTimeout(() => toast(result.message, { type: 'error' }), 0);
+		},
 	});
 
 	return (

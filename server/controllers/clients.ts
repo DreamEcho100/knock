@@ -4,6 +4,7 @@ import axios from 'axios';
 import gql from 'graphql-tag';
 import { print } from 'graphql';
 import SibApiV3Sdk from 'sib-api-v3-sdk';
+import { shopifyFetch } from '~/libs/shopify/utils';
 
 SibApiV3Sdk.ApiClient.instance.authentications['api-key'].apiKey =
 	process.env.SENDINBLUE_API_SMTP;
@@ -310,7 +311,7 @@ const editAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 	const input = z.object({ email: z.string().email() }).parse(req.body);
 
-	const customer = gql`
+	const customer = /* GraphQL */ `
 		mutation customerRecover($email: String!) {
 			customerRecover(email: $email) {
 				customerUserErrors {
@@ -318,28 +319,27 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 					field
 					message
 				}
+				userErrors {
+					field
+					message
+				}
 			}
 		}
 	`;
-	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2024-10/graphql.json`,
-		{
-			query: print(customer),
-			variables: {
-				email: input.email,
-			},
-		},
-		{
-			headers: {
-				'Content-Type': 'application/json',
-				'X-Shopify-Storefront-Access-Token':
-					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding': 'null',
-			},
-		},
-	);
 
-	if (!response.data.data.customerRecover) {
+	const response = await shopifyFetch<any, any>({
+		query: customer,
+		variables: {
+			email: input.email,
+		},
+	});
+
+	if (!response.body.data.customerRecover.customerAccessToken) {
+		res.statusCode = 404;
+		throw new Error('Please check your email and password');
+	}
+
+	if (!response.body.data.data.customerRecover) {
 		res.statusCode = 429;
 		throw new Error(
 			'The user sent too many requests in a given amount of time.',
@@ -347,12 +347,12 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 	}
 
 	if (
-		response.data.data.customerRecover.customerUserErrors.length &&
-		response.data.data.customerRecover.customerUserErrors[0].code
+		response.body.data.customerRecover.customerUserErrors.length &&
+		response.body.data.customerRecover.customerUserErrors[0].code
 	) {
 		res.statusCode = 404;
 		throw new Error(
-			response.data.data.customerRecover.customerUserErrors[0].message,
+			response.body.data.customerRecover.customerUserErrors[0].message,
 		);
 	}
 
@@ -370,7 +370,7 @@ const resetPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 		})
 		.parse(req.body);
 
-	const customer = gql`
+	const customer = /* GraphQL */ `
 		mutation customerResetByUrl($password: String!, $resetUrl: URL!) {
 			customerResetByUrl(password: $password, resetUrl: $resetUrl) {
 				customer {
@@ -381,49 +381,37 @@ const resetPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 					accessToken
 					expiresAt
 				}
-				customerUserErrors {
-					code
+
+				userErrors {
 					field
 					message
 				}
 			}
 		}
 	`;
-	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2024-10/graphql.json`,
-		{
-			query: print(customer),
-			variables: {
-				password: input.password,
-				resetUrl: input.resetUrl,
-			},
-		},
-		{
-			headers: {
-				'Content-Type': 'application/json',
-				'X-Shopify-Storefront-Access-Token':
-					process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-				'accept-encoding': 'null',
-			},
-		},
-	);
 
-	if (response.data.errors) {
-		res.statusCode = 404;
-		throw new Error(response.data.errors[0].message);
-	}
+	const response = await shopifyFetch<any, any>({
+		query: customer,
+		variables: {
+			password: input.password,
+			resetUrl: input.resetUrl,
+		},
+	});
 
-	if (response.data.data.customerResetByUrl?.customerUserErrors.length) {
+	// if (response.data.errors) {
+	// 	res.statusCode = 404;
+	// 	throw new Error(response.data.errors[0].message);
+	// }
+
+	if (response.body.data.userErrors?.userErrors.length) {
 		res.statusCode = 404;
-		throw new Error(
-			response.data.data.customerResetByUrl.customerUserErrors[0].message,
-		);
+		throw new Error(response.body.data.userErrors.userErrors[0].message);
 	}
 
 	return res.status(200).json({
 		success: true,
 		message: 'Reset password done successfully',
-		user: response.data.data.customerResetByUrl,
+		user: response.body.data.customerResetByUrl,
 	});
 };
 

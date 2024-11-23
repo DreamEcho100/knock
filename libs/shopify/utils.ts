@@ -83,10 +83,29 @@ export async function shopifyFetch<T>({
 
 		const body = await result.json();
 
+		interface SError {
+			message: string;
+			locations: {
+				line: number;
+				column: number;
+			}[];
+			extensions: {
+				value: null;
+				problems: {
+					path: never[];
+					explanation: string;
+				}[];
+			};
+		}
+
 		if (body.errors) {
+			const messages = body.errors
+				.map((error: Error | SError) => error.message)
+				.join('\n');
 			console.error('Errors:');
 			console.dir(body.errors, { depth: Number.MAX_SAFE_INTEGER });
-			throw body.errors[0];
+			console.error(messages);
+			throw messages;
 		}
 
 		return {
