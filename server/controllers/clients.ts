@@ -28,7 +28,7 @@ const deleteAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2024-10/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2025-01/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -115,7 +115,7 @@ const addAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2024-10/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2025-01/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -187,7 +187,7 @@ const defaultAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 	`;
 
 	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2024-10/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2025-01/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -258,7 +258,7 @@ const editAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 	`;
 
 	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2024-10/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2025-01/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -336,7 +336,7 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	if (!response.body.data.customerRecover.customerAccessToken) {
 		res.statusCode = 404;
-		throw new Error('Please check your email and password');
+		throw new Error('Please check your email for instructions to reset your password');
 	}
 
 	if (!response.body.data.data.customerRecover) {
@@ -476,7 +476,7 @@ const updateOneController = async (
 	`;
 
 	const response = await axios.post(
-		`https://${process.env.DOMAINE}/api/2024-10/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2025-01/graphql.json`,
 		{
 			query: print(customer),
 			variables: {
@@ -535,7 +535,7 @@ const getAllOrdersForOneClientByIdController = async (
 
 	if (accessToken) {
 		const { data } = await axios.post(
-			`https://${process.env.DOMAINE}/api/2024-10/graphql.json`,
+			`https://${process.env.DOMAINE}/api/2025-01/graphql.json`,
 			{
 				query: `
           query {
@@ -654,7 +654,7 @@ const getOneOrderForOneClientByIdController = async (
 	const { select, orderKey } = req.query;
 
 	const { data } = await axios.post(
-		`https://${process.env.DOMAINE}/api/2024-10/graphql.json`,
+		`https://${process.env.DOMAINE}/api/2025-01/graphql.json`,
 		{
 			query: `
             query {

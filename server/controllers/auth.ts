@@ -39,7 +39,7 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	if (!response.body.data.customerAccessTokenCreate.customerAccessToken) {
 		res.statusCode = 404;
-		throw new Error('Please check your email and password');
+		throw new Error('Please check your email for instructions to reset your password');
 	}
 
 	return res.status(200).json({

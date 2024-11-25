@@ -126,7 +126,7 @@ export default function LoginType({
 								className="text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600"
 								onClick={() => setType(EWindowType.FORGET_PASSWORD)}
 							>
-								forget password?
+								forgot password?
 							</button>
 						</div>
 						<div className="flex justify-end mt-4">
