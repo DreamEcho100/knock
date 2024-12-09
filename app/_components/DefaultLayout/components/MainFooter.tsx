@@ -36,7 +36,6 @@ const LinksListContainer = ({
 	}[];
 	linksListClassName?: string;
 }) => {
-	return null;
 	return (
 		<nav className="flex flex-col gap-2 p-2">
 			<h3 className="capitalize font-semibold text-2xl text-primary-1">

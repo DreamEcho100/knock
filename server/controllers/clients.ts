@@ -336,7 +336,9 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	if (!response.body.data.customerRecover.customerAccessToken) {
 		res.statusCode = 404;
-		throw new Error('Please check your email for instructions to reset your password');
+		throw new Error(
+			'Please check your email for instructions to reset your password',
+		);
 	}
 
 	if (!response.body.data.data.customerRecover) {
@@ -815,14 +817,168 @@ const supportForm = async (
 		})
 		.parse(req.body);
 
-	const email = await new SibApiV3Sdk.TransactionalEmailsApi().sendTransacEmail(
-		{
-			sender: {
-				email: input.email,
-				name: input.fullName,
+	// const email = await new SibApiV3Sdk.TransactionalEmailsApi().sendTransacEmail(
+	// 	{
+	// 		sender: {
+	// 			email: input.email,
+	// 			name: input.fullName,
+	// 		},
+	// 		subject: input.subject,
+	// 		htmlContent: `<!DOCTYPE html>
+	// 					<html lang="en">
+	// 					<head>
+	// 						<meta charset="UTF-8" />
+	// 						<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	// 						<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	// 						<link rel="preconnect" href="https://fonts.googleapis.com" />
+	// 						<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	// 						<link
+	// 						href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap"
+	// 						rel="stylesheet"
+	// 						/>
+	// 						<title>Contact Email</title>
+	// 					</head>
+	// 					<style>
+	// 						body {
+	// 						font-family: "Lato", sans-serif;
+	// 						}
+	// 						p {
+	// 						color: black;
+	// 						text-align: left;
+	// 						font-family: "Lato", sans-serif;
+	// 						line-height: 1.6;
+	// 						font-size: 14px;
+	// 						padding: 0px 0 0;
+	// 						margin: 0;
+	// 						}
+	// 						a{
+	// 						color: #4E7FA1;
+	// 						}
+	// 					</style>
+
+	// 					<body>
+	// 						<table style="width: 100%; height: 100%; padding: 20px 0">
+	// 						<tbody >
+	// 							<tr>
+	// 							<td style="height: 1%">
+	// 								<table
+	// 								style="
+	// 									background-color: #ffffff;
+	// 									width: 100%;
+	// 									height: 100%;
+	// 									max-width: 500px;
+	// 									margin: 0 auto;
+	// 									position: relative;
+	// 									border: 2px solid #e3e3e3;
+	// 									border-radius: 10px;
+	// 								"
+	// 								>
+	// 								<tbody>
+	// 									<tr>
+	// 									<td style="height: 1%; padding: 10px 30px 0">
+	// 										<p style="font-size: 14px">
+	// 										You received a new message from your online store's
+	// 										contact <br />
+	// 										form
+	// 										</p>
+	// 										<hr
+	// 										style="height: 2px; border: none; background: #e3e3e3"
+	// 										/>
+	// 									</td>
+	// 									</tr>
+
+	// 									<tr>
+	// 									<td style="height: 1%; padding: 10px 30px">
+	// 										<p style="font-weight: 900 ;" >
+	// 										Country Code:
+	// 										</p>
+	// 										<p style="font-weight: 500 ;"  >${input.countryCode}</p>
+	// 									</td>
+	// 									</tr>
+	// 									<tr>
+	// 									<td style="height: 1%;  padding: 10px 30px">
+	// 										<p style="font-weight: 900 ;" >
+	// 										Name:
+	// 										</p>
+	// 										<p style="font-weight: 500 ;" >
+	// 										${input.fullName}
+	// 										</p>
+	// 									</td>
+	// 									</tr>
+	// 									<tr>
+	// 									<td style="height: 1%; padding: 10px 30px">
+	// 										<p style="font-weight: 900 ;">
+	// 										Email:
+	// 										</p>
+	// 										<p style="font-weight: 500 ;"  >
+	// 										<a href="mailto:${input.email}"> ${input.email} </a>
+	// 										</p>
+	// 									</td>
+	// 									</tr>
+	// 									${
+	// 										input.orderNumber
+	// 											? `
+	// 									<tr>
+	// 									<td style="height: 1%; padding: 10px 30px">
+	// 										<p style="font-weight: 900 ;">
+	// 										Order Number:
+	// 										</p>
+	// 										<p style="font-weight: 500 ;"  >
+	// 										#${input.orderNumber}
+	// 										</p>
+	// 									</td>
+	// 									</tr>`
+	// 											: ''
+	// 									}
+	// 									<tr>
+	// 									<td style="height: 1%; padding: 0 30px">
+	// 										<p style="font-weight: 900 ;" >
+	// 										Body:
+	// 										</p>
+	// 										<p  style="padding-bottom: 20px ; font-weight: 500 ;" > ${input.message} </p>
+	// 									</td>
+	// 									</tr>
+	// 									<tr>
+	// 									<td  style="height: 1%; padding: 0 30px">
+	// 										<p style="font-weight: 900 ;" >
+	// 										Thank you
+	// 										</p>
+	// 										<p style="font-weight: 500 ; padding-bottom: 20px ;" >${input.fullName}</p>
+	// 									</td>
+	// 									</tr>
+	// 								</tbody>
+	// 								</table>
+	// 							</td>
+	// 							</tr>
+	// 						</tbody>
+	// 						</table>
+	// 					</body>
+	// 					</html>
+	// 			`,
+
+	// 		to: [
+	// 			{
+	// 				email: process.env.NEXT_PUPLIC_FORMSUBMIT_EMAIL,
+	// 			},
+	// 		],
+	// 	},
+	// );
+
+	const url = 'https://api.brevo.com/v3/smtp/email';
+	const apiKey = process.env.SENDINBLUE_API_SMTP;
+	const payload = {
+		sender: {
+			name: input.fullName,
+			email: input.email,
+		},
+		to: [
+			{
+				email: process.env.NEXT_PUPLIC_FORMSUBMIT_EMAIL,
+				name: 'Plugins That Knock',
 			},
-			subject: input.subject,
-			htmlContent: `<!DOCTYPE html>
+		],
+		subject: input.subject,
+		htmlContent: `<!DOCTYPE html>
 						<html lang="en">
 						<head>
 							<meta charset="UTF-8" />
@@ -953,22 +1109,59 @@ const supportForm = async (
 						</body>
 						</html>
 				`,
+	};
 
-			to: [
-				{
-					email: process.env.NEXT_PUPLIC_FORMSUBMIT_EMAIL,
-				},
-			],
-		},
-	);
+	try {
+		const response = await fetch(url, {
+			method: 'POST',
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			headers: {
+				accept: 'application/json',
+				'api-key': apiKey,
+				'content-type': 'application/json',
+			},
+			body: JSON.stringify(payload),
+		});
 
-	if (email) {
+		console.log('___ response', response);
+
+		// if (!response.ok) {
+		// 	throw new Error(`HTTP error! Status: ${response.status}`);
+		// }
+
+		const data = (await response.json()) as
+			| { messageId: string }
+			| { code: string; message: string };
+
+		if ('message' in data) {
+			return res.status(500).json({
+				success: false,
+				message: data.message,
+			});
+		}
+
+		console.log('Email sent successfully:', data);
 		return res.status(200).json({
 			success: true,
 			message: 'The form was sent successfully!',
-			email,
+			data,
+		});
+	} catch (error) {
+		console.error('Error sending email:', error);
+		return res.status(500).json({
+			success: false,
+			message: 'Failed to send email',
 		});
 	}
+
+	// if (email) {
+	// 	return res.status(200).json({
+	// 		success: true,
+	// 		message: 'The form was sent successfully!',
+	// 		email,
+	// 	});
+	// }
 };
 
 const redeemCode = async (
