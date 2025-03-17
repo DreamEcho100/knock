@@ -28,7 +28,7 @@ export const metadata = {
 
 export default async function KnockPluginPage() {
 	const [knockPlugin, knockPageData, knockMainSection] = await Promise.all([
-		getProduct('knock-plugin'),
+		getProduct({ handle: 'knock-plugin' }),
 		getKnockPageData(),
 		getKnockMainSection(),
 	]);

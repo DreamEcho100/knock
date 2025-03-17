@@ -87,7 +87,9 @@ async function applyKnobPluginSpecificLogic() {
 			) {
 				return;
 			}
-			const result = await getProduct(drumsThatKnockLimitedEdition2024Handle);
+			const result = await getProduct({
+				handle: drumsThatKnockLimitedEdition2024Handle,
+			});
 
 			const variant = result?.variants[0];
 

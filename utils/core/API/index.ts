@@ -1,5 +1,4 @@
 import axios from 'axios';
-import type { Product } from '~/libs/shopify/types';
 
 export const getBanner = async () => {
 	const response = await axios.get(
@@ -201,15 +200,3 @@ const getAppApiPath = () =>
 			? `https://${process.env.NEXT_PUBLIC_APP_DOMAINE}/api`
 			: process.env.NEXT_PUBLIC_BACKEND_ABSOLUTE_PATH
 		: process.env.NEXT_PUBLIC_BACKEND_RELATIVE_PATH;
-
-export const getProductById = async (id: string) => {
-	const response = await fetch(`${getAppApiPath()}/products/product/?id=${id}`);
-
-	// await throwIfResponseError(response);
-
-	const productResult = (await response.json()) as {
-		product: Product;
-	};
-
-	return productResult.product;
-};

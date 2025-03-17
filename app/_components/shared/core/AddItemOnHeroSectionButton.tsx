@@ -6,7 +6,7 @@ import { cx } from 'class-variance-authority';
 import type { Product } from '~/libs/shopify/types';
 import { cartStore } from '~/libs/shopify/stores/cart';
 
-const AddItemOnHeroSectionButton = ({
+export default function AddItemOnHeroSectionButton({
 	product,
 	buttonProps: _buttonProps = {},
 	hideButton,
@@ -14,7 +14,7 @@ const AddItemOnHeroSectionButton = ({
 	product: Product;
 	buttonProps?: Parameters<typeof Button>[0];
 	hideButton?: boolean;
-}) => {
+}) {
 	const variant = product.variants[0];
 	const buttonProps = {
 		onClick: async () => {
@@ -65,6 +65,4 @@ const AddItemOnHeroSectionButton = ({
 			{!hideButton && <Button {...buttonProps} />}
 		</div>
 	);
-};
-
-export default AddItemOnHeroSectionButton;
+}

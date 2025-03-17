@@ -1,10 +1,11 @@
-import { getOneCustomProductByHandle } from '~/server/controllers/products';
 import { notFound, redirect } from 'next/navigation';
 import ProductByHandleScreen from './screen';
 import { type Metadata, type ResolvingMetadata } from 'next';
 import { defaultSiteName3 } from '~/utils/core/next-seo.config';
 import { cache } from 'react';
-import { getProducts } from '~/libs/shopify';
+import { getProduct, getProducts } from '~/libs/shopify';
+import axios from 'axios';
+import type { ICustomProduct } from '~/types';
 
 type Props = {
 	params: { productHandle: string };
@@ -13,6 +14,30 @@ type Props = {
 const pages_redirects_map: Record<string, string> = {
 	'knock-plugin': '/knock',
 	'knock-clipper': '/knock-clipper',
+};
+
+const getOneCustomProductByHandle = async (handle: string) => {
+	const product = await getProduct({ handle });
+
+	if (!product) {
+		throw new Error('Product not found');
+	}
+
+	const response = await axios.get(
+		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-DTK-product?productHandle=${product.handle}`,
+	);
+
+	const newFieldsApi = response.data.DTKproduct;
+
+	newFieldsApi && delete newFieldsApi.id;
+
+	const newProductObject = {
+		...product,
+		...newFieldsApi,
+		originalDescription: product.description,
+	} as ICustomProduct;
+
+	return newProductObject;
 };
 
 const getPageData = cache(async (props: Props) => {

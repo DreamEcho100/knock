@@ -25,7 +25,7 @@ export const metadata = {
 
 async function getPageData() {
 	return await Promise.all([
-		getProduct('knock-clipper'),
+		getProduct({ handle: 'knock-clipper' }),
 		getKnockClipperPageData(),
 		getKnockClipperMainSection(),
 	]);

@@ -18,7 +18,7 @@ import {
 } from './queries/collection';
 import { getMenuQuery } from './queries/menu';
 import {
-	getProductQuery,
+	getProductQueryByHandle,
 	getProductRecommendationsQuery,
 	getProductsQuery,
 } from './queries/product';
@@ -177,13 +177,17 @@ export async function getCollectionProducts({
 	);
 }
 
-export async function getProduct(handle: string): Promise<Product | undefined> {
+export async function getProduct(param: {
+	handle?: string;
+	id?: string;
+}): Promise<Product | undefined> {
 	const res = await shopifyFetch<ShopifyProductOperation>({
 		tags: [TAGS.products],
 		revalidate: 3600,
-		query: getProductQuery,
+		query: param.handle ? getProductQueryByHandle : getProductQueryByHandle,
 		variables: {
-			handle,
+			handle: param.handle,
+			id: param.id,
 		},
 	});
 	return reshapeShopifyProduct(res.body.data.product, false);
@@ -281,103 +285,6 @@ export async function addToCart(
 	return reshapeCart(res.body.data.cartLinesAdd.cart);
 }
 
-/*
-cartDiscountCodesUpdate
-mutation
-
-Updates the discount codes applied to the cart.
-Anchor to section titled 'Arguments'
-Arguments
-
-Anchor to cartId
-cartId
-ID!
-required
-
-    The ID of the cart.
-
-Anchor to discountCodes
-discountCodes
-[String!]
-
-    The case-insensitive discount codes that the customer added at checkout.
-
-    The input must not contain more than 250 values.
-
-Was this section helpful?
-Anchor to section titled 'CartDiscountCodesUpdatePayload returns'
-CartDiscountCodesUpdatePayload returns
-
-Anchor to CartDiscountCodesUpdatePayload.cart
-cart
-Cart
-
-    The updated cart.
-Anchor to CartDiscountCodesUpdatePayload.userErrors
-userErrors
-[CartUserError!]!
-non-null
-
-    The list of errors that occurred from executing the mutation.
-Anchor to CartDiscountCodesUpdatePayload.warnings
-warnings
-[CartWarning!]!
-non-null
-
-    A list of warnings that occurred during the mutation.
-
-
-
-Hide code
-Mutation reference
-```
-mutation cartDiscountCodesUpdate($cartId: ID!) {
-  cartDiscountCodesUpdate(cartId: $cartId) {
-    cart {
-      # Cart fields
-    }
-    userErrors {
-      field
-      message
-    }
-    warnings {
-      # CartWarning fields
-    }
-  }
-}
-```
-
-Input - Variables
-```
-{
-  "cartId": "gid://shopify/<objectName>/10079785100",
-  "discountCodes": [
-    "<your-discountCodes>"
-  ]
-}
-```
-
-```
-export const cartDiscountCodesUpdateMutation = / * GraphQL * / `
-mutation cartDiscountCodesUpdate($cartId: ID!, $discountCodes: [String!]) {
-	cartDiscountCodesUpdate(cartId: $cartId, discountCodes: $discountCodes) {
-		cart {
-			...cart
-		}
-		userErrors {
-			field
-			message
-		}
-		warnings {
-			code
-			message
-		}
-	}
-}
-${cartFragment}
-`;
-```
-*/
 export async function updateCartDiscountCodes(
 	cartId: string,
 	discountCodes: string[],

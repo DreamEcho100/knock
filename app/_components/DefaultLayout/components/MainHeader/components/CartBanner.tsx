@@ -2,13 +2,10 @@
 import Link from 'next/link';
 import { commonClasses } from '../../..';
 import { AiFillCloseCircle } from 'react-icons/ai';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { cartStore } from '~/libs/shopify/stores/cart';
 import { useStore } from 'zustand';
 import { getProduct } from '~/libs/shopify';
-import type { ShopifyProduct } from '~/libs/shopify/types';
-import { reshapeShopifyProduct } from '~/libs/shopify/utils';
 import { generalStore } from '~/libs/stores/general';
 import { createPortal } from 'react-dom';
 
@@ -26,11 +23,7 @@ export default function CartBanner({ data }: { data?: any }) {
 	const addToCart = async () => {
 		if (parseInt(bannerId)) {
 			try {
-				const data = await axios
-					.get(`/api/products/product?id=${bannerId}`)
-					.then((res) =>
-						reshapeShopifyProduct(res.data.product as ShopifyProduct),
-					);
+				const data = await getProduct({ id: bannerId });
 
 				if (!data?.variants[0]) {
 					throw new Error('Product not found');
@@ -45,9 +38,9 @@ export default function CartBanner({ data }: { data?: any }) {
 			}
 		} else {
 			try {
-				const data = await getProduct(
-					bannerId === 'knock' ? 'knock-plugin' : bannerId,
-				);
+				const data = await getProduct({
+					handle: bannerId === 'knock' ? 'knock-plugin' : bannerId,
+				});
 
 				if (!data?.variants[0]) {
 					throw new Error('Product not found');

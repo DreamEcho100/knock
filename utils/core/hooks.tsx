@@ -6,11 +6,7 @@ import { getCookie } from '~/utils/common/storage/cookie/document';
 
 import { useEffect, useRef } from 'react';
 
-import type { IGenericErrorResponse, ILineItem, IUser } from 'types';
-
-// import { checkoutApi } from './API';
-import { convertProductToCartItem } from './products';
-import type { Product } from '~/libs/shopify/types';
+import type { IGenericErrorResponse, IUser } from 'types';
 
 export const useGetUserDataFromStore = () => {
 	const user = useGetUserData({ enabled: true });

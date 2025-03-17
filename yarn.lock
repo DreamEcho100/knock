@@ -841,11 +841,6 @@
   resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.5.8.tgz#8268a8c57a3e4abd25c165ecd36237db7948a55e"
   integrity sha512-I8EUhyrgfLrcTkzV3TSsGyl1tSuPrEDzr0yd5m90UgNxQkyDXULk3b6MlQqTCpZpNtWe1K0hzclnZkTcLBe2UQ==
 
-"@types/shopify-buy@^2.17.4":
-  version "2.17.4"
-  resolved "https://registry.yarnpkg.com/@types/shopify-buy/-/shopify-buy-2.17.4.tgz#02f9b88e3e1e6dcd50cba5de17e4bfc4357f67a9"
-  integrity sha512-svTrPgQJaKcKv0yGAdQAsgHR8JF8qSWPQThPU+cawSq2+2Wj/ZD8AVXn3FenXwEVfhqGcRhZOKJJfSd7+gipYg==
-
 "@types/unist@*", "@types/unist@^3.0.0":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@types/unist/-/unist-3.0.3.tgz#acaab0f919ce69cce629c2d4ed2eb4adc1b6c20c"

@@ -335,29 +335,6 @@ function CartContainer({ banner }: { banner: any }) {
 		refetchOnWindowFocus: true,
 	});
 
-	// useEffect(() => {
-	// 	const cartContainer = document.getElementById('cart-container');
-	// 	const mainHeaderNavAndActions = document.getElementById(
-	// 		'main-header-nav-and-actions',
-	// 	);
-	// 	const cartOverlay = document.getElementById('cart-overlay');
-
-	// 	if (!cartContainer || !mainHeaderNavAndActions || !cartOverlay) {
-	// 		return;
-	// 	}
-
-	// 	const resizeObserver = new ResizeObserver(() => {
-	// 		cartContainer.style.marginTop = `${mainHeaderNavAndActions.clientHeight}px`;
-	// 		// cartOverlay.style.marginTop = `${mainHeaderNavAndActions.clientHeight}px`;
-	// 	});
-
-	// 	resizeObserver.observe(mainHeaderNavAndActions);
-
-	// 	return () => {
-	// 		resizeObserver.disconnect();
-	// 	};
-	// }, []);
-
 	return (
 		<>
 			<div

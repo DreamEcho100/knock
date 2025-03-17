@@ -31,7 +31,7 @@ async function getPageData() {
 				(product) => !typesToExclude.includes(product.productType),
 			);
 		}),
-		getProduct('knock-plugin'),
+		getProduct({ handle: 'knock-plugin' }),
 		getDTKPageData(),
 	]);
 	// knockclipper-pluginboutique

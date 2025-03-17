@@ -16,7 +16,7 @@ type Props = {
 export const revalidate = 360;
 
 const getPageData = cache(async (props: Props) => {
-	const data = await getProduct(props.params.pluginsBoutique);
+	const data = await getProduct({ handle: props.params.pluginsBoutique });
 
 	if (!data) {
 		notFound();
@@ -49,17 +49,17 @@ export async function generateMetadata(
 
 export async function getStaticPaths() {
 	const paths = await getProducts().then((products) => {
-		const params = [];
+		const paths = [];
 
 		const typesToExclude = ['Sound Editing Software'];
 
 		for (const product of products) {
 			if (!typesToExclude.includes(product.productType)) {
-				params.push({ params: { pluginsBoutique: product.handle } });
+				paths.push({ params: { pluginsBoutique: product.handle } });
 			}
 		}
 
-		return { params };
+		return paths;
 	});
 
 	return {
