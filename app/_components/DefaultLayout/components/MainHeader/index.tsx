@@ -203,7 +203,7 @@ const MainHeader = () => {
 								<li>
 									<button
 										title="cart"
-										className="flex items-center justify-center disabled:bg-slate-400 disabled:cursor-not-allowed disabled:opacity-50"
+										className="flex items-center justify-center disabled:bg-slate-400 disabled:cursor-not-allowed disabled:animate-pulse"
 										onClick={() => logoutUser.mutate()}
 										disabled={logoutUser.isLoading}
 									>
@@ -303,7 +303,7 @@ function RemoveItemButton(props: { lineItemId: string; disabled: boolean }) {
 			className={cx(
 				'w-fit py-1 text-primary-3 hover:text-primary-2 focus:text-primary-1',
 				'transition-all duration-150',
-				'disabled:cursor-not-allowed disabled:opacity-50',
+				'disabled:cursor-not-allowed disabled:animate-pulse',
 			)}
 			disabled={props.disabled}
 			onClick={() => {
@@ -385,7 +385,7 @@ function CartContainer({ banner }: { banner: any }) {
 					<header className="pb-4">
 						<h3 className="font-semibold uppercase text-h5">cart</h3>
 					</header>
-					<div className="flex flex-col gap-4 overflow-auto">
+					<div className="flex flex-col gap-4 overflow-x-hidden overflow-y-auto">
 						{productsData.length === 0
 							? "You don't have any items in your cart yet."
 							: productsData.map((lineItem) => {
