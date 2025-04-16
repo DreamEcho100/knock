@@ -30,14 +30,16 @@ const UserAuthButton = ({ isOpen, setIsOpen }: IProps) => {
 
 	return (
 		<>
-			<button
-				type="button"
-				title="login/register"
-				className="flex items-center justify-center"
-				onClick={() => setIsOpen(true)}
-			>
-				<BsFillPersonFill className="text-xl" />
-			</button>
+			{process.env.NODE_ENV === 'development' && (
+				<button
+					type="button"
+					title="login/register"
+					className="flex items-center justify-center"
+					onClick={() => setIsOpen(true)}
+				>
+					<BsFillPersonFill className="text-xl" />
+				</button>
+			)}
 			{type === EWindowType.REGISTER ? (
 				<RegisterTypeDynamic
 					isOpen={isOpen}

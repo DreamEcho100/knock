@@ -27,8 +27,7 @@ export const cardClasses = cva(
 );
 
 export const buttonClasses = cva(
-	`font-semibold outline-none disabled:cursor-not-allowed
-	duration-300 transition-all`,
+	`font-semibold outline-none disabled:cursor-not-allowed disabled:opacity-50 duration-300 transition-all`,
 	{
 		variants: {
 			w: {

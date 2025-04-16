@@ -30,7 +30,7 @@ import { initCart, redirectToCheckout } from '~/libs/shopify/actions/cart';
 import {
 	CartDiscountCodesPendingKey,
 	CartLinePendingDeleteKey,
-	CartLinePendingUpdateKey,
+	CartLinePendingUpsertKey,
 	cartStore,
 } from '~/libs/shopify/stores/cart';
 import { useStore } from 'zustand';
@@ -203,7 +203,7 @@ const MainHeader = () => {
 								<li>
 									<button
 										title="cart"
-										className="flex items-center justify-center disabled:bg-slate-400"
+										className="flex items-center justify-center disabled:bg-slate-400 disabled:cursor-not-allowed disabled:opacity-50"
 										onClick={() => logoutUser.mutate()}
 										disabled={logoutUser.isLoading}
 									>
@@ -297,6 +297,24 @@ function CartDisplayButton() {
 	);
 }
 
+function RemoveItemButton(props: { lineItemId: string; disabled: boolean }) {
+	return (
+		<button
+			className={cx(
+				'w-fit py-1 text-primary-3 hover:text-primary-2 focus:text-primary-1',
+				'transition-all duration-150',
+				'disabled:cursor-not-allowed disabled:opacity-50',
+			)}
+			disabled={props.disabled}
+			onClick={() => {
+				void cartStore.getState().updateCartItem('delete', props.lineItemId);
+			}}
+		>
+			remove
+		</button>
+	);
+}
+
 function CartContainer({ banner }: { banner: any }) {
 	// const isBannerVisible = useStore(
 	// 	generalStore,
@@ -309,7 +327,7 @@ function CartContainer({ banner }: { banner: any }) {
 		cartStore,
 		(state) =>
 			state.pendingActions[CartLinePendingDeleteKey] ||
-			state.pendingActions[CartLinePendingUpdateKey] ||
+			state.pendingActions[CartLinePendingUpsertKey] ||
 			isPending,
 	);
 
@@ -469,20 +487,10 @@ function CartContainer({ banner }: { banner: any }) {
                         </div> */}
 													<div className="flex flex-col">
 														<CartItemDiscounts lineItem={lineItem} />
-														<button
-															className={cx(
-																'w-fit py-1 text-primary-3 hover:text-primary-2 focus:text-primary-1',
-																'transition-all duration-150',
-															)}
+														<RemoveItemButton
+															lineItemId={lineItem.id}
 															disabled={disableAllButtons}
-															onClick={() => {
-																void cartStore
-																	.getState()
-																	.updateCartItem('delete', lineItem.id);
-															}}
-														>
-															remove
-														</button>
+														/>
 													</div>
 												</div>
 											</div>

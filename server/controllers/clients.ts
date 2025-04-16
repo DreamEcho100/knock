@@ -979,8 +979,6 @@ const supportForm = async (
 			body: JSON.stringify(payload),
 		});
 
-		console.log('___ response', response);
-
 		// if (!response.ok) {
 		// 	throw new Error(`HTTP error! Status: ${response.status}`);
 		// }

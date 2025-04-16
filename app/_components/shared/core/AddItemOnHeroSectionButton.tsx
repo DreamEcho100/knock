@@ -4,7 +4,11 @@ import Button from './Button';
 import { useMemo } from 'react';
 import { cx } from 'class-variance-authority';
 import type { Product } from '~/libs/shopify/types';
-import { cartStore } from '~/libs/shopify/stores/cart';
+import {
+	cartStore,
+	getCartLineItemPendingUpsertOrUpdateKey,
+} from '~/libs/shopify/stores/cart';
+import { useStore } from 'zustand';
 
 export default function AddItemOnHeroSectionButton({
 	product,
@@ -16,6 +20,16 @@ export default function AddItemOnHeroSectionButton({
 	hideButton?: boolean;
 }) {
 	const variant = product.variants[0];
+	const isPending = useStore(
+		cartStore,
+		(state) =>
+			state.pendingActions[
+				getCartLineItemPendingUpsertOrUpdateKey(
+					product.id,
+					product.variants[0].id,
+				)
+			],
+	);
 	const buttonProps = {
 		onClick: async () => {
 			await cartStore.getState().upsertCartItem(variant, product);
@@ -23,6 +37,7 @@ export default function AddItemOnHeroSectionButton({
 		},
 		children: 'Buy it now',
 		className: 'capitalize text-h6',
+		disabled: isPending,
 		..._buttonProps,
 	};
 

@@ -15,6 +15,7 @@ import {
 	updateCartItemQuantity,
 } from '../../actions/cart';
 import { upsertOnSuccess } from './utils';
+import { toast } from 'react-toastify';
 
 type UpdateType = 'plus' | 'minus' | 'delete';
 interface CartStateRules {
@@ -85,7 +86,7 @@ export const getCartLineItemPendingUpsertOrUpdateKey = (
 ) => `cart-line-item-upsert-or-update-${productId}-${productVariantId}`;
 
 export const CartLinePendingDeleteKey = 'cart-line-delete';
-export const CartLinePendingUpdateKey = 'cart-line-update';
+export const CartLinePendingUpsertKey = 'cart-line-upsert';
 export const CartDiscountCodesPendingKey = 'cart-discount-codes';
 
 export const cartStore = createStore<CartState>((set, get) => ({
@@ -174,6 +175,7 @@ export const cartStore = createStore<CartState>((set, get) => ({
 		switch (result?.type) {
 			case 'ERROR':
 				console.error(result.message);
+				toast.error(result.message);
 				break;
 			case 'HALT':
 			case 'SUCCESS':
@@ -191,7 +193,7 @@ export const cartStore = createStore<CartState>((set, get) => ({
 		if (state.state !== 'active') {
 			return;
 		}
-		let pendingKey: string | undefined;
+		let pendingKey: string[] | undefined;
 
 		try {
 			const currentCart = state.cart ?? createEmptyCart();
@@ -261,8 +263,11 @@ export const cartStore = createStore<CartState>((set, get) => ({
 			switch (actualUpdateType) {
 				case 'plus':
 				case 'minus': {
-					pendingKey = getCartLineItemPendingUpdateKey(lineId);
-					state.setPendingAction(pendingKey, true);
+					pendingKey = [
+						getCartLineItemPendingUpdateKey(lineId),
+						CartLinePendingUpsertKey,
+					];
+					pendingKey.forEach((pk) => state.setPendingAction(pk, true));
 					const result = await updateCartItemQuantity({
 						merchandiseId: lineId,
 						quantity: foundItem.quantity,
@@ -277,8 +282,11 @@ export const cartStore = createStore<CartState>((set, get) => ({
 					break;
 				}
 				case 'delete': {
-					pendingKey = getCartLineItemPendingDeleteKey(lineId);
-					state.setPendingAction(pendingKey, true);
+					pendingKey = [
+						getCartLineItemPendingDeleteKey(lineId),
+						CartLinePendingDeleteKey,
+					];
+					pendingKey.forEach((pk) => state.setPendingAction(pk, true));
 					const result = await removeCartItem(lineId);
 
 					if (result.type === 'error') {
@@ -290,18 +298,19 @@ export const cartStore = createStore<CartState>((set, get) => ({
 				}
 			}
 
-			set({
-				cart: updatedCart,
-			});
+			set({ cart: updatedCart });
 
 			if (rules?.shouldOpen) {
 				state.setIsOpen(true);
 			}
 		} catch (error) {
 			console.dir(error, { depth: Number.MAX_SAFE_INTEGER });
+			toast.error(
+				error instanceof Error ? error.message : String(error?.message),
+			);
 		}
 
-		pendingKey && state.setPendingAction(pendingKey, false);
+		pendingKey?.forEach((pk) => state.setPendingAction(pk, false));
 	},
 
 	updateCartDiscountCodes: async (discountCodes) => {
