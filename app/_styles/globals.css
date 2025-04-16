@@ -1,5 +1,9 @@
-@import 'tailwindcss';
+@import 'tailwindcss' important;
 @config "../../tailwind.config.js";
+@source "../../app";
+@source "../../utils";
+@source "../../pages";
+@source "../../components";
 
 :root {
 	--main-nav-h: 6rem;
