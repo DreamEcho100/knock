@@ -155,7 +155,7 @@ const MainHeader = () => {
 		initCartQuery.data,
 		initCartQuery.error?.message,
 		initCartQuery.isError,
-		initCartQuery.isInitialLoading,
+		initCartQuery.isLoading,
 		initCartQuery.isSuccess,
 	]);
 
