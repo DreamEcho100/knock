@@ -102,7 +102,9 @@ const ActivatePage = () => {
 						autoComplete="confirm password"
 						minLength={3}
 					/>
-					<Button disabled={activateAccount.isPending}>Activate</Button>
+					<Button classesIntent={{ isLoading: activateAccount.isPending }}>
+						Activate
+					</Button>
 				</form>
 			</div>
 		</section>

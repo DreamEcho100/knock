@@ -102,7 +102,9 @@ const ResetPage = () => {
 						autoComplete="confirm password"
 						minLength={3}
 					/>
-					<Button disabled={resetAccount.isPending}>RESET</Button>
+					<Button classesIntent={{ isLoading: resetAccount.isPending }}>
+						RESET
+					</Button>
 				</form>
 			</div>
 		</section>

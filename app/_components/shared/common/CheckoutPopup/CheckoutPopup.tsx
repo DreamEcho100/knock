@@ -250,8 +250,11 @@ const CheckoutPopup = (props: {
 							},
 						})}
 				className="mt-5 w-full"
-				classesIntent={{ w: 'full', display: 'flex-xy-center' }}
-				disabled={isPending}
+				classesIntent={{
+					w: 'full',
+					display: 'flex-xy-center',
+					isLoading: isPending,
+				}}
 			>
 				Continue to Checkout
 			</Button>

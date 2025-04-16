@@ -132,9 +132,11 @@ export default function LoginType({
 						<div className="flex justify-end mt-4">
 							<Button
 								type="submit"
-								classesIntent={{ w: 'full' }}
+								classesIntent={{
+									w: 'full',
+									isLoading: loginMutation.isPending,
+								}}
 								className="mt-4"
-								disabled={loginMutation.isPending}
 							>
 								Submit
 							</Button>

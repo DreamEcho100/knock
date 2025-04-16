@@ -27,7 +27,7 @@ export const cardClasses = cva(
 );
 
 export const buttonClasses = cva(
-	`font-semibold outline-none disabled:cursor-not-allowed disabled:animate-pulse duration-300 transition-all`,
+	`font-semibold outline-none disabled:cursor-not-allowed duration-300 transition-all`,
 	{
 		variants: {
 			w: {
@@ -51,6 +51,9 @@ export const buttonClasses = cva(
 					'focus:ring focus:ring-bg-secondary-1',
 				),
 				none: '',
+			},
+			isLoading: {
+				true: 'cursor-progress animate-pulse pointer-events-none',
 			},
 			display: {
 				'flex-xy-center': 'flex items-center justify-center',

@@ -286,8 +286,8 @@ const UpdateUserBasicDetails = ({
 					<div className="flex justify-end">
 						<Button
 							type="submit"
-							classesIntent={{ w: 'full' }}
-							disabled={updateMutation.isPending || !isChanged}
+							classesIntent={{ w: 'full', isLoading: updateMutation.isPending }}
+							disabled={!isChanged}
 						>
 							Submit
 						</Button>
@@ -381,8 +381,12 @@ export default function CustomerProfilePage() {
 							<span className="text-bg-secondary-1">{user.data.email}</span> (
 							<Button
 								onClick={() => logoutUser.mutate()}
-								disabled={logoutUser.isPending}
-								classesIntent={{ rounded: 'none', p: 'none', theme: 'none' }}
+								classesIntent={{
+									rounded: 'none',
+									p: 'none',
+									theme: 'none',
+									isLoading: logoutUser.isPending,
+								}}
 								className="text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600"
 							>
 								logout

@@ -148,9 +148,11 @@ export default function RegisterType({
 						<div className="flex justify-end mt-4">
 							<Button
 								type="submit"
-								classesIntent={{ w: 'full' }}
+								classesIntent={{
+									w: 'full',
+									isLoading: registerMutation.isPending,
+								}}
 								className="mt-4"
-								disabled={registerMutation.isPending}
 							>
 								Submit
 							</Button>

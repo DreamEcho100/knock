@@ -14,6 +14,7 @@ import { commonClasses } from '..';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useMutation } from '@tanstack/react-query';
+import { cn } from '~/libs/utils';
 
 const socialLinks = {
 	facebook: 'https://www.facebook.com/decapmusic',
@@ -175,14 +176,18 @@ export default function MainFooter() {
 										required
 										placeholder="Email address"
 										id={`email-${formId}`}
-										className="w-full bg-transparent px-6 py-2 outline-none text-base autofill:bg-red-900"
+										className={cn(
+											'w-full bg-transparent px-6 py-2 outline-none text-base autofill:bg-red-900',
+											subscribeToNewsLetters.isPending
+												? 'cursor-progress animate-pulse pointer-events-none'
+												: '',
+										)}
 										onChange={(event) => {
 											setFormValues((prev) => ({
 												...prev,
 												email: event.target.value,
 											}));
 										}}
-										disabled={subscribeToNewsLetters.isPending}
 									/>
 									<Button
 										type="submit"

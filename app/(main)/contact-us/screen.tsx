@@ -173,7 +173,10 @@ export default function ContactUsScreen() {
 								}
 							}}
 						/>
-						<Button type="submit" disabled={submitForm.isPending}>
+						<Button
+							type="submit"
+							classesIntent={{ isLoading: submitForm.isPending }}
+						>
 							Submit
 						</Button>
 					</form>

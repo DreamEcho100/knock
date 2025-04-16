@@ -27,6 +27,9 @@ export default function ProductDetails({
 			],
 	);
 
+	const isLoading = isPending || cartState === 'loading';
+	const isDisabled = cartState === 'idle';
+
 	return (
 		<div className={classes.ProductCardDetailsContainer}>
 			<div></div>
@@ -69,7 +72,8 @@ export default function ProductDetails({
 									description: product.originalDescription,
 								})
 							}
-							disabled={isPending}
+							disabled={isDisabled}
+							classesIntent={{ isLoading }}
 						>
 							Add To Cart
 						</Button>

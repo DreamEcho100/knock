@@ -76,6 +76,7 @@ const MainHeader = () => {
 	const [isRegisterDialogOpen, setIsRegisterDialogOpen] = useState(false);
 	const [isSmallScreenNaveOpen, setIsSmallScreenNaveOpen] = useState(false);
 	// const [isCheckoutFound, setIsCheckoutFound] = useState(false);
+	const cartState = useStore(cartStore, (state) => state.state);
 
 	const initCartQuery = useQuery<
 		Cart | undefined,
@@ -241,9 +242,13 @@ const MainHeader = () => {
 							{user?.data && (
 								<li>
 									<button
-										className="flex items-center justify-center disabled:bg-slate-400 disabled:cursor-not-allowed disabled:animate-pulse"
+										className={cn(
+											'flex items-center justify-center',
+											cartState === 'loading' || logoutUser.isPending
+												? 'cursor-progress animate-pulse pointer-events-none'
+												: '',
+										)}
 										onClick={() => logoutUser.mutate()}
-										disabled={logoutUser.isPending}
 									>
 										logout
 									</button>
@@ -350,15 +355,16 @@ function CartDisplayButton() {
 	);
 }
 
-function RemoveItemButton(props: { lineItemId: string; disabled: boolean }) {
+function RemoveItemButton(props: { lineItemId: string; isLoading: boolean }) {
 	return (
 		<button
 			className={cx(
 				'w-fit py-1 text-primary-3 hover:text-primary-2 focus:text-primary-1',
 				'transition-all duration-150',
-				'disabled:cursor-not-allowed disabled:animate-pulse',
+				props.isLoading
+					? 'cursor-progress animate-pulse pointer-events-none'
+					: '',
 			)}
-			disabled={props.disabled}
 			onClick={() => {
 				void cartStore.getState().updateCartItem('delete', props.lineItemId);
 			}}
@@ -376,7 +382,7 @@ function CartContainer({ banner }: { banner: any }) {
 	const [isPending, startTransition] = useTransition();
 	const isCartVisible = useStore(cartStore, (state) => state.isOpen);
 
-	const disableAllButtons = useStore(
+	const isUpdateOrDeletePending = useStore(
 		cartStore,
 		(state) =>
 			state.pendingActions[CartLinePendingDeleteKey] ||
@@ -415,7 +421,7 @@ function CartContainer({ banner }: { banner: any }) {
 			<div
 				aria-hidden={!isCartVisible}
 				className={cx(
-					`fixed right-0 w-full h-full bg-primary-3 bg-opacity-60 transition-all`,
+					`fixed right-0 w-full h-full bg-primary-3/60 transition-all`,
 					isCartVisible
 						? 'duration-300'
 						: 'pointer-events-none select-none opacity-0 duration-150',
@@ -546,7 +552,7 @@ function CartContainer({ banner }: { banner: any }) {
 														<CartItemDiscounts lineItem={lineItem} />
 														<RemoveItemButton
 															lineItemId={lineItem.id}
-															disabled={disableAllButtons}
+															isLoading={isUpdateOrDeletePending}
 														/>
 													</div>
 												</div>
@@ -764,8 +770,12 @@ function CartContainer({ banner }: { banner: any }) {
 								// 		await redirectToCheckout();
 								// 	});
 								// }}
-								disabled={productsData.length === 0 || disableAllButtons}
-								classesIntent={{ w: 'full', display: 'flex-xy-center' }}
+								disabled={productsData.length === 0}
+								classesIntent={{
+									w: 'full',
+									display: 'flex-xy-center',
+									isLoading: isUpdateOrDeletePending,
+								}}
 							>
 								{productsData.length === 0 ? 'Cart Is Empty' : 'Checkout'}
 							</Button>

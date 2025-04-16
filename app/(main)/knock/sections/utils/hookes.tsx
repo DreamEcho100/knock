@@ -25,7 +25,7 @@ export function useAddKnockPluginToCartButtonProps({
 
 	return {
 		onClick: () => cartStore.getState().upsertCartItem(variant, product),
-		disabled: isPending,
+		isLoading: isPending,
 		children: text ? (
 			text
 		) : variant.compareAtPrice ? (
