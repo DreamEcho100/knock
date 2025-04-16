@@ -100,7 +100,7 @@ export default function LoginType({
 				>
 					<fieldset
 						className="mt-2 space-y-4"
-						disabled={loginMutation.isLoading}
+						disabled={loginMutation.isPending}
 					>
 						<FormField
 							values={formValues}
@@ -134,7 +134,7 @@ export default function LoginType({
 								type="submit"
 								classesIntent={{ w: 'full' }}
 								className="mt-4"
-								disabled={loginMutation.isLoading}
+								disabled={loginMutation.isPending}
 							>
 								Submit
 							</Button>

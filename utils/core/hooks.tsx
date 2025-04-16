@@ -9,12 +9,12 @@ import { useEffect, useRef } from 'react';
 import type { IGenericErrorResponse, IUser } from 'types';
 
 export const useGetUserDataFromStore = () => {
-	const user = useGetUserData({ enabled: true });
+	const userQuery = useGetUserData({ enabled: true });
 
 	const queryClient = useQueryClient();
 
 	return {
-		user,
+		user: userQuery,
 		getUser: () => queryClient.getQueryData<IUser>(['check-token']),
 	};
 };
@@ -26,9 +26,9 @@ export const useGetUserData = ({
 	enabled: boolean;
 	accessToken?: string;
 }) => {
-	const query = useQuery<IUser, IGenericErrorResponse>(
-		['check-token'],
-		() => {
+	const query = useQuery<IUser, IGenericErrorResponse>({
+		queryKey: ['check-token'],
+		queryFn: () => {
 			if (!accessToken) throw new Error('Access token is required');
 
 			return fetch(
@@ -41,13 +41,11 @@ export const useGetUserData = ({
 				},
 			)
 				.then((response) => response.json())
-				.then((result) => result.user ?? null);
+				.then((result) => (result.user as IUser) ?? null);
 		},
-		{
-			enabled: enabled && !!accessToken,
-			refetchInterval: 10 * 60 * 1000,
-		},
-	);
+		enabled: enabled && !!accessToken,
+		refetchInterval: 10 * 60 * 1000,
+	});
 
 	return query;
 };
@@ -59,9 +57,9 @@ export const useLogoutUser = ({
 	onError?: () => void;
 	onSuccess?: () => void | Promise<void>;
 } = {}) => {
-	return useMutation<IUser, IGenericErrorResponse>(
-		['logout'],
-		() => {
+	return useMutation<IUser, IGenericErrorResponse>({
+		mutationKey: ['logout'],
+		mutationFn: () => {
 			const accessToken = getGetAccessTokenFromCookie();
 
 			if (!accessToken) throw new Error('Access token is required');
@@ -76,24 +74,21 @@ export const useLogoutUser = ({
 				},
 			).then((response) => response.json());
 		},
-		{
-			onSuccess: async () => {
-				// @ts-expect-error - Add away somewhere to remove the associated cart to the user on logout
 
-				// Remove the user-access-token and cartId cookies nativly
-				document.cookie =
-					'user-access-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-				document.cookie =
-					'cartId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+		onSuccess: async () => {
+			// Remove the user-access-token and cartId cookies nativly
+			document.cookie =
+				'user-access-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+			document.cookie =
+				'cartId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 
-				if (onSuccess) await onSuccess();
-				else window.location.reload();
-			},
-			onError: (error) => {
-				if (onError) return onError();
-			},
+			if (onSuccess) await onSuccess();
+			else window.location.reload();
 		},
-	);
+		onError: (error) => {
+			if (onError) return onError();
+		},
+	});
 };
 
 export const getGetAccessTokenFromCookie = () => {

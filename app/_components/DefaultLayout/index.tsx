@@ -1,5 +1,6 @@
 'use client';
 import type { ReactNode } from 'react';
+import { unstable_ViewTransition as ViewTransition } from 'react';
 
 import MainHeader from './components/MainHeader';
 import MainFooter from './components/MainFooter';
@@ -11,7 +12,7 @@ export const commonClasses = 'leading-relaxed text-primary-2 mx-auto';
 
 const DefaultLayout = ({ children }: { children: ReactNode }) => {
 	return (
-		<>
+		<ViewTransition>
 			<MainHeader />
 			<Actions />
 			<MainContent>{children}</MainContent>
@@ -29,7 +30,7 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
 				pauseOnHover
 				theme="dark"
 			/>
-		</>
+		</ViewTransition>
 	);
 };
 

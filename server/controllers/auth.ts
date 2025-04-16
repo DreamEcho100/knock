@@ -30,7 +30,7 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 
-	const response = await shopifyFetch<any, any>({
+	const response = await shopifyFetch<any>({
 		query: customer,
 		variables: {
 			input: { email: input.email, password: input.password },
@@ -39,7 +39,9 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	if (!response.body.data.customerAccessTokenCreate.customerAccessToken) {
 		res.statusCode = 404;
-		throw new Error('Please check your email for instructions to reset your password');
+		throw new Error(
+			'Please check your email for instructions to reset your password',
+		);
 	}
 
 	return res.status(200).json({
@@ -79,7 +81,7 @@ const activate = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 
-	const response = await shopifyFetch<any, any>({
+	const response = await shopifyFetch<any>({
 		query: customer,
 		variables: {
 			activationUrl: input.activationUrl,
@@ -227,7 +229,7 @@ const checkToken = async (
         }
          `;
 
-		const response = await shopifyFetch<any, any>({
+		const response = await shopifyFetch<any>({
 			query: customerQuery,
 		});
 
@@ -262,7 +264,7 @@ const logout = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 
-	const response = await shopifyFetch<any, any>({
+	const response = await shopifyFetch<any>({
 		query: deletedAccessToken,
 		variables: {
 			customerAccessToken: accessToken,
@@ -326,7 +328,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 
-	const response = await shopifyFetch<any, any>({
+	const response = await shopifyFetch<any>({
 		query: createCustomerMutation,
 		variables: {
 			input: {

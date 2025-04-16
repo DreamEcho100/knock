@@ -132,11 +132,11 @@ const UpdateUserBasicDetails = ({
 	setIsOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
 	const queryClient = useQueryClient();
-	const { user: user } = useGetUserDataFromStore();
+	const { user } = useGetUserDataFromStore();
 	const accessTokenFrom = getGetAccessTokenFromCookie();
 
 	const initFromValues = () => ({
-		email: user.data ? user.data.email : '',
+		email: user.data ? user.data?.email : '',
 		firstName: user.data ? user.data.firstName : '',
 		lastName: user.data ? user.data.lastName : '',
 		acceptsMarketing: user.data ? user.data.acceptsMarketing : false,
@@ -237,7 +237,7 @@ const UpdateUserBasicDetails = ({
 			>
 				<fieldset
 					className="mt-2 space-y-4"
-					disabled={updateMutation.isLoading}
+					disabled={updateMutation.isPending}
 				>
 					<FormField
 						values={formValues}
@@ -287,7 +287,7 @@ const UpdateUserBasicDetails = ({
 						<Button
 							type="submit"
 							classesIntent={{ w: 'full' }}
-							disabled={updateMutation.isLoading || !isChanged}
+							disabled={updateMutation.isPending || !isChanged}
 						>
 							Submit
 						</Button>
@@ -325,7 +325,7 @@ export default function CustomerProfilePage() {
 
 	let pageTitle = `Loading... | ${defaultSiteName3}`;
 
-	if (user.status === 'loading' && user.fetchStatus === 'fetching')
+	if (user.status === 'pending' && user.fetchStatus === 'fetching')
 		return (
 			<>
 				<Head>
@@ -381,7 +381,7 @@ export default function CustomerProfilePage() {
 							<span className="text-bg-secondary-1">{user.data.email}</span> (
 							<Button
 								onClick={() => logoutUser.mutate()}
-								disabled={logoutUser.isLoading}
+								disabled={logoutUser.isPending}
 								classesIntent={{ rounded: 'none', p: 'none', theme: 'none' }}
 								className="text-bg-secondary-1 hover:text-violet-600 focus:text-violet-600"
 							>

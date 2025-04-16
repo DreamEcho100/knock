@@ -102,7 +102,7 @@ const ResetPage = () => {
 						autoComplete="confirm password"
 						minLength={3}
 					/>
-					<Button disabled={resetAccount.isLoading}>RESET</Button>
+					<Button disabled={resetAccount.isPending}>RESET</Button>
 				</form>
 			</div>
 		</section>

@@ -150,7 +150,7 @@ export default function RegisterType({
 								type="submit"
 								classesIntent={{ w: 'full' }}
 								className="mt-4"
-								disabled={registerMutation.isLoading}
+								disabled={registerMutation.isPending}
 							>
 								Submit
 							</Button>

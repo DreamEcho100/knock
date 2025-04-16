@@ -89,7 +89,7 @@ export default function ContactUsScreen() {
 						<label className="w-full flex flex-col">
 							<span className="pb-4">Country</span>
 							<CountryDropdown
-								classes="w-full bg-transparent outline-none transition-all duration-150 border-[0.125rem] border-slate-500 focus:border-slate-700 rounded-md px-3 py-2"
+								className="w-full bg-transparent outline-none transition-all duration-150 border-[0.125rem] border-slate-500 focus:border-slate-700 rounded-md px-3 py-2"
 								value={formValues.countryCode}
 								onChange={(value) =>
 									setFormValues((oldValue) => {
@@ -173,7 +173,7 @@ export default function ContactUsScreen() {
 								}
 							}}
 						/>
-						<Button type="submit" disabled={submitForm.isLoading}>
+						<Button type="submit" disabled={submitForm.isPending}>
 							Submit
 						</Button>
 					</form>

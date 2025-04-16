@@ -11,14 +11,14 @@ const ExternalGlobalScripts = () => {
 	const configRef = useRef<{ isPageReadyId: NodeJS.Timeout | null }>({
 		isPageReadyId: null,
 	});
-	const reactFacebookPixelLazyImport = useQuery(
-		['react-facebook-pixel'],
-		() =>
+	const reactFacebookPixelLazyImport = useQuery({
+		queryKey: ['react-facebook-pixel'],
+		queryFn: () =>
 			import('react-facebook-pixel').then(
 				({ default: reactFacebookPixel }) => reactFacebookPixel,
 			),
-		{ enabled: isPageReady },
-	);
+		enabled: isPageReady,
+	});
 
 	useEffect(() => {
 		if (!reactFacebookPixelLazyImport.data) return;

@@ -33,7 +33,8 @@ type CartState = {
 
 	generalRules: CartStateRules;
 
-	initCart: (cart: Cart) => void;
+	initCart: (cart?: Cart) => void;
+	setCartState: (state: 'idle' | 'loading' | 'active') => void;
 
 	updateCartItem: (
 		updateType: UpdateType,
@@ -111,10 +112,14 @@ export const cartStore = createStore<CartState>((set, get) => ({
 			cart: {
 				...prev.cart,
 				...cart,
-				...updateCartTotals(cart.lines ?? []),
+				...updateCartTotals(cart?.lines ?? []),
 			},
 			state: 'active',
 		}));
+	},
+
+	setCartState(state) {
+		set({ state });
 	},
 
 	upsertCartItem: async (variant, product, options) => {

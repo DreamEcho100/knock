@@ -35,7 +35,7 @@ import {
 } from '~/libs/shopify/stores/cart';
 import { useStore } from 'zustand';
 import { getProducts } from '~/libs/shopify';
-import type { CartItem } from '~/libs/shopify/types';
+import type { Cart, CartItem } from '~/libs/shopify/types';
 import { generalStore } from '~/libs/stores/general';
 import { cn } from '~/libs/utils';
 const CartBannerDynamic = dynamic(() => import('./components/CartBanner'), {
@@ -77,10 +77,24 @@ const MainHeader = () => {
 	const [isSmallScreenNaveOpen, setIsSmallScreenNaveOpen] = useState(false);
 	// const [isCheckoutFound, setIsCheckoutFound] = useState(false);
 
-	useQuery(['init-cart'], initCart, {
-		// @ts-expect-error - should handle the user associated with the cart
-		// enabled: !userCheckoutIdAndKeyFromCookie,
-		onSuccess: cartStore.getState().initCart,
+	const initCartQuery = useQuery<
+		Cart | undefined,
+		Error,
+		Cart | undefined,
+		string[]
+	>({
+		queryKey: ['init-cart'],
+		queryFn: async () => {
+			cartStore.getState().setCartState('loading');
+
+			return await initCart().then((result) => {
+				if (result.type === 'error') {
+					throw new Error(result.message);
+				}
+
+				return result.data;
+			});
+		},
 	});
 
 	const logoutUser = useLogoutUser();
@@ -90,7 +104,9 @@ const MainHeader = () => {
 	// 	(state) => state.isVisible.banner,
 	// );
 
-	const banner = useQuery(['banner-data'], getBanner, {
+	const banner = useQuery({
+		queryKey: ['banner-data'],
+		queryFn: getBanner,
 		refetchOnWindowFocus: true,
 	});
 
@@ -112,6 +128,28 @@ const MainHeader = () => {
 			resizeObserver.disconnect();
 		};
 	}, []);
+
+	useEffect(() => {
+		if (initCartQuery.isInitialLoading) {
+			toast.info('Loading the cart, please wait');
+		} else if (initCartQuery.isSuccess) {
+			cartStore.getState().initCart(initCartQuery.data);
+			cartStore.getState().setCartState('active');
+			toast.success(
+				initCartQuery.data?.lines.length
+					? 'Cart Data Loaded!'
+					: 'Cart is active!',
+			);
+		} else if (initCartQuery.isError) {
+			toast.error(initCartQuery.error.message);
+		}
+	}, [
+		initCartQuery.data,
+		initCartQuery.error?.message,
+		initCartQuery.isError,
+		initCartQuery.isInitialLoading,
+		initCartQuery.isSuccess,
+	]);
 
 	return (
 		<>
@@ -202,10 +240,9 @@ const MainHeader = () => {
 							{user?.data && (
 								<li>
 									<button
-										title="cart"
 										className="flex items-center justify-center disabled:bg-slate-400 disabled:cursor-not-allowed disabled:animate-pulse"
 										onClick={() => logoutUser.mutate()}
-										disabled={logoutUser.isLoading}
+										disabled={logoutUser.isPending}
 									>
 										logout
 									</button>
@@ -264,10 +301,25 @@ function CartDisplayButton() {
 		(state) => state.cart.totalQuantity,
 	);
 
+	const cartState = useStore(cartStore, (state) => state.state);
+
 	return (
 		<button
-			title="cart"
-			className="flex items-center justify-center"
+			title={
+				cartState === 'loading'
+					? 'Loading Cart'
+					: cartState === 'idle'
+						? 'Idle'
+						: 'Cart'
+			}
+			className={cn(
+				'flex items-center justify-center',
+				cartState === 'loading'
+					? 'cursor-progress animate-pulse'
+					: cartState === 'idle'
+						? 'animate-pulse cursor-wait'
+						: '',
+			)}
 			onClick={() => {
 				cartStore.getState().toggleIsOpen();
 				generalStore.getState().setIsVisible('marketingPopup', false);
@@ -338,7 +390,9 @@ function CartContainer({ banner }: { banner: any }) {
 
 	const [isOpen, setIsOpen] = useState(false);
 
-	const upselling = useQuery(['get-upselling-popup'], getUpSellingPopup, {
+	const upselling = useQuery({
+		queryKey: ['get-upselling-popup'],
+		queryFn: getUpSellingPopup,
 		refetchOnWindowFocus: true,
 	});
 
@@ -349,7 +403,9 @@ function CartContainer({ banner }: { banner: any }) {
 		(state) => state.cart.discountCodes,
 	);
 
-	const { data } = useQuery(['all-products'], () => getProducts(), {
+	const { data } = useQuery({
+		queryKey: ['all-products'],
+		queryFn: () => getProducts(),
 		refetchOnWindowFocus: true,
 	});
 

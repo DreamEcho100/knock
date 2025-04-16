@@ -327,7 +327,7 @@ const recoverPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 
-	const response = await shopifyFetch<any, any>({
+	const response = await shopifyFetch<any>({
 		query: customer,
 		variables: {
 			email: input.email,
@@ -392,7 +392,7 @@ const resetPassword = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	`;
 
-	const response = await shopifyFetch<any, any>({
+	const response = await shopifyFetch<any>({
 		query: customer,
 		variables: {
 			password: input.password,

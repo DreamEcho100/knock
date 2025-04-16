@@ -196,5 +196,5 @@ export async function initCart() {
 	// Set the cart ID cookie
 	cookiesManger.set('cartId', cart.id!);
 
-	return cart;
+	return { type: 'success', data: cart };
 }

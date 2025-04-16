@@ -15,6 +15,7 @@ export default function ProductDetails({
 }: {
 	product: ICustomProduct;
 }) {
+	const cartState = useStore(cartStore, (state) => state.state);
 	const isPending = useStore(
 		cartStore,
 		(state) =>

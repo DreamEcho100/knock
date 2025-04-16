@@ -18,7 +18,9 @@ export default function MainContent(props: PropsWithChildren) {
 	 *
 	 * This one here is used to listen to the changes.
 	 */
-	const banner = useQuery(['banner-data'], getBanner, {
+	const banner = useQuery({
+		queryKey: ['banner-data'],
+		queryFn: getBanner,
 		refetchOnWindowFocus: true,
 		enabled: false,
 	});

@@ -112,7 +112,7 @@ const Dialog = ({
 									)}
 								</header>
 							)}
-							{children}
+							<>{children}</>
 
 							<DialogPrimitive.Close
 								className={cx(
