@@ -130,8 +130,8 @@ const MainHeader = () => {
 	}, []);
 
 	useEffect(() => {
-		if (initCartQuery.isInitialLoading) {
-			toast.info('Loading the cart, please wait');
+		if (initCartQuery.isLoading) {
+			toast.info('Loading the cart, please wait', { position: 'bottom-left' });
 		} else if (initCartQuery.isSuccess) {
 			cartStore.getState().initCart(initCartQuery.data);
 			cartStore.getState().setCartState('active');
@@ -139,9 +139,10 @@ const MainHeader = () => {
 				initCartQuery.data?.lines.length
 					? 'Cart Data Loaded!'
 					: 'Cart is active!',
+				{ position: 'bottom-left' },
 			);
 		} else if (initCartQuery.isError) {
-			toast.error(initCartQuery.error.message);
+			toast.error(initCartQuery.error.message, { position: 'bottom-left' });
 		}
 	}, [
 		initCartQuery.data,
