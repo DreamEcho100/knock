@@ -1,13 +1,15 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import Script from 'next/script';
 import { useEffect, useRef, useState } from 'react';
 
 const ExternalGlobalScripts = () => {
 	const pathname = usePathname();
+	let searchParams = useSearchParams();
+
 	const [isPageReady, setIsPageReady] = useState(false);
 	const configRef = useRef<{ isPageReadyId: NodeJS.Timeout | null }>({
 		isPageReadyId: null,
@@ -30,13 +32,15 @@ const ExternalGlobalScripts = () => {
 		reactFacebookPixel.pageView();
 	}, [isPageReady, reactFacebookPixelLazyImport.data]);
 
+	useEffect(() => {}, [pathname]);
+
 	useEffect(() => {
 		if (!reactFacebookPixelLazyImport.data) return;
 
 		const reactFacebookPixel = reactFacebookPixelLazyImport.data;
 
 		reactFacebookPixel.pageView();
-	}, [pathname]);
+	}, [pathname, searchParams]);
 
 	useEffect(() => {
 		console.log('___ page will be ready!');
