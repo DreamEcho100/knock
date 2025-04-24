@@ -43,9 +43,7 @@ const ExternalGlobalScripts = () => {
 	}, [pathname, searchParams]);
 
 	useEffect(() => {
-		console.log('___ page will be ready!');
 		configRef.current.isPageReadyId = setTimeout(() => {
-			console.log('___ page is ready!');
 			setIsPageReady(true);
 		}, 5000);
 
