@@ -72,7 +72,7 @@ const headerLinks = [
 const MainHeader = () => {
 	const { user } = useGetUserDataFromStore();
 	const pathname = usePathname();
-	const [hasCartInitialSuccess, setHasCartInitialSuccess] = useState(false);
+	// const [hasCartInitialSuccess, setHasCartInitialSuccess] = useState(false);
 
 	const [isRegisterDialogOpen, setIsRegisterDialogOpen] = useState(false);
 	const [isSmallScreenNaveOpen, setIsSmallScreenNaveOpen] = useState(false);
@@ -131,33 +131,33 @@ const MainHeader = () => {
 		};
 	}, []);
 
-	useEffect(() => {
-		if (hasCartInitialSuccess) {
-			return;
-		}
+	// useEffect(() => {
+	// 	if (hasCartInitialSuccess) {
+	// 		return;
+	// 	}
 
-		if (initCartQuery.isLoading) {
-			toast.info('Loading the cart, please wait', { position: 'bottom-left' });
-		} else if (initCartQuery.isSuccess) {
-			cartStore.getState().initCart(initCartQuery.data);
-			cartStore.getState().setCartState('active');
-			toast.success(
-				initCartQuery.data?.lines.length
-					? 'Cart Data Loaded!'
-					: 'Cart is active!',
-				{ position: 'bottom-left' },
-			);
-			setHasCartInitialSuccess(true);
-		} else if (initCartQuery.isError) {
-			toast.error(initCartQuery.error.message, { position: 'bottom-left' });
-		}
-	}, [
-		initCartQuery.data,
-		initCartQuery.error?.message,
-		initCartQuery.isError,
-		initCartQuery.isLoading,
-		initCartQuery.isSuccess,
-	]);
+	// 	if (initCartQuery.isLoading) {
+	// 		toast.info('Loading the cart, please wait', { position: 'bottom-left' });
+	// 	} else if (initCartQuery.isSuccess) {
+	// 		cartStore.getState().initCart(initCartQuery.data);
+	// 		cartStore.getState().setCartState('active');
+	// 		toast.success(
+	// 			initCartQuery.data?.lines.length
+	// 				? 'Cart Data Loaded!'
+	// 				: 'Cart is active!',
+	// 			{ position: 'bottom-left' },
+	// 		);
+	// 		setHasCartInitialSuccess(true);
+	// 	} else if (initCartQuery.isError) {
+	// 		toast.error(initCartQuery.error.message, { position: 'bottom-left' });
+	// 	}
+	// }, [
+	// 	initCartQuery.data,
+	// 	initCartQuery.error?.message,
+	// 	initCartQuery.isError,
+	// 	initCartQuery.isLoading,
+	// 	initCartQuery.isSuccess,
+	// ]);
 
 	return (
 		<>
