@@ -1,12 +1,13 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Script from 'next/script';
 import { useEffect, useRef, useState } from 'react';
 
 const ExternalGlobalScripts = () => {
-	const router = useRouter();
+	const pathname = usePathname();
 	const [isPageReady, setIsPageReady] = useState(false);
 	const configRef = useRef<{ isPageReadyId: NodeJS.Timeout | null }>({
 		isPageReadyId: null,
@@ -27,14 +28,20 @@ const ExternalGlobalScripts = () => {
 
 		reactFacebookPixel.init(process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID!); // facebookPixelId
 		reactFacebookPixel.pageView();
-
-		router.events.on('routeChangeComplete', () => {
-			reactFacebookPixel.pageView();
-		});
-	}, [isPageReady, reactFacebookPixelLazyImport.data, router.events]);
+	}, [isPageReady, reactFacebookPixelLazyImport.data]);
 
 	useEffect(() => {
+		if (!reactFacebookPixelLazyImport.data) return;
+
+		const reactFacebookPixel = reactFacebookPixelLazyImport.data;
+
+		reactFacebookPixel.pageView();
+	}, [pathname]);
+
+	useEffect(() => {
+		console.log('___ page will be ready!');
 		configRef.current.isPageReadyId = setTimeout(() => {
+			console.log('___ page is ready!');
 			setIsPageReady(true);
 		}, 5000);
 
