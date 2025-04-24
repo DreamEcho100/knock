@@ -40,7 +40,7 @@ const ExternalGlobalScripts = () => {
 		const reactFacebookPixel = reactFacebookPixelLazyImport.data;
 
 		reactFacebookPixel.pageView();
-	}, [pathname, searchParams]);
+	}, [pathname, searchParams?.toString()]);
 
 	useEffect(() => {
 		configRef.current.isPageReadyId = setTimeout(() => {
