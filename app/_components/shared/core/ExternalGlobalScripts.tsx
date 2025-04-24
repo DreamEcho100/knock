@@ -11,8 +11,8 @@ const ExternalGlobalScripts = () => {
 	let searchParams = useSearchParams();
 
 	const [isPageReady, setIsPageReady] = useState(false);
-	const configRef = useRef<{ isPageReadyId: NodeJS.Timeout | null }>({
-		isPageReadyId: null,
+	const configRef = useRef<{ isPageReadyTimeoutId: NodeJS.Timeout | null }>({
+		isPageReadyTimeoutId: null,
 	});
 	const reactFacebookPixelLazyImport = useQuery({
 		queryKey: ['react-facebook-pixel'],
@@ -32,8 +32,6 @@ const ExternalGlobalScripts = () => {
 		reactFacebookPixel.pageView();
 	}, [isPageReady, reactFacebookPixelLazyImport.data]);
 
-	useEffect(() => {}, [pathname]);
-
 	useEffect(() => {
 		if (!reactFacebookPixelLazyImport.data) return;
 
@@ -43,15 +41,15 @@ const ExternalGlobalScripts = () => {
 	}, [pathname, searchParams?.toString()]);
 
 	useEffect(() => {
-		configRef.current.isPageReadyId = setTimeout(() => {
+		configRef.current.isPageReadyTimeoutId = setTimeout(() => {
 			setIsPageReady(true);
 		}, 5000);
 
-		const isPageReadyId = configRef.current.isPageReadyId;
+		const isPageReadyId = configRef.current.isPageReadyTimeoutId;
 
 		return () => {
 			if (isPageReadyId) {
-				configRef.current.isPageReadyId = null;
+				configRef.current.isPageReadyTimeoutId = null;
 			}
 		};
 	}, []);
