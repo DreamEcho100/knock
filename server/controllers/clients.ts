@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 import { print } from 'graphql';
 import SibApiV3Sdk from 'sib-api-v3-sdk';
 import { shopifyFetch } from '~/libs/shopify/utils';
+import { APP_NAME } from '~/utils/core/constants';
 
 SibApiV3Sdk.ApiClient.instance.authentications['api-key'].apiKey =
 	process.env.SENDINBLUE_API_SMTP;
@@ -829,7 +830,7 @@ const supportForm = async (
 		to: [
 			{
 				email: process.env.NEXT_PUPLIC_FORMSUBMIT_EMAIL,
-				name: 'Plugins That Knock',
+				name: APP_NAME.toUpperCase(),
 			},
 		],
 		subject: input.subject,
@@ -1122,7 +1123,7 @@ const createOrderRedeemCode = async (
 	return res.status(200).json({
 		success: true,
 		message:
-			'Thanks for ordering from Plugins That Knock. Your payment has cleared',
+			`Thanks for ordering from ${APP_NAME.toUpperCase()}. Your payment has cleared`,
 		data: response.data,
 	});
 };

@@ -47,7 +47,7 @@ const HeroSection = ({
 					/>
 				</div>
 				<h2 className="text-h3 font-semibold text-primary-1 mt-4 mb-3 flex flex-wrap justify-center uppercase">
-					<KnockTrademark tradeMark={knockClipperMainSection.main.tradeMark} />
+					<KnockTrademark tradeMarkPrefix={knockClipperMainSection.main.tradeMark} />
 					{knockClipperMainSection.main.h2}
 				</h2>
 				<p className="text-primary-2 mt-2 mb-5 leading-6 max-w-[350px] sm:text-[1.3rem]">

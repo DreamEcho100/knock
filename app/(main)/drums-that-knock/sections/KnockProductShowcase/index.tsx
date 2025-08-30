@@ -22,7 +22,7 @@ const KnockProductShowcaseSection = ({
 						children: (
 							<Link href={data.buttonUrl} className="flex flex-wrap">
 								{data.h2 ? <h2>{data.h2}&nbsp; </h2> : ''}
-								<KnockTrademark tradeMark={data.tradeMark} />
+								<KnockTrademark tradeMarkPrefix={data.tradeMark} />
 							</Link>
 						),
 					},

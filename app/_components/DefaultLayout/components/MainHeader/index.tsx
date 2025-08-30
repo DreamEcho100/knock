@@ -38,6 +38,7 @@ import { getProducts } from '~/libs/shopify';
 import type { Cart, CartItem } from '~/libs/shopify/types';
 import { generalStore } from '~/libs/stores/general';
 import { cn } from '~/libs/utils';
+import { APP_NAME } from '~/utils/core/constants';
 const CartBannerDynamic = dynamic(() => import('./components/CartBanner'), {
 	ssr: false,
 });
@@ -191,8 +192,8 @@ const MainHeader = () => {
 									pathname &&
 									(pathname.startsWith('/products/[productHandle]') ||
 										pathname.startsWith('/drums-that-knock'))
-										? 'DRUMS THAT'
-										: undefined
+										? 'DRUMS THAT KNOCK'
+										: APP_NAME.toUpperCase()
 								}
 							/>
 						</div>

@@ -30,7 +30,7 @@ export default function DrumsThatKnockSection({
 			title={
 				<>
 					{data.h2}&nbsp;
-					<KnockTrademark tradeMark={data.tradeMark} />
+					<KnockTrademark tradeMarkPrefix={data.tradeMark} />
 				</>
 			}
 		/>

@@ -21,7 +21,7 @@ export default function HeroSection({
 			title={
 				<>
 					{data.main.h2}&nbsp;
-					<KnockTrademark tradeMark={data.main.tradeMark} />
+					<KnockTrademark tradeMarkPrefix={data.main.tradeMark} />
 				</>
 			}
 			description={data.main?.p}

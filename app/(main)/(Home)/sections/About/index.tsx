@@ -10,7 +10,7 @@ const AboutSection = ({ data }: { data: any }) => {
 			>
 				<h2 className="text-h3 text-primary-1 capitalize font-semibold flex flex-wrap justify-center">
 					{data.h2}&nbsp;
-					<KnockTrademark tradeMark={data.tradeMark} />
+					<KnockTrademark tradeMarkPrefix={data.tradeMark} />
 				</h2>
 				<Description>{data.p}</Description>
 			</div>

@@ -13,7 +13,7 @@ const OneProductShowCaseSection = ({ data }: { data: any }) => {
 					h2: {
 						children: (
 							<>
-								<KnockTrademark tradeMark={data.tradeMark} />
+								<KnockTrademark tradeMarkPrefix={data.tradeMark} />
 								{data.h2}
 							</>
 						),
