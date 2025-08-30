@@ -252,7 +252,7 @@ export default function MainFooter() {
 				</div>
 				<div className="flex gap-2 px-1 justify-between items-end mx-1 my-4 text-[0.8rem]">
 					<div className="flex flex-col">
-						<Logo whatKnocks={APP_NAME}/>
+						<Logo whatKnocks={APP_NAME.toUpperCase()}/>
 						<small className="capitalize">
 							{/* copyright &copy; {APP_NAME} 2022 - {new Date().getFullYear()}. all
 							rights reserved. */}
