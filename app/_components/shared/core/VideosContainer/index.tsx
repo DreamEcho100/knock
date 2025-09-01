@@ -28,16 +28,17 @@ const VideosContainer = ({
 			</header>
 			<div
 				className="flex flex-col items-center justify-center gap-8
-		lg:flex-row max-w-[95%]"
+		lg:flex-row"
 			>
 				{/* classes.youtubeIframe */}
 				{iframes.map((iframe, index) => (
 					<div
-						key={index}
+						key={`${iframe.srcDoc}-${index}`}
 						className="relative max-w-[28rem] w-full flex flex-wrap items-center justify-center group"
 					>
 						{isYoutubeVideo !== index ? (
-							<div
+							<button
+								type="button"
 								onClick={() => setIsYoutubeVideo(index)}
 								style={{
 									backgroundImage: `url(${iframe.srcDoc})`,
@@ -45,24 +46,23 @@ const VideosContainer = ({
 									height: '230px',
 									borderRadius: '25px',
 								}}
-								className={`extra-sm:bg-cover bg-center rounded-2xl flex flex-col items-center justify-center w-full cursor-pointer `}
+								className={`bg-transparent extra-sm:bg-cover bg-center rounded-2xl flex flex-col items-center justify-center w-full cursor-pointer `}
 							>
-								<button
+								<div
 									className={
 										'flex flex-col items-center justify-center bg-secondary-1 transition-all duration-150 group-hover:bg-purple-700 rounded-2xl  border-black w-20 h-12'
 									}
 								>
 									<FaPlay className={'text-white'} />
-								</button>
-							</div>
+								</div>
+							</button>
 						) : (
 							<iframe
-								key={index}
 								width="450"
 								height="325"
 								src={iframe.src}
 								allow={iframe.allow}
-								// title='YouTube video player'
+								title={iframe.title ?? 'YouTube video player'}
 								className="overflow-hidden rounded-2xl w-full aspect-video"
 								loading="lazy"
 							/>
