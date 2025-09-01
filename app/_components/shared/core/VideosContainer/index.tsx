@@ -28,7 +28,7 @@ const VideosContainer = ({
 			</header>
 			<div
 				className="flex flex-col items-center justify-center gap-8
-		lg:flex-row max-w-[95%] mx-auto"
+		lg:flex-row max-w-[95%]"
 			>
 				{/* classes.youtubeIframe */}
 				{iframes.map((iframe, index) => (
