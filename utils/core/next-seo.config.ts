@@ -1,8 +1,9 @@
 import { type Metadata } from 'next';
+import { APP_NAME } from './constants';
 
 export const websiteBasePath = `https://${process.env.NEXT_PUBLIC_APP_DOMAINE}`;
 
-export const defaultSiteName = 'PLUGINS THAT KNOCK';
+export const defaultSiteName = APP_NAME.toUpperCase();
 export const defaultSiteName2 = 'DRUMS THAT KNOCK';
 export const defaultSiteName3 = 'KNOCK Plugin - Make Your Drums Knock';
 const defaultDescription =
@@ -25,13 +26,13 @@ const SEODefaults: Metadata = {
 				url: `${websiteBasePath}/images/_.jpeg`,
 				width: 700,
 				height: 470,
-				alt: 'PLUGINS THAT KNOCK Logo',
+				alt: `${APP_NAME.toUpperCase()} Logo`,
 			},
 		],
 	},
 	twitter: {
 		creator: '@decapmusic',
-		site: '@PLUGINS THAT KNOCK',
+		site: `@${APP_NAME.toUpperCase()}`,
 		card: 'summary_large_image',
 		title: defaultSiteName,
 	},

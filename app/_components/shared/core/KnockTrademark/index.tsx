@@ -1,6 +1,6 @@
 import { cx } from 'class-variance-authority';
 
-export default function KnockTrademark({ tradeMark }: { tradeMark?: string }) {
+export default function KnockTrademark({ tradeMarkPrefix: tradeMark }: { tradeMarkPrefix?: string }) {
 	return (
 		<span className="flex w-fit relative">
 			{tradeMark ?? 'KNOCK'}

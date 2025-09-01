@@ -19,7 +19,7 @@ const ArtistsSection = ({ reviews, data }: { reviews: any; data: any }) => {
 					<header className="flex items-center justify-center text-center">
 						<h2 className="flex flex-wrap justify-center font-semibold capitalize text-h4">
 							{data.h2}&nbsp;
-							<KnockTrademark tradeMark={data.tradeMark} />
+							<KnockTrademark tradeMarkPrefix={data.tradeMark} />
 						</h2>
 					</header>
 					<div className="max-w-[1200px] w-full mx-auto">

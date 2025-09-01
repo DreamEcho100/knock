@@ -5,7 +5,7 @@ const HeroSection = ({ data }: { data: any }) => {
 	return (
 		<KnockSection
 			description={data.p}
-			title={<KnockTrademark tradeMark={data.h2} />}
+			title={<KnockTrademark tradeMarkPrefix={data.h2} />}
 			colorText={{
 				p: data.pColor,
 				h2: data.h2Color,

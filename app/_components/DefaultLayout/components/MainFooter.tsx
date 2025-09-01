@@ -15,6 +15,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useMutation } from '@tanstack/react-query';
 import { cn } from '~/libs/utils';
+import { APP_NAME } from '~/utils/core/constants';
 
 const socialLinks = {
 	facebook: 'https://www.facebook.com/decapmusic',
@@ -251,9 +252,11 @@ export default function MainFooter() {
 				</div>
 				<div className="flex gap-2 px-1 justify-between items-end mx-1 my-4 text-[0.8rem]">
 					<div className="flex flex-col">
-						<Logo />
+						<Logo whatKnocks={APP_NAME.toUpperCase()}/>
 						<small className="capitalize">
-							copyright &copy; plugins that knock
+							{/* copyright &copy; {APP_NAME} 2022 - {new Date().getFullYear()}. all
+							rights reserved. */}
+							copyright &copy; {APP_NAME}
 						</small>
 					</div>
 					{/* <div className='w-36 sm:w-64'>

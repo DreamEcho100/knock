@@ -32,7 +32,7 @@ const LatestSamplesSection = ({
 				<div className="flex flex-col items-center gap-4 p-4 text-center lg:p-8 lg:items-start lg:text-align-initial lg:flex-grow lg:w-1/2 lg:justify-center">
 					<h2 className="flex flex-wrap justify-center font-semibold text-center text-h3 text-primary-1 lg:text-align-initial lg:justify-start">
 						{data.h2[0]}&nbsp;
-						<KnockTrademark tradeMark={data.tradeMark} />
+						<KnockTrademark tradeMarkPrefix={data.tradeMark} />
 						{data.h2[1]}
 					</h2>
 					<p className="mb-2 text-primary-2 text-h6">
