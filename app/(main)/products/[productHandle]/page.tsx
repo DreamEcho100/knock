@@ -8,7 +8,7 @@ import axios from 'axios';
 import type { ICustomProduct } from '~/types';
 
 type Props = {
-	params: { productHandle: string };
+	params: Promise<{ productHandle: string }>;
 };
 
 const pages_redirects_map: Record<string, string> = {
@@ -40,30 +40,37 @@ const getOneCustomProductByHandle = async (handle: string) => {
 	return newProductObject;
 };
 
-const getPageData = cache(async (props: Props) => {
-	if (props.params.productHandle.search('boutique') !== -1) {
-		notFound();
-	}
+const getPageData = cache(
+	async (props: { params: Awaited<Props['params']> }) => {
+		if (props.params.productHandle.search('boutique') !== -1) {
+			notFound();
+		}
 
-	if (typeof pages_redirects_map[props.params.productHandle] === 'string') {
-		redirect(pages_redirects_map[props.params.productHandle]);
-	}
+		if (typeof pages_redirects_map[props.params.productHandle] === 'string') {
+			redirect(pages_redirects_map[props.params.productHandle]);
+		}
 
-	const product = await getOneCustomProductByHandle(props.params.productHandle);
+		const product = await getOneCustomProductByHandle(
+			props.params.productHandle,
+		);
 
-	if (!product) {
-		notFound();
-	}
+		if (!product) {
+			notFound();
+		}
 
-	return product;
-});
+		return product;
+	},
+);
 
 export const revalidate = 360;
 export async function generateMetadata(
 	props: Props,
 	parent: ResolvingMetadata,
 ): Promise<Metadata> {
-	const productData = await getPageData(props);
+	const params = await props.params;
+	const productData = await getPageData({
+		params,
+	});
 
 	// optionally access and extend (rather than replace) parent metadata
 	const previousImages = (await parent).openGraph?.images ?? [];
@@ -98,7 +105,9 @@ export async function getStaticPaths() {
 	};
 }
 
-export default async function ProductByHandlePage(props: Props) {
+export default async function ProductByHandlePage(props: {
+	params: Awaited<Props['params']>;
+}) {
 	const product = await getPageData(props);
 
 	return <ProductByHandleScreen product={product} />;

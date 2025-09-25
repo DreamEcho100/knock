@@ -10,13 +10,14 @@ export interface IKnockPluginBoutiqueProps {
 }
 
 type Props = {
-	params: { pluginsBoutique: string };
+	params: Promise<{ pluginsBoutique: string }>;
 };
 
 export const revalidate = 360;
 
 const getPageData = cache(async (props: Props) => {
-	const data = await getProduct({ handle: props.params.pluginsBoutique });
+	const params = await props.params;
+	const data = await getProduct({ handle: params.pluginsBoutique });
 
 	if (!data) {
 		notFound();

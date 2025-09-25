@@ -2,13 +2,13 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/navigation';
 import Script from 'next/script';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 
 const ExternalGlobalScripts = () => {
 	const pathname = usePathname();
-	let searchParams = useSearchParams();
+	const searchParams = useSearchParams();
+	const id = useId();
 
 	const [isPageReady, setIsPageReady] = useState(false);
 	const configRef = useRef<{ isPageReadyTimeoutId: NodeJS.Timeout | null }>({
@@ -23,6 +23,11 @@ const ExternalGlobalScripts = () => {
 		enabled: isPageReady,
 	});
 
+	const searchParamsStringified = useMemo(
+		() => searchParams?.toString(),
+		[searchParams],
+	);
+
 	useEffect(() => {
 		if (!reactFacebookPixelLazyImport.data) return;
 
@@ -30,15 +35,17 @@ const ExternalGlobalScripts = () => {
 
 		reactFacebookPixel.init(process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID!); // facebookPixelId
 		reactFacebookPixel.pageView();
-	}, [isPageReady, reactFacebookPixelLazyImport.data]);
+	}, [reactFacebookPixelLazyImport.data]);
 
 	useEffect(() => {
 		if (!reactFacebookPixelLazyImport.data) return;
 
 		const reactFacebookPixel = reactFacebookPixelLazyImport.data;
+		pathname;
+		searchParamsStringified;
 
 		reactFacebookPixel.pageView();
-	}, [pathname, searchParams?.toString()]);
+	}, [reactFacebookPixelLazyImport.data, pathname, searchParamsStringified]);
 
 	useEffect(() => {
 		configRef.current.isPageReadyTimeoutId = setTimeout(() => {
@@ -61,9 +68,9 @@ const ExternalGlobalScripts = () => {
 			<Script
 				strategy="lazyOnload"
 				src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-				id="googletagmanager"
+				id={`${id}-googletagmanager`}
 			/>
-			<Script id="ga-analytics" strategy="lazyOnload">
+			<Script id={`${id}-ga-analytics`} strategy="lazyOnload">
 				{`
             window.dataLayer = window.dataLayer || [];
 			function gtag(){dataLayer.push(arguments);}
