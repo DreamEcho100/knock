@@ -142,7 +142,7 @@ const CheckoutPopup = (props: {
 																}}
 															>
 																{product.discount_code}
-															</b>
+															</button>
 															<AiFillCopy
 																className="cursor-pointer"
 																onClick={() => {
