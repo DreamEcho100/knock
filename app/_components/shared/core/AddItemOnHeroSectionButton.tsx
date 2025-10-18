@@ -38,7 +38,7 @@ export default function AddItemOnHeroSectionButton({
 		children: 'Buy it now',
 		className: 'capitalize text-h6',
 		..._buttonProps,
-		classIntent: { isLoading: isPending, ..._buttonProps.classesIntent },
+		classesIntent: { isLoading: isPending, ..._buttonProps.classesIntent },
 	};
 
 	const prices = useMemo(() => {

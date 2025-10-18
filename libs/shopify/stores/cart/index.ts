@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/useIterableCallbackReturn: <explanation> */
 'use client';
 
 import type {
@@ -43,7 +44,6 @@ type CartState = {
 	) => Promise<void>;
 	upsertCartItem: (
 		variant: ProductVariant,
-		// @ts-expect-error - it's not needed
 		product: Product,
 		options?: { rules?: CartStateRules },
 	) => Promise<void>;

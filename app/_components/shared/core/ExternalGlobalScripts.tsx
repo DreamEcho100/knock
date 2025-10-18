@@ -29,13 +29,25 @@ const ExternalGlobalScripts = () => {
 	);
 
 	useEffect(() => {
-		if (!reactFacebookPixelLazyImport.data) return;
+		if (!reactFacebookPixelLazyImport.data) {
+			if (reactFacebookPixelLazyImport.error) {
+				console.error(
+					'Failed to load Facebook Pixel:',
+					reactFacebookPixelLazyImport.error,
+				);
+			}
+			return;
+		}
 
-		const reactFacebookPixel = reactFacebookPixelLazyImport.data;
+		const ReactPixel = reactFacebookPixelLazyImport.data.default;
 
-		reactFacebookPixel.init(process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID!); // facebookPixelId
-		reactFacebookPixel.pageView();
-	}, [reactFacebookPixelLazyImport.data]);
+		try {
+			ReactPixel.init(process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID || '');
+			ReactPixel.pageView();
+		} catch (error) {
+			console.error('Facebook Pixel initialization error:', error);
+		}
+	}, [reactFacebookPixelLazyImport.data, reactFacebookPixelLazyImport.error]);
 
 	useEffect(() => {
 		if (!reactFacebookPixelLazyImport.data) return;

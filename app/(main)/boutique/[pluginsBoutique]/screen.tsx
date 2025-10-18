@@ -150,7 +150,7 @@ const KnockScreen = ({ knockPluginBoutique }: IKnockPluginBoutiqueProps) => {
 							setValues={setFormValues}
 							name="redeemCode"
 							required
-							minLength={3}
+							minLength={4}
 						/>
 					</div>
 					<div className="flex items-center justify-center p-2 ">

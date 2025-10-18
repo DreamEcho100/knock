@@ -15,9 +15,8 @@ type Props = {
 
 export const revalidate = 360;
 
-const getPageData = cache(async (props: Props) => {
-	const params = await props.params;
-	const data = await getProduct({ handle: params.pluginsBoutique });
+const getPageData = cache(async (props: {handle: params.pluginsBoutique}) => {
+	const data = await getProduct({ handle: params.handle });
 
 	if (!data) {
 		notFound();
@@ -70,7 +69,8 @@ export async function getStaticPaths() {
 }
 
 export default async function KnockPluginBoutique(props: Props) {
-	const knockPluginBoutique = await getPageData(props);
+	const params = await props.params;
+	const knockPluginBoutique = await getPageData({ handle: params.pluginsBoutique });
 
 	return <KnockScreen knockPluginBoutique={knockPluginBoutique} />;
 }

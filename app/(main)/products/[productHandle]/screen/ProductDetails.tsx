@@ -26,12 +26,8 @@ export default function ProductDetails({
 				)
 			],
 	);
-	console.log('___ isPending', isPending);
-	console.log('___ product.id', product.id);
-	console.log('___ product.variants[0].id', product.variants[0].id);
 	const isLoading = isPending || cartState === 'loading';
 	const isDisabled = cartState === 'idle';
-	console.log('___ cartState', cartState);
 
 	return (
 		<div className={classes.ProductCardDetailsContainer}>

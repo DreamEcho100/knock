@@ -21,6 +21,11 @@ const nextConfig = {
 		// domains: ['cdn.shopify.com', 'api.pluginsthatknock.com'],
 
 		remotePatterns: [
+			{
+				protocol: 'http',
+				hostname: 'localhost',
+				port: '4500',
+			},
 			// {
 			//   protocol: "https",
 			//   hostname: "*.amazonaws.com",

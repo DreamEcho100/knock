@@ -84,8 +84,14 @@ const CheckoutPopup = (props: {
 				? ''
 				: interestedProduct.map((product) => {
 						const defaultVariant = product.variants[0];
-
-						if (!defaultVariant) return null;
+						if (
+							!defaultVariant ||
+							!defaultVariant.id ||
+							!defaultVariant.price
+						) {
+							console.error('Invalid product variant data');
+							return null;
+						}
 
 						const isProductInCart = cartItemsHandlesStr.includes(
 							product.handle,
@@ -125,24 +131,25 @@ const CheckoutPopup = (props: {
 													</Link>
 													{product.hasDiscount ? (
 														<div className="flex items-center gap-1">
-															<p
+															<button
+																type="button"
 																className="cursor-pointer"
 																onClick={() => {
-																	void navigator.clipboard.writeText(
+																	(void navigator.clipboard.writeText(
 																		product.discount_code,
 																	),
-																		setIsCopied(product.handle);
+																		setIsCopied(product.handle));
 																}}
 															>
 																{product.discount_code}
-															</p>
+															</b>
 															<AiFillCopy
 																className="cursor-pointer"
 																onClick={() => {
-																	void navigator.clipboard.writeText(
+																	(void navigator.clipboard.writeText(
 																		product.discount_code,
 																	),
-																		setIsCopied(product.handle);
+																		setIsCopied(product.handle));
 																}}
 															/>
 															{isCopied === product.handle ? <p>Copied</p> : ''}
@@ -219,7 +226,6 @@ const CheckoutPopup = (props: {
 												) : (
 													<Button
 														onClick={() => {
-															debugger;
 															void cartStore
 																.getState()
 																.upsertCartItem(defaultVariant, product);
