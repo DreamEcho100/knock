@@ -4,11 +4,28 @@ import { useQuery } from '@tanstack/react-query';
 import { usePathname, useSearchParams } from 'next/navigation';
 import Script from 'next/script';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import Head from 'next/head';
 
 const ExternalGlobalScripts = () => {
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
 	const id = useId();
+	const head = useMemo(
+		() => (
+			// Set shop.pluginsthatknock.com to noindex
+			<Head key="external-global-scripts-head">
+				{typeof window !== 'undefined' &&
+					window.location.hostname === 'shop.pluginsthatknock.com' && (
+						<meta
+							name="robots"
+							content="noindex,nofollow"
+							suppressHydrationWarning
+						/>
+					)}
+			</Head>
+		),
+		[],
+	);
 
 	const [isPageReady, setIsPageReady] = useState(false);
 	const configRef = useRef<{ isPageReadyTimeoutId: NodeJS.Timeout | null }>({
@@ -73,10 +90,11 @@ const ExternalGlobalScripts = () => {
 		};
 	}, []);
 
-	if (!isPageReady) return <></>;
+	if (!isPageReady) return <>{head}</>;
 
 	return (
 		<>
+			{head}
 			<Script
 				strategy="lazyOnload"
 				src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
