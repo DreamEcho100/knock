@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/correctness/useUniqueElementIds: <explanation> */
 'use client';
 import { BsInfoCircleFill } from 'react-icons/bs';
 import {
@@ -17,7 +18,7 @@ import { cx } from 'class-variance-authority';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { HTMLAttributes, ReactNode, SVGProps, CSSProperties } from 'react';
-import { Suspense, useEffect, useTransition } from 'react';
+import { Suspense, useEffect, useMemo, useTransition } from 'react';
 import { useState } from 'react';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -112,6 +113,9 @@ const MainHeader = () => {
 		queryFn: getBanner,
 		refetchOnWindowFocus: true,
 	});
+	const hasBannerEnabled = useMemo(() => {
+		return !!(banner.data && !banner.data.disable);
+	}, [banner.data?.disable]);
 
 	useEffect(() => {
 		const main = document.querySelector('main');
@@ -162,7 +166,7 @@ const MainHeader = () => {
 
 	return (
 		<>
-			{banner.data && !banner.data.disable && (
+			{hasBannerEnabled && (
 				<Suspense fallback={null}>
 					<CartBannerDynamic data={banner.data} />
 				</Suspense>
@@ -217,6 +221,7 @@ const MainHeader = () => {
 						<ul className="flex items-center justify-end gap-2 sm:gap-4">
 							<li className="block lg:hidden">
 								<button
+									type="button"
 									onClick={() => setIsSmallScreenNaveOpen((prev) => !prev)}
 									title={`press or click to ${
 										isSmallScreenNaveOpen ? 'hide' : 'show'
@@ -249,6 +254,7 @@ const MainHeader = () => {
 							{user?.data && (
 								<li>
 									<button
+										type="button"
 										className={cn(
 											'flex items-center justify-center',
 											cartState === 'loading' || logoutUser.isPending
@@ -318,6 +324,7 @@ function CartDisplayButton() {
 
 	return (
 		<button
+			type="button"
 			title={
 				cartState === 'loading'
 					? 'Loading Cart'
@@ -365,6 +372,7 @@ function CartDisplayButton() {
 function RemoveItemButton(props: { lineItemId: string; isLoading: boolean }) {
 	return (
 		<button
+			type="button"
 			className={cx(
 				'w-fit py-1 text-primary-3 hover:text-primary-2 focus:text-primary-1',
 				'transition-all duration-150',
@@ -689,6 +697,7 @@ function CartContainer({ banner }: { banner: any }) {
 												end={
 													code.code && (
 														<button
+															type="button"
 															className="text-primary-3 px-2 hover:bg-primary-3/70 focus:bg-primary-3/70 transition-colors duration-100 h-full"
 															onClick={() => {
 																const currentDiscounts =
@@ -898,6 +907,7 @@ function CartItemDiscounts({ lineItem }: { lineItem: CartItem }) {
 						end={
 							discountAllocation.code && (
 								<button
+									type="button"
 									className="text-primary-3 px-2 hover:bg-primary-3/70 focus:bg-primary-3/70 transition-colors duration-100 h-full"
 									onClick={() => {
 										const currentDiscounts =

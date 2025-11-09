@@ -63,6 +63,7 @@ export default function CartBanner({ data }: { data?: any }) {
 	}
 
 	return createPortal(
+		// biome-ignore lint/correctness/useUniqueElementIds: <explanation>
 		<div
 			style={{ background: data.background }}
 			data-testid="banner-test"

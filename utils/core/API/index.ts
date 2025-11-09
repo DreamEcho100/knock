@@ -12,7 +12,7 @@ export const getBanner = async () => {
 };
 
 export const getUpSellingPopup = async () => {
-	const response = await axios.get(
+	const response = await fetch(
 		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-upselling-popup`,
 		{
 			headers: {
@@ -21,7 +21,9 @@ export const getUpSellingPopup = async () => {
 		},
 	);
 
-	return response.data;
+	const data = await response.json();
+
+	return data;
 };
 
 export const getMainSection = async () => {
