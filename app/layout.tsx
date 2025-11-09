@@ -12,7 +12,7 @@ import { decapv16, sourceSansPro } from './_libs/fonts';
 import { cx } from 'class-variance-authority';
 import { headers } from 'next/headers';
 
-export const metadata: Metadata = SEODefaults;
+// export const metadata: Metadata = SEODefaults;
 
 export async function generateMetadata({
 	params,
