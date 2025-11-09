@@ -10,10 +10,32 @@ import '~/app/_styles/customNProgressStyles.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { decapv16, sourceSansPro } from './_libs/fonts';
 import { cx } from 'class-variance-authority';
+import { headers } from 'next/headers';
 
 export const metadata: Metadata = SEODefaults;
 
-export default function RootLayout(props: PropsWithChildren) {
+export async function generateMetadata({
+	params,
+}: {
+	params: { id: string };
+}): Promise<Metadata> {
+	const h = await headers();
+	const host = h.get('host');
+
+	if (host === 'shop.pluginsthatknock.com') {
+		return {
+			...SEODefaults,
+			robots: {
+				index: false,
+				follow: false,
+			},
+		};
+	}
+
+	return SEODefaults;
+}
+
+export default async function RootLayout(props: PropsWithChildren) {
 	return (
 		<html lang="en">
 			<head suppressHydrationWarning>
