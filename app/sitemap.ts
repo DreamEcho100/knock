@@ -69,6 +69,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		'drums-that-knock',
 		'faqs',
 		'knock-clipper',
+		'knock-sale',
 		'knock',
 		'policies/privacy-policy',
 		'policies/refund-policy',
