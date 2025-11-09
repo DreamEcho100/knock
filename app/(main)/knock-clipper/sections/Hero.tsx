@@ -1,16 +1,34 @@
 import KnockTrademark from '~/app/_components/shared/core/KnockTrademark';
-import CustomNextImage from '~/app/_components/shared/common/CustomNextImage';
+import CustomNextImage, {
+	ICustomNextImageProps,
+} from '~/app/_components/shared/common/CustomNextImage';
 import AddItemOnHeroSectionButton from '~/app/_components/shared/core/AddItemOnHeroSectionButton';
-import { type CSSProperties } from 'react';
+import { useMemo, type CSSProperties } from 'react';
 import type { Product } from '~/libs/shopify/types';
+import Link from 'next/link';
 
 const HeroSection = ({
 	knockClipperPlugin,
 	knockClipperMainSection,
+	featuredImg,
+	titleAnchor,
 }: {
 	knockClipperPlugin: Product;
 	knockClipperMainSection: any;
+	featuredImg?: Partial<ICustomNextImageProps>;
+	titleAnchor?: { href: string };
 }) => {
+	const titleElem = useMemo(
+		() => (
+			<>
+				<KnockTrademark
+					tradeMarkPrefix={knockClipperMainSection.main.tradeMark}
+				/>
+				{knockClipperMainSection.main.h2}
+			</>
+		),
+		[knockClipperMainSection.main.tradeMark, knockClipperMainSection.main.h2],
+	);
 	return (
 		<section
 			className="bg-primary-1 section-p-v1 section-h-v1"
@@ -44,11 +62,20 @@ const HeroSection = ({
 						priority
 						className="object-cover relative"
 						style={{ aspectRatio: '16 / 16' }}
+						{...featuredImg}
 					/>
 				</div>
 				<h2 className="text-h3 font-semibold text-primary-1 mt-4 mb-3 flex flex-wrap justify-center uppercase">
-					<KnockTrademark tradeMarkPrefix={knockClipperMainSection.main.tradeMark} />
-					{knockClipperMainSection.main.h2}
+					{titleAnchor ? (
+						<Link
+							href={titleAnchor.href}
+							className="flex flex-wrap justify-center"
+						>
+							{titleElem}
+						</Link>
+					) : (
+						titleElem
+					)}
 				</h2>
 				<p className="text-primary-2 mt-2 mb-5 leading-6 max-w-[350px] sm:text-[1.3rem]">
 					{knockClipperMainSection.main.p}

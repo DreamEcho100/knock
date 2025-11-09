@@ -153,7 +153,7 @@ const KnockSection = ({
 			style={
 				{
 					'--pt-multi': 1.8,
-					'--pb-multi': 2,
+					'--pb-multi': 1.8,
 					'--h': 'fit-content',
 					'--max-h': 'fit-content',
 				} as CSSProperties
