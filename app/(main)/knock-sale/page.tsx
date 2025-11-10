@@ -22,6 +22,7 @@ import AddItemOnHeroSectionButton from '~/app/_components/shared/core/AddItemOnH
 import CustomNextImage from '~/app/_components/shared/common/CustomNextImage';
 import Link from 'next/link';
 import SystemRequirementsSection from '~/app/_components/shared/core/SystemRequirements';
+import { Fragment } from 'react';
 
 export interface IKnockPluginPageProps {
 	product: Product; // ShopifyBuy.Product;
@@ -122,15 +123,14 @@ export default async function KnockSalePage() {
 												);
 											}
 											return (
-												<span
+												<Fragment
 													key={`${word}-${
 														// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 														index
 													}`}
-													className="text-current"
 												>
 													{word}{' '}
-												</span>
+												</Fragment>
 											);
 										})}
 								</Link>

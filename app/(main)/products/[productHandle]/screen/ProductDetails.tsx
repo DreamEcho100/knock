@@ -1,7 +1,7 @@
 'use client';
 import Button from '~/app/_components/shared/core/Button';
 import Image from 'next/image';
-import React from 'react';
+import React, { Fragment } from 'react';
 import classes from '~/app/_styles/productsPages.module.css';
 import { type ICustomProduct } from '~/types';
 import {
@@ -45,15 +45,14 @@ export default function ProductDetails({
 			);
 		}
 		return (
-			<span
+			<Fragment
 				key={`${word}-${
 					// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 					index
 				}`}
-				className="text-current"
 			>
 				{word}{' '}
-			</span>
+			</Fragment>
 		);
 	});
 
