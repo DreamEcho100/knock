@@ -104,7 +104,35 @@ export default async function KnockSalePage() {
 							</div>
 							<h2 className="text-h3 font-semibold text-primary-1 mt-4 mb-3 flex flex-wrap justify-center uppercase">
 								<Link href={`/products/${knockSampleBundleProduct.handle}`}>
-									{knockSampleBundleProduct.title}
+									{knockSampleBundleProduct.title
+										.split(' ')
+										.map((word, index) => {
+											if (word.toLowerCase() === 'knock') {
+												return (
+													<span
+														key={`${word}-${
+															// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+															index
+														}`}
+														className="text-current"
+													>
+														{word}
+														<sup>&#174;</sup>{' '}
+													</span>
+												);
+											}
+											return (
+												<span
+													key={`${word}-${
+														// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+														index
+													}`}
+													className="text-current"
+												>
+													{word}{' '}
+												</span>
+											);
+										})}
 								</Link>
 							</h2>
 							<p className="text-primary-2 mt-2 mb-5 leading-6 max-w-[350px] sm:text-[1.3rem]">

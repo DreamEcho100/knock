@@ -32,14 +32,26 @@ export default function ProductDetails({
 	const title = product.title.split(' ').map((word, index) => {
 		if (word.toLowerCase() === 'knock') {
 			return (
-				<span key={`${word}-${index}`} className="text-current">
+				<span
+					key={`${word}-${
+						// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+						index
+					}`}
+					className="text-current"
+				>
 					{word}
 					<sup>&#174;</sup>{' '}
 				</span>
 			);
 		}
 		return (
-			<span key={`${word}-${index}`} className="text-current">
+			<span
+				key={`${word}-${
+					// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+					index
+				}`}
+				className="text-current"
+			>
 				{word}{' '}
 			</span>
 		);
