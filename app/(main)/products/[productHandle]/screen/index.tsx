@@ -13,6 +13,38 @@ export default function ProductByHandleScreen({
 }) {
 	const renderFeature = () => {
 		switch (product.handle) {
+			case 'knock-plugin-sample-bundle':
+				return (
+					<div>
+						<div className={classes.productPageFeaturesWithOneBox}>
+							<p>
+								The complete bundle of Knock Audio software and sound packs
+								comes with everything you need to make hard hitting beats!
+								Included:
+							</p>
+							<div className={classes.overLayFeatures}></div>
+							<div>
+								<ul className={classes.productPageDetailsUl}>
+									{[
+										'Drums That Knock Vol. 1',
+										'Drums That Knock Vol. 2',
+										'Drums That Knock Vol. 3',
+										'Drums That Knock Vol. 4',
+										'Drums That Knock Vol. 5',
+										'Drums That Knock Vol. 6',
+										'Drums That Knock Vol. 7',
+										'Drums That Knock Vol. 8',
+										'Drums That Knock Vol. 9',
+										'Drums That Knock X (Complete Edition)',
+									].map((item) => (
+										<li key={item}>{item}</li>
+									))}
+								</ul>
+							</div>
+						</div>
+					</div>
+				);
+
 			case 'decap-ableton-live-masterclass':
 			case 'complete-knock-bundle-v2-all-digital-products':
 				return (

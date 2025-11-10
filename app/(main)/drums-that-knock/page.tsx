@@ -37,7 +37,7 @@ async function getPageData() {
 	// knockclipper-pluginboutique
 }
 
-export default async function DrumsThatKnockPage({}) {
+export default async function DrumsThatKnockPage() {
 	const [products, knockPlugin, dtkData] = await getPageData();
 
 	return (

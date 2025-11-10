@@ -42,17 +42,16 @@ const getOneCustomProductByHandle = async (handle: string) => {
 
 const getPageData = cache(
 	async (props: { params: Awaited<Props['params']> }) => {
-		if (props.params.productHandle.search('boutique') !== -1) {
+		const params = await props.params;
+		if (params.productHandle.search('boutique') !== -1) {
 			notFound();
 		}
 
-		if (typeof pages_redirects_map[props.params.productHandle] === 'string') {
-			redirect(pages_redirects_map[props.params.productHandle]);
+		if (typeof pages_redirects_map[params.productHandle] === 'string') {
+			redirect(pages_redirects_map[params.productHandle]);
 		}
 
-		const product = await getOneCustomProductByHandle(
-			props.params.productHandle,
-		);
+		const product = await getOneCustomProductByHandle(params.productHandle);
 
 		if (!product) {
 			notFound();

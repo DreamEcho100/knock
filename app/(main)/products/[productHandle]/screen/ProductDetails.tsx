@@ -43,7 +43,7 @@ export default function ProductDetails({
 					/>
 				</div>
 				<div>
-					<h4> DECAP - {product.title}</h4>
+					<h4>{product.title}</h4>
 					{product.variants[0].compareAtPrice?.amount ? (
 						<div className={classes.ProductCardDetailsPriceSales}>
 							<p> ${product.variants[0].compareAtPrice.amount}0 </p>{' '}
@@ -55,7 +55,8 @@ export default function ProductDetails({
 						</div>
 					)}
 					<p>
-						Pay in 4 interest-free installments of $12.50 with{' '}
+						Pay in 4 interest-free installments of $
+						{(Number(product.variants[0].price.amount) / 4).toFixed(2)} with{' '}
 						<Image
 							width={143}
 							height={32}

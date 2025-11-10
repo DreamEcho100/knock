@@ -1,8 +1,18 @@
 import { defaultSiteName } from '~/utils/core/next-seo.config';
-import { HeroSection } from './sections';
+import {
+	AvailableOnIOSSection,
+	DescriptionSection,
+	DrumsThatKnockSection,
+	EasyToUseSection,
+	HeroSection,
+	ReviewsSection,
+	ShapesYourDrumsSection,
+	VideosSection,
+} from './sections';
 import {
 	getKnockClipperMainSection,
 	getKnockMainSection,
+	getKnockPageData,
 } from '~/utils/core/API';
 import type { Product } from '~/libs/shopify/types';
 import { getProduct } from '~/libs/shopify';
@@ -11,6 +21,7 @@ import ClipperHeroSection from '../knock-clipper/sections/Hero';
 import AddItemOnHeroSectionButton from '~/app/_components/shared/core/AddItemOnHeroSectionButton';
 import CustomNextImage from '~/app/_components/shared/common/CustomNextImage';
 import Link from 'next/link';
+import SystemRequirementsSection from '~/app/_components/shared/core/SystemRequirements';
 
 export interface IKnockPluginPageProps {
 	product: Product; // ShopifyBuy.Product;
@@ -30,10 +41,11 @@ export const metadata = {
 	},
 };
 
-export default async function KnockPluginPage() {
+export default async function KnockSalePage() {
 	const [
 		knockPlugin,
 		knockMainSection,
+		knockPageData,
 		//
 		knockClipperPlugin,
 		knockClipperMainSection,
@@ -42,6 +54,7 @@ export default async function KnockPluginPage() {
 	] = await Promise.all([
 		getProduct({ handle: 'knock-plugin' }),
 		getKnockMainSection(),
+		getKnockPageData(),
 		//
 		getProduct({ handle: 'knock-clipper' }),
 		getKnockClipperMainSection(),
@@ -109,8 +122,8 @@ export default async function KnockPluginPage() {
 					</section>
 				)}
 			</div>
-			{/*
-<DescriptionSection data={knockPageData.secondSection} />
+
+			<DescriptionSection data={knockPageData.secondSection} />
 			<ShapesYourDrumsSection data={knockPageData.thirdSection} />
 			<EasyToUseSection
 				data={knockPageData.forthSection}
@@ -139,7 +152,6 @@ export default async function KnockPluginPage() {
 				data={knockPageData.eightSection}
 				knockPlugin={knockPlugin}
 			/>
-			*/}
 		</div>
 	);
 }
