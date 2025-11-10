@@ -17,14 +17,17 @@ export default function ProductByHandleScreen({
 				return (
 					<div>
 						<div className={classes.productPageFeaturesWithOneBox}>
-							<p>
+							<p className="text-xl mb-0">
 								The complete bundle of Knock Audio software and sound packs
 								comes with everything you need to make hard hitting beats!
 								Included:
 							</p>
-							<div className={classes.overLayFeatures}></div>
 							<div>
 								<ul className={classes.productPageDetailsUl}>
+									{/** biome-ignore lint/a11y/useValidAriaProps: <explanation> */}
+									<li data-type="none" className="text-white">
+										<strong>Included:</strong>
+									</li>
 									{[
 										'Drums That Knock Vol. 1',
 										'Drums That Knock Vol. 2',
@@ -41,6 +44,7 @@ export default function ProductByHandleScreen({
 									))}
 								</ul>
 							</div>
+							<div className={classes.overLayFeatures}></div>
 						</div>
 					</div>
 				);
@@ -66,7 +70,7 @@ export default function ProductByHandleScreen({
 						<div className={classes.productPageFeaturesWithOneBox}>
 							<div className={classes.overLayFeatures}></div>
 							<div>
-								{product.filesIncluded.length ? (
+								{product.filesIncluded?.length ? (
 									<ul className={classes.productPageDetailsUl}>
 										{product.filesIncluded.map((el) => (
 											<li key={el.id}>{el.li}</li>
@@ -87,7 +91,7 @@ export default function ProductByHandleScreen({
 						<div className={classes.productPageFeaturesWithOneBox}>
 							<div className={classes.overLayFeatures}></div>
 							<div>
-								{product.features.length ? (
+								{product.features?.length ? (
 									<ul className={classes.productPageDetailsUl}>
 										{product.features.map((el) => (
 											<li key={el.id}>{el.li}</li>
@@ -109,7 +113,7 @@ export default function ProductByHandleScreen({
 					<div className={classes.productPageFeatures}>
 						<div className={classes.overLayFeaturesSection}></div>
 						<div>
-							{product.features.length ? (
+							{product.features?.length ? (
 								<ul>
 									{product.features.map((el) => (
 										<div key={el.id} className="flex flex-col">
@@ -120,7 +124,7 @@ export default function ProductByHandleScreen({
 							) : (
 								''
 							)}
-							{product.filesIncluded.length ? (
+							{product.filesIncluded?.length ? (
 								<ul className={classes.ul}>
 									{product.filesIncluded.map((el) => (
 										<div key={el.id}>

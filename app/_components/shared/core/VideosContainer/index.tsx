@@ -72,7 +72,7 @@ const VideosContainer = ({
 			</div>
 			<div className="flex items-center justify-center mt-2">
 				{buttonElem ?? (
-					<Button className="capitalize" {...buttonProps}>
+					<Button className="capitalize whitespace-nowrap" {...buttonProps}>
 						add to cart
 					</Button>
 				)}

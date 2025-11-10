@@ -29,6 +29,22 @@ export default function ProductDetails({
 	const isLoading = isPending || cartState === 'loading';
 	const isDisabled = cartState === 'idle';
 
+	const title = product.title.split(' ').map((word, index) => {
+		if (word.toLowerCase() === 'knock') {
+			return (
+				<span key={`${word}-${index}`} className="text-current">
+					{word}
+					<sup>&#174;</sup>{' '}
+				</span>
+			);
+		}
+		return (
+			<span key={`${word}-${index}`} className="text-current">
+				{word}{' '}
+			</span>
+		);
+	});
+
 	return (
 		<div className={classes.ProductCardDetailsContainer}>
 			<div></div>
@@ -43,7 +59,7 @@ export default function ProductDetails({
 					/>
 				</div>
 				<div>
-					<h4>{product.title}</h4>
+					<h4>{title}</h4>
 					{product.variants[0].compareAtPrice?.amount ? (
 						<div className={classes.ProductCardDetailsPriceSales}>
 							<p> ${product.variants[0].compareAtPrice.amount}0 </p>{' '}
@@ -74,6 +90,7 @@ export default function ProductDetails({
 							}
 							disabled={isDisabled}
 							classesIntent={{ isLoading }}
+							className="whitespace-nowrap"
 						>
 							Add To Cart
 						</Button>

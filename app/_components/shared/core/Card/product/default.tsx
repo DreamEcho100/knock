@@ -90,6 +90,7 @@ const ExtraProductCardDetails = ({
 			buttonProps={{
 				children: 'add to cart',
 				classesIntent: { p: 'extra-wide' },
+				className: 'whitespace-nowrap',
 			}}
 			hideButton={!toAddToCart}
 		/>

@@ -66,7 +66,6 @@ select {
 }
 
 body sup {
-	top: var(--sup-t, 0.25ch);
 	width: 1ch;
 	height: 1ch;
 }
