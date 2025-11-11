@@ -121,6 +121,14 @@ const nextConfig = {
 	},
 	experimental: {
 		viewTransition: true,
+		serverActions: {
+			allowedOrigins: [
+				'localhost:3000',
+				'pluginsthatknock.com',
+				'plugins-that-knock.myshopify.com',
+				'knockaudio.com',
+			],
+		},
 	},
 };
 
