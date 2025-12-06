@@ -24,6 +24,9 @@ export const metadata = {
 	},
 };
 
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+
 // export default async function HomeScreen() {
 // 	const [homePageData, heroSection, products] = await Promise.all([
 // 		getHomePageData(),
