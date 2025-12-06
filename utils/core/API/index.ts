@@ -40,29 +40,41 @@ export const getMainSection = async () => {
 };
 
 export const getHomePageData = async () => {
-	const response = await axios.get(
-		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-homepage`,
-		{
-			headers: {
-				'Content-Type': 'application/json',
+	try {
+		const response = await axios.get(
+			`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-homepage`,
+			{
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				timeout: 20000,
 			},
-		},
-	);
+		);
 
-	return response.data;
+		return response.data;
+	} catch (error) {
+		console.error('Error fetching home page data:', error);
+		return null;
+	}
 };
 
 export const getKnockPageData = async () => {
-	const response = await axios.get(
-		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-knockpage`,
-		{
-			headers: {
-				'Content-Type': 'application/json',
+	try {
+		const response = await axios.get(
+			`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-knockpage`,
+			{
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				timeout: 20000,
 			},
-		},
-	);
+		);
 
-	return response.data;
+		return response.data;
+	} catch (error) {
+		console.error('Error fetching knock page data:', error);
+		return null;
+	}
 };
 
 export const getPrivacyPolicy = async () => {
@@ -118,68 +130,98 @@ export const getTermsOfService = async () => {
 };
 
 export const getDTKPageData = async () => {
-	const response = await axios.get(
-		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-DTK`,
-		{
-			headers: {
-				'Content-Type': 'application/json',
+	try {
+		const response = await axios.get(
+			`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-DTK`,
+			{
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				timeout: 20000,
 			},
-		},
-	);
+		);
 
-	return response.data;
+		return response.data;
+	} catch (error) {
+		console.error('Error fetching DTK page data:', error);
+		return null;
+	}
 };
 
 export const getFaqPageData = async () => {
-	const response = await axios.get(
-		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-FAQ`,
-		{
-			headers: {
-				'Content-Type': 'application/json',
+	try {
+		const response = await axios.get(
+			`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-FAQ`,
+			{
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				timeout: 20000,
 			},
-		},
-	);
+		);
 
-	return response.data;
+		return response.data;
+	} catch (error) {
+		console.error('Error fetching FAQ page data:', error);
+		return null;
+	}
 };
 
 export const getKnockClipperPageData = async () => {
-	const response = await axios.get(
-		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-knockclipperpage`,
-		{
-			headers: {
-				'Content-Type': 'application/json',
+	try {
+		const response = await axios.get(
+			`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-knockclipperpage`,
+			{
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				timeout: 20000,
 			},
-		},
-	);
+		);
 
-	return response.data;
+		return response.data;
+	} catch (error) {
+		console.error('Error fetching knock clipper page data:', error);
+		return null;
+	}
 };
 
 export const getKnockMainSection = async () => {
-	const response = await axios.get(
-		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-knock-main-section`,
-		{
-			headers: {
-				'Content-Type': 'application/json',
+	try {
+		const response = await axios.get(
+			`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-knock-main-section`,
+			{
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				timeout: 20000,
 			},
-		},
-	);
+		);
 
-	return response.data;
+		return response.data;
+	} catch (error) {
+		console.error('Error fetching knock main section data:', error);
+		return null;
+	}
 };
 
 export const getKnockClipperMainSection = async () => {
-	const response = await axios.get(
-		`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-knock-clipper-main-section`,
-		{
-			headers: {
-				'Content-Type': 'application/json',
+	try {
+		const response = await axios.get(
+			`${process.env.NEXT_PUBLIC_KNOCK_URL_API}/ui/get-knock-clipper-main-section`,
+			{
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				timeout: 20000,
 			},
-		},
-	);
+		);
 
-	return response.data;
+		return response.data;
+	} catch (error) {
+		console.error('Error fetching knock clipper main section data:', error);
+		return null;
+	}
 };
 
 export const getPopup = async () => {

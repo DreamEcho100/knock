@@ -40,6 +40,14 @@ async function getPageData() {
 export default async function DrumsThatKnockPage() {
 	const [products, knockPlugin, dtkData] = await getPageData();
 
+	if (!dtkData) {
+		return (
+			<div className="w-full max-w-[100vw] overflow-hidden flex items-center justify-center min-h-[50vh]">
+				<p className="text-center">Unable to load page data. Please try again later.</p>
+			</div>
+		);
+	}
+
 	return (
 		<div className="w-full max-w-[100vw] overflow-hidden">
 			<HeroSection data={dtkData.main_section} />

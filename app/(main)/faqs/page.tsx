@@ -11,6 +11,23 @@ export const metadata = {
 export default async function FAQSPages() {
 	const data = await getFaqPageData();
 
+	if (!data || !data.FAQpage) {
+		return (
+			<section className="bg-primary-1 section-p-v1 flex flex-col">
+				<div className="max-w-full md:max-w-[800px] mx-auto text-primary-4">
+					<header>
+						<h1 className="text-h2 capitalize mt-10 md:mt-0 font-semibold text-primary-1">
+							FAQs
+						</h1>
+					</header>
+					<div className="my-8 border-[0.125rem] border-bg-secondary-1 px-8 sm:px-20 py-12 rounded-2xl">
+						<p className="text-center">Unable to load FAQ data. Please try again later.</p>
+					</div>
+				</div>
+			</section>
+		);
+	}
+
 	return (
 		<section className="bg-primary-1 section-p-v1 flex flex-col">
 			<div className="max-w-full md:max-w-[800px] mx-auto text-primary-4">

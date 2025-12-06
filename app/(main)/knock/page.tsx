@@ -37,6 +37,14 @@ export default async function KnockPluginPage() {
 		notFound();
 	}
 
+	if (!knockPageData || !knockMainSection) {
+		return (
+			<div className="w-full max-w-[100vw] overflow-x-hidden flex items-center justify-center min-h-[50vh]">
+				<p className="text-center">Unable to load page data. Please try again later.</p>
+			</div>
+		);
+	}
+
 	return (
 		<div className="w-full max-w-[100vw] overflow-x-hidden">
 			<HeroSection knockPlugin={knockPlugin} data={knockMainSection} />
