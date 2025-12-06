@@ -29,7 +29,9 @@ const ActivatePage = () => {
 		mutationFn: (event) => {
 			event.preventDefault();
 
-			const activationUrl = window.location.href;
+			const activationUrl = window.location?.href;
+
+			if (!activationUrl) throw new Error('Activation url is required');
 
 			if (formValues.confirmPassword !== formValues.password) {
 				throw new Error('Confirm password is not the same as password');

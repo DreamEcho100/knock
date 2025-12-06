@@ -83,7 +83,7 @@ export const useLogoutUser = ({
 				'cartId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 
 			if (onSuccess) await onSuccess();
-			else window.location.reload();
+			else window.location?.reload();
 		},
 		onError: (error) => {
 			if (onError) return onError();

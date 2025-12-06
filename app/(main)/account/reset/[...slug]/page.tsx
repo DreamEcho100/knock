@@ -28,7 +28,9 @@ const ResetPage = () => {
 	>({
 		mutationFn: (event) => {
 			event.preventDefault();
-			const resetUrl = window.location.href;
+			const resetUrl = window.location?.href;
+
+			if (!resetUrl) throw new Error('Reset url is required');
 
 			if (formValues.confirmPassword !== formValues.password) {
 				throw new Error('Confirm password is not the same as password');
