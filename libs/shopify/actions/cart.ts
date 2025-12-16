@@ -27,7 +27,7 @@ export async function addCartItem(selectedVariantId: string | undefined) {
 		const cart = await addToCart(cartId, [
 			{ merchandiseId: selectedVariantId, quantity: 1 },
 		]);
-		revalidateTag(TAGS.cart);
+		revalidateTag(TAGS.cart, 'max');
 
 		return { type: 'success', data: cart } as const;
 	} catch (error) {
@@ -81,7 +81,7 @@ export async function updateCartItemQuantity(payload: {
 			} as const;
 		}
 
-		revalidateTag(TAGS.cart);
+		revalidateTag(TAGS.cart, 'max');
 		return { type: 'success', data: updatedCart } as const;
 	} catch (error) {
 		console.error(error);
@@ -107,7 +107,7 @@ export async function removeCartItem(merchandiseId: string) {
 		if (lineItem?.id) {
 			const cart = await removeFromCart(cartId, [lineItem.id]);
 
-			revalidateTag(TAGS.cart);
+			revalidateTag(TAGS.cart, 'max');
 			return { type: 'success', data: cart } as const;
 		} else {
 			return { type: 'error', message: 'Item not found in cart' } as const;
@@ -126,7 +126,7 @@ export async function updateCartDiscounts(discountCodes: string[]) {
 
 	try {
 		const cart = await updateCartDiscountCodes(cartId, discountCodes);
-		revalidateTag(TAGS.cart);
+		revalidateTag(TAGS.cart, 'max');
 		return { type: 'success', data: cart } as const;
 	} catch (error) {
 		return { type: 'error', message: 'Error updating discounts' } as const;

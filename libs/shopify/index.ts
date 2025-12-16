@@ -46,7 +46,7 @@ import type {
 	ShopifyCartBuyerIdentityInput,
 } from './types';
 import { headers } from 'next/headers';
-import { revalidateTag } from 'next/cache';
+import { revalidateTag } from 'next/cache, "max"';
 import { getPageQuery, getPagesQuery } from './queries/page';
 import {
 	collectionsPathSegment,
@@ -348,11 +348,11 @@ export async function revalidate(req: NextRequest): Promise<NextResponse> {
 	}
 
 	if (isCollectionUpdate) {
-		revalidateTag(TAGS.collections);
+		revalidateTag(TAGS.collections, 'max');
 	}
 
 	if (isProductUpdate) {
-		revalidateTag(TAGS.products);
+		revalidateTag(TAGS.products, 'max');
 	}
 
 	return NextResponse.json({ status: 200, revalidated: true, now: Date.now() });
