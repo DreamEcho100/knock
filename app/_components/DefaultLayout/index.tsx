@@ -1,6 +1,6 @@
 'use client';
 import type { ReactNode } from 'react';
-import { unstable_ViewTransition as ViewTransition } from 'react';
+import { ViewTransition } from 'react';
 
 import MainHeader from './components/MainHeader';
 import MainFooter from './components/MainFooter';
