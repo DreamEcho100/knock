@@ -19,6 +19,7 @@ const nextConfig = {
 	images: {
 		formats: ['image/avif', 'image/webp'],
 		// domains: ['cdn.shopify.com', 'api.pluginsthatknock.com'],
+		dangerouslyAllowLocalIP: true,
 
 		remotePatterns: [
 			{
